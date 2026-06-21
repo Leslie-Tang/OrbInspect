@@ -1,0 +1,87 @@
+\section{Proposed Offline Planner}
+\label{sec:algorithm}
+
+\subsection{Planner Decomposition}
+
+The proposed planner decomposes the full problem into four stages:
+\begin{enumerate}
+  \item target sampling on the station model;
+  \item safe candidate viewpoint generation;
+  \item coverage-aware viewpoint selection and ordering;
+  \item CW-feasible trajectory generation between selected viewpoints.
+\end{enumerate}
+
+This decomposition is chosen because it produces interpretable paper metrics:
+coverage ratio, uncovered target set, planned $\Delta v$, executed $\Delta v$,
+minimum clearance, planning time, and mission duration.
+
+\subsection{Target Sampling}
+
+For mesh-based experiments, the station surface is sampled into target points
+$p_i$ with normals $n_i$. The sampling density should be configurable by a
+target spacing parameter. For fair comparison, the same sampled target set is
+used by all methods in a scenario.
+
+\subsection{Candidate Viewpoint Generation}
+
+A candidate viewpoint $z_j$ is generated on offset shells around the station:
+\begin{equation}
+  z_j = p_i + \rho_j n_i,
+\end{equation}
+where $\rho_j\in[\rho_{\min},\rho_{\max}]$ and the candidate is accepted only
+if it satisfies keep-out constraints and does not lie inside the station
+safety envelope. Candidate viewpoints can also be generated from cylindrical
+or spherical shells surrounding major structural components.
+
+For each accepted candidate $z_j$, a binary visibility vector
+$A_{ij}\in\{0,1\}$ is computed:
+\begin{equation}
+  A_{ij}=1 \quad \Longleftrightarrow \quad
+  \text{target } i \text{ is visible from candidate } j.
+\end{equation}
+
+\subsection{Viewpoint Selection}
+
+The viewpoint subset can be selected by a weighted set-cover objective:
+\begin{align}
+  \min_{\alpha_j\in\{0,1\}}
+  \quad &
+  \sum_j c_j \alpha_j \\
+  \text{s.t.}\quad &
+  \sum_j A_{ij}\alpha_j \ge 1,
+  \quad \forall i \in \mathcal{T}_{\mathrm{req}},
+\end{align}
+where $c_j$ penalizes fuel estimate, poor safety margin, and view quality. If
+full set cover is too large, a greedy submodular approximation is used:
+\begin{equation}
+  j^\star =
+  \arg\max_j
+  \left[
+    w_{\mathrm{cov}}\Delta C_j
+    - w_d d(r,z_j)
+    - w_u \hat{\Delta v}(r,z_j)
+    + w_m m_j
+  \right],
+\end{equation}
+where $\Delta C_j$ is new coverage, $d(r,z_j)$ is travel distance,
+$\hat{\Delta v}$ is an estimated transfer cost, and $m_j$ is safety margin.
+
+\subsection{Ordering and CW Transfer Generation}
+
+After selecting candidate viewpoints, their order is computed by solving a
+traveling-salesman-like problem with edge costs estimated from CW transfers.
+For each edge $(i,j)$, the planner computes a dynamically feasible transfer
+under bounded acceleration and rejects edges that violate safety margins.
+
+\input{algorithms/offline_planner}
+
+\subsection{Trajectory Output}
+
+The offline planner outputs a timestamped reference trajectory
+\begin{equation}
+  \mathcal{P} =
+  \{(t_k,r_k^{\mathrm{ref}},v_k^{\mathrm{ref}},u_k^{\mathrm{ref}})\}_{k=0}^{K}.
+\end{equation}
+This trajectory is saved before ROS execution and then replayed through the
+controller/dynamics stack. This is the proper order for the final paper:
+trajectory first, Gazebo validation second.

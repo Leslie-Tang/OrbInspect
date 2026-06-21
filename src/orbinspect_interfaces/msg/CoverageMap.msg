@@ -1,0 +1,7 @@
+std_msgs/Header header
+orbinspect_interfaces/InspectionTarget[] targets
+int32 total_targets
+int32 inspected_targets
+float64 coverage_ratio
+int32 visible_target_count
+int32 new_targets_seen

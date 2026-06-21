@@ -1,0 +1,44 @@
+\section{Simulation and Validation Protocol}
+\label{sec:simulation}
+
+\subsection{Offline Planning Stage}
+
+The offline planner is run in Python before launching Gazebo. It must produce:
+\begin{itemize}
+  \item sampled target set and normals;
+  \item selected viewpoints;
+  \item planned CW trajectory;
+  \item predicted coverage over time;
+  \item predicted $\Delta v$ and clearance margins.
+\end{itemize}
+
+The planned outputs should be saved in the experiment directory
+\path{data/results/<timestamp>/}, including configuration snapshots and raw
+CSV logs.
+
+\subsection{ROS 2 Execution Stage}
+
+The planned trajectory is then supplied to the ROS~2 stack. The HCW dynamics
+node remains the source of truth for chaser state. The controller tracks the
+planned reference, the safety layer filters control commands, and the coverage
+node evaluates observed targets. Gazebo Harmonic visualizes the NASA ISS model
+and chaser model but does not provide spacecraft dynamics.
+
+\subsection{Evaluation Metrics}
+
+Each experiment should report:
+\begin{align}
+  C_{\mathrm{final}} &= \frac{N_{\mathrm{inspected}}}{N},\\
+  \Delta v_{\mathrm{cum}} &= \sum_k \norm{u_k}_2 \dt,\\
+  d_{\min} &= \min_k d_{\mathcal{S}}(r_k),\\
+  e_{\mathrm{track,rms}} &=
+    \sqrt{\frac{1}{K}\sum_k \norm{r_k-r_k^{\mathrm{ref}}}_2^2}.
+\end{align}
+
+The final paper should compare at least four methods:
+\begin{enumerate}
+  \item fixed waypoint baseline;
+  \item random safe viewpoint baseline;
+  \item greedy next-best-view baseline;
+  \item proposed coverage-constrained CW trajectory planner.
+\end{enumerate}

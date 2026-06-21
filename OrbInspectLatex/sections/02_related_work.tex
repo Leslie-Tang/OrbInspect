@@ -1,0 +1,25 @@
+\section{Related Work}
+\label{sec:related}
+
+Orbital inspection combines ideas from spacecraft relative motion, visual
+inspection planning, next-best-view planning, and safe control. Relative motion
+near a circular chief orbit is commonly modeled with the
+Clohessy--Wiltshire/Hill equations, which provide a tractable baseline for
+guidance design and trajectory optimization \citep{clohessy1960terminal}.
+Higher-fidelity models can later
+be incorporated through numerical astrodynamics backends, but a linear
+relative-motion baseline is valuable for reproducible algorithm development.
+
+Coverage planning and next-best-view methods are widely used in robotics for
+inspection of complex geometry \citep{scott2003view}. However, orbital inspection differs from
+terrestrial inspection because viewpoints are constrained by orbital dynamics,
+thruster authority, keep-out zones, line-of-sight blockage, and fuel. The
+planner must therefore optimize over both sensing utility and dynamic
+feasibility.
+
+OrbInspect is designed to bridge this gap by combining a coverage model, a
+relative-dynamics trajectory generator, safety constraints, and ROS~2-based
+experiment logging. The NASA International Space Station mesh is used for
+visual realism, while simplified primitives are retained initially for
+occlusion and safety certificates until mesh-accelerated ray casting is
+implemented.

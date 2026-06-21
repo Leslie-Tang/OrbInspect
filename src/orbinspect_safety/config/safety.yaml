@@ -1,0 +1,16 @@
+safety_monitor_node:
+  ros__parameters:
+    safety_margin: 2.0
+    caution_margin: 8.0
+    publish_rate: 5.0
+    frame_id: lvlh
+
+safety_filter_node:
+  ros__parameters:
+    safety_margin: 2.0
+    caution_margin: 8.0
+    max_acceleration: 0.01
+    max_speed: 0.25
+    repulsion_gain: 0.004
+    braking_time: 4.0
+    frame_id: lvlh

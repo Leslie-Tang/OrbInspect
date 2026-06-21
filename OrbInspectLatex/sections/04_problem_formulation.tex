@@ -1,0 +1,74 @@
+\section{Problem Formulation}
+\label{sec:problem}
+
+\subsection{Visibility Conditions}
+
+A target $i$ is visible from chaser pose $x_k$ if all of the following hold:
+\begin{align}
+  \rho_{\min} \le \norm{p_i-r_k} \le \rho_{\max}, \label{eq:range}\\
+  p_i \in \fov(r_k,q_k), \label{eq:fov}\\
+  \arccos\left(
+    \frac{(r_k-p_i)^{\mathsf{T}}n_i}
+    {\norm{r_k-p_i}\norm{n_i}}
+  \right) \le \theta_{\max}, \label{eq:view-angle}\\
+  \los(r_k,p_i,\mathcal{O}) = 1, \label{eq:los}
+\end{align}
+where $\rho_{\min}$ and $\rho_{\max}$ define the camera range, $q_k$ is the
+camera attitude or assumed station-facing boresight, $\theta_{\max}$ is the
+maximum allowable viewing angle, and $\mathcal{O}$ is the set of occluding
+station primitives or mesh triangles.
+
+The dwell-time update is
+\begin{equation}
+  \tau_{i,k+1} =
+  \begin{cases}
+    \tau_{i,k}+\dt, & \text{if target } i \text{ is visible at } k,\\
+    \tau_{i,k}, & \text{otherwise},
+  \end{cases}
+\end{equation}
+and the inspection indicator is
+\begin{equation}
+  y_{i,k}= \mathbf{1}\{\tau_{i,k}\ge \tau_{\min}\}.
+\end{equation}
+
+\subsection{Safety and Actuation Constraints}
+
+The planner must satisfy acceleration, speed, and keep-out constraints:
+\begin{align}
+  \norm{u_k}_2 &\le u_{\max}, \\
+  \norm{v_k}_2 &\le v_{\max}, \\
+  d_{\mathcal{S}}(r_k) &\ge d_{\mathrm{safe}},
+\end{align}
+where $d_{\mathcal{S}}(r_k)$ is the signed distance from the chaser to the
+station safety envelope.
+
+Additional mission constraints may include terminal conditions, sunlight
+constraints, communication geometry, plume impingement constraints, and camera
+slew-rate limits. These are outside the first implementation but should be
+represented in the final paper discussion.
+
+\subsection{Coverage-Constrained Trajectory Optimization}
+
+The full inspection planning problem can be written as
+\begin{align}
+  \min_{\{x_k,u_k,q_k\}_{k=0}^{K}}
+  \quad &
+  w_t K\dt
+  + w_u \sum_{k=0}^{K-1} \norm{u_k}_2\dt
+  + w_s \sum_{k=0}^{K} \phi(d_{\mathcal{S}}(r_k))
+  + w_c (1-C_K) \label{eq:objective}\\
+  \text{s.t.}\quad &
+  x_{k+1}=f_{\mathrm{CW}}(x_k,u_k,\dt), \\
+  & \norm{u_k}_2 \le u_{\max}, \\
+  & \norm{v_k}_2 \le v_{\max}, \\
+  & d_{\mathcal{S}}(r_k) \ge d_{\mathrm{safe}}, \\
+  & y_{i,k} \text{ follows the visibility and dwell model},\\
+  & C_K \ge C_{\mathrm{req}},
+\end{align}
+where $\phi(\cdot)$ is a soft safety penalty used only when a relaxed version
+of the problem is solved. A hard-constrained implementation should enforce
+$d_{\mathcal{S}}(r_k)\ge d_{\mathrm{safe}}$ at all times.
+
+This problem is mixed-integer and nonconvex because of visibility, occlusion,
+and coverage indicators. Therefore, the proposed first paper algorithm uses a
+structured offline decomposition.

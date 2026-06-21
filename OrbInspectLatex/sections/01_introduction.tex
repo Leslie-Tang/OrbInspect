@@ -1,0 +1,31 @@
+\section{Introduction}
+\label{sec:introduction}
+
+Large orbital structures such as space stations, service platforms, and
+assembled space telescopes require periodic external inspection. Human
+extravehicular activity is expensive and hazardous, while fixed cameras provide
+limited coverage of complex external geometry. A small free-flying inspection
+spacecraft can provide richer visual coverage, but planning its trajectory is a
+coupled guidance, navigation, control, perception, and safety problem.
+
+The difficulty is not merely producing a visually appealing simulation. A
+research-grade inspection planner must answer the following questions: which
+surface elements must be inspected, from which viewpoints can they be observed,
+what trajectory connects these viewpoints under relative orbital dynamics, and
+how safety margins are maintained near large structures. In addition, the
+resulting experiment must produce reproducible trajectory, control, coverage,
+safety, and planning logs suitable for academic evaluation.
+
+This paper draft positions OrbInspect around the following contribution:
+a coverage-constrained trajectory planner for large orbital structure inspection
+under Clohessy--Wiltshire relative dynamics, with validation in ROS~2 and
+Gazebo Harmonic. The present manuscript intentionally separates three layers:
+\begin{enumerate}
+  \item formal problem definition and mission assumptions;
+  \item offline trajectory generation using a geometry-aware coverage model;
+  \item ROS~2/Gazebo replay and validation using the generated trajectory.
+\end{enumerate}
+
+This separation avoids over-claiming from a short Gazebo visualization. Gazebo
+is used to validate visualization, logging, and execution interfaces; the
+coverage claim must come from the planner and its recorded metrics.

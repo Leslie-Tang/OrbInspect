@@ -1,0 +1,22 @@
+\section{Expected Results and Figures}
+\label{sec:results}
+
+The current repository can generate trajectory, control, safety, coverage, and
+planner logs. However, the existing Gazebo videos should be treated as
+qualitative visualization until the offline planner reaches a verified
+coverage threshold on the target set.
+
+The paper should include the following figures:
+\begin{itemize}
+  \item sampled ISS inspection targets colored by inspected/uninspected state;
+  \item planned three-dimensional trajectory in LVLH coordinates;
+  \item executed trajectory compared with planned trajectory;
+  \item coverage ratio versus time;
+  \item cumulative $\Delta v$ versus time;
+  \item minimum clearance versus time;
+  \item method comparison table over Monte Carlo runs.
+\end{itemize}
+
+The qualitative Gazebo figure should show the NASA ISS mesh and the chaser
+following the planned trajectory, but the quantitative claim should come from
+the logged coverage and safety metrics.

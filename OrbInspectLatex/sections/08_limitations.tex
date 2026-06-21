@@ -1,0 +1,21 @@
+\section{Limitations and Required Next Steps}
+\label{sec:limitations}
+
+The current software stack has several limitations that must be resolved before
+paper submission:
+\begin{enumerate}
+  \item The current full-ISS video is not a proof of full coverage.
+  \item The real ISS mesh is used for visualization, while target generation
+        and safety still rely primarily on simplified geometry.
+  \item The current offline trajectory mode is a waypoint demonstration, not a
+        solved coverage-constrained optimization problem.
+  \item Gazebo is used for visualization only; it does not validate nonlinear
+        orbital dynamics.
+  \item A higher-fidelity backend such as Basilisk should be used only as an
+        optional validation case after the HCW baseline is reproducible.
+\end{enumerate}
+
+The immediate technical priority is therefore to implement mesh-based target
+sampling, visibility matrix construction, viewpoint selection, CW-feasible
+transfer generation, and a result logger that proves the requested coverage
+threshold numerically before recording the final Gazebo video.

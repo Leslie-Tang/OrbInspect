@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>orbinspect_bringup</name>
+  <version>0.0.0</version>
+  <description>Top-level launch and configuration package for OrbInspect demos and experiments.</description>
+  <maintainer email="rugang@todo.todo">rugang</maintainer>
+  <license>Apache-2.0</license>
+
+  <depend>rclpy</depend>
+  <depend>launch</depend>
+  <depend>launch_ros</depend>
+  <exec_depend>orbinspect_control</exec_depend>
+  <exec_depend>orbinspect_description</exec_depend>
+  <exec_depend>orbinspect_dynamics</exec_depend>
+  <exec_depend>orbinspect_eval</exec_depend>
+  <exec_depend>orbinspect_gazebo</exec_depend>
+  <exec_depend>orbinspect_guidance</exec_depend>
+  <exec_depend>orbinspect_mission</exec_depend>
+  <exec_depend>orbinspect_perception</exec_depend>
+  <exec_depend>orbinspect_safety</exec_depend>
+  <exec_depend>rviz2</exec_depend>
+
+  <test_depend>ament_copyright</test_depend>
+  <test_depend>ament_flake8</test_depend>
+  <test_depend>ament_pep257</test_depend>
+  <test_depend>python3-pytest</test_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

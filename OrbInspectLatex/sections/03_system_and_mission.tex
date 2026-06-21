@@ -1,0 +1,59 @@
+\section{System Model and Mission Setting}
+\label{sec:system}
+
+\subsection{Reference Frames}
+
+The inspection scenario is expressed in a local-vertical/local-horizontal
+(LVLH) frame attached to a nominal target orbit. The target structure is
+treated as fixed in this frame during one inspection pass. The chaser state is
+\begin{equation}
+  x =
+  \begin{bmatrix}
+    r_x & r_y & r_z & v_x & v_y & v_z
+  \end{bmatrix}^{\mathsf{T}},
+\end{equation}
+where $r \in \R^3$ and $v \in \R^3$ are relative position and velocity in LVLH.
+
+\subsection{Relative Dynamics}
+
+For the baseline planner, chaser motion follows the
+Clohessy--Wiltshire equations with control acceleration
+$u=[a_x,a_y,a_z]^{\mathsf{T}}$:
+\begin{align}
+  \dot r_x &= v_x, &
+  \dot r_y &= v_y, &
+  \dot r_z &= v_z, \\
+  \dot v_x &= 3n^2 r_x + 2n v_y + a_x, &
+  \dot v_y &= -2n v_x + a_y, &
+  \dot v_z &= -n^2 r_z + a_z,
+\end{align}
+where $n$ is the chief mean motion. The discrete propagation map is denoted
+\begin{equation}
+  x_{k+1}=f_{\mathrm{CW}}(x_k,u_k,\dt).
+\end{equation}
+This model is appropriate as a first-order relative-motion baseline for
+near-circular-orbit inspection studies and is consistent with standard mission
+engineering practice \citep{wertz2011space}.
+
+\subsection{Inspection Target Model}
+
+Let $\mathcal{T}=\{1,\ldots,N\}$ be a finite set of surface inspection targets
+sampled from the station geometry. Each target $i$ has a surface point $p_i$,
+normal $n_i$, and dwell-time accumulator $\tau_i$. A target is inspected when
+it is visible for at least a required dwell time $\tau_{\min}$.
+
+The current implementation can generate targets from simplified station
+primitives. The planned paper algorithm should extend this to mesh-aware target
+sampling on the real ISS model, with primitive geometry retained as a
+conservative safety envelope.
+
+\subsection{Mission Objective}
+
+The mission starts from a safe initial relative state $x_0$ and terminates when
+the required coverage threshold is achieved or when a maximum mission time is
+reached:
+\begin{equation}
+  C_K = \frac{1}{N}\sum_{i=1}^{N} y_{i,K} \ge C_{\mathrm{req}},
+\end{equation}
+where $y_{i,K}\in\{0,1\}$ indicates whether target $i$ has been inspected by
+the final time step $K$.

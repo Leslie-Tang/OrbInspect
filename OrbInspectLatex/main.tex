@@ -1,0 +1,81 @@
+\documentclass[preprint,12pt,authoryear]{elsarticle}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{xcolor}
+
+\journal{Aerospace Science and Technology}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\dt}{\Delta t}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\los}{\mathrm{LOS}}
+\newcommand{\fov}{\mathrm{FOV}}
+\newcommand{\dv}{\Delta v}
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{Coverage-Constrained Relative Trajectory Planning for Autonomous Space Station Inspection in ROS 2}
+
+\author[inst1]{Rugang}
+\author[inst2]{OrbInspect Contributors}
+
+\affiliation[inst1]{
+  organization={OrbInspect Project},
+  city={Shanghai},
+  country={China}
+}
+
+\affiliation[inst2]{
+  organization={Open Research Software Collaboration},
+  country={International}
+}
+
+\begin{abstract}
+Autonomous inspection of large orbital structures requires planning algorithms
+that jointly account for relative orbital dynamics, sensor visibility, target
+coverage, collision avoidance, and fuel expenditure. This paper presents
+OrbInspect, a ROS~2-based simulation and planning framework for external
+inspection of space-station-scale structures, and formulates a coverage-
+constrained trajectory planning problem in the local-vertical/local-horizontal
+frame. The proposed planning workflow first samples inspection targets on a
+three-dimensional station model, constructs safe candidate viewpoints, solves an
+offline coverage-aware viewpoint ordering problem, and then generates a
+dynamically feasible trajectory under Clohessy--Wiltshire relative dynamics.
+The resulting trajectory is validated in ROS~2 with a Gazebo Harmonic
+visualization using a NASA International Space Station model. The current draft
+defines the formal problem, mission assumptions, constraints, and algorithmic
+evaluation protocol required before claiming full-coverage experimental results.
+\end{abstract}
+
+\begin{keyword}
+spacecraft inspection \sep relative orbital dynamics \sep coverage planning
+\sep next-best-view planning \sep Clohessy--Wiltshire equations \sep ROS 2
+\sep Gazebo Harmonic
+\end{keyword}
+
+\end{frontmatter}
+
+\input{sections/01_introduction}
+\input{sections/02_related_work}
+\input{sections/03_system_and_mission}
+\input{sections/04_problem_formulation}
+\input{sections/05_algorithm}
+\input{sections/06_simulation_protocol}
+\input{sections/07_expected_results}
+\input{sections/08_limitations}
+\input{sections/09_conclusion}
+
+\bibliographystyle{elsarticle-harv}
+\bibliography{references}
+
+\end{document}

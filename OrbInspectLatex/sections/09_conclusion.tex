@@ -1,0 +1,13 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+This draft formalizes the OrbInspect full-coverage inspection problem and
+defines the assumptions, constraints, objective, mission setting, and validation
+workflow needed for an academic paper. The central principle is that trajectory
+planning must precede visualization: a Python offline planner should generate
+a coverage-constrained, CW-feasible trajectory, and ROS~2/Gazebo should then
+validate execution, logging, and visual interpretation.
+
+Future work will implement the mesh-aware planner and evaluate it against
+baseline methods using paper-grade logs, Monte Carlo trials, and repeatable
+Gazebo/RViz visualizations.

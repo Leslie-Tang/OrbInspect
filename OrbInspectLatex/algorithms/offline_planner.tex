@@ -1,0 +1,28 @@
+\begin{algorithm}[t]
+\caption{Offline coverage-constrained CW inspection planner}
+\label{alg:offline-planner}
+\begin{algorithmic}[1]
+\Require Station mesh or primitive model $\mathcal{S}$, initial state $x_0$,
+camera model, safety margin $d_{\mathrm{safe}}$, coverage threshold
+$C_{\mathrm{req}}$
+\Ensure Planned trajectory $\mathcal{P}$ and inspection metrics
+\State Sample surface targets $\mathcal{T}=\{(p_i,n_i)\}_{i=1}^N$
+\State Generate candidate viewpoints $\mathcal{V}=\{z_j\}_{j=1}^M$
+\ForAll{$z_j \in \mathcal{V}$}
+  \State Reject $z_j$ if $d_{\mathcal{S}}(z_j)<d_{\mathrm{safe}}$
+  \State Compute visibility vector $A_{\cdot j}$ using range, FOV, view angle,
+  and line-of-sight constraints
+\EndFor
+\State Select viewpoint subset $\mathcal{V}^\star$ using weighted set cover or
+greedy submodular coverage
+\State Order $\mathcal{V}^\star$ using CW-transfer edge costs
+\State Generate bounded-acceleration CW transfers between consecutive
+viewpoints
+\State Simulate planned trajectory and compute predicted coverage
+\If{$C_{\mathrm{final}} < C_{\mathrm{req}}$}
+  \State Add additional viewpoints for uncovered target clusters and replan
+\EndIf
+\State Save trajectory, selected viewpoints, visibility matrix, and metrics
+\State \Return $\mathcal{P}$
+\end{algorithmic}
+\end{algorithm}

@@ -1,0 +1,7 @@
+advanced_safe_planner_node:
+  ros__parameters:
+    method: placeholder
+    horizon_steps: 20
+    time_step: 1.0
+    safety_margin: 2.0
+    publish_rate: 1.0
