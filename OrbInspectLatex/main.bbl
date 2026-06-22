@@ -13,23 +13,17 @@
 \ifx\xfnm\relax \def\xfnm[#1]{\unskip,\space#1}\fi
 %Type = Article
 \bibitem[{Clohessy and Wiltshire(1960)}]{clohessy1960terminal}
-\bibinfo{author}{Clohessy, W.H.}, \bibinfo{author}{Wiltshire, R.S.},
-  \bibinfo{year}{1960}.
+\bibinfo{author}{Clohessy, W.H.}, \bibinfo{author}{Wiltshire, R.S.}, \bibinfo{year}{1960}.
 \newblock \bibinfo{title}{Terminal guidance system for satellite rendezvous}.
-\newblock \bibinfo{journal}{Journal of the Aerospace Sciences}
-  \bibinfo{volume}{27}, \bibinfo{pages}{653--658}.
+\newblock \bibinfo{journal}{Journal of the Aerospace Sciences} \bibinfo{volume}{27}, \bibinfo{pages}{653--658}.
 %Type = Article
 \bibitem[{Scott et~al.(2003)Scott, Roth and Rivest}]{scott2003view}
-\bibinfo{author}{Scott, W.R.}, \bibinfo{author}{Roth, G.},
-  \bibinfo{author}{Rivest, J.F.}, \bibinfo{year}{2003}.
-\newblock \bibinfo{title}{View planning for automated three-dimensional object
-  reconstruction and inspection}.
-\newblock \bibinfo{journal}{ACM Computing Surveys} \bibinfo{volume}{35},
-  \bibinfo{pages}{64--96}.
+\bibinfo{author}{Scott, W.R.}, \bibinfo{author}{Roth, G.}, \bibinfo{author}{Rivest, J.F.}, \bibinfo{year}{2003}.
+\newblock \bibinfo{title}{View planning for automated three-dimensional object reconstruction and inspection}.
+\newblock \bibinfo{journal}{ACM Computing Surveys} \bibinfo{volume}{35}, \bibinfo{pages}{64--96}.
 %Type = Book
 \bibitem[{Wertz et~al.(2011)Wertz, Everett and Puschell}]{wertz2011space}
-\bibinfo{author}{Wertz, J.R.}, \bibinfo{author}{Everett, D.F.},
-  \bibinfo{author}{Puschell, J.J.}, \bibinfo{year}{2011}.
+\bibinfo{author}{Wertz, J.R.}, \bibinfo{author}{Everett, D.F.}, \bibinfo{author}{Puschell, J.J.}, \bibinfo{year}{2011}.
 \newblock \bibinfo{title}{Space Mission Engineering: The New SMAD}.
 \newblock \bibinfo{publisher}{Microcosm Press}.
 

@@ -1,15 +1,16 @@
 # Fdb version 4
-["bibtex main"] 1782058902.44667 "main.aux" "main.bbl" "main" 1782058902.77252 0
+["bibtex main"] 1782058902.44667 "main.aux" "main.bbl" "main" 1782103304.3505 0
   "./references.bib" 1782058009.55368 1019 d3decdfbd8774c5a659df75c9239c8a5 ""
   "/usr/share/texlive/texmf-dist/bibtex/bst/elsarticle/elsarticle-harv.bst" 1606256092 30002 8c0c5833f37bea3ec214cf315a72975d ""
-  "main.aux" 1782058902.70215 4986 30fa293075e4cab996d308e195d05ab1 "pdflatex"
+  "main.aux" 1782103304.28664 4986 30fa293075e4cab996d308e195d05ab1 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1782058902.46281 "main.tex" "main.pdf" "main" 1782058902.7727 0
+["pdflatex"] 1782103304.05396 "/home/rugang/robotics/projects/OrbInspect/OrbInspectLatex/main.tex" "main.pdf" "main" 1782103304.35063 0
   "/etc/texmf/web2c/texmf.cnf" 1782058705.82033 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/rugang/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk" 1782058847.53371 14040 48bafb9bf1c344eaadccc91028727b74 ""
+  "/home/rugang/robotics/projects/OrbInspect/OrbInspectLatex/main.tex" 1782103303.90213 2647 0d3418713da0721c63c38970d5fbfaa9 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm" 1136768653 1536 74b7293ec3713bb7fdca8dd1bd1f469c ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -125,11 +126,11 @@
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1782058711.022 165012 f177baa1c39a3ebd62c3096a43521a0d ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1782058725 6830966 997e82564868a5397e25cf1ce617e2ee ""
   "algorithms/offline_planner.tex" 1782058009.55368 1292 0018c5a9adc1d12269fe7ee863a11dea ""
-  "main.aux" 1782058902.70215 4986 30fa293075e4cab996d308e195d05ab1 "pdflatex"
-  "main.bbl" 1782058902.45814 1669 5f75afad74b610f06cb621de62ceb7a9 "bibtex main"
-  "main.out" 1782058902.70315 4320 48887ca6449af3b2021f4c7ae1b05224 "pdflatex"
-  "main.spl" 1782058902.55514 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "main.tex" 1782058890.22576 2647 0d3418713da0721c63c38970d5fbfaa9 ""
+  "main.aux" 1782103304.28664 4986 30fa293075e4cab996d308e195d05ab1 "pdflatex"
+  "main.bbl" 1782103292.61323 1657 57c66c9320758512a12f6cf112955d83 "bibtex main"
+  "main.out" 1782103304.28664 4320 48887ca6449af3b2021f4c7ae1b05224 "pdflatex"
+  "main.spl" 1782103304.1436 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "main.tex" 1782103303.90213 2647 0d3418713da0721c63c38970d5fbfaa9 ""
   "sections/01_introduction.tex" 1782058009.55303 1798 a837723963e7969b3a02b2505e114316 ""
   "sections/02_related_work.tex" 1782058881.80949 1376 028f4df8711033c6e7d67d18a49751da ""
   "sections/03_system_and_mission.tex" 1782058881.80949 2222 28dbae4466f33cbdf8ee63741d659eaa ""

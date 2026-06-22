@@ -33,8 +33,14 @@ def test_offline_planner_saves_paper_outputs(tmp_path: Path) -> None:
     assert (run_dir / 'raw' / 'coverage.csv').is_file()
     assert (run_dir / 'raw' / 'coverage_over_time.csv').is_file()
     assert (run_dir / 'figures' / 'targets_3d.png').is_file()
+    assert (run_dir / 'figures' / 'targets_3d.pdf').is_file()
+    assert (run_dir / 'figures' / 'targets_3d.svg').is_file()
     assert (run_dir / 'figures' / 'planned_trajectory_3d.png').is_file()
+    assert (run_dir / 'figures' / 'planned_trajectory_3d.pdf').is_file()
+    assert (run_dir / 'figures' / 'planned_trajectory_3d.svg').is_file()
     assert (run_dir / 'figures' / 'coverage_over_time.png').is_file()
+    assert (run_dir / 'figures' / 'coverage_over_time.pdf').is_file()
+    assert (run_dir / 'figures' / 'coverage_over_time.svg').is_file()
     assert (run_dir / 'summary.json').is_file()
 
 
@@ -47,6 +53,7 @@ def test_offline_planner_loads_yaml_config(tmp_path: Path) -> None:
         '    candidate_shell_offsets: [0.0]\n'
         '    coverage_threshold: 0.4\n'
         '    initial_state: [1.0, -30.0, 8.0, 0.0, 0.0, 0.0]\n'
+        '    iss_mesh_path: src/orbinspect_description/models/iss_real/meshes/ISS_stationary.glb\n'
         '    output_root: data/results\n'
     )
 
@@ -62,6 +69,9 @@ def test_offline_planner_loads_yaml_config(tmp_path: Path) -> None:
     assert config.candidate_shell_offsets == (0.0,)
     assert config.coverage_threshold == 0.5
     assert config.initial_state == (1.0, -30.0, 8.0, 0.0, 0.0, 0.0)
+    assert config.iss_mesh_path == Path(
+        'src/orbinspect_description/models/iss_real/meshes/ISS_stationary.glb'
+    )
     assert config.output_root == tmp_path
     assert config.run_id == 'yaml_test'
 
@@ -77,6 +87,7 @@ def _small_config(tmp_path: Path) -> OfflinePlannerConfig:
         transfer_duration=20.0,
         integration_dt=2.0,
         max_acceleration=0.02,
+        mesh_preview_max_edges=0,
         output_root=tmp_path,
         run_id='offline_test',
     )

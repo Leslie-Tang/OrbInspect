@@ -13,8 +13,8 @@ import struct
 from time import perf_counter
 from typing import Iterable
 
-from mpl_toolkits.mplot3d.art3d import Line3DCollection
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d.art3d import Line3DCollection
 
 from orbinspect_dynamics.hcw_dynamics import HCWDynamics
 from orbinspect_perception.inspection_target_manager import InspectionTarget
@@ -161,9 +161,9 @@ class IssMeshPreview:
         """Draw the ISS preview as a light wireframe."""
         collection = Line3DCollection(
             self.segments,
-            colors='#8A8A8A',
-            linewidths=0.18,
-            alpha=0.18,
+            colors='#6F6F6F',
+            linewidths=0.22,
+            alpha=0.28,
             zorder=1,
         )
         axis.add_collection3d(collection)
@@ -706,9 +706,15 @@ class OfflineCoveragePlanner:
                 depthshade=False,
                 label='selected viewpoints',
             )
-        _style_3d_axis(axis, 'Inspection targets and selected viewpoints')
+        _style_3d_axis(axis)
         _set_equal_3d_axes(axis, targets, selected)
-        axis.legend(loc='upper left', frameon=False)
+        axis.legend(
+            loc='upper center',
+            bbox_to_anchor=(0.5, 1.02),
+            ncol=2,
+            frameon=False,
+            handlelength=1.4,
+        )
         figure.tight_layout()
         _save_publishable_figure(figure, path)
         plt.close(figure)
@@ -745,9 +751,15 @@ class OfflineCoveragePlanner:
             )
             colorbar = figure.colorbar(scatter, ax=axis, shrink=0.62, pad=0.08)
             colorbar.set_label('normalized time')
-        _style_3d_axis(axis, 'Offline CW trajectory on NASA ISS mesh')
+        _style_3d_axis(axis)
         _set_equal_3d_axes(axis, [sample[1] for sample in samples])
-        axis.legend(loc='upper left', frameon=False)
+        axis.legend(
+            loc='upper center',
+            bbox_to_anchor=(0.5, 1.02),
+            ncol=2,
+            frameon=False,
+            handlelength=1.4,
+        )
         figure.tight_layout()
         _save_publishable_figure(figure, path)
         plt.close(figure)
@@ -823,6 +835,299 @@ def distance(left: Iterable[float], right: Iterable[float]) -> float:
     ))
 
 
+def _read_glb(path: Path) -> tuple[dict[str, object], bytes]:
+    with path.open('rb') as handle:
+        magic, version, _length = struct.unpack('<4sII', handle.read(12))
+        if magic != b'glTF' or version != 2:
+            raise ValueError('expected glTF 2.0 binary file')
+        json_length, json_type = struct.unpack('<I4s', handle.read(8))
+        if json_type != b'JSON':
+            raise ValueError('first GLB chunk must be JSON')
+        json_doc = json.loads(handle.read(json_length).decode('utf-8'))
+        binary = b''
+        while True:
+            chunk_header = handle.read(8)
+            if not chunk_header:
+                break
+            chunk_length, chunk_type = struct.unpack('<I4s', chunk_header)
+            chunk_data = handle.read(chunk_length)
+            if chunk_type == b'BIN\x00':
+                binary = chunk_data
+                break
+        if not binary:
+            raise ValueError('GLB does not contain a binary buffer')
+        return json_doc, binary
+
+
+def _mesh_segments_from_gltf(
+    json_doc: dict[str, object],
+    binary: bytes,
+    scale: float,
+    max_edges: int,
+) -> list[tuple[Vector3, Vector3]]:
+    nodes = json_doc.get('nodes', [])
+    meshes = json_doc.get('meshes', [])
+    if not isinstance(nodes, list) or not isinstance(meshes, list):
+        return []
+
+    node_transforms = _node_translations(json_doc)
+    segments: list[tuple[Vector3, Vector3]] = []
+    stride = 1
+    edge_budget = max_edges
+    primitive_total = sum(
+        len(mesh.get('primitives', []))
+        for mesh in meshes
+        if isinstance(mesh, dict)
+    )
+    if primitive_total > 0:
+        edge_budget = max(1, max_edges // primitive_total)
+
+    for node in nodes:
+        if not isinstance(node, dict) or 'mesh' not in node:
+            continue
+        mesh_index = int(node['mesh'])
+        if mesh_index >= len(meshes) or not isinstance(meshes[mesh_index], dict):
+            continue
+        translation = node_transforms.get(id(node), (0.0, 0.0, 0.0))
+        mesh = meshes[mesh_index]
+        primitives = mesh.get('primitives', [])
+        if not isinstance(primitives, list):
+            continue
+        for primitive in primitives:
+            if not isinstance(primitive, dict):
+                continue
+            if primitive.get('mode', 4) != 4:
+                continue
+            attributes = primitive.get('attributes', {})
+            if not isinstance(attributes, dict) or 'POSITION' not in attributes:
+                continue
+            positions = _read_accessor_vec3(json_doc, binary, int(attributes['POSITION']))
+            indices = _read_accessor_indices(json_doc, binary, primitive.get('indices'))
+            if len(positions) < 3:
+                continue
+            triangle_count = len(indices) // 3 if indices else len(positions) // 3
+            stride = max(1, math.ceil((triangle_count * 3) / max(1, edge_budget)))
+            for tri_start in range(0, triangle_count * 3, 3 * stride):
+                if indices:
+                    triangle = indices[tri_start:tri_start + 3]
+                    if len(triangle) < 3 or max(triangle) >= len(positions):
+                        continue
+                    points = [positions[index] for index in triangle]
+                else:
+                    points = positions[tri_start:tri_start + 3]
+                    if len(points) < 3:
+                        continue
+                transformed = [
+                    _transform_iss_vertex(point, translation, scale)
+                    for point in points
+                ]
+                segments.extend((
+                    (transformed[0], transformed[1]),
+                    (transformed[1], transformed[2]),
+                    (transformed[2], transformed[0]),
+                ))
+                if len(segments) >= max_edges:
+                    return segments
+    return segments
+
+
+def _node_translations(json_doc: dict[str, object]) -> dict[int, Vector3]:
+    nodes = json_doc.get('nodes', [])
+    if not isinstance(nodes, list):
+        return {}
+    scene_index = int(json_doc.get('scene', 0))
+    scenes = json_doc.get('scenes', [])
+    root_indices: list[int]
+    if isinstance(scenes, list) and scene_index < len(scenes):
+        scene = scenes[scene_index]
+        root_indices = list(scene.get('nodes', [])) if isinstance(scene, dict) else []
+    else:
+        root_indices = list(range(len(nodes)))
+
+    transforms: dict[int, Vector3] = {}
+
+    def visit(node_index: int, parent_translation: Vector3) -> None:
+        if node_index >= len(nodes) or not isinstance(nodes[node_index], dict):
+            return
+        node = nodes[node_index]
+        translation_values = node.get('translation', (0.0, 0.0, 0.0))
+        local_translation = _vector3_from_values(translation_values)
+        translation = add(parent_translation, local_translation)
+        transforms[id(node)] = translation
+        for child_index in node.get('children', []):
+            visit(int(child_index), translation)
+
+    for root_index in root_indices:
+        visit(int(root_index), (0.0, 0.0, 0.0))
+    return transforms
+
+
+def _read_accessor_vec3(
+    json_doc: dict[str, object],
+    binary: bytes,
+    accessor_index: int,
+) -> list[Vector3]:
+    accessor, offset, stride = _accessor_buffer(json_doc, accessor_index)
+    if accessor.get('componentType') != 5126 or accessor.get('type') != 'VEC3':
+        return []
+    count = int(accessor.get('count', 0))
+    values: list[Vector3] = []
+    for index in range(count):
+        start = offset + index * stride
+        values.append(struct.unpack_from('<fff', binary, start))
+    return values
+
+
+def _read_accessor_indices(
+    json_doc: dict[str, object],
+    binary: bytes,
+    accessor_index: object,
+) -> list[int]:
+    if accessor_index is None:
+        return []
+    accessor, offset, stride = _accessor_buffer(json_doc, int(accessor_index))
+    component_type = int(accessor.get('componentType', 0))
+    count = int(accessor.get('count', 0))
+    if component_type == 5123:
+        fmt = '<H'
+        default_stride = 2
+    elif component_type == 5125:
+        fmt = '<I'
+        default_stride = 4
+    else:
+        return []
+    stride = max(stride, default_stride)
+    return [
+        int(struct.unpack_from(fmt, binary, offset + index * stride)[0])
+        for index in range(count)
+    ]
+
+
+def _accessor_buffer(
+    json_doc: dict[str, object],
+    accessor_index: int,
+) -> tuple[dict[str, object], int, int]:
+    accessors = json_doc['accessors']
+    buffer_views = json_doc['bufferViews']
+    accessor = accessors[accessor_index]
+    buffer_view = buffer_views[int(accessor['bufferView'])]
+    offset = int(buffer_view.get('byteOffset', 0)) + int(accessor.get('byteOffset', 0))
+    stride = int(buffer_view.get('byteStride', 0))
+    if stride <= 0:
+        component_type = int(accessor.get('componentType', 5126))
+        component_size = 2 if component_type == 5123 else 4
+        component_count = {'SCALAR': 1, 'VEC2': 2, 'VEC3': 3}.get(
+            accessor.get('type', 'SCALAR'),
+            1,
+        )
+        stride = component_size * component_count
+    return accessor, offset, stride
+
+
+def _transform_iss_vertex(point: Vector3, translation: Vector3, scale_factor: float) -> Vector3:
+    translated = add(point, translation)
+    # Match the SDF visual pose: roll=0, pitch=90 deg, yaw=0, then scale.
+    return (
+        scale_factor * translated[2],
+        scale_factor * translated[1],
+        -scale_factor * translated[0],
+    )
+
+
+def _vector3_from_values(values: object) -> Vector3:
+    if not isinstance(values, (list, tuple)) or len(values) != 3:
+        return (0.0, 0.0, 0.0)
+    return (float(values[0]), float(values[1]), float(values[2]))
+
+
+def _draw_proxy_wireframe(axis) -> None:
+    boxes = (
+        ((0.0, 0.0, 0.0), (80.0, 4.0, 4.0)),
+        ((-25.0, 0.0, 12.0), (30.0, 1.0, 12.0)),
+        ((25.0, 0.0, 12.0), (30.0, 1.0, 12.0)),
+    )
+    for center, size in boxes:
+        axis.add_collection3d(Line3DCollection(
+            _box_edges(center, size),
+            colors='#9A9A9A',
+            linewidths=0.45,
+            alpha=0.25,
+        ))
+
+
+def _box_edges(center: Vector3, size: Vector3) -> list[tuple[Vector3, Vector3]]:
+    cx, cy, cz = center
+    sx, sy, sz = (size[0] / 2.0, size[1] / 2.0, size[2] / 2.0)
+    corners = [
+        (cx + dx * sx, cy + dy * sy, cz + dz * sz)
+        for dx in (-1.0, 1.0)
+        for dy in (-1.0, 1.0)
+        for dz in (-1.0, 1.0)
+    ]
+    edges = []
+    for i, first in enumerate(corners):
+        for second in corners[i + 1:]:
+            differences = sum(
+                1 for axis in range(3)
+                if abs(first[axis] - second[axis]) > 1.0e-9
+            )
+            if differences == 1:
+                edges.append((first, second))
+    return edges
+
+
+def _style_3d_axis(axis) -> None:
+    axis.set_xlabel('$x_{LVLH}$ [m]', labelpad=7)
+    axis.set_ylabel('$y_{LVLH}$ [m]', labelpad=7)
+    axis.set_zlabel('$z_{LVLH}$ [m]', labelpad=7)
+    axis.view_init(elev=22.0, azim=-58.0)
+    axis.grid(True, color='#ECECEC', linewidth=0.45)
+    for pane in (axis.xaxis.pane, axis.yaxis.pane, axis.zaxis.pane):
+        pane.set_facecolor((1.0, 1.0, 1.0, 0.0))
+        pane.set_edgecolor('#E6E6E6')
+
+
+def _set_equal_3d_axes(axis, *point_sets: Iterable[object]) -> None:
+    points: list[Vector3] = []
+    for point_set in point_sets:
+        for item in point_set:
+            if isinstance(item, InspectionTarget):
+                points.append(item.position)
+            elif isinstance(item, SelectedViewpoint):
+                points.append(item.candidate.position)
+            elif isinstance(item, (tuple, list)) and len(item) >= 3:
+                points.append((float(item[0]), float(item[1]), float(item[2])))
+    points.extend(((-45.0, -25.0, -18.0), (45.0, 25.0, 22.0)))
+    xs = [point[0] for point in points]
+    ys = [point[1] for point in points]
+    zs = [point[2] for point in points]
+    centers = (
+        (min(xs) + max(xs)) / 2.0,
+        (min(ys) + max(ys)) / 2.0,
+        (min(zs) + max(zs)) / 2.0,
+    )
+    radius = max(max(xs) - min(xs), max(ys) - min(ys), max(zs) - min(zs)) / 2.0
+    radius = max(radius, 1.0) * 1.04
+    axis.set_xlim(centers[0] - radius, centers[0] + radius)
+    axis.set_ylim(centers[1] - radius, centers[1] + radius)
+    axis.set_zlim(centers[2] - radius, centers[2] + radius)
+
+
+def _normalized_values(values: list[float]) -> list[float]:
+    if not values:
+        return []
+    minimum = min(values)
+    maximum = max(values)
+    span = max(maximum - minimum, 1.0e-12)
+    return [(value - minimum) / span for value in values]
+
+
+def _save_publishable_figure(figure, path: Path) -> None:
+    figure.savefig(path)
+    for suffix in ('.pdf', '.svg'):
+        figure.savefig(path.with_suffix(suffix))
+
+
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     """Parse command-line arguments."""
     parser = argparse.ArgumentParser(description=__doc__)
@@ -867,6 +1172,8 @@ def config_from_args(args: argparse.Namespace) -> OfflinePlannerConfig:
 
     if 'output_root' in config_values:
         config_values['output_root'] = Path(str(config_values['output_root']))
+    if 'iss_mesh_path' in config_values:
+        config_values['iss_mesh_path'] = Path(str(config_values['iss_mesh_path']))
     if 'candidate_shell_offsets' in config_values:
         config_values['candidate_shell_offsets'] = tuple(
             float(value) for value in config_values['candidate_shell_offsets']

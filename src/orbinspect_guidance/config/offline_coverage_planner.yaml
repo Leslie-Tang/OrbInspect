@@ -2,6 +2,9 @@ offline_coverage_planner:
   ros__parameters:
     geometry_backend: proxy
     method_name: dynamics_aware_greedy
+    iss_mesh_path: src/orbinspect_description/models/iss_real/meshes/ISS_stationary.glb
+    iss_mesh_scale: 1.065
+    mesh_preview_max_edges: 12000
     target_spacing: 12.0
     candidate_radius: 18.0
     candidate_shell_offsets: [0.0, 8.0]
