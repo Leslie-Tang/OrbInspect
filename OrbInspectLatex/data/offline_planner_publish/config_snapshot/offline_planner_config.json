@@ -1,0 +1,33 @@
+{
+  "candidate_radius": 18.0,
+  "candidate_shell_offsets": [
+    0.0,
+    8.0
+  ],
+  "candidate_stride": 2,
+  "coverage_threshold": 0.5,
+  "geometry_backend": "proxy",
+  "initial_state": [
+    0.0,
+    -35.0,
+    10.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "integration_dt": 1.0,
+  "iss_mesh_path": "src/orbinspect_description/models/iss_real/meshes/ISS_stationary.glb",
+  "iss_mesh_scale": 1.065,
+  "max_acceleration": 0.012,
+  "max_viewpoints": 20,
+  "mean_motion": 0.0011313666536110225,
+  "mesh_preview_max_edges": 12000,
+  "method_name": "dynamics_aware_greedy",
+  "output_root": "data/results",
+  "position_gain": 0.0008,
+  "run_id": "offline_planner_publish",
+  "safety_margin": 2.0,
+  "target_spacing": 16.0,
+  "transfer_duration": 80.0,
+  "velocity_gain": 0.08
+}

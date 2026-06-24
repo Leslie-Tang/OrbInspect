@@ -23,6 +23,13 @@ class ControllerNode(Node):
         self.declare_parameter('velocity_gain', 0.08)
         self.declare_parameter('max_acceleration', 0.01)
         self.declare_parameter('control_rate', 10.0)
+        self.declare_parameter('controller_type', 'pd')
+        self.declare_parameter('mean_motion', 0.0011313666536110225)
+        self.declare_parameter('lqr_state_weights', [1.0, 1.0, 1.0, 80.0, 80.0, 80.0])
+        self.declare_parameter('lqr_control_weights', [4000.0, 4000.0, 4000.0])
+        self.declare_parameter('riccati_iterations', 200)
+        self.declare_parameter('mpc_horizon', 8)
+        self.declare_parameter('mpc_max_iterations', 35)
         self.declare_parameter('default_reference', [8.0, -20.0, 6.0])
         self.declare_parameter('frame_id', 'lvlh')
         self.declare_parameter('publish_safe_command_passthrough', True)
@@ -31,15 +38,25 @@ class ControllerNode(Node):
         self.publish_safe_passthrough = bool(
             self.get_parameter('publish_safe_command_passthrough').value
         )
+        control_rate = self._positive_parameter('control_rate')
         self.controller = LQRController(
             position_gain=self._nonnegative_parameter('position_gain'),
             velocity_gain=self._nonnegative_parameter('velocity_gain'),
             max_acceleration=self._positive_parameter('max_acceleration'),
+            controller_type=str(self.get_parameter('controller_type').value),
+            mean_motion=self._positive_parameter('mean_motion'),
+            control_dt=1.0 / control_rate,
+            state_weights=self._vector_parameter('lqr_state_weights', 6),
+            control_weights=self._vector_parameter('lqr_control_weights', 3),
+            riccati_iterations=self._positive_int_parameter('riccati_iterations'),
+            mpc_horizon=self._positive_int_parameter('mpc_horizon'),
+            mpc_max_iterations=self._positive_int_parameter('mpc_max_iterations'),
         )
-        control_rate = self._positive_parameter('control_rate')
 
         self.state: tuple[float, float, float, float, float, float] | None = None
         self.reference = tuple(self._vector_parameter('default_reference', 3))
+        self.reference_velocity = (0.0, 0.0, 0.0)
+        self.feedforward_acceleration = (0.0, 0.0, 0.0)
         self.trajectory = Path()
         self.trajectory.header.frame_id = self.frame_id
 
@@ -48,10 +65,10 @@ class ControllerNode(Node):
             '/chaser/control_command',
             10,
         )
-        self.safe_control_pub = self.create_publisher(
-            AccelStamped,
-            '/chaser/safe_control_command',
-            10,
+        self.safe_control_pub = (
+            self.create_publisher(AccelStamped, '/chaser/safe_control_command', 10)
+            if self.publish_safe_passthrough
+            else None
         )
         self.trajectory_pub = self.create_publisher(Path, '/chaser/trajectory', 10)
         self.create_subscription(Odometry, '/chaser/odom', self._odom_callback, 10)
@@ -59,6 +76,12 @@ class ControllerNode(Node):
             PointStamped,
             '/chaser/reference',
             self._reference_callback,
+            10,
+        )
+        self.create_subscription(
+            Odometry,
+            '/chaser/reference_state',
+            self._reference_state_callback,
             10,
         )
         self.create_timer(1.0 / control_rate, self._publish_control)
@@ -80,12 +103,36 @@ class ControllerNode(Node):
             float(msg.point.y),
             float(msg.point.z),
         )
+        self.reference_velocity = (0.0, 0.0, 0.0)
+        self.feedforward_acceleration = (0.0, 0.0, 0.0)
+
+    def _reference_state_callback(self, msg: Odometry) -> None:
+        self.reference = (
+            float(msg.pose.pose.position.x),
+            float(msg.pose.pose.position.y),
+            float(msg.pose.pose.position.z),
+        )
+        self.reference_velocity = (
+            float(msg.twist.twist.linear.x),
+            float(msg.twist.twist.linear.y),
+            float(msg.twist.twist.linear.z),
+        )
+        self.feedforward_acceleration = (
+            float(msg.twist.twist.angular.x),
+            float(msg.twist.twist.angular.y),
+            float(msg.twist.twist.angular.z),
+        )
 
     def _publish_control(self) -> None:
         if self.state is None:
             return
 
-        command = self.controller.compute_control(self.state, self.reference)
+        command = self.controller.compute_control(
+            self.state,
+            self.reference,
+            self.reference_velocity,
+            self.feedforward_acceleration,
+        )
         msg = AccelStamped()
         msg.header.stamp = self.get_clock().now().to_msg()
         msg.header.frame_id = self.frame_id
@@ -94,7 +141,7 @@ class ControllerNode(Node):
         msg.accel.linear.z = command[2]
         self.control_pub.publish(msg)
 
-        if self.publish_safe_passthrough:
+        if self.safe_control_pub is not None:
             self.safe_control_pub.publish(msg)
 
     def _append_trajectory_pose(self, msg: Odometry) -> None:
@@ -117,6 +164,12 @@ class ControllerNode(Node):
         value = float(self.get_parameter(name).value)
         if value < 0.0:
             raise ValueError(f'{name} must be non-negative')
+        return value
+
+    def _positive_int_parameter(self, name: str) -> int:
+        value = int(self.get_parameter(name).value)
+        if value <= 0:
+            raise ValueError(f'{name} must be positive')
         return value
 
     def _vector_parameter(self, name: str, expected_length: int) -> list[float]:

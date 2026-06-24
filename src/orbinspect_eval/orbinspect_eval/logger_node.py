@@ -5,14 +5,14 @@ from __future__ import annotations
 from collections.abc import Sequence
 import csv
 import json
+import math
 from pathlib import Path
 import signal
 
-from geometry_msgs.msg import AccelStamped, PointStamped
+from geometry_msgs.msg import AccelStamped, PointStamped, PoseStamped
 from nav_msgs.msg import Odometry
 from orbinspect_eval.metrics import delta_v_increment
 from orbinspect_eval.metrics import is_saturated
-from orbinspect_eval.metrics import tracking_error_norm
 from orbinspect_eval.metrics import vector_norm
 from orbinspect_eval.plot_results import generate_figures
 from orbinspect_interfaces.msg import CoverageMap
@@ -35,6 +35,21 @@ TRAJECTORY_COLUMNS = (
     'qz',
     'qw',
     'tracking_error_norm',
+    'planned_rx',
+    'planned_ry',
+    'planned_rz',
+    'planned_vx',
+    'planned_vy',
+    'planned_vz',
+    'planned_ax',
+    'planned_ay',
+    'planned_az',
+    'position_tracking_error_norm',
+    'velocity_tracking_error_norm',
+    'state_tracking_error_norm',
+    'boresight_x',
+    'boresight_y',
+    'boresight_z',
 )
 
 CONTROL_COLUMNS = (
@@ -128,6 +143,9 @@ class CsvLoggerNode(Node):
         self.save_figures = bool(self.get_parameter('save_figures').value)
         self.max_acceleration = self._positive_parameter('max_acceleration')
         self.reference = tuple(self._vector_parameter('default_reference', 3))
+        self.reference_velocity = (0.0, 0.0, 0.0)
+        self.reference_acceleration = (0.0, 0.0, 0.0)
+        self.boresight = (1.0, 0.0, 0.0)
 
         self.result_dir = self._create_result_dir()
         self.raw_dir = self.result_dir / 'raw'
@@ -171,6 +189,18 @@ class CsvLoggerNode(Node):
             10,
         )
         self.create_subscription(
+            Odometry,
+            '/chaser/reference_state',
+            self._reference_state_callback,
+            10,
+        )
+        self.create_subscription(
+            PoseStamped,
+            '/chaser/attitude_reference',
+            self._attitude_reference_callback,
+            10,
+        )
+        self.create_subscription(
             CoverageMap,
             '/inspection/coverage_map',
             self._coverage_callback,
@@ -208,6 +238,16 @@ class CsvLoggerNode(Node):
             float(msg.twist.twist.linear.z),
         )
         orientation = msg.pose.pose.orientation
+        position_error = tuple(
+            position[index] - self.reference[index]
+            for index in range(3)
+        )
+        velocity_error = tuple(
+            velocity[index] - self.reference_velocity[index]
+            for index in range(3)
+        )
+        position_error_norm = vector_norm(position_error)
+        velocity_error_norm = vector_norm(velocity_error)
         self.trajectory_rows.append({
             'time': self._elapsed_time(),
             'rx': position[0],
@@ -220,7 +260,25 @@ class CsvLoggerNode(Node):
             'qy': float(orientation.y),
             'qz': float(orientation.z),
             'qw': float(orientation.w),
-            'tracking_error_norm': tracking_error_norm(position, self.reference),
+            'tracking_error_norm': position_error_norm,
+            'planned_rx': self.reference[0],
+            'planned_ry': self.reference[1],
+            'planned_rz': self.reference[2],
+            'planned_vx': self.reference_velocity[0],
+            'planned_vy': self.reference_velocity[1],
+            'planned_vz': self.reference_velocity[2],
+            'planned_ax': self.reference_acceleration[0],
+            'planned_ay': self.reference_acceleration[1],
+            'planned_az': self.reference_acceleration[2],
+            'position_tracking_error_norm': position_error_norm,
+            'velocity_tracking_error_norm': velocity_error_norm,
+            'state_tracking_error_norm': math.sqrt(
+                position_error_norm * position_error_norm
+                + velocity_error_norm * velocity_error_norm
+            ),
+            'boresight_x': self.boresight[0],
+            'boresight_y': self.boresight[1],
+            'boresight_z': self.boresight[2],
         })
 
     def _control_callback(self, msg: AccelStamped) -> None:
@@ -252,6 +310,34 @@ class CsvLoggerNode(Node):
             float(msg.point.x),
             float(msg.point.y),
             float(msg.point.z),
+        )
+        self.reference_velocity = (0.0, 0.0, 0.0)
+        self.reference_acceleration = (0.0, 0.0, 0.0)
+
+    def _reference_state_callback(self, msg: Odometry) -> None:
+        self.reference = (
+            float(msg.pose.pose.position.x),
+            float(msg.pose.pose.position.y),
+            float(msg.pose.pose.position.z),
+        )
+        self.reference_velocity = (
+            float(msg.twist.twist.linear.x),
+            float(msg.twist.twist.linear.y),
+            float(msg.twist.twist.linear.z),
+        )
+        self.reference_acceleration = (
+            float(msg.twist.twist.angular.x),
+            float(msg.twist.twist.angular.y),
+            float(msg.twist.twist.angular.z),
+        )
+
+    def _attitude_reference_callback(self, msg: PoseStamped) -> None:
+        orientation = msg.pose.orientation
+        self.boresight = _boresight_from_quaternion(
+            float(orientation.x),
+            float(orientation.y),
+            float(orientation.z),
+            float(orientation.w),
         )
 
     def _coverage_callback(self, msg: CoverageMap) -> None:
@@ -400,6 +486,14 @@ class CsvLoggerNode(Node):
         self._write_summary_markdown()
 
     def _write_summary(self, figure_paths: list[Path]) -> None:
+        position_errors = [
+            float(row['position_tracking_error_norm'])
+            for row in self.trajectory_rows
+        ]
+        velocity_errors = [
+            float(row['velocity_tracking_error_norm'])
+            for row in self.trajectory_rows
+        ]
         summary = {
             'result_dir': str(self.result_dir),
             'trajectory_samples': len(self.trajectory_rows),
@@ -409,9 +503,14 @@ class CsvLoggerNode(Node):
             'safety_samples': len(self.safety_rows),
             'planner_samples': len(self.planner_rows),
             'cumulative_delta_v': self.cumulative_delta_v,
+            'mean_position_tracking_error': _mean(position_errors),
+            'max_position_tracking_error': max(position_errors) if position_errors else 0.0,
+            'mean_velocity_tracking_error': _mean(velocity_errors),
+            'max_velocity_tracking_error': max(velocity_errors) if velocity_errors else 0.0,
             'figures': [path.name for path in figure_paths],
             'topics': [
                 '/chaser/odom',
+                '/chaser/reference_state',
                 '/chaser/control_command',
                 '/chaser/safe_control_command',
                 '/inspection/coverage_map',
@@ -435,6 +534,13 @@ class CsvLoggerNode(Node):
             f'- Planner samples: {len(self.planner_rows)}',
             f'- Cumulative delta-v: {self.cumulative_delta_v:.6f} m/s',
         ]
+        position_errors = [
+            float(row['position_tracking_error_norm'])
+            for row in self.trajectory_rows
+        ]
+        if position_errors:
+            lines.append(f'- Mean position tracking error: {_mean(position_errors):.6f} m')
+            lines.append(f'- Max position tracking error: {max(position_errors):.6f} m')
         if self.coverage_rows:
             final_coverage = self.coverage_rows[-1]['coverage_ratio']
             lines.append(f'- Final coverage ratio: {final_coverage:.6f}')
@@ -502,6 +608,33 @@ class CsvLoggerNode(Node):
     @staticmethod
     def _stamp_key(msg: AccelStamped) -> tuple[int, int]:
         return (int(msg.header.stamp.sec), int(msg.header.stamp.nanosec))
+
+
+def _boresight_from_quaternion(
+    qx: float,
+    qy: float,
+    qz: float,
+    qw: float,
+) -> tuple[float, float, float]:
+    """Return body +X axis expressed in the parent frame."""
+    norm = math.sqrt(qx * qx + qy * qy + qz * qz + qw * qw)
+    if norm <= 0.0:
+        return (1.0, 0.0, 0.0)
+    qx /= norm
+    qy /= norm
+    qz /= norm
+    qw /= norm
+    return (
+        1.0 - 2.0 * (qy * qy + qz * qz),
+        2.0 * (qx * qy + qz * qw),
+        2.0 * (qx * qz - qy * qw),
+    )
+
+
+def _mean(values: Sequence[float]) -> float:
+    if not values:
+        return 0.0
+    return sum(float(value) for value in values) / len(values)
 
 
 def main(args: list[str] | None = None) -> None:

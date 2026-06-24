@@ -1,24 +1,40 @@
 \section{System Model and Mission Setting}
 \label{sec:system}
 
-\subsection{Reference Frames}
+\subsection{Architecture}
 
-The inspection scenario is expressed in a local-vertical/local-horizontal
-(LVLH) frame attached to a nominal target orbit. The target structure is
-treated as fixed in this frame during one inspection pass. The chaser state is
+OrbInspect is organized as a ROS~2 Jazzy workspace with packages for dynamics,
+control, guidance, perception, safety, mission management, evaluation,
+description, Gazebo visualization, and bringup. The system is designed around
+a strict authority boundary. The dynamics node propagates the chaser state
+under CW/HCW equations and publishes odometry. The controller tracks reference
+states and emits acceleration commands. The safety layer monitors clearance
+against station primitives and can filter commanded accelerations. The
+coverage layer evaluates which inspection targets are visible. The evaluation
+nodes record CSV logs, rosbag data, summaries, and figures. Gazebo Harmonic
+subscribes to the resulting state and renders the ISS model and chaser for
+visual validation.
+
+\subsection{Reference Frame and State}
+
+The inspection pass is represented in a local-vertical/local-horizontal frame
+attached to a nominal circular chief orbit. Over the time horizon considered
+here, the inspected structure is treated as fixed in this frame. The chaser
+translational state is
 \begin{equation}
   x =
   \begin{bmatrix}
     r_x & r_y & r_z & v_x & v_y & v_z
   \end{bmatrix}^{\mathsf{T}},
 \end{equation}
-where $r \in \R^3$ and $v \in \R^3$ are relative position and velocity in LVLH.
+where $r \in \R^3$ is relative position and $v \in \R^3$ is relative velocity.
+The camera is assumed to point toward the inspected structure or toward a
+selected target cluster during the baseline experiments; attitude slew
+constraints are left to later work.
 
 \subsection{Relative Dynamics}
 
-For the baseline planner, chaser motion follows the
-Clohessy--Wiltshire equations with control acceleration
-$u=[a_x,a_y,a_z]^{\mathsf{T}}$:
+The baseline dynamics are
 \begin{align}
   \dot r_x &= v_x, &
   \dot r_y &= v_y, &
@@ -27,33 +43,38 @@ $u=[a_x,a_y,a_z]^{\mathsf{T}}$:
   \dot v_y &= -2n v_x + a_y, &
   \dot v_z &= -n^2 r_z + a_z,
 \end{align}
-where $n$ is the chief mean motion. The discrete propagation map is denoted
+where $n$ is the chief mean motion and
+$u=[a_x,a_y,a_z]^{\mathsf{T}}$ is the commanded acceleration. The discrete
+propagation map is denoted
 \begin{equation}
   x_{k+1}=f_{\mathrm{CW}}(x_k,u_k,\dt).
 \end{equation}
-This model is appropriate as a first-order relative-motion baseline for
-near-circular-orbit inspection studies and is consistent with standard mission
-engineering practice \citep{wertz2011space}.
+The same model is used in the offline trajectory generator and in the ROS
+dynamics node for the baseline validation reported here.
 
-\subsection{Inspection Target Model}
+\subsection{Inspection Targets}
 
-Let $\mathcal{T}=\{1,\ldots,N\}$ be a finite set of surface inspection targets
-sampled from the station geometry. Each target $i$ has a surface point $p_i$,
-normal $n_i$, and dwell-time accumulator $\tau_i$. A target is inspected when
-it is visible for at least a required dwell time $\tau_{\min}$.
+The station is represented for planning by a finite set
+$\mathcal{T}=\{1,\ldots,N\}$ of target samples. Each target $i$ has a point
+$p_i$, outward normal $n_i$, and accumulated dwell time $\tau_i$. A target is
+considered inspected when it has remained visible for at least
+$\tau_{\min}$. The primary offline benchmark in this paper uses the NASA ISS
+mesh backend, area-weighted sampling with 180 target samples, and 357 candidate
+viewpoints. The ROS smoke run uses the online coverage configuration, which
+reports 142 target samples. Gazebo renders the ISS visual model for
+interpretation and trajectory replay; the quantitative coverage and dynamics
+claims are computed from the logged offline and ROS data.
 
-The current implementation can generate targets from simplified station
-primitives. The planned paper algorithm should extend this to mesh-aware target
-sampling on the real ISS model, with primitive geometry retained as a
-conservative safety envelope.
+\subsection{Mission Termination}
 
-\subsection{Mission Objective}
-
-The mission starts from a safe initial relative state $x_0$ and terminates when
-the required coverage threshold is achieved or when a maximum mission time is
-reached:
+The mission starts from a safe initial relative state and terminates when a
+coverage threshold is reached, when the planner exhausts available useful
+viewpoints, or when a maximum mission time is reached:
 \begin{equation}
-  C_K = \frac{1}{N}\sum_{i=1}^{N} y_{i,K} \ge C_{\mathrm{req}},
+  C_K = \frac{1}{N}\sum_{i=1}^{N} y_{i,K},
+  \qquad
+  y_{i,K}=\mathbf{1}\{\tau_{i,K}\ge \tau_{\min}\}.
 \end{equation}
-where $y_{i,K}\in\{0,1\}$ indicates whether target $i$ has been inspected by
-the final time step $K$.
+The high-coverage offline benchmark uses a 70\% success threshold and a 98\%
+planning stop ratio. The best feasible method reaches 98.33\% final coverage,
+as reported in Section~\ref{sec:results}.

@@ -1,13 +1,22 @@
 \section{Conclusion}
 \label{sec:conclusion}
 
-This draft formalizes the OrbInspect full-coverage inspection problem and
-defines the assumptions, constraints, objective, mission setting, and validation
-workflow needed for an academic paper. The central principle is that trajectory
-planning must precede visualization: a Python offline planner should generate
-a coverage-constrained, CW-feasible trajectory, and ROS~2/Gazebo should then
-validate execution, logging, and visual interpretation.
+This paper presented OrbInspect, a ROS~2 and Gazebo Harmonic framework for
+coverage-constrained autonomous orbital inspection. The framework keeps
+CW/HCW dynamics as the state source of truth, uses Gazebo for visualization,
+and records the artifacts needed to audit planning, control, coverage, safety,
+and experiment configuration. The updated mesh-aware offline experiment
+generated a feasible 1840~s set-cover CW tour with 23 selected viewpoints,
+8.7697~m/s planned cumulative $\Delta v$, 7.5323~m minimum clearance, and
+98.33\% final coverage over 180 mesh targets. Compared with random-safe and
+several greedy baselines, the proposed method provides the best feasible
+coverage-energy trade-off in the reported benchmark. The ROS smoke run
+validated the logging and safety-monitoring pipeline, and Gazebo frames and
+videos validated the visual replay interface.
 
-Future work will implement the mesh-aware planner and evaluate it against
-baseline methods using paper-grade logs, Monte Carlo trials, and repeatable
-Gazebo/RViz visualizations.
+The next technical steps are broader Monte Carlo studies, higher-fidelity mesh
+occlusion acceleration, uncertainty-aware keep-out margins, camera slew and
+illumination constraints, and optional Basilisk validation after the HCW
+baseline remains reproducible. With those additions, OrbInspect can mature
+from a reproducible inspection-planning framework into a high-confidence
+experimental platform for autonomous inspection of large orbital structures.

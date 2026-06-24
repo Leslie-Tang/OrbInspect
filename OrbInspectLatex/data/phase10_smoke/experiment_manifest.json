@@ -1,0 +1,13 @@
+{
+  "scenario": "full_station",
+  "method": "greedy_nbv_safety_filter",
+  "dynamics_backend": "hcw",
+  "config_snapshots": [
+    "dynamics.yaml",
+    "control.yaml",
+    "camera.yaml",
+    "safety.yaml",
+    "planner.yaml",
+    "eval.yaml"
+  ]
+}

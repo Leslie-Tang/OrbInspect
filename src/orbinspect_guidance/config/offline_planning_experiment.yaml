@@ -1,0 +1,31 @@
+offline_planning_experiment:
+  ros__parameters:
+    output_root: data/results
+    geometry_backend: mesh
+    mesh_target_count: 180
+    mesh_occlusion_max_triangles: 400
+    candidate_radius: 34.0
+    candidate_stride: 1
+    coverage_threshold: 0.70
+    coverage_stop_ratio: 0.98
+    max_viewpoints: 36
+    min_new_targets: 1
+    transfer_duration: 80.0
+    integration_dt: 2.0
+    max_acceleration: 0.018
+    safety_margin: 2.0
+    initial_state: [0.0, -35.0, 10.0, 0.0, 0.0, 0.0]
+    random_seed: 7
+    proposed_beam_width: 6
+    proposed_lookahead_depth: 2
+    cw_energy_weight: 5.0
+    cw_tracking_weight: 0.18
+    cw_safety_weight: 120.0
+    methods:
+      - set_cover_cw_tour
+      - proposed_safe_cw_nbv
+      - coverage_greedy
+      - safe_coverage_greedy
+      - distance_greedy
+      - fuel_greedy
+      - random_safe

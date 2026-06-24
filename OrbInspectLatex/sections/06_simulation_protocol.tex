@@ -1,44 +1,41 @@
-\section{Simulation and Validation Protocol}
+\section{Experimental Protocol}
 \label{sec:simulation}
 
-\subsection{Offline Planning Stage}
+\subsection{Offline Planning Benchmark}
 
-The offline planner is run in Python before launching Gazebo. It must produce:
-\begin{itemize}
-  \item sampled target set and normals;
-  \item selected viewpoints;
-  \item planned CW trajectory;
-  \item predicted coverage over time;
-  \item predicted $\Delta v$ and clearance margins.
-\end{itemize}
+The primary quantitative planning artifact is the local high-coverage offline
+experiment directory. It uses a mesh geometry backend, CW/HCW dynamics,
+180 area-weighted mesh targets, 357 candidate viewpoints, a 70\% coverage
+success threshold, and a 98\% planning stop ratio. The experiment compares
+\texttt{set\_cover\_cw\_tour}, \texttt{proposed\_safe\_cw\_nbv},
+\texttt{coverage\_greedy}, \texttt{safe\_coverage\_greedy},
+\texttt{distance\_greedy}, \texttt{fuel\_greedy}, and
+\texttt{random\_safe}. The planner writes raw CSV files, configuration
+snapshots, figures, and summary documents under the paper directory.
 
-The planned outputs should be saved in the experiment directory
-\path{data/results/<timestamp>/}, including configuration snapshots and raw
-CSV logs.
+\subsection{ROS~2 Execution Smoke Run}
 
-\subsection{ROS 2 Execution Stage}
+The ROS execution artifact is the local phase-10 smoke directory. The manifest
+records the \texttt{full\_station} scenario, \texttt{greedy\_nbv\_safety\_filter}
+method, and \texttt{hcw} dynamics backend. The run records odometry, nominal
+control, safe control, coverage map, mission event, safety status, and planner
+event topics. Its purpose is to validate that the ROS system produces the
+paper-grade artifact layout and that the safety and logging interfaces behave
+correctly. The updated validation launch can additionally replay the saved
+high-coverage trajectory and attitude stream for RViz and Gazebo visualization.
 
-The planned trajectory is then supplied to the ROS~2 stack. The HCW dynamics
-node remains the source of truth for chaser state. The controller tracks the
-planned reference, the safety layer filters control commands, and the coverage
-node evaluates observed targets. Gazebo Harmonic visualizes the NASA ISS model
-and chaser model but does not provide spacecraft dynamics.
+\subsection{Gazebo Harmonic Validation}
 
-\subsection{Evaluation Metrics}
+Gazebo Harmonic is used to visualize the station and chaser. The validation
+artifacts are stored in the local video-capture directory and include preview frames
+and videos from chaser-follow and full-ISS views. Gazebo does not determine
+the spacecraft state in these experiments. Instead, chaser pose is driven from
+the ROS state stream, preserving the principle that the dynamics node is the
+source of truth.
 
-Each experiment should report:
-\begin{align}
-  C_{\mathrm{final}} &= \frac{N_{\mathrm{inspected}}}{N},\\
-  \Delta v_{\mathrm{cum}} &= \sum_k \norm{u_k}_2 \dt,\\
-  d_{\min} &= \min_k d_{\mathcal{S}}(r_k),\\
-  e_{\mathrm{track,rms}} &=
-    \sqrt{\frac{1}{K}\sum_k \norm{r_k-r_k^{\mathrm{ref}}}_2^2}.
-\end{align}
+\subsection{Monte Carlo Baseline Table}
 
-The final paper should compare at least four methods:
-\begin{enumerate}
-  \item fixed waypoint baseline;
-  \item random safe viewpoint baseline;
-  \item greedy next-best-view baseline;
-  \item proposed coverage-constrained CW trajectory planner.
-\end{enumerate}
+The primary method comparison is the deterministic mesh experiment described
+above. The older Monte Carlo directory is retained as a small regression
+artifact, but the paper's quantitative claims are based on the high-coverage
+mesh comparison.

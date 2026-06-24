@@ -4,6 +4,7 @@ from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
 from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.substitutions import AnonName
 from launch.substitutions import LaunchConfiguration
 from launch.substitutions import PathJoinSubstitution
 from launch_ros.actions import Node
@@ -14,6 +15,7 @@ def generate_launch_description() -> LaunchDescription:
     output_path = LaunchConfiguration('output_path')
     max_frames = LaunchConfiguration('max_frames')
     fps = LaunchConfiguration('fps')
+    gz_partition = LaunchConfiguration('gz_partition')
     real_iss_demo = PathJoinSubstitution([
         FindPackageShare('orbinspect_bringup'),
         'launch',
@@ -43,8 +45,19 @@ def generate_launch_description() -> LaunchDescription:
             default_value='12.0',
             description='Output video frames per second.',
         ),
-        IncludeLaunchDescription(PythonLaunchDescriptionSource(real_iss_demo)),
-        IncludeLaunchDescription(PythonLaunchDescriptionSource(follow_camera_launch)),
+        DeclareLaunchArgument(
+            'gz_partition',
+            default_value=AnonName('orbinspect_chaser_view_recording'),
+            description='Gazebo Transport partition for this recording run.',
+        ),
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(real_iss_demo),
+            launch_arguments={'gz_partition': gz_partition}.items(),
+        ),
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(follow_camera_launch),
+            launch_arguments={'gz_partition': gz_partition}.items(),
+        ),
         Node(
             package='ros_gz_bridge',
             executable='parameter_bridge',
@@ -54,6 +67,7 @@ def generate_launch_description() -> LaunchDescription:
                 f'{gz_image_topic}@sensor_msgs/msg/Image[gz.msgs.Image',
             ],
             remappings=[(gz_image_topic, ros_image_topic)],
+            additional_env={'GZ_PARTITION': gz_partition},
         ),
         Node(
             package='orbinspect_gazebo',

@@ -44,6 +44,35 @@ def test_offline_planner_saves_paper_outputs(tmp_path: Path) -> None:
     assert (run_dir / 'summary.json').is_file()
 
 
+def test_offline_planner_loads_mesh_targets(tmp_path: Path) -> None:
+    planner = OfflineCoveragePlanner(OfflinePlannerConfig(
+        geometry_backend='mesh',
+        mesh_target_count=24,
+        mesh_occlusion_max_triangles=0,
+        candidate_radius=18.0,
+        candidate_shell_offsets=(0.0,),
+        candidate_stride=4,
+        coverage_threshold=0.05,
+        max_viewpoints=3,
+        transfer_duration=10.0,
+        integration_dt=2.0,
+        max_acceleration=0.02,
+        mesh_preview_max_edges=0,
+        output_root=tmp_path,
+        run_id='mesh_test',
+    ))
+
+    targets = planner.load_targets()
+    candidates = planner.generate_candidate_viewpoints(targets)
+    visibility = planner.compute_visibility_matrix(tuple(targets), tuple(candidates))
+
+    assert len(targets) == 24
+    assert planner.total_inspection_area > 0.0
+    assert all(target.target_id.startswith('mesh_') for target in targets)
+    assert candidates
+    assert visibility.visible_targets_by_candidate
+
+
 def test_offline_planner_loads_yaml_config(tmp_path: Path) -> None:
     config_path = tmp_path / 'offline_coverage_planner.yaml'
     config_path.write_text(

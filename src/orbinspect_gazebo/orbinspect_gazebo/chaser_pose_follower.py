@@ -5,6 +5,7 @@ from __future__ import annotations
 from collections.abc import Sequence
 import shutil
 import subprocess
+from time import monotonic
 
 from nav_msgs.msg import Odometry
 import rclpy
@@ -23,15 +24,18 @@ class ChaserPoseFollower(Node):
         self.declare_parameter('odom_topic', '/chaser/odom')
         self.declare_parameter('follow_rate', 2.0)
         self.declare_parameter('command_timeout', 0.6)
+        self.declare_parameter('startup_delay', 2.0)
 
         self.entity_name = str(self.get_parameter('entity_name').value)
         self.world_name = str(self.get_parameter('world_name').value)
         odom_topic = str(self.get_parameter('odom_topic').value)
         self.command_timeout = self._positive_parameter('command_timeout')
+        self.startup_delay = self._nonnegative_parameter('startup_delay')
         follow_rate = self._positive_parameter('follow_rate')
         self.gz_executable = shutil.which('gz')
         self.latest_odom: Odometry | None = None
         self.warned_missing_gz = False
+        self.start_time = monotonic()
 
         self.create_subscription(Odometry, odom_topic, self._odom_callback, 10)
         self.create_timer(1.0 / follow_rate, self._publish_pose_to_gazebo)
@@ -41,6 +45,8 @@ class ChaserPoseFollower(Node):
 
     def _publish_pose_to_gazebo(self) -> None:
         if self.latest_odom is None:
+            return
+        if monotonic() - self.start_time < self.startup_delay:
             return
         if self.gz_executable is None:
             if not self.warned_missing_gz:
@@ -93,6 +99,12 @@ class ChaserPoseFollower(Node):
         value = float(self.get_parameter(name).value)
         if value <= 0.0:
             raise ValueError(f'{name} must be positive')
+        return value
+
+    def _nonnegative_parameter(self, name: str) -> float:
+        value = float(self.get_parameter(name).value)
+        if value < 0.0:
+            raise ValueError(f'{name} must be non-negative')
         return value
 
     @staticmethod

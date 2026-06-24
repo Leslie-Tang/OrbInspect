@@ -1,9 +1,10 @@
 \section{Problem Formulation}
 \label{sec:problem}
 
-\subsection{Visibility Conditions}
+\subsection{Visibility and Dwell}
 
-A target $i$ is visible from chaser pose $x_k$ if all of the following hold:
+At time step $k$, target $i$ is visible from chaser position $r_k$ when range,
+field-of-view, incidence-angle, and line-of-sight predicates are satisfied:
 \begin{align}
   \rho_{\min} \le \norm{p_i-r_k} \le \rho_{\max}, \label{eq:range}\\
   p_i \in \fov(r_k,q_k), \label{eq:fov}\\
@@ -13,43 +14,33 @@ A target $i$ is visible from chaser pose $x_k$ if all of the following hold:
   \right) \le \theta_{\max}, \label{eq:view-angle}\\
   \los(r_k,p_i,\mathcal{O}) = 1, \label{eq:los}
 \end{align}
-where $\rho_{\min}$ and $\rho_{\max}$ define the camera range, $q_k$ is the
-camera attitude or assumed station-facing boresight, $\theta_{\max}$ is the
-maximum allowable viewing angle, and $\mathcal{O}$ is the set of occluding
-station primitives or mesh triangles.
-
-The dwell-time update is
+where $q_k$ denotes camera attitude or an equivalent boresight model,
+$\theta_{\max}$ is the maximum view angle, and $\mathcal{O}$ is the occluding
+geometry representation. The dwell update is
 \begin{equation}
   \tau_{i,k+1} =
   \begin{cases}
     \tau_{i,k}+\dt, & \text{if target } i \text{ is visible at } k,\\
-    \tau_{i,k}, & \text{otherwise},
+    \tau_{i,k}, & \text{otherwise}.
   \end{cases}
 \end{equation}
-and the inspection indicator is
-\begin{equation}
-  y_{i,k}= \mathbf{1}\{\tau_{i,k}\ge \tau_{\min}\}.
-\end{equation}
 
-\subsection{Safety and Actuation Constraints}
+\subsection{Safety and Actuation}
 
-The planner must satisfy acceleration, speed, and keep-out constraints:
+The chaser must satisfy acceleration, speed, and clearance constraints:
 \begin{align}
   \norm{u_k}_2 &\le u_{\max}, \\
   \norm{v_k}_2 &\le v_{\max}, \\
   d_{\mathcal{S}}(r_k) &\ge d_{\mathrm{safe}},
 \end{align}
 where $d_{\mathcal{S}}(r_k)$ is the signed distance from the chaser to the
-station safety envelope.
+station safety envelope. In the implemented ROS stack, a safety monitor logs
+minimum distance, clearance, caution-zone status, nearest primitive, filter
+activity, and nominal versus filtered acceleration commands.
 
-Additional mission constraints may include terminal conditions, sunlight
-constraints, communication geometry, plume impingement constraints, and camera
-slew-rate limits. These are outside the first implementation but should be
-represented in the final paper discussion.
+\subsection{Optimization Objective}
 
-\subsection{Coverage-Constrained Trajectory Optimization}
-
-The full inspection planning problem can be written as
+The ideal finite-horizon inspection problem is
 \begin{align}
   \min_{\{x_k,u_k,q_k\}_{k=0}^{K}}
   \quad &
@@ -57,7 +48,7 @@ The full inspection planning problem can be written as
   + w_u \sum_{k=0}^{K-1} \norm{u_k}_2\dt
   + w_s \sum_{k=0}^{K} \phi(d_{\mathcal{S}}(r_k))
   + w_c (1-C_K) \label{eq:objective}\\
-  \text{s.t.}\quad &
+  \mathrm{s.t.}\quad &
   x_{k+1}=f_{\mathrm{CW}}(x_k,u_k,\dt), \\
   & \norm{u_k}_2 \le u_{\max}, \\
   & \norm{v_k}_2 \le v_{\max}, \\
@@ -65,10 +56,43 @@ The full inspection planning problem can be written as
   & y_{i,k} \text{ follows the visibility and dwell model},\\
   & C_K \ge C_{\mathrm{req}},
 \end{align}
-where $\phi(\cdot)$ is a soft safety penalty used only when a relaxed version
-of the problem is solved. A hard-constrained implementation should enforce
-$d_{\mathcal{S}}(r_k)\ge d_{\mathrm{safe}}$ at all times.
+where $\phi$ is a soft penalty used in relaxed formulations. This problem is
+mixed-integer and nonconvex because visibility, occlusion, dwell satisfaction,
+and coverage are discrete or discontinuous. OrbInspect therefore implements a
+structured decomposition rather than a monolithic nonlinear mixed-integer
+program.
 
-This problem is mixed-integer and nonconvex because of visibility, occlusion,
-and coverage indicators. Therefore, the proposed first paper algorithm uses a
-structured offline decomposition.
+\subsection{Evaluation Metrics}
+
+The primary metrics are final coverage, cumulative control effort, minimum
+clearance, maximum speed, and tracking error:
+\begin{align}
+  C_{\mathrm{final}} &= \frac{N_{\mathrm{inspected}}}{N},\\
+  \Delta v_{\mathrm{cum}} &= \sum_k \norm{u_k}_2 \dt,\\
+  d_{\min} &= \min_k d_{\mathcal{S}}(r_k),\\
+  e_{\mathrm{track,rms}} &=
+    \sqrt{\frac{1}{K}\sum_k \norm{r_k-r_k^{\mathrm{ref}}}_2^2}.
+\end{align}
+Additional reported metrics include planning time, selected-viewpoint count,
+candidate-viewpoint count, trajectory sample count, and safety-filter
+activation.
+
+\subsection{Dynamics-Aware Coverage Efficiency}
+
+The role of the CW model is not limited to post hoc feasibility checking.  In
+the implemented offline planner, each candidate viewpoint is evaluated through
+a predicted bounded-acceleration CW transfer from the current state.  This
+produces an edge cost
+\begin{equation}
+  J_{\mathrm{CW}}(x,z_j) =
+  \lambda_v \widehat{\Delta v}(x,z_j)
+  + \lambda_e \widehat{e}_{\mathrm{track}}(x,z_j)
+  + \lambda_s \max\{0,-\widehat{d}_{\min}(x,z_j)\},
+\end{equation}
+where $\widehat{\Delta v}$ is the integrated acceleration norm,
+$\widehat{e}_{\mathrm{track}}$ is the RMS transfer tracking error, and
+$\widehat{d}_{\min}$ is the predicted minimum clearance.  The planner therefore
+prefers viewpoints that expose new surface area while requiring low control
+effort under orbital relative dynamics.  The reported
+$\Delta v/C_{\mathrm{final}}$ metric is used as a direct measure of coverage
+efficiency.

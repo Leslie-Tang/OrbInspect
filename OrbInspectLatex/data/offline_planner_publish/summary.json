@@ -1,0 +1,19 @@
+{
+  "candidate_count": 68,
+  "coverage_success": false,
+  "coverage_threshold": 0.5,
+  "dynamics_model": "CW/HCW",
+  "feasible": true,
+  "final_coverage_ratio": 0.4714285714285714,
+  "geometry_backend": "proxy",
+  "max_speed": 0.5540424750324842,
+  "method": "dynamics_aware_greedy",
+  "min_clearance": 0.23399899948175928,
+  "mission_duration": 1040.0,
+  "planning_time": 0.9509173439946608,
+  "rms_tracking_error": 33.33089364718842,
+  "selected_viewpoint_count": 13,
+  "target_count": 70,
+  "total_delta_v": 5.853384817236131,
+  "trajectory_sample_count": 1040
+}

@@ -40,6 +40,10 @@ setup(
             'orbinspect_guidance.offline_trajectory_node:main',
             'offline_coverage_planner = '
             'orbinspect_guidance.offline_coverage_planner:main',
+            'offline_planning_experiment = '
+            'orbinspect_guidance.offline_planning_experiment:main',
+            'planned_trajectory_replay_node = '
+            'orbinspect_guidance.planned_trajectory_replay_node:main',
         ],
     },
 )

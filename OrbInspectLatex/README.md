@@ -1,12 +1,14 @@
-# OrbInspect AST Paper Draft
+# OrbInspect Paper
 
-This folder contains an Elsevier/Aerospace Science and Technology-style LaTeX
-manuscript draft for OrbInspect.
+This folder contains an Elsevier/Aerospace Science and Technology LaTeX
+manuscript for OrbInspect. The active template files are taken from Elsevier's
+official `elsarticle_April2024` journal article template package.
 
-The draft is intentionally written before claiming a full Gazebo inspection
-result. It formalizes the inspection planning problem, assumptions, constraints,
-mission setting, and an offline trajectory generation algorithm that should be
-implemented and evaluated before using Gazebo videos as evidence.
+The manuscript is self-contained: every figure, raw CSV, summary, configuration
+snapshot, preview frame, and validation video cited by the paper is copied into
+this directory. The paper deliberately separates the high-coverage offline mesh
+planning result, ROS execution/logging validation, and Gazebo Harmonic visual
+validation.
 
 ## Build
 
@@ -15,7 +17,7 @@ family used for Aerospace Science and Technology submissions.
 
 ```bash
 cd OrbInspectLatex
-latexmk -pdf main.tex
+make
 ```
 
 If `latexmk` is unavailable:
@@ -27,15 +29,36 @@ pdflatex main.tex
 pdflatex main.tex
 ```
 
-This workspace currently does not include a TeX distribution, so compilation
-may require installing TeX Live and the Elsevier template package.
+The folder vendors `elsarticle.cls` and `elsarticle-num.bst` extracted from the
+official Elsevier template package, so the build uses the same class and
+numbered bibliography style shipped by Elsevier.
 
 ## Structure
 
 - `main.tex`: manuscript entry point.
+- `elsarticle.cls`: official Elsevier class extracted from
+  `elsarticle_April2024`.
+- `elsarticle-num.bst`: official Elsevier numbered bibliography style.
 - `sections/`: paper sections.
 - `references.bib`: initial bibliography placeholders.
-- `figures/`: generated paper figures should be placed here.
-- `tables/`: generated tables should be placed here.
+- `figures/high_coverage/`: trajectory, coverage, delta-v, efficiency, and
+  safety comparison figures for the updated mesh experiment.
+- `figures/iss_mesh/`: NASA ISS mesh preview figures.
+- `figures/offline_planner/`: legacy target, trajectory, and coverage figures.
+- `figures/gazebo_validation/`: Gazebo frames and ROS smoke-run figures.
+- `figures/monte_carlo/`: method-comparison figure.
+- `data/offline_high_coverage_experiment/`: updated offline mesh comparison
+  CSV, JSON, Markdown, and config snapshot artifacts.
+- `data/iss_mesh/`: copied NASA ISS GLB used to regenerate mesh-overlaid
+  trajectory figures without leaving this folder.
+- `data/offline_planner_publish/`: offline planner CSV, JSON, Markdown, and
+  config snapshot artifacts from the earlier proxy run.
+- `data/phase10_smoke/`: ROS execution CSV, JSON, Markdown, manifest, and
+  config snapshot artifacts.
+- `data/monte_carlo_20260621_155201/`: comparison summary and run tables.
+- `data/video_capture/`: Gazebo validation videos and preview frames.
 - `algorithms/`: algorithm pseudocode snippets.
-
+- `scripts/generate_mesh_trajectory_figures.py`: reproducible generator for
+  the mesh-overlaid trajectory figures in `figures/high_coverage/`.
+- `templates/official_elsevier_elsarticle_2024/`: downloaded official Elsevier
+  template archive and extracted source files.

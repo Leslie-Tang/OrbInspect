@@ -1,0 +1,176 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /Global Options1
+        - /TF1
+        - /ISS Mesh1
+        - /Planned Trajectory1
+        - /Executed Trajectory1
+        - /Camera Image1
+      Splitter Ratio: 0.5
+  - Class: rviz_common/Views
+    Name: Views
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Alpha: 0.45
+      Cell Size: 5
+      Class: rviz_default_plugins/Grid
+      Color: 120; 120; 128
+      Enabled: true
+      Line Style:
+        Line Width: 0.03
+        Value: Lines
+      Name: LVLH Grid
+      Plane: XY
+      Plane Cell Count: 30
+      Reference Frame: lvlh
+      Value: true
+    - Class: rviz_default_plugins/TF
+      Enabled: true
+      Frame Timeout: 15
+      Frames:
+        All Enabled: true
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+      Update Interval: 0
+      Value: true
+    - Angle Tolerance: 0.1
+      Class: rviz_default_plugins/Odometry
+      Enabled: true
+      Keep: 200
+      Name: Chaser Odometry
+      Position Tolerance: 0.1
+      Shape: Axes
+      Topic:
+        Depth: 10
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /chaser/odom
+      Value: true
+    - Class: rviz_default_plugins/Marker
+      Enabled: true
+      Name: ISS Mesh
+      Topic:
+        Depth: 10
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /visualization/station_mesh
+      Value: true
+    - Class: rviz_default_plugins/Path
+      Color: 30; 144; 255
+      Enabled: true
+      Line Style: Lines
+      Line Width: 0.08
+      Name: Planned Trajectory
+      Pose Style: None
+      Topic:
+        Depth: 10
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /inspection/planned_path
+      Value: true
+    - Class: rviz_default_plugins/Path
+      Color: 255; 120; 20
+      Enabled: true
+      Line Style: Lines
+      Line Width: 0.06
+      Name: Executed Trajectory
+      Pose Style: None
+      Topic:
+        Depth: 10
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /chaser/trajectory
+      Value: true
+    - Alpha: 1
+      Class: rviz_default_plugins/PointStamped
+      Color: 255; 80; 80
+      Enabled: true
+      History Length: 1
+      Name: Current Replay Point
+      Radius: 0.8
+      Topic:
+        Depth: 10
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /chaser/reference
+      Value: true
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: true
+      Name: Proposed Viewpoints
+      Topic:
+        Depth: 10
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /visualization/planner_markers
+      Value: true
+    - Class: rviz_default_plugins/Marker
+      Enabled: true
+      Name: Current Camera FOV
+      Topic:
+        Depth: 10
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /visualization/fov_marker
+      Value: true
+    - Class: rviz_default_plugins/Image
+      Enabled: true
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: Camera Image
+      Normalize Range: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /chaser/camera/image
+      Value: true
+  Enabled: true
+  Global Options:
+    Background Color: 12; 14; 20
+    Fixed Frame: lvlh
+    Frame Rate: 30
+  Name: root
+  Tools:
+    - Class: rviz_default_plugins/Interact
+      Hide Inactive Objects: true
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
+  Transformation:
+    Current:
+      Class: rviz_default_plugins/TF
+  Value: true
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 95
+      Focal Point:
+        X: 0
+        Y: -18
+        Z: 12
+      Name: Current View
+      Pitch: 0.55
+      Target Frame: lvlh
+      Yaw: 0.75
+Window Geometry:
+  Displays:
+    collapsed: false
+  Height: 980
+  Hide Left Dock: false
+  Hide Right Dock: false
+  Width: 1600

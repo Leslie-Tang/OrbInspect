@@ -1,3 +1,4 @@
+from orbinspect_eval.logger_node import _boresight_from_quaternion
 from orbinspect_eval.metrics import delta_v_increment
 from orbinspect_eval.metrics import is_saturated
 from orbinspect_eval.metrics import tracking_error_norm
@@ -29,3 +30,9 @@ def test_invalid_metrics_inputs_raise_value_error() -> None:
         delta_v_increment(-1.0, 1.0)
     with pytest.raises(ValueError):
         is_saturated(0.0, 0.0)
+
+
+def test_boresight_from_identity_quaternion() -> None:
+    assert _boresight_from_quaternion(0.0, 0.0, 0.0, 1.0) == pytest.approx(
+        (1.0, 0.0, 0.0)
+    )

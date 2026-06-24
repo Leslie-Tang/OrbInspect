@@ -1,0 +1,1 @@
+{"scenario": "full_station", "num_runs": 2, "methods": ["fixed_waypoints", "random_safe", "greedy_nbv", "greedy_nbv_safety_filter"]}

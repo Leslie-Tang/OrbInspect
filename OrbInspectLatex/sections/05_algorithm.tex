@@ -1,87 +1,77 @@
-\section{Proposed Offline Planner}
+\section{Offline Planner}
 \label{sec:algorithm}
 
-\subsection{Planner Decomposition}
+\subsection{Decomposition}
 
-The proposed planner decomposes the full problem into four stages:
-\begin{enumerate}
-  \item target sampling on the station model;
-  \item safe candidate viewpoint generation;
-  \item coverage-aware viewpoint selection and ordering;
-  \item CW-feasible trajectory generation between selected viewpoints.
-\end{enumerate}
+The implemented planner decomposes inspection into mesh target sampling,
+candidate viewpoint construction, visibility matrix construction, viewpoint
+selection, CW tour generation, trajectory rollout, and camera attitude export.
+This decomposition is deliberately transparent: each stage writes artifacts
+that can be checked after the run. The self-contained benchmark includes
+method-comparison, viewpoint, planner, trajectory, attitude, and coverage CSV
+files.
 
-This decomposition is chosen because it produces interpretable paper metrics:
-coverage ratio, uncovered target set, planned $\Delta v$, executed $\Delta v$,
-minimum clearance, planning time, and mission duration.
+\subsection{Candidate Viewpoints}
 
-\subsection{Target Sampling}
-
-For mesh-based experiments, the station surface is sampled into target points
-$p_i$ with normals $n_i$. The sampling density should be configurable by a
-target spacing parameter. For fair comparison, the same sampled target set is
-used by all methods in a scenario.
-
-\subsection{Candidate Viewpoint Generation}
-
-A candidate viewpoint $z_j$ is generated on offset shells around the station:
+For each mesh target, candidate viewpoints are generated on offset shells and
+accepted only when they satisfy basic safety and view constraints. Each
+candidate $z_j$ stores a safety margin and a precomputed set of visible
+targets. The resulting binary visibility relation can be written as
 \begin{equation}
-  z_j = p_i + \rho_j n_i,
+  A_{ij}=1
+  \quad \Longleftrightarrow \quad
+  \text{target } i \text{ is visible from candidate } z_j .
 \end{equation}
-where $\rho_j\in[\rho_{\min},\rho_{\max}]$ and the candidate is accepted only
-if it satisfies keep-out constraints and does not lie inside the station
-safety envelope. Candidate viewpoints can also be generated from cylindrical
-or spherical shells surrounding major structural components.
+In the high-coverage offline benchmark, 357 candidates are generated for
+180 mesh target samples.
 
-For each accepted candidate $z_j$, a binary visibility vector
-$A_{ij}\in\{0,1\}$ is computed:
+\subsection{Dynamics-Aware Viewpoint Selection}
+
+The proposed method first performs dynamics-aware weighted set cover and then
+orders the selected candidates with a greedy CW-transfer tour. At each set-cover
+iteration, the planner balances new surface area coverage against the CW
+transfer cost from the current predicted state. For candidate $z_j$, let
+$\Delta A_j$ be the newly visible mesh area and let $J_{\mathrm{CW}}(x,z_j)$ be
+the transfer cost defined in Section~\ref{sec:problem}. The set-cover stage
+uses the score
 \begin{equation}
-  A_{ij}=1 \quad \Longleftrightarrow \quad
-  \text{target } i \text{ is visible from candidate } j.
+  s_j =
+  \frac{\Delta A_j}{1+J_{\mathrm{CW}}(x,z_j)}
+  + w_m \min\{\widehat{d}_{\min}(x,z_j),d_{\max}\},
 \end{equation}
+then updates the predicted state with the CW rollout to the selected
+viewpoint. A second ordering pass greedily chooses the next selected candidate
+with the lowest predicted CW dynamic cost from the current terminal state. This
+makes later choices depend on the orbital state reached by earlier choices, so
+CW dynamics affect both the selected viewpoints and their order. The logged
+\texttt{planner.csv} file records the selected candidate
+identifier, new target count, area gain, cumulative coverage, score, transfer
+$\Delta v$, dynamic transfer cost, minimum clearance, transfer tracking error,
+and feasibility flag for each selected viewpoint.
 
-\subsection{Viewpoint Selection}
+\subsection{CW Transfer Generation}
 
-The viewpoint subset can be selected by a weighted set-cover objective:
-\begin{align}
-  \min_{\alpha_j\in\{0,1\}}
-  \quad &
-  \sum_j c_j \alpha_j \\
-  \text{s.t.}\quad &
-  \sum_j A_{ij}\alpha_j \ge 1,
-  \quad \forall i \in \mathcal{T}_{\mathrm{req}},
-\end{align}
-where $c_j$ penalizes fuel estimate, poor safety margin, and view quality. If
-full set cover is too large, a greedy submodular approximation is used:
-\begin{equation}
-  j^\star =
-  \arg\max_j
-  \left[
-    w_{\mathrm{cov}}\Delta C_j
-    - w_d d(r,z_j)
-    - w_u \hat{\Delta v}(r,z_j)
-    + w_m m_j
-  \right],
-\end{equation}
-where $\Delta C_j$ is new coverage, $d(r,z_j)$ is travel distance,
-$\hat{\Delta v}$ is an estimated transfer cost, and $m_j$ is safety margin.
-
-\subsection{Ordering and CW Transfer Generation}
-
-After selecting candidate viewpoints, their order is computed by solving a
-traveling-salesman-like problem with edge costs estimated from CW transfers.
-For each edge $(i,j)$, the planner computes a dynamically feasible transfer
-under bounded acceleration and rejects edges that violate safety margins.
+After a candidate is selected, the planner computes a bounded-acceleration
+CW transfer toward the viewpoint, samples the resulting trajectory, evaluates
+clearance and speed, and updates predicted coverage. The exported trajectory
+includes position, velocity, acceleration command, camera boresight, yaw,
+pitch, and quaternion samples, so the planned path specifies both where the
+chaser flies and how the inspection camera is pointed. Edges that violate
+basic feasibility checks are penalized or rejected depending on the baseline
+method. The current implementation is still a tractable approximation rather
+than a global mixed-integer optimum; this limitation is discussed in
+Section~\ref{sec:discussion}.
 
 \input{algorithms/offline_planner}
 
-\subsection{Trajectory Output}
+\subsection{Outputs}
 
-The offline planner outputs a timestamped reference trajectory
+The planner outputs a timestamped reference trajectory
 \begin{equation}
   \mathcal{P} =
   \{(t_k,r_k^{\mathrm{ref}},v_k^{\mathrm{ref}},u_k^{\mathrm{ref}})\}_{k=0}^{K}.
 \end{equation}
-This trajectory is saved before ROS execution and then replayed through the
-controller/dynamics stack. This is the proper order for the final paper:
-trajectory first, Gazebo validation second.
+For the reported set-cover CW tour run, $\mathcal{P}$ contains 920 trajectory
+samples over 1840~s with an 80~s transfer duration and 2~s integration step.
+The trajectory and attitude stream are subsequently available to the ROS stack
+for replay, logging, RViz inspection, and Gazebo visualization.

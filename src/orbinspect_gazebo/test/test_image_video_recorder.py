@@ -1,6 +1,6 @@
 from orbinspect_gazebo.image_video_recorder import ImageVideoRecorder
-from sensor_msgs.msg import Image
 import pytest
+from sensor_msgs.msg import Image
 
 
 def test_channels_for_encoding() -> None:

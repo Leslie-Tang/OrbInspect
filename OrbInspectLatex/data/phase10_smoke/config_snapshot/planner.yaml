@@ -1,0 +1,18 @@
+inspection_planner_node:
+  ros__parameters:
+    coverage_threshold: 0.8
+    max_waypoints: 40
+    waypoint_tolerance: 2.0
+    publish_rate: 1.0
+    candidate_radius_min: 10.0
+    candidate_radius_max: 28.0
+    candidate_radial_steps: 3
+    candidate_azimuth_steps: 16
+    candidate_elevation_steps: 5
+    sensor_range: 25.0
+    weight_coverage: 10.0
+    weight_distance: 0.08
+    weight_fuel: 0.4
+    weight_safety: 0.08
+    weight_view_quality: 1.0
+    frame_id: lvlh

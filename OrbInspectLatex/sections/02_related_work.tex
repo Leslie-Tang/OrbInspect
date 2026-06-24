@@ -1,25 +1,38 @@
 \section{Related Work}
 \label{sec:related}
 
-Orbital inspection combines ideas from spacecraft relative motion, visual
-inspection planning, next-best-view planning, and safe control. Relative motion
-near a circular chief orbit is commonly modeled with the
-Clohessy--Wiltshire/Hill equations, which provide a tractable baseline for
-guidance design and trajectory optimization \citep{clohessy1960terminal}.
-Higher-fidelity models can later
-be incorporated through numerical astrodynamics backends, but a linear
-relative-motion baseline is valuable for reproducible algorithm development.
+Orbital inspection draws on three bodies of literature: relative spacecraft
+motion, robotic view planning, and middleware-supported simulation. The
+Clohessy--Wiltshire equations remain a common starting point for rendezvous
+and proximity operations near a circular chief orbit because they provide a
+linear, interpretable model of relative translation \cite{clohessy1960terminal}.
+Although high-fidelity perturbation models are required for flight design, a
+CW/HCW baseline is appropriate for early algorithmic comparisons because it
+makes assumptions explicit and permits repeatable propagation, control, and
+transfer-cost calculations \cite{wertz2011space}.
 
-Coverage planning and next-best-view methods are widely used in robotics for
-inspection of complex geometry \citep{scott2003view}. However, orbital inspection differs from
-terrestrial inspection because viewpoints are constrained by orbital dynamics,
-thruster authority, keep-out zones, line-of-sight blockage, and fuel. The
-planner must therefore optimize over both sensing utility and dynamic
-feasibility.
+Robotic inspection and next-best-view planning study how a robot should select
+sensor poses that reconstruct or inspect an object efficiently. Classical
+surveys emphasize visibility, occlusion, sensor range, view quality, and the
+trade-off between coverage and motion cost \cite{scott2003view}. Orbital
+inspection adds constraints that are less prominent in terrestrial settings:
+viewpoints must be dynamically reachable under relative orbital motion, safety
+margins must be maintained around delicate structure, and fuel consumption is a
+primary mission metric. This motivates planners that do not choose views solely
+by information gain, but also by transfer feasibility and clearance.
 
-OrbInspect is designed to bridge this gap by combining a coverage model, a
-relative-dynamics trajectory generator, safety constraints, and ROS~2-based
-experiment logging. The NASA International Space Station mesh is used for
-visual realism, while simplified primitives are retained initially for
-occlusion and safety certificates until mesh-accelerated ray casting is
-implemented.
+Simulation frameworks for space robotics must also be treated carefully. A
+rendered Gazebo scene can show useful visual context, but standard rigid-body
+physics in a robotics simulator is not a substitute for an orbital relative
+dynamics model. OrbInspect therefore uses Gazebo Harmonic for visualization of
+the ISS model and chaser while the ROS~2 dynamics node publishes the chaser
+state used by planning, control, safety, and logging. This separation follows
+the philosophy that numerical claims should come from logged planning and
+execution data, while visualization should support interpretation and
+interface validation.
+
+The closest methodological position of this work is therefore not a single
+new optimizer in isolation, but an integrated, reproducible evaluation stack:
+coverage-aware viewpoint planning, CW-feasible trajectory generation, safety
+monitoring, ROS~2 execution, and Gazebo visualization are connected through
+recorded artifacts that can be audited after each run.

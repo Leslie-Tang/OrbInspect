@@ -72,7 +72,9 @@ class OfflinePlannerConfig:
         'src/orbinspect_description/models/iss_real/meshes/ISS_stationary.glb'
     )
     iss_mesh_scale: float = 1.065
-    mesh_preview_max_edges: int = 12000
+    mesh_preview_max_edges: int = 60000
+    mesh_target_count: int = 240
+    mesh_occlusion_max_triangles: int = 1200
 
 
 @dataclass(frozen=True)
@@ -133,6 +135,25 @@ class OfflinePlan:
 
 
 @dataclass(frozen=True)
+class MeshTriangle:
+    """A transformed mesh triangle with surface area and normal."""
+
+    vertices: tuple[Vector3, Vector3, Vector3]
+    centroid: Vector3
+    normal: Vector3
+    area: float
+
+
+@dataclass(frozen=True)
+class MeshTargetSet:
+    """Area-weighted inspection targets sampled from a mesh."""
+
+    targets: tuple[InspectionTarget, ...]
+    target_area_by_id: dict[str, float]
+    total_area: float
+
+
+@dataclass(frozen=True)
 class IssMeshPreview:
     """Downsampled line preview of the NASA ISS GLB for paper figures."""
 
@@ -169,6 +190,63 @@ class IssMeshPreview:
         axis.add_collection3d(collection)
 
 
+@dataclass(frozen=True)
+class IssMeshGeometry:
+    """Triangle geometry for mesh target sampling and visibility checks."""
+
+    triangles: tuple[MeshTriangle, ...]
+    occluders: tuple[MeshTriangle, ...]
+    total_area: float
+
+    @classmethod
+    def load(
+        cls,
+        path: Path,
+        scale: float,
+        occlusion_max_triangles: int,
+    ) -> IssMeshGeometry:
+        """Load transformed NASA ISS mesh triangles from a GLB file."""
+        json_doc, binary = _read_glb(path)
+        triangles = tuple(_mesh_triangles_from_gltf(json_doc, binary, scale))
+        if not triangles:
+            raise RuntimeError(f'no triangles loaded from mesh: {path}')
+        total_area = sum(triangle.area for triangle in triangles)
+        return cls(
+            triangles=triangles,
+            occluders=tuple(_downsample_triangles(triangles, occlusion_max_triangles)),
+            total_area=total_area,
+        )
+
+    def sample_targets(self, target_count: int) -> MeshTargetSet:
+        """Return deterministic area-weighted target samples on the mesh."""
+        if target_count <= 0:
+            raise ValueError('mesh_target_count must be positive')
+        selected = _sample_triangles_by_area(self.triangles, target_count)
+        sample_area = self.total_area / float(len(selected))
+        targets: list[InspectionTarget] = []
+        target_area_by_id: dict[str, float] = {}
+        for index, triangle in enumerate(selected):
+            target_id = f'mesh_{index:05d}'
+            targets.append(InspectionTarget(
+                target_id=target_id,
+                position=triangle.centroid,
+                normal=triangle.normal,
+            ))
+            target_area_by_id[target_id] = sample_area
+        return MeshTargetSet(tuple(targets), target_area_by_id, self.total_area)
+
+    def line_of_sight_blocked(
+        self,
+        start: Vector3,
+        end: Vector3,
+    ) -> bool:
+        """Return true when the segment intersects the downsampled mesh."""
+        for triangle in self.occluders:
+            if _segment_triangle_intersection(start, end, triangle.vertices):
+                return True
+        return False
+
+
 class OfflineCoveragePlanner:
     """Plan coverage-aware viewpoint sequences with CW transfer costs."""
 
@@ -180,6 +258,9 @@ class OfflineCoveragePlanner:
             CameraModel(max_range=max(config.candidate_radius + 20.0, 35.0))
         )
         self.dynamics = HCWDynamics(config.mean_motion)
+        self.mesh_geometry: IssMeshGeometry | None = None
+        self.target_area_by_id: dict[str, float] = {}
+        self.total_inspection_area = 0.0
         self.mesh_preview = IssMeshPreview.load(
             config.iss_mesh_path,
             scale=config.iss_mesh_scale,
@@ -219,11 +300,22 @@ class OfflineCoveragePlanner:
 
     def load_targets(self) -> list[InspectionTarget]:
         """Load or generate inspection targets for the selected geometry backend."""
-        if self.config.geometry_backend != 'proxy':
-            raise NotImplementedError(
-                'mesh target sampling is planned; use geometry_backend=proxy for now'
+        if self.config.geometry_backend == 'proxy':
+            targets = InspectionTargetManager(self.config.target_spacing).generate_targets()
+            self.target_area_by_id = {target.target_id: 1.0 for target in targets}
+            self.total_inspection_area = float(len(targets))
+            return targets
+        if self.config.geometry_backend == 'mesh':
+            self.mesh_geometry = IssMeshGeometry.load(
+                self.config.iss_mesh_path,
+                self.config.iss_mesh_scale,
+                self.config.mesh_occlusion_max_triangles,
             )
-        return InspectionTargetManager(self.config.target_spacing).generate_targets()
+            target_set = self.mesh_geometry.sample_targets(self.config.mesh_target_count)
+            self.target_area_by_id = target_set.target_area_by_id
+            self.total_inspection_area = target_set.total_area
+            return list(target_set.targets)
+        raise ValueError(f'unsupported geometry_backend: {self.config.geometry_backend}')
 
     def generate_candidate_viewpoints(
         self,
@@ -266,16 +358,15 @@ class OfflineCoveragePlanner:
         """Compute the set of targets visible from each candidate."""
         target_list = tuple(targets)
         candidate_list = tuple(candidates)
+        target_by_id = {target.target_id: target for target in target_list}
         visible_by_candidate: dict[str, frozenset[str]] = {}
         for candidate in candidate_list:
+            aim_target = target_by_id.get(candidate.source_target_id)
+            aim_position = aim_target.position if aim_target is not None else None
             visible = frozenset(
                 target.target_id
                 for target in target_list
-                if self.visibility_checker.is_visible(
-                    candidate.position,
-                    target.position,
-                    target.normal,
-                )
+                if self._target_visible(candidate.position, target, aim_position)
             )
             visible_by_candidate[candidate.candidate_id] = visible
         return VisibilityMatrix(
@@ -299,7 +390,7 @@ class OfflineCoveragePlanner:
         remaining = {candidate.candidate_id: candidate for candidate in candidates}
 
         while (
-            len(covered) / float(len(target_ids)) < self.config.coverage_threshold
+            self._coverage_ratio(covered, len(target_ids)) < self.config.coverage_threshold
             and remaining
             and len(selected) < self.config.max_viewpoints
         ):
@@ -310,7 +401,11 @@ class OfflineCoveragePlanner:
                 if not new_targets:
                     continue
                 transfer = self.estimate_transfer(current_state, candidate.position)
-                score = self._candidate_score(len(new_targets), candidate, transfer)
+                score = self._candidate_score(
+                    self._target_area(new_targets),
+                    candidate,
+                    transfer,
+                )
                 if best is None or score > best[0]:
                     best = (score, candidate, frozenset(new_targets), transfer)
             if best is None:
@@ -326,7 +421,7 @@ class OfflineCoveragePlanner:
                     sequence=sequence,
                     candidate=candidate,
                     new_targets=new_targets,
-                    cumulative_coverage=len(covered) / float(len(target_ids)),
+                    cumulative_coverage=self._coverage_ratio(covered, len(target_ids)),
                     transfer=self._offset_transfer_time(transfer, current_time),
                     score=score,
                 )
@@ -389,7 +484,7 @@ class OfflineCoveragePlanner:
         for directory in output_dirs:
             directory.mkdir(parents=True, exist_ok=True)
 
-        self._write_targets(raw_dir / 'targets.csv', plan.targets)
+        self._write_targets(raw_dir / 'targets.csv', plan.targets, self.target_area_by_id)
         self._write_candidates(
             raw_dir / 'candidate_viewpoints.csv',
             plan.candidates,
@@ -434,6 +529,7 @@ class OfflineCoveragePlanner:
             'method': self.config.method_name,
             'geometry_backend': self.config.geometry_backend,
             'target_count': len(targets),
+            'total_inspection_area': self.total_inspection_area,
             'candidate_count': len(candidates),
             'selected_viewpoint_count': len(selected),
             'trajectory_sample_count': len(planned_trajectory),
@@ -454,18 +550,69 @@ class OfflineCoveragePlanner:
 
     def _candidate_score(
         self,
-        new_target_count: int,
+        new_target_gain: float,
         candidate: CandidateViewpoint,
         transfer: TransferEstimate,
     ) -> float:
         feasibility_penalty = 0.0 if transfer.feasible else 25.0
+        if self.config.geometry_backend == 'mesh':
+            denominator = max(self.total_inspection_area, 1.0e-12)
+            new_target_gain = 100.0 * new_target_gain / denominator
         return (
-            8.0 * float(new_target_count)
+            8.0 * float(new_target_gain)
             + 0.05 * candidate.safety_margin
             - 2.0 * transfer.delta_v
             - 0.2 * transfer.tracking_error
             - feasibility_penalty
         )
+
+    def _target_visible(
+        self,
+        chaser_position: Vector3,
+        target: InspectionTarget,
+        aim_position: Vector3 | None = None,
+    ) -> bool:
+        if self.config.geometry_backend == 'mesh' and self.mesh_geometry is not None:
+            return self._mesh_target_visible(chaser_position, target, aim_position)
+        return self.visibility_checker.is_visible(
+            chaser_position,
+            target.position,
+            target.normal,
+        )
+
+    def _mesh_target_visible(
+        self,
+        chaser_position: Vector3,
+        target: InspectionTarget,
+        aim_position: Vector3 | None = None,
+    ) -> bool:
+        relative = subtract(target.position, chaser_position)
+        target_distance = norm(relative)
+        camera = self.visibility_checker.camera
+        if target_distance < camera.min_range or target_distance > camera.max_range:
+            return False
+        if not _inside_camera_fov(chaser_position, relative, camera, aim_position):
+            return False
+        target_to_chaser = subtract(chaser_position, target.position)
+        cosine = dot(unit(target_to_chaser), unit(target.normal))
+        cosine = max(-1.0, min(1.0, cosine))
+        if math.degrees(math.acos(cosine)) > camera.max_view_angle_deg:
+            return False
+        if self.mesh_geometry is None:
+            return True
+        return not self.mesh_geometry.line_of_sight_blocked(
+            tuple(float(value) for value in chaser_position),
+            target.position,
+        )
+
+    def _target_area(self, target_ids: Iterable[str]) -> float:
+        return sum(self.target_area_by_id.get(target_id, 1.0) for target_id in target_ids)
+
+    def _coverage_ratio(self, covered: set[str], target_count: int) -> float:
+        if self.config.geometry_backend == 'mesh':
+            denominator = max(self.total_inspection_area, 1.0e-12)
+            return self._target_area(covered) / denominator
+        return len(covered) / float(max(1, target_count))
 
     def _control_to_target(
         self,
@@ -534,10 +681,15 @@ class OfflineCoveragePlanner:
         path.write_text(json.dumps(payload, indent=2, sort_keys=True) + '\n')
 
     @staticmethod
-    def _write_targets(path: Path, targets: tuple[InspectionTarget, ...]) -> None:
+    def _write_targets(
+        path: Path,
+        targets: tuple[InspectionTarget, ...],
+        target_area_by_id: dict[str, float],
+    ) -> None:
         with path.open('w', newline='') as handle:
             writer = csv.DictWriter(handle, fieldnames=[
                 'target_id', 'px', 'py', 'pz', 'nx', 'ny', 'nz',
+                'surface_area_weight',
             ])
             writer.writeheader()
             for target in targets:
@@ -549,6 +701,7 @@ class OfflineCoveragePlanner:
                     'nx': target.normal[0],
                     'ny': target.normal[1],
                     'nz': target.normal[2],
+                    'surface_area_weight': target_area_by_id.get(target.target_id, 1.0),
                 })
 
     @staticmethod
@@ -804,10 +957,43 @@ def add(left: Vector3, right: Vector3) -> Vector3:
     return (left[0] + right[0], left[1] + right[1], left[2] + right[2])
 
 
+def subtract(left: Iterable[float], right: Iterable[float]) -> Vector3:
+    """Return vector subtraction."""
+    left_vector = tuple(float(value) for value in left)
+    right_vector = tuple(float(value) for value in right)
+    return (
+        left_vector[0] - right_vector[0],
+        left_vector[1] - right_vector[1],
+        left_vector[2] - right_vector[2],
+    )
+
+
 def scale(values: Iterable[float], factor: float) -> Vector3:
     """Return a scaled three-vector."""
     vector = tuple(float(value) for value in values)
     return (vector[0] * factor, vector[1] * factor, vector[2] * factor)
+
+
+def dot(left: Iterable[float], right: Iterable[float]) -> float:
+    """Return dot product."""
+    left_vector = tuple(float(value) for value in left)
+    right_vector = tuple(float(value) for value in right)
+    return (
+        left_vector[0] * right_vector[0]
+        + left_vector[1] * right_vector[1]
+        + left_vector[2] * right_vector[2]
+    )
+
+
+def cross(left: Iterable[float], right: Iterable[float]) -> Vector3:
+    """Return cross product."""
+    left_vector = tuple(float(value) for value in left)
+    right_vector = tuple(float(value) for value in right)
+    return (
+        left_vector[1] * right_vector[2] - left_vector[2] * right_vector[1],
+        left_vector[2] * right_vector[0] - left_vector[0] * right_vector[2],
+        left_vector[0] * right_vector[1] - left_vector[1] * right_vector[0],
+    )
 
 
 def norm(values: Iterable[float]) -> float:
@@ -826,13 +1012,7 @@ def unit(values: Iterable[float]) -> Vector3:
 
 def distance(left: Iterable[float], right: Iterable[float]) -> float:
     """Return Euclidean distance between two vectors."""
-    left_vector = tuple(float(value) for value in left)
-    right_vector = tuple(float(value) for value in right)
-    return norm((
-        left_vector[0] - right_vector[0],
-        left_vector[1] - right_vector[1],
-        left_vector[2] - right_vector[2],
-    ))
+    return norm(subtract(left, right))
 
 
 def _read_glb(path: Path) -> tuple[dict[str, object], bytes]:
@@ -929,6 +1109,231 @@ def _mesh_segments_from_gltf(
                 if len(segments) >= max_edges:
                     return segments
     return segments
+
+
+def _mesh_triangles_from_gltf(
+    json_doc: dict[str, object],
+    binary: bytes,
+    scale: float,
+) -> list[MeshTriangle]:
+    nodes = json_doc.get('nodes', [])
+    meshes = json_doc.get('meshes', [])
+    if not isinstance(nodes, list) or not isinstance(meshes, list):
+        return []
+
+    node_transforms = _node_translations(json_doc)
+    triangles: list[MeshTriangle] = []
+    for node in nodes:
+        if not isinstance(node, dict) or 'mesh' not in node:
+            continue
+        mesh_index = int(node['mesh'])
+        if mesh_index >= len(meshes) or not isinstance(meshes[mesh_index], dict):
+            continue
+        translation = node_transforms.get(id(node), (0.0, 0.0, 0.0))
+        mesh = meshes[mesh_index]
+        primitives = mesh.get('primitives', [])
+        if not isinstance(primitives, list):
+            continue
+        for primitive in primitives:
+            if not isinstance(primitive, dict) or primitive.get('mode', 4) != 4:
+                continue
+            attributes = primitive.get('attributes', {})
+            if not isinstance(attributes, dict) or 'POSITION' not in attributes:
+                continue
+            positions = _read_accessor_vec3(json_doc, binary, int(attributes['POSITION']))
+            indices = _read_accessor_indices(json_doc, binary, primitive.get('indices'))
+            if indices:
+                triangles.extend(_triangles_from_indexed_positions(
+                    positions,
+                    indices,
+                    translation,
+                    scale,
+                ))
+            else:
+                triangles.extend(_triangles_from_positions(positions, translation, scale))
+    return _orient_triangles_outward(triangles)
+
+
+def _triangles_from_indexed_positions(
+    positions: list[Vector3],
+    indices: list[int],
+    translation: Vector3,
+    scale_factor: float,
+) -> list[MeshTriangle]:
+    triangles: list[MeshTriangle] = []
+    for start in range(0, len(indices) - 2, 3):
+        triangle_indices = indices[start:start + 3]
+        if max(triangle_indices) >= len(positions):
+            continue
+        vertices = tuple(
+            _transform_iss_vertex(positions[index], translation, scale_factor)
+            for index in triangle_indices
+        )
+        triangle = _make_mesh_triangle(vertices)
+        if triangle is not None:
+            triangles.append(triangle)
+    return triangles
+
+
+def _triangles_from_positions(
+    positions: list[Vector3],
+    translation: Vector3,
+    scale_factor: float,
+) -> list[MeshTriangle]:
+    triangles: list[MeshTriangle] = []
+    for start in range(0, len(positions) - 2, 3):
+        vertices = tuple(
+            _transform_iss_vertex(point, translation, scale_factor)
+            for point in positions[start:start + 3]
+        )
+        triangle = _make_mesh_triangle(vertices)
+        if triangle is not None:
+            triangles.append(triangle)
+    return triangles
+
+
+def _make_mesh_triangle(vertices: tuple[Vector3, Vector3, Vector3]) -> MeshTriangle | None:
+    edge_a = subtract(vertices[1], vertices[0])
+    edge_b = subtract(vertices[2], vertices[0])
+    normal_area = cross(edge_a, edge_b)
+    double_area = norm(normal_area)
+    if double_area <= 1.0e-10:
+        return None
+    area = 0.5 * double_area
+    normal = scale(normal_area, 1.0 / double_area)
+    centroid = (
+        (vertices[0][0] + vertices[1][0] + vertices[2][0]) / 3.0,
+        (vertices[0][1] + vertices[1][1] + vertices[2][1]) / 3.0,
+        (vertices[0][2] + vertices[1][2] + vertices[2][2]) / 3.0,
+    )
+    return MeshTriangle(vertices=vertices, centroid=centroid, normal=normal, area=area)
+
+
+def _orient_triangles_outward(triangles: list[MeshTriangle]) -> list[MeshTriangle]:
+    if not triangles:
+        return []
+    total_area = sum(triangle.area for triangle in triangles)
+    if total_area <= 0.0:
+        return triangles
+    center = (
+        sum(triangle.centroid[0] * triangle.area for triangle in triangles) / total_area,
+        sum(triangle.centroid[1] * triangle.area for triangle in triangles) / total_area,
+        sum(triangle.centroid[2] * triangle.area for triangle in triangles) / total_area,
+    )
+    oriented: list[MeshTriangle] = []
+    for triangle in triangles:
+        outward = subtract(triangle.centroid, center)
+        if dot(triangle.normal, outward) >= 0.0:
+            oriented.append(triangle)
+            continue
+        oriented.append(MeshTriangle(
+            vertices=triangle.vertices,
+            centroid=triangle.centroid,
+            normal=scale(triangle.normal, -1.0),
+            area=triangle.area,
+        ))
+    return oriented
+
+
+def _sample_triangles_by_area(
+    triangles: tuple[MeshTriangle, ...],
+    sample_count: int,
+) -> list[MeshTriangle]:
+    if not triangles:
+        return []
+    total_area = sum(triangle.area for triangle in triangles)
+    if total_area <= 0.0:
+        return list(triangles[:sample_count])
+    selected: list[MeshTriangle] = []
+    step = total_area / float(sample_count)
+    threshold = 0.5 * step
+    cumulative = 0.0
+    for triangle in triangles:
+        cumulative += triangle.area
+        while cumulative >= threshold and len(selected) < sample_count:
+            selected.append(triangle)
+            threshold += step
+        if len(selected) >= sample_count:
+            break
+    return selected
+
+
+def _downsample_triangles(
+    triangles: tuple[MeshTriangle, ...],
+    max_triangles: int,
+) -> list[MeshTriangle]:
+    if max_triangles <= 0:
+        return []
+    if len(triangles) <= max_triangles:
+        return list(triangles)
+    stride = max(1, math.ceil(len(triangles) / float(max_triangles)))
+    return list(triangles[::stride][:max_triangles])
+
+
+def _segment_triangle_intersection(
+    start: Vector3,
+    end: Vector3,
+    vertices: tuple[Vector3, Vector3, Vector3],
+) -> bool:
+    direction = subtract(end, start)
+    length = norm(direction)
+    if length <= 1.0e-12:
+        return False
+    edge_a = subtract(vertices[1], vertices[0])
+    edge_b = subtract(vertices[2], vertices[0])
+    p_vector = cross(direction, edge_b)
+    determinant = dot(edge_a, p_vector)
+    if abs(determinant) <= 1.0e-10:
+        return False
+    inv_determinant = 1.0 / determinant
+    t_vector = subtract(start, vertices[0])
+    u_value = dot(t_vector, p_vector) * inv_determinant
+    if u_value < 0.0 or u_value > 1.0:
+        return False
+    q_vector = cross(t_vector, edge_a)
+    v_value = dot(direction, q_vector) * inv_determinant
+    if v_value < 0.0 or u_value + v_value > 1.0:
+        return False
+    distance_along_ray = dot(edge_b, q_vector) * inv_determinant
+    segment_fraction = distance_along_ray / length
+    return 1.0e-4 < segment_fraction < 1.0 - 1.0e-4
+
+
+def _inside_camera_fov(
+    chaser_position: Vector3,
+    relative: Vector3,
+    camera: CameraModel,
+    aim_position: Vector3 | None = None,
+) -> bool:
+    if aim_position is None:
+        try:
+            boresight = unit(tuple(-float(value) for value in chaser_position))
+        except ValueError:
+            boresight = unit(relative)
+    else:
+        try:
+            boresight = unit(subtract(aim_position, chaser_position))
+        except ValueError:
+            boresight = unit(relative)
+    right, up = _camera_basis(boresight)
+    forward = dot(relative, boresight)
+    if forward <= 0.0:
+        return False
+    horizontal_angle = math.atan2(abs(dot(relative, right)), forward)
+    vertical_angle = math.atan2(abs(dot(relative, up)), forward)
+    return (
+        horizontal_angle <= math.radians(camera.horizontal_fov_deg) / 2.0
+        and vertical_angle <= math.radians(camera.vertical_fov_deg) / 2.0
+    )
+
+
+def _camera_basis(boresight: Vector3) -> tuple[Vector3, Vector3]:
+    world_up = (0.0, 0.0, 1.0)
+    if abs(dot(boresight, world_up)) > 0.95:
+        world_up = (0.0, 1.0, 0.0)
+    right = unit(cross(world_up, boresight))
+    up = unit(cross(boresight, right))
+    return right, up
 
 
 def _node_translations(json_doc: dict[str, object]) -> dict[int, Vector3]:
@@ -1136,7 +1541,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         default='src/orbinspect_guidance/config/offline_coverage_planner.yaml',
         help='YAML planner config file.',
     )
-    parser.add_argument('--geometry', default='proxy', choices=['proxy'])
+    parser.add_argument('--geometry', choices=['proxy', 'mesh'])
     parser.add_argument('--target-spacing', type=float)
     parser.add_argument('--candidate-radius', type=float)
     parser.add_argument('--candidate-stride', type=int)
@@ -1145,6 +1550,8 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument('--transfer-duration', type=float)
     parser.add_argument('--integration-dt', type=float)
     parser.add_argument('--max-acceleration', type=float)
+    parser.add_argument('--mesh-target-count', type=int)
+    parser.add_argument('--mesh-occlusion-max-triangles', type=int)
     parser.add_argument('--output-root')
     parser.add_argument('--run-id', default='')
     return parser.parse_args(argv)
@@ -1163,6 +1570,8 @@ def config_from_args(args: argparse.Namespace) -> OfflinePlannerConfig:
         'transfer_duration': args.transfer_duration,
         'integration_dt': args.integration_dt,
         'max_acceleration': args.max_acceleration,
+        'mesh_target_count': args.mesh_target_count,
+        'mesh_occlusion_max_triangles': args.mesh_occlusion_max_triangles,
         'output_root': args.output_root,
         'run_id': args.run_id,
     }

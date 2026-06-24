@@ -1,15 +1,22 @@
-\documentclass[preprint,12pt,authoryear]{elsarticle}
+%% Official Elsevier elsarticle template, downloaded from Elsevier's
+%% LaTeX instructions page as elsarticle_April2024.
+%% AST uses Elsevier submission; numbered references are used per the
+%% official numbered elsarticle template. The doubleblind option follows
+%% AST's double-anonymized review policy for submission PDFs.
+\documentclass[preprint,review,12pt,number,doubleblind]{elsarticle}
 
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsfonts}
 \usepackage{booktabs}
 \usepackage{graphicx}
-\usepackage{hyperref}
+\usepackage[hypertexnames=false]{hyperref}
 \usepackage{url}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{xcolor}
+\usepackage{array}
+\usepackage{ragged2e}
 
 \journal{Aerospace Science and Technology}
 
@@ -19,12 +26,14 @@
 \newcommand{\los}{\mathrm{LOS}}
 \newcommand{\fov}{\mathrm{FOV}}
 \newcommand{\dv}{\Delta v}
+\newcommand{\unit}[2]{#1~#2}
+\newcommand{\artifact}[1]{\texttt{\small #1}}
 
 \begin{document}
 
 \begin{frontmatter}
 
-\title{Coverage-Constrained Relative Trajectory Planning for Autonomous Space Station Inspection in ROS 2}
+\title{OrbInspect: Coverage-Constrained Relative Trajectory Planning and ROS~2--Gazebo Validation for Autonomous Orbital Structure Inspection}
 
 \author[inst1]{Rugang}
 \author[inst2]{OrbInspect Contributors}
@@ -41,26 +50,49 @@
 }
 
 \begin{abstract}
-Autonomous inspection of large orbital structures requires planning algorithms
-that jointly account for relative orbital dynamics, sensor visibility, target
-coverage, collision avoidance, and fuel expenditure. This paper presents
-OrbInspect, a ROS~2-based simulation and planning framework for external
-inspection of space-station-scale structures, and formulates a coverage-
-constrained trajectory planning problem in the local-vertical/local-horizontal
-frame. The proposed planning workflow first samples inspection targets on a
-three-dimensional station model, constructs safe candidate viewpoints, solves an
-offline coverage-aware viewpoint ordering problem, and then generates a
-dynamically feasible trajectory under Clohessy--Wiltshire relative dynamics.
-The resulting trajectory is validated in ROS~2 with a Gazebo Harmonic
-visualization using a NASA International Space Station model. The current draft
-defines the formal problem, mission assumptions, constraints, and algorithmic
-evaluation protocol required before claiming full-coverage experimental results.
+Autonomous inspection of large orbital structures requires a planner that can
+reason about relative orbital motion, sensor visibility, target coverage,
+collision avoidance, and fuel expenditure while remaining reproducible enough
+for system-level validation. This paper presents OrbInspect, a ROS~2 Jazzy
+simulation and evaluation framework for space-station-scale external inspection.
+OrbInspect uses a ROS-native Clohessy--Wiltshire/Hill dynamics node as the
+state source of truth, separates quantitative planning from Gazebo Harmonic
+visualization, and records trajectory, control, coverage, safety, planner, and
+configuration artifacts for paper-grade analysis. We formulate coverage-
+constrained inspection as a mixed visibility--dynamics problem and implement a
+mesh-aware offline planning experiment with area-weighted target sampling,
+line-of-sight filtering, attitude export, and seven planning methods. The best
+feasible method, a dynamics-aware weighted set-cover planner followed by a
+CW-transfer tour, reached 98.33\% final coverage on 180 mesh targets with 357
+candidate viewpoints, 23 selected viewpoints, \unit{8.770}{m/s} cumulative
+$\Delta v$, \unit{7.53}{m} minimum clearance, \unit{0.564}{m/s} maximum speed,
+and \unit{5.86}{s} planning time. The same benchmark showed that a pure
+coverage-greedy baseline also achieved 98.33\% coverage but was infeasible
+because its trajectory entered the keep-out envelope, while a random-safe
+baseline required \unit{24.57}{m/s}. A ROS~2 execution smoke run produced
+synchronized trajectory, control, coverage, planner, safety, and rosbag
+artifacts, and Gazebo Harmonic validation using an International Space Station
+visual model confirmed replay, pose-following, and visual interface behavior
+without making Gazebo physics the authority for spacecraft dynamics.
 \end{abstract}
+
+\begin{highlights}
+\item OrbInspect separates HCW dynamics authority from Gazebo visualization.
+\item A self-contained mesh benchmark reports trajectory, attitude, coverage,
+safety, and planner artifacts.
+\item The proposed set-cover CW tour reaches 98.33\% mesh-target coverage.
+\item The best feasible method reduces $\Delta v$ by 64.3\% relative to the
+random-safe baseline.
+\item ROS~2 validation records synchronized control, coverage, planner, safety,
+and rosbag outputs.
+\item Gazebo Harmonic frames and videos validate visual replay, not orbital
+physics.
+\end{highlights}
 
 \begin{keyword}
 spacecraft inspection \sep relative orbital dynamics \sep coverage planning
-\sep next-best-view planning \sep Clohessy--Wiltshire equations \sep ROS 2
-\sep Gazebo Harmonic
+\sep next-best-view planning \sep Clohessy--Wiltshire equations \sep ROS~2
+\sep Gazebo Harmonic \sep reproducible robotics evaluation
 \end{keyword}
 
 \end{frontmatter}
@@ -75,7 +107,7 @@ spacecraft inspection \sep relative orbital dynamics \sep coverage planning
 \input{sections/08_limitations}
 \input{sections/09_conclusion}
 
-\bibliographystyle{elsarticle-harv}
+\bibliographystyle{elsarticle-num}
 \bibliography{references}
 
 \end{document}

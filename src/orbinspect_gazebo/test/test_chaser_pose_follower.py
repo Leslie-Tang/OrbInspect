@@ -19,3 +19,15 @@ def test_pose_request_text_contains_entity_pose() -> None:
     assert 'name: "chaser"' in request
     assert 'position { x: 1 y: -2 z: 3.5 }' in request
     assert 'orientation { x: 0 y: 0 z: 0 w: 1 }' in request
+
+
+def test_nonnegative_parameter_rejects_negative_values() -> None:
+    follower = ChaserPoseFollower.__new__(ChaserPoseFollower)
+    follower.get_parameter = lambda _name: type('Parameter', (), {'value': -1.0})()
+
+    try:
+        follower._nonnegative_parameter('startup_delay')
+    except ValueError as error:
+        assert 'startup_delay' in str(error)
+    else:
+        raise AssertionError('negative startup_delay should be rejected')

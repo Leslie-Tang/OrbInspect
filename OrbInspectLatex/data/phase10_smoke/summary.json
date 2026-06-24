@@ -1,0 +1,23 @@
+{
+  "result_dir": "/home/rugang/robotics/projects/OrbInspect/data/results/phase10_smoke",
+  "trajectory_samples": 260,
+  "control_samples": 130,
+  "coverage_samples": 26,
+  "mission_event_samples": 0,
+  "safety_samples": 195,
+  "planner_samples": 1,
+  "cumulative_delta_v": 0.0581980714645774,
+  "figures": [
+    "trajectory_3d.png",
+    "control_effort_over_time.png"
+  ],
+  "topics": [
+    "/chaser/odom",
+    "/chaser/control_command",
+    "/chaser/safe_control_command",
+    "/inspection/coverage_map",
+    "/mission/event",
+    "/chaser/safety_status",
+    "/planner/event"
+  ]
+}

@@ -5,7 +5,7 @@ from __future__ import annotations
 from collections.abc import Sequence
 import math
 
-from geometry_msgs.msg import AccelStamped, TransformStamped
+from geometry_msgs.msg import AccelStamped, PoseStamped, TransformStamped
 from nav_msgs.msg import Odometry
 from orbinspect_dynamics.hcw_dynamics import HCWDynamics
 import rclpy
@@ -43,6 +43,7 @@ class HCWDynamicsNode(Node):
         velocity = self._vector_parameter('initial_velocity_lvlh', 3)
         self.state = tuple(position + velocity)
         self.command_acceleration = (0.0, 0.0, 0.0)
+        self.attitude = (0.0, 0.0, 0.0, 1.0)
 
         self.odom_pub = self.create_publisher(Odometry, '/chaser/odom', 10)
         self.state_pub = self.create_publisher(Odometry, '/chaser/state_lvlh', 10)
@@ -51,6 +52,12 @@ class HCWDynamicsNode(Node):
             AccelStamped,
             '/chaser/safe_control_command',
             self._control_callback,
+            10,
+        )
+        self.create_subscription(
+            PoseStamped,
+            '/chaser/attitude_reference',
+            self._attitude_callback,
             10,
         )
 
@@ -63,6 +70,14 @@ class HCWDynamicsNode(Node):
             float(msg.accel.linear.x),
             float(msg.accel.linear.y),
             float(msg.accel.linear.z),
+        )
+
+    def _attitude_callback(self, msg: PoseStamped) -> None:
+        self.attitude = (
+            float(msg.pose.orientation.x),
+            float(msg.pose.orientation.y),
+            float(msg.pose.orientation.z),
+            float(msg.pose.orientation.w),
         )
 
     def _integrate_once(self) -> None:
@@ -88,7 +103,10 @@ class HCWDynamicsNode(Node):
         odom.pose.pose.position.x = rx
         odom.pose.pose.position.y = ry
         odom.pose.pose.position.z = rz
-        odom.pose.pose.orientation.w = 1.0
+        odom.pose.pose.orientation.x = self.attitude[0]
+        odom.pose.pose.orientation.y = self.attitude[1]
+        odom.pose.pose.orientation.z = self.attitude[2]
+        odom.pose.pose.orientation.w = self.attitude[3]
         odom.twist.twist.linear.x = vx
         odom.twist.twist.linear.y = vy
         odom.twist.twist.linear.z = vz
@@ -103,7 +121,10 @@ class HCWDynamicsNode(Node):
         transform.transform.translation.x = rx
         transform.transform.translation.y = ry
         transform.transform.translation.z = rz
-        transform.transform.rotation.w = 1.0
+        transform.transform.rotation.x = self.attitude[0]
+        transform.transform.rotation.y = self.attitude[1]
+        transform.transform.rotation.z = self.attitude[2]
+        transform.transform.rotation.w = self.attitude[3]
         return transform
 
     def _mean_motion_from_parameters(self) -> float:

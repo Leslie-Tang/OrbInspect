@@ -1,21 +1,72 @@
-\section{Limitations and Required Next Steps}
-\label{sec:limitations}
+\section{Discussion and Limitations}
+\label{sec:discussion}
 
-The current software stack has several limitations that must be resolved before
-paper submission:
-\begin{enumerate}
-  \item The current full-ISS video is not a proof of full coverage.
-  \item The real ISS mesh is used for visualization, while target generation
-        and safety still rely primarily on simplified geometry.
-  \item The current offline trajectory mode is a waypoint demonstration, not a
-        solved coverage-constrained optimization problem.
-  \item Gazebo is used for visualization only; it does not validate nonlinear
-        orbital dynamics.
-  \item A higher-fidelity backend such as Basilisk should be used only as an
-        optional validation case after the HCW baseline is reproducible.
-\end{enumerate}
+The updated results change the interpretation of OrbInspect from a preliminary
+proxy-geometry demonstration to a mesh-aware high-coverage planning baseline.
+The proposed set-cover CW tour reaches 98.33\% coverage with positive
+clearance and the lowest $\Delta v$ among feasible methods that achieve the
+same coverage. The comparison also clarifies why dynamics must be included in
+view planning: the pure coverage-greedy method achieves the same coverage but
+is infeasible because it violates the keep-out envelope. Coverage alone is
+therefore not an adequate objective for orbital inspection.
 
-The immediate technical priority is therefore to implement mesh-based target
-sampling, visibility matrix construction, viewpoint selection, CW-feasible
-transfer generation, and a result logger that proves the requested coverage
-threshold numerically before recording the final Gazebo video.
+The proposed method is not universally optimal across every metric. The
+nearest-NBV baseline records a larger minimum clearance, and the proposed safe
+CW NBV method uses fewer selected viewpoints. However, both require more
+$\Delta v$ than the set-cover CW tour. This indicates that the current
+weighted set-cover stage and CW tour ordering are effective for the chosen
+mesh benchmark, but the weight settings should be studied across additional
+geometries, initial states, target densities, and safety margins.
+
+The mesh benchmark still uses a downsampled line-of-sight representation for
+occlusion checking. This is appropriate for a reproducible paper baseline, but
+a flight-oriented planner would need higher-fidelity geometry acceleration,
+uncertainty-inflated keep-out volumes, camera slew limits, illumination
+constraints, state-estimation error, plume constraints, and actuator
+saturation studies. The reported RMS transfer tracking error is also a
+planner-side rollout metric rather than a closed-loop flight validation error.
+
+Gazebo validation should be interpreted conservatively. The videos and frames
+verify that the visual model, chaser model, camera view, and pose-following
+interfaces work in the integrated stack. They do not validate orbital
+mechanics, prove coverage, or certify collision avoidance. In OrbInspect,
+those quantitative claims come from the HCW dynamics, coverage, trajectory,
+attitude, safety, and planner logs.
+
+\subsection{Self-Contained Artifact Inventory}
+
+All cited figures and data are contained in the paper folder. The key local
+artifacts are listed in Table~\ref{tab:artifact-inventory}.
+
+\begin{table}[t]
+  \centering
+  \caption{Self-contained manuscript artifacts.}
+  \label{tab:artifact-inventory}
+  \begin{tabular}{p{0.30\linewidth}p{0.56\linewidth}}
+    \toprule
+    Local artifact & Contents \\
+    \midrule
+    High-coverage figures &
+    Mesh-overlaid trajectory, coverage, $\Delta v$, efficiency, and safety
+    comparison figures. \\
+    ISS mesh figures &
+    High-resolution NASA ISS mesh preview in PDF, PNG, and SVG form. \\
+    ISS mesh model &
+    Copied NASA ISS GLB used to regenerate the mesh-overlaid trajectory
+    figures. \\
+    High-coverage data &
+    Summary files, config snapshot, and raw comparison, planner, viewpoint,
+    attitude, trajectory, and coverage CSV files. \\
+    Gazebo figures &
+    Gazebo preview frames and ROS smoke-run trajectory/control figures. \\
+    ROS smoke data &
+    Summary files, experiment manifest, config snapshots, and raw ROS
+    execution CSV files. \\
+    Legacy offline data &
+    Earlier proxy and mesh single-run planner artifacts retained for
+    traceability. \\
+    Video data &
+    Gazebo validation videos and preview frames. \\
+    \bottomrule
+  \end{tabular}
+\end{table}

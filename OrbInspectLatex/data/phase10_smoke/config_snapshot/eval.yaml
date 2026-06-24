@@ -1,0 +1,6 @@
+csv_logger_node:
+  ros__parameters:
+    result_root: data/results
+    run_id: ""
+    max_acceleration: 0.01
+    default_reference: [8.0, -20.0, 6.0]

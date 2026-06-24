@@ -1,31 +1,65 @@
 \section{Introduction}
 \label{sec:introduction}
 
-Large orbital structures such as space stations, service platforms, and
-assembled space telescopes require periodic external inspection. Human
-extravehicular activity is expensive and hazardous, while fixed cameras provide
-limited coverage of complex external geometry. A small free-flying inspection
-spacecraft can provide richer visual coverage, but planning its trajectory is a
-coupled guidance, navigation, control, perception, and safety problem.
+Large orbital structures are becoming central to civil, scientific, and
+commercial spaceflight. Space stations, assembled telescopes, logistics
+platforms, and in-space manufacturing facilities all require periodic external
+inspection to detect configuration changes, micrometeoroid damage, thermal
+blanket degradation, docking-interface anomalies, and other faults that are
+not easily observed from fixed onboard cameras. A small free-flying inspector
+can provide close-range, target-specific imagery, but autonomous inspection in
+the neighborhood of a large structure remains a coupled planning and validation
+problem: the vehicle must acquire useful views, satisfy relative orbital
+dynamics, remain outside keep-out regions, avoid excessive control effort, and
+produce evidence that the mission actually inspected the requested targets.
 
-The difficulty is not merely producing a visually appealing simulation. A
-research-grade inspection planner must answer the following questions: which
-surface elements must be inspected, from which viewpoints can they be observed,
-what trajectory connects these viewpoints under relative orbital dynamics, and
-how safety margins are maintained near large structures. In addition, the
-resulting experiment must produce reproducible trajectory, control, coverage,
-safety, and planning logs suitable for academic evaluation.
+This paper presents OrbInspect, a ROS~2-based framework for orbital inspection
+planning, execution, and evaluation. The design is motivated by a practical
+research need. Inspection algorithms are often demonstrated either as
+stand-alone planners detached from middleware and visualization, or as
+visually compelling simulators in which the quantitative coverage and safety
+evidence is difficult to audit. OrbInspect separates those roles. A ROS-native
+Clohessy--Wiltshire/Hill (CW/HCW) dynamics node is the source of truth for the
+chaser state; controllers, safety filters, coverage estimators, mission logic,
+and loggers are connected through ROS~2 interfaces; Gazebo Harmonic provides
+visual validation of the station and chaser scene but is not used as the
+orbital-dynamics authority.
 
-This paper draft positions OrbInspect around the following contribution:
-a coverage-constrained trajectory planner for large orbital structure inspection
-under Clohessy--Wiltshire relative dynamics, with validation in ROS~2 and
-Gazebo Harmonic. The present manuscript intentionally separates three layers:
+The specific contribution of this manuscript is a coverage-constrained
+inspection-planning and validation pipeline. We formulate the inspection task
+in the local-vertical/local-horizontal frame, define target visibility and
+dwell criteria, impose actuation and keep-out constraints, and implement a
+mesh-aware offline planning experiment. The planner samples area-weighted mesh
+targets, generates candidate viewpoints, computes visibility with range,
+field-of-view, view-angle, and line-of-sight checks, scores viewpoints by new
+coverage and CW transfer cost, exports camera attitudes, and produces a
+bounded-acceleration CW reference trajectory. The resulting artifacts are stored in a
+self-contained experiment directory containing raw CSV files, configuration
+snapshots, figures, videos, and summary files.
+
+The reported results show a substantial improvement over the earlier proxy
+planner baseline. On the mesh benchmark, the proposed set-cover CW tour
+achieves 98.33\% coverage of 180 target samples with all transfers feasible,
+\unit{8.770}{m/s} cumulative $\Delta v$, and \unit{7.53}{m} minimum clearance.
+The comparison includes six baselines: proposed safe CW next-best-view,
+coverage-greedy, safe coverage-greedy, nearest next-best-view, fuel-greedy,
+and random-safe. A ROS~2 paper-experiment smoke run verifies the execution and
+logging pipeline over trajectory, control, coverage, planner, safety, and
+rosbag topics. A Gazebo Harmonic validation path replays the saved offline
+trajectory and attitude stream with an ISS visual model, confirming simulator
+interfaces while leaving HCW dynamics as the state authority.
+
+The main contributions are:
 \begin{enumerate}
-  \item formal problem definition and mission assumptions;
-  \item offline trajectory generation using a geometry-aware coverage model;
-  \item ROS~2/Gazebo replay and validation using the generated trajectory.
+  \item a ROS~2 Jazzy architecture for orbital inspection in which HCW dynamics
+  remain the state source of truth and Gazebo is used for visualization;
+  \item a formal coverage-constrained relative trajectory planning problem
+  combining visibility, dwell, fuel, speed, and clearance constraints;
+  \item a mesh-aware dynamics-aware set-cover CW tour planner with saved
+  target, viewpoint, attitude, trajectory, coverage, and planner logs;
+  \item a self-contained validation package with figures, raw data, Gazebo
+  frames, video artifacts, configuration snapshots, and summaries embedded
+  under the paper directory;
+  \item an evidence-based comparison showing 98.33\% coverage and lower
+  $\Delta v$ than random-safe and several greedy baselines.
 \end{enumerate}
-
-This separation avoids over-claiming from a short Gazebo visualization. Gazebo
-is used to validate visualization, logging, and execution interfaces; the
-coverage claim must come from the planner and its recorded metrics.
