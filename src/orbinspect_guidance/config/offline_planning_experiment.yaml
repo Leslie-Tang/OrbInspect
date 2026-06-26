@@ -10,9 +10,9 @@ offline_planning_experiment:
     coverage_stop_ratio: 0.98
     max_viewpoints: 36
     min_new_targets: 1
-    transfer_duration: 80.0
+    transfer_duration: 90.0
     integration_dt: 2.0
-    max_acceleration: 0.018
+    max_acceleration: 0.060
     safety_margin: 2.0
     initial_state: [0.0, -35.0, 10.0, 0.0, 0.0, 0.0]
     random_seed: 7
@@ -21,6 +21,9 @@ offline_planning_experiment:
     cw_energy_weight: 5.0
     cw_tracking_weight: 0.18
     cw_safety_weight: 120.0
+    certified_candidate_limit: 14
+    certified_time_limit_s: 6.0
+    certified_max_expansions: 80000
     methods:
       - set_cover_cw_tour
       - proposed_safe_cw_nbv

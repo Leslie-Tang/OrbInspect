@@ -1,24 +1,28 @@
-%% Official Elsevier elsarticle template, downloaded from Elsevier's
-%% LaTeX instructions page as elsarticle_April2024.
-%% AST uses Elsevier submission; numbered references are used per the
-%% official numbered elsarticle template. The doubleblind option follows
-%% AST's double-anonymized review policy for submission PDFs.
-\documentclass[preprint,review,12pt,number,doubleblind]{elsarticle}
+%% IEEE TAES manuscript wrapper based on the TAES template.
+\documentclass{IEEEtaes}
 
+\usepackage{color,amsthm}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsfonts}
 \usepackage{booktabs}
 \usepackage{graphicx}
-\usepackage[hypertexnames=false]{hyperref}
-\usepackage{url}
+\usepackage{stfloats}
+\usepackage{placeins}
+\usepackage{textcomp}
+\usepackage[urlcolor=blue,linkcolor=blue,citecolor=blue]{hyperref}
+\usepackage{soul, xcolor}
+\usepackage{tikz}
+\usepackage{subcaption}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{ragged2e}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
-\usepackage{xcolor}
-\usepackage{array}
-\usepackage{ragged2e}
-
-\journal{Aerospace Science and Technology}
+\usepackage{cite}
+\usepackage{url}
+\usepackage{verbatim}
+\usepackage{fancybox}
 
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\dt}{\Delta t}
@@ -27,87 +31,87 @@
 \newcommand{\fov}{\mathrm{FOV}}
 \newcommand{\dv}{\Delta v}
 \newcommand{\unit}[2]{#1~#2}
-\newcommand{\artifact}[1]{\texttt{\small #1}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
 
 \begin{document}
 
-\begin{frontmatter}
+\title{Dynamics-Aware Coverage Planning for Autonomous Inspection of Orbital Structures}
 
-\title{OrbInspect: Coverage-Constrained Relative Trajectory Planning and ROS~2--Gazebo Validation for Autonomous Orbital Structure Inspection}
+\author{Rugang Tang}
+\affil{Northwestern Polytechnical University, Xi'an, China\\
+Hong Kong Polytechnic University, Hong Kong, China} 
 
-\author[inst1]{Rugang}
-\author[inst2]{OrbInspect Contributors}
+\author{Xin Ning}
+\affil{Northwestern Polytechnical University, Xi'an, China}
 
-\affiliation[inst1]{
-  organization={OrbInspect Project},
-  city={Shanghai},
-  country={China}
-}
+\author{Chih-Yung Wen}
+\affil{Hong Kong Polytechnic University, Hong Kong, China}
 
-\affiliation[inst2]{
-  organization={Open Research Software Collaboration},
-  country={International}
-}
+
+\receiveddate{This research was supported, in part by Research Centre of Unmanned Autonomous Systems, Hong Kong Polytechnic University under Grant P0046487.}
+
+
+\corresp{{\itshape (Corresponding author: Rugang Tang)}.}
+
+\editor{}
+\supplementary{Color versions of one or more of the figures in this article are available online at \href{http://ieeexplore.ieee.org}{http://ieeexplore.ieee.org}.}
+\markboth{OrbInspect}{Dynamics-Aware Coverage Planning}
+
+\maketitle
 
 \begin{abstract}
-Autonomous inspection of large orbital structures requires a planner that can
-reason about relative orbital motion, sensor visibility, target coverage,
-collision avoidance, and fuel expenditure while remaining reproducible enough
-for system-level validation. This paper presents OrbInspect, a ROS~2 Jazzy
-simulation and evaluation framework for space-station-scale external inspection.
-OrbInspect uses a ROS-native Clohessy--Wiltshire/Hill dynamics node as the
-state source of truth, separates quantitative planning from Gazebo Harmonic
-visualization, and records trajectory, control, coverage, safety, planner, and
-configuration artifacts for paper-grade analysis. We formulate coverage-
-constrained inspection as a mixed visibility--dynamics problem and implement a
-mesh-aware offline planning experiment with area-weighted target sampling,
-line-of-sight filtering, attitude export, and seven planning methods. The best
-feasible method, a dynamics-aware weighted set-cover planner followed by a
-CW-transfer tour, reached 98.33\% final coverage on 180 mesh targets with 357
-candidate viewpoints, 23 selected viewpoints, \unit{8.770}{m/s} cumulative
-$\Delta v$, \unit{7.53}{m} minimum clearance, \unit{0.564}{m/s} maximum speed,
-and \unit{5.86}{s} planning time. The same benchmark showed that a pure
-coverage-greedy baseline also achieved 98.33\% coverage but was infeasible
-because its trajectory entered the keep-out envelope, while a random-safe
-baseline required \unit{24.57}{m/s}. A ROS~2 execution smoke run produced
-synchronized trajectory, control, coverage, planner, safety, and rosbag
-artifacts, and Gazebo Harmonic validation using an International Space Station
-visual model confirmed replay, pose-following, and visual interface behavior
-without making Gazebo physics the authority for spacecraft dynamics.
+Autonomous inspection of large orbital structures requires view plans that are simultaneously informative, dynamically reachable, and safe under relative orbital motion. This paper formulates the offline inspection problem
+as a finite candidate-view graph whose nodes encode camera-feasible viewpoints and whose directed edges encode bounded-acceleration Clohessy--Wiltshire/Hill transfers, clearance, and input feasibility. The resulting planner couples area-weighted coverage gain with orbital transfer cost during view selection, instead of selecting geometric views first and checking dynamics afterward. For reduced graphs, an exact dynamic program over selected-view masks and terminal-view nodes provides a discrete optimality certificate. For full ISS-mesh instances, a scalable deterministic solver uses the same visibility and transfer model to generate high-coverage tours. The method is evaluated on an open NASA ISS mesh against coverage, nearest-view, fuel-focused, CW-NBV, random-safe, and safety-filtered coverage baselines. The results show that geometry-only high-coverage planners can violate input or clearance constraints, whereas the proposed dynamics-aware planner reaches the high-coverage stop target with lower energy than feasible safe baselines. Sensitivity and ablation studies further identify the effects of target
+density, candidate density, initial condition, safety margin, transfer duration, transfer cost, clearance filtering, and input checking. ROS~2 and Gazebo replay verify that the logged trajectory and camera field-of-view
+geometry are consistent with the offline planner, while the quantitative claims remain based on the HCW dynamics and planner logs.
 \end{abstract}
 
-\begin{highlights}
-\item OrbInspect separates HCW dynamics authority from Gazebo visualization.
-\item A self-contained mesh benchmark reports trajectory, attitude, coverage,
-safety, and planner artifacts.
-\item The proposed set-cover CW tour reaches 98.33\% mesh-target coverage.
-\item The best feasible method reduces $\Delta v$ by 64.3\% relative to the
-random-safe baseline.
-\item ROS~2 validation records synchronized control, coverage, planner, safety,
-and rosbag outputs.
-\item Gazebo Harmonic frames and videos validate visual replay, not orbital
-physics.
-\end{highlights}
-
-\begin{keyword}
-spacecraft inspection \sep relative orbital dynamics \sep coverage planning
-\sep next-best-view planning \sep Clohessy--Wiltshire equations \sep ROS~2
-\sep Gazebo Harmonic \sep reproducible robotics evaluation
-\end{keyword}
-
-\end{frontmatter}
+\begin{IEEEkeywords}
+spacecraft inspection, relative orbital dynamics, coverage planning, next-best-view planning, Clohessy--Wiltshire equations, energy-aware planning
+\end{IEEEkeywords}
 
 \input{sections/01_introduction}
 \input{sections/02_related_work}
 \input{sections/03_system_and_mission}
 \input{sections/04_problem_formulation}
 \input{sections/05_algorithm}
+\FloatBarrier
 \input{sections/06_simulation_protocol}
+\FloatBarrier
 \input{sections/07_expected_results}
+\FloatBarrier
 \input{sections/08_limitations}
 \input{sections/09_conclusion}
 
-\bibliographystyle{elsarticle-num}
+\bibliographystyle{IEEEtran}
 \bibliography{references}
+
+\begin{IEEEbiography}
+    [{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{figures/authors/trg.jpg}}]{Rugang Tang} received the B.Eng. degree in aircraft design and engineering from the School of Astronautics, Northwestern Polytechnical University, Xi'an, China, in 2020.  He is currently working toward the Ph.D.
+    degree in aircraft design with the Department of Aeronautical and Aviation Engineering, The Hong Kong Polytechnic University, Hong Kong. His current research interests include multi-agent systems, nonlinear systems, reach-avoid differential graphical games, and approximate dynamic programming.
+\end{IEEEbiography}
+
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{figures/authors/nx.pdf}}]{Xin Ning} received the B.Eng. degree in communication engineering, the M.Eng. degree in systems engineering, and the Ph.D.
+    degree in transportation planning and management from Northwestern Polytechnical University, Xi'an, China in 2004, 2007, and 2011, respectively.
+    From 2009 to 2014, he was a Lecturer with Northwestern Polytechnical University.
+    From 2013 to 2014, he was a visiting scholar with the University of Calgary.
+    \par
+    From 2014 to 2017, he was an Associate Professor with the School of Astronautics, Northwestern Polytechnical University.
+    Since 2017, he has been a Professor with the School of Astronautics, Northwestern Polytechnical University.
+    Since 2021, he has served as the Vice Dean of the School of Astronautics, Northwestern Polytechnical University.
+    His research interests include aerospace flight dynamics, navigation, guidance and control, spacecraft on-orbit servicing, trajectory planning, intelligent optimization, intelligent control, nonlinear systems, and nonlinear modeling.
+\end{IEEEbiography}
+
+\begin{IEEEbiography}
+    [{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{figures/authors/CYW.png}}]{Prof. Chih-yung WEN} received the B.S.
+    degree from the Department of Mechanical Engineering, National Taiwan University, in 1986, and the M.S. and Ph.D.
+    degrees from the Department of Aeronautics, California Institute of Technology, in 1989 and 1994, respectively.
+    In 2012, he joined the Department of Mechanical Engineering, The Hong Kong Polytechnic University, as a professor.
+    From 2015 to 2019, he was the Associate Head/Research of the Department of Mechanical Engineering, The Hong Kong Polytechnic University, where he is currently the Head and Chair Professor of Aeronautical Engineering with the Department of Aeronautical and Aviation Engineering and the Associate Director of the Research Institute for Sports Science and Technology.
+    In 2019, he became the Interim Head of the Department of Aeronautical and Aviation Engineering, The Hong Kong Polytechnic University.
+    He is actively involved in professional academic activities related to mechanical and aerospace engineering at both domestic and international levels.
+\end{IEEEbiography}
 
 \end{document}

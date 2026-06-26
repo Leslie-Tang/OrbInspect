@@ -16,7 +16,7 @@
     0.0
   ],
   "integration_dt": 2.0,
-  "max_acceleration": 0.018,
+  "max_acceleration": 0.06,
   "max_viewpoints": 36,
   "mesh_occlusion_max_triangles": 400,
   "mesh_target_count": 180,
@@ -30,11 +30,11 @@
     "random_safe"
   ],
   "min_new_targets": 1,
-  "output_root": "data/results",
+  "output_root": "OrbInspectLatex/data",
   "proposed_beam_width": 6,
   "proposed_lookahead_depth": 2,
   "random_seed": 7,
   "run_id": "offline_high_coverage_experiment",
   "safety_margin": 2.0,
-  "transfer_duration": 80.0
+  "transfer_duration": 90.0
 }

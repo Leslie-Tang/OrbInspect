@@ -1,22 +1,43 @@
 \section{Problem Formulation}
 \label{sec:problem}
 
-\subsection{Visibility and Dwell}
+\subsection{State, Visibility, and Coverage}
 
-At time step $k$, target $i$ is visible from chaser position $r_k$ when range,
-field-of-view, incidence-angle, and line-of-sight predicates are satisfied:
+Let the chaser state at discrete time $k$ be
+\begin{equation}
+  x_k =
+  \begin{bmatrix}
+    r_k^{\mathsf T} & v_k^{\mathsf T}
+  \end{bmatrix}^{\mathsf T} \in \R^6,
+\end{equation}
+where $r_k \in \R^3$ and $v_k \in \R^3$ are the relative position and velocity
+in the local-vertical/local-horizontal frame of a nominal circular chief orbit.
+The inspected structure is represented by a finite weighted target set
+\begin{equation}
+  \mathcal T = \{(p_i,n_i,w_i)\}_{i=1}^{N},
+\end{equation}
+where $p_i \in \R^3$ is the target point, $n_i$ is the outward surface normal,
+and $w_i \ge 0$ is the inspection weight of that sample.
+
+The camera attitude is represented by a unit boresight vector $b(q_k)\in\mathbb
+S^2$ or, equivalently, by an attitude variable $q_k$ that determines the
+boresight. Illumination is not modeled as a state variable in the baseline
+formulation; it can be included as an additional binary feasibility predicate
+when mission lighting constraints are relevant.
+
+Target $i$ is visible at time $k$ if range, field-of-view, incidence angle, and
+line-of-sight constraints all hold:
 \begin{align}
   \rho_{\min} \le \norm{p_i-r_k} \le \rho_{\max}, \label{eq:range}\\
-  p_i \in \fov(r_k,q_k), \label{eq:fov}\\
-  \arccos\left(
-    \frac{(r_k-p_i)^{\mathsf{T}}n_i}
-    {\norm{r_k-p_i}\norm{n_i}}
-  \right) \le \theta_{\max}, \label{eq:view-angle}\\
-  \los(r_k,p_i,\mathcal{O}) = 1, \label{eq:los}
+  \arccos\!\left(\frac{(p_i-r_k)^{\mathsf T} b(q_k)}{\norm{p_i-r_k}}\right)
+  \le \alpha_{\max}, \label{eq:fov}\\
+  \arccos\!\left(\frac{(r_k-p_i)^{\mathsf T}n_i}{\norm{r_k-p_i}\norm{n_i}}\right)
+  \le \theta_{\max}, \label{eq:view-angle}\\
+  \los(r_k,p_i,\mathcal O) = 1, \label{eq:los}
 \end{align}
-where $q_k$ denotes camera attitude or an equivalent boresight model,
-$\theta_{\max}$ is the maximum view angle, and $\mathcal{O}$ is the occluding
-geometry representation. The dwell update is
+where $\alpha_{\max}$ is the half-angle field-of-view limit, $\theta_{\max}$
+is the maximum incidence angle, and $\mathcal O$ denotes the occluding
+geometry. The dwell state evolves as
 \begin{equation}
   \tau_{i,k+1} =
   \begin{cases}
@@ -24,75 +45,127 @@ geometry representation. The dwell update is
     \tau_{i,k}, & \text{otherwise}.
   \end{cases}
 \end{equation}
+The inspection indicator is $y_{i,k}=\mathbf 1\{\tau_{i,k}\ge \tau_{\min}\}$.
 
-\subsection{Safety and Actuation}
+\subsection{Dynamic Feasibility and Cost}
 
-The chaser must satisfy acceleration, speed, and clearance constraints:
+The relative translational motion follows the discrete HCW model
+\begin{equation}
+  x_{k+1}=f_{\mathrm{HCW}}(x_k,u_k,\dt),
+\end{equation}
+where $u_k\in\R^3$ is the commanded acceleration. The chaser must satisfy the
+actuation and safety limits
 \begin{align}
   \norm{u_k}_2 &\le u_{\max}, \\
   \norm{v_k}_2 &\le v_{\max}, \\
-  d_{\mathcal{S}}(r_k) &\ge d_{\mathrm{safe}},
+  d_{\mathcal S}(r_k) &\ge d_{\mathrm{safe}},
 \end{align}
-where $d_{\mathcal{S}}(r_k)$ is the signed distance from the chaser to the
-station safety envelope. In the implemented ROS stack, a safety monitor logs
-minimum distance, clearance, caution-zone status, nearest primitive, filter
-activity, and nominal versus filtered acceleration commands.
+where $d_{\mathcal S}(r_k)$ is the signed distance to the station safety
+envelope. A CBF-type filter can be attached later as an execution layer, but
+it is not part of the core mathematical problem.
+
+The offline planner evaluates motion between candidate views through bounded
+HCW rollouts. For a transfer from candidate $z_a$ to candidate $z_b$, let
+$\pi_{ab}$ denote the sampled state-control sequence generated over a fixed or
+bounded transfer duration. The terminal state is constrained to reach the
+candidate position with zero relative velocity, so each selected view
+corresponds to a stabilized inspection state rather than a fly-through point.
+The transfer is feasible when every sample satisfies the input, speed, and
+clearance constraints and the terminal position and velocity errors remain
+within prescribed tolerances. We write this feasibility indicator as
+\begin{equation}
+  \eta_{ab} =
+  \mathbf{1}\{\pi_{ab}\ \text{satisfies all dynamic and safety limits}\}.
+\end{equation}
+The corresponding edge cost is
+\begin{equation}
+  \begin{aligned}
+  \ell_{ab} ={}&
+  \lambda_v \sum_{k\in\pi_{ab}}\norm{u_k}_2\dt
+  + \lambda_t T_{ab} \\
+  &+ \lambda_s \sum_{k\in\pi_{ab}}\phi(d_{\mathcal S}(r_k))
+  + \lambda_e e_{ab},
+  \end{aligned}
+\end{equation}
+where $T_{ab}$ is transfer duration, $e_{ab}$ is terminal tracking error,
+including terminal position and velocity residuals, and $\phi$ penalizes
+proximity to the safety boundary. Edges with $\eta_{ab}=0$
+are either removed from the exact finite graph or assigned a prohibitive cost
+in greedy baselines.
+The coverage mission ends when either the prescribed stop ratio is
+reached, the finite view budget is exhausted, or no feasible outgoing edge
+remains from the current terminal state.
 
 \subsection{Optimization Objective}
 
-The ideal finite-horizon inspection problem is
-\begin{align}
-  \min_{\{x_k,u_k,q_k\}_{k=0}^{K}}
-  \quad &
-  w_t K\dt
-  + w_u \sum_{k=0}^{K-1} \norm{u_k}_2\dt
-  + w_s \sum_{k=0}^{K} \phi(d_{\mathcal{S}}(r_k))
-  + w_c (1-C_K) \label{eq:objective}\\
-  \mathrm{s.t.}\quad &
-  x_{k+1}=f_{\mathrm{CW}}(x_k,u_k,\dt), \\
-  & \norm{u_k}_2 \le u_{\max}, \\
-  & \norm{v_k}_2 \le v_{\max}, \\
-  & d_{\mathcal{S}}(r_k) \ge d_{\mathrm{safe}}, \\
-  & y_{i,k} \text{ follows the visibility and dwell model},\\
-  & C_K \ge C_{\mathrm{req}},
-\end{align}
-where $\phi$ is a soft penalty used in relaxed formulations. This problem is
-mixed-integer and nonconvex because visibility, occlusion, dwell satisfaction,
-and coverage are discrete or discontinuous. OrbInspect therefore implements a
-structured decomposition rather than a monolithic nonlinear mixed-integer
-program.
-
-\subsection{Evaluation Metrics}
-
-The primary metrics are final coverage, cumulative control effort, minimum
-clearance, maximum speed, and tracking error:
-\begin{align}
-  C_{\mathrm{final}} &= \frac{N_{\mathrm{inspected}}}{N},\\
-  \Delta v_{\mathrm{cum}} &= \sum_k \norm{u_k}_2 \dt,\\
-  d_{\min} &= \min_k d_{\mathcal{S}}(r_k),\\
-  e_{\mathrm{track,rms}} &=
-    \sqrt{\frac{1}{K}\sum_k \norm{r_k-r_k^{\mathrm{ref}}}_2^2}.
-\end{align}
-Additional reported metrics include planning time, selected-viewpoint count,
-candidate-viewpoint count, trajectory sample count, and safety-filter
-activation.
-
-\subsection{Dynamics-Aware Coverage Efficiency}
-
-The role of the CW model is not limited to post hoc feasibility checking.  In
-the implemented offline planner, each candidate viewpoint is evaluated through
-a predicted bounded-acceleration CW transfer from the current state.  This
-produces an edge cost
+The offline inspection problem is to choose a sequence of viewpoints and
+controls that maximizes weighted coverage while remaining dynamically feasible:
 \begin{equation}
-  J_{\mathrm{CW}}(x,z_j) =
-  \lambda_v \widehat{\Delta v}(x,z_j)
-  + \lambda_e \widehat{e}_{\mathrm{track}}(x,z_j)
-  + \lambda_s \max\{0,-\widehat{d}_{\min}(x,z_j)\},
+  \begin{aligned}
+  \min_{\mathcal X,\mathcal U,\mathcal Q}\quad & J_{\mathrm{total}} \\
+  ={}& w_C (1-C_K) + w_T K\dt \\
+  &+ w_U \sum_{k=0}^{K-1}\norm{u_k}_2\dt \\
+  &+ w_S \sum_{k=0}^{K}\phi\!\left(d_{\mathcal S}(r_k)\right) \\
+  &+ w_A \sum_{k=0}^{K}\psi(q_k) \\
+  \mathrm{s.t.} \quad
+  & x_{k+1}=f_{\mathrm{HCW}}(x_k,u_k,\dt), \\
+  & \norm{u_k}_2 \le u_{\max}, \quad \norm{v_k}_2 \le v_{\max}, \\
+  & d_{\mathcal S}(r_k)\ge d_{\mathrm{safe}}, \\
+  & y_{i,k} \text{ follows the visibility and dwell model}, \\
+  & C_K \ge C_{\mathrm{req}}.
+  \end{aligned}
 \end{equation}
-where $\widehat{\Delta v}$ is the integrated acceleration norm,
-$\widehat{e}_{\mathrm{track}}$ is the RMS transfer tracking error, and
-$\widehat{d}_{\min}$ is the predicted minimum clearance.  The planner therefore
-prefers viewpoints that expose new surface area while requiring low control
-effort under orbital relative dynamics.  The reported
-$\Delta v/C_{\mathrm{final}}$ metric is used as a direct measure of coverage
-efficiency.
+Here $\mathcal X=\{x_k\}_{k=0}^{K}$, $\mathcal U=\{u_k\}_{k=0}^{K-1}$,
+and $\mathcal Q=\{q_k\}_{k=0}^{K}$. The function $\phi(\cdot)$ penalizes
+proximity to the safety boundary and $\psi(q_k)$ penalizes attitude or
+boresight deviation if attitude is optimized explicitly.
+The weighted coverage ratio is
+\begin{equation}
+  C_K = \frac{\sum_{i=1}^{N} w_i y_{i,K}}{\sum_{i=1}^{N} w_i}.
+\end{equation}
+
+\subsection{Finite Graph and Evaluation Quantities}
+
+This is a mixed-integer, nonconvex planning problem. The discrete components
+are target visibility, dwell satisfaction, and viewpoint selection. The
+continuous components are HCW propagation, actuation limits, and clearance
+constraints. The present benchmark studies the finite approximation induced
+by a candidate-view graph. Its nodes are camera-feasible views and its edges
+are precomputed HCW transfers.
+
+Let $\mathcal V=\{z_j\}_{j=1}^{M}$ be the accepted candidate views and let
+$\Gamma_j\subseteq\mathcal T$ be the target subset visible from $z_j$. For a
+maximum of $L$ selected views, the finite planning problem is to choose an
+ordered sequence
+\begin{equation}
+  \sigma=(z_{\sigma_1},\ldots,z_{\sigma_L})
+\end{equation}
+that satisfies feasible-transfer constraints and covers enough target weight.
+One representative objective is
+\begin{equation}
+  J_{\mathrm{graph}}(\sigma)=
+  \sum_{\ell=1}^{L}\ell_{\sigma_{\ell-1},\sigma_{\ell}}
+  +\lambda_L L
+  +\lambda_C\sum_{i=1}^{N}w_i(1-c_i),
+\end{equation}
+where $z_{\sigma_0}$ denotes the initial state node and
+$c_i=\mathbf{1}\{i\in\cup_{\ell=1}^{L}\Gamma_{\sigma_\ell}\}$. The coverage
+constraint is
+\begin{equation}
+  \sum_{i=1}^{N}w_i c_i
+  \ge C_{\mathrm{req}}\sum_{i=1}^{N}w_i .
+\end{equation}
+This finite graph is the object on which the exact optimality statement in
+Section~\ref{sec:theory} is made. The implementation evaluated in
+Section~\ref{sec:results} uses a scalable dynamics-aware set-cover and CW-tour
+solver on the same graph.
+
+For reporting, the primary quantities are cumulative control effort, minimum
+clearance, peak requested input, mission time, and selected-viewpoint count:
+\begin{align}
+  \Delta v_{\mathrm{cum}} &= \sum_k \norm{u_k}_2\dt,\\
+  d_{\min} &= \min_k d_{\mathcal S}(r_k),\\
+  u_{\max,\mathrm{req}} &= \max_k \norm{u_k}_{\mathrm{req},2}.
+\end{align}
+These quantities are used later to compare planners on the same mission
+geometry and relative dynamics model.

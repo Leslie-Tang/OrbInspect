@@ -1,0 +1,38 @@
+{
+  "candidate_radius": 34.0,
+  "candidate_stride": 1,
+  "coverage_stop_ratio": 0.98,
+  "coverage_threshold": 0.7,
+  "cw_energy_weight": 5.0,
+  "cw_safety_weight": 120.0,
+  "cw_tracking_weight": 0.18,
+  "geometry_backend": "mesh",
+  "initial_state": [
+    0.0,
+    -35.0,
+    10.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "integration_dt": 2.0,
+  "max_acceleration": 0.06,
+  "max_viewpoints": 36,
+  "mesh_occlusion_max_triangles": 400,
+  "mesh_target_count": 180,
+  "methods": [
+    "set_cover_cw_tour",
+    "coverage_greedy",
+    "safe_coverage_greedy",
+    "distance_greedy",
+    "fuel_greedy"
+  ],
+  "min_new_targets": 1,
+  "output_root": "OrbInspectLatex/data/validation_matrix",
+  "proposed_beam_width": 6,
+  "proposed_lookahead_depth": 2,
+  "random_seed": 7,
+  "run_id": "000_target_density_N180",
+  "safety_margin": 2.0,
+  "transfer_duration": 90.0
+}

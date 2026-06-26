@@ -1,0 +1,696 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1080" viewBox="0 0 1600 1080" role="img" aria-labelledby="title desc">
+<title id="title">Offline orbital inspection planner and optimality scope</title>
+<desc id="desc">Editable vector academic schematic generated from the requested figure concept.</desc>
+<defs>
+  <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f5fbf"/></marker>
+  <marker id="arrow-gray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6f747a"/></marker>
+  <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d32f2f"/></marker>
+  <marker id="arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d98200"/></marker>
+  <style>
+    .panel { fill: #fff; stroke: #1f5fbf; stroke-width: 1.6; rx: 14; }
+    .panel-green { fill: #fff; stroke: #2e7d32; stroke-width: 1.6; rx: 14; }
+    .panel-gray { fill: #fff; stroke: #9aa3ad; stroke-width: 1.3; rx: 12; }
+    .title { font-family: Arial, Helvetica, sans-serif; font-size: 25px; font-weight: 700; fill: #0d2f6f; }
+    .title-green { font-family: Arial, Helvetica, sans-serif; font-size: 25px; font-weight: 700; fill: #0d5b25; }
+    .label { font-family: Arial, Helvetica, sans-serif; font-size: 17px; fill: #111111; }
+    .small { font-family: Arial, Helvetica, sans-serif; font-size: 13px; fill: #3f444a; }
+    .tiny { font-family: Arial, Helvetica, sans-serif; font-size: 11px; fill: #3f444a; }
+    .letter { font-family: Arial, Helvetica, sans-serif; font-size: 43px; font-weight: 800; fill: #0d2f6f; }
+    .letter-green { font-family: Arial, Helvetica, sans-serif; font-size: 43px; font-weight: 800; fill: #0d5b25; }
+    .caption { font-family: Georgia, 'Times New Roman', serif; font-size: 18px; font-style: italic; fill: #111111; }
+    .box { fill: #f8fbff; stroke: #1f5fbf; stroke-width: 1.4; rx: 8; }
+    .greenbox { fill: #dff2e1; stroke: #43a047; stroke-width: 1.4; rx: 8; }
+    .amberbox { fill: #fff2d6; stroke: #d98200; stroke-width: 1.4; rx: 8; }
+    .redbox { fill: #fde6e6; stroke: #d32f2f; stroke-width: 1.3; stroke-dasharray: 6 4; rx: 8; }
+    .node { fill: #1f5fbf; stroke: #fff; stroke-width: 1.5; }
+    .axis { stroke: #111; stroke-width: 2; marker-end: url(#arrow-gray); }
+    .blue-line { stroke: #1f5fbf; stroke-width: 2.4; fill: none; marker-end: url(#arrow-blue); }
+    .gray-line { stroke: #6f747a; stroke-width: 1.8; fill: none; marker-end: url(#arrow-gray); }
+    .red-line { stroke: #d32f2f; stroke-width: 2.2; fill: none; stroke-dasharray: 8 6; marker-end: url(#arrow-red); }
+    .amber-line { stroke: #d98200; stroke-width: 2.2; fill: none; marker-end: url(#arrow-amber); }
+    .dash-blue { stroke: #5b8fd8; stroke-width: 1.4; fill: none; stroke-dasharray: 6 5; }
+    .dash-gray { stroke: #adb5bd; stroke-width: 1.2; fill: none; stroke-dasharray: 6 4; }
+    .mesh { fill: #d9dde2; stroke: #707780; stroke-width: 1.0; }
+    .mesh-line { stroke: #8b929a; stroke-width: .8; fill: none; }
+  </style>
+</defs>
+<rect width="100%" height="100%" fill="#fff"/>
+<rect x="10" y="10" width="500" height="985" class="panel"/>
+<text x="28" y="55" class="letter" text-anchor="start">A</text>
+<text x="92" y="48" class="title" text-anchor="start">Continuous mission geometry
+to finite graph</text>
+<circle cx="55" cy="130" r="17" fill="#1f5fbf"/><text x="55" y="135" fill="#fff" font-family="Arial" font-size="15" font-weight="700" text-anchor="middle">1</text>
+<text x="85" y="123" class="small" text-anchor="start"><tspan x="85" dy="0">Structure / orbital</tspan><tspan x="85" dy="18">geometry mesh</tspan></text>
+<path d="M250,185 L250,245" class="blue-line"/>
+<circle cx="55" cy="300" r="17" fill="#1f5fbf"/><text x="55" y="305" fill="#fff" font-family="Arial" font-size="15" font-weight="700" text-anchor="middle">2</text>
+<text x="85" y="293" class="small" text-anchor="start"><tspan x="85" dy="0">Weighted surface</tspan><tspan x="85" dy="18">target samples</tspan></text>
+<path d="M250,355 L250,415" class="blue-line"/>
+<circle cx="55" cy="470" r="17" fill="#1f5fbf"/><text x="55" y="475" fill="#fff" font-family="Arial" font-size="15" font-weight="700" text-anchor="middle">3</text>
+<text x="85" y="463" class="small" text-anchor="start"><tspan x="85" dy="0">Candidate camera</tspan><tspan x="85" dy="18">views</tspan></text>
+<path d="M250,525 L250,585" class="blue-line"/>
+<circle cx="55" cy="640" r="17" fill="#1f5fbf"/><text x="55" y="645" fill="#fff" font-family="Arial" font-size="15" font-weight="700" text-anchor="middle">4</text>
+<text x="85" y="633" class="small" text-anchor="start"><tspan x="85" dy="0">Visibility matrix V</tspan></text>
+<path d="M250,695 L250,755" class="blue-line"/>
+<circle cx="55" cy="820" r="17" fill="#1f5fbf"/><text x="55" y="825" fill="#fff" font-family="Arial" font-size="15" font-weight="700" text-anchor="middle">5</text>
+<text x="85" y="813" class="small" text-anchor="start"><tspan x="85" dy="0">HCW edge-cost</tspan><tspan x="85" dy="18">matrix C</tspan></text>
+<g opacity="1.0">
+<rect x="232.0" y="125.84" width="156.0" height="8.32" class="mesh"/>
+<path d="M239.8,125.84 L250.20000000000002,134.16 M239.8,134.16 L250.20000000000002,125.84" class="mesh-line"/>
+<path d="M253.84,125.84 L264.24,134.16 M253.84,134.16 L264.24,125.84" class="mesh-line"/>
+<path d="M267.88,125.84 L278.28,134.16 M267.88,134.16 L278.28,125.84" class="mesh-line"/>
+<path d="M281.92,125.84 L292.32,134.16 M281.92,134.16 L292.32,125.84" class="mesh-line"/>
+<path d="M295.96,125.84 L306.35999999999996,134.16 M295.96,134.16 L306.35999999999996,125.84" class="mesh-line"/>
+<path d="M310.0,125.84 L320.4,134.16 M310.0,134.16 L320.4,125.84" class="mesh-line"/>
+<path d="M324.04,125.84 L334.44,134.16 M324.04,134.16 L334.44,125.84" class="mesh-line"/>
+<path d="M338.08,125.84 L348.47999999999996,134.16 M338.08,134.16 L348.47999999999996,125.84" class="mesh-line"/>
+<path d="M352.12,125.84 L362.52,134.16 M352.12,134.16 L362.52,125.84" class="mesh-line"/>
+<path d="M366.16,125.84 L376.56,134.16 M366.16,134.16 L376.56,125.84" class="mesh-line"/>
+<path d="M380.2,125.84 L390.59999999999997,134.16 M380.2,134.16 L390.59999999999997,125.84" class="mesh-line"/>
+<rect x="291.8" y="111.8" width="36.4" height="36.4" rx="4.16" fill="#dfe3e8" stroke="#676d74" stroke-width="0.624"/>
+<line x1="294.4" y1="130.0" x2="325.6" y2="130.0" class="mesh-line"/>
+<rect x="317.8" y="85.8" width="17.68" height="32.24" rx="4.16" fill="#dfe3e8" stroke="#676d74" stroke-width="0.624"/>
+<line x1="320.4" y1="101.92" x2="332.88" y2="101.92" class="mesh-line"/>
+<rect x="297.0" y="153.4" width="26.0" height="17.68" rx="4.16" fill="#dfe3e8" stroke="#676d74" stroke-width="0.624"/>
+<line x1="299.6" y1="162.24" x2="320.4" y2="162.24" class="mesh-line"/>
+<rect x="343.8" y="117.0" width="24.96" height="26.0" rx="4.16" fill="#dfe3e8" stroke="#676d74" stroke-width="0.624"/>
+<line x1="346.4" y1="130.0" x2="366.16" y2="130.0" class="mesh-line"/>
+<rect x="255.4" y="118.56" width="23.92" height="22.880000000000003" rx="4.16" fill="#dfe3e8" stroke="#676d74" stroke-width="0.624"/>
+<line x1="258.0" y1="130.0" x2="276.72" y2="130.0" class="mesh-line"/>
+<rect x="200.8" y="99.84" width="31.200000000000003" height="59.800000000000004" fill="#c9ced6" stroke="#626b73" stroke-width="0.52"/>
+<line x1="200.8" y1="114.4" x2="232.0" y2="114.4" class="mesh-line"/>
+<line x1="200.8" y1="128.96" x2="232.0" y2="128.96" class="mesh-line"/>
+<line x1="200.8" y1="143.52" x2="232.0" y2="143.52" class="mesh-line"/>
+<rect x="164.39999999999998" y="99.84" width="31.200000000000003" height="59.800000000000004" fill="#c9ced6" stroke="#626b73" stroke-width="0.52"/>
+<line x1="164.39999999999998" y1="114.4" x2="195.59999999999997" y2="114.4" class="mesh-line"/>
+<line x1="164.39999999999998" y1="128.96" x2="195.59999999999997" y2="128.96" class="mesh-line"/>
+<line x1="164.39999999999998" y1="143.52" x2="195.59999999999997" y2="143.52" class="mesh-line"/>
+<rect x="388.0" y="99.84" width="31.200000000000003" height="59.800000000000004" fill="#c9ced6" stroke="#626b73" stroke-width="0.52"/>
+<line x1="388.0" y1="114.4" x2="419.2" y2="114.4" class="mesh-line"/>
+<line x1="388.0" y1="128.96" x2="419.2" y2="128.96" class="mesh-line"/>
+<line x1="388.0" y1="143.52" x2="419.2" y2="143.52" class="mesh-line"/>
+<rect x="424.4" y="99.84" width="31.200000000000003" height="59.800000000000004" fill="#c9ced6" stroke="#626b73" stroke-width="0.52"/>
+<line x1="424.4" y1="114.4" x2="455.59999999999997" y2="114.4" class="mesh-line"/>
+<line x1="424.4" y1="128.96" x2="455.59999999999997" y2="128.96" class="mesh-line"/>
+<line x1="424.4" y1="143.52" x2="455.59999999999997" y2="143.52" class="mesh-line"/>
+</g>
+<g opacity="1.0">
+<rect x="232.0" y="295.84" width="156.0" height="8.32" class="mesh"/>
+<path d="M239.8,295.84 L250.20000000000002,304.16 M239.8,304.16 L250.20000000000002,295.84" class="mesh-line"/>
+<path d="M253.84,295.84 L264.24,304.16 M253.84,304.16 L264.24,295.84" class="mesh-line"/>
+<path d="M267.88,295.84 L278.28,304.16 M267.88,304.16 L278.28,295.84" class="mesh-line"/>
+<path d="M281.92,295.84 L292.32,304.16 M281.92,304.16 L292.32,295.84" class="mesh-line"/>
+<path d="M295.96,295.84 L306.35999999999996,304.16 M295.96,304.16 L306.35999999999996,295.84" class="mesh-line"/>
+<path d="M310.0,295.84 L320.4,304.16 M310.0,304.16 L320.4,295.84" class="mesh-line"/>
+<path d="M324.04,295.84 L334.44,304.16 M324.04,304.16 L334.44,295.84" class="mesh-line"/>
+<path d="M338.08,295.84 L348.47999999999996,304.16 M338.08,304.16 L348.47999999999996,295.84" class="mesh-line"/>
+<path d="M352.12,295.84 L362.52,304.16 M352.12,304.16 L362.52,295.84" class="mesh-line"/>
+<path d="M366.16,295.84 L376.56,304.16 M366.16,304.16 L376.56,295.84" class="mesh-line"/>
+<path d="M380.2,295.84 L390.59999999999997,304.16 M380.2,304.16 L390.59999999999997,295.84" class="mesh-line"/>
+<rect x="291.8" y="281.8" width="36.4" height="36.4" rx="4.16" fill="#dfe3e8" stroke="#676d74" stroke-width="0.624"/>
+<line x1="294.4" y1="300.0" x2="325.6" y2="300.0" class="mesh-line"/>
+<rect x="317.8" y="255.8" width="17.68" height="32.24" rx="4.16" fill="#dfe3e8" stroke="#676d74" stroke-width="0.624"/>
+<line x1="320.4" y1="271.92" x2="332.88" y2="271.92" class="mesh-line"/>
+<rect x="297.0" y="323.4" width="26.0" height="17.68" rx="4.16" fill="#dfe3e8" stroke="#676d74" stroke-width="0.624"/>
+<line x1="299.6" y1="332.24" x2="320.4" y2="332.24" class="mesh-line"/>
+<rect x="343.8" y="287.0" width="24.96" height="26.0" rx="4.16" fill="#dfe3e8" stroke="#676d74" stroke-width="0.624"/>
+<line x1="346.4" y1="300.0" x2="366.16" y2="300.0" class="mesh-line"/>
+<rect x="255.4" y="288.56" width="23.92" height="22.880000000000003" rx="4.16" fill="#dfe3e8" stroke="#676d74" stroke-width="0.624"/>
+<line x1="258.0" y1="300.0" x2="276.72" y2="300.0" class="mesh-line"/>
+<rect x="200.8" y="269.84" width="31.200000000000003" height="59.800000000000004" fill="#c9ced6" stroke="#626b73" stroke-width="0.52"/>
+<line x1="200.8" y1="284.4" x2="232.0" y2="284.4" class="mesh-line"/>
+<line x1="200.8" y1="298.96" x2="232.0" y2="298.96" class="mesh-line"/>
+<line x1="200.8" y1="313.52" x2="232.0" y2="313.52" class="mesh-line"/>
+<rect x="164.39999999999998" y="269.84" width="31.200000000000003" height="59.800000000000004" fill="#c9ced6" stroke="#626b73" stroke-width="0.52"/>
+<line x1="164.39999999999998" y1="284.4" x2="195.59999999999997" y2="284.4" class="mesh-line"/>
+<line x1="164.39999999999998" y1="298.96" x2="195.59999999999997" y2="298.96" class="mesh-line"/>
+<line x1="164.39999999999998" y1="313.52" x2="195.59999999999997" y2="313.52" class="mesh-line"/>
+<rect x="388.0" y="269.84" width="31.200000000000003" height="59.800000000000004" fill="#c9ced6" stroke="#626b73" stroke-width="0.52"/>
+<line x1="388.0" y1="284.4" x2="419.2" y2="284.4" class="mesh-line"/>
+<line x1="388.0" y1="298.96" x2="419.2" y2="298.96" class="mesh-line"/>
+<line x1="388.0" y1="313.52" x2="419.2" y2="313.52" class="mesh-line"/>
+<rect x="424.4" y="269.84" width="31.200000000000003" height="59.800000000000004" fill="#c9ced6" stroke="#626b73" stroke-width="0.52"/>
+<line x1="424.4" y1="284.4" x2="455.59999999999997" y2="284.4" class="mesh-line"/>
+<line x1="424.4" y1="298.96" x2="455.59999999999997" y2="298.96" class="mesh-line"/>
+<line x1="424.4" y1="313.52" x2="455.59999999999997" y2="313.52" class="mesh-line"/>
+</g>
+<circle cx="250" cy="270" r="5" fill="#43a047" stroke="#444"/>
+<circle cx="295" cy="318" r="5" fill="#43a047" stroke="#444"/>
+<circle cx="345" cy="285" r="5" fill="#f4c542" stroke="#444"/>
+<circle cx="378" cy="328" r="5" fill="#f4c542" stroke="#444"/>
+<circle cx="300" cy="250" r="5" fill="#43a047" stroke="#444"/>
+<circle cx="235" cy="330" r="5" fill="#f4c542" stroke="#444"/>
+<circle cx="370" cy="260" r="5" fill="#43a047" stroke="#444"/>
+<rect x="405" y="255" width="75" height="90" class="panel-gray"/>
+<text x="420" y="280" class="tiny" text-anchor="start">weight</text>
+<circle cx="418" cy="300" r="5" fill="#43a047" stroke="#444"/>
+<text x="435" y="304" class="tiny" text-anchor="start">high</text>
+<circle cx="418" cy="322" r="5" fill="#f4c542" stroke="#444"/>
+<text x="435" y="326" class="tiny" text-anchor="start">low</text>
+<g opacity="1.0">
+<rect x="245.5" y="466.56" width="129.0" height="6.88" class="mesh"/>
+<path d="M251.95,466.56 L260.55,473.44 M251.95,473.44 L260.55,466.56" class="mesh-line"/>
+<path d="M263.56,466.56 L272.16,473.44 M263.56,473.44 L272.16,466.56" class="mesh-line"/>
+<path d="M275.17,466.56 L283.77000000000004,473.44 M275.17,473.44 L283.77000000000004,466.56" class="mesh-line"/>
+<path d="M286.78,466.56 L295.38,473.44 M286.78,473.44 L295.38,466.56" class="mesh-line"/>
+<path d="M298.39,466.56 L306.99,473.44 M298.39,473.44 L306.99,466.56" class="mesh-line"/>
+<path d="M310.0,466.56 L318.6,473.44 M310.0,473.44 L318.6,466.56" class="mesh-line"/>
+<path d="M321.61,466.56 L330.21000000000004,473.44 M321.61,473.44 L330.21000000000004,466.56" class="mesh-line"/>
+<path d="M333.22,466.56 L341.82000000000005,473.44 M333.22,473.44 L341.82000000000005,466.56" class="mesh-line"/>
+<path d="M344.83,466.56 L353.43,473.44 M344.83,473.44 L353.43,466.56" class="mesh-line"/>
+<path d="M356.44,466.56 L365.04,473.44 M356.44,473.44 L365.04,466.56" class="mesh-line"/>
+<path d="M368.05,466.56 L376.65000000000003,473.44 M368.05,473.44 L376.65000000000003,466.56" class="mesh-line"/>
+<rect x="294.95" y="454.95" width="30.099999999999998" height="30.099999999999998" rx="3.44" fill="#dfe3e8" stroke="#676d74" stroke-width="0.516"/>
+<line x1="297.1" y1="470.0" x2="322.9" y2="470.0" class="mesh-line"/>
+<rect x="316.45" y="433.45" width="14.62" height="26.66" rx="3.44" fill="#dfe3e8" stroke="#676d74" stroke-width="0.516"/>
+<line x1="318.6" y1="446.78" x2="328.92" y2="446.78" class="mesh-line"/>
+<rect x="299.25" y="489.35" width="21.5" height="14.62" rx="3.44" fill="#dfe3e8" stroke="#676d74" stroke-width="0.516"/>
+<line x1="301.4" y1="496.66" x2="318.6" y2="496.66" class="mesh-line"/>
+<rect x="337.95" y="459.25" width="20.64" height="21.5" rx="3.44" fill="#dfe3e8" stroke="#676d74" stroke-width="0.516"/>
+<line x1="340.1" y1="470.0" x2="356.44" y2="470.0" class="mesh-line"/>
+<rect x="264.85" y="460.54" width="19.78" height="18.919999999999998" rx="3.44" fill="#dfe3e8" stroke="#676d74" stroke-width="0.516"/>
+<line x1="267.0" y1="470.0" x2="282.48" y2="470.0" class="mesh-line"/>
+<rect x="219.7" y="445.06" width="25.8" height="49.449999999999996" fill="#c9ced6" stroke="#626b73" stroke-width="0.43"/>
+<line x1="219.7" y1="457.1" x2="245.5" y2="457.1" class="mesh-line"/>
+<line x1="219.7" y1="469.14" x2="245.5" y2="469.14" class="mesh-line"/>
+<line x1="219.7" y1="481.18" x2="245.5" y2="481.18" class="mesh-line"/>
+<rect x="189.6" y="445.06" width="25.8" height="49.449999999999996" fill="#c9ced6" stroke="#626b73" stroke-width="0.43"/>
+<line x1="189.6" y1="457.1" x2="215.4" y2="457.1" class="mesh-line"/>
+<line x1="189.6" y1="469.14" x2="215.4" y2="469.14" class="mesh-line"/>
+<line x1="189.6" y1="481.18" x2="215.4" y2="481.18" class="mesh-line"/>
+<rect x="374.5" y="445.06" width="25.8" height="49.449999999999996" fill="#c9ced6" stroke="#626b73" stroke-width="0.43"/>
+<line x1="374.5" y1="457.1" x2="400.3" y2="457.1" class="mesh-line"/>
+<line x1="374.5" y1="469.14" x2="400.3" y2="469.14" class="mesh-line"/>
+<line x1="374.5" y1="481.18" x2="400.3" y2="481.18" class="mesh-line"/>
+<rect x="404.6" y="445.06" width="25.8" height="49.449999999999996" fill="#c9ced6" stroke="#626b73" stroke-width="0.43"/>
+<line x1="404.6" y1="457.1" x2="430.40000000000003" y2="457.1" class="mesh-line"/>
+<line x1="404.6" y1="469.14" x2="430.40000000000003" y2="469.14" class="mesh-line"/>
+<line x1="404.6" y1="481.18" x2="430.40000000000003" y2="481.18" class="mesh-line"/>
+</g>
+<g transform="translate(180,430) rotate(20) scale(0.55)">
+  <path d="M0,0 L90,-36 L90,36 Z" fill="#1f5fbf" fill-opacity="0.10" stroke="#1f5fbf" stroke-width="1.8"/>
+  <line x1="0" y1="0" x2="90" y2="0" stroke="#1f5fbf" stroke-width="1.2" stroke-dasharray="5 4"/>
+</g>
+<g transform="translate(180,430) scale(0.34)">
+  <rect x="-13" y="-10" width="26" height="20" rx="2" fill="#d6dbe2" stroke="#444" stroke-width="1.2"/>
+  <rect x="-38" y="-7" width="20" height="14" fill="#9fb9dd" stroke="#315c9c" stroke-width="1"/>
+  <rect x="18" y="-7" width="20" height="14" fill="#9fb9dd" stroke="#315c9c" stroke-width="1"/>
+  <circle cx="0" cy="0" r="3" fill="#1f5fbf"/>
+</g>
+<g transform="translate(410,435) rotate(165) scale(0.55)">
+  <path d="M0,0 L90,-36 L90,36 Z" fill="#1f5fbf" fill-opacity="0.10" stroke="#1f5fbf" stroke-width="1.8"/>
+  <line x1="0" y1="0" x2="90" y2="0" stroke="#1f5fbf" stroke-width="1.2" stroke-dasharray="5 4"/>
+</g>
+<g transform="translate(410,435) scale(0.34)">
+  <rect x="-13" y="-10" width="26" height="20" rx="2" fill="#d6dbe2" stroke="#444" stroke-width="1.2"/>
+  <rect x="-38" y="-7" width="20" height="14" fill="#9fb9dd" stroke="#315c9c" stroke-width="1"/>
+  <rect x="18" y="-7" width="20" height="14" fill="#9fb9dd" stroke="#315c9c" stroke-width="1"/>
+  <circle cx="0" cy="0" r="3" fill="#1f5fbf"/>
+</g>
+<g transform="translate(220,530) rotate(-25) scale(0.55)">
+  <path d="M0,0 L90,-36 L90,36 Z" fill="#1f5fbf" fill-opacity="0.10" stroke="#1f5fbf" stroke-width="1.8"/>
+  <line x1="0" y1="0" x2="90" y2="0" stroke="#1f5fbf" stroke-width="1.2" stroke-dasharray="5 4"/>
+</g>
+<g transform="translate(220,530) scale(0.34)">
+  <rect x="-13" y="-10" width="26" height="20" rx="2" fill="#d6dbe2" stroke="#444" stroke-width="1.2"/>
+  <rect x="-38" y="-7" width="20" height="14" fill="#9fb9dd" stroke="#315c9c" stroke-width="1"/>
+  <rect x="18" y="-7" width="20" height="14" fill="#9fb9dd" stroke="#315c9c" stroke-width="1"/>
+  <circle cx="0" cy="0" r="3" fill="#1f5fbf"/>
+</g>
+<g transform="translate(390,520) rotate(210) scale(0.55)">
+  <path d="M0,0 L90,-36 L90,36 Z" fill="#1f5fbf" fill-opacity="0.10" stroke="#1f5fbf" stroke-width="1.8"/>
+  <line x1="0" y1="0" x2="90" y2="0" stroke="#1f5fbf" stroke-width="1.2" stroke-dasharray="5 4"/>
+</g>
+<g transform="translate(390,520) scale(0.34)">
+  <rect x="-13" y="-10" width="26" height="20" rx="2" fill="#d6dbe2" stroke="#444" stroke-width="1.2"/>
+  <rect x="-38" y="-7" width="20" height="14" fill="#9fb9dd" stroke="#315c9c" stroke-width="1"/>
+  <rect x="18" y="-7" width="20" height="14" fill="#9fb9dd" stroke="#315c9c" stroke-width="1"/>
+  <circle cx="0" cy="0" r="3" fill="#1f5fbf"/>
+</g>
+<g transform="translate(260,605)">
+<rect x="0" y="0" width="26" height="26" fill="#dff2e1" stroke="#c8ced6" stroke-width=".8"/>
+<text x="13.0" y="17.0" class="tiny" text-anchor="middle">1</text>
+<rect x="26" y="0" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="39.0" y="17.0" class="tiny" text-anchor="middle">0</text>
+<rect x="52" y="0" width="26" height="26" fill="#dff2e1" stroke="#c8ced6" stroke-width=".8"/>
+<text x="65.0" y="17.0" class="tiny" text-anchor="middle">1</text>
+<rect x="78" y="0" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="91.0" y="17.0" class="tiny" text-anchor="middle">…</text>
+<rect x="104" y="0" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="117.0" y="17.0" class="tiny" text-anchor="middle">0</text>
+<rect x="0" y="26" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="13.0" y="43.0" class="tiny" text-anchor="middle">0</text>
+<rect x="26" y="26" width="26" height="26" fill="#dff2e1" stroke="#c8ced6" stroke-width=".8"/>
+<text x="39.0" y="43.0" class="tiny" text-anchor="middle">1</text>
+<rect x="52" y="26" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="65.0" y="43.0" class="tiny" text-anchor="middle">0</text>
+<rect x="78" y="26" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="91.0" y="43.0" class="tiny" text-anchor="middle">…</text>
+<rect x="104" y="26" width="26" height="26" fill="#dff2e1" stroke="#c8ced6" stroke-width=".8"/>
+<text x="117.0" y="43.0" class="tiny" text-anchor="middle">1</text>
+<rect x="0" y="52" width="26" height="26" fill="#dff2e1" stroke="#c8ced6" stroke-width=".8"/>
+<text x="13.0" y="69.0" class="tiny" text-anchor="middle">1</text>
+<rect x="26" y="52" width="26" height="26" fill="#dff2e1" stroke="#c8ced6" stroke-width=".8"/>
+<text x="39.0" y="69.0" class="tiny" text-anchor="middle">1</text>
+<rect x="52" y="52" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="65.0" y="69.0" class="tiny" text-anchor="middle">0</text>
+<rect x="78" y="52" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="91.0" y="69.0" class="tiny" text-anchor="middle">…</text>
+<rect x="104" y="52" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="117.0" y="69.0" class="tiny" text-anchor="middle">0</text>
+<rect x="0" y="78" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="13.0" y="95.0" class="tiny" text-anchor="middle">⋮</text>
+<rect x="26" y="78" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="39.0" y="95.0" class="tiny" text-anchor="middle">⋮</text>
+<rect x="52" y="78" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="65.0" y="95.0" class="tiny" text-anchor="middle">⋮</text>
+<rect x="78" y="78" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="91.0" y="95.0" class="tiny" text-anchor="middle">⋱</text>
+<rect x="104" y="78" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="117.0" y="95.0" class="tiny" text-anchor="middle">⋮</text>
+<rect x="0" y="104" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="13.0" y="121.0" class="tiny" text-anchor="middle">0</text>
+<rect x="26" y="104" width="26" height="26" fill="#dff2e1" stroke="#c8ced6" stroke-width=".8"/>
+<text x="39.0" y="121.0" class="tiny" text-anchor="middle">1</text>
+<rect x="52" y="104" width="26" height="26" fill="#dff2e1" stroke="#c8ced6" stroke-width=".8"/>
+<text x="65.0" y="121.0" class="tiny" text-anchor="middle">1</text>
+<rect x="78" y="104" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="91.0" y="121.0" class="tiny" text-anchor="middle">…</text>
+<rect x="104" y="104" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="117.0" y="121.0" class="tiny" text-anchor="middle">0</text>
+</g>
+<text x="250" y="592" class="tiny" text-anchor="start">targets</text>
+<text x="190" y="675" class="tiny" text-anchor="start">views</text>
+<g transform="translate(255,785)">
+<rect x="0" y="0" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="13.0" y="17.0" class="tiny" text-anchor="middle">0</text>
+<rect x="26" y="0" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="39.0" y="17.0" class="tiny" text-anchor="middle">8.7</text>
+<rect x="52" y="0" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="65.0" y="17.0" class="tiny" text-anchor="middle">12.3</text>
+<rect x="78" y="0" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="91.0" y="17.0" class="tiny" text-anchor="middle">…</text>
+<rect x="104" y="0" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="117.0" y="17.0" class="tiny" text-anchor="middle">15.6</text>
+<rect x="0" y="26" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="13.0" y="43.0" class="tiny" text-anchor="middle">8.7</text>
+<rect x="26" y="26" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="39.0" y="43.0" class="tiny" text-anchor="middle">0</text>
+<rect x="52" y="26" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="65.0" y="43.0" class="tiny" text-anchor="middle">6.4</text>
+<rect x="78" y="26" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="91.0" y="43.0" class="tiny" text-anchor="middle">…</text>
+<rect x="104" y="26" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="117.0" y="43.0" class="tiny" text-anchor="middle">9.1</text>
+<rect x="0" y="52" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="13.0" y="69.0" class="tiny" text-anchor="middle">12.3</text>
+<rect x="26" y="52" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="39.0" y="69.0" class="tiny" text-anchor="middle">6.4</text>
+<rect x="52" y="52" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="65.0" y="69.0" class="tiny" text-anchor="middle">0</text>
+<rect x="78" y="52" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="91.0" y="69.0" class="tiny" text-anchor="middle">…</text>
+<rect x="104" y="52" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="117.0" y="69.0" class="tiny" text-anchor="middle">7.2</text>
+<rect x="0" y="78" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="13.0" y="95.0" class="tiny" text-anchor="middle">⋮</text>
+<rect x="26" y="78" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="39.0" y="95.0" class="tiny" text-anchor="middle">⋮</text>
+<rect x="52" y="78" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="65.0" y="95.0" class="tiny" text-anchor="middle">⋮</text>
+<rect x="78" y="78" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="91.0" y="95.0" class="tiny" text-anchor="middle">⋱</text>
+<rect x="104" y="78" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="117.0" y="95.0" class="tiny" text-anchor="middle">⋮</text>
+<rect x="0" y="104" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="13.0" y="121.0" class="tiny" text-anchor="middle">15.6</text>
+<rect x="26" y="104" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="39.0" y="121.0" class="tiny" text-anchor="middle">9.1</text>
+<rect x="52" y="104" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="65.0" y="121.0" class="tiny" text-anchor="middle">7.2</text>
+<rect x="78" y="104" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="91.0" y="121.0" class="tiny" text-anchor="middle">…</text>
+<rect x="104" y="104" width="26" height="26" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<text x="117.0" y="121.0" class="tiny" text-anchor="middle">0</text>
+</g>
+<text x="424" y="870" class="tiny" text-anchor="start">cost / Δv</text>
+<rect x="520" y="10" width="580" height="985" class="panel"/>
+<text x="538" y="55" class="letter" text-anchor="start">B</text>
+<text x="602" y="48" class="title" text-anchor="start">Optimization scope from the finite graph</text>
+<text x="810" y="105" class="label" text-anchor="middle">Finite graph formulation</text>
+<g opacity="0.7">
+<rect x="738.0" y="166.16" width="144.0" height="7.68" class="mesh"/>
+<path d="M745.2,166.16 L754.8000000000001,173.84 M745.2,173.84 L754.8000000000001,166.16" class="mesh-line"/>
+<path d="M758.16,166.16 L767.76,173.84 M758.16,173.84 L767.76,166.16" class="mesh-line"/>
+<path d="M771.12,166.16 L780.72,173.84 M771.12,173.84 L780.72,166.16" class="mesh-line"/>
+<path d="M784.08,166.16 L793.6800000000001,173.84 M784.08,173.84 L793.6800000000001,166.16" class="mesh-line"/>
+<path d="M797.04,166.16 L806.64,173.84 M797.04,173.84 L806.64,166.16" class="mesh-line"/>
+<path d="M810.0,166.16 L819.6,173.84 M810.0,173.84 L819.6,166.16" class="mesh-line"/>
+<path d="M822.96,166.16 L832.5600000000001,173.84 M822.96,173.84 L832.5600000000001,166.16" class="mesh-line"/>
+<path d="M835.92,166.16 L845.52,173.84 M835.92,173.84 L845.52,166.16" class="mesh-line"/>
+<path d="M848.88,166.16 L858.48,173.84 M848.88,173.84 L858.48,166.16" class="mesh-line"/>
+<path d="M861.84,166.16 L871.44,173.84 M861.84,173.84 L871.44,166.16" class="mesh-line"/>
+<path d="M874.8,166.16 L884.4,173.84 M874.8,173.84 L884.4,166.16" class="mesh-line"/>
+<rect x="793.2" y="153.2" width="33.6" height="33.6" rx="3.84" fill="#dfe3e8" stroke="#676d74" stroke-width="0.576"/>
+<line x1="795.6" y1="170.0" x2="824.4" y2="170.0" class="mesh-line"/>
+<rect x="817.2" y="129.2" width="16.32" height="29.759999999999998" rx="3.84" fill="#dfe3e8" stroke="#676d74" stroke-width="0.576"/>
+<line x1="819.6" y1="144.08" x2="831.12" y2="144.08" class="mesh-line"/>
+<rect x="798.0" y="191.6" width="24.0" height="16.32" rx="3.84" fill="#dfe3e8" stroke="#676d74" stroke-width="0.576"/>
+<line x1="800.4" y1="199.76" x2="819.6" y2="199.76" class="mesh-line"/>
+<rect x="841.2" y="158.0" width="23.04" height="24.0" rx="3.84" fill="#dfe3e8" stroke="#676d74" stroke-width="0.576"/>
+<line x1="843.6" y1="170.0" x2="861.84" y2="170.0" class="mesh-line"/>
+<rect x="759.6" y="159.44" width="22.08" height="21.119999999999997" rx="3.84" fill="#dfe3e8" stroke="#676d74" stroke-width="0.576"/>
+<line x1="762.0" y1="170.0" x2="779.28" y2="170.0" class="mesh-line"/>
+<rect x="709.2" y="142.16" width="28.799999999999997" height="55.199999999999996" fill="#c9ced6" stroke="#626b73" stroke-width="0.48"/>
+<line x1="709.2" y1="155.6" x2="738.0" y2="155.6" class="mesh-line"/>
+<line x1="709.2" y1="169.04" x2="738.0" y2="169.04" class="mesh-line"/>
+<line x1="709.2" y1="182.48" x2="738.0" y2="182.48" class="mesh-line"/>
+<rect x="675.6" y="142.16" width="28.799999999999997" height="55.199999999999996" fill="#c9ced6" stroke="#626b73" stroke-width="0.48"/>
+<line x1="675.6" y1="155.6" x2="704.4" y2="155.6" class="mesh-line"/>
+<line x1="675.6" y1="169.04" x2="704.4" y2="169.04" class="mesh-line"/>
+<line x1="675.6" y1="182.48" x2="704.4" y2="182.48" class="mesh-line"/>
+<rect x="882.0" y="142.16" width="28.799999999999997" height="55.199999999999996" fill="#c9ced6" stroke="#626b73" stroke-width="0.48"/>
+<line x1="882.0" y1="155.6" x2="910.8" y2="155.6" class="mesh-line"/>
+<line x1="882.0" y1="169.04" x2="910.8" y2="169.04" class="mesh-line"/>
+<line x1="882.0" y1="182.48" x2="910.8" y2="182.48" class="mesh-line"/>
+<rect x="915.6" y="142.16" width="28.799999999999997" height="55.199999999999996" fill="#c9ced6" stroke="#626b73" stroke-width="0.48"/>
+<line x1="915.6" y1="155.6" x2="944.4" y2="155.6" class="mesh-line"/>
+<line x1="915.6" y1="169.04" x2="944.4" y2="169.04" class="mesh-line"/>
+<line x1="915.6" y1="182.48" x2="944.4" y2="182.48" class="mesh-line"/>
+</g>
+<line x1="960.0" y1="170.0" x2="924.9066664678467" y2="216.28070789743083" stroke="#3f444a" stroke-width="1.7"/>
+<line x1="924.9066664678467" y1="216.28070789743083" x2="836.0472266500395" y2="240.90615821687896" stroke="#3f444a" stroke-width="1.7"/>
+<line x1="836.0472266500395" y1="240.90615821687896" x2="735.0" y2="232.35382907247958" stroke="#3f444a" stroke-width="1.7"/>
+<line x1="735.0" y1="232.35382907247958" x2="669.0461068821137" y2="194.62545031944816" stroke="#3f444a" stroke-width="1.7"/>
+<line x1="669.0461068821137" y1="194.62545031944816" x2="669.0461068821137" y2="145.37454968055187" stroke="#3f444a" stroke-width="1.7"/>
+<line x1="669.0461068821137" y1="145.37454968055187" x2="734.9999999999999" y2="107.64617092752044" stroke="#3f444a" stroke-width="1.7"/>
+<line x1="734.9999999999999" y1="107.64617092752044" x2="836.0472266500395" y2="99.09384178312101" stroke="#3f444a" stroke-width="1.7"/>
+<line x1="836.0472266500395" y1="99.09384178312101" x2="924.9066664678467" y2="123.71929210256914" stroke="#3f444a" stroke-width="1.7"/>
+<line x1="924.9066664678467" y1="123.71929210256914" x2="960.0" y2="170.0" stroke="#3f444a" stroke-width="1.7"/>
+<circle cx="960.0" cy="170.0" r="8" fill="#1f5fbf"/>
+<circle cx="924.9066664678467" cy="216.28070789743083" r="8" fill="#1f5fbf"/>
+<circle cx="836.0472266500395" cy="240.90615821687896" r="8" fill="#1f5fbf"/>
+<circle cx="735.0" cy="232.35382907247958" r="8" fill="#1f5fbf"/>
+<circle cx="669.0461068821137" cy="194.62545031944816" r="8" fill="#1f5fbf"/>
+<circle cx="669.0461068821137" cy="145.37454968055187" r="8" fill="#1f5fbf"/>
+<circle cx="734.9999999999999" cy="107.64617092752044" r="8" fill="#1f5fbf"/>
+<circle cx="836.0472266500395" cy="99.09384178312101" r="8" fill="#1f5fbf"/>
+<circle cx="924.9066664678467" cy="123.71929210256914" r="8" fill="#1f5fbf"/>
+<path d="M810,250 C745,285 700,310 660,345" stroke="#1f5fbf" stroke-width="2.4" fill="none" marker-end="url(#arrow-blue)"/><path d="M810,250 C885,285 925,310 970,345" stroke="#d98200" stroke-width="2" fill="none" marker-end="url(#arrow-amber)"/><circle cx="595" cy="365" r="17" fill="#1f5fbf"/><text x="595" y="370" fill="#fff" font-family="Arial" font-size="15" font-weight="700" text-anchor="middle">1</text>
+<text x="620" y="357" class="small" text-anchor="start"><tspan x="620" dy="0">Exact finite optimization</tspan><tspan x="620" dy="18">exact on discretized graph</tspan></text>
+<rect x="545" y="435" width="230" height="145" class="box"/>
+<text x="660" y="465" class="label" text-anchor="middle">MIP / Graph solver</text>
+<circle cx="610" cy="515" r="8" fill="#1f5fbf"/>
+<circle cx="650" cy="490" r="8" fill="#1f5fbf"/>
+<circle cx="700" cy="515" r="8" fill="#1f5fbf"/>
+<circle cx="675" cy="548" r="8" fill="#1f5fbf"/>
+<circle cx="625" cy="552" r="8" fill="#1f5fbf"/>
+<line x1="610" y1="515" x2="650" y2="490" stroke="#0d2f6f"/>
+<line x1="650" y1="490" x2="700" y2="515" stroke="#0d2f6f"/>
+<line x1="700" y1="515" x2="675" y2="548" stroke="#0d2f6f"/>
+<line x1="675" y1="548" x2="625" y2="552" stroke="#0d2f6f"/>
+<line x1="625" y1="552" x2="610" y2="515" stroke="#0d2f6f"/>
+<line x1="650" y1="490" x2="675" y2="548" stroke="#0d2f6f"/>
+<g transform="translate(735,515) scale(1.1)"><circle cx="0" cy="0" r="15" fill="#43a047"/><path d="M-7,-1 L-2,6 L9,-8" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
+<path d="M660,582 L660,630" class="blue-line"/>
+<rect x="545" y="645" width="230" height="155" class="greenbox"/>
+<text x="660" y="675" class="label" text-anchor="middle"><tspan x="660" dy="0">Optimal solution</tspan><tspan x="660" dy="18">on the finite graph</tspan></text>
+<g transform="translate(735,735) scale(1.05)"><circle cx="0" cy="0" r="15" fill="#43a047"/><path d="M-7,-1 L-2,6 L9,-8" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
+<rect x="610" y="715" width="55" height="62" fill="#fff" stroke="#555"/><line x1="620" y1="732" x2="655" y2="732" stroke="#555"/><line x1="620" y1="748" x2="655" y2="748" stroke="#555"/><circle cx="660" cy="775" r="10" fill="none" stroke="#555" stroke-width="2"/>
+<text x="660" y="835" class="small" text-anchor="middle"><tspan x="660" dy="0">Certificate of optimality</tspan><tspan x="660" dy="18">GLOBAL for this graph</tspan></text>
+<circle cx="865" cy="365" r="17" fill="#d98200"/><text x="865" y="370" fill="#fff" font-family="Arial" font-size="15" font-weight="700" text-anchor="middle">2</text>
+<text x="890" y="357" class="small" text-anchor="start"><tspan x="890" dy="0">Scalable dynamics-aware</tspan><tspan x="890" dy="18">set-cover + CW tour solver</tspan><tspan x="890" dy="18">ISS-mesh benchmark method</tspan></text>
+<rect x="810" y="425" width="255" height="365" class="amberbox"/>
+<rect x="835" y="460" width="205" height="80" class="panel-gray"/>
+<text x="938" y="505" class="small" text-anchor="middle">Dynamics-aware set-cover</text>
+<path d="M937,545 L937,578" class="amber-line"/>
+<rect x="835" y="585" width="205" height="80" class="panel-gray"/>
+<text x="910" y="615" class="small" text-anchor="middle"><tspan x="910" dy="0">CW</tspan><tspan x="910" dy="16">/</tspan><tspan x="910" dy="16">HCW</tspan><tspan x="910" dy="16">tour</tspan><tspan x="910" dy="16">solver</tspan></text>
+<path d="M937,670 L937,703" class="amber-line"/>
+<rect x="835" y="710" width="205" height="80" class="panel-gray"/>
+<text x="910" y="740" class="small" text-anchor="middle"><tspan x="910" dy="0">Practical</tspan><tspan x="910" dy="16">benchmark</tspan><tspan x="910" dy="16">planner</tspan></text>
+<g transform="translate(987,465)">
+<rect x="0" y="0" width="15" height="15" fill="#43a047" stroke="#c8ced6" stroke-width=".8"/>
+<rect x="15" y="0" width="15" height="15" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<rect x="30" y="0" width="15" height="15" fill="#43a047" stroke="#c8ced6" stroke-width=".8"/>
+<rect x="45" y="0" width="15" height="15" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<rect x="0" y="15" width="15" height="15" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<rect x="15" y="15" width="15" height="15" fill="#43a047" stroke="#c8ced6" stroke-width=".8"/>
+<rect x="30" y="15" width="15" height="15" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<rect x="45" y="15" width="15" height="15" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<rect x="0" y="30" width="15" height="15" fill="#43a047" stroke="#c8ced6" stroke-width=".8"/>
+<rect x="15" y="30" width="15" height="15" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<rect x="30" y="30" width="15" height="15" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<rect x="45" y="30" width="15" height="15" fill="#43a047" stroke="#c8ced6" stroke-width=".8"/>
+<rect x="0" y="45" width="15" height="15" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<rect x="15" y="45" width="15" height="15" fill="#43a047" stroke="#c8ced6" stroke-width=".8"/>
+<rect x="30" y="45" width="15" height="15" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+<rect x="45" y="45" width="15" height="15" fill="#fff" stroke="#c8ced6" stroke-width=".8"/>
+</g>
+<ellipse cx="965" cy="625" rx="55" ry="28" fill="none" stroke="#1f5fbf" stroke-width="1.6" stroke-dasharray="6 4"/>
+<circle cx="1020.0" cy="625.0" r="5" fill="#1f5fbf"/>
+<circle cx="965.0" cy="653.0" r="5" fill="#1f5fbf"/>
+<circle cx="913.3169058567751" cy="615.4234359868813" r="5" fill="#1f5fbf"/>
+<circle cx="992.5" cy="600.7512886940357" r="5" fill="#1f5fbf"/>
+<g opacity="0.75">
+<rect x="929.0" y="746.08" width="72.0" height="3.84" class="mesh"/>
+<path d="M932.6,746.08 L937.4,749.92 M932.6,749.92 L937.4,746.08" class="mesh-line"/>
+<path d="M939.08,746.08 L943.88,749.92 M939.08,749.92 L943.88,746.08" class="mesh-line"/>
+<path d="M945.56,746.08 L950.3599999999999,749.92 M945.56,749.92 L950.3599999999999,746.08" class="mesh-line"/>
+<path d="M952.04,746.08 L956.8399999999999,749.92 M952.04,749.92 L956.8399999999999,746.08" class="mesh-line"/>
+<path d="M958.52,746.08 L963.3199999999999,749.92 M958.52,749.92 L963.3199999999999,746.08" class="mesh-line"/>
+<path d="M965.0,746.08 L969.8,749.92 M965.0,749.92 L969.8,746.08" class="mesh-line"/>
+<path d="M971.48,746.08 L976.28,749.92 M971.48,749.92 L976.28,746.08" class="mesh-line"/>
+<path d="M977.96,746.08 L982.76,749.92 M977.96,749.92 L982.76,746.08" class="mesh-line"/>
+<path d="M984.44,746.08 L989.24,749.92 M984.44,749.92 L989.24,746.08" class="mesh-line"/>
+<path d="M990.92,746.08 L995.7199999999999,749.92 M990.92,749.92 L995.7199999999999,746.08" class="mesh-line"/>
+<path d="M997.4,746.08 L1002.1999999999999,749.92 M997.4,749.92 L1002.1999999999999,746.08" class="mesh-line"/>
+<rect x="956.6" y="739.6" width="16.8" height="16.8" rx="1.92" fill="#dfe3e8" stroke="#676d74" stroke-width="0.288"/>
+<line x1="957.8" y1="748.0" x2="972.2" y2="748.0" class="mesh-line"/>
+<rect x="968.6" y="727.6" width="8.16" height="14.879999999999999" rx="1.92" fill="#dfe3e8" stroke="#676d74" stroke-width="0.288"/>
+<line x1="969.8" y1="735.04" x2="975.56" y2="735.04" class="mesh-line"/>
+<rect x="959.0" y="758.8" width="12.0" height="8.16" rx="1.92" fill="#dfe3e8" stroke="#676d74" stroke-width="0.288"/>
+<line x1="960.2" y1="762.88" x2="969.8" y2="762.88" class="mesh-line"/>
+<rect x="980.6" y="742.0" width="11.52" height="12.0" rx="1.92" fill="#dfe3e8" stroke="#676d74" stroke-width="0.288"/>
+<line x1="981.8" y1="748.0" x2="990.92" y2="748.0" class="mesh-line"/>
+<rect x="939.8" y="742.72" width="11.04" height="10.559999999999999" rx="1.92" fill="#dfe3e8" stroke="#676d74" stroke-width="0.288"/>
+<line x1="941.0" y1="748.0" x2="949.64" y2="748.0" class="mesh-line"/>
+<rect x="914.6" y="734.08" width="14.399999999999999" height="27.599999999999998" fill="#c9ced6" stroke="#626b73" stroke-width="0.24"/>
+<line x1="914.6" y1="740.8000000000001" x2="929.0" y2="740.8000000000001" class="mesh-line"/>
+<line x1="914.6" y1="747.5200000000001" x2="929.0" y2="747.5200000000001" class="mesh-line"/>
+<line x1="914.6" y1="754.24" x2="929.0" y2="754.24" class="mesh-line"/>
+<rect x="897.8000000000001" y="734.08" width="14.399999999999999" height="27.599999999999998" fill="#c9ced6" stroke="#626b73" stroke-width="0.24"/>
+<line x1="897.8000000000001" y1="740.8000000000001" x2="912.2" y2="740.8000000000001" class="mesh-line"/>
+<line x1="897.8000000000001" y1="747.5200000000001" x2="912.2" y2="747.5200000000001" class="mesh-line"/>
+<line x1="897.8000000000001" y1="754.24" x2="912.2" y2="754.24" class="mesh-line"/>
+<rect x="1001.0" y="734.08" width="14.399999999999999" height="27.599999999999998" fill="#c9ced6" stroke="#626b73" stroke-width="0.24"/>
+<line x1="1001.0" y1="740.8000000000001" x2="1015.4" y2="740.8000000000001" class="mesh-line"/>
+<line x1="1001.0" y1="747.5200000000001" x2="1015.4" y2="747.5200000000001" class="mesh-line"/>
+<line x1="1001.0" y1="754.24" x2="1015.4" y2="754.24" class="mesh-line"/>
+<rect x="1017.8" y="734.08" width="14.399999999999999" height="27.599999999999998" fill="#c9ced6" stroke="#626b73" stroke-width="0.24"/>
+<line x1="1017.8" y1="740.8000000000001" x2="1032.2" y2="740.8000000000001" class="mesh-line"/>
+<line x1="1017.8" y1="747.5200000000001" x2="1032.2" y2="747.5200000000001" class="mesh-line"/>
+<line x1="1017.8" y1="754.24" x2="1032.2" y2="754.24" class="mesh-line"/>
+</g>
+<ellipse cx="965" cy="748" rx="55" ry="28" fill="none" stroke="#1f5fbf" stroke-width="1.6" stroke-dasharray="6 4"/>
+<rect x="555" y="870" width="250" height="80" class="box"/>
+<text x="680" y="900" class="small" text-anchor="middle"><tspan x="680" dy="0">Guarantee applies to</tspan><tspan x="680" dy="18">the discretized graph only</tspan></text>
+<rect x="815" y="870" width="250" height="80" class="redbox"/>
+<g transform="translate(845,910) scale(0.8)"><path d="M0,-18 L18,15 L-18,15 Z" fill="#fde6e6" stroke="#d32f2f" stroke-width="2"/><line x1="0" y1="-6" x2="0" y2="6" stroke="#d32f2f" stroke-width="3"/><circle cx="0" cy="11" r="2" fill="#d32f2f"/></g>
+<text x="950" y="900" class="tiny" text-anchor="middle"><tspan x="950" dy="0">Heuristic branch: no global</tspan><tspan x="950" dy="15">optimality guarantee for</tspan><tspan x="950" dy="15">the continuous problem</tspan></text>
+<rect x="1110" y="10" width="480" height="985" class="panel-green"/>
+<text x="1128" y="55" class="letter-green" text-anchor="start">C</text>
+<text x="1192" y="48" class="title-green" text-anchor="start">Planner outputs</text>
+<rect x="1110" y="82" width="480" height="210" fill="#fff" stroke="#b3c8b8" stroke-width="1.1"/>
+<text x="1130" y="112" class="label" text-anchor="start">Reference trajectory</text>
+<rect x="1110" y="252" width="480" height="140" fill="#fff" stroke="#b3c8b8" stroke-width="1.1"/>
+<text x="1130" y="282" class="label" text-anchor="start">Attitude stream</text>
+<rect x="1110" y="412" width="480" height="145" fill="#fff" stroke="#b3c8b8" stroke-width="1.1"/>
+<text x="1130" y="442" class="label" text-anchor="start">Coverage log</text>
+<rect x="1110" y="580" width="480" height="210" fill="#fff" stroke="#b3c8b8" stroke-width="1.1"/>
+<text x="1130" y="610" class="label" text-anchor="start">Safety log: clearance / input</text>
+<rect x="1110" y="812" width="480" height="135" fill="#fff" stroke="#b3c8b8" stroke-width="1.1"/>
+<text x="1130" y="842" class="label" text-anchor="start">Planner metrics</text>
+<g opacity="0.75">
+<rect x="1293.0" y="161.96" width="114.0" height="6.08" class="mesh"/>
+<path d="M1298.7,161.96 L1306.3,168.04 M1298.7,168.04 L1306.3,161.96" class="mesh-line"/>
+<path d="M1308.96,161.96 L1316.56,168.04 M1308.96,168.04 L1316.56,161.96" class="mesh-line"/>
+<path d="M1319.22,161.96 L1326.82,168.04 M1319.22,168.04 L1326.82,161.96" class="mesh-line"/>
+<path d="M1329.48,161.96 L1337.08,168.04 M1329.48,168.04 L1337.08,161.96" class="mesh-line"/>
+<path d="M1339.74,161.96 L1347.34,168.04 M1339.74,168.04 L1347.34,161.96" class="mesh-line"/>
+<path d="M1350.0,161.96 L1357.6,168.04 M1350.0,168.04 L1357.6,161.96" class="mesh-line"/>
+<path d="M1360.26,161.96 L1367.86,168.04 M1360.26,168.04 L1367.86,161.96" class="mesh-line"/>
+<path d="M1370.52,161.96 L1378.12,168.04 M1370.52,168.04 L1378.12,161.96" class="mesh-line"/>
+<path d="M1380.78,161.96 L1388.3799999999999,168.04 M1380.78,168.04 L1388.3799999999999,161.96" class="mesh-line"/>
+<path d="M1391.04,161.96 L1398.6399999999999,168.04 M1391.04,168.04 L1398.6399999999999,161.96" class="mesh-line"/>
+<path d="M1401.3,161.96 L1408.8999999999999,168.04 M1401.3,168.04 L1408.8999999999999,161.96" class="mesh-line"/>
+<rect x="1336.7" y="151.7" width="26.6" height="26.6" rx="3.04" fill="#dfe3e8" stroke="#676d74" stroke-width="0.45599999999999996"/>
+<line x1="1338.6" y1="165.0" x2="1361.4" y2="165.0" class="mesh-line"/>
+<rect x="1355.7" y="132.7" width="12.92" height="23.56" rx="3.04" fill="#dfe3e8" stroke="#676d74" stroke-width="0.45599999999999996"/>
+<line x1="1357.6" y1="144.48" x2="1366.72" y2="144.48" class="mesh-line"/>
+<rect x="1340.5" y="182.1" width="19.0" height="12.92" rx="3.04" fill="#dfe3e8" stroke="#676d74" stroke-width="0.45599999999999996"/>
+<line x1="1342.4" y1="188.56" x2="1357.6" y2="188.56" class="mesh-line"/>
+<rect x="1374.7" y="155.5" width="18.240000000000002" height="19.0" rx="3.04" fill="#dfe3e8" stroke="#676d74" stroke-width="0.45599999999999996"/>
+<line x1="1376.6" y1="165.0" x2="1391.04" y2="165.0" class="mesh-line"/>
+<rect x="1310.1" y="156.64" width="17.48" height="16.72" rx="3.04" fill="#dfe3e8" stroke="#676d74" stroke-width="0.45599999999999996"/>
+<line x1="1312.0" y1="165.0" x2="1325.68" y2="165.0" class="mesh-line"/>
+<rect x="1270.2" y="142.96" width="22.8" height="43.7" fill="#c9ced6" stroke="#626b73" stroke-width="0.38"/>
+<line x1="1270.2" y1="153.60000000000002" x2="1293.0" y2="153.60000000000002" class="mesh-line"/>
+<line x1="1270.2" y1="164.24" x2="1293.0" y2="164.24" class="mesh-line"/>
+<line x1="1270.2" y1="174.88" x2="1293.0" y2="174.88" class="mesh-line"/>
+<rect x="1243.6000000000001" y="142.96" width="22.8" height="43.7" fill="#c9ced6" stroke="#626b73" stroke-width="0.38"/>
+<line x1="1243.6000000000001" y1="153.60000000000002" x2="1266.4" y2="153.60000000000002" class="mesh-line"/>
+<line x1="1243.6000000000001" y1="164.24" x2="1266.4" y2="164.24" class="mesh-line"/>
+<line x1="1243.6000000000001" y1="174.88" x2="1266.4" y2="174.88" class="mesh-line"/>
+<rect x="1407.0" y="142.96" width="22.8" height="43.7" fill="#c9ced6" stroke="#626b73" stroke-width="0.38"/>
+<line x1="1407.0" y1="153.60000000000002" x2="1429.8" y2="153.60000000000002" class="mesh-line"/>
+<line x1="1407.0" y1="164.24" x2="1429.8" y2="164.24" class="mesh-line"/>
+<line x1="1407.0" y1="174.88" x2="1429.8" y2="174.88" class="mesh-line"/>
+<rect x="1433.6" y="142.96" width="22.8" height="43.7" fill="#c9ced6" stroke="#626b73" stroke-width="0.38"/>
+<line x1="1433.6" y1="153.60000000000002" x2="1456.3999999999999" y2="153.60000000000002" class="mesh-line"/>
+<line x1="1433.6" y1="164.24" x2="1456.3999999999999" y2="164.24" class="mesh-line"/>
+<line x1="1433.6" y1="174.88" x2="1456.3999999999999" y2="174.88" class="mesh-line"/>
+</g>
+<ellipse cx="1350" cy="165" rx="150" ry="55" fill="none" stroke="#1f5fbf" stroke-width="2.2"/>
+<path d="M1205,175 C1260,110 1425,105 1492,155" stroke="#1f5fbf" stroke-width="2.4" fill="none" marker-end="url(#arrow-blue)"/><g transform="translate(1185,330) scale(0.38)">
+  <rect x="-13" y="-10" width="26" height="20" rx="2" fill="#d6dbe2" stroke="#444" stroke-width="1.2"/>
+  <rect x="-38" y="-7" width="20" height="14" fill="#9fb9dd" stroke="#315c9c" stroke-width="1"/>
+  <rect x="18" y="-7" width="20" height="14" fill="#9fb9dd" stroke="#315c9c" stroke-width="1"/>
+  <circle cx="0" cy="0" r="3" fill="#1f5fbf"/>
+</g>
+<g transform="translate(1203,330) rotate(-20) scale(0.36)">
+  <path d="M0,0 L90,-36 L90,36 Z" fill="#1f5fbf" fill-opacity="0.10" stroke="#1f5fbf" stroke-width="1.8"/>
+  <line x1="0" y1="0" x2="90" y2="0" stroke="#1f5fbf" stroke-width="1.2" stroke-dasharray="5 4"/>
+</g>
+<g transform="translate(1260,330) scale(0.38)">
+  <rect x="-13" y="-10" width="26" height="20" rx="2" fill="#d6dbe2" stroke="#444" stroke-width="1.2"/>
+  <rect x="-38" y="-7" width="20" height="14" fill="#9fb9dd" stroke="#315c9c" stroke-width="1"/>
+  <rect x="18" y="-7" width="20" height="14" fill="#9fb9dd" stroke="#315c9c" stroke-width="1"/>
+  <circle cx="0" cy="0" r="3" fill="#1f5fbf"/>
+</g>
+<g transform="translate(1278,330) rotate(-5) scale(0.36)">
+  <path d="M0,0 L90,-36 L90,36 Z" fill="#1f5fbf" fill-opacity="0.10" stroke="#1f5fbf" stroke-width="1.8"/>
+  <line x1="0" y1="0" x2="90" y2="0" stroke="#1f5fbf" stroke-width="1.2" stroke-dasharray="5 4"/>
+</g>
+<g transform="translate(1335,330) scale(0.38)">
+  <rect x="-13" y="-10" width="26" height="20" rx="2" fill="#d6dbe2" stroke="#444" stroke-width="1.2"/>
+  <rect x="-38" y="-7" width="20" height="14" fill="#9fb9dd" stroke="#315c9c" stroke-width="1"/>
+  <rect x="18" y="-7" width="20" height="14" fill="#9fb9dd" stroke="#315c9c" stroke-width="1"/>
+  <circle cx="0" cy="0" r="3" fill="#1f5fbf"/>
+</g>
+<g transform="translate(1353,330) rotate(10) scale(0.36)">
+  <path d="M0,0 L90,-36 L90,36 Z" fill="#1f5fbf" fill-opacity="0.10" stroke="#1f5fbf" stroke-width="1.8"/>
+  <line x1="0" y1="0" x2="90" y2="0" stroke="#1f5fbf" stroke-width="1.2" stroke-dasharray="5 4"/>
+</g>
+<g transform="translate(1430,330) scale(0.38)">
+  <rect x="-13" y="-10" width="26" height="20" rx="2" fill="#d6dbe2" stroke="#444" stroke-width="1.2"/>
+  <rect x="-38" y="-7" width="20" height="14" fill="#9fb9dd" stroke="#315c9c" stroke-width="1"/>
+  <rect x="18" y="-7" width="20" height="14" fill="#9fb9dd" stroke="#315c9c" stroke-width="1"/>
+  <circle cx="0" cy="0" r="3" fill="#1f5fbf"/>
+</g>
+<g transform="translate(1448,330) rotate(25) scale(0.36)">
+  <path d="M0,0 L90,-36 L90,36 Z" fill="#1f5fbf" fill-opacity="0.10" stroke="#1f5fbf" stroke-width="1.8"/>
+  <line x1="0" y1="0" x2="90" y2="0" stroke="#1f5fbf" stroke-width="1.2" stroke-dasharray="5 4"/>
+</g>
+<line x1="1160" y1="370" x2="1510" y2="370" stroke="#111" stroke-width="1.4" marker-end="url(#arrow-gray)"/>
+<text x="1530" y="374" class="small" text-anchor="start">t</text>
+<text x="1385" y="330" class="title" text-anchor="start">⋯</text>
+<text x="1145" y="515" class="small" text-anchor="start">targets</text>
+<rect x="1180" y="475" width="10" height="34" fill="#fff" stroke="#888" stroke-width=".7"/>
+<rect x="1191" y="475" width="10" height="34" fill="#43a047" stroke="#888" stroke-width=".7"/>
+<rect x="1202" y="475" width="10" height="34" fill="#43a047" stroke="#888" stroke-width=".7"/>
+<rect x="1213" y="475" width="10" height="34" fill="#43a047" stroke="#888" stroke-width=".7"/>
+<rect x="1224" y="475" width="10" height="34" fill="#fff" stroke="#888" stroke-width=".7"/>
+<rect x="1235" y="475" width="10" height="34" fill="#43a047" stroke="#888" stroke-width=".7"/>
+<rect x="1246" y="475" width="10" height="34" fill="#43a047" stroke="#888" stroke-width=".7"/>
+<rect x="1257" y="475" width="10" height="34" fill="#43a047" stroke="#888" stroke-width=".7"/>
+<rect x="1268" y="475" width="10" height="34" fill="#fff" stroke="#888" stroke-width=".7"/>
+<rect x="1279" y="475" width="10" height="34" fill="#43a047" stroke="#888" stroke-width=".7"/>
+<rect x="1290" y="475" width="10" height="34" fill="#43a047" stroke="#888" stroke-width=".7"/>
+<rect x="1301" y="475" width="10" height="34" fill="#43a047" stroke="#888" stroke-width=".7"/>
+<rect x="1312" y="475" width="10" height="34" fill="#fff" stroke="#888" stroke-width=".7"/>
+<rect x="1323" y="475" width="10" height="34" fill="#43a047" stroke="#888" stroke-width=".7"/>
+<rect x="1334" y="475" width="10" height="34" fill="#43a047" stroke="#888" stroke-width=".7"/>
+<rect x="1345" y="475" width="10" height="34" fill="#43a047" stroke="#888" stroke-width=".7"/>
+<rect x="1356" y="475" width="10" height="34" fill="#fff" stroke="#888" stroke-width=".7"/>
+<rect x="1367" y="475" width="10" height="34" fill="#43a047" stroke="#888" stroke-width=".7"/>
+<rect x="1378" y="475" width="10" height="34" fill="#43a047" stroke="#888" stroke-width=".7"/>
+<rect x="1389" y="475" width="10" height="34" fill="#43a047" stroke="#888" stroke-width=".7"/>
+<rect x="1400" y="475" width="10" height="34" fill="#fff" stroke="#888" stroke-width=".7"/>
+<rect x="1411" y="475" width="10" height="34" fill="#43a047" stroke="#888" stroke-width=".7"/>
+<rect x="1422" y="475" width="10" height="34" fill="#43a047" stroke="#888" stroke-width=".7"/>
+<rect x="1433" y="475" width="10" height="34" fill="#43a047" stroke="#888" stroke-width=".7"/>
+<rect x="1444" y="475" width="10" height="34" fill="#fff" stroke="#888" stroke-width=".7"/>
+<rect x="1455" y="475" width="10" height="34" fill="#43a047" stroke="#888" stroke-width=".7"/>
+<rect x="1466" y="475" width="10" height="34" fill="#43a047" stroke="#888" stroke-width=".7"/>
+<rect x="1477" y="475" width="10" height="34" fill="#43a047" stroke="#888" stroke-width=".7"/>
+<text x="1180" y="530" class="tiny" text-anchor="start">0</text>
+<text x="1490" y="530" class="tiny" text-anchor="start">T</text>
+<rect x="1190" y="540" width="16" height="16" fill="#43a047" stroke="#444"/> <text x="1215" y="553" class="tiny" text-anchor="start">covered</text>
+<rect x="1330" y="540" width="16" height="16" fill="#fff" stroke="#444"/> <text x="1355" y="553" class="tiny" text-anchor="start">not covered</text>
+<text x="1160" y="624" class="tiny" text-anchor="start">clearance</text>
+<line x1="1160" y1="695" x2="1515" y2="695" stroke="#111"/><line x1="1160" y1="695" x2="1160" y2="640" stroke="#111"/>
+<line x1="1160" y1="675" x2="1515" y2="675" stroke="#d32f2f" stroke-dasharray="6 5"/>
+<path d="M1165,668 C1210,655 1275,672 1335,660 C1410,650 1470,665 1510,658" stroke="#43a047" stroke-width="2" fill="none"/><text x="1455" y="672" class="tiny" text-anchor="start">limit</text>
+<text x="1160" y="717" class="tiny" text-anchor="start">control input</text>
+<line x1="1160" y1="788" x2="1515" y2="788" stroke="#111"/><line x1="1160" y1="788" x2="1160" y2="733" stroke="#111"/>
+<line x1="1160" y1="768" x2="1515" y2="768" stroke="#d32f2f" stroke-dasharray="6 5"/>
+<path d="M1165,761 C1210,748 1275,765 1335,753 C1410,743 1470,758 1510,751" stroke="#43a047" stroke-width="2" fill="none"/><text x="1455" y="765" class="tiny" text-anchor="start">limit</text>
+<g transform="translate(1145,870)">
+<rect x="0" y="0" width="0" height="0"/>
+<rect x="0" y="0" width="0" height="0"/>
+<rect x="0" y="0" width="0" height="0"/>
+<rect x="0" y="0" width="0" height="0"/>
+<rect x="0" y="0" width="0" height="0"/>
+<rect x="0" y="0" width="0" height="0"/>
+<rect x="0" y="0" width="0" height="0"/>
+<rect x="0" y="0" width="0" height="0"/>
+<rect x="0" y="0" width="0" height="0"/>
+<rect x="0" y="0" width="0" height="0"/>
+<rect x="0" y="0" width="0" height="0"/>
+<rect x="0" y="0" width="0" height="0"/>
+<rect x="0" y="0" width="0" height="0"/>
+<rect x="0" y="0" width="0" height="0"/>
+<rect x="0" y="0" width="0" height="0"/>
+<rect x="0" y="0" width="0" height="0"/>
+<rect x="0" y="0" width="0" height="0"/>
+<rect x="0" y="0" width="0" height="0"/>
+<rect x="0" y="0" width="150" height="22" fill="#dff2e1" stroke="#9aa"/>
+<rect x="150" y="0" width="120" height="22" fill="#dff2e1" stroke="#9aa"/>
+<rect x="270" y="0" width="80" height="22" fill="#dff2e1" stroke="#9aa"/>
+<rect x="0" y="22" width="150" height="22" fill="#fff" stroke="#9aa"/>
+<rect x="150" y="22" width="120" height="22" fill="#fff" stroke="#9aa"/>
+<rect x="270" y="22" width="80" height="22" fill="#fff" stroke="#9aa"/>
+<rect x="0" y="44" width="150" height="22" fill="#fff" stroke="#9aa"/>
+<rect x="150" y="44" width="120" height="22" fill="#fff" stroke="#9aa"/>
+<rect x="270" y="44" width="80" height="22" fill="#fff" stroke="#9aa"/>
+<rect x="0" y="66" width="150" height="22" fill="#fff" stroke="#9aa"/>
+<rect x="150" y="66" width="120" height="22" fill="#fff" stroke="#9aa"/>
+<rect x="270" y="66" width="80" height="22" fill="#fff" stroke="#9aa"/>
+<rect x="0" y="88" width="150" height="22" fill="#fff" stroke="#9aa"/>
+<rect x="150" y="88" width="120" height="22" fill="#fff" stroke="#9aa"/>
+<rect x="270" y="88" width="80" height="22" fill="#fff" stroke="#9aa"/>
+<rect x="0" y="110" width="150" height="22" fill="#fff" stroke="#9aa"/>
+<rect x="150" y="110" width="120" height="22" fill="#fff" stroke="#9aa"/>
+<rect x="270" y="110" width="80" height="22" fill="#fff" stroke="#9aa"/>
+<text x="75.0" y="15" class="tiny" text-anchor="middle">Metric</text>
+<text x="210.0" y="15" class="tiny" text-anchor="middle">Value</text>
+<text x="310.0" y="15" class="tiny" text-anchor="middle">Status</text>
+<text x="75.0" y="37" font-family="Arial" font-size="11" fill="#3f444a" text-anchor="middle">Coverage</text>
+<text x="210.0" y="37" font-family="Arial" font-size="11" fill="#3f444a" text-anchor="middle">98.4 %</text>
+<text x="310.0" y="37" font-family="Arial" font-size="11" fill="#43a047" text-anchor="middle">✓</text>
+<text x="75.0" y="59" font-family="Arial" font-size="11" fill="#3f444a" text-anchor="middle">Total cost</text>
+<text x="210.0" y="59" font-family="Arial" font-size="11" fill="#3f444a" text-anchor="middle">12.6 h</text>
+<text x="310.0" y="59" font-family="Arial" font-size="11" fill="#43a047" text-anchor="middle">✓</text>
+<text x="75.0" y="81" font-family="Arial" font-size="11" fill="#3f444a" text-anchor="middle">Total Δv</text>
+<text x="210.0" y="81" font-family="Arial" font-size="11" fill="#3f444a" text-anchor="middle">14.8 m/s</text>
+<text x="310.0" y="81" font-family="Arial" font-size="11" fill="#43a047" text-anchor="middle">✓</text>
+<text x="75.0" y="103" font-family="Arial" font-size="11" fill="#3f444a" text-anchor="middle">Min. clearance</text>
+<text x="210.0" y="103" font-family="Arial" font-size="11" fill="#3f444a" text-anchor="middle">12.7 m</text>
+<text x="310.0" y="103" font-family="Arial" font-size="11" fill="#43a047" text-anchor="middle">✓</text>
+<text x="75.0" y="125" font-family="Arial" font-size="11" fill="#3f444a" text-anchor="middle">Feasibility</text>
+<text x="210.0" y="125" font-family="Arial" font-size="11" fill="#3f444a" text-anchor="middle">feasible</text>
+<text x="310.0" y="125" font-family="Arial" font-size="11" fill="#43a047" text-anchor="middle">✓</text>
+</g>
+<text x="800" y="1040" class="caption" text-anchor="middle">The planner separates the exact finite graph formulation from the scalable solver used in the reported ISS-mesh benchmark.</text>
+</svg>

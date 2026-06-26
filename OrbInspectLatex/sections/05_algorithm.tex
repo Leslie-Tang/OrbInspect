@@ -3,20 +3,25 @@
 
 \subsection{Decomposition}
 
-The implemented planner decomposes inspection into mesh target sampling,
-candidate viewpoint construction, visibility matrix construction, viewpoint
-selection, CW tour generation, trajectory rollout, and camera attitude export.
-This decomposition is deliberately transparent: each stage writes artifacts
-that can be checked after the run. The self-contained benchmark includes
-method-comparison, viewpoint, planner, trajectory, attitude, and coverage CSV
-files.
+The offline solver operates on the finite graph defined in
+Section~\ref{sec:problem}. It decomposes inspection into target sampling,
+candidate-view construction, visibility-matrix construction, HCW edge
+generation, finite-graph optimization, trajectory rollout, and camera-attitude
+export. The implementation has two modes. The certified mode solves a reduced
+finite graph exactly by dynamic programming over selected-view masks and the
+last visited view. The scalable mode uses dynamics-aware set cover followed by
+CW-cost tour ordering for the full ISS-mesh benchmark. Both modes use the same
+camera visibility matrix and the same HCW transfer feasibility audit, so the
+certificate and the scalable results refer to the same discretized mission
+model.
 
 \subsection{Candidate Viewpoints}
 
-For each mesh target, candidate viewpoints are generated on offset shells and
-accepted only when they satisfy basic safety and view constraints. Each
-candidate $z_j$ stores a safety margin and a precomputed set of visible
-targets. The resulting binary visibility relation can be written as
+For each surface target, candidate views are generated on offset shells and
+accepted only when they satisfy basic range, field-of-view, incidence-angle,
+line-of-sight, and clearance constraints. Each candidate $z_j$ stores a safety
+margin and a precomputed set of visible targets. The resulting binary
+visibility relation can be written as
 \begin{equation}
   A_{ij}=1
   \quad \Longleftrightarrow \quad
@@ -27,51 +32,152 @@ In the high-coverage offline benchmark, 357 candidates are generated for
 
 \subsection{Dynamics-Aware Viewpoint Selection}
 
-The proposed method first performs dynamics-aware weighted set cover and then
-orders the selected candidates with a greedy CW-transfer tour. At each set-cover
-iteration, the planner balances new surface area coverage against the CW
-transfer cost from the current predicted state. For candidate $z_j$, let
-$\Delta A_j$ be the newly visible mesh area and let $J_{\mathrm{CW}}(x,z_j)$ be
-the transfer cost defined in Section~\ref{sec:problem}. The set-cover stage
-uses the score
+The scalable solver selects views on the candidate graph and then orders the
+selected sequence using CW transfer costs. At each selection step, the planner
+balances new weighted coverage against the HCW transfer cost from the current
+predicted state. For candidate $z_j$, let $\Delta C_j$ be the newly gained
+weighted coverage and let $J(x,z_j)$ be the rollout cost defined by the edge
+model in Section~\ref{sec:problem}. The selection stage uses the score
 \begin{equation}
   s_j =
-  \frac{\Delta A_j}{1+J_{\mathrm{CW}}(x,z_j)}
+  \frac{\Delta C_j}{1+J(x,z_j)}
   + w_m \min\{\widehat{d}_{\min}(x,z_j),d_{\max}\},
 \end{equation}
-then updates the predicted state with the CW rollout to the selected
-viewpoint. A second ordering pass greedily chooses the next selected candidate
-with the lowest predicted CW dynamic cost from the current terminal state. This
-makes later choices depend on the orbital state reached by earlier choices, so
-CW dynamics affect both the selected viewpoints and their order. The logged
-\texttt{planner.csv} file records the selected candidate
-identifier, new target count, area gain, cumulative coverage, score, transfer
-$\Delta v$, dynamic transfer cost, minimum clearance, transfer tracking error,
-and feasibility flag for each selected viewpoint.
+then updates the predicted state with the CW rollout to the selected viewpoint.
+The resulting ordered sequence is then propagated forward so that later choices
+depend on the orbital state reached by earlier ones. The planner records the
+selected candidate identifier, new target count, area gain, cumulative
+coverage, score, transfer $\Delta v$, dynamic transfer cost, minimum
+clearance, transfer tracking error, and feasibility flag for each selected
+viewpoint.
+The planning loop terminates when the cumulative coverage reaches the
+prescribed stop ratio, when the view budget is exhausted, or when no feasible
+outgoing edge remains from the current state.
 
 \subsection{CW Transfer Generation}
 
-After a candidate is selected, the planner computes a bounded-acceleration
-CW transfer toward the viewpoint, samples the resulting trajectory, evaluates
-clearance and speed, and updates predicted coverage. The exported trajectory
-includes position, velocity, acceleration command, camera boresight, yaw,
-pitch, and quaternion samples, so the planned path specifies both where the
-chaser flies and how the inspection camera is pointed. Edges that violate
-basic feasibility checks are penalized or rejected depending on the baseline
-method. The current implementation is still a tractable approximation rather
-than a global mixed-integer optimum; this limitation is discussed in
-Section~\ref{sec:discussion}.
+After a candidate is selected, the planner computes a finite-horizon HCW
+terminal transfer to the selected viewpoint. For the fixed integration grid,
+the linear HCW map is used to solve the minimum-energy sequence of piecewise
+constant accelerations whose terminal position equals the candidate view
+position and whose terminal relative velocity is zero. The transfer is then
+sampled forward, and the edge is marked feasible only when terminal position
+error, terminal speed, peak input, speed, and clearance satisfy the specified
+bounds. This makes the selected viewpoints stabilized inspection states rather
+than fly-through camera markers.
+Because each segment is generated independently on the discrete HCW grid, the
+reported trajectory is physically valid but piecewise smooth rather than a
+single globally optimized spline. The plotted line is a stitched sequence of
+rest-to-rest transfers, so corners can appear at viewpoint transitions even
+though each segment satisfies the HCW dynamics model.
+
+The exported trajectory includes position, velocity, acceleration command,
+camera boresight, yaw, pitch, and quaternion samples, so the planned path
+specifies both where the chaser flies and how the inspection camera is
+pointed. Edges that violate feasibility checks are penalized or rejected
+depending on the baseline method. Thus, the same visibility gain can be
+accepted or rejected depending on whether the terminal HCW transfer remains
+inside the control and clearance envelope. The high-coverage benchmark
+evaluates the scalable graph solver rather than claiming a global
+mixed-integer optimum for the continuous mission.
 
 \input{algorithms/offline_planner}
 
-\subsection{Outputs}
+\subsection{Certified Finite-Graph Solver}
+\label{sec:theory}
+
+Let $\mathcal V=\{z_j\}_{j=1}^{M}$ denote the finite candidate-viewpoint set.
+Each viewpoint $z_j$ observes a subset of targets $\Gamma_j \subseteq \mathcal
+T$, and each directed transfer $(z_a,z_b)$ has a precomputed HCW cost
+$\ell_{ab}\ge 0$ and feasibility flag $\eta_{ab}\in\{0,1\}$. The discretized
+mission is therefore a finite optimization problem on
+$\mathcal G=(\mathcal V,\mathcal E)$, where $\mathcal E$ contains only
+feasible transfers.
+
+Let $\Sigma_{L_{\max}}$ be the set of all ordered candidate sequences of
+length at most $L_{\max}$ that start from the initial node $z_0$ and use only
+feasible edges. For
+$\sigma=(z_{\sigma_1},\ldots,z_{\sigma_L})$, define
+\begin{align}
+  c_i(\sigma) &=
+  \mathbf{1}\{i\in\cup_{\ell=1}^{L}\Gamma_{\sigma_\ell}\},\\
+  J_{\mathrm{disc}}(\sigma) &=
+  \sum_{\ell=1}^{L}\ell_{\sigma_{\ell-1},\sigma_\ell}.
+  \label{eq:finite-mip-objective}
+\end{align}
+The exact finite inspection problem is
+\begin{equation}
+  \begin{aligned}
+  \sigma^\star=\arg\min_{\sigma\in\Sigma_{L_{\max}}}\quad
+  & J_{\mathrm{disc}}(\sigma)\\
+  \mathrm{s.t.}\quad
+  & \sum_{i=1}^{N}w_i c_i(\sigma)
+  \ge C_{\mathrm{req}}\sum_{i=1}^{N}w_i .
+  \end{aligned}
+\end{equation}
+This sequence problem can be encoded as a mixed-integer program with
+stage-selection and edge-consistency variables. In the implementation, the
+certified mode solves it directly by dynamic programming. A state is
+$(B,j)$, where $B\subseteq\mathcal V$ is the selected-view set and $j$ is the
+last selected view. The value $D(B,j)$ stores the minimum HCW dynamic cost of
+any feasible sequence that visits exactly $B$ and terminates at $j$. The
+recursion is
+\begin{equation}
+  D(B\cup\{k\},k)=
+  \min_{j\in B,\ \eta_{jk}=1}
+  \left[D(B,j)+\ell_{jk}\right],
+\end{equation}
+with initialization from the initial spacecraft state. The solver returns the
+lowest-cost state whose accumulated weighted coverage satisfies the required
+ratio before the view budget is exceeded. If all reachable states within the
+budget are expanded before the time and expansion limits are reached, the
+returned sequence is certified optimal on the reduced graph.
+
+\begin{theorem}[Global optimality on the discretized mission graph]
+For a fixed finite candidate set $\mathcal V$, fixed visibility sets
+$\Gamma_j$, fixed edge costs $\ell_{ab}$, fixed feasibility indicators
+$\eta_{ab}$, required weighted coverage $C_{\mathrm{req}}$, and finite horizon
+$L_{\max}$, the dynamic-programming solver described above returns a minimum
+cost feasible inspection sequence for the discretized mission graph whenever
+it terminates after expanding all reachable states within the horizon.
+\end{theorem}
+
+\begin{IEEEproof}[Sketch]
+The sequence set $\Sigma_{L_{\max}}$ is finite because both the candidate set
+and maximum sequence length are finite. Removing dynamically infeasible edges
+only reduces this set. The objective assigns a finite scalar value to every
+feasible sequence, and the coverage constraint selects a finite subset of
+those sequences. If that subset is nonempty, a minimum is attained. The dynamic
+program stores the minimum cost for every reachable pair $(B,j)$ by Bellman's
+principle of optimality: any optimal sequence ending at $j$ through selected
+set $B$ must contain an optimal predecessor sequence ending at some
+$a\in B\setminus\{j\}$. Exhausting all reachable states of cardinality
+$\le L_{\max}$ therefore evaluates every feasible ordered sequence up to
+duplicate prefixes represented by the same state. Taking the least-cost state
+that satisfies the weighted coverage constraint gives the global optimum on
+the discretized graph.
+\end{IEEEproof}
+
+The theorem is deliberately discrete. It does not claim global optimality for
+the original continuous viewpoint space, nor does it claim that the scalable
+solver used in the full ISS benchmark is globally optimal. Rather, it
+identifies the finite problem for which a certificate is meaningful. In the
+reported certification smoke case, the exact solver uses 8 candidate nodes and
+13 visible target IDs, expands 39 feasible states, selects two views, reaches
+the required 25\% coverage, and returns certificate status ``optimal''. The
+same candidate graph can therefore support a fast solver for large studies and
+an exact solver for smaller certification cases.
+
+\subsection{Planner Outputs}
 
 The planner outputs a timestamped reference trajectory
 \begin{equation}
   \mathcal{P} =
   \{(t_k,r_k^{\mathrm{ref}},v_k^{\mathrm{ref}},u_k^{\mathrm{ref}})\}_{k=0}^{K}.
 \end{equation}
-For the reported set-cover CW tour run, $\mathcal{P}$ contains 920 trajectory
-samples over 1840~s with an 80~s transfer duration and 2~s integration step.
-The trajectory and attitude stream are subsequently available to the ROS stack
-for replay, logging, RViz inspection, and Gazebo visualization.
+For the reported proposed tour, $\mathcal{P}$ contains 945 trajectory samples
+over 1890~s with a 90~s transfer duration and 2~s integration step. The
+corresponding attitude stream also contains 945 samples. The trajectory and
+attitude stream are subsequently available to the ROS stack for replay,
+logging, RViz inspection, and Gazebo visualization. In the paper, these outputs
+are algorithmic outputs; ROS and Gazebo form the verification environment.

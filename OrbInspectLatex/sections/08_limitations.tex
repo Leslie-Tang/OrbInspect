@@ -1,72 +1,50 @@
 \section{Discussion and Limitations}
 \label{sec:discussion}
 
-The updated results change the interpretation of OrbInspect from a preliminary
-proxy-geometry demonstration to a mesh-aware high-coverage planning baseline.
-The proposed set-cover CW tour reaches 98.33\% coverage with positive
-clearance and the lowest $\Delta v$ among feasible methods that achieve the
-same coverage. The comparison also clarifies why dynamics must be included in
-view planning: the pure coverage-greedy method achieves the same coverage but
-is infeasible because it violates the keep-out envelope. Coverage alone is
-therefore not an adequate objective for orbital inspection.
+The main result is that coverage and orbital feasibility cannot be separated
+without changing the mission outcome. In the reported benchmark, the
+proposed dynamics-aware tour reaches 98.33\% coverage with positive
+clearance, the lowest $\Delta v$ among feasible methods that reach the
+high-coverage stop target, and a comparatively low peak requested input. The
+coverage-greedy method reaches the same coverage but requires acceleration
+beyond the admissible input limit, while nearest and random-safe selection
+also become infeasible because of clearance or input violations. Coverage
+alone is therefore not an adequate objective for orbital inspection.
 
-The proposed method is not universally optimal across every metric. The
-nearest-NBV baseline records a larger minimum clearance, and the proposed safe
-CW NBV method uses fewer selected viewpoints. However, both require more
-$\Delta v$ than the set-cover CW tour. This indicates that the current
-weighted set-cover stage and CW tour ordering are effective for the chosen
-mesh benchmark, but the weight settings should be studied across additional
-geometries, initial states, target densities, and safety margins.
+The sensitivity matrix strengthens this conclusion but also shows its
+boundary. The proposed planner remains feasible under the $N=500$ target
+density, three tested initial states, candidate strides from 1 to 3, and
+keep-out margins from 1 to 4~m. However, the coarser $N=1000$ stress case
+falls below the 98\% stop target because candidate density was reduced for
+runtime, and the 70~s transfer-duration case violates the input limit. Thus,
+the method is not simply ``robust'' in an unqualified sense. It is robust over
+the completed moderate sweeps, but high-density mesh coverage requires better
+candidate generation, visibility acceleration, or a larger view budget.
 
-The mesh benchmark still uses a downsampled line-of-sight representation for
-occlusion checking. This is appropriate for a reproducible paper baseline, but
-a flight-oriented planner would need higher-fidelity geometry acceleration,
-uncertainty-inflated keep-out volumes, camera slew limits, illumination
-constraints, state-estimation error, plume constraints, and actuator
-saturation studies. The reported RMS transfer tracking error is also a
-planner-side rollout metric rather than a closed-loop flight validation error.
+The benchmark still uses a downsampled line-of-sight representation for
+occlusion checking and a CW/HCW translational model. These choices are
+appropriate for a reproducible algorithmic baseline, but the validation
+matrix shows that dense target sets quickly make line-of-sight and transfer
+evaluation expensive. A flight-oriented planner would require accelerated
+mesh queries, uncertainty-inflated keep-out volumes, camera slew limits,
+illumination constraints, state-estimation error, plume constraints, and
+actuator saturation studies. The reported RMS transfer tracking error is also
+a planner-side rollout metric rather than a closed-loop flight validation
+error.
+
+The optimality statement is similarly bounded. The implemented dynamic program
+certifies the minimum-cost sequence only on the fixed reduced candidate graph
+whose reachable states are fully expanded. The reported high-coverage ISS
+experiment uses a scalable deterministic solver on the same graph model, so
+its evidence is empirical rather than a global certificate for the full graph
+or for the original continuous viewpoint space. This split is intentional: the
+reduced case verifies the optimization statement, whereas the full benchmark
+tests whether the same dynamics-aware modeling choices remain useful at ISS
+mesh scale.
 
 Gazebo validation should be interpreted conservatively. The videos and frames
 verify that the visual model, chaser model, camera view, and pose-following
 interfaces work in the integrated stack. They do not validate orbital
-mechanics, prove coverage, or certify collision avoidance. In OrbInspect,
-those quantitative claims come from the HCW dynamics, coverage, trajectory,
-attitude, safety, and planner logs.
-
-\subsection{Self-Contained Artifact Inventory}
-
-All cited figures and data are contained in the paper folder. The key local
-artifacts are listed in Table~\ref{tab:artifact-inventory}.
-
-\begin{table}[t]
-  \centering
-  \caption{Self-contained manuscript artifacts.}
-  \label{tab:artifact-inventory}
-  \begin{tabular}{p{0.30\linewidth}p{0.56\linewidth}}
-    \toprule
-    Local artifact & Contents \\
-    \midrule
-    High-coverage figures &
-    Mesh-overlaid trajectory, coverage, $\Delta v$, efficiency, and safety
-    comparison figures. \\
-    ISS mesh figures &
-    High-resolution NASA ISS mesh preview in PDF, PNG, and SVG form. \\
-    ISS mesh model &
-    Copied NASA ISS GLB used to regenerate the mesh-overlaid trajectory
-    figures. \\
-    High-coverage data &
-    Summary files, config snapshot, and raw comparison, planner, viewpoint,
-    attitude, trajectory, and coverage CSV files. \\
-    Gazebo figures &
-    Gazebo preview frames and ROS smoke-run trajectory/control figures. \\
-    ROS smoke data &
-    Summary files, experiment manifest, config snapshots, and raw ROS
-    execution CSV files. \\
-    Legacy offline data &
-    Earlier proxy and mesh single-run planner artifacts retained for
-    traceability. \\
-    Video data &
-    Gazebo validation videos and preview frames. \\
-    \bottomrule
-  \end{tabular}
-\end{table}
+mechanics, prove coverage, or certify collision avoidance. Those quantitative
+claims come from the HCW dynamics, coverage, trajectory, attitude, safety, and
+planner logs.

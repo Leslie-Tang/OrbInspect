@@ -1,38 +1,104 @@
 \section{Related Work}
 \label{sec:related}
 
-Orbital inspection draws on three bodies of literature: relative spacecraft
-motion, robotic view planning, and middleware-supported simulation. The
-Clohessy--Wiltshire equations remain a common starting point for rendezvous
-and proximity operations near a circular chief orbit because they provide a
-linear, interpretable model of relative translation \cite{clohessy1960terminal}.
+Orbital inspection draws on relative spacecraft motion, robotic view planning,
+and orbit-design methods for complex structures. The Clohessy--Wiltshire
+equations remain a common starting point for rendezvous and proximity
+operations near a circular chief orbit because they provide a linear,
+interpretable model of relative translation \cite{clohessy1960terminal}.
 Although high-fidelity perturbation models are required for flight design, a
-CW/HCW baseline is appropriate for early algorithmic comparisons because it
-makes assumptions explicit and permits repeatable propagation, control, and
-transfer-cost calculations \cite{wertz2011space}.
+CW/HCW model is appropriate for the planning question studied here: how view
+ordering affects fuel use, clearance, and input demand under a fixed relative
+dynamics model \cite{wertz2011space}.
 
 Robotic inspection and next-best-view planning study how a robot should select
 sensor poses that reconstruct or inspect an object efficiently. Classical
 surveys emphasize visibility, occlusion, sensor range, view quality, and the
-trade-off between coverage and motion cost \cite{scott2003view}. Orbital
-inspection adds constraints that are less prominent in terrestrial settings:
-viewpoints must be dynamically reachable under relative orbital motion, safety
-margins must be maintained around delicate structure, and fuel consumption is a
-primary mission metric. This motivates planners that do not choose views solely
-by information gain, but also by transfer feasibility and clearance.
+trade-off between coverage and motion cost \cite{scott2003view}. Kinodynamic
+sampling-based planners, including rapidly exploring random trees and their
+optimal variants, explicitly combine dynamics and collision constraints during
+motion planning \cite{lavalle1998rapidly,karaman2011sampling}. Their strength
+is continuous-state reachability, whereas coverage is usually encoded through
+task-specific rewards, terminal goals, or repeated replanning rather than as a
+finite weighted dwell-coverage objective over a spacecraft surface.
+
+Recent spacecraft-inspection studies illustrate the same tension from
+different directions. Apodaca et al. couple viewpoint planning with trajectory
+generation for in-orbit structure inspection and emphasize coverage-energy
+trade-offs in a supervised planning pipeline \cite{apodaca2025trajectory}.
+Hou et al. design relative orbits for visual inspection of the China Space
+Station and analyze field-of-view and occlusion feasibility through orbital
+geometry \cite{hou2024relative}. Zhou et al. plan tomographic inspection paths
+around complex spacecraft structures with surface-aware obstacle avoidance
+\cite{zhou2026tomographic}. Ogri et al. address a complementary online
+problem: image-based feature tracking, information gain, and dwell-time
+conditions for autonomous inspection under switched systems
+\cite{ogri2025switched}. The present work is positioned between these lines:
+it does not introduce a new orbital dynamics model, a flight-certified
+collision-avoidance controller, or a globally optimal continuous planner.
+Its contribution is the offline finite candidate-graph problem and solver in
+which surface coverage, camera feasibility, HCW transfer effort, clearance,
+and input saturation are evaluated before the inspection tour is accepted.
+
+\begin{table*}[t]
+  \centering
+  \caption{Positioning relative to closely related inspection and planning
+  approaches.}
+  \label{tab:positioning}
+  \renewcommand{\arraystretch}{1.08}
+  \setlength{\tabcolsep}{4.0pt}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{0.18\textwidth}>{\RaggedRight\arraybackslash}p{0.36\textwidth}>{\RaggedRight\arraybackslash}X@{}}
+    \toprule
+    Approach & Primary emphasis & Difference from this work \\
+    \midrule
+    Robotic NBV surveys~\cite{scott2003view} &
+    geometric surface or volume coverage with sensor-pose sampling &
+    motion cost is usually geometric or platform-specific rather than an
+    HCW-feasible orbital edge cost \\
+    Kinodynamic sampling~\cite{lavalle1998rapidly,karaman2011sampling} &
+    continuous-state motion planning with dynamics and collision constraints &
+    coverage is typically task-reward driven rather than a finite weighted
+    dwell-coverage graph over spacecraft surface targets \\
+    Apodaca et al.~\cite{apodaca2025trajectory} &
+    inspection coverage and energy trade-off for in-orbit structures &
+    does not state an exact finite candidate-graph certificate for the
+    discretized coverage-transfer problem \\
+    Hou et al.~\cite{hou2024relative} &
+    relative-orbit design for visual inspection with FOV and occlusion checks &
+    optimizes orbit geometry rather than selecting a coverage tour from
+    camera-feasible candidate views \\
+    Zhou et al.~\cite{zhou2026tomographic} &
+    tomographic inspection paths around complex spacecraft structures &
+    targets scan-path planning rather than HCW-feasible dwell-view sequencing
+    with input auditing \\
+    Ogri et al.~\cite{ogri2025switched} &
+    online feature tracking, information gain, and switched-system execution &
+    addresses execution-level camera control rather than offline finite-graph
+    coverage planning \\
+    This work &
+    weighted surface dwell coverage on a mesh-normal candidate graph &
+    couples camera feasibility with CW/HCW edge rollouts, input limits,
+    clearance, reduced-graph DP certification, and ROS~2/Gazebo replay \\
+    \bottomrule
+  \end{tabularx}
+\end{table*}
+
+Table~\ref{tab:positioning} clarifies what is gained and lost by the finite
+candidate-view graph. The gain is a common discrete object on which coverage,
+camera feasibility, edge feasibility, clearance, input limits, and exact
+finite-graph certification can be stated simultaneously. The cost is that
+optimality is conditional on the sampled candidate set and precomputed
+feasible-transfer graph; the approach does not provide global optimality in the
+continuous viewpoint space, nor does it replace kinodynamic planning when a
+mission requires continuous online obstacle avoidance. The safety statement is
+therefore planning-level feasibility filtering on logged HCW rollouts, not a
+flight safety certificate.
 
 Simulation frameworks for space robotics must also be treated carefully. A
-rendered Gazebo scene can show useful visual context, but standard rigid-body
-physics in a robotics simulator is not a substitute for an orbital relative
-dynamics model. OrbInspect therefore uses Gazebo Harmonic for visualization of
-the ISS model and chaser while the ROS~2 dynamics node publishes the chaser
-state used by planning, control, safety, and logging. This separation follows
-the philosophy that numerical claims should come from logged planning and
-execution data, while visualization should support interpretation and
-interface validation.
-
-The closest methodological position of this work is therefore not a single
-new optimizer in isolation, but an integrated, reproducible evaluation stack:
-coverage-aware viewpoint planning, CW-feasible trajectory generation, safety
-monitoring, ROS~2 execution, and Gazebo visualization are connected through
-recorded artifacts that can be audited after each run.
+rendered Gazebo scene can provide visual context and reveal integration errors
+in camera geometry, but standard rigid-body physics in a robotics simulator is
+not a substitute for orbital relative dynamics. We therefore use Gazebo
+Harmonic for station and chaser visualization while the ROS~2 dynamics node
+publishes the state used by replay, safety checks, camera-frustum
+verification, and logging. This separation makes the validation repeatable
+without allowing simulator physics to define the scientific result.

@@ -1,29 +1,56 @@
 \begin{algorithm}[t]
-\caption{Dynamics-aware set-cover CW inspection planner}
+\caption{Dynamics-aware finite-graph inspection planner}
 \label{alg:offline-planner}
 \begin{algorithmic}[1]
-\Require Station mesh $\mathcal{S}$, initial state $x_0$, camera model,
+\Require Structure geometry $\mathcal{S}$, initial state $x_0$, camera model,
 $d_{\mathrm{safe}}$, $C_{\mathrm{req}}$, $C_{\mathrm{stop}}$
-\Ensure Planned trajectory $\mathcal{P}$ and inspection metrics
+\Ensure Planned trajectory $\mathcal{P}$, attitude stream, and inspection metrics
 \State Sample area-weighted mesh targets
 $\mathcal{T}=\{(p_i,n_i,A_i)\}_{i=1}^N$
-\State Generate candidate viewpoints $\mathcal{V}=\{z_j\}_{j=1}^M$
+\State Generate candidate views $\mathcal{V}=\{z_j\}_{j=1}^M$
 \State Reject unsafe candidates and compute visibility matrix
 $A\in\{0,1\}^{N\times M}$
 \State Initialize covered set $\mathcal{C}\gets\emptyset$, selected list
 $\mathcal{V}^{\star}\gets\emptyset$, and predicted state $x\gets x_0$
-\While{$C(\mathcal{C})<C_{\mathrm{stop}}$ and the viewpoint budget is not exhausted}
-  \State Roll out candidate CW transfers from $x$ and compute
-  $\Delta A_j$ and $J_{\mathrm{CW}}(x,z_j)$
+\While{$C(\mathcal{C})<C_{\mathrm{stop}}$ and the view budget is not exhausted}
+  \State Solve rest-to-rest terminal HCW transfer edges from $x$ to candidate
+  positions $z_j$ and reject edges violating terminal position error,
+  terminal speed, input, speed, or clearance limits
+  \State Compute $\Delta A_j$ and $J_{\mathrm{CW}}(x,z_j)$ for feasible
+  candidates
   \State Select $z^\star=\arg\max_j
   \Delta A_j/(1+J_{\mathrm{CW}}(x,z_j))+w_m d_{\min}$
   \State Append $z^\star$ to $\mathcal{V}^{\star}$
-  \State Update $x$ using the terminal state of the transfer
+  \State Update $x$ using the terminal state of the selected transfer
   \State Update covered set $\mathcal{C}$ from the candidate visibility vector
 \EndWhile
-\State Reorder $\mathcal{V}^{\star}$ greedily using CW-transfer dynamic costs
+\State Order $\mathcal{V}^{\star}$ using CW-transfer dynamic costs
 \State Simulate ordered trajectory and compute coverage, attitude, and safety
-\State Save trajectory, selected viewpoints, attitudes, visibility, and metrics
+\State Save trajectory, selected views, attitudes, visibility, and metrics
 \State \Return $\mathcal{P}$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[t]
+\caption{Certified reduced-graph dynamic program}
+\label{alg:certified-dp}
+\begin{algorithmic}[1]
+\Require Candidate graph $\mathcal G$, visibility sets $\Gamma_j$, edge costs
+$\ell_{jk}$, feasibility flags $\eta_{jk}$, $C_{\mathrm{req}}$, $L_{\max}$
+\Ensure Minimum-cost feasible sequence on the reduced graph, or no certificate
+\State Precompute target masks for all candidate views
+\State Initialize $D(\emptyset,s)\gets0$ at the initial spacecraft state $s$
+\For{$\ell=0,\ldots,L_{\max}-1$}
+  \ForAll{reachable states $(B,j)$ with $|B|=\ell$}
+    \ForAll{$k\notin B$ with $\eta_{jk}=1$ and new visible targets}
+      \State $B^+\gets B\cup\{k\}$
+      \State $D(B^+,k)\gets\min\{D(B^+,k),D(B,j)+\ell_{jk}\}$
+      \State Store predecessor if the value improves
+    \EndFor
+  \EndFor
+\EndFor
+\State Select the least-cost state whose weighted coverage exceeds
+$C_{\mathrm{req}}$
+\State Reconstruct the predecessor chain and report certificate status
 \end{algorithmic}
 \end{algorithm}

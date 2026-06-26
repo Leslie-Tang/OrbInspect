@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1250" viewBox="0 0 1800 1250" role="img" aria-labelledby="title desc">
+<title id="title">ROS RViz Gazebo execution and visual-geometry verification workflow</title>
+<desc id="desc">Editable vector academic schematic generated from the requested figure concept.</desc>
+<defs>
+  <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f5fbf"/></marker>
+  <marker id="arrow-gray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6f747a"/></marker>
+  <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d32f2f"/></marker>
+  <marker id="arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d98200"/></marker>
+  <style>
+    .panel { fill: #fff; stroke: #1f5fbf; stroke-width: 1.6; rx: 14; }
+    .panel-green { fill: #fff; stroke: #2e7d32; stroke-width: 1.6; rx: 14; }
+    .panel-gray { fill: #fff; stroke: #9aa3ad; stroke-width: 1.3; rx: 12; }
+    .title { font-family: Arial, Helvetica, sans-serif; font-size: 25px; font-weight: 700; fill: #0d2f6f; }
+    .title-green { font-family: Arial, Helvetica, sans-serif; font-size: 25px; font-weight: 700; fill: #0d5b25; }
+    .label { font-family: Arial, Helvetica, sans-serif; font-size: 17px; fill: #111111; }
+    .small { font-family: Arial, Helvetica, sans-serif; font-size: 13px; fill: #3f444a; }
+    .tiny { font-family: Arial, Helvetica, sans-serif; font-size: 11px; fill: #3f444a; }
+    .letter { font-family: Arial, Helvetica, sans-serif; font-size: 43px; font-weight: 800; fill: #0d2f6f; }
+    .letter-green { font-family: Arial, Helvetica, sans-serif; font-size: 43px; font-weight: 800; fill: #0d5b25; }
+    .caption { font-family: Georgia, 'Times New Roman', serif; font-size: 18px; font-style: italic; fill: #111111; }
+    .box { fill: #f8fbff; stroke: #1f5fbf; stroke-width: 1.4; rx: 8; }
+    .greenbox { fill: #dff2e1; stroke: #43a047; stroke-width: 1.4; rx: 8; }
+    .amberbox { fill: #fff2d6; stroke: #d98200; stroke-width: 1.4; rx: 8; }
+    .redbox { fill: #fde6e6; stroke: #d32f2f; stroke-width: 1.3; stroke-dasharray: 6 4; rx: 8; }
+    .node { fill: #1f5fbf; stroke: #fff; stroke-width: 1.5; }
+    .axis { stroke: #111; stroke-width: 2; marker-end: url(#arrow-gray); }
+    .blue-line { stroke: #1f5fbf; stroke-width: 2.4; fill: none; marker-end: url(#arrow-blue); }
+    .gray-line { stroke: #6f747a; stroke-width: 1.8; fill: none; marker-end: url(#arrow-gray); }
+    .red-line { stroke: #d32f2f; stroke-width: 2.2; fill: none; stroke-dasharray: 8 6; marker-end: url(#arrow-red); }
+    .amber-line { stroke: #d98200; stroke-width: 2.2; fill: none; marker-end: url(#arrow-amber); }
+    .dash-blue { stroke: #5b8fd8; stroke-width: 1.4; fill: none; stroke-dasharray: 6 5; }
+    .dash-gray { stroke: #adb5bd; stroke-width: 1.2; fill: none; stroke-dasharray: 6 4; }
+    .mesh { fill: #d9dde2; stroke: #707780; stroke-width: 1.0; }
+    .mesh-line { stroke: #8b929a; stroke-width: .8; fill: none; }
+  </style>
+</defs>
+<rect width="100%" height="100%" fill="#fff"/>
+<rect x="10" y="10" width="1780" height="480" class="panel"/>
+<text x="28" y="55" class="letter" text-anchor="start">A</text>
+<text x="92" y="48" class="title" text-anchor="start">Data flow: ROS verification pipeline</text>
+<rect x="45" y="90" width="270" height="170" class="box"/>
+<text x="180" y="125" class="label" text-anchor="middle">Offline planner outputs</text>
+<line x1="70" y1="220" x2="140" y2="175" stroke="#1f5fbf" stroke-width="2" fill="none"/><polyline points="70,220 100,185 130,205 165,160 200,175" fill="none" stroke="#1f5fbf" stroke-width="2"/>
+<text x="190" y="190" class="small" text-anchor="start"><tspan x="190" dy="0">Trajectory reference</tspan><tspan x="190" dy="18">rₖ, vₖ in LVLH</tspan></text>
+<rect x="45" y="285" width="270" height="145" class="box"/>
+<text x="180" y="322" class="label" text-anchor="middle"><tspan x="180" dy="0">Attitude reference</tspan><tspan x="180" dy="18">qₖ, ωₖ camera</tspan></text>
+<g transform="translate(90,365) rotate(-20) scale(0.52)">
+  <path d="M0,0 L90,-36 L90,36 Z" fill="#1f5fbf" fill-opacity="0.10" stroke="#1f5fbf" stroke-width="1.8"/>
+  <line x1="0" y1="0" x2="90" y2="0" stroke="#1f5fbf" stroke-width="1.2" stroke-dasharray="5 4"/>
+</g>
+<g transform="translate(150,365) rotate(0) scale(0.52)">
+  <path d="M0,0 L90,-36 L90,36 Z" fill="#1f5fbf" fill-opacity="0.10" stroke="#1f5fbf" stroke-width="1.8"/>
+  <line x1="0" y1="0" x2="90" y2="0" stroke="#1f5fbf" stroke-width="1.2" stroke-dasharray="5 4"/>
+</g>
+<g transform="translate(210,365) rotate(20) scale(0.52)">
+  <path d="M0,0 L90,-36 L90,36 Z" fill="#1f5fbf" fill-opacity="0.10" stroke="#1f5fbf" stroke-width="1.8"/>
+  <line x1="0" y1="0" x2="90" y2="0" stroke="#1f5fbf" stroke-width="1.2" stroke-dasharray="5 4"/>
+</g>
+<rect x="450" y="70" width="340" height="125" class="panel-gray"/>
+<text x="620" y="105" class="label" text-anchor="middle">HCW dynamics state stream</text>
+<text x="620" y="136" class="small" text-anchor="middle">source of spacecraft state</text>
+<text x="620" y="168" class="small" text-anchor="middle">ẋ = A x + B u     xₖ=[x y z ẋ ẏ ż]ᵀ</text>
+<rect x="420" y="235" width="340" height="190" class="box"/>
+<text x="590" y="270" class="label" text-anchor="middle">ROS replay / tracking node</text>
+<text x="590" y="300" class="small" text-anchor="middle">reference tracker</text>
+<rect x="490" y="305" width="200" height="34" class="panel-gray"/>
+<text x="590" y="327" class="tiny" text-anchor="middle">load trajectory + attitude</text>
+<rect x="490" y="345" width="200" height="34" class="panel-gray"/>
+<text x="590" y="367" class="tiny" text-anchor="middle">time synchronization</text>
+<rect x="490" y="385" width="200" height="34" class="panel-gray"/>
+<text x="590" y="407" class="tiny" text-anchor="middle">publish markers + logs</text>
+<path d="M315,175 L420,300" class="blue-line"/>
+<path d="M315,360 L420,340" class="blue-line"/>
+<path d="M620,195 L620,235" class="gray-line"/>
+<text x="640" y="218" class="small" text-anchor="start">/state (HCW)</text>
+<rect x="815" y="235" width="170" height="190" class="box"/>
+<text x="900" y="265" class="small" text-anchor="middle">Published topics</text>
+<text x="835" y="295" class="tiny" text-anchor="start">/pose</text>
+<text x="835" y="312" class="tiny" text-anchor="start">/path</text>
+<text x="835" y="329" class="tiny" text-anchor="start">/attitude</text>
+<text x="835" y="346" class="tiny" text-anchor="start">/camera_frustum</text>
+<text x="835" y="363" class="tiny" text-anchor="start">/visible_targets</text>
+<text x="835" y="380" class="tiny" text-anchor="start">/clearance</text>
+<text x="835" y="397" class="tiny" text-anchor="start">/inputs</text>
+<text x="835" y="414" class="tiny" text-anchor="start">/tf</text>
+<path d="M760,330 L815,330" class="blue-line"/>
+<rect x="1060" y="70" width="380" height="165" class="box"/>
+<text x="1250" y="105" class="label" text-anchor="middle">RViz verification view</text>
+<g opacity="0.7">
+<rect x="1137.0" y="162.44" width="96.0" height="5.12" class="mesh"/>
+<path d="M1141.8,162.44 L1148.2,167.56 M1141.8,167.56 L1148.2,162.44" class="mesh-line"/>
+<path d="M1150.44,162.44 L1156.8400000000001,167.56 M1150.44,167.56 L1156.8400000000001,162.44" class="mesh-line"/>
+<path d="M1159.08,162.44 L1165.48,167.56 M1159.08,167.56 L1165.48,162.44" class="mesh-line"/>
+<path d="M1167.72,162.44 L1174.1200000000001,167.56 M1167.72,167.56 L1174.1200000000001,162.44" class="mesh-line"/>
+<path d="M1176.36,162.44 L1182.76,167.56 M1176.36,167.56 L1182.76,162.44" class="mesh-line"/>
+<path d="M1185.0,162.44 L1191.4,167.56 M1185.0,167.56 L1191.4,162.44" class="mesh-line"/>
+<path d="M1193.64,162.44 L1200.0400000000002,167.56 M1193.64,167.56 L1200.0400000000002,162.44" class="mesh-line"/>
+<path d="M1202.28,162.44 L1208.68,167.56 M1202.28,167.56 L1208.68,162.44" class="mesh-line"/>
+<path d="M1210.92,162.44 L1217.3200000000002,167.56 M1210.92,167.56 L1217.3200000000002,162.44" class="mesh-line"/>
+<path d="M1219.56,162.44 L1225.96,167.56 M1219.56,167.56 L1225.96,162.44" class="mesh-line"/>
+<path d="M1228.2,162.44 L1234.6000000000001,167.56 M1228.2,167.56 L1234.6000000000001,162.44" class="mesh-line"/>
+<rect x="1173.8" y="153.8" width="22.400000000000002" height="22.400000000000002" rx="2.56" fill="#dfe3e8" stroke="#676d74" stroke-width="0.384"/>
+<line x1="1175.4" y1="165.0" x2="1194.6" y2="165.0" class="mesh-line"/>
+<rect x="1189.8" y="137.8" width="10.88" height="19.84" rx="2.56" fill="#dfe3e8" stroke="#676d74" stroke-width="0.384"/>
+<line x1="1191.4" y1="147.72" x2="1199.08" y2="147.72" class="mesh-line"/>
+<rect x="1177.0" y="179.4" width="16.0" height="10.88" rx="2.56" fill="#dfe3e8" stroke="#676d74" stroke-width="0.384"/>
+<line x1="1178.6" y1="184.84" x2="1191.4" y2="184.84" class="mesh-line"/>
+<rect x="1205.8" y="157.0" width="15.36" height="16.0" rx="2.56" fill="#dfe3e8" stroke="#676d74" stroke-width="0.384"/>
+<line x1="1207.4" y1="165.0" x2="1219.56" y2="165.0" class="mesh-line"/>
+<rect x="1151.4" y="157.96" width="14.72" height="14.08" rx="2.56" fill="#dfe3e8" stroke="#676d74" stroke-width="0.384"/>
+<line x1="1153.0" y1="165.0" x2="1164.52" y2="165.0" class="mesh-line"/>
+<rect x="1117.8" y="146.44" width="19.2" height="36.800000000000004" fill="#c9ced6" stroke="#626b73" stroke-width="0.32"/>
+<line x1="1117.8" y1="155.4" x2="1137.0" y2="155.4" class="mesh-line"/>
+<line x1="1117.8" y1="164.36" x2="1137.0" y2="164.36" class="mesh-line"/>
+<line x1="1117.8" y1="173.32" x2="1137.0" y2="173.32" class="mesh-line"/>
+<rect x="1095.3999999999999" y="146.44" width="19.2" height="36.800000000000004" fill="#c9ced6" stroke="#626b73" stroke-width="0.32"/>
+<line x1="1095.3999999999999" y1="155.4" x2="1114.6" y2="155.4" class="mesh-line"/>
+<line x1="1095.3999999999999" y1="164.36" x2="1114.6" y2="164.36" class="mesh-line"/>
+<line x1="1095.3999999999999" y1="173.32" x2="1114.6" y2="173.32" class="mesh-line"/>
+<rect x="1233.0" y="146.44" width="19.2" height="36.800000000000004" fill="#c9ced6" stroke="#626b73" stroke-width="0.32"/>
+<line x1="1233.0" y1="155.4" x2="1252.2" y2="155.4" class="mesh-line"/>
+<line x1="1233.0" y1="164.36" x2="1252.2" y2="164.36" class="mesh-line"/>
+<line x1="1233.0" y1="173.32" x2="1252.2" y2="173.32" class="mesh-line"/>
+<rect x="1255.4" y="146.44" width="19.2" height="36.800000000000004" fill="#c9ced6" stroke="#626b73" stroke-width="0.32"/>
+<line x1="1255.4" y1="155.4" x2="1274.6000000000001" y2="155.4" class="mesh-line"/>
+<line x1="1255.4" y1="164.36" x2="1274.6000000000001" y2="164.36" class="mesh-line"/>
+<line x1="1255.4" y1="173.32" x2="1274.6000000000001" y2="173.32" class="mesh-line"/>
+</g>
+<g transform="translate(1305,165) rotate(0) scale(0.55)">
+  <path d="M0,0 L90,-36 L90,36 Z" fill="#1f5fbf" fill-opacity="0.10" stroke="#1f5fbf" stroke-width="1.8"/>
+  <line x1="0" y1="0" x2="90" y2="0" stroke="#1f5fbf" stroke-width="1.2" stroke-dasharray="5 4"/>
+</g>
+<circle cx="1340" cy="130" r="5" fill="#43a047" stroke="#444"/>
+<circle cx="1370" cy="160" r="5" fill="#f4c542" stroke="#444"/>
+<circle cx="1350" cy="190" r="5" fill="#43a047" stroke="#444"/>
+<text x="1165" y="225" class="tiny" text-anchor="middle"><tspan x="1165" dy="0">pose/path</tspan><tspan x="1165" dy="18">station mesh</tspan><tspan x="1165" dy="18">FOV markers</tspan></text>
+<rect x="1035" y="275" width="430" height="165" class="amberbox"/>
+<text x="1250" y="310" class="label" text-anchor="middle">Gazebo visual replay only</text>
+<g opacity="0.65">
+<rect x="1142.0" y="372.44" width="96.0" height="5.12" class="mesh"/>
+<path d="M1146.8,372.44 L1153.2,377.56 M1146.8,377.56 L1153.2,372.44" class="mesh-line"/>
+<path d="M1155.44,372.44 L1161.8400000000001,377.56 M1155.44,377.56 L1161.8400000000001,372.44" class="mesh-line"/>
+<path d="M1164.08,372.44 L1170.48,377.56 M1164.08,377.56 L1170.48,372.44" class="mesh-line"/>
+<path d="M1172.72,372.44 L1179.1200000000001,377.56 M1172.72,377.56 L1179.1200000000001,372.44" class="mesh-line"/>
+<path d="M1181.36,372.44 L1187.76,377.56 M1181.36,377.56 L1187.76,372.44" class="mesh-line"/>
+<path d="M1190.0,372.44 L1196.4,377.56 M1190.0,377.56 L1196.4,372.44" class="mesh-line"/>
+<path d="M1198.64,372.44 L1205.0400000000002,377.56 M1198.64,377.56 L1205.0400000000002,372.44" class="mesh-line"/>
+<path d="M1207.28,372.44 L1213.68,377.56 M1207.28,377.56 L1213.68,372.44" class="mesh-line"/>
+<path d="M1215.92,372.44 L1222.3200000000002,377.56 M1215.92,377.56 L1222.3200000000002,372.44" class="mesh-line"/>
+<path d="M1224.56,372.44 L1230.96,377.56 M1224.56,377.56 L1230.96,372.44" class="mesh-line"/>
+<path d="M1233.2,372.44 L1239.6000000000001,377.56 M1233.2,377.56 L1239.6000000000001,372.44" class="mesh-line"/>
+<rect x="1178.8" y="363.8" width="22.400000000000002" height="22.400000000000002" rx="2.56" fill="#dfe3e8" stroke="#676d74" stroke-width="0.384"/>
+<line x1="1180.4" y1="375.0" x2="1199.6" y2="375.0" class="mesh-line"/>
+<rect x="1194.8" y="347.8" width="10.88" height="19.84" rx="2.56" fill="#dfe3e8" stroke="#676d74" stroke-width="0.384"/>
+<line x1="1196.4" y1="357.72" x2="1204.08" y2="357.72" class="mesh-line"/>
+<rect x="1182.0" y="389.4" width="16.0" height="10.88" rx="2.56" fill="#dfe3e8" stroke="#676d74" stroke-width="0.384"/>
+<line x1="1183.6" y1="394.84" x2="1196.4" y2="394.84" class="mesh-line"/>
+<rect x="1210.8" y="367.0" width="15.36" height="16.0" rx="2.56" fill="#dfe3e8" stroke="#676d74" stroke-width="0.384"/>
+<line x1="1212.4" y1="375.0" x2="1224.56" y2="375.0" class="mesh-line"/>
+<rect x="1156.4" y="367.96" width="14.72" height="14.08" rx="2.56" fill="#dfe3e8" stroke="#676d74" stroke-width="0.384"/>
+<line x1="1158.0" y1="375.0" x2="1169.52" y2="375.0" class="mesh-line"/>
+<rect x="1122.8" y="356.44" width="19.2" height="36.800000000000004" fill="#c9ced6" stroke="#626b73" stroke-width="0.32"/>
+<line x1="1122.8" y1="365.4" x2="1142.0" y2="365.4" class="mesh-line"/>
+<line x1="1122.8" y1="374.36" x2="1142.0" y2="374.36" class="mesh-line"/>
+<line x1="1122.8" y1="383.32" x2="1142.0" y2="383.32" class="mesh-line"/>
+<rect x="1100.3999999999999" y="356.44" width="19.2" height="36.800000000000004" fill="#c9ced6" stroke="#626b73" stroke-width="0.32"/>
+<line x1="1100.3999999999999" y1="365.4" x2="1119.6" y2="365.4" class="mesh-line"/>
+<line x1="1100.3999999999999" y1="374.36" x2="1119.6" y2="374.36" class="mesh-line"/>
+<line x1="1100.3999999999999" y1="383.32" x2="1119.6" y2="383.32" class="mesh-line"/>
+<rect x="1238.0" y="356.44" width="19.2" height="36.800000000000004" fill="#c9ced6" stroke="#626b73" stroke-width="0.32"/>
+<line x1="1238.0" y1="365.4" x2="1257.2" y2="365.4" class="mesh-line"/>
+<line x1="1238.0" y1="374.36" x2="1257.2" y2="374.36" class="mesh-line"/>
+<line x1="1238.0" y1="383.32" x2="1257.2" y2="383.32" class="mesh-line"/>
+<rect x="1260.4" y="356.44" width="19.2" height="36.800000000000004" fill="#c9ced6" stroke="#626b73" stroke-width="0.32"/>
+<line x1="1260.4" y1="365.4" x2="1279.6000000000001" y2="365.4" class="mesh-line"/>
+<line x1="1260.4" y1="374.36" x2="1279.6000000000001" y2="374.36" class="mesh-line"/>
+<line x1="1260.4" y1="383.32" x2="1279.6000000000001" y2="383.32" class="mesh-line"/>
+</g>
+<g transform="translate(1310,375) rotate(0) scale(0.55)">
+  <path d="M0,0 L90,-36 L90,36 Z" fill="#1f5fbf" fill-opacity="0.10" stroke="#1f5fbf" stroke-width="1.8"/>
+  <line x1="0" y1="0" x2="90" y2="0" stroke="#1f5fbf" stroke-width="1.2" stroke-dasharray="5 4"/>
+</g>
+<g transform="translate(1090,375) scale(0.5)">
+  <rect x="-13" y="-10" width="26" height="20" rx="2" fill="#d6dbe2" stroke="#444" stroke-width="1.2"/>
+  <rect x="-38" y="-7" width="20" height="14" fill="#9fb9dd" stroke="#315c9c" stroke-width="1"/>
+  <rect x="18" y="-7" width="20" height="14" fill="#9fb9dd" stroke="#315c9c" stroke-width="1"/>
+  <circle cx="0" cy="0" r="3" fill="#1f5fbf"/>
+</g>
+<text x="1250" y="430" class="small" text-anchor="middle">visual replay/context; not a dynamics source</text>
+<path d="M985,310 L1060,155" class="blue-line"/>
+<path d="M985,360 L1035,360" class="amber-line"/>
+<rect x="1540" y="185" width="170" height="155" class="panel-gray"/>
+<text x="1625" y="220" class="label" text-anchor="middle">Logger / rosbag</text>
+<text x="1625" y="250" class="tiny" text-anchor="middle">/tf, /pose</text>
+<text x="1625" y="270" class="tiny" text-anchor="middle">/frustum</text>
+<text x="1625" y="290" class="tiny" text-anchor="middle">/coverage</text>
+<text x="1625" y="310" class="tiny" text-anchor="middle">/clearance, /inputs</text>
+<path d="M1440,150 L1540,220" class="gray-line"/>
+<path d="M1465,360 L1540,290" class="gray-line"/>
+<text x="1250" y="462" class="small" text-anchor="middle">Gazebo provides visual replay/context only; HCW remains the source of state.</text>
+<rect x="10" y="505" width="1780" height="235" class="panel"/>
+<text x="28" y="550" class="letter" text-anchor="start">B</text>
+<text x="92" y="543" class="title" text-anchor="start">Verification checks: automated consistency tests</text>
+<rect x="40" y="565" width="415" height="145" class="greenbox"/>
+<g transform="translate(68,590) scale(0.75)"><circle cx="0" cy="0" r="15" fill="#43a047"/><path d="M-7,-1 L-2,6 L9,-8" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="102" y="592" class="label" text-anchor="start">1) Trajectory sample consistency</text>
+<text x="102" y="620" class="small" text-anchor="start">reference and HCW samples align</text>
+<polyline points="100,675 140,645 185,660 230,628 290,640" fill="none" stroke="#1f5fbf" stroke-width="2"/><line x1="100" y1="675" x2="290" y2="675" stroke="#222"/><line x1="100" y1="675" x2="100" y2="630" stroke="#222"/>
+<rect x="370" y="660" width="58" height="32" class="greenbox"/>
+<text x="399" y="681" class="small" text-anchor="middle">PASS</text>
+<rect x="477" y="565" width="415" height="145" class="greenbox"/>
+<g transform="translate(505,590) scale(0.75)"><circle cx="0" cy="0" r="15" fill="#43a047"/><path d="M-7,-1 L-2,6 L9,-8" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="539" y="592" class="label" text-anchor="start">2) Camera frustum from attitude</text>
+<text x="539" y="620" class="small" text-anchor="start">reconstructed FOV matches attitude</text>
+<g transform="translate(559,670) scale(0.42)">
+  <rect x="-13" y="-10" width="26" height="20" rx="2" fill="#d6dbe2" stroke="#444" stroke-width="1.2"/>
+  <rect x="-38" y="-7" width="20" height="14" fill="#9fb9dd" stroke="#315c9c" stroke-width="1"/>
+  <rect x="18" y="-7" width="20" height="14" fill="#9fb9dd" stroke="#315c9c" stroke-width="1"/>
+  <circle cx="0" cy="0" r="3" fill="#1f5fbf"/>
+</g>
+<g transform="translate(587,670) rotate(0) scale(0.9)">
+  <path d="M0,0 L90,-36 L90,36 Z" fill="#1f5fbf" fill-opacity="0.10" stroke="#1f5fbf" stroke-width="1.8"/>
+  <line x1="0" y1="0" x2="90" y2="0" stroke="#1f5fbf" stroke-width="1.2" stroke-dasharray="5 4"/>
+</g>
+<rect x="807" y="660" width="58" height="32" class="greenbox"/>
+<text x="836" y="681" class="small" text-anchor="middle">PASS</text>
+<rect x="914" y="565" width="415" height="145" class="greenbox"/>
+<g transform="translate(942,590) scale(0.75)"><circle cx="0" cy="0" r="15" fill="#43a047"/><path d="M-7,-1 L-2,6 L9,-8" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="976" y="592" class="label" text-anchor="start">3) Visible-target consistency</text>
+<text x="976" y="620" class="small" text-anchor="start">visibility agrees with geometry</text>
+<g opacity="0.75">
+<rect x="1051.5" y="668.0" width="75.0" height="4.0" class="mesh"/>
+<path d="M1055.25,668.0 L1060.25,672.0 M1055.25,672.0 L1060.25,668.0" class="mesh-line"/>
+<path d="M1062.0,668.0 L1067.0,672.0 M1062.0,672.0 L1067.0,668.0" class="mesh-line"/>
+<path d="M1068.75,668.0 L1073.75,672.0 M1068.75,672.0 L1073.75,668.0" class="mesh-line"/>
+<path d="M1075.5,668.0 L1080.5,672.0 M1075.5,672.0 L1080.5,668.0" class="mesh-line"/>
+<path d="M1082.25,668.0 L1087.25,672.0 M1082.25,672.0 L1087.25,668.0" class="mesh-line"/>
+<path d="M1089.0,668.0 L1094.0,672.0 M1089.0,672.0 L1094.0,668.0" class="mesh-line"/>
+<path d="M1095.75,668.0 L1100.75,672.0 M1095.75,672.0 L1100.75,668.0" class="mesh-line"/>
+<path d="M1102.5,668.0 L1107.5,672.0 M1102.5,672.0 L1107.5,668.0" class="mesh-line"/>
+<path d="M1109.25,668.0 L1114.25,672.0 M1109.25,672.0 L1114.25,668.0" class="mesh-line"/>
+<path d="M1116.0,668.0 L1121.0,672.0 M1116.0,672.0 L1121.0,668.0" class="mesh-line"/>
+<path d="M1122.75,668.0 L1127.75,672.0 M1122.75,672.0 L1127.75,668.0" class="mesh-line"/>
+<rect x="1080.25" y="661.25" width="17.5" height="17.5" rx="2.0" fill="#dfe3e8" stroke="#676d74" stroke-width="0.3"/>
+<line x1="1081.5" y1="670.0" x2="1096.5" y2="670.0" class="mesh-line"/>
+<rect x="1092.75" y="648.75" width="8.5" height="15.5" rx="2.0" fill="#dfe3e8" stroke="#676d74" stroke-width="0.3"/>
+<line x1="1094.0" y1="656.5" x2="1100.0" y2="656.5" class="mesh-line"/>
+<rect x="1082.75" y="681.25" width="12.5" height="8.5" rx="2.0" fill="#dfe3e8" stroke="#676d74" stroke-width="0.3"/>
+<line x1="1084.0" y1="685.5" x2="1094.0" y2="685.5" class="mesh-line"/>
+<rect x="1105.25" y="663.75" width="12.0" height="12.5" rx="2.0" fill="#dfe3e8" stroke="#676d74" stroke-width="0.3"/>
+<line x1="1106.5" y1="670.0" x2="1116.0" y2="670.0" class="mesh-line"/>
+<rect x="1062.75" y="664.5" width="11.5" height="11.0" rx="2.0" fill="#dfe3e8" stroke="#676d74" stroke-width="0.3"/>
+<line x1="1064.0" y1="670.0" x2="1073.0" y2="670.0" class="mesh-line"/>
+<rect x="1036.5" y="655.5" width="15.0" height="28.75" fill="#c9ced6" stroke="#626b73" stroke-width="0.25"/>
+<line x1="1036.5" y1="662.5" x2="1051.5" y2="662.5" class="mesh-line"/>
+<line x1="1036.5" y1="669.5" x2="1051.5" y2="669.5" class="mesh-line"/>
+<line x1="1036.5" y1="676.5" x2="1051.5" y2="676.5" class="mesh-line"/>
+<rect x="1019.0" y="655.5" width="15.0" height="28.75" fill="#c9ced6" stroke="#626b73" stroke-width="0.25"/>
+<line x1="1019.0" y1="662.5" x2="1034.0" y2="662.5" class="mesh-line"/>
+<line x1="1019.0" y1="669.5" x2="1034.0" y2="669.5" class="mesh-line"/>
+<line x1="1019.0" y1="676.5" x2="1034.0" y2="676.5" class="mesh-line"/>
+<rect x="1126.5" y="655.5" width="15.0" height="28.75" fill="#c9ced6" stroke="#626b73" stroke-width="0.25"/>
+<line x1="1126.5" y1="662.5" x2="1141.5" y2="662.5" class="mesh-line"/>
+<line x1="1126.5" y1="669.5" x2="1141.5" y2="669.5" class="mesh-line"/>
+<line x1="1126.5" y1="676.5" x2="1141.5" y2="676.5" class="mesh-line"/>
+<rect x="1144.0" y="655.5" width="15.0" height="28.75" fill="#c9ced6" stroke="#626b73" stroke-width="0.25"/>
+<line x1="1144.0" y1="662.5" x2="1159.0" y2="662.5" class="mesh-line"/>
+<line x1="1144.0" y1="669.5" x2="1159.0" y2="669.5" class="mesh-line"/>
+<line x1="1144.0" y1="676.5" x2="1159.0" y2="676.5" class="mesh-line"/>
+</g>
+<g transform="translate(1164,675) rotate(190) scale(0.8)">
+  <path d="M0,0 L90,-36 L90,36 Z" fill="#1f5fbf" fill-opacity="0.10" stroke="#1f5fbf" stroke-width="1.8"/>
+  <line x1="0" y1="0" x2="90" y2="0" stroke="#1f5fbf" stroke-width="1.2" stroke-dasharray="5 4"/>
+</g>
+<circle cx="1089" cy="660" r="5" fill="#43a047" stroke="#444"/>
+<circle cx="1109" cy="685" r="5" fill="#f4c542" stroke="#444"/>
+<circle cx="1059" cy="675" r="5" fill="#43a047" stroke="#444"/>
+<rect x="1244" y="660" width="58" height="32" class="greenbox"/>
+<text x="1273" y="681" class="small" text-anchor="middle">PASS</text>
+<rect x="1351" y="565" width="415" height="145" class="greenbox"/>
+<g transform="translate(1379,590) scale(0.75)"><circle cx="0" cy="0" r="15" fill="#43a047"/><path d="M-7,-1 L-2,6 L9,-8" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="1413" y="592" class="label" text-anchor="start">4) Clearance &amp; input-limit log</text>
+<text x="1413" y="620" class="small" text-anchor="start">limits remain consistent over time</text>
+<line x1="1411" y1="650" x2="1611" y2="650" stroke="#222"/><line x1="1411" y1="650" x2="1411" y2="615" stroke="#222"/>
+<line x1="1411" y1="632" x2="1611" y2="632" stroke="#d32f2f" stroke-dasharray="6 5"/>
+<path d="M1416,624 C1466,640 1536,618 1606,628" stroke="#43a047" stroke-width="2" fill="none"/><line x1="1411" y1="685" x2="1611" y2="685" stroke="#222"/><line x1="1411" y1="685" x2="1411" y2="650" stroke="#222"/>
+<line x1="1411" y1="667" x2="1611" y2="667" stroke="#d32f2f" stroke-dasharray="6 5"/>
+<path d="M1416,659 C1466,675 1536,653 1606,663" stroke="#43a047" stroke-width="2" fill="none"/><rect x="1681" y="660" width="58" height="32" class="greenbox"/>
+<text x="1710" y="681" class="small" text-anchor="middle">PASS</text>
+<rect x="10" y="755" width="870" height="455" class="panel"/>
+<text x="28" y="800" class="letter" text-anchor="start">C</text>
+<text x="92" y="793" class="title" text-anchor="start">RViz verification evidence</text>
+<rect x="35" y="825" width="180" height="310" class="panel-gray"/>
+<text x="55" y="852" class="small" text-anchor="start">Global Options</text>
+<rect x="55" y="868" width="14" height="14" fill="#fff" stroke="#333"/><path d="M57,875 L62,880 L69,869" stroke="#333" fill="none" stroke-width="2"/>
+<text x="80" y="882" class="tiny" text-anchor="start">Grid</text>
+<rect x="55" y="901" width="14" height="14" fill="#fff" stroke="#333"/><path d="M57,908 L62,913 L69,902" stroke="#333" fill="none" stroke-width="2"/>
+<text x="80" y="915" class="tiny" text-anchor="start">Station Mesh</text>
+<rect x="55" y="934" width="14" height="14" fill="#fff" stroke="#333"/><path d="M57,941 L62,946 L69,935" stroke="#333" fill="none" stroke-width="2"/>
+<text x="80" y="948" class="tiny" text-anchor="start">Chaser Pose</text>
+<rect x="55" y="967" width="14" height="14" fill="#fff" stroke="#333"/><path d="M57,974 L62,979 L69,968" stroke="#333" fill="none" stroke-width="2"/>
+<text x="80" y="981" class="tiny" text-anchor="start">Reference Path</text>
+<rect x="55" y="1000" width="14" height="14" fill="#fff" stroke="#333"/><path d="M57,1007 L62,1012 L69,1001" stroke="#333" fill="none" stroke-width="2"/>
+<text x="80" y="1014" class="tiny" text-anchor="start">Camera Frustum</text>
+<rect x="55" y="1033" width="14" height="14" fill="#fff" stroke="#333"/><path d="M57,1040 L62,1045 L69,1034" stroke="#333" fill="none" stroke-width="2"/>
+<text x="80" y="1047" class="tiny" text-anchor="start">Visible Targets</text>
+<rect x="55" y="1066" width="14" height="14" fill="#fff" stroke="#333"/><path d="M57,1073 L62,1078 L69,1067" stroke="#333" fill="none" stroke-width="2"/>
+<text x="80" y="1080" class="tiny" text-anchor="start">Axes (LVLH)</text>
+<g opacity="0.8">
+<rect x="397.0" y="953.44" width="245.99999999999997" height="13.12" class="mesh"/>
+<path d="M409.3,953.44 L425.7,966.56 M409.3,966.56 L425.7,953.44" class="mesh-line"/>
+<path d="M431.44,953.44 L447.84,966.56 M431.44,966.56 L447.84,953.44" class="mesh-line"/>
+<path d="M453.58,953.44 L469.97999999999996,966.56 M453.58,966.56 L469.97999999999996,953.44" class="mesh-line"/>
+<path d="M475.72,953.44 L492.12,966.56 M475.72,966.56 L492.12,953.44" class="mesh-line"/>
+<path d="M497.86,953.44 L514.26,966.56 M497.86,966.56 L514.26,953.44" class="mesh-line"/>
+<path d="M520.0,953.44 L536.4,966.56 M520.0,966.56 L536.4,953.44" class="mesh-line"/>
+<path d="M542.14,953.44 L558.54,966.56 M542.14,966.56 L558.54,953.44" class="mesh-line"/>
+<path d="M564.28,953.44 L580.68,966.56 M564.28,966.56 L580.68,953.44" class="mesh-line"/>
+<path d="M586.42,953.44 L602.8199999999999,966.56 M586.42,966.56 L602.8199999999999,953.44" class="mesh-line"/>
+<path d="M608.56,953.44 L624.9599999999999,966.56 M608.56,966.56 L624.9599999999999,953.44" class="mesh-line"/>
+<path d="M630.7,953.44 L647.1,966.56 M630.7,966.56 L647.1,953.44" class="mesh-line"/>
+<rect x="491.3" y="931.3" width="57.4" height="57.4" rx="6.56" fill="#dfe3e8" stroke="#676d74" stroke-width="0.9839999999999999"/>
+<line x1="495.4" y1="960.0" x2="544.6" y2="960.0" class="mesh-line"/>
+<rect x="532.3" y="890.3" width="27.88" height="50.839999999999996" rx="6.56" fill="#dfe3e8" stroke="#676d74" stroke-width="0.9839999999999999"/>
+<line x1="536.4" y1="915.72" x2="556.08" y2="915.72" class="mesh-line"/>
+<rect x="499.5" y="996.9" width="41.0" height="27.88" rx="6.56" fill="#dfe3e8" stroke="#676d74" stroke-width="0.9839999999999999"/>
+<line x1="503.6" y1="1010.84" x2="536.4" y2="1010.84" class="mesh-line"/>
+<rect x="573.3" y="939.5" width="39.36" height="41.0" rx="6.56" fill="#dfe3e8" stroke="#676d74" stroke-width="0.9839999999999999"/>
+<line x1="577.4" y1="960.0" x2="608.56" y2="960.0" class="mesh-line"/>
+<rect x="433.9" y="941.96" width="37.72" height="36.08" rx="6.56" fill="#dfe3e8" stroke="#676d74" stroke-width="0.9839999999999999"/>
+<line x1="438.0" y1="960.0" x2="467.52" y2="960.0" class="mesh-line"/>
+<rect x="347.8" y="912.44" width="49.199999999999996" height="94.3" fill="#c9ced6" stroke="#626b73" stroke-width="0.82"/>
+<line x1="347.8" y1="935.4000000000001" x2="397.0" y2="935.4000000000001" class="mesh-line"/>
+<line x1="347.8" y1="958.36" x2="397.0" y2="958.36" class="mesh-line"/>
+<line x1="347.8" y1="981.32" x2="397.0" y2="981.32" class="mesh-line"/>
+<rect x="290.40000000000003" y="912.44" width="49.199999999999996" height="94.3" fill="#c9ced6" stroke="#626b73" stroke-width="0.82"/>
+<line x1="290.40000000000003" y1="935.4000000000001" x2="339.6" y2="935.4000000000001" class="mesh-line"/>
+<line x1="290.40000000000003" y1="958.36" x2="339.6" y2="958.36" class="mesh-line"/>
+<line x1="290.40000000000003" y1="981.32" x2="339.6" y2="981.32" class="mesh-line"/>
+<rect x="643.0" y="912.44" width="49.199999999999996" height="94.3" fill="#c9ced6" stroke="#626b73" stroke-width="0.82"/>
+<line x1="643.0" y1="935.4000000000001" x2="692.2" y2="935.4000000000001" class="mesh-line"/>
+<line x1="643.0" y1="958.36" x2="692.2" y2="958.36" class="mesh-line"/>
+<line x1="643.0" y1="981.32" x2="692.2" y2="981.32" class="mesh-line"/>
+<rect x="700.4" y="912.44" width="49.199999999999996" height="94.3" fill="#c9ced6" stroke="#626b73" stroke-width="0.82"/>
+<line x1="700.4" y1="935.4000000000001" x2="749.6" y2="935.4000000000001" class="mesh-line"/>
+<line x1="700.4" y1="958.36" x2="749.6" y2="958.36" class="mesh-line"/>
+<line x1="700.4" y1="981.32" x2="749.6" y2="981.32" class="mesh-line"/>
+</g>
+<g transform="translate(350,1040) scale(0.75)">
+  <rect x="-13" y="-10" width="26" height="20" rx="2" fill="#d6dbe2" stroke="#444" stroke-width="1.2"/>
+  <rect x="-38" y="-7" width="20" height="14" fill="#9fb9dd" stroke="#315c9c" stroke-width="1"/>
+  <rect x="18" y="-7" width="20" height="14" fill="#9fb9dd" stroke="#315c9c" stroke-width="1"/>
+  <circle cx="0" cy="0" r="3" fill="#1f5fbf"/>
+</g>
+<g transform="translate(378,1040) rotate(-15) scale(1.15)">
+  <path d="M0,0 L90,-36 L90,36 Z" fill="#1f5fbf" fill-opacity="0.10" stroke="#1f5fbf" stroke-width="1.8"/>
+  <line x1="0" y1="0" x2="90" y2="0" stroke="#1f5fbf" stroke-width="1.2" stroke-dasharray="5 4"/>
+</g>
+<path d="M300,920 C360,850 470,860 520,925 C560,980 480,1045 380,1035" stroke="#1f5fbf" stroke-width="2.4" fill="none" stroke-dasharray="8 6" marker-end="url(#arrow-blue)"/><circle cx="510" cy="955" r="7" fill="#43a047" stroke="#444"/>
+<circle cx="545" cy="980" r="7" fill="#43a047" stroke="#444"/>
+<circle cx="575" cy="1000" r="7" fill="#f4c542" stroke="#444"/>
+<circle cx="485" cy="995" r="7" fill="#43a047" stroke="#444"/>
+<circle cx="600" cy="930" r="7" fill="#f4c542" stroke="#444"/>
+<text x="270" y="920" class="small" text-anchor="start">reference path</text>
+<text x="255" y="1050" class="small" text-anchor="start">chaser pose</text>
+<text x="390" y="1105" class="small" text-anchor="start">camera FOV from attitude</text>
+<g transform="translate(260,1160)"><line x1="0" y1="0" x2="70" y2="0" stroke="#43a047" stroke-width="3" marker-end="url(#arrow-gray)"/><line x1="0" y1="0" x2="-45" y2="35" stroke="#d32f2f" stroke-width="3" marker-end="url(#arrow-gray)"/><line x1="0" y1="0" x2="0" y2="-60" stroke="#1f5fbf" stroke-width="3" marker-end="url(#arrow-gray)"/><text x="76" y="5" class="tiny" text-anchor="start">y</text>
+<text x="-60" y="45" class="tiny" text-anchor="start">x</text>
+<text x="5" y="-63" class="tiny" text-anchor="start">z</text>
+</g>
+<rect x="680" y="835" width="170" height="125" class="panel-gray"/>
+<circle cx="700" cy="865" r="6" fill="#43a047" stroke="#444"/> <text x="720" y="869" class="tiny" text-anchor="start">selected / visible</text>
+<circle cx="700" cy="895" r="6" fill="#f4c542" stroke="#444"/> <text x="720" y="899" class="tiny" text-anchor="start">occluded</text>
+<circle cx="700" cy="925" r="6" fill="#bbb" stroke="#444"/> <text x="720" y="929" class="tiny" text-anchor="start">out of FOV</text>
+<rect x="700" y="1075" width="140" height="90" class="panel-gray"/>
+<text x="720" y="1100" class="small" text-anchor="start">RViz status</text>
+<text x="720" y="1125" class="tiny" text-anchor="start">TF: OK</text>
+<text x="720" y="1145" class="tiny" text-anchor="start">Messages: OK</text>
+<text x="720" y="1165" class="tiny" text-anchor="start">Time sync: OK</text>
+<rect x="900" y="755" width="890" height="455" class="panel"/>
+<text x="918" y="800" class="letter" text-anchor="start">D</text>
+<text x="982" y="793" class="title" text-anchor="start">Gazebo replay evidence: visual context only</text>
+<rect x="930" y="825" width="830" height="350" rx="8" fill="#f5f8fb" stroke="#3f444a" stroke-width="1.3"/>
+<path d="M930,1090 C1100,1030 1300,1040 1760,970 L1760,1175 L930,1175 Z" fill="#dfe8f2" stroke="#c8d2dc"/>
+<g opacity="0.88">
+<rect x="1318.0" y="942.96" width="264.0" height="14.08" class="mesh"/>
+<path d="M1331.2,942.96 L1348.8,957.04 M1331.2,957.04 L1348.8,942.96" class="mesh-line"/>
+<path d="M1354.96,942.96 L1372.56,957.04 M1354.96,957.04 L1372.56,942.96" class="mesh-line"/>
+<path d="M1378.72,942.96 L1396.32,957.04 M1378.72,957.04 L1396.32,942.96" class="mesh-line"/>
+<path d="M1402.48,942.96 L1420.08,957.04 M1402.48,957.04 L1420.08,942.96" class="mesh-line"/>
+<path d="M1426.24,942.96 L1443.84,957.04 M1426.24,957.04 L1443.84,942.96" class="mesh-line"/>
+<path d="M1450.0,942.96 L1467.6,957.04 M1450.0,957.04 L1467.6,942.96" class="mesh-line"/>
+<path d="M1473.76,942.96 L1491.36,957.04 M1473.76,957.04 L1491.36,942.96" class="mesh-line"/>
+<path d="M1497.52,942.96 L1515.12,957.04 M1497.52,957.04 L1515.12,942.96" class="mesh-line"/>
+<path d="M1521.28,942.96 L1538.8799999999999,957.04 M1521.28,957.04 L1538.8799999999999,942.96" class="mesh-line"/>
+<path d="M1545.04,942.96 L1562.6399999999999,957.04 M1545.04,957.04 L1562.6399999999999,942.96" class="mesh-line"/>
+<path d="M1568.8,942.96 L1586.3999999999999,957.04 M1568.8,957.04 L1586.3999999999999,942.96" class="mesh-line"/>
+<rect x="1419.2" y="919.2" width="61.6" height="61.6" rx="7.04" fill="#dfe3e8" stroke="#676d74" stroke-width="1.056"/>
+<line x1="1423.6" y1="950.0" x2="1476.4" y2="950.0" class="mesh-line"/>
+<rect x="1463.2" y="875.2" width="29.92" height="54.56" rx="7.04" fill="#dfe3e8" stroke="#676d74" stroke-width="1.056"/>
+<line x1="1467.6" y1="902.48" x2="1488.72" y2="902.48" class="mesh-line"/>
+<rect x="1428.0" y="989.6" width="44.0" height="29.92" rx="7.04" fill="#dfe3e8" stroke="#676d74" stroke-width="1.056"/>
+<line x1="1432.4" y1="1004.56" x2="1467.6" y2="1004.56" class="mesh-line"/>
+<rect x="1507.2" y="928.0" width="42.24" height="44.0" rx="7.04" fill="#dfe3e8" stroke="#676d74" stroke-width="1.056"/>
+<line x1="1511.6" y1="950.0" x2="1545.04" y2="950.0" class="mesh-line"/>
+<rect x="1357.6" y="930.64" width="40.48" height="38.72" rx="7.04" fill="#dfe3e8" stroke="#676d74" stroke-width="1.056"/>
+<line x1="1362.0" y1="950.0" x2="1393.68" y2="950.0" class="mesh-line"/>
+<rect x="1265.2" y="898.96" width="52.8" height="101.2" fill="#c9ced6" stroke="#626b73" stroke-width="0.88"/>
+<line x1="1265.2" y1="923.6" x2="1318.0" y2="923.6" class="mesh-line"/>
+<line x1="1265.2" y1="948.24" x2="1318.0" y2="948.24" class="mesh-line"/>
+<line x1="1265.2" y1="972.88" x2="1318.0" y2="972.88" class="mesh-line"/>
+<rect x="1203.6000000000001" y="898.96" width="52.8" height="101.2" fill="#c9ced6" stroke="#626b73" stroke-width="0.88"/>
+<line x1="1203.6000000000001" y1="923.6" x2="1256.4" y2="923.6" class="mesh-line"/>
+<line x1="1203.6000000000001" y1="948.24" x2="1256.4" y2="948.24" class="mesh-line"/>
+<line x1="1203.6000000000001" y1="972.88" x2="1256.4" y2="972.88" class="mesh-line"/>
+<rect x="1582.0" y="898.96" width="52.8" height="101.2" fill="#c9ced6" stroke="#626b73" stroke-width="0.88"/>
+<line x1="1582.0" y1="923.6" x2="1634.8" y2="923.6" class="mesh-line"/>
+<line x1="1582.0" y1="948.24" x2="1634.8" y2="948.24" class="mesh-line"/>
+<line x1="1582.0" y1="972.88" x2="1634.8" y2="972.88" class="mesh-line"/>
+<rect x="1643.6" y="898.96" width="52.8" height="101.2" fill="#c9ced6" stroke="#626b73" stroke-width="0.88"/>
+<line x1="1643.6" y1="923.6" x2="1696.3999999999999" y2="923.6" class="mesh-line"/>
+<line x1="1643.6" y1="948.24" x2="1696.3999999999999" y2="948.24" class="mesh-line"/>
+<line x1="1643.6" y1="972.88" x2="1696.3999999999999" y2="972.88" class="mesh-line"/>
+</g>
+<g transform="translate(1110,1040) scale(1.0)">
+  <rect x="-13" y="-10" width="26" height="20" rx="2" fill="#d6dbe2" stroke="#444" stroke-width="1.2"/>
+  <rect x="-38" y="-7" width="20" height="14" fill="#9fb9dd" stroke="#315c9c" stroke-width="1"/>
+  <rect x="18" y="-7" width="20" height="14" fill="#9fb9dd" stroke="#315c9c" stroke-width="1"/>
+  <circle cx="0" cy="0" r="3" fill="#1f5fbf"/>
+</g>
+<g transform="translate(1160,1040) rotate(-12) scale(1.65)">
+  <path d="M0,0 L90,-36 L90,36 Z" fill="#1f5fbf" fill-opacity="0.10" stroke="#1f5fbf" stroke-width="1.8"/>
+  <line x1="0" y1="0" x2="90" y2="0" stroke="#1f5fbf" stroke-width="1.2" stroke-dasharray="5 4"/>
+</g>
+<rect x="950" y="845" width="190" height="100" class="panel-gray"/>
+<text x="975" y="875" class="small" text-anchor="start">Gazebo replay</text>
+<text x="975" y="905" class="tiny" text-anchor="start"><tspan x="975" dy="0">visual context only</tspan><tspan x="975" dy="18">HCW is source of state</tspan></text>
+<rect x="1585" y="1060" width="150" height="90" class="panel-gray"/>
+<text x="1660" y="1090" class="small" text-anchor="middle">Replay mode</text>
+<text x="1660" y="1122" class="tiny" text-anchor="middle"><tspan x="1660" dy="0">no physics feedback</tspan><tspan x="1660" dy="18">to ROS pipeline</tspan></text>
+<g transform="translate(960,1140)"><line x1="0" y1="0" x2="55" y2="0" stroke="#d32f2f" stroke-width="3" marker-end="url(#arrow-gray)"/><line x1="0" y1="0" x2="0" y2="-55" stroke="#1f5fbf" stroke-width="3" marker-end="url(#arrow-gray)"/><line x1="0" y1="0" x2="45" y2="-25" stroke="#43a047" stroke-width="3" marker-end="url(#arrow-gray)"/><text x="60" y="5" class="tiny" text-anchor="start">x</text>
+<text x="5" y="-60" class="tiny" text-anchor="start">z</text>
+<text x="50" y="-28" class="tiny" text-anchor="start">y</text>
+</g>
+<text x="900" y="1232" class="caption" text-anchor="middle">ROS verifies that the offline trajectory, attitude stream, camera frustum, and logged safety/coverage signals are instantiated consistently during replay; HCW dynamics remain the source of spacecraft state.</text>
+</svg>

@@ -6,60 +6,75 @@ commercial spaceflight. Space stations, assembled telescopes, logistics
 platforms, and in-space manufacturing facilities all require periodic external
 inspection to detect configuration changes, micrometeoroid damage, thermal
 blanket degradation, docking-interface anomalies, and other faults that are
-not easily observed from fixed onboard cameras. A small free-flying inspector
-can provide close-range, target-specific imagery, but autonomous inspection in
-the neighborhood of a large structure remains a coupled planning and validation
-problem: the vehicle must acquire useful views, satisfy relative orbital
-dynamics, remain outside keep-out regions, avoid excessive control effort, and
-produce evidence that the mission actually inspected the requested targets.
+not easily observed from fixed onboard cameras. The corresponding planning
+problem is simultaneously geometric and dynamic. A candidate view may provide
+high visual coverage yet remain unsafe, expensive, or unreachable under
+relative orbital motion.
 
-This paper presents OrbInspect, a ROS~2-based framework for orbital inspection
-planning, execution, and evaluation. The design is motivated by a practical
-research need. Inspection algorithms are often demonstrated either as
-stand-alone planners detached from middleware and visualization, or as
-visually compelling simulators in which the quantitative coverage and safety
-evidence is difficult to audit. OrbInspect separates those roles. A ROS-native
-Clohessy--Wiltshire/Hill (CW/HCW) dynamics node is the source of truth for the
-chaser state; controllers, safety filters, coverage estimators, mission logic,
-and loggers are connected through ROS~2 interfaces; Gazebo Harmonic provides
-visual validation of the station and chaser scene but is not used as the
-orbital-dynamics authority.
+Existing inspection planners often emphasize one side of this problem. Robotic
+next-best-view methods provide mature tools for coverage, occlusion reasoning,
+and sensor placement, but their motion cost is usually geometric. Relative
+orbit-design methods provide dynamically meaningful paths, but they do not
+always treat surface coverage, camera field of view, and target occlusion as
+the planning objective. This separation is limiting for large structures.
+Selecting views first and checking dynamics later can produce trajectories
+that appear coverage-rich but violate clearance or require excessive input.
 
-The specific contribution of this manuscript is a coverage-constrained
-inspection-planning and validation pipeline. We formulate the inspection task
-in the local-vertical/local-horizontal frame, define target visibility and
-dwell criteria, impose actuation and keep-out constraints, and implement a
-mesh-aware offline planning experiment. The planner samples area-weighted mesh
-targets, generates candidate viewpoints, computes visibility with range,
-field-of-view, view-angle, and line-of-sight checks, scores viewpoints by new
-coverage and CW transfer cost, exports camera attitudes, and produces a
-bounded-acceleration CW reference trajectory. The resulting artifacts are stored in a
-self-contained experiment directory containing raw CSV files, configuration
-snapshots, figures, videos, and summary files.
+This paper addresses that gap by formulating orbital structure inspection as a
+dynamics-aware coverage problem on a finite candidate-view graph. The planner
+samples area-weighted surface targets, constructs camera-feasible views,
+evaluates visibility under range, field-of-view, incidence-angle, and
+line-of-sight constraints, and assigns each candidate transfer a
+bounded-acceleration Clohessy--Wiltshire/Hill (CW/HCW) cost. View selection is
+therefore driven by the coverage that a view adds and by the orbital effort,
+clearance, and input saturation incurred to reach it.
 
-The reported results show a substantial improvement over the earlier proxy
-planner baseline. On the mesh benchmark, the proposed set-cover CW tour
-achieves 98.33\% coverage of 180 target samples with all transfers feasible,
-\unit{8.770}{m/s} cumulative $\Delta v$, and \unit{7.53}{m} minimum clearance.
-The comparison includes six baselines: proposed safe CW next-best-view,
-coverage-greedy, safe coverage-greedy, nearest next-best-view, fuel-greedy,
-and random-safe. A ROS~2 paper-experiment smoke run verifies the execution and
-logging pipeline over trajectory, control, coverage, planner, safety, and
-rosbag topics. A Gazebo Harmonic validation path replays the saved offline
-trajectory and attitude stream with an ISS visual model, confirming simulator
-interfaces while leaving HCW dynamics as the state authority.
+The finite graph also gives a precise scope for optimality. For a fixed
+candidate set, fixed visibility relation, and fixed feasible-transfer graph,
+the inspection task can be written as a mixed-integer optimization problem. We
+implement an exact dynamic-programming graph solver that returns a certificate
+on reduced instances by minimizing CW dynamic cost subject to a required
+coverage ratio and a view budget. The full ISS-mesh benchmark uses a scalable
+dynamics-aware set-cover and CW-tour solver on the same graph. Thus, the paper
+separates an implemented finite-graph optimality oracle from the scalable
+planner used to generate the reported high-coverage trajectories.
+
+The reported results show that dynamics awareness matters. On the ISS-mesh
+benchmark, the proposed dynamics-aware tour achieves 98.33\% coverage with 21
+selected views, \unit{21.592}{m/s} cumulative $\Delta v$, \unit{9.91}{m}
+minimum clearance, and \unit{5.97}{s} planning time. Coverage-greedy reaches
+the same coverage but requires input beyond the admissible bound and violates
+clearance; nearest selection also reaches high coverage but violates
+clearance. Safe-coverage and random-safe baselines remain feasible at high
+coverage, but require substantially higher cumulative $\Delta v$, while the
+fuel-focused baseline stops below the high-coverage target. The comparison
+therefore exposes failure modes that are hidden by coverage metrics alone in
+this deterministic base case. Robustness across target density, candidate
+density, initial state, keep-out margin, and transfer duration is treated as a
+separate validation requirement rather than inferred from one mesh instance.
+
+ROS~2 Jazzy and Gazebo Harmonic are used as a replay and verification layer,
+not as the source of orbital dynamics. The ROS stack publishes the chaser
+state from the HCW dynamics model, records trajectory, attitude, coverage,
+safety, and planner logs, and reconstructs the camera frustum used by the
+offline planner. Gazebo provides visual context for the station and chaser.
+This replay layer verifies that the planned visual geometry can be
+instantiated in the integrated system while preserving the planner as the
+scientific object of study.
 
 The main contributions are:
 \begin{enumerate}
-  \item a ROS~2 Jazzy architecture for orbital inspection in which HCW dynamics
-  remain the state source of truth and Gazebo is used for visualization;
-  \item a formal coverage-constrained relative trajectory planning problem
-  combining visibility, dwell, fuel, speed, and clearance constraints;
-  \item a mesh-aware dynamics-aware set-cover CW tour planner with saved
-  target, viewpoint, attitude, trajectory, coverage, and planner logs;
-  \item a self-contained validation package with figures, raw data, Gazebo
-  frames, video artifacts, configuration snapshots, and summaries embedded
-  under the paper directory;
-  \item an evidence-based comparison showing 98.33\% coverage and lower
-  $\Delta v$ than random-safe and several greedy baselines.
+  \item a finite candidate-graph formulation of orbital inspection that states
+  the scope of the discrete optimization problem, including camera visibility,
+  dwell coverage, CW/HCW transfer feasibility, clearance, and input limits;
+  \item a two-mode solver for this graph: an exact dynamic-programming
+  certificate on reduced finite graphs and a scalable dynamics-aware offline
+  solver that couples set-cover gain with transfer cost and safety margins
+  during view selection;
+  \item a deterministic ISS-mesh base benchmark and validation matrix for
+  target-density, candidate-density, initial-condition, safety-margin,
+  transfer-duration, and ablation studies;
+  \item a ROS~2/Gazebo replay layer that verifies camera frusta, logged
+  attitudes, and trajectory geometry while keeping HCW dynamics as the source
+  of quantitative evidence.
 \end{enumerate}

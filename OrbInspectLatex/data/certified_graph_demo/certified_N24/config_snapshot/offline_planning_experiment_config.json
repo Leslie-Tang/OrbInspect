@@ -1,0 +1,39 @@
+{
+  "candidate_radius": 34.0,
+  "candidate_stride": 3,
+  "certified_candidate_limit": 8,
+  "certified_max_expansions": 5000,
+  "certified_time_limit_s": 3.0,
+  "coverage_stop_ratio": 0.25,
+  "coverage_threshold": 0.1,
+  "cw_energy_weight": 5.0,
+  "cw_safety_weight": 120.0,
+  "cw_tracking_weight": 0.18,
+  "geometry_backend": "mesh",
+  "initial_state": [
+    0.0,
+    -35.0,
+    10.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "integration_dt": 5.0,
+  "max_acceleration": 0.06,
+  "max_viewpoints": 4,
+  "mesh_occlusion_max_triangles": 0,
+  "mesh_target_count": 24,
+  "methods": [
+    "certified_graph_search",
+    "set_cover_cw_tour",
+    "safe_coverage_greedy"
+  ],
+  "min_new_targets": 1,
+  "output_root": "OrbInspectLatex/data/certified_graph_demo",
+  "proposed_beam_width": 6,
+  "proposed_lookahead_depth": 2,
+  "random_seed": 7,
+  "run_id": "certified_N24",
+  "safety_margin": 2.0,
+  "transfer_duration": 90.0
+}

@@ -1,0 +1,10 @@
+method,time,coverage_ratio,inspected_targets
+certified_graph_search,0.0,0.0,0
+certified_graph_search,90.0,0.16666666666666666,4
+certified_graph_search,180.0,0.25,6
+set_cover_cw_tour,0.0,0.0,0
+set_cover_cw_tour,90.0,0.16666666666666666,4
+set_cover_cw_tour,180.0,0.2916666666666667,7
+safe_coverage_greedy,0.0,0.0,0
+safe_coverage_greedy,90.0,0.16666666666666666,4
+safe_coverage_greedy,180.0,0.2916666666666667,7

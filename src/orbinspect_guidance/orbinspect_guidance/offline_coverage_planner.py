@@ -22,7 +22,11 @@ from orbinspect_perception.inspection_target_manager import InspectionTargetMana
 from orbinspect_perception.visibility_checker import CameraModel
 from orbinspect_perception.visibility_checker import VisibilityChecker
 from orbinspect_safety.keepout_zones import KeepoutZoneModel
-import yaml
+
+try:
+    import yaml
+except ModuleNotFoundError:  # pragma: no cover - minimal offline Python fallback.
+    yaml = None
 
 plt.switch_backend('Agg')
 plt.rcParams.update({
@@ -60,6 +64,8 @@ class OfflinePlannerConfig:
     transfer_duration: float = 80.0
     integration_dt: float = 1.0
     max_acceleration: float = 0.012
+    terminal_position_tolerance: float = 0.5
+    terminal_velocity_tolerance: float = 0.05
     position_gain: float = 0.0008
     velocity_gain: float = 0.08
     safety_margin: float = 2.0
@@ -106,6 +112,9 @@ class TransferEstimate:
     max_speed: float
     min_clearance: float
     tracking_error: float
+    peak_requested_input: float
+    clipped_step_count: int
+    sample_count: int
     feasible: bool
 
 
@@ -266,6 +275,10 @@ class OfflineCoveragePlanner:
             scale=config.iss_mesh_scale,
             max_edges=config.mesh_preview_max_edges,
         )
+        self._terminal_map_cache: dict[
+            tuple[int, float],
+            tuple[tuple[StateVector, ...], tuple[StateVector, ...]],
+        ] = {}
 
     def plan(self) -> OfflinePlan:
         """Generate targets, select viewpoints, roll out trajectory, and score metrics."""
@@ -401,6 +414,8 @@ class OfflineCoveragePlanner:
                 if not new_targets:
                     continue
                 transfer = self.estimate_transfer(current_state, candidate.position)
+                if not transfer.feasible:
+                    continue
                 score = self._candidate_score(
                     self._target_area(new_targets),
                     candidate,
@@ -434,18 +449,37 @@ class OfflineCoveragePlanner:
         initial_state: StateVector,
         target_position: Vector3,
     ) -> TransferEstimate:
-        """Roll out a saturated CW transfer to one viewpoint."""
-        state = initial_state
+        """Roll out a rest-to-rest terminal HCW transfer to one viewpoint.
+
+        The transfer solves the discrete HCW map for the minimum-energy
+        piecewise-constant acceleration sequence that reaches
+        ``target_position`` with zero relative velocity at the end of the
+        transfer. This keeps selected viewpoints as stabilized inspection
+        states rather than fly-through points; feasibility then checks whether
+        the required input respects the configured acceleration limit.
+        """
         dt = self.config.integration_dt
         steps = max(1, int(round(self.config.transfer_duration / dt)))
+        requested_commands = self._terminal_minimum_energy_controls(
+            initial_state,
+            target_position,
+            dt,
+            steps,
+        )
         trajectory: list[tuple[float, StateVector, ControlVector]] = []
         delta_v = 0.0
         max_speed = 0.0
         min_clearance = math.inf
         tracking_error_sum = 0.0
+        peak_requested_input = 0.0
+        clipped_step_count = 0
+        state = initial_state
 
-        for step in range(steps):
-            command = self._control_to_target(state, target_position)
+        for step, command in enumerate(requested_commands):
+            requested_input = norm(command)
+            peak_requested_input = max(peak_requested_input, requested_input)
+            if requested_input > self.config.max_acceleration + 1.0e-12:
+                clipped_step_count += 1
             state = self.dynamics.rk4_step(state, command, dt)
             speed = norm(state[3:6])
             clearance = self.keepout.assess(state[:3]).clearance
@@ -457,10 +491,14 @@ class OfflineCoveragePlanner:
             trajectory.append(((step + 1) * dt, state, command))
 
         tracking_error = math.sqrt(tracking_error_sum / float(steps))
+        terminal_error = distance(state[:3], target_position)
+        terminal_speed = norm(state[3:6])
         feasible = (
             min_clearance >= 0.0
             and max_speed <= 2.0
-            and norm(trajectory[-1][2]) <= self.config.max_acceleration + 1.0e-9
+            and peak_requested_input <= self.config.max_acceleration + 1.0e-9
+            and terminal_error <= self.config.terminal_position_tolerance
+            and terminal_speed <= self.config.terminal_velocity_tolerance
         )
         return TransferEstimate(
             next_state=state,
@@ -469,6 +507,9 @@ class OfflineCoveragePlanner:
             max_speed=max_speed,
             min_clearance=min_clearance,
             tracking_error=tracking_error,
+            peak_requested_input=peak_requested_input,
+            clipped_step_count=clipped_step_count,
+            sample_count=steps,
             feasible=feasible,
         )
 
@@ -524,7 +565,7 @@ class OfflineCoveragePlanner:
             sum(item.transfer.tracking_error**2 for item in selected)
             / max(1, len(selected))
         )
-        feasible = all(item.transfer.feasible for item in selected)
+        feasible = bool(selected) and all(item.transfer.feasible for item in selected)
         return {
             'method': self.config.method_name,
             'geometry_backend': self.config.geometry_backend,
@@ -614,12 +655,12 @@ class OfflineCoveragePlanner:
             return self._target_area(covered) / denominator
         return len(covered) / float(max(1, target_count))
 
-    def _control_to_target(
+    def _desired_control(
         self,
         state: StateVector,
         target_position: Vector3,
     ) -> ControlVector:
-        command = (
+        return (
             self.config.position_gain * (target_position[0] - state[0])
             - self.config.velocity_gain * state[3],
             self.config.position_gain * (target_position[1] - state[1])
@@ -627,9 +668,101 @@ class OfflineCoveragePlanner:
             self.config.position_gain * (target_position[2] - state[2])
             - self.config.velocity_gain * state[5],
         )
+
+    def _control_to_target(
+        self,
+        state: StateVector,
+        target_position: Vector3,
+    ) -> ControlVector:
+        return self._limit_command(self._desired_control(state, target_position))
+
+    def _terminal_minimum_energy_controls(
+        self,
+        initial_state: StateVector,
+        target_position: Vector3,
+        dt: float,
+        steps: int,
+    ) -> tuple[ControlVector, ...]:
+        """Solve minimum-energy controls that reach and stabilize at a view."""
+        zero_final = self._propagate_constant_control(
+            initial_state,
+            (0.0, 0.0, 0.0),
+            dt,
+            steps,
+        )
+        columns, gram = self._terminal_influence_map(dt, steps)
+        target_state: StateVector = (
+            target_position[0],
+            target_position[1],
+            target_position[2],
+            0.0,
+            0.0,
+            0.0,
+        )
+        rhs = tuple(target_state[index] - zero_final[index] for index in range(6))
+        multiplier = _solve_linear_system(gram, rhs)
+        controls: list[ControlVector] = []
+        for column_index in range(0, len(columns), 3):
+            controls.append((
+                dot(columns[column_index], multiplier),
+                dot(columns[column_index + 1], multiplier),
+                dot(columns[column_index + 2], multiplier),
+            ))
+        return tuple(controls)
+
+    def _terminal_influence_map(
+        self,
+        dt: float,
+        steps: int,
+    ) -> tuple[tuple[StateVector, ...], tuple[StateVector, ...]]:
+        """Return cached final-state influence columns and Gram matrix."""
+        key = (steps, float(dt))
+        if key in self._terminal_map_cache:
+            return self._terminal_map_cache[key]
+
+        columns: list[StateVector] = []
+        zero_command: ControlVector = (0.0, 0.0, 0.0)
+        for control_step in range(steps):
+            for axis in range(3):
+                state: StateVector = (0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+                basis: ControlVector = (
+                    1.0 if axis == 0 else 0.0,
+                    1.0 if axis == 1 else 0.0,
+                    1.0 if axis == 2 else 0.0,
+                )
+                for step in range(steps):
+                    command = basis if step == control_step else zero_command
+                    state = self.dynamics.rk4_step(state, command, dt)
+                columns.append(state)
+
+        gram = tuple(
+            tuple(
+                sum(column[row] * column[column_index] for column in columns)
+                for column_index in range(6)
+            )
+            for row in range(6)
+        )
+        terminal_map = (tuple(columns), gram)
+        self._terminal_map_cache[key] = terminal_map
+        return terminal_map
+
+    def _propagate_constant_control(
+        self,
+        initial_state: StateVector,
+        command: ControlVector,
+        dt: float,
+        steps: int,
+    ) -> StateVector:
+        """Propagate HCW dynamics with a constant control for ``steps`` samples."""
+        state = initial_state
+        for _step in range(steps):
+            state = self.dynamics.rk4_step(state, command, dt)
+        return state
+
+    def _limit_command(self, command: Sequence[float]) -> ControlVector:
         command_norm = norm(command)
         if command_norm <= self.config.max_acceleration:
-            return command
+            return (float(command[0]), float(command[1]), float(command[2]))
         return scale(command, self.config.max_acceleration / command_norm)
 
     def _offset_transfer_time(
@@ -649,6 +782,9 @@ class OfflineCoveragePlanner:
             max_speed=transfer.max_speed,
             min_clearance=transfer.min_clearance,
             tracking_error=transfer.tracking_error,
+            peak_requested_input=transfer.peak_requested_input,
+            clipped_step_count=transfer.clipped_step_count,
+            sample_count=transfer.sample_count,
             feasible=transfer.feasible,
         )
 
@@ -978,10 +1114,9 @@ def dot(left: Iterable[float], right: Iterable[float]) -> float:
     """Return dot product."""
     left_vector = tuple(float(value) for value in left)
     right_vector = tuple(float(value) for value in right)
-    return (
-        left_vector[0] * right_vector[0]
-        + left_vector[1] * right_vector[1]
-        + left_vector[2] * right_vector[2]
+    return sum(
+        left_value * right_value
+        for left_value, right_value in zip(left_vector, right_vector)
     )
 
 
@@ -1013,6 +1148,77 @@ def unit(values: Iterable[float]) -> Vector3:
 def distance(left: Iterable[float], right: Iterable[float]) -> float:
     """Return Euclidean distance between two vectors."""
     return norm(subtract(left, right))
+
+
+def _solve_3x3(
+    matrix: tuple[Vector3, Vector3, Vector3],
+    rhs: Vector3,
+) -> ControlVector:
+    """Solve a 3-by-3 linear system with Gaussian elimination."""
+    augmented = [
+        [float(matrix[row][0]), float(matrix[row][1]), float(matrix[row][2]), float(rhs[row])]
+        for row in range(3)
+    ]
+    for pivot_index in range(3):
+        pivot_row = max(
+            range(pivot_index, 3),
+            key=lambda row: abs(augmented[row][pivot_index]),
+        )
+        if abs(augmented[pivot_row][pivot_index]) <= 1.0e-12:
+            raise ValueError('singular terminal transfer map')
+        if pivot_row != pivot_index:
+            augmented[pivot_index], augmented[pivot_row] = (
+                augmented[pivot_row],
+                augmented[pivot_index],
+            )
+        pivot = augmented[pivot_index][pivot_index]
+        for column in range(pivot_index, 4):
+            augmented[pivot_index][column] /= pivot
+        for row in range(3):
+            if row == pivot_index:
+                continue
+            factor = augmented[row][pivot_index]
+            for column in range(pivot_index, 4):
+                augmented[row][column] -= factor * augmented[pivot_index][column]
+    return (
+        augmented[0][3],
+        augmented[1][3],
+        augmented[2][3],
+    )
+
+
+def _solve_linear_system(
+    matrix: tuple[tuple[float, ...], ...],
+    rhs: tuple[float, ...],
+) -> tuple[float, ...]:
+    """Solve a small dense linear system with partial pivoting."""
+    size = len(rhs)
+    augmented = [
+        [float(matrix[row][column]) for column in range(size)] + [float(rhs[row])]
+        for row in range(size)
+    ]
+    for pivot_index in range(size):
+        pivot_row = max(
+            range(pivot_index, size),
+            key=lambda row: abs(augmented[row][pivot_index]),
+        )
+        if abs(augmented[pivot_row][pivot_index]) <= 1.0e-12:
+            raise ValueError('singular terminal transfer map')
+        if pivot_row != pivot_index:
+            augmented[pivot_index], augmented[pivot_row] = (
+                augmented[pivot_row],
+                augmented[pivot_index],
+            )
+        pivot = augmented[pivot_index][pivot_index]
+        for column in range(pivot_index, size + 1):
+            augmented[pivot_index][column] /= pivot
+        for row in range(size):
+            if row == pivot_index:
+                continue
+            factor = augmented[row][pivot_index]
+            for column in range(pivot_index, size + 1):
+                augmented[row][column] -= factor * augmented[pivot_index][column]
+    return tuple(augmented[row][size] for row in range(size))
 
 
 def _read_glb(path: Path) -> tuple[dict[str, object], bytes]:
@@ -1598,7 +1804,7 @@ def _load_yaml_config(path: Path) -> dict[str, object]:
     """Load offline planner config values from YAML if the file exists."""
     if not path.is_file():
         return {}
-    raw = yaml.safe_load(path.read_text()) or {}
+    raw = _safe_load_yaml_mapping(path)
     if 'offline_coverage_planner' in raw:
         raw = raw['offline_coverage_planner'].get('ros__parameters', {})
     if not isinstance(raw, dict):
@@ -1609,6 +1815,67 @@ def _load_yaml_config(path: Path) -> dict[str, object]:
         for key, value in raw.items()
         if str(key) in allowed_keys
     }
+
+
+def _safe_load_yaml_mapping(path: Path) -> dict[str, object]:
+    """Load simple YAML mappings with a PyYAML fallback for offline macOS runs."""
+    if yaml is not None:
+        loaded = yaml.safe_load(path.read_text()) or {}
+        return loaded if isinstance(loaded, dict) else {}
+    return _load_simple_yaml_mapping(path.read_text())
+
+
+def _load_simple_yaml_mapping(text: str) -> dict[str, object]:
+    """Parse the small subset of YAML used by local planner config files."""
+    root: dict[str, object] = {}
+    stack: list[tuple[int, dict[str, object]]] = [(-1, root)]
+    pending_list: tuple[int, str, list[object]] | None = None
+    for raw_line in text.splitlines():
+        if not raw_line.strip() or raw_line.lstrip().startswith('#'):
+            continue
+        indent = len(raw_line) - len(raw_line.lstrip(' '))
+        stripped = raw_line.strip()
+        if pending_list is not None and indent > pending_list[0] and stripped.startswith('- '):
+            pending_list[2].append(_parse_scalar(stripped[2:].strip()))
+            continue
+        pending_list = None
+        while stack and indent <= stack[-1][0]:
+            stack.pop()
+        current = stack[-1][1]
+        key, separator, value = stripped.partition(':')
+        if not separator:
+            continue
+        key = key.strip()
+        value = value.strip()
+        if value == '':
+            child: dict[str, object] = {}
+            current[key] = child
+            stack.append((indent, child))
+        elif value == '[]':
+            current[key] = []
+        else:
+            parsed = _parse_scalar(value)
+            current[key] = parsed
+            if isinstance(parsed, list):
+                pending_list = (indent, key, parsed)
+    return root
+
+
+def _parse_scalar(value: str) -> object:
+    if value.startswith('[') and value.endswith(']'):
+        inner = value[1:-1].strip()
+        if not inner:
+            return []
+        return [_parse_scalar(item.strip()) for item in inner.split(',')]
+    lowered = value.lower()
+    if lowered in {'true', 'false'}:
+        return lowered == 'true'
+    try:
+        if any(marker in value for marker in ('.', 'e', 'E')):
+            return float(value)
+        return int(value)
+    except ValueError:
+        return value.strip('"\'')
 
 
 def main(argv: list[str] | None = None) -> None:

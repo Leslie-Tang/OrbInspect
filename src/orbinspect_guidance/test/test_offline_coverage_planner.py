@@ -113,7 +113,7 @@ def _small_config(tmp_path: Path) -> OfflinePlannerConfig:
         candidate_stride=2,
         coverage_threshold=0.25,
         max_viewpoints=8,
-        transfer_duration=20.0,
+        transfer_duration=80.0,
         integration_dt=2.0,
         max_acceleration=0.02,
         mesh_preview_max_edges=0,

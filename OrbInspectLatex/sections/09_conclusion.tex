@@ -1,22 +1,33 @@
 \section{Conclusion}
 \label{sec:conclusion}
 
-This paper presented OrbInspect, a ROS~2 and Gazebo Harmonic framework for
-coverage-constrained autonomous orbital inspection. The framework keeps
-CW/HCW dynamics as the state source of truth, uses Gazebo for visualization,
-and records the artifacts needed to audit planning, control, coverage, safety,
-and experiment configuration. The updated mesh-aware offline experiment
-generated a feasible 1840~s set-cover CW tour with 23 selected viewpoints,
-8.7697~m/s planned cumulative $\Delta v$, 7.5323~m minimum clearance, and
-98.33\% final coverage over 180 mesh targets. Compared with random-safe and
-several greedy baselines, the proposed method provides the best feasible
-coverage-energy trade-off in the reported benchmark. The ROS smoke run
-validated the logging and safety-monitoring pipeline, and Gazebo frames and
-videos validated the visual replay interface.
+This paper formulated autonomous inspection of orbital structures as a
+dynamics-aware coverage-planning problem on a finite candidate-view graph. The
+planner incorporates CW/HCW transfer cost, clearance, and input limits during
+view selection instead of checking them after geometric coverage has been
+chosen. The reduced-graph certification case showed that the implemented
+dynamic program can return a true finite-graph optimum: with eight candidate
+nodes and 13 visible target IDs, it expanded 39 feasible states and selected a
+minimum-cost two-view tour satisfying the 25\% coverage requirement. On the
+full ISS-mesh benchmark, the scalable solver generated a feasible 1890~s
+trajectory with 21 selected views, 21.5921~m/s cumulative $\Delta v$,
+9.9107~m minimum clearance, and 98.33\% final coverage over 180 surface
+targets. Compared with coverage-greedy, safe-coverage, nearest-viewpoint,
+fuel-focused, CW-NBV, and random-safe baselines, the proposed solver reached
+the target coverage with the lowest cumulative $\Delta v$ among feasible
+high-coverage methods and avoided the input and clearance violations observed
+in simpler high-coverage selection rules. ROS~2 and Gazebo provided replay and
+camera-geometry verification, while the planner and logged HCW trajectory
+remained the basis of the quantitative claims.
 
-The next technical steps are broader Monte Carlo studies, higher-fidelity mesh
-occlusion acceleration, uncertainty-aware keep-out margins, camera slew and
-illumination constraints, and optional Basilisk validation after the HCW
-baseline remains reproducible. With those additions, OrbInspect can mature
-from a reproducible inspection-planning framework into a high-confidence
-experimental platform for autonomous inspection of large orbital structures.
+Additional sensitivity and ablation runs show that the proposed planner
+remains feasible for the tested $N=500$ target-density case, three initial
+states, three candidate densities, and keep-out margins from 1 to 4~m. They
+also expose real limits: a 70~s transfer segment violates the input bound, and
+a coarse $N=1000$ stress case falls below the high-coverage stop target.
+Future work should therefore focus on accelerated mesh visibility, denser
+candidate generation, broader Monte Carlo cases, larger certified graph
+instances, and uncertainty-aware keep-out, camera slew, illumination, and
+actuator constraints. Higher-fidelity validation, including an optional
+Basilisk backend, should be added only after the HCW baseline remains
+reproducible.

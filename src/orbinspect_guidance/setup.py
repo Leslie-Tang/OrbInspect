@@ -42,6 +42,8 @@ setup(
             'orbinspect_guidance.offline_coverage_planner:main',
             'offline_planning_experiment = '
             'orbinspect_guidance.offline_planning_experiment:main',
+            'offline_validation_matrix = '
+            'orbinspect_guidance.offline_validation_matrix:main',
             'planned_trajectory_replay_node = '
             'orbinspect_guidance.planned_trajectory_replay_node:main',
         ],

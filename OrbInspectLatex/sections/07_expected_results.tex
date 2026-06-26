@@ -1,157 +1,288 @@
 \section{Results}
 \label{sec:results}
 
-\subsection{Mesh-Aware Offline Planning}
+\subsection{Offline Planning Performance}
 
-Table~\ref{tab:offline-results} summarizes the best feasible method in the
-high-coverage mesh experiment. The proposed set-cover CW tour reaches 98.33\%
-coverage over 180 mesh targets, exceeding the 70\% success threshold and
-nearly reaching the 98\% stop target. The planner selects 23 viewpoints from
-357 candidates and produces a 1840~s trajectory with 920 samples. Unlike the
-pure coverage-greedy baseline, every selected transfer is feasible and the
-minimum clearance remains positive.
+Table~\ref{tab:certified-results} reports the reduced-graph certification
+case. The exact dynamic program used eight candidate nodes from a 16-candidate
+mesh instance, covered 13 visible target IDs, expanded 39 feasible graph
+states, and returned certificate status ``optimal''. The certified tour
+selected two views, reached the required 25\% raw coverage, and remained
+within the input and clearance limits. On the same reduced instance, the
+scalable proposed solver and safe-coverage-greedy also selected two feasible
+views but incurred higher HCW dynamic cost. The purpose of this case is not to
+represent the full ISS mission; it demonstrates that the implemented finite
+graph solver can return a genuine optimum when the reduced graph is small
+enough to exhaust.
 
 \begin{table}[t]
   \centering
-  \caption{Best feasible offline planning metrics from
-  \texttt{data/offline\_high\_coverage\_experiment/summary.json}.}
+  \caption{Reduced-graph certification case. The exact dynamic program
+  minimizes HCW dynamic cost subject to feasible transfers, a four-view budget,
+  and a 25\% coverage requirement.}
+  \label{tab:certified-results}
+  \renewcommand{\arraystretch}{1.05}
+  \setlength{\tabcolsep}{4.0pt}
+  \begin{tabular}{lrr}
+    \toprule
+    Method & Coverage & Dynamic cost \\
+    \midrule
+    Certified DP & 0.2500 & 26.7682 \\
+    Proposed scalable & 0.2917 & 27.0924 \\
+    Safe coverage greedy & 0.2917 & 30.3664 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Table~\ref{tab:offline-results} summarizes the proposed dynamics-aware tour in
+the high-coverage mesh experiment. The planner reached 98.33\% coverage over
+180 surface targets, exceeding the 70\% success threshold and passing the 98\%
+planning stop target. Coverage is reported together with cumulative
+$\Delta v$, minimum clearance, peak requested input, and clipping ratio because
+these quantities determine whether an inspection sequence is dynamically
+plausible. These results establish the scalable full-graph comparison only;
+the sensitivity and ablation studies in Table~\ref{tab:validation-matrix} test
+which parts of this ranking persist under denser target sampling and perturbed
+mission conditions.
+
+\begin{table}[t]
+  \centering
+  \caption{Best feasible offline planning metrics from the high-coverage mesh
+  experiment.}
   \label{tab:offline-results}
   \begin{tabular}{ll}
     \toprule
     Metric & Value \\
     \midrule
-    Method & set-cover CW tour \\
+    Method & Proposed dynamics-aware tour \\
     Dynamics model & CW/HCW \\
-    Geometry backend & mesh \\
+    Geometry model & NASA ISS glTF mesh \\
     Target count & 180 \\
-    Candidate viewpoints & 357 \\
-    Selected viewpoints & 23 \\
-    Trajectory samples & 920 \\
-    Mission duration & 1840.0~s \\
+    Candidate views & 357 \\
+    Selected views & 21 \\
+    Trajectory samples & 945 \\
+    Mission duration & 1890.0~s \\
     Final coverage ratio & 0.9833 \\
     Inspectable coverage ratio & 0.9833 \\
     Coverage threshold & 0.7000 \\
-    Coverage success & true \\
-    Total planned $\Delta v$ & 8.7697~m/s \\
-    $\Delta v$ per coverage & 8.9183~m/s \\
-    Maximum speed & 0.5641~m/s \\
-    Minimum clearance & 7.5323~m \\
-    RMS transfer tracking error & 28.6747~m \\
-    Planning time & 5.8591~s \\
-    Feasible trajectory & true \\
+    Coverage success & Yes \\
+    Total planned $\Delta v$ & 21.5921~m/s \\
+    $\Delta v$ per coverage & 21.9581~m/s \\
+    Maximum speed & 0.8898~m/s \\
+    Minimum clearance & 9.9107~m \\
+    RMS transfer tracking error & 19.9695~m \\
+    Peak requested input & 0.0388~m/s$^2$ \\
+    Clipped step ratio & 0.0000 \\
+    Planning time & 5.9707~s \\
+    Feasible trajectory & Yes \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-Figure~\ref{fig:mesh-and-trajectory} overlays the proposed trajectory on the
-same ISS mesh model used for target sampling and Gazebo visualization. The
-figure is generated directly from the copied NASA ISS GLB,
-\texttt{raw/trajectory.csv}, and \texttt{raw/viewpoints.csv} in the saved
-high-coverage experiment, so the displayed path and selected viewpoints share
-the same LVLH coordinate frame as the mesh.
+Figure~\ref{fig:mesh-and-trajectory} overlays the planned trajectory on the
+same open NASA ISS glTF mesh model used for target sampling and replay
+visualization~\cite{nasa_iss_gltf_model}. The figure is generated from the
+benchmark data, so the displayed path and selected views share the same LVLH
+coordinate frame as the mesh. The path is a stitched sequence of discrete
+rest-to-rest HCW transfers, so it is dynamically valid but not drawn as a
+single global spline.
 
 \begin{figure}[t]
   \centering
   \includegraphics[width=0.95\linewidth]{figures/high_coverage/proposed_trajectory_3d.pdf}
-  \caption{Proposed set-cover CW trajectory overlaid on the ISS mesh model.
-  The selected viewpoints are colored by cumulative covered targets, and the
-  thick blue curve shows the planned chaser path around the mesh.}
+  \caption{Proposed dynamics-aware tour overlaid on the open NASA ISS glTF mesh model.
+  The selected views are colored by cumulative coverage, and the
+  trajectory is shown as the planned chaser path in LVLH coordinates.}
   \label{fig:mesh-and-trajectory}
 \end{figure}
 
 Figure~\ref{fig:coverage-comparison} reports the corresponding coverage
 evolution for the deterministic mesh comparison. All curves are generated from
-the copied high-coverage result folder, keeping the manuscript figures tied to
-the archived CSV files.
+the archived high-coverage experiment and use the same candidate set,
+visibility model, transfer constraints, and termination logic.
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=0.82\linewidth]{figures/high_coverage/coverage_comparison.pdf}
+  \includegraphics[width=0.95\linewidth]{figures/high_coverage/coverage_comparison.pdf}
   \caption{Coverage evolution for the compared offline methods in the
   high-coverage mesh experiment.}
   \label{fig:coverage-comparison}
 \end{figure}
 
-\subsection{Method Comparison}
-
-Table~\ref{tab:method-results} reports the deterministic mesh comparison. All
-methods except the infeasible coverage-greedy baseline maintain positive
-clearance. The proposed set-cover CW tour has the lowest $\Delta v$ among the
-methods that simultaneously achieve 98.33\% coverage and remain feasible. It
-uses 64.3\% less $\Delta v$ than the random-safe baseline and 40.99\% less
-$\Delta v$ than safe coverage-greedy while retaining a much larger minimum
-clearance.
-
-\begin{table}[t]
-  \centering
-  \caption{Offline mesh method comparison from
-  \texttt{raw/method\_comparison.csv}.}
-  \label{tab:method-results}
-  \begin{tabular}{p{0.31\linewidth}rrrrr}
-    \toprule
-    Method & Coverage & $\Delta v$ & Clearance & Cost & Feasible \\
-    \midrule
-    set-cover CW tour & 0.983 & 8.770 & 7.532 & 152.8 & true \\
-    proposed safe CW NBV & 0.983 & 13.169 & 2.512 & 224.6 & true \\
-    coverage greedy & 0.983 & 15.665 & -2.933 & 855.7 & false \\
-    safe coverage greedy & 0.983 & 14.865 & 1.307 & 251.0 & true \\
-    nearest NBV & 0.983 & 9.936 & 9.760 & 175.5 & true \\
-    fuel greedy & 0.983 & 11.362 & 2.582 & 199.4 & true \\
-    random safe & 0.983 & 24.565 & 2.123 & 409.1 & true \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-Figure~\ref{fig:trajectory-comparison} shows the saved 3D trajectories for all
-offline methods over the ISS mesh. The plot makes the dynamic consequence of
-each viewpoint ordering visible: methods with similar final coverage can still
-induce substantially different approach geometry, path length, and clearance
-behavior relative to the inspected structure.
+Figure~\ref{fig:trajectory-comparison} compares the baseline trajectories as
+method-wise small multiples. The proposed dynamics-aware tour is shown
+separately in Fig.~\ref{fig:mesh-and-trajectory}, where the selected views and
+full mesh context are easier to inspect. The shared mesh silhouette, viewpoint,
+and axis limits make baseline path geometry comparable without repeating the
+proposed trajectory. Figure~\ref{fig:trajectory-tradeoff-summary} reports the
+full comparison in terms of final coverage and cumulative $\Delta v$, and it
+marks dynamically infeasible runs.
+In this representation, the proposed tour is the lowest-energy feasible method
+that reaches the high-coverage stop target in the reported base case. The
+coverage-greedy and
+nearest-viewpoint runs can reach similar coverage only by violating input or
+clearance constraints, whereas the safe-coverage and random-safe baselines
+remain feasible but require substantially more cumulative $\Delta v$. The
+fuel-focused baseline uses low input effort but stops below the high-coverage
+target.
+The baseline trajectory panels are intentionally unsmoothed between selected
+views. The visible corners therefore reflect terminal HCW transfer segments,
+not a rendering artifact.
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=0.95\linewidth]{figures/high_coverage/trajectory_method_comparison.pdf}
-  \caption{Offline trajectory comparison generated from
-  \texttt{raw/trajectory.csv} and overlaid on the copied ISS GLB mesh. The
-  proposed set-cover CW tour reaches the high-coverage target with the lowest
-  $\Delta v$ among feasible methods at the same final coverage.}
+  \subfloat[CW-NBV]{\includegraphics[width=0.32\linewidth]{figures/high_coverage/trajectory_method_cw_nbv.pdf}}\hfill
+  \subfloat[Coverage]{\includegraphics[width=0.32\linewidth]{figures/high_coverage/trajectory_method_coverage.pdf}}
+  \vspace{-0.35em}
+  \subfloat[Safe cov.]{\includegraphics[width=0.32\linewidth]{figures/high_coverage/trajectory_method_safe_coverage.pdf}}\hfill
+
+  \subfloat[Nearest]{\includegraphics[width=0.32\linewidth]{figures/high_coverage/trajectory_method_nearest.pdf}}\hfill
+  \subfloat[Fuel]{\includegraphics[width=0.32\linewidth]{figures/high_coverage/trajectory_method_fuel.pdf}}
+  \subfloat[Random]{\includegraphics[width=0.32\linewidth]{figures/high_coverage/trajectory_method_random.pdf}}
+  \caption{Baseline trajectory comparison over the same ISS mesh silhouette.
+  The proposed dynamics-aware tour is shown separately in Fig.~\ref{fig:mesh-and-trajectory}.}
   \label{fig:trajectory-comparison}
 \end{figure}
 
-Figure~\ref{fig:energy-safety} compares $\Delta v$, coverage efficiency, and
-minimum clearance. The set-cover CW tour is not the single best method for
-clearance, but it provides the best feasible trade-off among coverage,
-energy, and dynamic cost. The nearest-NBV baseline has the largest minimum
-clearance but requires more viewpoints, a longer mission duration, and higher
-$\Delta v$ than the proposed method.
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.90\linewidth]{figures/high_coverage/trajectory_tradeoff_summary.pdf}
+  \caption{Coverage-effort-feasibility summary for the full offline comparison.
+  The dashed line in the summary panel marks the 98\% stop target. A star
+  denotes the proposed method shown in Fig.~\ref{fig:mesh-and-trajectory};
+  circles denote feasible baselines, and crosses denote methods that fail the
+  input, speed, or clearance checks.}
+  \label{fig:trajectory-tradeoff-summary}
+\end{figure}
+
+Table~\ref{tab:method-execution-results} reports execution and solver
+quantities that are not shown in
+Fig.~\ref{fig:trajectory-tradeoff-summary}. Rest-to-rest terminal transfers
+remove the earlier fly-through artifact in which a myopic safe baseline could
+terminate after one view. Safe-coverage-greedy now reaches the same final
+coverage as the proposed tour, but it requires more than twice the cumulative
+$\Delta v$. Coverage-greedy reaches the target coverage with fewer views, but
+it violates input and clearance checks. Nearest-viewpoint selection also
+reaches high coverage, but its clearance violation makes the resulting tour
+dynamically infeasible.
+
+\begin{table*}[t]
+  \centering
+  \caption{Complementary offline comparison quantities not encoded by the
+  coverage-effort plot.}
+  \label{tab:method-execution-results}
+  \renewcommand{\arraystretch}{1.08}
+  \setlength{\tabcolsep}{5.0pt}
+  \begin{tabular}{lrrrrrr}
+    \toprule
+    Method & Views & Duration (s) & Peak input (m/s$^2$) &
+    Clipped steps (\%) & Planning time (s) & Feasible \\
+    \midrule
+    Proposed & 21 & 1890 & 0.0388 & 0.0 & 5.97 & Yes \\
+    CW-NBV baseline & 19 & 1710 & 0.0581 & 0.0 & 37.22 & Yes \\
+    Coverage greedy & 18 & 1620 & 0.0849 & 10.5 & 5.25 & No \\
+    Safe coverage greedy & 20 & 1800 & 0.0581 & 0.0 & 6.13 & Yes \\
+    Nearest NBV & 36 & 3240 & 0.0528 & 0.0 & 9.68 & No \\
+    Fuel greedy & 36 & 3240 & 0.0368 & 0.0 & 10.43 & Yes \\
+    Random safe & 34 & 3060 & 0.0588 & 0.0 & 10.47 & Yes \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+Figure~\ref{fig:validation-matrix-summary} summarizes the sensitivity and
+ablation matrix. Increasing the target count from 180 to 500 preserves the
+main ranking: the proposed tour remains feasible and reaches the 98\% stop
+target with 21.38~m/s cumulative $\Delta v$, whereas safe-coverage-greedy
+requires 47.08~m/s and coverage-greedy remains infeasible. The coarser
+$N=1000$ proposed-only stress case remains feasible but reaches 76.5\%
+coverage because the candidate stride is increased to keep mesh visibility
+computation tractable; this identifies candidate-density coupling as a
+remaining scalability issue rather than hiding it.
+
+The initial-condition sweep over three safe starting states keeps the proposed
+tour feasible with final coverage 98.33\%, cumulative $\Delta v$ between
+20.19 and 23.09~m/s, and positive clearance. Candidate-density sweeps show
+that reducing candidate count from 357 to 120 still reaches at least 97.2\%
+coverage but reduces clearance to 0.73~m in the proposed tour. Transfer
+duration is the clearest feasibility boundary: a 70~s segment requests
+0.061~m/s$^2$, slightly above the 0.060~m/s$^2$ limit, and is therefore
+audited as infeasible; 90~s and 120~s segments are feasible.
+
+The ablation study provides direct evidence for the algorithmic components.
+Removing transfer cost increases cumulative $\Delta v$ and peak input while
+retaining coverage. Removing the input-feasibility check produces high
+coverage but violates the input limit. Removing clearance filtering changes
+the selected set and reduces final coverage to 90.0\% in this benchmark.
+Unweighted coverage is nearly identical here because the sampled ISS targets
+have similar effective weights, but it remains an explicit ablation because
+area weighting becomes important for nonuniform meshes.
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=0.32\linewidth]{figures/high_coverage/delta_v_comparison.pdf}
-  \includegraphics[width=0.32\linewidth]{figures/high_coverage/energy_efficiency_comparison.pdf}
-  \includegraphics[width=0.32\linewidth]{figures/high_coverage/safety_comparison.pdf}
-  \caption{Offline comparison figures. Left: cumulative planned $\Delta v$.
-  Center: coverage per unit $\Delta v$. Right: minimum clearance.}
-  \label{fig:energy-safety}
+  \includegraphics[width=0.96\linewidth]{figures/high_coverage/validation_matrix_summary.pdf}
+  \caption{Sensitivity and ablation results generated by the offline
+  validation matrix. Circles denote feasible runs and crosses denote runs that
+  fail the full feasibility audit. The dashed lines mark the 98\% stop target
+  or the 0.060~m/s$^2$ input limit.}
+  \label{fig:validation-matrix-summary}
 \end{figure}
 
-\subsection{Trajectory, Attitude, and ROS Validation}
+\subsection{Camera Geometry and Replay Verification}
 
-The high-coverage experiment exports both trajectory and camera-attitude
-streams. For the set-cover CW tour, \texttt{trajectory.csv} and
-\texttt{attitude.csv} each contain 920 samples, while \texttt{viewpoints.csv}
-contains the selected camera viewpoints, boresight vectors, yaw, pitch, and
-quaternion orientations. These files are used by the trajectory replay node to
-publish odometry, path markers, field-of-view markers, and station mesh
-markers for RViz and Gazebo validation.
+The high-coverage experiment exports trajectory and camera-attitude streams
+for every compared method. For the proposed tour, each stream contains 945
+samples. The camera orientation data replay the planned path with the same
+boresight alignment used in the visibility predicate. The trajectory replay
+node uses these data to publish odometry, path markers, field-of-view markers,
+and station mesh markers for RViz and Gazebo validation.
 
-The existing ROS execution smoke run remains a middleware validation artifact.
-It records trajectory, control, coverage, planner, safety, summary, manifest,
-and rosbag outputs. The run is shorter than the high-coverage offline
-trajectory, so its online coverage ratio is not used as the headline planning
-result. Its role is to demonstrate that the ROS stack records paper-grade
-topics and that Gazebo visualization consumes the ROS state stream while HCW
-dynamics remain the source of truth.
+Figures~\ref{fig:camera-model-frusta} and~\ref{fig:camera-model-coverage}
+make the camera model visible in two ways. The first reconstructs
+representative field-of-view frusta from selected view poses and boresight
+vectors. The second reports the incremental surface coverage contributed by
+the selected-view sequence. Together, they show that saved attitudes
+instantiate the same FOV geometry used by the visibility predicate and that
+the selected views contribute to the final coverage.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.95\linewidth]{figures/high_coverage/camera_model_frusta.pdf}
+  \caption{Camera-model verification through reconstructed field-of-view
+  geometry overlaid on the proposed dynamics-aware tour. The frusta and
+  boresight rays are reconstructed from saved camera poses for representative
+  early, middle, and final selected views, verifying that the logged attitude
+  stream instantiates the visibility model used by the planner and by ROS
+  replay in the same LVLH frame as the ISS mesh.}
+  \label{fig:camera-model-frusta}
+\end{figure}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.96\linewidth]{figures/high_coverage/camera_model_coverage.pdf}
+  \caption{Incremental surface coverage contributed by the selected camera
+  views. Bars show per-view coverage gain in the selected-view sequence, with
+  the same representative early, middle, and final views highlighted as in
+  Fig.~\ref{fig:camera-model-frusta}.}
+  \label{fig:camera-model-coverage}
+\end{figure}
+
+The ROS execution run reconstructs the planned state, attitude, and camera
+frame from the saved logs, broadcasts the same FOV geometry used by the
+planner, and records trajectory, control, coverage, mission-event, safety, and
+planner topics. This verifies that the visual model, attitude stream, and
+geometric visibility logic remain consistent after integration.
+
+\begin{figure}[t]
+  \centering
+  \fbox{\parbox[c][1.55in][c]{0.92\linewidth}{\centering
+  Placeholder: ROS verification panel.
+
+  This panel will show the RViz/Gazebo replay view together with logged
+  coverage, safety, and FOV-consistency signals from the ROS execution run.}}
+  \caption{Placeholder for ROS verification of the camera model and replayed
+  inspection execution.}
+  \label{fig:ros-camera-verification}
+\end{figure}
 
 \begin{figure}[t]
   \centering
@@ -159,6 +290,7 @@ dynamics remain the source of truth.
   \includegraphics[width=0.48\linewidth]{figures/gazebo_validation/full_preview_360.png}
   \caption{Gazebo Harmonic validation frames. Left: chaser-follow camera view.
   Right: full ISS visual context with chaser trajectory replay. Quantitative
-  coverage, safety, and control claims come from CSV logs, not Gazebo physics.}
+  coverage, safety, and control claims come from recorded planner logs, not
+  Gazebo physics.}
   \label{fig:gazebo-validation}
 \end{figure}

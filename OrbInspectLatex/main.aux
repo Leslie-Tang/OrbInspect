@@ -2,77 +2,113 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
-\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{2}{section.1}\protected@file@percent }
-\newlabel{sec:introduction}{{1}{2}{Introduction}{section.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}{section.1}\protected@file@percent }
+\newlabel{sec:introduction}{{I}{1}{}{section.1}{}}
 \citation{clohessy1960terminal}
 \citation{wertz2011space}
-\@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{4}{section.7}\protected@file@percent }
-\newlabel{sec:related}{{2}{4}{Related Work}{section.7}{}}
 \citation{scott2003view}
-\@writefile{toc}{\contentsline {section}{\numberline {3}System Model and Mission Setting}{6}{section.8}\protected@file@percent }
-\newlabel{sec:system}{{3}{6}{System Model and Mission Setting}{section.8}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Architecture}{6}{subsection.9}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Reference Frame and State}{6}{subsection.10}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Relative Dynamics}{7}{subsection.12}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Inspection Targets}{7}{subsection.16}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Mission Termination}{8}{subsection.17}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}Problem Formulation}{8}{section.19}\protected@file@percent }
-\newlabel{sec:problem}{{4}{8}{Problem Formulation}{section.19}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Visibility and Dwell}{8}{subsection.20}\protected@file@percent }
-\newlabel{eq:range}{{6}{8}{Visibility and Dwell}{equation.21}{}}
-\newlabel{eq:fov}{{7}{8}{Visibility and Dwell}{equation.22}{}}
-\newlabel{eq:view-angle}{{8}{8}{Visibility and Dwell}{equation.23}{}}
-\newlabel{eq:los}{{9}{8}{Visibility and Dwell}{equation.24}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Safety and Actuation}{9}{subsection.26}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Optimization Objective}{9}{subsection.30}\protected@file@percent }
-\newlabel{eq:objective}{{14}{9}{Optimization Objective}{equation.31}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Evaluation Metrics}{10}{subsection.38}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Dynamics-Aware Coverage Efficiency}{10}{subsection.43}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5}Offline Planner}{11}{section.45}\protected@file@percent }
-\newlabel{sec:algorithm}{{5}{11}{Offline Planner}{section.45}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Decomposition}{11}{subsection.46}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Candidate Viewpoints}{11}{subsection.47}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Dynamics-Aware Viewpoint Selection}{12}{subsection.49}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}CW Transfer Generation}{12}{subsection.51}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}Outputs}{13}{subsection.53}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6}Experimental Protocol}{13}{section.55}\protected@file@percent }
-\newlabel{sec:simulation}{{6}{13}{Experimental Protocol}{section.55}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Offline Planning Benchmark}{13}{subsection.56}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}ROS~2 Execution Smoke Run}{14}{subsection.57}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Gazebo Harmonic Validation}{14}{subsection.58}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Monte Carlo Baseline Table}{14}{subsection.59}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7}Results}{15}{section.60}\protected@file@percent }
-\newlabel{sec:results}{{7}{15}{Results}{section.60}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Mesh-Aware Offline Planning}{15}{subsection.61}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Method Comparison}{15}{subsection.68}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Proposed set-cover CW trajectory overlaid on the ISS mesh model. The selected viewpoints are colored by cumulative covered targets, and the thick blue curve shows the planned chaser path around the mesh.}}{16}{figure.65}\protected@file@percent }
-\newlabel{fig:mesh-and-trajectory}{{1}{16}{Proposed set-cover CW trajectory overlaid on the ISS mesh model. The selected viewpoints are colored by cumulative covered targets, and the thick blue curve shows the planned chaser path around the mesh}{figure.65}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Coverage evolution for the compared offline methods in the high-coverage mesh experiment.}}{17}{figure.67}\protected@file@percent }
-\newlabel{fig:coverage-comparison}{{2}{17}{Coverage evolution for the compared offline methods in the high-coverage mesh experiment}{figure.67}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Trajectory, Attitude, and ROS Validation}{17}{subsection.75}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {8}Discussion and Limitations}{18}{section.78}\protected@file@percent }
-\newlabel{sec:discussion}{{8}{18}{Discussion and Limitations}{section.78}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}Self-Contained Artifact Inventory}{19}{subsection.79}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {9}Conclusion}{19}{section.82}\protected@file@percent }
-\newlabel{sec:conclusion}{{9}{19}{Conclusion}{section.82}{}}
-\bibstyle{elsarticle-num}
+\citation{lavalle1998rapidly,karaman2011sampling}
+\citation{apodaca2025trajectory}
+\citation{hou2024relative}
+\citation{zhou2026tomographic}
+\citation{ogri2025switched}
+\citation{scott2003view}
+\citation{lavalle1998rapidly,karaman2011sampling}
+\citation{apodaca2025trajectory}
+\citation{hou2024relative}
+\citation{zhou2026tomographic}
+\citation{ogri2025switched}
+\@writefile{toc}{\contentsline {section}{\numberline {II}Related Work}{2}{section.2}\protected@file@percent }
+\newlabel{sec:related}{{II}{2}{}{section.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {III}System Model and Mission Setting}{2}{section.3}\protected@file@percent }
+\newlabel{sec:system}{{III}{2}{}{section.3}{}}
+\citation{nasa_iss_gltf_model}
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Positioning relative to closely related inspection and planning approaches.}}{3}{table.caption.1}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{tab:positioning}{{I}{3}{Positioning relative to closely related inspection and planning approaches}{table.caption.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A}Reference Frame and Dynamics}{3}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {B}Inspection Geometry and Termination}{3}{subsection.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Problem Formulation}{4}{section.4}\protected@file@percent }
+\newlabel{sec:problem}{{IV}{4}{}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A}State, Visibility, and Coverage}{4}{subsection.4.1}\protected@file@percent }
+\newlabel{eq:range}{{8}{4}{}{equation.8}{}}
+\newlabel{eq:fov}{{9}{4}{}{equation.9}{}}
+\newlabel{eq:view-angle}{{10}{4}{}{equation.10}{}}
+\newlabel{eq:los}{{11}{4}{}{equation.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B}Dynamic Feasibility and Cost}{4}{subsection.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {C}Optimization Objective}{4}{subsection.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {D}Finite Graph and Evaluation Quantities}{5}{subsection.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {V}Offline Planner}{5}{section.5}\protected@file@percent }
+\newlabel{sec:algorithm}{{V}{5}{}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A}Decomposition}{5}{subsection.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {B}Candidate Viewpoints}{5}{subsection.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {C}Dynamics-Aware Viewpoint Selection}{5}{subsection.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {D}CW Transfer Generation}{5}{subsection.5.4}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Dynamics-aware finite-graph inspection planner}}{6}{algorithm.1}\protected@file@percent }
+\newlabel{alg:offline-planner}{{1}{6}{Dynamics-aware finite-graph inspection planner}{algorithm.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {E}Certified Finite-Graph Solver}{6}{subsection.5.5}\protected@file@percent }
+\newlabel{sec:theory}{{E}{6}{}{subsection.5.5}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Certified reduced-graph dynamic program}}{6}{algorithm.2}\protected@file@percent }
+\newlabel{alg:certified-dp}{{2}{6}{Certified reduced-graph dynamic program}{algorithm.2}{}}
+\newlabel{eq:finite-mip-objective}{{30}{6}{}{equation.30}{}}
+\citation{nasa_iss_gltf_model}
+\@writefile{toc}{\contentsline {subsection}{\numberline {F}Planner Outputs}{7}{subsection.5.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Execution and Experimental Protocol}{7}{section.6}\protected@file@percent }
+\newlabel{sec:simulation}{{VI}{7}{}{section.6}{}}
+\newlabel{sec:online}{{VI}{7}{}{section.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Validation matrix for sensitivity and ablation studies.}}{7}{table.caption.2}\protected@file@percent }
+\newlabel{tab:validation-matrix}{{II}{7}{Validation matrix for sensitivity and ablation studies}{table.caption.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A}Benchmark Definition}{7}{subsection.6.1}\protected@file@percent }
+\citation{nasa_iss_gltf_model}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B}Online Replay Interface}{8}{subsection.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {C}ROS/Gazebo Verification}{8}{subsection.6.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {VII}Results}{8}{section.7}\protected@file@percent }
+\newlabel{sec:results}{{VII}{8}{}{section.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A}Offline Planning Performance}{8}{subsection.7.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Reduced-graph certification case. The exact dynamic program minimizes HCW dynamic cost subject to feasible transfers, a four-view budget, and a 25\% coverage requirement.}}{8}{table.caption.3}\protected@file@percent }
+\newlabel{tab:certified-results}{{III}{8}{Reduced-graph certification case. The exact dynamic program minimizes HCW dynamic cost subject to feasible transfers, a four-view budget, and a 25\% coverage requirement}{table.caption.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {IV}{\ignorespaces Best feasible offline planning metrics from the high-coverage mesh experiment.}}{8}{table.caption.4}\protected@file@percent }
+\newlabel{tab:offline-results}{{IV}{8}{Best feasible offline planning metrics from the high-coverage mesh experiment}{table.caption.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Proposed dynamics-aware tour overlaid on the open NASA ISS glTF mesh model. The selected views are colored by cumulative coverage, and the trajectory is shown as the planned chaser path in LVLH coordinates.}}{9}{figure.caption.5}\protected@file@percent }
+\newlabel{fig:mesh-and-trajectory}{{1}{9}{Proposed dynamics-aware tour overlaid on the open NASA ISS glTF mesh model. The selected views are colored by cumulative coverage, and the trajectory is shown as the planned chaser path in LVLH coordinates}{figure.caption.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Coverage evolution for the compared offline methods in the high-coverage mesh experiment.}}{9}{figure.caption.6}\protected@file@percent }
+\newlabel{fig:coverage-comparison}{{2}{9}{Coverage evolution for the compared offline methods in the high-coverage mesh experiment}{figure.caption.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Baseline trajectory comparison over the same ISS mesh silhouette. The proposed dynamics-aware tour is shown separately in Fig.~\ref {fig:mesh-and-trajectory}.}}{9}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:trajectory-comparison}{{3}{9}{Baseline trajectory comparison over the same ISS mesh silhouette. The proposed dynamics-aware tour is shown separately in Fig.~\ref {fig:mesh-and-trajectory}}{figure.caption.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Coverage-effort-feasibility summary for the full offline comparison. The dashed line in the summary panel marks the 98\% stop target. A star denotes the proposed method shown in Fig.~\ref {fig:mesh-and-trajectory}; circles denote feasible baselines, and crosses denote methods that fail the input, speed, or clearance checks.}}{9}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:trajectory-tradeoff-summary}{{4}{9}{Coverage-effort-feasibility summary for the full offline comparison. The dashed line in the summary panel marks the 98\% stop target. A star denotes the proposed method shown in Fig.~\ref {fig:mesh-and-trajectory}; circles denote feasible baselines, and crosses denote methods that fail the input, speed, or clearance checks}{figure.caption.8}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {V}{\ignorespaces Complementary offline comparison quantities not encoded by the coverage-effort plot.}}{10}{table.caption.9}\protected@file@percent }
+\newlabel{tab:method-execution-results}{{V}{10}{Complementary offline comparison quantities not encoded by the coverage-effort plot}{table.caption.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Sensitivity and ablation results generated by the offline validation matrix. Circles denote feasible runs and crosses denote runs that fail the full feasibility audit. The dashed lines mark the 98\% stop target or the 0.060~m/s$^2$ input limit.}}{10}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:validation-matrix-summary}{{5}{10}{Sensitivity and ablation results generated by the offline validation matrix. Circles denote feasible runs and crosses denote runs that fail the full feasibility audit. The dashed lines mark the 98\% stop target or the 0.060~m/s$^2$ input limit}{figure.caption.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B}Camera Geometry and Replay Verification}{10}{subsection.7.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Camera-model verification through reconstructed field-of-view geometry overlaid on the proposed dynamics-aware tour. The frusta and boresight rays are reconstructed from saved camera poses for representative early, middle, and final selected views, verifying that the logged attitude stream instantiates the visibility model used by the planner and by ROS replay in the same LVLH frame as the ISS mesh.}}{11}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:camera-model-frusta}{{6}{11}{Camera-model verification through reconstructed field-of-view geometry overlaid on the proposed dynamics-aware tour. The frusta and boresight rays are reconstructed from saved camera poses for representative early, middle, and final selected views, verifying that the logged attitude stream instantiates the visibility model used by the planner and by ROS replay in the same LVLH frame as the ISS mesh}{figure.caption.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Incremental surface coverage contributed by the selected camera views. Bars show per-view coverage gain in the selected-view sequence, with the same representative early, middle, and final views highlighted as in Fig.~\ref {fig:camera-model-frusta}.}}{11}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:camera-model-coverage}{{7}{11}{Incremental surface coverage contributed by the selected camera views. Bars show per-view coverage gain in the selected-view sequence, with the same representative early, middle, and final views highlighted as in Fig.~\ref {fig:camera-model-frusta}}{figure.caption.12}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Placeholder for ROS verification of the camera model and replayed inspection execution.}}{11}{figure.caption.13}\protected@file@percent }
+\newlabel{fig:ros-camera-verification}{{8}{11}{Placeholder for ROS verification of the camera model and replayed inspection execution}{figure.caption.13}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Gazebo Harmonic validation frames. Left: chaser-follow camera view. Right: full ISS visual context with chaser trajectory replay. Quantitative coverage, safety, and control claims come from recorded planner logs, not Gazebo physics.}}{11}{figure.caption.14}\protected@file@percent }
+\newlabel{fig:gazebo-validation}{{9}{11}{Gazebo Harmonic validation frames. Left: chaser-follow camera view. Right: full ISS visual context with chaser trajectory replay. Quantitative coverage, safety, and control claims come from recorded planner logs, not Gazebo physics}{figure.caption.14}{}}
+\bibstyle{IEEEtran}
 \bibdata{references}
-\bibcite{clohessy1960terminal}{{1}{}{{}}{{}}}
-\bibcite{wertz2011space}{{2}{}{{}}{{}}}
-\bibcite{scott2003view}{{3}{}{{}}{{}}}
-\providecommand\NAT@force@numbers{}\NAT@force@numbers
-\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Dynamics-aware set-cover CW inspection planner}}{21}{algorithm.52}\protected@file@percent }
-\newlabel{alg:offline-planner}{{1}{21}{CW Transfer Generation}{algorithm.52}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Best feasible offline planning metrics from \texttt  {data/offline\_high\_coverage\_experiment/summary.json}.}}{22}{table.63}\protected@file@percent }
-\newlabel{tab:offline-results}{{1}{22}{Best feasible offline planning metrics from \texttt {data/offline\_high\_coverage\_experiment/summary.json}}{table.63}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Offline mesh method comparison from \texttt  {raw/method\_comparison.csv}.}}{23}{table.70}\protected@file@percent }
-\newlabel{tab:method-results}{{2}{23}{Offline mesh method comparison from \texttt {raw/method\_comparison.csv}}{table.70}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Offline trajectory comparison generated from \texttt  {raw/trajectory.csv} and overlaid on the copied ISS GLB mesh. The proposed set-cover CW tour reaches the high-coverage target with the lowest $\Delta v$ among feasible methods at the same final coverage.}}{24}{figure.72}\protected@file@percent }
-\newlabel{fig:trajectory-comparison}{{3}{24}{Offline trajectory comparison generated from \texttt {raw/trajectory.csv} and overlaid on the copied ISS GLB mesh. The proposed set-cover CW tour reaches the high-coverage target with the lowest $\Delta v$ among feasible methods at the same final coverage}{figure.72}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Offline comparison figures. Left: cumulative planned $\Delta v$. Center: coverage per unit $\Delta v$. Right: minimum clearance.}}{25}{figure.74}\protected@file@percent }
-\newlabel{fig:energy-safety}{{4}{25}{Offline comparison figures. Left: cumulative planned $\Delta v$. Center: coverage per unit $\Delta v$. Right: minimum clearance}{figure.74}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Gazebo Harmonic validation frames. Left: chaser-follow camera view. Right: full ISS visual context with chaser trajectory replay. Quantitative coverage, safety, and control claims come from CSV logs, not Gazebo physics.}}{25}{figure.77}\protected@file@percent }
-\newlabel{fig:gazebo-validation}{{5}{25}{Gazebo Harmonic validation frames. Left: chaser-follow camera view. Right: full ISS visual context with chaser trajectory replay. Quantitative coverage, safety, and control claims come from CSV logs, not Gazebo physics}{figure.77}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Self-contained manuscript artifacts.}}{26}{table.81}\protected@file@percent }
-\newlabel{tab:artifact-inventory}{{3}{26}{Self-contained manuscript artifacts}{table.81}{}}
-\gdef \@abspage@last{27}
+\bibcite{clohessy1960terminal}{1}
+\bibcite{wertz2011space}{2}
+\bibcite{scott2003view}{3}
+\bibcite{lavalle1998rapidly}{4}
+\bibcite{karaman2011sampling}{5}
+\bibcite{apodaca2025trajectory}{6}
+\bibcite{hou2024relative}{7}
+\@writefile{toc}{\contentsline {section}{\numberline {VIII}Discussion and Limitations}{12}{section.8}\protected@file@percent }
+\newlabel{sec:discussion}{{VIII}{12}{}{section.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {IX}Conclusion}{12}{section.9}\protected@file@percent }
+\newlabel{sec:conclusion}{{IX}{12}{}{section.9}{}}
+\@writefile{toc}{\contentsline {section}{REFERENCES}{12}{section.9}\protected@file@percent }
+\bibcite{zhou2026tomographic}{8}
+\bibcite{ogri2025switched}{9}
+\bibcite{nasa_iss_gltf_model}{10}
+\@writefile{toc}{\contentsline {section}{Biographies}{13}{IEEEbiography.0}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{Rugang Tang}{13}{IEEEbiography.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{Xin Ning}{13}{IEEEbiography.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{Prof. Chih-yung WEN}{13}{IEEEbiography.3}\protected@file@percent }
+\gdef \@abspage@last{13}
