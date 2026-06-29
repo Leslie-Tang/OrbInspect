@@ -61,13 +61,13 @@ does not include solar illumination dynamics; if required by a mission
 scenario, illumination can be added as a binary feasibility predicate. The
 primary offline benchmark uses the public NASA Solar System ISS glTF model as
 the station geometry source~\cite{nasa_iss_gltf_model}, with 180
-area-weighted target samples and 357 candidate viewpoints. The mesh defines
+area-weighted target samples and 357 viewpoint seeds used to generate SOOAs. The mesh defines
 target samples, visibility tests, and replay geometry; it is not a dynamics
 model.
 
 The mission starts from a safe initial relative state and terminates when a
 coverage threshold is reached, when the planner exhausts available useful
-views, or when a maximum mission time is reached. For a weighted target
+inspection actions, or when a maximum mission time is reached. For a weighted target
 set, the final coverage ratio is
 \begin{equation}
   C_K = \frac{\sum_{i=1}^{N} w_i y_{i,K}}{\sum_{i=1}^{N} w_i},

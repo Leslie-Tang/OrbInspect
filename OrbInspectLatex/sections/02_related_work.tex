@@ -36,9 +36,20 @@ conditions for autonomous inspection under switched systems
 \cite{ogri2025switched}. The present work is positioned between these lines:
 it does not introduce a new orbital dynamics model, a flight-certified
 collision-avoidance controller, or a globally optimal continuous planner.
-Its contribution is the offline finite candidate-graph problem and solver in
+Its contribution is the SOOA abstraction and offline finite-arc solver in
 which surface coverage, camera feasibility, HCW transfer effort, clearance,
-and input saturation are evaluated before the inspection tour is accepted.
+input saturation, and passive-drift audit metrics are evaluated before an
+inspection action can contribute coverage.
+
+The distinction is the planning primitive. Robotic NBV and inspection planners
+commonly reason over sensor poses or short geometric motions, while
+relative-orbit design methods reason over dynamically meaningful paths that
+are not necessarily coverage-optimal. The proposed SOOA representation merges
+these two views at the discrete action level: every selectable action is
+simultaneously an orbital motion segment and a sensor-valid coverage
+contributor. This makes the finite graph a graph of admissible inspection
+actions, not merely a graph of geometric views connected by post hoc
+transfers.
 
 \begin{table*}[t]
   \centering
@@ -61,12 +72,12 @@ and input saturation are evaluated before the inspection tour is accepted.
     dwell-coverage graph over spacecraft surface targets \\
     Apodaca et al.~\cite{apodaca2025trajectory} &
     inspection coverage and energy trade-off for in-orbit structures &
-    does not state an exact finite candidate-graph certificate for the
-    discretized coverage-transfer problem \\
+    does not make the selectable primitive a safety-audited observable orbital
+    arc with reduced-graph oracle verification \\
     Hou et al.~\cite{hou2024relative} &
     relative-orbit design for visual inspection with FOV and occlusion checks &
-    optimizes orbit geometry rather than selecting a coverage tour from
-    camera-feasible candidate views \\
+    optimizes orbit geometry rather than selecting finite-duration SOOAs for
+    weighted surface coverage \\
     Zhou et al.~\cite{zhou2026tomographic} &
     tomographic inspection paths around complex spacecraft structures &
     targets scan-path planning rather than HCW-feasible dwell-view sequencing
@@ -76,23 +87,24 @@ and input saturation are evaluated before the inspection tour is accepted.
     addresses execution-level camera control rather than offline finite-graph
     coverage planning \\
     This work &
-    weighted surface dwell coverage on a mesh-normal candidate graph &
-    couples camera feasibility with CW/HCW edge rollouts, input limits,
-    clearance, reduced-graph DP certification, and ROS~2/Gazebo replay \\
+    safe observable orbital arcs for FOV-valid weighted surface coverage &
+    selects finite-duration HCW-feasible inspection actions annotated with
+    visibility, fuel cost, clearance, input feasibility, passive-safety audit,
+    reduced-graph oracle verification, and ROS~2/RViz/Gazebo replay \\
     \bottomrule
   \end{tabularx}
 \end{table*}
 
 Table~\ref{tab:positioning} clarifies what is gained and lost by the finite
-candidate-view graph. The gain is a common discrete object on which coverage,
-camera feasibility, edge feasibility, clearance, input limits, and exact
-finite-graph certification can be stated simultaneously. The cost is that
-optimality is conditional on the sampled candidate set and precomputed
-feasible-transfer graph; the approach does not provide global optimality in the
-continuous viewpoint space, nor does it replace kinodynamic planning when a
-mission requires continuous online obstacle avoidance. The safety statement is
-therefore planning-level feasibility filtering on logged HCW rollouts, not a
-flight safety certificate.
+SOOA graph. The gain is a common discrete object on which coverage, camera
+feasibility, transition feasibility, clearance, input limits, passive-drift
+audit metrics, and reduced-graph oracle checks can be stated simultaneously.
+The cost is that optimality is conditional on the sampled SOOA library and
+precomputed feasible-transition graph; the approach does not provide global
+optimality in continuous viewpoint space, nor does it replace kinodynamic
+planning when a mission requires continuous online obstacle avoidance. The
+safety statement is therefore planning-level feasibility filtering and audit
+on logged HCW rollouts, not a flight safety certificate.
 
 Simulation frameworks for space robotics must also be treated carefully. A
 rendered Gazebo scene can provide visual context and reveal integration errors

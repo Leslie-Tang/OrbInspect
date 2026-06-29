@@ -64,12 +64,12 @@ where $d_{\mathcal S}(r_k)$ is the signed distance to the station safety
 envelope. A CBF-type filter can be attached later as an execution layer, but
 it is not part of the core mathematical problem.
 
-The offline planner evaluates motion between candidate views through bounded
-HCW rollouts. For a transfer from candidate $z_a$ to candidate $z_b$, let
+The offline planner evaluates motion between SOOA terminal poses through
+bounded HCW rollouts. For a transition from arc $a_a$ to arc $a_b$, let
 $\pi_{ab}$ denote the sampled state-control sequence generated over a fixed or
-bounded transfer duration. The terminal state is constrained to reach the
-candidate position with zero relative velocity, so each selected view
-corresponds to a stabilized inspection state rather than a fly-through point.
+bounded transfer duration. The terminal state is constrained to reach the seed
+dwell position with zero relative velocity, so each selected SOOA corresponds
+to a stabilized inspection action rather than a fly-through point.
 The transfer is feasible when every sample satisfies the input, speed, and
 clearance constraints and the terminal position and velocity errors remain
 within prescribed tolerances. We write this feasibility indicator as
@@ -90,11 +90,52 @@ The corresponding edge cost is
 where $T_{ab}$ is transfer duration, $e_{ab}$ is terminal tracking error,
 including terminal position and velocity residuals, and $\phi$ penalizes
 proximity to the safety boundary. Edges with $\eta_{ab}=0$
-are either removed from the exact finite graph or assigned a prohibitive cost
+are either removed from the reduced finite graph or assigned a prohibitive cost
 in greedy baselines.
 The coverage mission ends when either the prescribed stop ratio is
 reached, the finite view budget is exhausted, or no feasible outgoing edge
 remains from the current terminal state.
+
+\subsection{Safe Observable Orbital Arc}
+
+A safe observable orbital arc is the finite-duration inspection action used by
+the planner. For an arc $a_j$ over $t\in[0,T_j]$, define
+\begin{equation}
+    a_j = \left(x_j(t), u_j(t), q_j(t), \Gamma_j,
+    \Delta v_j, d^{\min}_j, \rho_j\right),
+\end{equation}
+where $x_j(t)$ is the HCW-propagated relative state, $u_j(t)$ is the commanded
+acceleration, $q_j(t)$ is the camera attitude profile, $\Gamma_j\subseteq
+\mathcal{T}$ is the set of targets satisfying the range, FOV, incidence,
+dwell, and line-of-sight visibility predicates for the stabilized inspection
+action, $\Delta v_j$ is the accumulated control effort, $d^{\min}_j$ is the
+minimum clearance, and $\rho_j$ is the passive-safety audit margin.
+
+The accumulated control effort and clearance are
+\begin{equation}
+    \Delta v_j = \int_0^{T_j} \|u_j(t)\|_2\,dt,
+\end{equation}
+\begin{equation}
+    d^{\min}_j = \min_{t\in[0,T_j]} d_{\mathcal{S}}(r_j(t)).
+\end{equation}
+An arc is dynamically admissible if all sampled states satisfy the HCW
+propagation model, input bound, speed bound, clearance bound, and terminal
+error tolerance. It is observable if $\Gamma_j\neq\emptyset$ under the camera
+visibility model.
+
+To audit passive safety, the uncontrolled drift from sampled states on the arc
+is propagated as
+\begin{equation}
+    \dot{x}_{\mathrm{drift}} = f_{\mathrm{HCW}}(x_{\mathrm{drift}},0).
+\end{equation}
+The reported passive-safety margin is
+\begin{equation}
+    \rho_j = \min_{t_k\in a_j}\min_{\tau\in[0,T_{\mathrm{PS}}]}
+    d_{\mathcal{S}}\left(r^{\mathrm{drift}}(t_k+\tau)\right)-d_{\mathrm{PS}}.
+\end{equation}
+The arc is passively safe when $\rho_j\ge 0$. This is a planning-level audit
+under the sampled HCW model and the selected audit horizon; it is not a
+flight-certified safety guarantee.
 
 \subsection{Optimization Objective}
 
@@ -127,29 +168,36 @@ The weighted coverage ratio is
 \subsection{Finite Graph and Evaluation Quantities}
 
 This is a mixed-integer, nonconvex planning problem. The discrete components
-are target visibility, dwell satisfaction, and viewpoint selection. The
+are target visibility, dwell satisfaction, and SOOA selection. The
 continuous components are HCW propagation, actuation limits, and clearance
 constraints. The present benchmark studies the finite approximation induced
-by a candidate-view graph. Its nodes are camera-feasible views and its edges
-are precomputed HCW transfers.
+by a SOOA graph. Seed viewpoints generate terminal/dwell camera poses, but the
+accepted graph elements are finite-duration HCW-feasible inspection arcs.
 
-Let $\mathcal V=\{z_j\}_{j=1}^{M}$ be the accepted candidate views and let
-$\Gamma_j\subseteq\mathcal T$ be the target subset visible from $z_j$. For a
-maximum of $L$ selected views, the finite planning problem is to choose an
+Let $\mathcal A=\{a_j\}_{j=1}^{M}$ be the accepted SOOA library and let
+$\Gamma(a_j)\subseteq\mathcal T$ be the target subset visible from arc $a_j$.
+For a maximum of $L$ selected arcs, the finite planning problem is to choose an
 ordered sequence
 \begin{equation}
-  \sigma=(z_{\sigma_1},\ldots,z_{\sigma_L})
+  \sigma=(a_{\sigma_1},\ldots,a_{\sigma_L})
 \end{equation}
 that satisfies feasible-transfer constraints and covers enough target weight.
 One representative objective is
 \begin{equation}
-  J_{\mathrm{graph}}(\sigma)=
-  \sum_{\ell=1}^{L}\ell_{\sigma_{\ell-1},\sigma_{\ell}}
-  +\lambda_L L
-  +\lambda_C\sum_{i=1}^{N}w_i(1-c_i),
+  \begin{aligned}
+  J_{\mathrm{graph}}(\sigma)={}&
+  \sum_{\ell=1}^{L}\ell(a_{\sigma_{\ell-1}},a_{\sigma_\ell})
+  + \lambda_v\sum_{\ell=1}^{L}\Delta v(a_{\sigma_\ell})\\
+  &+\lambda_L L
+  +\lambda_C\sum_{i=1}^{N}w_i(1-c_i).
+  \end{aligned}
 \end{equation}
-where $z_{\sigma_0}$ denotes the initial state node and
-$c_i=\mathbf{1}\{i\in\cup_{\ell=1}^{L}\Gamma_{\sigma_\ell}\}$. The coverage
+where $a_{\sigma_0}$ denotes the initial state action and
+\begin{equation}
+  c_i = \mathbf{1}\left[
+  i\in \bigcup_{\ell=1}^{L}\Gamma(a_{\sigma_\ell})\right].
+\end{equation}
+The coverage
 constraint is
 \begin{equation}
   \sum_{i=1}^{N}w_i c_i
@@ -157,11 +205,11 @@ constraint is
 \end{equation}
 This finite graph is the object on which the exact optimality statement in
 Section~\ref{sec:theory} is made. The implementation evaluated in
-Section~\ref{sec:results} uses a scalable dynamics-aware set-cover and CW-tour
+Section~\ref{sec:results} uses a scalable deterministic safe-arc coverage
 solver on the same graph.
 
 For reporting, the primary quantities are cumulative control effort, minimum
-clearance, peak requested input, mission time, and selected-viewpoint count:
+clearance, peak requested input, mission time, and selected-SOOA count:
 \begin{align}
   \Delta v_{\mathrm{cum}} &= \sum_k \norm{u_k}_2\dt,\\
   d_{\min} &= \min_k d_{\mathcal S}(r_k),\\

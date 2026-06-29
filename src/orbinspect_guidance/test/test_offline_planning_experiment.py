@@ -88,6 +88,7 @@ def test_offline_planning_experiment_saves_outputs(tmp_path: Path) -> None:
 
     assert (run_dir / 'raw' / 'method_comparison.csv').is_file()
     assert (run_dir / 'raw' / 'planner.csv').is_file()
+    assert (run_dir / 'raw' / 'selected_sooas.csv').is_file()
     assert (run_dir / 'raw' / 'viewpoints.csv').is_file()
     assert (run_dir / 'raw' / 'trajectory.csv').is_file()
     assert (run_dir / 'raw' / 'attitude.csv').is_file()
@@ -104,11 +105,21 @@ def test_offline_planning_experiment_saves_outputs(tmp_path: Path) -> None:
     assert 'total_dynamic_cost' in method_row
     assert 'coverage_per_delta_v' in method_row
     assert 'certificate_status' in method_row
+    assert 'selected_sooa_count' in method_row
+    assert 'rho_min' in method_row
+    assert 'trajectory_feasible' in method_row
 
     with (run_dir / 'raw' / 'planner.csv').open(newline='') as handle:
         planner_row = next(csv.DictReader(handle))
     assert 'transfer_dynamic_cost' in planner_row
     assert 'coverage_gain_area' in planner_row
+    assert 'sooa_id' in planner_row
+    assert 'selected_inspection_action' in planner_row
+
+    with (run_dir / 'raw' / 'selected_sooas.csv').open(newline='') as handle:
+        sooa_row = next(csv.DictReader(handle))
+    assert 'passive_margin' in sooa_row
+    assert 'visible_target_count' in sooa_row
 
 
 def test_offline_planning_experiment_loads_yaml_config(tmp_path: Path) -> None:
@@ -134,6 +145,26 @@ def test_offline_planning_experiment_loads_yaml_config(tmp_path: Path) -> None:
     assert config.coverage_threshold == 0.2
     assert config.output_root == tmp_path
     assert config.run_id == 'yaml_exp'
+
+
+def test_offline_planning_experiment_loads_block_method_list(tmp_path: Path) -> None:
+    config_path = tmp_path / 'experiment_block_list.yaml'
+    config_path.write_text(
+        'offline_planning_experiment:\n'
+        '  ros__parameters:\n'
+        '    methods:\n'
+        '      - set_cover_cw_tour\n'
+        '      - random_safe\n'
+        '    output_root: data/results\n'
+    )
+
+    args = parse_args([
+        '--config', str(config_path),
+        '--output-root', str(tmp_path),
+    ])
+    config = config_from_args(args)
+
+    assert config.methods == ('set_cover_cw_tour', 'random_safe')
 
 
 def test_offline_validation_matrix_quick_run(tmp_path: Path) -> None:

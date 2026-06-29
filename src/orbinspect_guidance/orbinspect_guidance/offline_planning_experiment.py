@@ -94,6 +94,8 @@ class ExperimentConfig:
     transfer_duration: float = 90.0
     integration_dt: float = 2.0
     max_acceleration: float = 0.018
+    passive_safety_horizon: float = 300.0
+    passive_safety_distance: float = 0.0
     safety_margin: float = 2.0
     initial_state: StateVector = (0.0, -35.0, 10.0, 0.0, 0.0, 0.0)
     methods: tuple[str, ...] = (
@@ -667,6 +669,7 @@ class OfflinePlanningExperiment:
 
         self._write_method_comparison(raw_dir / 'method_comparison.csv', results)
         self._write_all_planner_rows(raw_dir / 'planner.csv', results)
+        self._write_all_sooas(raw_dir / 'selected_sooas.csv', results)
         self._write_all_viewpoints(raw_dir / 'viewpoints.csv', results)
         self._write_all_trajectories(raw_dir / 'trajectory.csv', results)
         self._write_all_attitudes(raw_dir / 'attitude.csv', results)
@@ -944,6 +947,11 @@ class OfflinePlanningExperiment:
             / max(1, len(steps))
         )
         feasible = bool(steps) and all(step.transfer.feasible for step in steps)
+        passive_margins = [
+            margin for step in steps
+            for margin in [self._passive_margin_for_step(step)]
+            if margin is not None
+        ]
         return {
             'method': method,
             'geometry_backend': self.config.geometry_backend,
@@ -952,6 +960,8 @@ class OfflinePlanningExperiment:
             'inspectable_target_count': len(self.inspectable_targets),
             'inspectable_area_ratio': self._inspectable_area_ratio(),
             'selected_viewpoint_count': len(steps),
+            'selected_sooa_count': len(steps),
+            'selected_sooa_ids': ','.join(str(step.sequence) for step in steps),
             'final_coverage_ratio': final_coverage,
             'final_inspectable_coverage_ratio': self._inspectable_coverage_ratio(
                 _covered_targets_from_steps(steps)
@@ -970,12 +980,38 @@ class OfflinePlanningExperiment:
             'min_clearance': min_clearance,
             'max_speed': max_speed,
             'rms_tracking_error': rms_tracking_error,
+            'terminal_error_rms': math.sqrt(
+                sum(step.transfer.terminal_error**2 for step in steps)
+                / max(1, len(steps))
+            ),
+            'rho_min': min(passive_margins) if passive_margins else None,
+            'passive_margin_min': min(passive_margins) if passive_margins else None,
+            'passive_safety_horizon': self.config.passive_safety_horizon,
+            'passive_safety_distance': self.base_planner._passive_safety_distance(),
+            'passive_safe': (
+                all(margin >= 0.0 for margin in passive_margins)
+                if passive_margins else None
+            ),
+            'input_feasible': all(
+                step.transfer.peak_requested_input
+                <= self.config.max_acceleration + 1.0e-9
+                for step in steps
+            ),
+            'clearance_feasible': all(
+                step.transfer.min_clearance >= 0.0 for step in steps
+            ),
+            'trajectory_feasible': feasible,
             'mission_duration': trajectory[-1][0] if trajectory else 0.0,
             'planning_time': planning_time,
             'trajectory_sample_count': len(trajectory),
             'feasible': feasible,
             'dynamics_model': 'CW/HCW',
         }
+
+    def _passive_margin_for_step(self, step: MethodStep) -> float | None:
+        states = tuple(state for _time, state, _command in step.transfer.trajectory)
+        passive_margin, _passive_safe = self.base_planner._passive_safety_audit(states)
+        return passive_margin
 
     def _coverage_timeline(self, steps: Iterable[MethodStep]) -> list[tuple[float, float, int]]:
         timeline = [(0.0, 0.0, 0)]
@@ -1032,8 +1068,12 @@ class OfflinePlanningExperiment:
             'total_delta_v', 'peak_requested_input', 'input_limit',
             'clipped_step_count', 'clipped_step_ratio',
             'min_clearance', 'max_speed', 'rms_tracking_error',
+            'terminal_error_rms', 'rho_min', 'passive_margin_min',
+            'passive_safety_horizon', 'passive_safety_distance', 'passive_safe',
+            'input_feasible', 'clearance_feasible', 'trajectory_feasible',
             'delta_v_per_raw_coverage', 'coverage_per_delta_v',
             'total_dynamic_cost', 'selected_viewpoint_count',
+            'selected_sooa_count', 'selected_sooa_ids',
             'mission_duration', 'planning_time',
             'certificate_status', 'certificate_expansions',
             'certificate_candidate_count', 'certificate_target_count',
@@ -1054,7 +1094,10 @@ class OfflinePlanningExperiment:
             'viewpoint_z', 'new_target_count', 'cumulative_coverage', 'score',
             'transfer_delta_v', 'transfer_min_clearance', 'transfer_tracking_error',
             'transfer_dynamic_cost', 'coverage_gain_area', 'coverage_per_delta_v',
-            'transfer_feasible',
+            'transfer_feasible', 'sooa_id', 'seed_view_id',
+            'selected_inspection_action', 'sooa_visible_target_count',
+            'sooa_delta_v', 'sooa_min_clearance', 'sooa_peak_input',
+            'sooa_passive_margin', 'sooa_passive_safe',
         ]
         with path.open('w', newline='') as handle:
             writer = csv.DictWriter(handle, fieldnames=fieldnames)
@@ -1065,6 +1108,7 @@ class OfflinePlanningExperiment:
                         self.base_planner.target_area_by_id.get(target_id, 1.0)
                         for target_id in step.new_targets
                     )
+                    passive_margin = self._passive_margin_for_step(step)
                     writer.writerow({
                         'method': result.method,
                         'sequence': step.sequence,
@@ -1084,6 +1128,66 @@ class OfflinePlanningExperiment:
                             coverage_gain_area / max(step.transfer.delta_v, 1.0e-12)
                         ),
                         'transfer_feasible': step.transfer.feasible,
+                        'sooa_id': step.sequence,
+                        'seed_view_id': step.candidate.candidate_id,
+                        'selected_inspection_action': 'SOOA',
+                        'sooa_visible_target_count': len(
+                            self.visibility.visible_targets_by_candidate[
+                                step.candidate.candidate_id
+                            ]
+                        ),
+                        'sooa_delta_v': step.transfer.delta_v,
+                        'sooa_min_clearance': step.transfer.min_clearance,
+                        'sooa_peak_input': step.transfer.peak_requested_input,
+                        'sooa_passive_margin': passive_margin,
+                        'sooa_passive_safe': (
+                            passive_margin >= 0.0
+                            if passive_margin is not None else ''
+                        ),
+                    })
+
+    def _write_all_sooas(self, path: Path, results: tuple[MethodResult, ...]) -> None:
+        fieldnames = [
+            'method', 'sooa_id', 'seed_view_id', 'sample_count',
+            'visible_target_count', 'visible_target_ids', 'delta_v',
+            'min_clearance', 'peak_input', 'max_speed', 'terminal_error',
+            'passive_margin', 'passive_safe', 'feasible', 'rejection_reason',
+        ]
+        with path.open('w', newline='') as handle:
+            writer = csv.DictWriter(handle, fieldnames=fieldnames)
+            writer.writeheader()
+            for result in results:
+                for step in result.steps:
+                    visible_targets = tuple(sorted(
+                        self.visibility.visible_targets_by_candidate[
+                            step.candidate.candidate_id
+                        ]
+                    ))
+                    passive_margin = self._passive_margin_for_step(step)
+                    passive_safe = (
+                        passive_margin >= 0.0
+                        if passive_margin is not None else None
+                    )
+                    writer.writerow({
+                        'method': result.method,
+                        'sooa_id': step.sequence,
+                        'seed_view_id': step.candidate.candidate_id,
+                        'sample_count': step.transfer.sample_count,
+                        'visible_target_count': len(visible_targets),
+                        'visible_target_ids': ';'.join(visible_targets),
+                        'delta_v': step.transfer.delta_v,
+                        'min_clearance': step.transfer.min_clearance,
+                        'peak_input': step.transfer.peak_requested_input,
+                        'max_speed': step.transfer.max_speed,
+                        'terminal_error': step.transfer.terminal_error,
+                        'passive_margin': passive_margin,
+                        'passive_safe': passive_safe,
+                        'feasible': step.transfer.feasible
+                        and (passive_safe is not False),
+                        'rejection_reason': self.base_planner._transfer_rejection_reason(
+                            step.transfer,
+                            passive_safe,
+                        ),
                     })
 
     def _write_all_viewpoints(self, path: Path, results: tuple[MethodResult, ...]) -> None:
@@ -1302,6 +1406,8 @@ def _planner_config(config: ExperimentConfig) -> OfflinePlannerConfig:
         transfer_duration=config.transfer_duration,
         integration_dt=config.integration_dt,
         max_acceleration=config.max_acceleration,
+        passive_safety_horizon=config.passive_safety_horizon,
+        passive_safety_distance=config.passive_safety_distance,
         safety_margin=config.safety_margin,
         initial_state=config.initial_state,
         output_root=config.output_root,
@@ -1598,21 +1704,51 @@ def config_from_args(args: argparse.Namespace) -> ExperimentConfig:
 def _load_yaml_config(path: Path) -> dict[str, object]:
     if not path.is_file():
         return {}
-    raw = _safe_load_yaml_mapping(path)
+    text = path.read_text()
+    raw = _safe_load_yaml_mapping_from_text(text)
     if 'offline_planning_experiment' in raw:
         raw = raw['offline_planning_experiment'].get('ros__parameters', {})
     if not isinstance(raw, dict):
         raise ValueError(f'experiment config must be a mapping: {path}')
+    if raw.get('methods') == {}:
+        raw['methods'] = _extract_block_list(text, 'methods')
     allowed = set(ExperimentConfig.__dataclass_fields__)
     return {str(key): value for key, value in raw.items() if str(key) in allowed}
 
 
 def _safe_load_yaml_mapping(path: Path) -> dict[str, object]:
     """Load simple YAML mappings with a PyYAML fallback for offline macOS runs."""
+    return _safe_load_yaml_mapping_from_text(path.read_text())
+
+
+def _safe_load_yaml_mapping_from_text(text: str) -> dict[str, object]:
+    """Load simple YAML text with a PyYAML fallback for offline macOS runs."""
     if yaml is not None:
-        loaded = yaml.safe_load(path.read_text()) or {}
+        loaded = yaml.safe_load(text) or {}
         return loaded if isinstance(loaded, dict) else {}
-    return _load_simple_yaml_mapping(path.read_text())
+    return _load_simple_yaml_mapping(text)
+
+
+def _extract_block_list(text: str, key: str) -> list[object]:
+    """Extract a simple YAML block list for fallback parsing."""
+    lines = text.splitlines()
+    for index, raw_line in enumerate(lines):
+        stripped = raw_line.strip()
+        if not stripped.startswith(f'{key}:') or stripped != f'{key}:':
+            continue
+        key_indent = len(raw_line) - len(raw_line.lstrip(' '))
+        values: list[object] = []
+        for child in lines[index + 1:]:
+            if not child.strip() or child.lstrip().startswith('#'):
+                continue
+            child_indent = len(child) - len(child.lstrip(' '))
+            child_stripped = child.strip()
+            if child_indent <= key_indent:
+                break
+            if child_stripped.startswith('- '):
+                values.append(_parse_scalar(child_stripped[2:].strip()))
+        return values
+    return []
 
 
 def _load_simple_yaml_mapping(text: str) -> dict[str, object]:

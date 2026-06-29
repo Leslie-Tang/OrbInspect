@@ -37,7 +37,7 @@
 
 \begin{document}
 
-\title{Dynamics-Aware Coverage Planning for Autonomous Inspection of Orbital Structures}
+\title{Safe Observable Orbital Arc Planning for Full-Coverage Autonomous Inspection of Orbital Structures}
 
 \author{Rugang Tang}
 \affil{Northwestern Polytechnical University, Xi'an, China\\
@@ -57,19 +57,16 @@ Hong Kong Polytechnic University, Hong Kong, China}
 
 \editor{}
 \supplementary{Color versions of one or more of the figures in this article are available online at \href{http://ieeexplore.ieee.org}{http://ieeexplore.ieee.org}.}
-\markboth{OrbInspect}{Dynamics-Aware Coverage Planning}
+\markboth{OrbInspect}{SOOA Planning for Orbital Inspection}
 
 \maketitle
 
 \begin{abstract}
-Autonomous inspection of large orbital structures requires view plans that are simultaneously informative, dynamically reachable, and safe under relative orbital motion. This paper formulates the offline inspection problem
-as a finite candidate-view graph whose nodes encode camera-feasible viewpoints and whose directed edges encode bounded-acceleration Clohessy--Wiltshire/Hill transfers, clearance, and input feasibility. The resulting planner couples area-weighted coverage gain with orbital transfer cost during view selection, instead of selecting geometric views first and checking dynamics afterward. For reduced graphs, an exact dynamic program over selected-view masks and terminal-view nodes provides a discrete optimality certificate. For full ISS-mesh instances, a scalable deterministic solver uses the same visibility and transfer model to generate high-coverage tours. The method is evaluated on an open NASA ISS mesh against coverage, nearest-view, fuel-focused, CW-NBV, random-safe, and safety-filtered coverage baselines. The results show that geometry-only high-coverage planners can violate input or clearance constraints, whereas the proposed dynamics-aware planner reaches the high-coverage stop target with lower energy than feasible safe baselines. Sensitivity and ablation studies further identify the effects of target
-density, candidate density, initial condition, safety margin, transfer duration, transfer cost, clearance filtering, and input checking. ROS~2 and Gazebo replay verify that the logged trajectory and camera field-of-view
-geometry are consistent with the offline planner, while the quantitative claims remain based on the HCW dynamics and planner logs.
+Autonomous inspection of large orbital structures requires inspection actions that are simultaneously informative, dynamically reachable, sensor-valid, and safe under relative orbital motion. This paper introduces a safe observable orbital arc (SOOA) representation for full-coverage orbital inspection. Each SOOA is an inspection motion primitive that jointly encodes HCW-feasible relative motion, camera field-of-view visibility, line-of-sight surface coverage, transfer effort, clearance, input feasibility, and a passive-safety audit. The inspection problem is formulated as constrained SOOA selection rather than geometric viewpoint selection followed by dynamic feasibility checking. For ISS-scale mesh instances, a scalable deterministic solver uses these visibility and feasibility semantics to generate high-coverage safe inspection tours, while a small exact dynamic-programming oracle is retained only to check finite-graph optimality on exhausted reduced SOOA graphs. The method is evaluated on an open NASA ISS mesh against coverage-greedy, nearest-view, fuel-focused, CW-NBV, random-safe, and safety-filtered coverage baselines. The proposed planner reaches 98.33\% weighted surface-sample coverage with 21 selected inspection actions, \unit{21.592}{m/s} cumulative $\Delta v$, \unit{9.91}{m} minimum clearance, \unit{1.51}{m} minimum passive-drift audit margin over a 300~s horizon, and \unit{5.63}{s} planning time in the reported base case. Baselines that optimize coverage geometrically can reach similar coverage only with input or clearance violations, whereas feasible safe baselines require substantially higher effort. ROS~2, RViz, and Gazebo replay verify that the logged trajectory, attitude stream, and camera frusta are consistent with the offline SOOA visibility model, while all quantitative dynamics, coverage, and safety claims remain based on the HCW planner logs.
 \end{abstract}
 
 \begin{IEEEkeywords}
-spacecraft inspection, relative orbital dynamics, coverage planning, next-best-view planning, Clohessy--Wiltshire equations, energy-aware planning
+spacecraft inspection, relative orbital dynamics, safe observable orbital arc, field-of-view constraints, coverage planning, passive safety, ROS verification, Clohessy--Wiltshire equations
 \end{IEEEkeywords}
 
 \input{sections/01_introduction}

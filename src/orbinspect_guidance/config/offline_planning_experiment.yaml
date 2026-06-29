@@ -13,6 +13,8 @@ offline_planning_experiment:
     transfer_duration: 90.0
     integration_dt: 2.0
     max_acceleration: 0.060
+    passive_safety_horizon: 300.0
+    passive_safety_distance: 0.0
     safety_margin: 2.0
     initial_state: [0.0, -35.0, 10.0, 0.0, 0.0, 0.0]
     random_seed: 7

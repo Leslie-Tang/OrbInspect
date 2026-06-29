@@ -3,39 +3,8 @@
 
 \subsection{Offline Planning Performance}
 
-Table~\ref{tab:certified-results} reports the reduced-graph certification
-case. The exact dynamic program used eight candidate nodes from a 16-candidate
-mesh instance, covered 13 visible target IDs, expanded 39 feasible graph
-states, and returned certificate status ``optimal''. The certified tour
-selected two views, reached the required 25\% raw coverage, and remained
-within the input and clearance limits. On the same reduced instance, the
-scalable proposed solver and safe-coverage-greedy also selected two feasible
-views but incurred higher HCW dynamic cost. The purpose of this case is not to
-represent the full ISS mission; it demonstrates that the implemented finite
-graph solver can return a genuine optimum when the reduced graph is small
-enough to exhaust.
-
-\begin{table}[t]
-  \centering
-  \caption{Reduced-graph certification case. The exact dynamic program
-  minimizes HCW dynamic cost subject to feasible transfers, a four-view budget,
-  and a 25\% coverage requirement.}
-  \label{tab:certified-results}
-  \renewcommand{\arraystretch}{1.05}
-  \setlength{\tabcolsep}{4.0pt}
-  \begin{tabular}{lrr}
-    \toprule
-    Method & Coverage & Dynamic cost \\
-    \midrule
-    Certified DP & 0.2500 & 26.7682 \\
-    Proposed scalable & 0.2917 & 27.0924 \\
-    Safe coverage greedy & 0.2917 & 30.3664 \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-Table~\ref{tab:offline-results} summarizes the proposed dynamics-aware tour in
-the high-coverage mesh experiment. The planner reached 98.33\% coverage over
+Table~\ref{tab:offline-results} summarizes the proposed SOOA tour in the
+high-coverage mesh experiment. The planner reached 98.33\% coverage over
 180 surface targets, exceeding the 70\% success threshold and passing the 98\%
 planning stop target. Coverage is reported together with cumulative
 $\Delta v$, minimum clearance, peak requested input, and clipping ratio because
@@ -43,7 +12,9 @@ these quantities determine whether an inspection sequence is dynamically
 plausible. These results establish the scalable full-graph comparison only;
 the sensitivity and ablation studies in Table~\ref{tab:validation-matrix} test
 which parts of this ranking persist under denser target sampling and perturbed
-mission conditions.
+mission conditions. The selected SOOA sequence also passes the reported
+passive-drift audit with a minimum margin of 1.509~m over a 300~s uncontrolled
+HCW drift horizon.
 
 \begin{table}[t]
   \centering
@@ -54,12 +25,12 @@ mission conditions.
     \toprule
     Metric & Value \\
     \midrule
-    Method & Proposed dynamics-aware tour \\
+    Method & Proposed SOOA tour \\
     Dynamics model & CW/HCW \\
     Geometry model & NASA ISS glTF mesh \\
     Target count & 180 \\
-    Candidate views & 357 \\
-    Selected views & 21 \\
+    Viewpoint seeds & 357 \\
+    Selected SOOAs & 21 \\
     Trajectory samples & 945 \\
     Mission duration & 1890.0~s \\
     Final coverage ratio & 0.9833 \\
@@ -70,11 +41,42 @@ mission conditions.
     $\Delta v$ per coverage & 21.9581~m/s \\
     Maximum speed & 0.8898~m/s \\
     Minimum clearance & 9.9107~m \\
+    Passive audit horizon & 300.0~s \\
+    Minimum passive audit margin & 1.5091~m \\
+    Passive audit passed & Yes \\
     RMS transfer tracking error & 19.9695~m \\
     Peak requested input & 0.0388~m/s$^2$ \\
     Clipped step ratio & 0.0000 \\
-    Planning time & 5.9707~s \\
+    Planning time & 5.6254~s \\
     Feasible trajectory & Yes \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Table~\ref{tab:certified-results} reports a separate reduced-graph oracle
+check. The exact dynamic program used eight SOOA nodes from a 16-seed mesh
+instance, covered 13 visible target IDs, expanded 39 feasible graph states,
+and returned certificate status ``optimal''. The certified sequence selected
+two arcs, reached the required 25\% raw coverage, and remained within the
+input and clearance limits. This is intentionally not a headline coverage
+result; it verifies that the finite SOOA objective and implementation can be
+exhausted on a small graph.
+
+\begin{table}[t]
+  \centering
+  \caption{Reduced-SOOA-graph oracle check. The exact dynamic program
+  minimizes HCW dynamic cost subject to feasible transitions, a four-arc
+  budget, and a 25\% coverage requirement.}
+  \label{tab:certified-results}
+  \renewcommand{\arraystretch}{1.05}
+  \setlength{\tabcolsep}{4.0pt}
+  \begin{tabular}{lrr}
+    \toprule
+    Method & Coverage & Dynamic cost \\
+    \midrule
+    Exact DP oracle & 0.2500 & 26.7682 \\
+    Proposed scalable & 0.2917 & 27.0924 \\
+    Safe coverage greedy & 0.2917 & 30.3664 \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -82,7 +84,7 @@ mission conditions.
 Figure~\ref{fig:mesh-and-trajectory} overlays the planned trajectory on the
 same open NASA ISS glTF mesh model used for target sampling and replay
 visualization~\cite{nasa_iss_gltf_model}. The figure is generated from the
-benchmark data, so the displayed path and selected views share the same LVLH
+benchmark data, so the displayed path and selected SOOA terminal poses share the same LVLH
 coordinate frame as the mesh. The path is a stitched sequence of discrete
 rest-to-rest HCW transfers, so it is dynamically valid but not drawn as a
 single global spline.
@@ -90,8 +92,8 @@ single global spline.
 \begin{figure}[t]
   \centering
   \includegraphics[width=0.95\linewidth]{figures/high_coverage/proposed_trajectory_3d.pdf}
-  \caption{Proposed dynamics-aware tour overlaid on the open NASA ISS glTF mesh model.
-  The selected views are colored by cumulative coverage, and the
+  \caption{Proposed SOOA tour overlaid on the open NASA ISS glTF mesh model.
+  The selected SOOA terminal poses are colored by cumulative coverage, and the
   trajectory is shown as the planned chaser path in LVLH coordinates.}
   \label{fig:mesh-and-trajectory}
 \end{figure}
@@ -110,9 +112,9 @@ visibility model, transfer constraints, and termination logic.
 \end{figure}
 
 Figure~\ref{fig:trajectory-comparison} compares the baseline trajectories as
-method-wise small multiples. The proposed dynamics-aware tour is shown
-separately in Fig.~\ref{fig:mesh-and-trajectory}, where the selected views and
-full mesh context are easier to inspect. The shared mesh silhouette, viewpoint,
+method-wise small multiples. The proposed SOOA tour is shown
+separately in Fig.~\ref{fig:mesh-and-trajectory}, where the selected SOOA
+terminal poses and full mesh context are easier to inspect. The shared mesh silhouette, viewpoint,
 and axis limits make baseline path geometry comparable without repeating the
 proposed trajectory. Figure~\ref{fig:trajectory-tradeoff-summary} reports the
 full comparison in terms of final coverage and cumulative $\Delta v$, and it
@@ -126,7 +128,7 @@ remain feasible but require substantially more cumulative $\Delta v$. The
 fuel-focused baseline uses low input effort but stops below the high-coverage
 target.
 The baseline trajectory panels are intentionally unsmoothed between selected
-views. The visible corners therefore reflect terminal HCW transfer segments,
+SOOAs. The visible corners therefore reflect terminal HCW transfer segments,
 not a rendering artifact.
 
 \begin{figure}[t]
@@ -140,7 +142,7 @@ not a rendering artifact.
   \subfloat[Fuel]{\includegraphics[width=0.32\linewidth]{figures/high_coverage/trajectory_method_fuel.pdf}}
   \subfloat[Random]{\includegraphics[width=0.32\linewidth]{figures/high_coverage/trajectory_method_random.pdf}}
   \caption{Baseline trajectory comparison over the same ISS mesh silhouette.
-  The proposed dynamics-aware tour is shown separately in Fig.~\ref{fig:mesh-and-trajectory}.}
+  The proposed SOOA tour is shown separately in Fig.~\ref{fig:mesh-and-trajectory}.}
   \label{fig:trajectory-comparison}
 \end{figure}
 
@@ -175,16 +177,16 @@ dynamically infeasible.
   \setlength{\tabcolsep}{5.0pt}
   \begin{tabular}{lrrrrrr}
     \toprule
-    Method & Views & Duration (s) & Peak input (m/s$^2$) &
+    Method & SOOAs & Duration (s) & Peak input (m/s$^2$) &
     Clipped steps (\%) & Planning time (s) & Feasible \\
     \midrule
-    Proposed & 21 & 1890 & 0.0388 & 0.0 & 5.97 & Yes \\
-    CW-NBV baseline & 19 & 1710 & 0.0581 & 0.0 & 37.22 & Yes \\
-    Coverage greedy & 18 & 1620 & 0.0849 & 10.5 & 5.25 & No \\
-    Safe coverage greedy & 20 & 1800 & 0.0581 & 0.0 & 6.13 & Yes \\
-    Nearest NBV & 36 & 3240 & 0.0528 & 0.0 & 9.68 & No \\
-    Fuel greedy & 36 & 3240 & 0.0368 & 0.0 & 10.43 & Yes \\
-    Random safe & 34 & 3060 & 0.0588 & 0.0 & 10.47 & Yes \\
+    Proposed & 21 & 1890 & 0.0388 & 0.0 & 5.63 & Yes \\
+    CW-NBV baseline & 19 & 1710 & 0.0581 & 0.0 & 24.40 & Yes \\
+    Coverage greedy & 18 & 1620 & 0.0849 & 10.5 & 1.21 & No \\
+    Safe coverage greedy & 20 & 1800 & 0.0581 & 0.0 & 0.97 & Yes \\
+    Nearest NBV & 36 & 3240 & 0.0528 & 0.0 & 4.82 & No \\
+    Fuel greedy & 36 & 3240 & 0.0368 & 0.0 & 4.68 & Yes \\
+    Random safe & 34 & 3060 & 0.0588 & 0.0 & 6.50 & Yes \\
     \bottomrule
   \end{tabular}
 \end{table*}
@@ -238,19 +240,19 @@ and station mesh markers for RViz and Gazebo validation.
 
 Figures~\ref{fig:camera-model-frusta} and~\ref{fig:camera-model-coverage}
 make the camera model visible in two ways. The first reconstructs
-representative field-of-view frusta from selected view poses and boresight
+representative field-of-view frusta from selected SOOA terminal poses and boresight
 vectors. The second reports the incremental surface coverage contributed by
-the selected-view sequence. Together, they show that saved attitudes
+the selected SOOA sequence. Together, they show that saved attitudes
 instantiate the same FOV geometry used by the visibility predicate and that
-the selected views contribute to the final coverage.
+the selected inspection actions contribute to the final coverage.
 
 \begin{figure}[t]
   \centering
   \includegraphics[width=0.95\linewidth]{figures/high_coverage/camera_model_frusta.pdf}
   \caption{Camera-model verification through reconstructed field-of-view
-  geometry overlaid on the proposed dynamics-aware tour. The frusta and
+  geometry overlaid on the proposed SOOA tour. The frusta and
   boresight rays are reconstructed from saved camera poses for representative
-  early, middle, and final selected views, verifying that the logged attitude
+  early, middle, and final selected SOOAs, verifying that the logged attitude
   stream instantiates the visibility model used by the planner and by ROS
   replay in the same LVLH frame as the ISS mesh.}
   \label{fig:camera-model-frusta}
@@ -259,9 +261,9 @@ the selected views contribute to the final coverage.
 \begin{figure}[t]
   \centering
   \includegraphics[width=0.96\linewidth]{figures/high_coverage/camera_model_coverage.pdf}
-  \caption{Incremental surface coverage contributed by the selected camera
-  views. Bars show per-view coverage gain in the selected-view sequence, with
-  the same representative early, middle, and final views highlighted as in
+  \caption{Incremental surface coverage contributed by the selected SOOAs.
+  Bars show per-arc coverage gain in the selected SOOA sequence, with
+  the same representative early, middle, and final arcs highlighted as in
   Fig.~\ref{fig:camera-model-frusta}.}
   \label{fig:camera-model-coverage}
 \end{figure}
@@ -274,13 +276,14 @@ geometric visibility logic remain consistent after integration.
 
 \begin{figure}[t]
   \centering
-  \fbox{\parbox[c][1.55in][c]{0.92\linewidth}{\centering
-  Placeholder: ROS verification panel.
-
-  This panel will show the RViz/Gazebo replay view together with logged
-  coverage, safety, and FOV-consistency signals from the ROS execution run.}}
-  \caption{Placeholder for ROS verification of the camera model and replayed
-  inspection execution.}
+  \includegraphics[width=0.48\linewidth]{figures/gazebo_validation/trajectory_3d.png}
+  \includegraphics[width=0.48\linewidth]{figures/gazebo_validation/control_effort_over_time.png}
+  \caption{ROS replay log verification for the planned SOOA execution. Left:
+  replayed chaser trajectory in the same LVLH frame used by the offline
+  planner. Right: logged control effort over replay time. These panels verify
+  that the saved trajectory and command streams are available to the ROS
+  logging and visualization stack; orbital dynamics claims remain based on the
+  HCW planner logs.}
   \label{fig:ros-camera-verification}
 \end{figure}
 

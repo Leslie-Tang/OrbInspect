@@ -1,16 +1,17 @@
 \section{Conclusion}
 \label{sec:conclusion}
 
-This paper formulated autonomous inspection of orbital structures as a
-dynamics-aware coverage-planning problem on a finite candidate-view graph. The
-planner incorporates CW/HCW transfer cost, clearance, and input limits during
-view selection instead of checking them after geometric coverage has been
-chosen. The reduced-graph certification case showed that the implemented
-dynamic program can return a true finite-graph optimum: with eight candidate
-nodes and 13 visible target IDs, it expanded 39 feasible states and selected a
-minimum-cost two-view tour satisfying the 25\% coverage requirement. On the
+This paper introduced safe observable orbital arc planning for autonomous
+inspection of orbital structures. The planner constructs finite-duration
+inspection actions that are simultaneously HCW-feasible, FOV-valid,
+coverage-informative, and safety-audited instead of checking dynamics after
+geometric coverage has been chosen. The reduced-SOOA certification case showed
+that the implemented dynamic program can return a true finite-graph optimum:
+with eight candidate arcs and 13 visible target IDs, it expanded 39 feasible
+states and selected a minimum-cost two-arc tour satisfying the 25\% coverage
+requirement. On the
 full ISS-mesh benchmark, the scalable solver generated a feasible 1890~s
-trajectory with 21 selected views, 21.5921~m/s cumulative $\Delta v$,
+trajectory with 21 selected inspection actions, 21.5921~m/s cumulative $\Delta v$,
 9.9107~m minimum clearance, and 98.33\% final coverage over 180 surface
 targets. Compared with coverage-greedy, safe-coverage, nearest-viewpoint,
 fuel-focused, CW-NBV, and random-safe baselines, the proposed solver reached

@@ -15,8 +15,12 @@ def test_offline_planner_generates_visibility_and_plan(tmp_path: Path) -> None:
     assert plan.candidates
     assert plan.visibility.visible_targets_by_candidate
     assert plan.selected_viewpoints
+    assert plan.selected_sooas
+    assert plan.selected_sooas[0].visible_target_ids
+    assert plan.selected_sooas[0].passive_margin is not None
     assert plan.summary['final_coverage_ratio'] > 0.0
     assert plan.summary['total_delta_v'] > 0.0
+    assert plan.summary['selected_sooa_count'] == len(plan.selected_viewpoints)
 
 
 def test_offline_planner_saves_paper_outputs(tmp_path: Path) -> None:
@@ -28,6 +32,7 @@ def test_offline_planner_saves_paper_outputs(tmp_path: Path) -> None:
     assert (run_dir / 'raw' / 'targets.csv').is_file()
     assert (run_dir / 'raw' / 'candidate_viewpoints.csv').is_file()
     assert (run_dir / 'raw' / 'selected_viewpoints.csv').is_file()
+    assert (run_dir / 'raw' / 'selected_sooas.csv').is_file()
     assert (run_dir / 'raw' / 'planner.csv').is_file()
     assert (run_dir / 'raw' / 'planned_trajectory.csv').is_file()
     assert (run_dir / 'raw' / 'coverage.csv').is_file()

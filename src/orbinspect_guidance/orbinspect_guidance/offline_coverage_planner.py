@@ -64,6 +64,8 @@ class OfflinePlannerConfig:
     transfer_duration: float = 80.0
     integration_dt: float = 1.0
     max_acceleration: float = 0.012
+    passive_safety_horizon: float = 300.0
+    passive_safety_distance: float = 0.0
     terminal_position_tolerance: float = 0.5
     terminal_velocity_tolerance: float = 0.05
     position_gain: float = 0.0008
@@ -112,10 +114,33 @@ class TransferEstimate:
     max_speed: float
     min_clearance: float
     tracking_error: float
+    terminal_error: float
     peak_requested_input: float
     clipped_step_count: int
     sample_count: int
     feasible: bool
+
+
+@dataclass(frozen=True)
+class SafeObservableOrbitalArc:
+    """Sequence-specific HCW inspection arc with visibility and safety audits."""
+
+    arc_id: int
+    seed_view_id: str
+    t_samples: tuple[float, ...]
+    x_samples: tuple[StateVector, ...]
+    u_samples: tuple[ControlVector, ...]
+    q_samples: tuple[Vector3, ...]
+    visible_target_ids: tuple[str, ...]
+    delta_v: float
+    min_clearance: float
+    peak_input: float
+    max_speed: float
+    terminal_error: float
+    passive_margin: float | None
+    passive_safe: bool | None
+    feasible: bool
+    rejection_reason: str = ''
 
 
 @dataclass(frozen=True)
@@ -128,6 +153,7 @@ class SelectedViewpoint:
     cumulative_coverage: float
     transfer: TransferEstimate
     score: float
+    inspection_arc: SafeObservableOrbitalArc | None = None
 
 
 @dataclass(frozen=True)
@@ -138,9 +164,10 @@ class OfflinePlan:
     candidates: tuple[CandidateViewpoint, ...]
     visibility: VisibilityMatrix
     selected_viewpoints: tuple[SelectedViewpoint, ...]
+    selected_sooas: tuple[SafeObservableOrbitalArc, ...]
     planned_trajectory: tuple[tuple[float, StateVector, ControlVector], ...]
     coverage_timeline: tuple[tuple[float, float, int], ...]
-    summary: dict[str, float | int | str | bool]
+    summary: dict[str, object]
 
 
 @dataclass(frozen=True)
@@ -287,6 +314,11 @@ class OfflineCoveragePlanner:
         candidates = tuple(self.generate_candidate_viewpoints(targets))
         visibility = self.compute_visibility_matrix(targets, candidates)
         selected = tuple(self.select_viewpoints(targets, candidates, visibility))
+        selected_sooas = tuple(
+            item.inspection_arc
+            for item in selected
+            if item.inspection_arc is not None
+        )
         planned_trajectory = tuple(
             sample
             for item in selected
@@ -306,6 +338,7 @@ class OfflineCoveragePlanner:
             candidates=candidates,
             visibility=visibility,
             selected_viewpoints=selected,
+            selected_sooas=selected_sooas,
             planned_trajectory=planned_trajectory,
             coverage_timeline=coverage_timeline,
             summary=summary,
@@ -396,6 +429,7 @@ class OfflineCoveragePlanner:
     ) -> list[SelectedViewpoint]:
         """Select viewpoints with greedy coverage gain per CW transfer cost."""
         target_ids = {target.target_id for target in targets}
+        target_by_id = {target.target_id: target for target in targets}
         covered: set[str] = set()
         selected: list[SelectedViewpoint] = []
         current_state = self.config.initial_state
@@ -431,14 +465,24 @@ class OfflineCoveragePlanner:
             current_state = transfer.next_state
             sequence = len(selected)
             current_time += self.config.transfer_duration
+            offset_transfer = self._offset_transfer_time(transfer, current_time)
+            visible_targets = visibility.visible_targets_by_candidate[candidate.candidate_id]
+            inspection_arc = self._build_selected_sooa(
+                sequence,
+                candidate,
+                visible_targets,
+                offset_transfer,
+                target_by_id,
+            )
             selected.append(
                 SelectedViewpoint(
                     sequence=sequence,
                     candidate=candidate,
                     new_targets=new_targets,
                     cumulative_coverage=self._coverage_ratio(covered, len(target_ids)),
-                    transfer=self._offset_transfer_time(transfer, current_time),
+                    transfer=offset_transfer,
                     score=score,
+                    inspection_arc=inspection_arc,
                 )
             )
             remaining.pop(candidate.candidate_id, None)
@@ -507,6 +551,7 @@ class OfflineCoveragePlanner:
             max_speed=max_speed,
             min_clearance=min_clearance,
             tracking_error=tracking_error,
+            terminal_error=terminal_error,
             peak_requested_input=peak_requested_input,
             clipped_step_count=clipped_step_count,
             sample_count=steps,
@@ -532,6 +577,7 @@ class OfflineCoveragePlanner:
             plan.visibility,
         )
         self._write_selected(raw_dir / 'selected_viewpoints.csv', plan.selected_viewpoints)
+        self._write_selected_sooas(raw_dir / 'selected_sooas.csv', plan.selected_sooas)
         self._write_planner_log(raw_dir / 'planner.csv', plan.selected_viewpoints)
         self._write_trajectory(raw_dir / 'planned_trajectory.csv', plan.planned_trajectory)
         self._write_coverage(raw_dir / 'coverage_over_time.csv', plan.coverage_timeline)
@@ -566,6 +612,18 @@ class OfflineCoveragePlanner:
             / max(1, len(selected))
         )
         feasible = bool(selected) and all(item.transfer.feasible for item in selected)
+        passive_margins = [
+            item.inspection_arc.passive_margin
+            for item in selected
+            if item.inspection_arc is not None
+            and item.inspection_arc.passive_margin is not None
+        ]
+        passive_flags = [
+            item.inspection_arc.passive_safe
+            for item in selected
+            if item.inspection_arc is not None
+            and item.inspection_arc.passive_safe is not None
+        ]
         return {
             'method': self.config.method_name,
             'geometry_backend': self.config.geometry_backend,
@@ -573,6 +631,8 @@ class OfflineCoveragePlanner:
             'total_inspection_area': self.total_inspection_area,
             'candidate_count': len(candidates),
             'selected_viewpoint_count': len(selected),
+            'selected_sooa_count': len(selected),
+            'selected_sooa_ids': ','.join(str(item.sequence) for item in selected),
             'trajectory_sample_count': len(planned_trajectory),
             'final_coverage_ratio': final_coverage,
             'coverage_threshold': self.config.coverage_threshold,
@@ -581,6 +641,24 @@ class OfflineCoveragePlanner:
             'min_clearance': min_clearance,
             'max_speed': max_speed,
             'rms_tracking_error': rms_tracking_error,
+            'terminal_error_rms': math.sqrt(
+                sum(item.transfer.terminal_error**2 for item in selected)
+                / max(1, len(selected))
+            ),
+            'rho_min': min(passive_margins) if passive_margins else None,
+            'passive_margin_min': min(passive_margins) if passive_margins else None,
+            'passive_safety_horizon': self.config.passive_safety_horizon,
+            'passive_safety_distance': self._passive_safety_distance(),
+            'passive_safe': all(passive_flags) if passive_flags else None,
+            'input_feasible': all(
+                item.transfer.peak_requested_input
+                <= self.config.max_acceleration + 1.0e-9
+                for item in selected
+            ),
+            'clearance_feasible': all(
+                item.transfer.min_clearance >= 0.0 for item in selected
+            ),
+            'trajectory_feasible': feasible,
             'mission_duration': (
                 planned_trajectory[-1][0] if planned_trajectory else 0.0
             ),
@@ -782,11 +860,105 @@ class OfflineCoveragePlanner:
             max_speed=transfer.max_speed,
             min_clearance=transfer.min_clearance,
             tracking_error=transfer.tracking_error,
+            terminal_error=transfer.terminal_error,
             peak_requested_input=transfer.peak_requested_input,
             clipped_step_count=transfer.clipped_step_count,
             sample_count=transfer.sample_count,
             feasible=transfer.feasible,
         )
+
+    def _build_selected_sooa(
+        self,
+        arc_id: int,
+        candidate: CandidateViewpoint,
+        visible_target_ids: Iterable[str],
+        transfer: TransferEstimate,
+        target_by_id: dict[str, InspectionTarget],
+    ) -> SafeObservableOrbitalArc:
+        """Build the exported SOOA view of one selected stabilized transfer arc."""
+        aim_target = target_by_id.get(candidate.source_target_id)
+        aim_position = aim_target.position if aim_target is not None else (0.0, 0.0, 0.0)
+        t_samples = tuple(time for time, _state, _command in transfer.trajectory)
+        x_samples = tuple(state for _time, state, _command in transfer.trajectory)
+        u_samples = tuple(command for _time, _state, command in transfer.trajectory)
+        q_samples = tuple(
+            unit(subtract(aim_position, state[:3]))
+            for _time, state, _command in transfer.trajectory
+        )
+        passive_margin, passive_safe = self._passive_safety_audit(x_samples)
+        feasible = transfer.feasible and (passive_safe is not False)
+        return SafeObservableOrbitalArc(
+            arc_id=arc_id,
+            seed_view_id=candidate.candidate_id,
+            t_samples=t_samples,
+            x_samples=x_samples,
+            u_samples=u_samples,
+            q_samples=q_samples,
+            visible_target_ids=tuple(sorted(visible_target_ids)),
+            delta_v=transfer.delta_v,
+            min_clearance=transfer.min_clearance,
+            peak_input=transfer.peak_requested_input,
+            max_speed=transfer.max_speed,
+            terminal_error=transfer.terminal_error,
+            passive_margin=passive_margin,
+            passive_safe=passive_safe,
+            feasible=feasible,
+            rejection_reason=self._transfer_rejection_reason(transfer, passive_safe),
+        )
+
+    def _passive_safety_audit(
+        self,
+        states: tuple[StateVector, ...],
+    ) -> tuple[float | None, bool | None]:
+        """Audit uncontrolled HCW drift clearance from every selected arc sample."""
+        horizon = float(self.config.passive_safety_horizon)
+        if horizon <= 0.0 or not states:
+            return None, None
+        dt = self.config.integration_dt
+        steps = max(1, int(math.ceil(horizon / dt)))
+        passive_distance = self._passive_safety_distance()
+        zero_control: ControlVector = (0.0, 0.0, 0.0)
+        margin = math.inf
+        for state in states:
+            drift_state = state
+            margin = min(
+                margin,
+                self.keepout.assess(drift_state[:3]).minimum_distance - passive_distance,
+            )
+            for _step in range(steps):
+                drift_state = self.dynamics.rk4_step(drift_state, zero_control, dt)
+                margin = min(
+                    margin,
+                    self.keepout.assess(drift_state[:3]).minimum_distance
+                    - passive_distance,
+                )
+        return margin, margin >= 0.0
+
+    def _passive_safety_distance(self) -> float:
+        configured = float(self.config.passive_safety_distance)
+        if configured > 0.0:
+            return configured
+        return float(self.config.safety_margin)
+
+    def _transfer_rejection_reason(
+        self,
+        transfer: TransferEstimate,
+        passive_safe: bool | None,
+    ) -> str:
+        reasons: list[str] = []
+        if transfer.min_clearance < 0.0:
+            reasons.append('clearance')
+        if transfer.max_speed > 2.0:
+            reasons.append('speed')
+        if transfer.peak_requested_input > self.config.max_acceleration + 1.0e-9:
+            reasons.append('input')
+        if transfer.terminal_error > self.config.terminal_position_tolerance:
+            reasons.append('terminal_position')
+        if norm(transfer.next_state[3:6]) > self.config.terminal_velocity_tolerance:
+            reasons.append('terminal_velocity')
+        if passive_safe is False:
+            reasons.append('passive_drift')
+        return ';'.join(reasons)
 
     def _coverage_timeline(
         self,
@@ -872,6 +1044,8 @@ class OfflineCoveragePlanner:
                 'sequence', 'candidate_id', 'x', 'y', 'z', 'new_targets',
                 'coverage_ratio', 'score', 'delta_v', 'max_speed',
                 'min_clearance', 'tracking_error', 'feasible',
+                'selected_sooa_id', 'visible_target_count', 'passive_margin',
+                'passive_safe',
             ])
             writer.writeheader()
             for item in selected:
@@ -889,6 +1063,53 @@ class OfflineCoveragePlanner:
                     'min_clearance': item.transfer.min_clearance,
                     'tracking_error': item.transfer.tracking_error,
                     'feasible': item.transfer.feasible,
+                    'selected_sooa_id': (
+                        item.inspection_arc.arc_id
+                        if item.inspection_arc is not None else ''
+                    ),
+                    'visible_target_count': (
+                        len(item.inspection_arc.visible_target_ids)
+                        if item.inspection_arc is not None else ''
+                    ),
+                    'passive_margin': (
+                        item.inspection_arc.passive_margin
+                        if item.inspection_arc is not None else ''
+                    ),
+                    'passive_safe': (
+                        item.inspection_arc.passive_safe
+                        if item.inspection_arc is not None else ''
+                    ),
+                })
+
+    @staticmethod
+    def _write_selected_sooas(
+        path: Path,
+        selected_sooas: tuple[SafeObservableOrbitalArc, ...],
+    ) -> None:
+        with path.open('w', newline='') as handle:
+            writer = csv.DictWriter(handle, fieldnames=[
+                'sooa_id', 'seed_view_id', 'sample_count', 'visible_target_count',
+                'visible_target_ids', 'delta_v', 'min_clearance', 'peak_input',
+                'max_speed', 'terminal_error', 'passive_margin', 'passive_safe',
+                'feasible', 'rejection_reason',
+            ])
+            writer.writeheader()
+            for arc in selected_sooas:
+                writer.writerow({
+                    'sooa_id': arc.arc_id,
+                    'seed_view_id': arc.seed_view_id,
+                    'sample_count': len(arc.t_samples),
+                    'visible_target_count': len(arc.visible_target_ids),
+                    'visible_target_ids': ';'.join(arc.visible_target_ids),
+                    'delta_v': arc.delta_v,
+                    'min_clearance': arc.min_clearance,
+                    'peak_input': arc.peak_input,
+                    'max_speed': arc.max_speed,
+                    'terminal_error': arc.terminal_error,
+                    'passive_margin': arc.passive_margin,
+                    'passive_safe': arc.passive_safe,
+                    'feasible': arc.feasible,
+                    'rejection_reason': arc.rejection_reason,
                 })
 
     @staticmethod
@@ -899,7 +1120,10 @@ class OfflineCoveragePlanner:
                 'viewpoint_z', 'new_target_count', 'cumulative_coverage',
                 'score', 'transfer_delta_v', 'transfer_max_speed',
                 'transfer_min_clearance', 'transfer_tracking_error',
-                'transfer_feasible',
+                'transfer_feasible', 'sooa_id', 'seed_view_id',
+                'selected_inspection_action', 'sooa_visible_target_count',
+                'sooa_delta_v', 'sooa_min_clearance', 'sooa_peak_input',
+                'sooa_passive_margin', 'sooa_passive_safe',
             ])
             writer.writeheader()
             for item in selected:
@@ -917,6 +1141,27 @@ class OfflineCoveragePlanner:
                     'transfer_min_clearance': item.transfer.min_clearance,
                     'transfer_tracking_error': item.transfer.tracking_error,
                     'transfer_feasible': item.transfer.feasible,
+                    'sooa_id': (
+                        item.inspection_arc.arc_id
+                        if item.inspection_arc is not None else ''
+                    ),
+                    'seed_view_id': item.candidate.candidate_id,
+                    'selected_inspection_action': 'SOOA',
+                    'sooa_visible_target_count': (
+                        len(item.inspection_arc.visible_target_ids)
+                        if item.inspection_arc is not None else ''
+                    ),
+                    'sooa_delta_v': item.transfer.delta_v,
+                    'sooa_min_clearance': item.transfer.min_clearance,
+                    'sooa_peak_input': item.transfer.peak_requested_input,
+                    'sooa_passive_margin': (
+                        item.inspection_arc.passive_margin
+                        if item.inspection_arc is not None else ''
+                    ),
+                    'sooa_passive_safe': (
+                        item.inspection_arc.passive_safe
+                        if item.inspection_arc is not None else ''
+                    ),
                 })
 
     @staticmethod
@@ -993,7 +1238,7 @@ class OfflineCoveragePlanner:
                 edgecolors='black',
                 linewidths=0.25,
                 depthshade=False,
-                label='selected viewpoints',
+                label='selected SOOA terminal poses',
             )
         _style_3d_axis(axis)
         _set_equal_3d_axes(axis, targets, selected)
@@ -1025,7 +1270,7 @@ class OfflineCoveragePlanner:
                 [state[2] for _time, state, _command in samples],
                 color='#D55E00',
                 linewidth=1.8,
-                label='CW-feasible trajectory',
+                label='SOOA HCW trajectory',
                 zorder=5,
             )
             scatter = axis.scatter(

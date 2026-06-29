@@ -1,44 +1,49 @@
 \begin{algorithm}[t]
-\caption{Dynamics-aware finite-graph inspection planner}
+\caption{SOOA-based orbital coverage planner}
 \label{alg:offline-planner}
 \begin{algorithmic}[1]
 \Require Structure geometry $\mathcal{S}$, initial state $x_0$, camera model,
-$d_{\mathrm{safe}}$, $C_{\mathrm{req}}$, $C_{\mathrm{stop}}$
-\Ensure Planned trajectory $\mathcal{P}$, attitude stream, and inspection metrics
-\State Sample area-weighted mesh targets
+HCW model, safety limits, $C_{\mathrm{req}}$, $C_{\mathrm{stop}}$
+\Ensure Planned trajectory $\mathcal{P}$, attitude stream, SOOA sequence, and
+inspection metrics
+\State Sample area-weighted surface targets
 $\mathcal{T}=\{(p_i,n_i,A_i)\}_{i=1}^N$
-\State Generate candidate views $\mathcal{V}=\{z_j\}_{j=1}^M$
-\State Reject unsafe candidates and compute visibility matrix
-$A\in\{0,1\}^{N\times M}$
-\State Initialize covered set $\mathcal{C}\gets\emptyset$, selected list
-$\mathcal{V}^{\star}\gets\emptyset$, and predicted state $x\gets x_0$
-\While{$C(\mathcal{C})<C_{\mathrm{stop}}$ and the view budget is not exhausted}
-  \State Solve rest-to-rest terminal HCW transfer edges from $x$ to candidate
-  positions $z_j$ and reject edges violating terminal position error,
-  terminal speed, input, speed, or clearance limits
-  \State Compute $\Delta A_j$ and $J_{\mathrm{CW}}(x,z_j)$ for feasible
-  candidates
-  \State Select $z^\star=\arg\max_j
-  \Delta A_j/(1+J_{\mathrm{CW}}(x,z_j))+w_m d_{\min}$
-  \State Append $z^\star$ to $\mathcal{V}^{\star}$
-  \State Update $x$ using the terminal state of the selected transfer
-  \State Update covered set $\mathcal{C}$ from the candidate visibility vector
+\State Generate viewpoint and attitude seeds around the structure
+\State For each seed, generate a finite-duration terminal/dwell candidate arc
+under the HCW model
+\State Reject arcs violating terminal error, input, speed, clearance, or
+passive-audit constraints
+\State Evaluate range, FOV, incidence, dwell, and LOS visibility for accepted
+arcs
+\State Construct the SOOA library $\mathcal{A}$ with visibility sets
+$\Gamma(a_j)$, costs $\Delta v_j$, clearances $d^{\min}_j$, and margins
+$\rho_j$
+\State Initialize covered set $\mathcal{C}\gets\emptyset$, selected sequence
+$\sigma\gets\emptyset$, and predicted state $x\gets x_0$
+\While{$C(\mathcal{C})<C_{\mathrm{stop}}$ and the arc budget is not exhausted}
+  \State Compute new weighted coverage gain $\Delta C_j$ for feasible outgoing
+  SOOAs
+  \State Score each arc using coverage gain, transfer cost, control effort, and
+  safety margin
+  \State Select $a^\star=\arg\max_j s_j$
+  \State Append $a^\star$ to $\sigma$ and update the predicted terminal state
+  \State Update covered set $\mathcal{C}$ using $\Gamma(a^\star)$
 \EndWhile
-\State Order $\mathcal{V}^{\star}$ using CW-transfer dynamic costs
-\State Simulate ordered trajectory and compute coverage, attitude, and safety
-\State Save trajectory, selected views, attitudes, visibility, and metrics
-\State \Return $\mathcal{P}$
+\State Roll out and audit the selected SOOA sequence under HCW dynamics
+\State Export trajectory, control, attitude, FOV, coverage, safety, and planner
+logs
+\State \Return $\mathcal{P}$, attitude stream, SOOA sequence, and metrics
 \end{algorithmic}
 \end{algorithm}
 
 \begin{algorithm}[t]
-\caption{Certified reduced-graph dynamic program}
+\caption{Certified reduced-SOOA-graph dynamic program}
 \label{alg:certified-dp}
 \begin{algorithmic}[1]
-\Require Candidate graph $\mathcal G$, visibility sets $\Gamma_j$, edge costs
+\Require SOOA graph $\mathcal G$, visibility sets $\Gamma(a_j)$, edge costs
 $\ell_{jk}$, feasibility flags $\eta_{jk}$, $C_{\mathrm{req}}$, $L_{\max}$
 \Ensure Minimum-cost feasible sequence on the reduced graph, or no certificate
-\State Precompute target masks for all candidate views
+\State Precompute target masks for all SOOAs
 \State Initialize $D(\emptyset,s)\gets0$ at the initial spacecraft state $s$
 \For{$\ell=0,\ldots,L_{\max}-1$}
   \ForAll{reachable states $(B,j)$ with $|B|=\ell$}

@@ -5,66 +5,70 @@
 
 The offline solver operates on the finite graph defined in
 Section~\ref{sec:problem}. It decomposes inspection into target sampling,
-candidate-view construction, visibility-matrix construction, HCW edge
-generation, finite-graph optimization, trajectory rollout, and camera-attitude
-export. The implementation has two modes. The certified mode solves a reduced
-finite graph exactly by dynamic programming over selected-view masks and the
-last visited view. The scalable mode uses dynamics-aware set cover followed by
-CW-cost tour ordering for the full ISS-mesh benchmark. Both modes use the same
-camera visibility matrix and the same HCW transfer feasibility audit, so the
-certificate and the scalable results refer to the same discretized mission
-model.
+viewpoint-seed construction, SOOA generation, visibility-matrix construction,
+HCW feasibility auditing, finite-graph optimization, trajectory rollout, and
+camera-attitude export. The implementation has two modes. The certified mode
+solves a reduced SOOA graph exactly by dynamic programming over selected-arc
+masks and the terminal arc. The scalable mode uses deterministic safe-arc
+coverage selection followed by CW-cost tour ordering for the full ISS-mesh
+benchmark. Both modes use the same camera visibility matrix and the same HCW
+transfer feasibility audit, so the certificate and the scalable results refer
+to the same discretized mission model.
 
-\subsection{Candidate Viewpoints}
+\subsection{Viewpoint Seeds and SOOA Library}
 
-For each surface target, candidate views are generated on offset shells and
+For each surface target, viewpoint seeds are generated on offset shells and
 accepted only when they satisfy basic range, field-of-view, incidence-angle,
-line-of-sight, and clearance constraints. Each candidate $z_j$ stores a safety
-margin and a precomputed set of visible targets. The resulting binary
+line-of-sight, and clearance constraints. Each seed then induces a
+transfer-to-dwell SOOA whose terminal camera pose is used for visibility in
+the current implementation. Each SOOA $a_j$ stores a safety margin, transfer
+metrics, passive-drift audit fields, and a precomputed set of visible targets.
+The resulting binary
 visibility relation can be written as
 \begin{equation}
   A_{ij}=1
   \quad \Longleftrightarrow \quad
-  \text{target } i \text{ is visible from candidate } z_j .
+  \text{target } i \text{ is visible from SOOA } a_j .
 \end{equation}
 In the high-coverage offline benchmark, 357 candidates are generated for
 180 mesh target samples.
 
-\subsection{Dynamics-Aware Viewpoint Selection}
+\subsection{SOOA Selection}
 
-The scalable solver selects views on the candidate graph and then orders the
+The scalable solver selects SOOAs on the accepted arc graph and then orders the
 selected sequence using CW transfer costs. At each selection step, the planner
 balances new weighted coverage against the HCW transfer cost from the current
-predicted state. For candidate $z_j$, let $\Delta C_j$ be the newly gained
-weighted coverage and let $J(x,z_j)$ be the rollout cost defined by the edge
+predicted state. For arc $a_j$, let $\Delta C_j$ be the newly gained
+weighted coverage and let $J(x,a_j)$ be the rollout cost defined by the edge
 model in Section~\ref{sec:problem}. The selection stage uses the score
 \begin{equation}
   s_j =
-  \frac{\Delta C_j}{1+J(x,z_j)}
-  + w_m \min\{\widehat{d}_{\min}(x,z_j),d_{\max}\},
+  \frac{\Delta C_j}{1+J(x,a_j)}
+  + w_m \min\{\widehat{d}_{\min}(x,a_j),d_{\max}\},
 \end{equation}
-then updates the predicted state with the CW rollout to the selected viewpoint.
+then updates the predicted state with the CW rollout to the selected SOOA
+terminal state.
 The resulting ordered sequence is then propagated forward so that later choices
 depend on the orbital state reached by earlier ones. The planner records the
-selected candidate identifier, new target count, area gain, cumulative
+selected SOOA identifier, seed-view identifier, new target count, area gain, cumulative
 coverage, score, transfer $\Delta v$, dynamic transfer cost, minimum
 clearance, transfer tracking error, and feasibility flag for each selected
-viewpoint.
+inspection action.
 The planning loop terminates when the cumulative coverage reaches the
 prescribed stop ratio, when the view budget is exhausted, or when no feasible
 outgoing edge remains from the current state.
 
 \subsection{CW Transfer Generation}
 
-After a candidate is selected, the planner computes a finite-horizon HCW
-terminal transfer to the selected viewpoint. For the fixed integration grid,
+After an arc is selected, the planner computes a finite-horizon HCW terminal
+transfer to the selected dwell pose. For the fixed integration grid,
 the linear HCW map is used to solve the minimum-energy sequence of piecewise
-constant accelerations whose terminal position equals the candidate view
-position and whose terminal relative velocity is zero. The transfer is then
+constant accelerations whose terminal position equals the SOOA dwell position
+and whose terminal relative velocity is zero. The transfer is then
 sampled forward, and the edge is marked feasible only when terminal position
 error, terminal speed, peak input, speed, and clearance satisfy the specified
-bounds. This makes the selected viewpoints stabilized inspection states rather
-than fly-through camera markers.
+bounds. This makes the selected SOOAs stabilized inspection actions rather than
+fly-through camera markers.
 Because each segment is generated independently on the discrete HCW grid, the
 reported trajectory is physically valid but piecewise smooth rather than a
 single globally optimized spline. The plotted line is a stitched sequence of
@@ -86,21 +90,21 @@ mixed-integer optimum for the continuous mission.
 \subsection{Certified Finite-Graph Solver}
 \label{sec:theory}
 
-Let $\mathcal V=\{z_j\}_{j=1}^{M}$ denote the finite candidate-viewpoint set.
-Each viewpoint $z_j$ observes a subset of targets $\Gamma_j \subseteq \mathcal
-T$, and each directed transfer $(z_a,z_b)$ has a precomputed HCW cost
+Let $\mathcal A=\{a_j\}_{j=1}^{M}$ denote the finite SOOA set. Each arc $a_j$
+observes a subset of targets $\Gamma(a_j) \subseteq \mathcal T$, and each
+directed transition $(a_a,a_b)$ has a precomputed HCW cost
 $\ell_{ab}\ge 0$ and feasibility flag $\eta_{ab}\in\{0,1\}$. The discretized
 mission is therefore a finite optimization problem on
-$\mathcal G=(\mathcal V,\mathcal E)$, where $\mathcal E$ contains only
+$\mathcal G=(\mathcal A,\mathcal E)$, where $\mathcal E$ contains only
 feasible transfers.
 
 Let $\Sigma_{L_{\max}}$ be the set of all ordered candidate sequences of
-length at most $L_{\max}$ that start from the initial node $z_0$ and use only
+length at most $L_{\max}$ that start from the initial node and use only
 feasible edges. For
-$\sigma=(z_{\sigma_1},\ldots,z_{\sigma_L})$, define
+$\sigma=(a_{\sigma_1},\ldots,a_{\sigma_L})$, define
 \begin{align}
   c_i(\sigma) &=
-  \mathbf{1}\{i\in\cup_{\ell=1}^{L}\Gamma_{\sigma_\ell}\},\\
+  \mathbf{1}\{i\in\cup_{\ell=1}^{L}\Gamma(a_{\sigma_\ell})\},\\
   J_{\mathrm{disc}}(\sigma) &=
   \sum_{\ell=1}^{L}\ell_{\sigma_{\ell-1},\sigma_\ell}.
   \label{eq:finite-mip-objective}
@@ -118,8 +122,8 @@ The exact finite inspection problem is
 This sequence problem can be encoded as a mixed-integer program with
 stage-selection and edge-consistency variables. In the implementation, the
 certified mode solves it directly by dynamic programming. A state is
-$(B,j)$, where $B\subseteq\mathcal V$ is the selected-view set and $j$ is the
-last selected view. The value $D(B,j)$ stores the minimum HCW dynamic cost of
+$(B,j)$, where $B\subseteq\mathcal A$ is the selected-arc set and $j$ is the
+last selected arc. The value $D(B,j)$ stores the minimum HCW dynamic cost of
 any feasible sequence that visits exactly $B$ and terminates at $j$. The
 recursion is
 \begin{equation}
@@ -133,9 +137,9 @@ ratio before the view budget is exceeded. If all reachable states within the
 budget are expanded before the time and expansion limits are reached, the
 returned sequence is certified optimal on the reduced graph.
 
-\begin{theorem}[Global optimality on the discretized mission graph]
-For a fixed finite candidate set $\mathcal V$, fixed visibility sets
-$\Gamma_j$, fixed edge costs $\ell_{ab}$, fixed feasibility indicators
+\begin{theorem}[Global optimality on an exhausted reduced SOOA graph]
+For a fixed finite SOOA set $\mathcal A$, fixed visibility sets
+$\Gamma(a_j)$, fixed edge costs $\ell_{ab}$, fixed feasibility indicators
 $\eta_{ab}$, required weighted coverage $C_{\mathrm{req}}$, and finite horizon
 $L_{\max}$, the dynamic-programming solver described above returns a minimum
 cost feasible inspection sequence for the discretized mission graph whenever
@@ -161,12 +165,12 @@ the discretized graph.
 The theorem is deliberately discrete. It does not claim global optimality for
 the original continuous viewpoint space, nor does it claim that the scalable
 solver used in the full ISS benchmark is globally optimal. Rather, it
-identifies the finite problem for which a certificate is meaningful. In the
-reported certification smoke case, the exact solver uses 8 candidate nodes and
-13 visible target IDs, expands 39 feasible states, selects two views, reaches
-the required 25\% coverage, and returns certificate status ``optimal''. The
-same candidate graph can therefore support a fast solver for large studies and
-an exact solver for smaller certification cases.
+identifies the finite problem for which a reduced-graph oracle is meaningful.
+In the reported oracle smoke case, the exact solver uses eight SOOA nodes and
+13 visible target IDs, expands 39 feasible states, selects two arcs, reaches
+the required 25\% coverage, and returns certificate status ``optimal''. This
+small case verifies the finite objective and implementation; it is not a
+mission-level coverage result.
 
 \subsection{Planner Outputs}
 

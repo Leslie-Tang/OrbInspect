@@ -17,6 +17,8 @@ offline_coverage_planner:
     transfer_duration: 80.0
     integration_dt: 1.0
     max_acceleration: 0.012
+    passive_safety_horizon: 300.0
+    passive_safety_distance: 0.0
     position_gain: 0.0008
     velocity_gain: 0.08
     safety_margin: 2.0
