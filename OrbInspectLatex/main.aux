@@ -20,21 +20,23 @@
 \citation{ogri2025switched}
 \@writefile{toc}{\contentsline {section}{\numberline {II}Related Work}{2}{section.2}\protected@file@percent }
 \newlabel{sec:related}{{II}{2}{}{section.2}{}}
-\citation{nasa_iss_gltf_model}
 \@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Positioning relative to closely related inspection and planning approaches.}}{3}{table.caption.1}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
 \newlabel{tab:positioning}{{I}{3}{Positioning relative to closely related inspection and planning approaches}{table.caption.1}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {III}System Model and Mission Setting}{3}{section.3}\protected@file@percent }
 \newlabel{sec:system}{{III}{3}{}{section.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {A}Reference Frame and Dynamics}{3}{subsection.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {B}Inspection Geometry and Termination}{3}{subsection.3.2}\protected@file@percent }
+\newlabel{eq:hcw-continuous}{{4}{3}{}{equation.4}{}}
+\citation{nasa_iss_gltf_model}
+\newlabel{eq:hcw-discrete}{{7}{4}{}{equation.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B}Inspection Geometry and Termination}{4}{subsection.3.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {IV}Problem Formulation}{4}{section.4}\protected@file@percent }
 \newlabel{sec:problem}{{IV}{4}{}{section.4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {A}State, Visibility, and Coverage}{4}{subsection.4.1}\protected@file@percent }
-\newlabel{eq:range}{{8}{4}{}{equation.8}{}}
-\newlabel{eq:fov}{{9}{4}{}{equation.9}{}}
-\newlabel{eq:view-angle}{{10}{4}{}{equation.10}{}}
-\newlabel{eq:los}{{11}{4}{}{equation.11}{}}
+\newlabel{eq:range}{{13}{4}{}{equation.13}{}}
+\newlabel{eq:fov}{{14}{4}{}{equation.14}{}}
+\newlabel{eq:view-angle}{{15}{4}{}{equation.15}{}}
+\newlabel{eq:los}{{16}{4}{}{equation.16}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {B}Dynamic Feasibility and Cost}{4}{subsection.4.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {C}Safe Observable Orbital Arc}{5}{subsection.4.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {D}Optimization Objective}{5}{subsection.4.4}\protected@file@percent }
@@ -45,24 +47,24 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {B}Viewpoint Seeds and SOOA Library}{6}{subsection.5.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {C}SOOA Selection}{6}{subsection.5.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {D}CW Transfer Generation}{6}{subsection.5.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {E}Certified Finite-Graph Solver}{6}{subsection.5.5}\protected@file@percent }
-\newlabel{sec:theory}{{E}{6}{}{subsection.5.5}{}}
-\newlabel{eq:finite-mip-objective}{{36}{6}{}{equation.36}{}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces SOOA-based orbital coverage planner}}{7}{algorithm.1}\protected@file@percent }
 \newlabel{alg:offline-planner}{{1}{7}{SOOA-based orbital coverage planner}{algorithm.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {E}Certified Finite-Graph Solver}{7}{subsection.5.5}\protected@file@percent }
+\newlabel{sec:theory}{{E}{7}{}{subsection.5.5}{}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Certified reduced-SOOA-graph dynamic program}}{7}{algorithm.2}\protected@file@percent }
 \newlabel{alg:certified-dp}{{2}{7}{Certified reduced-SOOA-graph dynamic program}{algorithm.2}{}}
+\newlabel{eq:finite-mip-objective}{{41}{7}{}{equation.41}{}}
 \citation{nasa_iss_gltf_model}
 \@writefile{toc}{\contentsline {subsection}{\numberline {F}Planner Outputs}{8}{subsection.5.6}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {VI}Execution and Experimental Protocol}{8}{section.6}\protected@file@percent }
 \newlabel{sec:simulation}{{VI}{8}{}{section.6}{}}
 \newlabel{sec:online}{{VI}{8}{}{section.6}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {A}Benchmark Definition}{8}{subsection.6.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Validation matrix for sensitivity and ablation studies.}}{8}{table.caption.2}\protected@file@percent }
-\newlabel{tab:validation-matrix}{{II}{8}{Validation matrix for sensitivity and ablation studies}{table.caption.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {B}Online Replay Interface}{8}{subsection.6.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {C}ROS/Gazebo Verification}{8}{subsection.6.3}\protected@file@percent }
 \citation{nasa_iss_gltf_model}
+\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Validation matrix for sensitivity and ablation studies.}}{9}{table.caption.2}\protected@file@percent }
+\newlabel{tab:validation-matrix}{{II}{9}{Validation matrix for sensitivity and ablation studies}{table.caption.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C}ROS/Gazebo Verification}{9}{subsection.6.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {VII}Results}{9}{section.7}\protected@file@percent }
 \newlabel{sec:results}{{VII}{9}{}{section.7}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {A}Offline Planning Performance}{9}{subsection.7.1}\protected@file@percent }
@@ -76,21 +78,23 @@
 \newlabel{fig:coverage-comparison}{{2}{10}{Coverage evolution for the compared offline methods in the high-coverage mesh experiment}{figure.caption.6}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Baseline trajectory comparison over the same ISS mesh silhouette. The proposed SOOA tour is shown separately in Fig.~\ref {fig:mesh-and-trajectory}.}}{10}{figure.caption.7}\protected@file@percent }
 \newlabel{fig:trajectory-comparison}{{3}{10}{Baseline trajectory comparison over the same ISS mesh silhouette. The proposed SOOA tour is shown separately in Fig.~\ref {fig:mesh-and-trajectory}}{figure.caption.7}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Coverage-effort-feasibility summary for the full offline comparison. The dashed line in the summary panel marks the 98\% stop target. A star denotes the proposed method shown in Fig.~\ref {fig:mesh-and-trajectory}; circles denote feasible baselines, and crosses denote methods that fail the input, speed, or clearance checks.}}{10}{figure.caption.8}\protected@file@percent }
-\newlabel{fig:trajectory-tradeoff-summary}{{4}{10}{Coverage-effort-feasibility summary for the full offline comparison. The dashed line in the summary panel marks the 98\% stop target. A star denotes the proposed method shown in Fig.~\ref {fig:mesh-and-trajectory}; circles denote feasible baselines, and crosses denote methods that fail the input, speed, or clearance checks}{figure.caption.8}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {V}{\ignorespaces Complementary offline comparison quantities not encoded by the coverage-effort plot.}}{11}{table.caption.9}\protected@file@percent }
 \newlabel{tab:method-execution-results}{{V}{11}{Complementary offline comparison quantities not encoded by the coverage-effort plot}{table.caption.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Coverage-effort-feasibility summary for the full offline comparison. The dashed line in the summary panel marks the 98\% stop target. A star denotes the proposed method shown in Fig.~\ref {fig:mesh-and-trajectory}; circles denote feasible baselines, and crosses denote methods that fail the input, speed, or clearance checks.}}{11}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:trajectory-tradeoff-summary}{{4}{11}{Coverage-effort-feasibility summary for the full offline comparison. The dashed line in the summary panel marks the 98\% stop target. A star denotes the proposed method shown in Fig.~\ref {fig:mesh-and-trajectory}; circles denote feasible baselines, and crosses denote methods that fail the input, speed, or clearance checks}{figure.caption.8}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Sensitivity and ablation results generated by the offline validation matrix. Circles denote feasible runs and crosses denote runs that fail the full feasibility audit. The dashed lines mark the 98\% stop target or the 0.060~m/s$^2$ input limit.}}{11}{figure.caption.10}\protected@file@percent }
 \newlabel{fig:validation-matrix-summary}{{5}{11}{Sensitivity and ablation results generated by the offline validation matrix. Circles denote feasible runs and crosses denote runs that fail the full feasibility audit. The dashed lines mark the 98\% stop target or the 0.060~m/s$^2$ input limit}{figure.caption.10}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {B}Camera Geometry and Replay Verification}{11}{subsection.7.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Camera-model verification through reconstructed field-of-view geometry overlaid on the proposed SOOA tour. The frusta and boresight rays are reconstructed from saved camera poses for representative early, middle, and final selected SOOAs, verifying that the logged attitude stream instantiates the visibility model used by the planner and by ROS replay in the same LVLH frame as the ISS mesh.}}{11}{figure.caption.11}\protected@file@percent }
-\newlabel{fig:camera-model-frusta}{{6}{11}{Camera-model verification through reconstructed field-of-view geometry overlaid on the proposed SOOA tour. The frusta and boresight rays are reconstructed from saved camera poses for representative early, middle, and final selected SOOAs, verifying that the logged attitude stream instantiates the visibility model used by the planner and by ROS replay in the same LVLH frame as the ISS mesh}{figure.caption.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Camera-model verification through reconstructed field-of-view geometry overlaid on the proposed SOOA tour. The frusta and boresight rays are reconstructed from saved camera poses for representative early, middle, and final selected SOOAs, verifying that the logged attitude stream instantiates the visibility model used by the planner and by ROS replay in the same LVLH frame as the ISS mesh.}}{12}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:camera-model-frusta}{{6}{12}{Camera-model verification through reconstructed field-of-view geometry overlaid on the proposed SOOA tour. The frusta and boresight rays are reconstructed from saved camera poses for representative early, middle, and final selected SOOAs, verifying that the logged attitude stream instantiates the visibility model used by the planner and by ROS replay in the same LVLH frame as the ISS mesh}{figure.caption.11}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Incremental surface coverage contributed by the selected SOOAs. Bars show per-arc coverage gain in the selected SOOA sequence, with the same representative early, middle, and final arcs highlighted as in Fig.~\ref {fig:camera-model-frusta}.}}{12}{figure.caption.12}\protected@file@percent }
 \newlabel{fig:camera-model-coverage}{{7}{12}{Incremental surface coverage contributed by the selected SOOAs. Bars show per-arc coverage gain in the selected SOOA sequence, with the same representative early, middle, and final arcs highlighted as in Fig.~\ref {fig:camera-model-frusta}}{figure.caption.12}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces ROS replay log verification for the planned SOOA execution. Left: replayed chaser trajectory in the same LVLH frame used by the offline planner. Right: logged control effort over replay time. These panels verify that the saved trajectory and command streams are available to the ROS logging and visualization stack; orbital dynamics claims remain based on the HCW planner logs.}}{12}{figure.caption.13}\protected@file@percent }
 \newlabel{fig:ros-camera-verification}{{8}{12}{ROS replay log verification for the planned SOOA execution. Left: replayed chaser trajectory in the same LVLH frame used by the offline planner. Right: logged control effort over replay time. These panels verify that the saved trajectory and command streams are available to the ROS logging and visualization stack; orbital dynamics claims remain based on the HCW planner logs}{figure.caption.13}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Gazebo Harmonic validation frames. Left: chaser-follow camera view. Right: full ISS visual context with chaser trajectory replay. Quantitative coverage, safety, and control claims come from recorded planner logs, not Gazebo physics.}}{12}{figure.caption.14}\protected@file@percent }
 \newlabel{fig:gazebo-validation}{{9}{12}{Gazebo Harmonic validation frames. Left: chaser-follow camera view. Right: full ISS visual context with chaser trajectory replay. Quantitative coverage, safety, and control claims come from recorded planner logs, not Gazebo physics}{figure.caption.14}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VIII}Discussion and Limitations}{12}{section.8}\protected@file@percent }
+\newlabel{sec:discussion}{{VIII}{12}{}{section.8}{}}
 \bibstyle{IEEEtran}
 \bibdata{references}
 \bibcite{clohessy1960terminal}{1}
@@ -100,16 +104,14 @@
 \bibcite{karaman2011sampling}{5}
 \bibcite{apodaca2025trajectory}{6}
 \bibcite{hou2024relative}{7}
-\@writefile{toc}{\contentsline {section}{\numberline {VIII}Discussion and Limitations}{13}{section.8}\protected@file@percent }
-\newlabel{sec:discussion}{{VIII}{13}{}{section.8}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {IX}Conclusion}{13}{section.9}\protected@file@percent }
-\newlabel{sec:conclusion}{{IX}{13}{}{section.9}{}}
-\@writefile{toc}{\contentsline {section}{REFERENCES}{13}{section.9}\protected@file@percent }
 \bibcite{zhou2026tomographic}{8}
 \bibcite{ogri2025switched}{9}
 \bibcite{nasa_iss_gltf_model}{10}
-\@writefile{toc}{\contentsline {section}{Biographies}{14}{IEEEbiography.0}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{Rugang Tang}{14}{IEEEbiography.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {IX}Conclusion}{13}{section.9}\protected@file@percent }
+\newlabel{sec:conclusion}{{IX}{13}{}{section.9}{}}
+\@writefile{toc}{\contentsline {section}{REFERENCES}{13}{section.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{Biographies}{13}{IEEEbiography.0}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{Rugang Tang}{13}{IEEEbiography.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{Xin Ning}{14}{IEEEbiography.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{Prof. Chih-yung WEN}{14}{IEEEbiography.3}\protected@file@percent }
 \gdef \@abspage@last{14}

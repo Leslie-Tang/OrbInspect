@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.10.27)  27 JUN 2026 12:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.10.27)  14 JUL 2026 18:01
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -776,10 +776,10 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 63.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-) (./sections/01_introduction.tex
+)
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
+(./sections/01_introduction.tex
+Underfull \vbox (badness 7540) has occurred while \output is active []
 
 
 
@@ -798,7 +798,7 @@ Underfull \hbox (badness 2088) in paragraph at lines 77--81
  []
 
 ) (./sections/02_related_work.tex
-Underfull \vbox (badness 1320) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
@@ -818,14 +818,14 @@ Underfull \hbox (badness 1389) in paragraph at lines 4--13
  []
 
 
+
+
 Underfull \hbox (badness 2980) in paragraph at lines 16--20
 []\OT1/ptm/m/n/10.28844 The in-spec-tion pass is rep-re-sented in a local-
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
+Underfull \vbox (badness 1635) has occurred while \output is active []
 
 
 
@@ -836,15 +836,20 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 [4]
 
 
-Underfull \hbox (badness 2057) in paragraph at lines 183--186
+Underfull \hbox (badness 2057) in paragraph at lines 189--192
 \OT1/ptm/m/n/10.28844 that sat-is-fies feasible-transfer con-straints and cov-ers
  []
 
-) (./sections/05_algorithm.tex
 
-[5]
+Underfull \vbox (badness 4699) has occurred while \output is active []
 
-(./algorithms/offline_planner.tex
+
+
+[5]) (./sections/05_algorithm.tex
+
+
+
+[6] (./algorithms/offline_planner.tex
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 2.
 
 Underfull \hbox (badness 10000) in paragraph at lines 9--11
@@ -857,140 +862,133 @@ Underfull \hbox (badness 1661) in paragraph at lines 12--14
  []
 
 )
+Underfull \vbox (badness 1371) has occurred while \output is active []
 
-[6]
 
-
-Underfull \vbox (badness 1107) has occurred while \output is active []
 
 
 
 [7]) (./sections/06_simulation_protocol.tex
+Underfull \vbox (badness 5008) has occurred while \output is active []
+
+
 
 
 
 [8]) (./sections/07_expected_results.tex
-<figures/high_coverage/proposed_trajectory_3d.pdf, id=298, 374.82387pt x 305.37682pt>
+
+
+
+[9]
+<figures/high_coverage/proposed_trajectory_3d.pdf, id=313, 374.82387pt x 305.37682pt>
 File: figures/high_coverage/proposed_trajectory_3d.pdf Graphic file (type pdf)
 <use figures/high_coverage/proposed_trajectory_3d.pdf>
 Package pdftex.def Info: figures/high_coverage/proposed_trajectory_3d.pdf  used on input line 94.
 (pdftex.def)             Requested size: 227.99927pt x 185.75769pt.
-<figures/high_coverage/coverage_comparison.pdf, id=300, 341.28818pt x 269.27383pt>
+<figures/high_coverage/coverage_comparison.pdf, id=315, 341.28818pt x 269.27383pt>
 File: figures/high_coverage/coverage_comparison.pdf Graphic file (type pdf)
 <use figures/high_coverage/coverage_comparison.pdf>
 Package pdftex.def Info: figures/high_coverage/coverage_comparison.pdf  used on input line 108.
 (pdftex.def)             Requested size: 227.99927pt x 179.8907pt.
 
-Underfull \vbox (badness 6741) has occurred while \output is active []
 
-
-
-<figures/high_coverage/trajectory_method_cw_nbv.pdf, id=304, 120.48836pt x 113.29314pt>
+<figures/high_coverage/trajectory_method_cw_nbv.pdf, id=319, 120.48836pt x 113.29314pt>
 File: figures/high_coverage/trajectory_method_cw_nbv.pdf Graphic file (type pdf)
 <use figures/high_coverage/trajectory_method_cw_nbv.pdf>
 Package pdftex.def Info: figures/high_coverage/trajectory_method_cw_nbv.pdf  used on input line 136.
 (pdftex.def)             Requested size: 76.80176pt x 72.21692pt.
-<figures/high_coverage/trajectory_method_coverage.pdf, id=305, 120.48836pt x 113.29314pt>
+<figures/high_coverage/trajectory_method_coverage.pdf, id=320, 120.48836pt x 113.29314pt>
 File: figures/high_coverage/trajectory_method_coverage.pdf Graphic file (type pdf)
 <use figures/high_coverage/trajectory_method_coverage.pdf>
 Package pdftex.def Info: figures/high_coverage/trajectory_method_coverage.pdf  used on input line 137.
 (pdftex.def)             Requested size: 76.80176pt x 72.21692pt.
-<figures/high_coverage/trajectory_method_safe_coverage.pdf, id=306, 120.48836pt x 113.29314pt>
+<figures/high_coverage/trajectory_method_safe_coverage.pdf, id=321, 120.48836pt x 113.29314pt>
 File: figures/high_coverage/trajectory_method_safe_coverage.pdf Graphic file (type pdf)
 <use figures/high_coverage/trajectory_method_safe_coverage.pdf>
 Package pdftex.def Info: figures/high_coverage/trajectory_method_safe_coverage.pdf  used on input line 139.
 (pdftex.def)             Requested size: 76.80176pt x 72.21692pt.
-<figures/high_coverage/trajectory_method_nearest.pdf, id=307, 120.48836pt x 113.29314pt>
+<figures/high_coverage/trajectory_method_nearest.pdf, id=322, 120.48836pt x 113.29314pt>
 File: figures/high_coverage/trajectory_method_nearest.pdf Graphic file (type pdf)
 <use figures/high_coverage/trajectory_method_nearest.pdf>
 Package pdftex.def Info: figures/high_coverage/trajectory_method_nearest.pdf  used on input line 141.
 (pdftex.def)             Requested size: 76.80176pt x 72.21692pt.
-<figures/high_coverage/trajectory_method_fuel.pdf, id=308, 120.48836pt x 113.29314pt>
+<figures/high_coverage/trajectory_method_fuel.pdf, id=323, 120.48836pt x 113.29314pt>
 File: figures/high_coverage/trajectory_method_fuel.pdf Graphic file (type pdf)
 <use figures/high_coverage/trajectory_method_fuel.pdf>
 Package pdftex.def Info: figures/high_coverage/trajectory_method_fuel.pdf  used on input line 142.
 (pdftex.def)             Requested size: 76.80176pt x 72.21692pt.
-<figures/high_coverage/trajectory_method_random.pdf, id=309, 120.48836pt x 113.29314pt>
+<figures/high_coverage/trajectory_method_random.pdf, id=324, 120.48836pt x 113.29314pt>
 File: figures/high_coverage/trajectory_method_random.pdf Graphic file (type pdf)
 <use figures/high_coverage/trajectory_method_random.pdf>
 Package pdftex.def Info: figures/high_coverage/trajectory_method_random.pdf  used on input line 143.
 (pdftex.def)             Requested size: 76.80176pt x 72.21692pt.
-<figures/high_coverage/trajectory_tradeoff_summary.pdf, id=312, 244.56432pt x 205.97514pt>
+<figures/high_coverage/trajectory_tradeoff_summary.pdf, id=327, 244.56432pt x 205.97514pt>
 File: figures/high_coverage/trajectory_tradeoff_summary.pdf Graphic file (type pdf)
 <use figures/high_coverage/trajectory_tradeoff_summary.pdf>
 Package pdftex.def Info: figures/high_coverage/trajectory_tradeoff_summary.pdf  used on input line 151.
 (pdftex.def)             Requested size: 215.99854pt x 181.91556pt.
 
-
-[9]
-
-
-Underfull \vbox (badness 6658) has occurred while \output is active []
+Underfull \vbox (badness 2671) has occurred while \output is active []
 
 
 
-[10 <./figures/high_coverage/proposed_trajectory_3d.pdf> <./figures/high_coverage/coverage_comparison.pdf> <./figures/high_coverage/trajectory_method_cw_nbv.pdf> <./figures/high_coverage/trajectory_method_coverage.pdf> <./figures/high_coverage/trajectory_method_safe_coverage.pdf> <./figures/high_coverage/trajectory_method_nearest.pdf> <./figures/high_coverage/trajectory_method_fuel.pdf> <./figures/high_coverage/trajectory_method_random.pdf> <./figures/high_coverage/trajectory_tradeoff_summary.pdf>]
-<figures/high_coverage/validation_matrix_summary.pdf, id=389, 509.9399pt x 353.10463pt>
+[10 <./figures/high_coverage/proposed_trajectory_3d.pdf> <./figures/high_coverage/coverage_comparison.pdf> <./figures/high_coverage/trajectory_method_cw_nbv.pdf> <./figures/high_coverage/trajectory_method_coverage.pdf> <./figures/high_coverage/trajectory_method_safe_coverage.pdf> <./figures/high_coverage/trajectory_method_nearest.pdf> <./figures/high_coverage/trajectory_method_fuel.pdf> <./figures/high_coverage/trajectory_method_random.pdf>]
+<figures/high_coverage/validation_matrix_summary.pdf, id=374, 509.9399pt x 353.10463pt>
 File: figures/high_coverage/validation_matrix_summary.pdf Graphic file (type pdf)
 <use figures/high_coverage/validation_matrix_summary.pdf>
 Package pdftex.def Info: figures/high_coverage/validation_matrix_summary.pdf  used on input line 224.
 (pdftex.def)             Requested size: 230.40161pt x 159.53677pt.
 
+Underfull \vbox (badness 4084) has occurred while \output is active []
 
-<figures/high_coverage/camera_model_frusta.pdf, id=392, 333.88742pt x 333.88742pt>
+
+
+<figures/high_coverage/camera_model_frusta.pdf, id=377, 333.88742pt x 333.88742pt>
 File: figures/high_coverage/camera_model_frusta.pdf Graphic file (type pdf)
 <use figures/high_coverage/camera_model_frusta.pdf>
 Package pdftex.def Info: figures/high_coverage/camera_model_frusta.pdf  used on input line 251.
 (pdftex.def)             Requested size: 227.99927pt x 228.00333pt.
-<figures/high_coverage/camera_model_coverage.pdf, id=393, 302.79938pt x 223.63512pt>
+<figures/high_coverage/camera_model_coverage.pdf, id=378, 302.79938pt x 223.63512pt>
 File: figures/high_coverage/camera_model_coverage.pdf Graphic file (type pdf)
 <use figures/high_coverage/camera_model_coverage.pdf>
 Package pdftex.def Info: figures/high_coverage/camera_model_coverage.pdf  used on input line 263.
 (pdftex.def)             Requested size: 230.40161pt x 170.16577pt.
-<figures/gazebo_validation/trajectory_3d.png, id=396, 505.89pt x 361.35pt>
+
+
+[11 <./figures/high_coverage/trajectory_tradeoff_summary.pdf> <./figures/high_coverage/validation_matrix_summary.pdf>]
+<figures/gazebo_validation/trajectory_3d.png, id=433, 505.89pt x 361.35pt>
 File: figures/gazebo_validation/trajectory_3d.png Graphic file (type png)
 <use figures/gazebo_validation/trajectory_3d.png>
 Package pdftex.def Info: figures/gazebo_validation/trajectory_3d.png  used on input line 279.
 (pdftex.def)             Requested size: 115.19897pt x 82.28168pt.
-<figures/gazebo_validation/control_effort_over_time.png, id=398, 505.89pt x 289.08pt>
+<figures/gazebo_validation/control_effort_over_time.png, id=435, 505.89pt x 289.08pt>
 File: figures/gazebo_validation/control_effort_over_time.png Graphic file (type png)
 <use figures/gazebo_validation/control_effort_over_time.png>
 Package pdftex.def Info: figures/gazebo_validation/control_effort_over_time.png  used on input line 280.
 (pdftex.def)             Requested size: 115.19897pt x 65.82535pt.
-<figures/gazebo_validation/chaser_follow_view_preview.png, id=399, 1284.8pt x 722.7pt>
+<figures/gazebo_validation/chaser_follow_view_preview.png, id=436, 1284.8pt x 722.7pt>
 File: figures/gazebo_validation/chaser_follow_view_preview.png Graphic file (type png)
 <use figures/gazebo_validation/chaser_follow_view_preview.png>
 Package pdftex.def Info: figures/gazebo_validation/chaser_follow_view_preview.png  used on input line 292.
 (pdftex.def)             Requested size: 115.19897pt x 64.79758pt.
-<figures/gazebo_validation/full_preview_360.png, id=400, 1284.8pt x 722.7pt>
+<figures/gazebo_validation/full_preview_360.png, id=437, 1284.8pt x 722.7pt>
 File: figures/gazebo_validation/full_preview_360.png Graphic file (type png)
 <use figures/gazebo_validation/full_preview_360.png>
 Package pdftex.def Info: figures/gazebo_validation/full_preview_360.png  used on input line 293.
 (pdftex.def)             Requested size: 115.19897pt x 64.79758pt.
 )
 
-[11 <./figures/high_coverage/validation_matrix_summary.pdf> <./figures/high_coverage/camera_model_frusta.pdf>]
+(./sections/08_limitations.tex
 
+[12 <./figures/high_coverage/camera_model_frusta.pdf> <./figures/high_coverage/camera_model_coverage.pdf> <./figures/gazebo_validation/trajectory_3d.png> <./figures/gazebo_validation/control_effort_over_time.png> <./figures/gazebo_validation/chaser_follow_view_preview.png (PNG copy)> <./figures/gazebo_validation/full_preview_360.png (PNG copy)>]) (./sections/09_conclusion.tex)
 
-
-[12
-
- <./figures/high_coverage/camera_model_coverage.pdf> <./figures/gazebo_validation/trajectory_3d.png> <./figures/gazebo_validation/control_effort_over_time.png> <./figures/gazebo_validation/chaser_follow_view_preview.png (PNG copy)> <./figures/gazebo_validation/full_preview_360.png (PNG copy)>] (./sections/08_limitations.tex) (./sections/09_conclusion.tex
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-) (./main.bbl
-
-[13
-
-]
+(./main.bbl
 Underfull \hbox (badness 1789) in paragraph at lines 70--73
 \OT1/ptm/m/n/8.25 Space Sta-tion glTF Model,'' [][]$https : / / solarsystem . nasa . gov / gltf[]
  []
 
 )
-<figures/authors/trg.jpg, id=471, 128.08638pt x 156.585pt>
+<figures/authors/trg.jpg, id=472, 128.08638pt x 156.585pt>
 File: figures/authors/trg.jpg Graphic file (type jpg)
 <use figures/authors/trg.jpg>
 Package pdftex.def Info: figures/authors/trg.jpg  used on input line 89.
@@ -999,7 +997,10 @@ File: figures/authors/trg.jpg Graphic file (type jpg)
 <use figures/authors/trg.jpg>
 Package pdftex.def Info: figures/authors/trg.jpg  used on input line 89.
 (pdftex.def)             Requested size: 72.26924pt x 88.34883pt.
-<figures/authors/nx.pdf, id=474, 114.4275pt x 150.5625pt>
+
+
+[13 <./figures/authors/trg.jpg>]
+<figures/authors/nx.pdf, id=483, 114.4275pt x 150.5625pt>
 File: figures/authors/nx.pdf Graphic file (type pdf)
 <use figures/authors/nx.pdf>
 Package pdftex.def Info: figures/authors/nx.pdf  used on input line 93.
@@ -1008,7 +1009,7 @@ File: figures/authors/nx.pdf Graphic file (type pdf)
 <use figures/authors/nx.pdf>
 Package pdftex.def Info: figures/authors/nx.pdf  used on input line 93.
 (pdftex.def)             Requested size: 68.65877pt x 90.34048pt.
-<figures/authors/CYW.png, id=477, 260.975pt x 343.2825pt>
+<figures/authors/CYW.png, id=486, 260.975pt x 343.2825pt>
 File: figures/authors/CYW.png Graphic file (type png)
 <use figures/authors/CYW.png>
 Package pdftex.def Info: figures/authors/CYW.png  used on input line 105.
@@ -1023,7 +1024,7 @@ Package pdftex.def Info: figures/authors/CYW.png  used on input line 105.
 
 [14
 
- <./figures/authors/trg.jpg> <./figures/authors/nx.pdf> <./figures/authors/CYW.png>] (./main.aux)
+ <./figures/authors/nx.pdf> <./figures/authors/CYW.png>] (./main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -1032,18 +1033,18 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: F1BDD96586B6433E8B2654E171D7B833;5358.
  ) 
 Here is how much of TeX's memory you used:
- 24781 strings out of 473190
- 461843 string characters out of 5715799
- 839715 words of memory out of 5000000
- 47446 multiletter control sequences out of 15000+600000
+ 24788 strings out of 473190
+ 461934 string characters out of 5715799
+ 840767 words of memory out of 5000000
+ 47448 multiletter control sequences out of 15000+600000
  605342 words of font info for 130 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 90i,13n,93p,1958b,579s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 90i,14n,93p,2132b,599s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (14 pages, 6830505 bytes).
+Output written on main.pdf (14 pages, 6837028 bytes).
 PDF statistics:
- 616 PDF objects out of 1000 (max. 8388607)
- 459 compressed objects within 5 object streams
- 119 named destinations out of 1000 (max. 500000)
+ 624 PDF objects out of 1000 (max. 8388607)
+ 467 compressed objects within 5 object streams
+ 124 named destinations out of 1000 (max. 500000)
  400 words of extra memory for PDF output out of 10000 (max. 10000000)
 

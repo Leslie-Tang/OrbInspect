@@ -3,14 +3,15 @@
 
 \subsection{State, Visibility, and Coverage}
 
-Let the chaser state at discrete time $k$ be
+Using the sampling convention in Section~\ref{sec:system}, let the chaser state
+at discrete time $k$ be
 \begin{equation}
-  x_k =
+  \mathbf{x}_k =
   \begin{bmatrix}
-    r_k^{\mathsf T} & v_k^{\mathsf T}
+    \mathbf{r}_k^{\mathsf T} & \mathbf{v}_k^{\mathsf T}
   \end{bmatrix}^{\mathsf T} \in \R^6,
 \end{equation}
-where $r_k \in \R^3$ and $v_k \in \R^3$ are the relative position and velocity
+where $\mathbf{r}_k \in \R^3$ and $\mathbf{v}_k \in \R^3$ are the relative position and velocity
 in the local-vertical/local-horizontal frame of a nominal circular chief orbit.
 The inspected structure is represented by a finite weighted target set
 \begin{equation}
@@ -28,12 +29,12 @@ when mission lighting constraints are relevant.
 Target $i$ is visible at time $k$ if range, field-of-view, incidence angle, and
 line-of-sight constraints all hold:
 \begin{align}
-  \rho_{\min} \le \norm{p_i-r_k} \le \rho_{\max}, \label{eq:range}\\
-  \arccos\!\left(\frac{(p_i-r_k)^{\mathsf T} b(q_k)}{\norm{p_i-r_k}}\right)
+  \rho_{\min} \le \norm{p_i-\mathbf{r}_k} \le \rho_{\max}, \label{eq:range}\\
+  \arccos\!\left(\frac{(p_i-\mathbf{r}_k)^{\mathsf T} b(q_k)}{\norm{p_i-\mathbf{r}_k}}\right)
   \le \alpha_{\max}, \label{eq:fov}\\
-  \arccos\!\left(\frac{(r_k-p_i)^{\mathsf T}n_i}{\norm{r_k-p_i}\norm{n_i}}\right)
+  \arccos\!\left(\frac{(\mathbf{r}_k-p_i)^{\mathsf T}n_i}{\norm{\mathbf{r}_k-p_i}\norm{n_i}}\right)
   \le \theta_{\max}, \label{eq:view-angle}\\
-  \los(r_k,p_i,\mathcal O) = 1, \label{eq:los}
+  \los(\mathbf{r}_k,p_i,\mathcal O) = 1, \label{eq:los}
 \end{align}
 where $\alpha_{\max}$ is the half-angle field-of-view limit, $\theta_{\max}$
 is the maximum incidence angle, and $\mathcal O$ denotes the occluding
@@ -49,18 +50,20 @@ The inspection indicator is $y_{i,k}=\mathbf 1\{\tau_{i,k}\ge \tau_{\min}\}$.
 
 \subsection{Dynamic Feasibility and Cost}
 
-The relative translational motion follows the discrete HCW model
+The planner directly uses the zero-order-hold discrete HCW model in
+Eq.~\eqref{eq:hcw-discrete}:
 \begin{equation}
-  x_{k+1}=f_{\mathrm{HCW}}(x_k,u_k,\dt),
+  \mathbf{x}_{k+1}=A_d\mathbf{x}_k+B_d\mathbf{u}_k,
 \end{equation}
-where $u_k\in\R^3$ is the commanded acceleration. The chaser must satisfy the
+where $\mathbf{u}_k\in\R^3$ is the commanded acceleration applied over the
+$k$th sampling interval. The chaser must satisfy the
 actuation and safety limits
 \begin{align}
-  \norm{u_k}_2 &\le u_{\max}, \\
-  \norm{v_k}_2 &\le v_{\max}, \\
-  d_{\mathcal S}(r_k) &\ge d_{\mathrm{safe}},
+  \norm{\mathbf{u}_k}_2 &\le u_{\max}, \\
+  \norm{\mathbf{v}_k}_2 &\le v_{\max}, \\
+  d_{\mathcal S}(\mathbf{r}_k) &\ge d_{\mathrm{safe}},
 \end{align}
-where $d_{\mathcal S}(r_k)$ is the signed distance to the station safety
+where $d_{\mathcal S}(\mathbf{r}_k)$ is the signed distance to the station safety
 envelope. A CBF-type filter can be attached later as an execution layer, but
 it is not part of the core mathematical problem.
 
@@ -81,9 +84,9 @@ The corresponding edge cost is
 \begin{equation}
   \begin{aligned}
   \ell_{ab} ={}&
-  \lambda_v \sum_{k\in\pi_{ab}}\norm{u_k}_2\dt
+  \lambda_v \sum_{k\in\pi_{ab}}\norm{\mathbf{u}_k}_2\dt
   + \lambda_t T_{ab} \\
-  &+ \lambda_s \sum_{k\in\pi_{ab}}\phi(d_{\mathcal S}(r_k))
+  &+ \lambda_s \sum_{k\in\pi_{ab}}\phi(d_{\mathcal S}(\mathbf{r}_k))
   + \lambda_e e_{ab},
   \end{aligned}
 \end{equation}
@@ -101,10 +104,11 @@ remains from the current terminal state.
 A safe observable orbital arc is the finite-duration inspection action used by
 the planner. For an arc $a_j$ over $t\in[0,T_j]$, define
 \begin{equation}
-    a_j = \left(x_j(t), u_j(t), q_j(t), \Gamma_j,
+    a_j = \left(\mathbf{x}_j(t), \mathbf{u}_j(t), q_j(t), \Gamma_j,
     \Delta v_j, d^{\min}_j, \rho_j\right),
 \end{equation}
-where $x_j(t)$ is the HCW-propagated relative state, $u_j(t)$ is the commanded
+where $\mathbf{x}_j(t)$ is the HCW-propagated relative state,
+$\mathbf{u}_j(t)$ is the commanded
 acceleration, $q_j(t)$ is the camera attitude profile, $\Gamma_j\subseteq
 \mathcal{T}$ is the set of targets satisfying the range, FOV, incidence,
 dwell, and line-of-sight visibility predicates for the stabilized inspection
@@ -113,10 +117,10 @@ minimum clearance, and $\rho_j$ is the passive-safety audit margin.
 
 The accumulated control effort and clearance are
 \begin{equation}
-    \Delta v_j = \int_0^{T_j} \|u_j(t)\|_2\,dt,
+    \Delta v_j = \int_0^{T_j} \|\mathbf{u}_j(t)\|_2\,dt,
 \end{equation}
 \begin{equation}
-    d^{\min}_j = \min_{t\in[0,T_j]} d_{\mathcal{S}}(r_j(t)).
+    d^{\min}_j = \min_{t\in[0,T_j]} d_{\mathcal{S}}(\mathbf{r}_j(t)).
 \end{equation}
 An arc is dynamically admissible if all sampled states satisfy the HCW
 propagation model, input bound, speed bound, clearance bound, and terminal
@@ -126,7 +130,8 @@ visibility model.
 To audit passive safety, the uncontrolled drift from sampled states on the arc
 is propagated as
 \begin{equation}
-    \dot{x}_{\mathrm{drift}} = f_{\mathrm{HCW}}(x_{\mathrm{drift}},0).
+    \dot{\mathbf{x}}_{\mathrm{drift}}
+    = A_{\mathrm{HCW}}\mathbf{x}_{\mathrm{drift}}.
 \end{equation}
 The reported passive-safety margin is
 \begin{equation}
@@ -145,18 +150,19 @@ controls that maximizes weighted coverage while remaining dynamically feasible:
   \begin{aligned}
   \min_{\mathcal X,\mathcal U,\mathcal Q}\quad & J_{\mathrm{total}} \\
   ={}& w_C (1-C_K) + w_T K\dt \\
-  &+ w_U \sum_{k=0}^{K-1}\norm{u_k}_2\dt \\
-  &+ w_S \sum_{k=0}^{K}\phi\!\left(d_{\mathcal S}(r_k)\right) \\
+  &+ w_U \sum_{k=0}^{K-1}\norm{\mathbf{u}_k}_2\dt \\
+  &+ w_S \sum_{k=0}^{K}\phi\!\left(d_{\mathcal S}(\mathbf{r}_k)\right) \\
   &+ w_A \sum_{k=0}^{K}\psi(q_k) \\
   \mathrm{s.t.} \quad
-  & x_{k+1}=f_{\mathrm{HCW}}(x_k,u_k,\dt), \\
-  & \norm{u_k}_2 \le u_{\max}, \quad \norm{v_k}_2 \le v_{\max}, \\
-  & d_{\mathcal S}(r_k)\ge d_{\mathrm{safe}}, \\
+  & \mathbf{x}_{k+1}=A_d\mathbf{x}_k+B_d\mathbf{u}_k, \\
+  & \norm{\mathbf{u}_k}_2 \le u_{\max}, \quad \norm{\mathbf{v}_k}_2 \le v_{\max}, \\
+  & d_{\mathcal S}(\mathbf{r}_k)\ge d_{\mathrm{safe}}, \\
   & y_{i,k} \text{ follows the visibility and dwell model}, \\
   & C_K \ge C_{\mathrm{req}}.
   \end{aligned}
 \end{equation}
-Here $\mathcal X=\{x_k\}_{k=0}^{K}$, $\mathcal U=\{u_k\}_{k=0}^{K-1}$,
+Here $\mathcal X=\{\mathbf{x}_k\}_{k=0}^{K}$,
+$\mathcal U=\{\mathbf{u}_k\}_{k=0}^{K-1}$,
 and $\mathcal Q=\{q_k\}_{k=0}^{K}$. The function $\phi(\cdot)$ penalizes
 proximity to the safety boundary and $\psi(q_k)$ penalizes attitude or
 boresight deviation if attitude is optimized explicitly.
@@ -211,9 +217,9 @@ solver on the same graph.
 For reporting, the primary quantities are cumulative control effort, minimum
 clearance, peak requested input, mission time, and selected-SOOA count:
 \begin{align}
-  \Delta v_{\mathrm{cum}} &= \sum_k \norm{u_k}_2\dt,\\
-  d_{\min} &= \min_k d_{\mathcal S}(r_k),\\
-  u_{\max,\mathrm{req}} &= \max_k \norm{u_k}_{\mathrm{req},2}.
+  \Delta v_{\mathrm{cum}} &= \sum_k \norm{\mathbf{u}_k}_2\dt,\\
+  d_{\min} &= \min_k d_{\mathcal S}(\mathbf{r}_k),\\
+  u_{\max,\mathrm{req}} &= \max_k \norm{\mathbf{u}_k}_{\mathrm{req},2}.
 \end{align}
 These quantities are used later to compare planners on the same mission
 geometry and relative dynamics model.

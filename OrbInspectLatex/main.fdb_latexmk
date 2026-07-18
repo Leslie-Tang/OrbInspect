@@ -1,14 +1,14 @@
 # Fdb version 4
-["bibtex main"] 1782533598.08809 "main.aux" "main.bbl" "main" 1782533704.66175 0
+["bibtex main"] 1784023126.31959 "main.aux" "main.bbl" "main" 1784023279.31255 0
   "./references.bib" 1782438989.07585 3156 ebbc74ae1a79dc119e60085178c229dd ""
   "/usr/local/texlive/2025/texmf-dist/bibtex/bst/ieeetran/IEEEtran.bst" 1440712899 57748 7c8250ecf02814ce6ddc0cdbb63df1dd ""
-  "main.aux" 1782533704.41674 14354 210ef603c905470a1a5f64e878cdf485 "pdflatex"
+  "main.aux" 1784023278.93281 14462 d3d84e931f71cf30e66d2352b48f3d23 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1782533703.19341 "/Users/supocoral/Github/OrbInspect/OrbInspectLatex/main.tex" "main.pdf" "main" 1782533704.66188 0
-  "/Users/supocoral/Github/OrbInspect/OrbInspectLatex/main.tex" 1782533702.98323 7405 b1b695072db7fe72598ce0160d2f409b ""
+["pdflatex"] 1784023277.35386 "/Users/supocoral/Github/OrbInspect/OrbInspectLatex/main.tex" "main.pdf" "main" 1784023279.3127 0
+  "/Users/supocoral/Github/OrbInspect/OrbInspectLatex/main.tex" 1784023277.11474 7585 ad8036ef68155a6913e671ac88dcacb1 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/helvetic/phvr7t.tfm" 1136768653 2520 53e01eef820ca829e42c1333c3fd02b9 ""
@@ -241,14 +241,14 @@
   "figures/high_coverage/trajectory_method_safe_coverage.pdf" 1782401606.29251 183654 0538fe813ef000cf7ee34dfb6f219b22 ""
   "figures/high_coverage/trajectory_tradeoff_summary.pdf" 1782401610.45559 24238 69e0867dc9b9314096d4fb059da38c35 ""
   "figures/high_coverage/validation_matrix_summary.pdf" 1782438810.94392 29264 19539e0f7cc5de6ff26b324621b5583a ""
-  "main.aux" 1782533704.41674 14354 210ef603c905470a1a5f64e878cdf485 "pdflatex"
-  "main.bbl" 1782533598.16028 2971 ddb6b7f13ce569e78346f02000231dda "bibtex main"
-  "main.out" 1782533704.41772 5358 f1bdd96586b6433e8b2654e171d7b833 "pdflatex"
-  "main.tex" 1782533702.98323 7405 b1b695072db7fe72598ce0160d2f409b ""
+  "main.aux" 1784023278.93281 14462 d3d84e931f71cf30e66d2352b48f3d23 "pdflatex"
+  "main.bbl" 1784023126.43658 2971 ddb6b7f13ce569e78346f02000231dda "bibtex main"
+  "main.out" 1784023278.93399 5358 f1bdd96586b6433e8b2654e171d7b833 "pdflatex"
+  "main.tex" 1784023277.11474 7585 ad8036ef68155a6913e671ac88dcacb1 ""
   "sections/01_introduction.tex" 1782533018.24217 5802 af81b753b86aeab417aa3300861fcc3b ""
   "sections/02_related_work.tex" 1782533084.7587 6942 4777bcaa43fcdee32bee9c36436a0a0a ""
-  "sections/03_system_and_mission.tex" 1782533084.85194 3928 360567f38a01365441a19f8ec5fcb3a2 ""
-  "sections/04_problem_formulation.tex" 1782533100.76259 9380 b9c7aaf74d04c0830696b8b697f418ab ""
+  "sections/03_system_and_mission.tex" 1784023121.62845 5168 5525ae2d5b83671efc513b9efabbf298 ""
+  "sections/04_problem_formulation.tex" 1784023104.53704 9858 2c5e8b99b8c623bb71cae70d2f41c163 ""
   "sections/05_algorithm.tex" 1782533100.86398 9620 430e31d241b0d5da103ff57827389bca ""
   "sections/06_simulation_protocol.tex" 1782533084.95291 5460 1491bfa5740c29f9159a11f7dd12b89c ""
   "sections/07_expected_results.tex" 1782533563.2694 14737 b004a3f5be4b02e68c4d8478e342d0f9 ""

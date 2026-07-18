@@ -18,22 +18,25 @@ attached to a nominal circular chief orbit. Over the time horizon considered
 here, the inspected structure is treated as fixed in this frame. The chaser
 translational state is
 \begin{equation}
-  x =
+  \mathbf{x}(t) =
   \begin{bmatrix}
-    r_x & r_y & r_z & v_x & v_y & v_z
-  \end{bmatrix}^{\mathsf{T}},
+    \mathbf{r}^{\mathsf T}(t) & \mathbf{v}^{\mathsf T}(t)
+  \end{bmatrix}^{\mathsf{T}} \in \R^6,
 \end{equation}
-where $r \in \R^3$ is relative position and $v \in \R^3$ is relative velocity.
+where $\mathbf{r}=[r_x,r_y,r_z]^{\mathsf T}\in\R^3$ and
+$\mathbf{v}=[v_x,v_y,v_z]^{\mathsf T}\in\R^3$ are the relative position and
+velocity, respectively.
 The camera boresight is modeled through an attitude variable or an equivalent
 unit pointing vector. In the baseline mission, attitude enters the visibility
 predicate and the replay stream, while closed-loop attitude dynamics are left
 outside the offline optimization. This scope isolates the coupling between
 surface coverage and translational orbital motion.
 
-The baseline dynamics are the Clohessy--Wiltshire equations,
+The baseline continuous-time dynamics are the Hill--Clohessy--Wiltshire (HCW)
+equations,
 \begin{align}
-  \dot r &= v, \\
-  \dot v &=
+  \dot{\mathbf r} &= \mathbf v, \\
+  \dot{\mathbf v} &=
   \begin{bmatrix}
     3n^2 r_x + 2n v_y + a_x \\
     -2n v_x + a_y \\
@@ -41,14 +44,47 @@ The baseline dynamics are the Clohessy--Wiltshire equations,
   \end{bmatrix},
 \end{align}
 where $n$ is the chief mean motion and
-$u=[a_x,a_y,a_z]^{\mathsf{T}}$ is the commanded acceleration. The discrete
-propagation map is
+$\mathbf{u}=[a_x,a_y,a_z]^{\mathsf{T}}\in\R^3$ is the commanded acceleration.
+Equivalently, these dynamics have the linear state-space form
 \begin{equation}
-  x_{k+1}=f_{\mathrm{CW}}(x_k,u_k,\dt).
+  \dot{\mathbf{x}}(t)
+  = A_{\mathrm{HCW}}\mathbf{x}(t)+B\mathbf{u}(t),
+  \label{eq:hcw-continuous}
 \end{equation}
-The same model is used in the offline trajectory generator and in the ROS
-dynamics node. Gazebo is not used to propagate the spacecraft state in the
-reported experiments.
+with
+\begin{align}
+  A_{\mathrm{HCW}} & =
+  \begin{bmatrix}
+    0_{3\times3} & I_3 \\
+    K_n & C_n
+  \end{bmatrix},
+  & B & =
+  \begin{bmatrix}
+    0_{3\times3} \\ I_3
+  \end{bmatrix}, \\
+  K_n & = \operatorname{diag}(3n^2,0,-n^2),
+  & C_n & =
+  \begin{bmatrix}
+    0 & 2n & 0 \\
+    -2n & 0 & 0 \\
+    0 & 0 & 0
+  \end{bmatrix}.
+\end{align}
+Here, $0_{3\times3}$ and $I_3$ are the $3\times3$ zero and identity matrices,
+respectively. For planning and numerical propagation, the input is assumed
+constant over each sampling interval of duration $\dt$. The resulting exact
+zero-order-hold discrete model is
+\begin{align}
+  \mathbf{x}_{k+1} &= A_d\mathbf{x}_k+B_d\mathbf{u}_k,
+  \label{eq:hcw-discrete}\\
+  A_d &= e^{A_{\mathrm{HCW}}\dt},\\
+  B_d &= \int_0^{\dt}e^{A_{\mathrm{HCW}}\tau}B\,d\tau.
+\end{align}
+where $\mathbf{x}_k=\mathbf{x}(k\dt)$, $k$ is the discrete-time index, and
+$\mathbf{u}_k$ is the commanded acceleration over the $k$th interval. This
+discrete HCW model is used in both the offline trajectory generator and the
+ROS dynamics node. Gazebo is not used to propagate the spacecraft state in
+the reported experiments.
 
 \subsection{Inspection Geometry and Termination}
 
