@@ -26,6 +26,11 @@ setup(
     description='Inspection waypoint and planning package for OrbInspect.',
     license='Apache-2.0',
     extras_require={
+        'paper': [
+            'matplotlib',
+            'numpy',
+            'scikit-learn',
+        ],
         'test': [
             'pytest',
         ],
@@ -42,6 +47,16 @@ setup(
             'orbinspect_guidance.offline_coverage_planner:main',
             'offline_planning_experiment = '
             'orbinspect_guidance.offline_planning_experiment:main',
+            'offline_adp_study = '
+            'orbinspect_guidance.offline_adp_study:main',
+            'offline_adp_superiority_study = '
+            'orbinspect_guidance.offline_adp_superiority_study:main',
+            'offline_adp_validation_decision = '
+            'orbinspect_guidance.offline_adp_validation_decision:main',
+            'offline_adp_superiority_plots = '
+            'orbinspect_guidance.offline_adp_superiority_plots:main',
+            'offline_planning_plots = '
+            'orbinspect_guidance.offline_planning_plots:main',
             'offline_validation_matrix = '
             'orbinspect_guidance.offline_validation_matrix:main',
             'planned_trajectory_replay_node = '

@@ -1,19 +1,18 @@
 # OrbInspect Paper
 
-This folder contains an Elsevier/Aerospace Science and Technology LaTeX
-manuscript for OrbInspect. The active template files are taken from Elsevier's
-official `elsarticle_April2024` journal article template package.
+This folder contains the IEEE Transactions on Aerospace and Electronic Systems
+LaTeX manuscript for OrbInspect.
 
-The manuscript is self-contained: every figure, raw CSV, summary, configuration
-snapshot, preview frame, and validation video cited by the paper is copied into
-this directory. The paper deliberately separates the high-coverage offline mesh
-planning result, ROS execution/logging validation, and Gazebo Harmonic visual
-validation.
+The manuscript is self-contained: the final study bundle, every plotted PDF,
+the editable framework diagram, and the replay evidence cited by the paper are
+copied into this directory. The paper deliberately separates HCW simulation,
+saved numerical results, read-only figure generation, ROS execution/logging
+validation, and Gazebo Harmonic visual replay.
+
+All active manuscript LaTeX code, including every section and algorithm, is in
+`main.tex`. The manuscript does not use per-section `\input` files.
 
 ## Build
-
-The source uses the Elsevier `elsarticle` class, which is the standard template
-family used for Aerospace Science and Technology submissions.
 
 ```bash
 cd OrbInspectLatex
@@ -29,36 +28,33 @@ pdflatex main.tex
 pdflatex main.tex
 ```
 
-The folder vendors `elsarticle.cls` and `elsarticle-num.bst` extracted from the
-official Elsevier template package, so the build uses the same class and
-numbered bibliography style shipped by Elsevier.
-
 ## Structure
 
-- `main.tex`: manuscript entry point.
-- `elsarticle.cls`: official Elsevier class extracted from
-  `elsarticle_April2024`.
-- `elsarticle-num.bst`: official Elsevier numbered bibliography style.
-- `sections/`: paper sections.
-- `references.bib`: initial bibliography placeholders.
-- `figures/high_coverage/`: trajectory, coverage, delta-v, efficiency, and
-  safety comparison figures for the updated mesh experiment.
+- `main.tex`: complete manuscript source, including all sections and algorithms.
+- `IEEEtaes.cls`: manuscript document class.
+- `references.bib`: manuscript bibliography.
+- `figures/01_orbinspect_sooa_framework.pdf`: publication figure inserted in
+  the manuscript.
+- `figures/orbinspect_sooa_framework_editable.pptx`: fully editable source for
+  the framework figure.
+- `figures/high_coverage/`: standalone primary tradeoff and trajectory case
+  study, seven-way component ablation, exact-oracle, initial-condition, and
+  compute figures.
 - `figures/iss_mesh/`: NASA ISS mesh preview figures.
-- `figures/offline_planner/`: legacy target, trajectory, and coverage figures.
 - `figures/gazebo_validation/`: Gazebo frames and ROS smoke-run figures.
-- `figures/monte_carlo/`: method-comparison figure.
-- `data/offline_high_coverage_experiment/`: updated offline mesh comparison
-  CSV, JSON, Markdown, and config snapshot artifacts.
+- `data/adp_paper_study_20260731_final/`: final independent-case study archive,
+  including the primary, exact-oracle, initial-condition, and compute cases.
+- `data/adp_component_ablation_20260801/`: cold-cache critic, rollout,
+  safeguard, and local-search component ablation.
 - `data/iss_mesh/`: copied NASA ISS GLB used to regenerate mesh-overlaid
   trajectory figures without leaving this folder.
-- `data/offline_planner_publish/`: offline planner CSV, JSON, Markdown, and
-  config snapshot artifacts from the earlier proxy run.
 - `data/phase10_smoke/`: ROS execution CSV, JSON, Markdown, manifest, and
   config snapshot artifacts.
-- `data/monte_carlo_20260621_155201/`: comparison summary and run tables.
 - `data/video_capture/`: Gazebo validation videos and preview frames.
-- `algorithms/`: algorithm pseudocode snippets.
-- `scripts/generate_mesh_trajectory_figures.py`: reproducible generator for
-  the mesh-overlaid trajectory figures in `figures/high_coverage/`.
+- `../src/orbinspect_guidance/orbinspect_guidance/offline_adp_study.py`: runs
+  the simulation cases and saves their records.
+- `../src/orbinspect_guidance/orbinspect_guidance/offline_planning_plots.py`:
+  loads only saved records; each manuscript result figure has one public
+  plotting function.
 - `templates/official_elsevier_elsarticle_2024/`: downloaded official Elsevier
-  template archive and extracted source files.
+  template archive retained only as a reference.

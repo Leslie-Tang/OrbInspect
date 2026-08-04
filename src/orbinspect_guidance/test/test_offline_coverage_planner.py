@@ -4,6 +4,9 @@ from orbinspect_guidance.offline_coverage_planner import config_from_args
 from orbinspect_guidance.offline_coverage_planner import OfflineCoveragePlanner
 from orbinspect_guidance.offline_coverage_planner import OfflinePlannerConfig
 from orbinspect_guidance.offline_coverage_planner import parse_args
+from orbinspect_guidance.offline_planning_plots import plot_coverage_over_time
+from orbinspect_guidance.offline_planning_plots import plot_planned_trajectory_3d
+from orbinspect_guidance.offline_planning_plots import plot_targets_3d
 
 
 def test_offline_planner_generates_visibility_and_plan(tmp_path: Path) -> None:
@@ -37,6 +40,12 @@ def test_offline_planner_saves_paper_outputs(tmp_path: Path) -> None:
     assert (run_dir / 'raw' / 'planned_trajectory.csv').is_file()
     assert (run_dir / 'raw' / 'coverage.csv').is_file()
     assert (run_dir / 'raw' / 'coverage_over_time.csv').is_file()
+    assert not any((run_dir / 'figures').iterdir())
+
+    plot_targets_3d(run_dir)
+    plot_planned_trajectory_3d(run_dir)
+    plot_coverage_over_time(run_dir)
+
     assert (run_dir / 'figures' / 'targets_3d.png').is_file()
     assert (run_dir / 'figures' / 'targets_3d.pdf').is_file()
     assert (run_dir / 'figures' / 'targets_3d.svg').is_file()

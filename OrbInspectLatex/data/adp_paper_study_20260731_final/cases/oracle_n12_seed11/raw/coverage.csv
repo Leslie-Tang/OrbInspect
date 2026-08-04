@@ -1,0 +1,6 @@
+method,time,coverage_ratio,inspected_targets
+safe_graph_adp,0.0,0.0,0
+safe_graph_adp,90.0,0.10416666666666667,5
+safe_graph_adp,180.0,0.14583333333333334,7
+safe_graph_adp,270.0,0.25,12
+safe_graph_adp,360.0,0.3541666666666667,17

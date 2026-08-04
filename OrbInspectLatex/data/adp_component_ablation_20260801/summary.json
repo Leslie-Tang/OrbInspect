@@ -1,0 +1,16 @@
+{
+  "completed_cases": [
+    {
+      "case_id": "component_ablation",
+      "elapsed_s": 1454.8259647499945,
+      "family": "components",
+      "label": "Matched primary-graph component ablation",
+      "run_dir": "data/results/adp_component_ablation_20260801/cases/component_ablation"
+    }
+  ],
+  "elapsed_s": 1454.8263114579895,
+  "planned_case_count": 1,
+  "primary": [],
+  "quick": false,
+  "status": "complete"
+}

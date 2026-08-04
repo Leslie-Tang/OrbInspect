@@ -88,24 +88,52 @@
 - Known limitations: Basilisk propagation itself is deferred until the optional Basilisk dependency is installed; default HCW workflow is unchanged.
 - Next phase: Phase 13 advanced safe planner placeholder.
 
-## Phase 13: Advanced Safe Planner Placeholder
+## Phase 13: Safety-Shielded Graph Approximate Policy Iteration
 
-- Status: Complete
+- Status: Complete for the ROS-independent planner core and offline paper
+  workflow; ROS package rebuild remains to be repeated on the target Jazzy
+  host.
 - Files changed:
   - `src/orbinspect_guidance/orbinspect_guidance/advanced_safe_planner.py`
   - `src/orbinspect_guidance/orbinspect_guidance/advanced_safe_planner_node.py`
+  - `src/orbinspect_guidance/orbinspect_guidance/offline_planning_experiment.py`
+  - `src/orbinspect_guidance/orbinspect_guidance/offline_adp_study.py`
+  - `src/orbinspect_guidance/orbinspect_guidance/offline_planning_plots.py`
   - `src/orbinspect_guidance/config/advanced_safe_planner.yaml`
+  - `src/orbinspect_guidance/config/offline_planning_experiment.yaml`
   - `src/orbinspect_guidance/setup.py`
   - `src/orbinspect_guidance/test/test_advanced_safe_planner.py`
+  - `src/orbinspect_guidance/test/test_offline_planning_experiment.py`
+  - `src/orbinspect_guidance/test/test_offline_adp_study.py`
   - `docs/advanced_safe_planner.md`
+  - `docs/safe_graph_adp_plan.md`
 - Commands run:
-  - `pytest src/orbinspect_guidance/test`
-  - `colcon build --symlink-install`
-  - `colcon test --packages-select orbinspect_guidance orbinspect_eval orbinspect_dynamics orbinspect_bringup --event-handlers console_direct+`
-  - `colcon test-result --verbose`
-  - `ros2 run orbinspect_guidance advanced_safe_planner_node`
-- Build result: Passed, 12 packages built.
-- Test result: Passed, 70 tests, 0 errors, 0 failures, 10 skipped.
-- Launch/smoke result: Placeholder status node ran until timeout as expected.
-- Known limitations: No MPC, CBF-QP, HJI, or ADP solver is implemented; scaffold is intentionally inactive.
-- Next phase: Research algorithm development.
+  - focused mathematical, experiment, study, and plotting tests;
+  - `python3 -m py_compile` for the four modified planner/study modules;
+  - `python3 -m orbinspect_guidance.offline_adp_study --run-id
+    adp_paper_study_20260731_final`;
+  - `python3 -m orbinspect_guidance.offline_planning_plots --result-dir
+    data/results/adp_paper_study_20260731_final`.
+  - `python3 -m orbinspect_guidance.offline_adp_study --run-id
+    adp_component_ablation_20260801 --families components`;
+  - standalone component-ablation plotting and visual inspection.
+- Build result: Not rerun on the current macOS host because ROS 2 Jazzy and
+  `colcon` are unavailable. The previous 12-package Jazzy build predates this
+  algorithm change.
+- Test result: Passed, 22 focused tests after adding component-isolation,
+  invalid-configuration, study-family, and plotting checks.
+- Experiment result: Completed all 17 planned cases in 1776.38 s. The primary
+  returned policy achieved 98.33% coverage with 18 actions and 19.47 m/s
+  cumulative delta-v, versus 21 actions and 21.59 m/s for the safe incumbent.
+  Nine reduced graphs had zero exact Bellman cost gap.
+- Ablation result: Completed seven cold-cache variants in 1454.83 s. Local
+  search plus safeguard reproduced the complete method's 18-action,
+  19.47 m/s route in 52.81 s; the complete method required 339.92 s.
+  Critic-only planning required 26 actions and 42.86 m/s, so the primary
+  result does not demonstrate ADP superiority.
+- Known limitations: The learned critic is not the source of the primary
+  improvement, critic training is not monotonic on the truncated compute
+  graph, planning is offline, and safety remains conditional on deterministic
+  sampled HCW and passive-drift audits.
+- Next phase: Jazzy build/replay validation, cached or batched edge-audit
+  acceleration, and higher-fidelity uncertainty-aware motion primitives.

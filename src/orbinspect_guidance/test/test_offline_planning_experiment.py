@@ -3,8 +3,19 @@ from pathlib import Path
 
 from orbinspect_guidance.offline_planning_experiment import config_from_args
 from orbinspect_guidance.offline_planning_experiment import ExperimentConfig
+from orbinspect_guidance.offline_planning_experiment import GRAPH_ADP_VARIANTS
 from orbinspect_guidance.offline_planning_experiment import OfflinePlanningExperiment
 from orbinspect_guidance.offline_planning_experiment import parse_args
+from orbinspect_guidance.offline_planning_plots import plot_coverage_comparison
+from orbinspect_guidance.offline_planning_plots import plot_delta_v_comparison
+from orbinspect_guidance.offline_planning_plots import (
+    plot_energy_efficiency_comparison,
+)
+from orbinspect_guidance.offline_planning_plots import plot_peak_input_comparison
+from orbinspect_guidance.offline_planning_plots import (
+    plot_primary_trajectory_case_study,
+)
+from orbinspect_guidance.offline_planning_plots import plot_safety_comparison
 from orbinspect_guidance.offline_validation_matrix import main as validation_matrix_main
 
 
@@ -14,6 +25,7 @@ def test_offline_planning_experiment_runs_baselines(tmp_path: Path) -> None:
     results = experiment.run()
 
     assert {result.method for result in results} == {
+        'safe_graph_adp',
         'set_cover_cw_tour',
         'certified_graph_search',
         'proposed_safe_cw_nbv',
@@ -23,6 +35,13 @@ def test_offline_planning_experiment_runs_baselines(tmp_path: Path) -> None:
     }
     assert any(result.summary['final_coverage_ratio'] > 0.0 for result in results)
     assert any(result.trajectory for result in results)
+    adp_result = next(
+        result
+        for result in results
+        if result.method == 'safe_graph_adp'
+    )
+    assert adp_result.summary['adp_training_episodes'] == 8
+    assert int(adp_result.summary['adp_safe_action_evaluations']) > 0
 
 
 def test_offline_planning_experiment_runs_ablation_methods(tmp_path: Path) -> None:
@@ -50,6 +69,32 @@ def test_offline_planning_experiment_runs_ablation_methods(tmp_path: Path) -> No
         'abl_unweighted_coverage',
     }
     assert all('peak_requested_input' in result.summary for result in results)
+
+
+def test_offline_planning_experiment_runs_graph_component_variants(
+    tmp_path: Path,
+) -> None:
+    config = _small_config(tmp_path)
+    experiment = OfflinePlanningExperiment(config.__class__(
+        **{
+            **config.__dict__,
+            'methods': tuple(GRAPH_ADP_VARIANTS),
+        }
+    ))
+
+    results = experiment.run()
+
+    assert {result.method for result in results} == set(GRAPH_ADP_VARIANTS)
+    result_by_method = {result.method: result for result in results}
+    assert not result_by_method[
+        'safe_graph_adp_critic_only'
+    ].summary['adp_safeguard_enabled']
+    assert not result_by_method[
+        'safe_graph_adp_rollout'
+    ].summary['adp_critic_enabled']
+    assert result_by_method[
+        'safe_graph_adp_local_search'
+    ].summary['adp_local_improvement_enabled']
 
 
 def test_offline_planning_experiment_runs_certified_graph_search(tmp_path: Path) -> None:
@@ -93,10 +138,19 @@ def test_offline_planning_experiment_saves_outputs(tmp_path: Path) -> None:
     assert (run_dir / 'raw' / 'trajectory.csv').is_file()
     assert (run_dir / 'raw' / 'attitude.csv').is_file()
     assert (run_dir / 'raw' / 'coverage.csv').is_file()
+    assert not any((run_dir / 'figures').iterdir())
+
+    plot_coverage_comparison(run_dir)
+    plot_delta_v_comparison(run_dir)
+    plot_energy_efficiency_comparison(run_dir)
+    plot_safety_comparison(run_dir)
+    plot_peak_input_comparison(run_dir)
+
     assert (run_dir / 'figures' / 'coverage_comparison.pdf').is_file()
     assert (run_dir / 'figures' / 'delta_v_comparison.pdf').is_file()
     assert (run_dir / 'figures' / 'energy_efficiency_comparison.pdf').is_file()
     assert (run_dir / 'figures' / 'safety_comparison.pdf').is_file()
+    assert (run_dir / 'figures' / 'peak_input_comparison.pdf').is_file()
     assert (run_dir / 'summary.json').is_file()
     assert (run_dir / 'summary.md').is_file()
 
@@ -108,6 +162,12 @@ def test_offline_planning_experiment_saves_outputs(tmp_path: Path) -> None:
     assert 'selected_sooa_count' in method_row
     assert 'rho_min' in method_row
     assert 'trajectory_feasible' in method_row
+    assert 'adp_training_episodes' in method_row
+    assert 'adp_shield_rejections' in method_row
+    assert 'adp_policy_source' in method_row
+    assert 'adp_reference_graph_cost' in method_row
+    assert 'adp_critic_enabled' in method_row
+    assert 'adp_local_improvement_enabled' in method_row
 
     with (run_dir / 'raw' / 'planner.csv').open(newline='') as handle:
         planner_row = next(csv.DictReader(handle))
@@ -115,11 +175,54 @@ def test_offline_planning_experiment_saves_outputs(tmp_path: Path) -> None:
     assert 'coverage_gain_area' in planner_row
     assert 'sooa_id' in planner_row
     assert 'selected_inspection_action' in planner_row
+    assert 'adp_estimated_cost_to_go' in planner_row
+    assert 'adp_safe_action_count' in planner_row
 
     with (run_dir / 'raw' / 'selected_sooas.csv').open(newline='') as handle:
         sooa_row = next(csv.DictReader(handle))
     assert 'passive_margin' in sooa_row
     assert 'visible_target_count' in sooa_row
+
+
+def test_primary_trajectory_case_study_loads_archived_csvs(tmp_path: Path) -> None:
+    raw_dir = tmp_path / 'raw'
+    raw_dir.mkdir()
+    _write_rows(raw_dir / 'trajectory.csv', [
+        {'method': 'safe_graph_adp', 'rx': 0.0, 'ry': -35.0, 'rz': 10.0},
+        {'method': 'safe_graph_adp', 'rx': 8.0, 'ry': -20.0, 'rz': 18.0},
+        {'method': 'set_cover_cw_tour', 'rx': 0.0, 'ry': -35.0, 'rz': 10.0},
+        {'method': 'set_cover_cw_tour', 'rx': -6.0, 'ry': -18.0, 'rz': 22.0},
+    ])
+    _write_rows(raw_dir / 'viewpoints.csv', [
+        {
+            'method': 'safe_graph_adp', 'sequence': 0,
+            'viewpoint_x': 8.0, 'viewpoint_y': -20.0, 'viewpoint_z': 18.0,
+        },
+        {
+            'method': 'set_cover_cw_tour', 'sequence': 0,
+            'viewpoint_x': -6.0, 'viewpoint_y': -18.0, 'viewpoint_z': 22.0,
+        },
+    ])
+    _write_rows(raw_dir / 'method_comparison.csv', [
+        {
+            'method': 'safe_graph_adp', 'selected_sooa_count': 1,
+            'total_delta_v': 1.0, 'final_inspectable_coverage_ratio': 0.5,
+            'min_clearance': 9.0, 'rho_min': 2.0,
+            'adp_policy_source': 'reference_improved',
+        },
+        {
+            'method': 'set_cover_cw_tour', 'selected_sooa_count': 1,
+            'total_delta_v': 1.2, 'final_inspectable_coverage_ratio': 0.5,
+            'min_clearance': 9.0, 'rho_min': 2.0,
+            'adp_policy_source': '',
+        },
+    ])
+
+    output_path = plot_primary_trajectory_case_study(tmp_path)
+
+    assert output_path.is_file()
+    assert output_path.with_suffix('.pdf').is_file()
+    assert output_path.with_suffix('.svg').is_file()
 
 
 def test_offline_planning_experiment_loads_yaml_config(tmp_path: Path) -> None:
@@ -199,6 +302,7 @@ def _small_config(tmp_path: Path) -> ExperimentConfig:
         integration_dt=3.0,
         max_acceleration=0.025,
         methods=(
+            'safe_graph_adp',
             'set_cover_cw_tour',
             'certified_graph_search',
             'proposed_safe_cw_nbv',
@@ -209,4 +313,17 @@ def _small_config(tmp_path: Path) -> ExperimentConfig:
         certified_candidate_limit=8,
         certified_time_limit_s=2.0,
         certified_max_expansions=2000,
+        adp_candidate_limit=12,
+        adp_branch_width=4,
+        adp_candidate_pool_width=8,
+        adp_lookahead_depth=2,
+        adp_training_episodes=8,
+        adp_oracle_node_limit=12,
     )
+
+
+def _write_rows(path: Path, rows: list[dict[str, object]]) -> None:
+    with path.open('w', newline='') as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+        writer.writeheader()
+        writer.writerows(rows)

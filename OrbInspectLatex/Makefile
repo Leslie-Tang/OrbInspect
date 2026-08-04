@@ -5,7 +5,7 @@ BIBTEX ?= bibtex
 
 all: main.pdf
 
-main.pdf: main.tex references.bib sections/*.tex algorithms/*.tex
+main.pdf: main.tex references.bib
 	$(PDFLATEX) main.tex
 	$(BIBTEX) main
 	$(PDFLATEX) main.tex

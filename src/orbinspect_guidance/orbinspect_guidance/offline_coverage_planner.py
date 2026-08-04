@@ -13,9 +13,6 @@ import struct
 from time import perf_counter
 from typing import Iterable
 
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d.art3d import Line3DCollection
-
 from orbinspect_dynamics.hcw_dynamics import HCWDynamics
 from orbinspect_perception.inspection_target_manager import InspectionTarget
 from orbinspect_perception.inspection_target_manager import InspectionTargetManager
@@ -27,22 +24,6 @@ try:
     import yaml
 except ModuleNotFoundError:  # pragma: no cover - minimal offline Python fallback.
     yaml = None
-
-plt.switch_backend('Agg')
-plt.rcParams.update({
-    'font.family': 'DejaVu Sans',
-    'font.size': 9,
-    'axes.labelsize': 9,
-    'axes.titlesize': 10,
-    'legend.fontsize': 8,
-    'xtick.labelsize': 8,
-    'ytick.labelsize': 8,
-    'figure.dpi': 160,
-    'savefig.dpi': 300,
-    'savefig.bbox': 'tight',
-    'pdf.fonttype': 42,
-    'ps.fonttype': 42,
-})
 
 
 Vector3 = tuple[float, float, float]
@@ -190,43 +171,6 @@ class MeshTargetSet:
 
 
 @dataclass(frozen=True)
-class IssMeshPreview:
-    """Downsampled line preview of the NASA ISS GLB for paper figures."""
-
-    segments: tuple[tuple[Vector3, Vector3], ...]
-
-    @classmethod
-    def load(
-        cls,
-        path: Path,
-        scale: float,
-        max_edges: int,
-    ) -> IssMeshPreview | None:
-        """Load a downsampled GLB wire preview without optional mesh packages."""
-        if not path.is_file() or max_edges <= 0:
-            return None
-        try:
-            json_doc, binary = _read_glb(path)
-            segments = _mesh_segments_from_gltf(json_doc, binary, scale, max_edges)
-        except (OSError, KeyError, ValueError, struct.error, json.JSONDecodeError):
-            return None
-        if not segments:
-            return None
-        return cls(tuple(segments))
-
-    def draw(self, axis) -> None:
-        """Draw the ISS preview as a light wireframe."""
-        collection = Line3DCollection(
-            self.segments,
-            colors='#6F6F6F',
-            linewidths=0.22,
-            alpha=0.28,
-            zorder=1,
-        )
-        axis.add_collection3d(collection)
-
-
-@dataclass(frozen=True)
 class IssMeshGeometry:
     """Triangle geometry for mesh target sampling and visibility checks."""
 
@@ -297,11 +241,6 @@ class OfflineCoveragePlanner:
         self.mesh_geometry: IssMeshGeometry | None = None
         self.target_area_by_id: dict[str, float] = {}
         self.total_inspection_area = 0.0
-        self.mesh_preview = IssMeshPreview.load(
-            config.iss_mesh_path,
-            scale=config.iss_mesh_scale,
-            max_edges=config.mesh_preview_max_edges,
-        )
         self._terminal_map_cache: dict[
             tuple[int, float],
             tuple[tuple[StateVector, ...], tuple[StateVector, ...]],
@@ -559,13 +498,13 @@ class OfflineCoveragePlanner:
         )
 
     def save_plan(self, plan: OfflinePlan) -> Path:
-        """Save CSV, JSON, and figure outputs for the planned trajectory."""
+        """Save planned trajectory data without rendering figures."""
         run_dir = self._run_dir()
         raw_dir = run_dir / 'raw'
-        figures_dir = run_dir / 'figures'
         config_dir = run_dir / 'config_snapshot'
         output_dirs = (
-            raw_dir, figures_dir, config_dir, run_dir / 'videos', run_dir / 'rosbag',
+            raw_dir, config_dir, run_dir / 'figures', run_dir / 'videos',
+            run_dir / 'rosbag',
         )
         for directory in output_dirs:
             directory.mkdir(parents=True, exist_ok=True)
@@ -585,9 +524,6 @@ class OfflineCoveragePlanner:
         self._write_json(run_dir / 'summary.json', plan.summary)
         self._write_json(config_dir / 'offline_planner_config.json', self._config_dict())
         self._write_summary_md(run_dir / 'summary.md', plan.summary)
-        self._plot_targets(figures_dir / 'targets_3d.png', plan.targets, plan.selected_viewpoints)
-        self._plot_trajectory(figures_dir / 'planned_trajectory_3d.png', plan.planned_trajectory)
-        self._plot_coverage(figures_dir / 'coverage_over_time.png', plan.coverage_timeline)
         return run_dir
 
     def evaluate_plan(
@@ -1209,130 +1145,6 @@ class OfflineCoveragePlanner:
             lines.append(f'- {key}: {value}')
         path.write_text('\n'.join(lines) + '\n')
 
-    def _plot_targets(
-        self,
-        path: Path,
-        targets: tuple[InspectionTarget, ...],
-        selected: tuple[SelectedViewpoint, ...],
-    ) -> None:
-        figure = plt.figure(figsize=(7.2, 5.2))
-        axis = figure.add_subplot(111, projection='3d')
-        self._draw_mesh_preview(axis)
-        axis.scatter(
-            [target.position[0] for target in targets],
-            [target.position[1] for target in targets],
-            [target.position[2] for target in targets],
-            s=5,
-            alpha=0.55,
-            c='#0072B2',
-            depthshade=False,
-            label='inspection targets',
-        )
-        if selected:
-            axis.scatter(
-                [item.candidate.position[0] for item in selected],
-                [item.candidate.position[1] for item in selected],
-                [item.candidate.position[2] for item in selected],
-                s=22,
-                c='#D55E00',
-                edgecolors='black',
-                linewidths=0.25,
-                depthshade=False,
-                label='selected SOOA terminal poses',
-            )
-        _style_3d_axis(axis)
-        _set_equal_3d_axes(axis, targets, selected)
-        axis.legend(
-            loc='upper center',
-            bbox_to_anchor=(0.5, 1.02),
-            ncol=2,
-            frameon=False,
-            handlelength=1.4,
-        )
-        figure.tight_layout()
-        _save_publishable_figure(figure, path)
-        plt.close(figure)
-
-    def _plot_trajectory(
-        self,
-        path: Path,
-        samples: tuple[tuple[float, StateVector, ControlVector], ...],
-    ) -> None:
-        figure = plt.figure(figsize=(7.2, 5.2))
-        axis = figure.add_subplot(111, projection='3d')
-        self._draw_mesh_preview(axis)
-        if samples:
-            times = [time for time, _state, _command in samples]
-            colors = _normalized_values(times)
-            axis.plot(
-                [state[0] for _time, state, _command in samples],
-                [state[1] for _time, state, _command in samples],
-                [state[2] for _time, state, _command in samples],
-                color='#D55E00',
-                linewidth=1.8,
-                label='SOOA HCW trajectory',
-                zorder=5,
-            )
-            scatter = axis.scatter(
-                [state[0] for _time, state, _command in samples[::max(1, len(samples)//120)]],
-                [state[1] for _time, state, _command in samples[::max(1, len(samples)//120)]],
-                [state[2] for _time, state, _command in samples[::max(1, len(samples)//120)]],
-                c=colors[::max(1, len(colors)//120)],
-                cmap='viridis',
-                s=10,
-                depthshade=False,
-                label='time samples',
-            )
-            colorbar = figure.colorbar(scatter, ax=axis, shrink=0.62, pad=0.08)
-            colorbar.set_label('normalized time')
-        _style_3d_axis(axis)
-        _set_equal_3d_axes(axis, [sample[1] for sample in samples])
-        axis.legend(
-            loc='upper center',
-            bbox_to_anchor=(0.5, 1.02),
-            ncol=2,
-            frameon=False,
-            handlelength=1.4,
-        )
-        figure.tight_layout()
-        _save_publishable_figure(figure, path)
-        plt.close(figure)
-
-    @staticmethod
-    def _plot_coverage(path: Path, timeline: tuple[tuple[float, float, int], ...]) -> None:
-        figure, axis = plt.subplots(figsize=(6.8, 3.6))
-        if timeline:
-            axis.step(
-                [row[0] for row in timeline],
-                [row[1] for row in timeline],
-                where='post',
-                color='#0072B2',
-                linewidth=2.0,
-            )
-            axis.scatter(
-                [row[0] for row in timeline],
-                [row[1] for row in timeline],
-                s=14,
-                color='#0072B2',
-                zorder=3,
-            )
-        axis.set_xlabel('mission time [s]')
-        axis.set_ylabel('coverage ratio')
-        axis.set_ylim(0.0, 1.05)
-        axis.spines['top'].set_visible(False)
-        axis.spines['right'].set_visible(False)
-        axis.grid(True, axis='y', color='#D9D9D9', linewidth=0.6)
-        figure.tight_layout()
-        _save_publishable_figure(figure, path)
-        plt.close(figure)
-
-    def _draw_mesh_preview(self, axis) -> None:
-        if self.mesh_preview is None:
-            _draw_proxy_wireframe(axis)
-            return
-        self.mesh_preview.draw(axis)
-
-
 def add(left: Vector3, right: Vector3) -> Vector3:
     """Return vector addition."""
     return (left[0] + right[0], left[1] + right[1], left[2] + right[2])
@@ -1894,94 +1706,6 @@ def _vector3_from_values(values: object) -> Vector3:
     if not isinstance(values, (list, tuple)) or len(values) != 3:
         return (0.0, 0.0, 0.0)
     return (float(values[0]), float(values[1]), float(values[2]))
-
-
-def _draw_proxy_wireframe(axis) -> None:
-    boxes = (
-        ((0.0, 0.0, 0.0), (80.0, 4.0, 4.0)),
-        ((-25.0, 0.0, 12.0), (30.0, 1.0, 12.0)),
-        ((25.0, 0.0, 12.0), (30.0, 1.0, 12.0)),
-    )
-    for center, size in boxes:
-        axis.add_collection3d(Line3DCollection(
-            _box_edges(center, size),
-            colors='#9A9A9A',
-            linewidths=0.45,
-            alpha=0.25,
-        ))
-
-
-def _box_edges(center: Vector3, size: Vector3) -> list[tuple[Vector3, Vector3]]:
-    cx, cy, cz = center
-    sx, sy, sz = (size[0] / 2.0, size[1] / 2.0, size[2] / 2.0)
-    corners = [
-        (cx + dx * sx, cy + dy * sy, cz + dz * sz)
-        for dx in (-1.0, 1.0)
-        for dy in (-1.0, 1.0)
-        for dz in (-1.0, 1.0)
-    ]
-    edges = []
-    for i, first in enumerate(corners):
-        for second in corners[i + 1:]:
-            differences = sum(
-                1 for axis in range(3)
-                if abs(first[axis] - second[axis]) > 1.0e-9
-            )
-            if differences == 1:
-                edges.append((first, second))
-    return edges
-
-
-def _style_3d_axis(axis) -> None:
-    axis.set_xlabel('$x_{LVLH}$ [m]', labelpad=7)
-    axis.set_ylabel('$y_{LVLH}$ [m]', labelpad=7)
-    axis.set_zlabel('$z_{LVLH}$ [m]', labelpad=7)
-    axis.view_init(elev=22.0, azim=-58.0)
-    axis.grid(True, color='#ECECEC', linewidth=0.45)
-    for pane in (axis.xaxis.pane, axis.yaxis.pane, axis.zaxis.pane):
-        pane.set_facecolor((1.0, 1.0, 1.0, 0.0))
-        pane.set_edgecolor('#E6E6E6')
-
-
-def _set_equal_3d_axes(axis, *point_sets: Iterable[object]) -> None:
-    points: list[Vector3] = []
-    for point_set in point_sets:
-        for item in point_set:
-            if isinstance(item, InspectionTarget):
-                points.append(item.position)
-            elif isinstance(item, SelectedViewpoint):
-                points.append(item.candidate.position)
-            elif isinstance(item, (tuple, list)) and len(item) >= 3:
-                points.append((float(item[0]), float(item[1]), float(item[2])))
-    points.extend(((-45.0, -25.0, -18.0), (45.0, 25.0, 22.0)))
-    xs = [point[0] for point in points]
-    ys = [point[1] for point in points]
-    zs = [point[2] for point in points]
-    centers = (
-        (min(xs) + max(xs)) / 2.0,
-        (min(ys) + max(ys)) / 2.0,
-        (min(zs) + max(zs)) / 2.0,
-    )
-    radius = max(max(xs) - min(xs), max(ys) - min(ys), max(zs) - min(zs)) / 2.0
-    radius = max(radius, 1.0) * 1.04
-    axis.set_xlim(centers[0] - radius, centers[0] + radius)
-    axis.set_ylim(centers[1] - radius, centers[1] + radius)
-    axis.set_zlim(centers[2] - radius, centers[2] + radius)
-
-
-def _normalized_values(values: list[float]) -> list[float]:
-    if not values:
-        return []
-    minimum = min(values)
-    maximum = max(values)
-    span = max(maximum - minimum, 1.0e-12)
-    return [(value - minimum) / span for value in values]
-
-
-def _save_publishable_figure(figure, path: Path) -> None:
-    figure.savefig(path)
-    for suffix in ('.pdf', '.svg'):
-        figure.savefig(path.with_suffix(suffix))
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:

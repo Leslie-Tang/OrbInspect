@@ -4,114 +4,120 @@
 \providecommand\HyField@AuxAddToCoFields[2]{}
 \@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}{section.1}\protected@file@percent }
 \newlabel{sec:introduction}{{I}{1}{}{section.1}{}}
-\citation{clohessy1960terminal}
-\citation{wertz2011space}
+\citation{clohessy1960terminal,wertz2011space}
+\citation{hou2024relative}
+\citation{zhou2026formation}
 \citation{scott2003view}
 \citation{lavalle1998rapidly,karaman2011sampling}
+\citation{bertsekas2020rollout,bertsekas1996neuro}
+\citation{achiam2017cpo}
+\citation{alshiekh2018shielding}
 \citation{apodaca2025trajectory}
-\citation{hou2024relative}
 \citation{zhou2026tomographic}
 \citation{ogri2025switched}
-\citation{scott2003view}
-\citation{lavalle1998rapidly,karaman2011sampling}
-\citation{apodaca2025trajectory}
-\citation{hou2024relative}
-\citation{zhou2026tomographic}
-\citation{ogri2025switched}
-\@writefile{toc}{\contentsline {section}{\numberline {II}Related Work}{2}{section.2}\protected@file@percent }
-\newlabel{sec:related}{{II}{2}{}{section.2}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Positioning relative to closely related inspection and planning approaches.}}{3}{table.caption.1}\protected@file@percent }
-\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{tab:positioning}{{I}{3}{Positioning relative to closely related inspection and planning approaches}{table.caption.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {III}System Model and Mission Setting}{3}{section.3}\protected@file@percent }
-\newlabel{sec:system}{{III}{3}{}{section.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {A}Reference Frame and Dynamics}{3}{subsection.3.1}\protected@file@percent }
-\newlabel{eq:hcw-continuous}{{4}{3}{}{equation.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {II}Related Work}{2}{section.9}\protected@file@percent }
+\newlabel{sec:related}{{II}{2}{}{section.9}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {III}System and Observation Model}{2}{section.10}\protected@file@percent }
+\newlabel{sec:system}{{III}{2}{}{section.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces OrbInspect formulation. (a) Candidate observations are generated around an ISS-scale structure and outside a station-primitive safety envelope. (b) Range, field of view, incidence, line of sight, and the prescribed observation condition determine each node's visible-target set. (c) A directed SOOA edge binds a source-dependent HCW transfer and its sampled audits to a destination observation. (d) The graph policy excludes coverage-rich choices whose incoming edge violates an enabled audit.}}{3}{figure.8}\protected@file@percent }
+\newlabel{fig:sooa-framework}{{1}{3}{OrbInspect formulation. (a) Candidate observations are generated around an ISS-scale structure and outside a station-primitive safety envelope. (b) Range, field of view, incidence, line of sight, and the prescribed observation condition determine each node's visible-target set. (c) A directed SOOA edge binds a source-dependent HCW transfer and its sampled audits to a destination observation. (d) The graph policy excludes coverage-rich choices whose incoming edge violates an enabled audit}{figure.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A}Relative Dynamics}{3}{subsection.13}\protected@file@percent }
+\newlabel{eq:hcw-continuous}{{1}{3}{}{equation.14}{}}
+\newlabel{eq:hcw-discrete}{{2}{3}{}{equation.15}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Modeling assumptions and the boundary of the reported evidence.}}{4}{table.12}\protected@file@percent }
+\newlabel{tab:assumptions}{{I}{4}{Modeling assumptions and the boundary of the reported evidence}{table.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B}Visibility, Prescribed Observation, and Coverage}{4}{subsection.16}\protected@file@percent }
+\newlabel{eq:visibility}{{3}{4}{}{equation.17}{}}
+\newlabel{eq:coverage}{{4}{4}{}{equation.18}{}}
+\newlabel{eq:inspectable-coverage}{{5}{4}{}{equation.19}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C}Dynamic Feasibility and SOOAs}{4}{subsection.20}\protected@file@percent }
+\newlabel{eq:limits}{{6}{4}{}{equation.21}{}}
+\newlabel{eq:edge-cost}{{7}{4}{}{equation.22}{}}
+\newlabel{eq:sooa}{{8}{4}{}{equation.23}{}}
+\citation{alshiekh2018shielding}
+\citation{bertsekas1996neuro}
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Safety-Shielded Candidate-Graph Policy Improvement}{5}{section.24}\protected@file@percent }
+\newlabel{sec:algorithm}{{IV}{5}{}{section.24}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A}Candidate Graph and Markov State}{5}{subsection.25}\protected@file@percent }
+\newlabel{eq:mdp-state}{{9}{5}{}{equation.26}{}}
+\newlabel{eq:mdp-transition}{{10}{5}{}{equation.27}{}}
+\newlabel{eq:bellman}{{11}{5}{}{equation.28}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B}SOOA Construction and Safety Shield}{5}{subsection.29}\protected@file@percent }
+\newlabel{eq:terminal-transfer}{{12}{5}{}{equation.30}{}}
+\newlabel{eq:safe-action-set}{{13}{5}{}{equation.31}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C}Critic, Lookahead, and Safeguarded Improvement}{5}{subsection.32}\protected@file@percent }
+\newlabel{eq:critic-surrogate}{{14}{5}{}{equation.33}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Safety-shielded candidate-graph policy improvement}}{6}{algorithm.35}\protected@file@percent }
+\newlabel{alg:safe-graph-api}{{1}{6}{}{algorithm.35}{}}
+\newlabel{eq:rollout}{{15}{6}{}{equation.34}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {D}Properties and Exact Oracle}{6}{subsection.36}\protected@file@percent }
+\newlabel{sec:theory}{{D}{6}{}{subsection.36}{}}
+\newlabel{prop:submodular-coverage}{{1}{6}{Monotone submodularity of fixed-mask coverage}{proposition.37}{}}
+\newlabel{prop:markov-sufficiency}{{2}{6}{Markov sufficiency}{proposition.39}{}}
+\newlabel{prop:audit-composition}{{3}{6}{Compositional preservation of stored audits}{proposition.40}{}}
+\newlabel{thm:incumbent}{{1}{6}{Incumbent no-degradation in the graph objective}{theorem.42}{}}
 \citation{nasa_iss_gltf_model}
-\newlabel{eq:hcw-discrete}{{7}{4}{}{equation.7}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {B}Inspection Geometry and Termination}{4}{subsection.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {IV}Problem Formulation}{4}{section.4}\protected@file@percent }
-\newlabel{sec:problem}{{IV}{4}{}{section.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {A}State, Visibility, and Coverage}{4}{subsection.4.1}\protected@file@percent }
-\newlabel{eq:range}{{13}{4}{}{equation.13}{}}
-\newlabel{eq:fov}{{14}{4}{}{equation.14}{}}
-\newlabel{eq:view-angle}{{15}{4}{}{equation.15}{}}
-\newlabel{eq:los}{{16}{4}{}{equation.16}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {B}Dynamic Feasibility and Cost}{4}{subsection.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {C}Safe Observable Orbital Arc}{5}{subsection.4.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {D}Optimization Objective}{5}{subsection.4.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {E}Finite Graph and Evaluation Quantities}{5}{subsection.4.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {V}Offline Planner}{6}{section.5}\protected@file@percent }
-\newlabel{sec:algorithm}{{V}{6}{}{section.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {A}Decomposition}{6}{subsection.5.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {B}Viewpoint Seeds and SOOA Library}{6}{subsection.5.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {C}SOOA Selection}{6}{subsection.5.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {D}CW Transfer Generation}{6}{subsection.5.4}\protected@file@percent }
-\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces SOOA-based orbital coverage planner}}{7}{algorithm.1}\protected@file@percent }
-\newlabel{alg:offline-planner}{{1}{7}{SOOA-based orbital coverage planner}{algorithm.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {E}Certified Finite-Graph Solver}{7}{subsection.5.5}\protected@file@percent }
-\newlabel{sec:theory}{{E}{7}{}{subsection.5.5}{}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Certified reduced-SOOA-graph dynamic program}}{7}{algorithm.2}\protected@file@percent }
-\newlabel{alg:certified-dp}{{2}{7}{Certified reduced-SOOA-graph dynamic program}{algorithm.2}{}}
-\newlabel{eq:finite-mip-objective}{{41}{7}{}{equation.41}{}}
-\citation{nasa_iss_gltf_model}
-\@writefile{toc}{\contentsline {subsection}{\numberline {F}Planner Outputs}{8}{subsection.5.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {VI}Execution and Experimental Protocol}{8}{section.6}\protected@file@percent }
-\newlabel{sec:simulation}{{VI}{8}{}{section.6}{}}
-\newlabel{sec:online}{{VI}{8}{}{section.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {A}Benchmark Definition}{8}{subsection.6.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {B}Online Replay Interface}{8}{subsection.6.2}\protected@file@percent }
-\citation{nasa_iss_gltf_model}
-\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Validation matrix for sensitivity and ablation studies.}}{9}{table.caption.2}\protected@file@percent }
-\newlabel{tab:validation-matrix}{{II}{9}{Validation matrix for sensitivity and ablation studies}{table.caption.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {C}ROS/Gazebo Verification}{9}{subsection.6.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {VII}Results}{9}{section.7}\protected@file@percent }
-\newlabel{sec:results}{{VII}{9}{}{section.7}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {A}Offline Planning Performance}{9}{subsection.7.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Best feasible offline planning metrics from the high-coverage mesh experiment.}}{9}{table.caption.3}\protected@file@percent }
-\newlabel{tab:offline-results}{{III}{9}{Best feasible offline planning metrics from the high-coverage mesh experiment}{table.caption.3}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {IV}{\ignorespaces Reduced-SOOA-graph oracle check. The exact dynamic program minimizes HCW dynamic cost subject to feasible transitions, a four-arc budget, and a 25\% coverage requirement.}}{9}{table.caption.4}\protected@file@percent }
-\newlabel{tab:certified-results}{{IV}{9}{Reduced-SOOA-graph oracle check. The exact dynamic program minimizes HCW dynamic cost subject to feasible transitions, a four-arc budget, and a 25\% coverage requirement}{table.caption.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Proposed SOOA tour overlaid on the open NASA ISS glTF mesh model. The selected SOOA terminal poses are colored by cumulative coverage, and the trajectory is shown as the planned chaser path in LVLH coordinates.}}{10}{figure.caption.5}\protected@file@percent }
-\newlabel{fig:mesh-and-trajectory}{{1}{10}{Proposed SOOA tour overlaid on the open NASA ISS glTF mesh model. The selected SOOA terminal poses are colored by cumulative coverage, and the trajectory is shown as the planned chaser path in LVLH coordinates}{figure.caption.5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Coverage evolution for the compared offline methods in the high-coverage mesh experiment.}}{10}{figure.caption.6}\protected@file@percent }
-\newlabel{fig:coverage-comparison}{{2}{10}{Coverage evolution for the compared offline methods in the high-coverage mesh experiment}{figure.caption.6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Baseline trajectory comparison over the same ISS mesh silhouette. The proposed SOOA tour is shown separately in Fig.~\ref {fig:mesh-and-trajectory}.}}{10}{figure.caption.7}\protected@file@percent }
-\newlabel{fig:trajectory-comparison}{{3}{10}{Baseline trajectory comparison over the same ISS mesh silhouette. The proposed SOOA tour is shown separately in Fig.~\ref {fig:mesh-and-trajectory}}{figure.caption.7}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {V}{\ignorespaces Complementary offline comparison quantities not encoded by the coverage-effort plot.}}{11}{table.caption.9}\protected@file@percent }
-\newlabel{tab:method-execution-results}{{V}{11}{Complementary offline comparison quantities not encoded by the coverage-effort plot}{table.caption.9}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Coverage-effort-feasibility summary for the full offline comparison. The dashed line in the summary panel marks the 98\% stop target. A star denotes the proposed method shown in Fig.~\ref {fig:mesh-and-trajectory}; circles denote feasible baselines, and crosses denote methods that fail the input, speed, or clearance checks.}}{11}{figure.caption.8}\protected@file@percent }
-\newlabel{fig:trajectory-tradeoff-summary}{{4}{11}{Coverage-effort-feasibility summary for the full offline comparison. The dashed line in the summary panel marks the 98\% stop target. A star denotes the proposed method shown in Fig.~\ref {fig:mesh-and-trajectory}; circles denote feasible baselines, and crosses denote methods that fail the input, speed, or clearance checks}{figure.caption.8}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Sensitivity and ablation results generated by the offline validation matrix. Circles denote feasible runs and crosses denote runs that fail the full feasibility audit. The dashed lines mark the 98\% stop target or the 0.060~m/s$^2$ input limit.}}{11}{figure.caption.10}\protected@file@percent }
-\newlabel{fig:validation-matrix-summary}{{5}{11}{Sensitivity and ablation results generated by the offline validation matrix. Circles denote feasible runs and crosses denote runs that fail the full feasibility audit. The dashed lines mark the 98\% stop target or the 0.060~m/s$^2$ input limit}{figure.caption.10}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {B}Camera Geometry and Replay Verification}{11}{subsection.7.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Camera-model verification through reconstructed field-of-view geometry overlaid on the proposed SOOA tour. The frusta and boresight rays are reconstructed from saved camera poses for representative early, middle, and final selected SOOAs, verifying that the logged attitude stream instantiates the visibility model used by the planner and by ROS replay in the same LVLH frame as the ISS mesh.}}{12}{figure.caption.11}\protected@file@percent }
-\newlabel{fig:camera-model-frusta}{{6}{12}{Camera-model verification through reconstructed field-of-view geometry overlaid on the proposed SOOA tour. The frusta and boresight rays are reconstructed from saved camera poses for representative early, middle, and final selected SOOAs, verifying that the logged attitude stream instantiates the visibility model used by the planner and by ROS replay in the same LVLH frame as the ISS mesh}{figure.caption.11}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Incremental surface coverage contributed by the selected SOOAs. Bars show per-arc coverage gain in the selected SOOA sequence, with the same representative early, middle, and final arcs highlighted as in Fig.~\ref {fig:camera-model-frusta}.}}{12}{figure.caption.12}\protected@file@percent }
-\newlabel{fig:camera-model-coverage}{{7}{12}{Incremental surface coverage contributed by the selected SOOAs. Bars show per-arc coverage gain in the selected SOOA sequence, with the same representative early, middle, and final arcs highlighted as in Fig.~\ref {fig:camera-model-frusta}}{figure.caption.12}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces ROS replay log verification for the planned SOOA execution. Left: replayed chaser trajectory in the same LVLH frame used by the offline planner. Right: logged control effort over replay time. These panels verify that the saved trajectory and command streams are available to the ROS logging and visualization stack; orbital dynamics claims remain based on the HCW planner logs.}}{12}{figure.caption.13}\protected@file@percent }
-\newlabel{fig:ros-camera-verification}{{8}{12}{ROS replay log verification for the planned SOOA execution. Left: replayed chaser trajectory in the same LVLH frame used by the offline planner. Right: logged control effort over replay time. These panels verify that the saved trajectory and command streams are available to the ROS logging and visualization stack; orbital dynamics claims remain based on the HCW planner logs}{figure.caption.13}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Gazebo Harmonic validation frames. Left: chaser-follow camera view. Right: full ISS visual context with chaser trajectory replay. Quantitative coverage, safety, and control claims come from recorded planner logs, not Gazebo physics.}}{12}{figure.caption.14}\protected@file@percent }
-\newlabel{fig:gazebo-validation}{{9}{12}{Gazebo Harmonic validation frames. Left: chaser-follow camera view. Right: full ISS visual context with chaser trajectory replay. Quantitative coverage, safety, and control claims come from recorded planner logs, not Gazebo physics}{figure.caption.14}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {VIII}Discussion and Limitations}{12}{section.8}\protected@file@percent }
-\newlabel{sec:discussion}{{VIII}{12}{}{section.8}{}}
+\newlabel{prop:critic-bound}{{4}{7}{Conditional finite-horizon approximation bound}{proposition.44}{}}
+\newlabel{thm:reduced-optimality}{{2}{7}{Optimality on an exhausted reduced SOOA graph}{theorem.46}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Experimental Protocol}{7}{section.48}\protected@file@percent }
+\newlabel{sec:simulation}{{V}{7}{}{section.48}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A}Base Benchmark}{7}{subsection.49}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {B}Matched Component Ablation}{7}{subsection.52}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Matched baseline definitions used in the full benchmark.}}{8}{table.51}\protected@file@percent }
+\newlabel{tab:baseline-definitions}{{II}{8}{Matched baseline definitions used in the full benchmark}{table.51}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C}Oracle, Initial-State Stress, and Compute Cases}{8}{subsection.53}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {D}Saved Results and Reproducibility Boundary}{8}{subsection.54}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {E}ROS 2 Execution Interface and Validation Placeholder}{8}{subsection.55}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Results}{8}{section.58}\protected@file@percent }
+\newlabel{sec:results}{{VI}{8}{}{section.58}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A}Primary Coverage--Effort Comparison}{8}{subsection.59}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces ROS~2/Gazebo integration placeholder based on an archived infrastructure smoke frame. The ISS and chaser rendering confirms model loading and visualization bridging only; it predates the proposed graph policy and is not used as performance evidence. Before submission, this frame should be replaced by the Jazzy closed-loop SOOA replay with planned and executed paths and the corresponding tracking and safety records.}}{9}{figure.57}\protected@file@percent }
+\newlabel{fig:ros-placeholder}{{2}{9}{ROS~2/Gazebo integration placeholder based on an archived infrastructure smoke frame. The ISS and chaser rendering confirms model loading and visualization bridging only; it predates the proposed graph policy and is not used as performance evidence. Before submission, this frame should be replaced by the Jazzy closed-loop SOOA replay with planned and executed paths and the corresponding tracking and safety records}{figure.57}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Primary saved-result comparison. Position gives final inspectable coverage and cumulative $\Delta v$; annotations give selected action count, and the dashed line marks the 98\% stop target. Circles pass every enabled trajectory and passive-drift audit, whereas X markers fail at least one audit.}}{9}{figure.61}\protected@file@percent }
+\newlabel{fig:adp-primary}{{3}{9}{Primary saved-result comparison. Position gives final inspectable coverage and cumulative $\Delta v$; annotations give selected action count, and the dashed line marks the 98\% stop target. Circles pass every enabled trajectory and passive-drift audit, whereas X markers fail at least one audit}{figure.61}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B}Primary Trajectory Case Study}{9}{subsection.64}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Primary saved-trajectory case study in the LVLH frame. The solid blue curve is the returned route, which is identical to the L+S component result; the dashed gold curve is the two-stage incumbent. Circles and triangles mark terminal observation poses, the green star marks the common initial position, and X markers show the final endpoints. The station mesh provides geometric context; every trajectory sample is loaded from the archived HCW results rather than recomputed during plotting.}}{9}{figure.66}\protected@file@percent }
+\newlabel{fig:primary-trajectory}{{4}{9}{Primary saved-trajectory case study in the LVLH frame. The solid blue curve is the returned route, which is identical to the L+S component result; the dashed gold curve is the two-stage incumbent. Circles and triangles mark terminal observation poses, the green star marks the common initial position, and X markers show the final endpoints. The station mesh provides geometric context; every trajectory sample is loaded from the archived HCW results rather than recomputed during plotting}{figure.66}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C}Component Attribution and Computational Cost}{9}{subsection.67}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Primary 180-target benchmark. The feasibility column includes the enabled 300~s passive-drift audit.}}{10}{table.63}\protected@file@percent }
+\newlabel{tab:method-results}{{III}{10}{Primary 180-target benchmark. The feasibility column includes the enabled \unit {300}{s} passive-drift audit}{table.63}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Decision matrix for the matched component ablation. C is critic training and lookahead, R is one-step rollout, S is the incumbent safeguard, and L is audited reversal search. Every variant reaches 98.33\% coverage and passes the enabled audits. Cells report raw values; color is normalized independently within each column, with darker cells indicating a larger burden.}}{10}{figure.69}\protected@file@percent }
+\newlabel{fig:adp-components}{{5}{10}{Decision matrix for the matched component ablation. C is critic training and lookahead, R is one-step rollout, S is the incumbent safeguard, and L is audited reversal search. Every variant reaches 98.33\% coverage and passes the enabled audits. Cells report raw values; color is normalized independently within each column, with darker cells indicating a larger burden}{figure.69}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {D}Reduced-Graph Certification}{10}{subsection.70}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Exact-oracle verification on reduced graphs. Vertical position is the number of Bellman states expanded; each point is annotated with the returned-policy cost gap to the exact optimum. Multiple seeds test the learned proposal while leaving the deterministic exact problem unchanged.}}{10}{figure.72}\protected@file@percent }
+\newlabel{fig:adp-oracle}{{6}{10}{Exact-oracle verification on reduced graphs. Vertical position is the number of Bellman states expanded; each point is annotated with the returned-policy cost gap to the exact optimum. Multiple seeds test the learned proposal while leaving the deterministic exact problem unchanged}{figure.72}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {E}Initial-State Stress Tests}{10}{subsection.73}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Connected safety--effort comparison across initial conditions. Each arrow starts at the two-stage incumbent and ends at the returned graph policy. The horizontal coordinate is cumulative $\Delta v$, the vertical coordinate is minimum passive-drift margin, and the shaded region fails the enabled passive audit. IC-0, IC-1, and IC-2 are defined explicitly in Section~\ref {sec:simulation}.}}{11}{figure.75}\protected@file@percent }
+\newlabel{fig:adp-initial}{{7}{11}{Connected safety--effort comparison across initial conditions. Each arrow starts at the two-stage incumbent and ends at the returned graph policy. The horizontal coordinate is cumulative $\Delta v$, the vertical coordinate is minimum passive-drift margin, and the shaded region fails the enabled passive audit. IC-0, IC-1, and IC-2 are defined explicitly in Section~\ref {sec:simulation}}{figure.75}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {F}Critic and Lookahead Compute Tradeoff}{11}{subsection.76}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {G}Cross-Result Synthesis}{11}{subsection.79}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Compute ablation on the 90-target, 48-node graph. Position gives cold-cache planning time and weighted surface coverage; annotations give training episodes and lookahead depth. Circles reach the 95\% graph goal and X markers do not.}}{11}{figure.78}\protected@file@percent }
+\newlabel{fig:adp-compute}{{8}{11}{Compute ablation on the 90-target, 48-node graph. Position gives cold-cache planning time and weighted surface coverage; annotations give training episodes and lookahead depth. Circles reach the 95\% graph goal and X markers do not}{figure.78}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VII}Discussion}{11}{section.80}\protected@file@percent }
+\newlabel{sec:discussion}{{VII}{11}{}{section.80}{}}
+\citation{zhou2026formation}
 \bibstyle{IEEEtran}
 \bibdata{references}
 \bibcite{clohessy1960terminal}{1}
 \bibcite{wertz2011space}{2}
-\bibcite{scott2003view}{3}
-\bibcite{lavalle1998rapidly}{4}
-\bibcite{karaman2011sampling}{5}
-\bibcite{apodaca2025trajectory}{6}
-\bibcite{hou2024relative}{7}
-\bibcite{zhou2026tomographic}{8}
-\bibcite{ogri2025switched}{9}
-\bibcite{nasa_iss_gltf_model}{10}
-\@writefile{toc}{\contentsline {section}{\numberline {IX}Conclusion}{13}{section.9}\protected@file@percent }
-\newlabel{sec:conclusion}{{IX}{13}{}{section.9}{}}
-\@writefile{toc}{\contentsline {section}{REFERENCES}{13}{section.9}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{Biographies}{13}{IEEEbiography.0}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{Rugang Tang}{13}{IEEEbiography.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{Xin Ning}{14}{IEEEbiography.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{Prof. Chih-yung WEN}{14}{IEEEbiography.3}\protected@file@percent }
-\gdef \@abspage@last{14}
+\bibcite{hou2024relative}{3}
+\bibcite{zhou2026formation}{4}
+\bibcite{scott2003view}{5}
+\bibcite{lavalle1998rapidly}{6}
+\bibcite{karaman2011sampling}{7}
+\bibcite{bertsekas2020rollout}{8}
+\bibcite{bertsekas1996neuro}{9}
+\@writefile{toc}{\contentsline {section}{\numberline {VIII}Conclusion}{12}{section.81}\protected@file@percent }
+\newlabel{sec:conclusion}{{VIII}{12}{}{section.81}{}}
+\@writefile{toc}{\contentsline {section}{REFERENCES}{12}{section.81}\protected@file@percent }
+\bibcite{achiam2017cpo}{10}
+\bibcite{alshiekh2018shielding}{11}
+\bibcite{apodaca2025trajectory}{12}
+\bibcite{zhou2026tomographic}{13}
+\bibcite{ogri2025switched}{14}
+\bibcite{nasa_iss_gltf_model}{15}
+\@writefile{toc}{\contentsline {section}{Biographies}{13}{IEEEbiography.82}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{Rugang Tang}{13}{IEEEbiography.83}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{Xin Ning}{13}{IEEEbiography.84}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{Chih-yung Wen}{13}{IEEEbiography.85}\protected@file@percent }
+\gdef \@abspage@last{13}

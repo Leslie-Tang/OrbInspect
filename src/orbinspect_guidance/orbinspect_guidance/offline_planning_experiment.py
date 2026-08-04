@@ -12,8 +12,12 @@ from pathlib import Path
 from time import perf_counter
 from typing import Iterable
 
-import matplotlib.pyplot as plt
-
+from orbinspect_guidance.advanced_safe_planner import AdvancedPlannerConfig
+from orbinspect_guidance.advanced_safe_planner import AdvancedSafePlanner
+from orbinspect_guidance.advanced_safe_planner import GraphDecision
+from orbinspect_guidance.advanced_safe_planner import SafeGraphEdge
+from orbinspect_guidance.advanced_safe_planner import SafeGraphNode
+from orbinspect_guidance.advanced_safe_planner import SafeGraphProblem
 from orbinspect_guidance.offline_coverage_planner import CandidateViewpoint
 from orbinspect_guidance.offline_coverage_planner import ControlVector
 from orbinspect_guidance.offline_coverage_planner import cross
@@ -32,41 +36,6 @@ except ModuleNotFoundError:  # pragma: no cover - exercised on minimal macOS Pyt
     yaml = None
 
 
-plt.rcParams['font.family'] = 'sans-serif'
-plt.rcParams['font.sans-serif'] = ['Arial', 'DejaVu Sans', 'Liberation Sans']
-plt.rcParams['svg.fonttype'] = 'none'
-plt.rcParams['pdf.fonttype'] = 42
-plt.rcParams['ps.fonttype'] = 42
-plt.rcParams['axes.linewidth'] = 1.0
-plt.rcParams['axes.spines.top'] = False
-plt.rcParams['axes.spines.right'] = False
-plt.rcParams['legend.frameon'] = False
-
-METHOD_COLORS = {
-    'set_cover_cw_tour': '#0F4D92',
-    'certified_graph_search': '#1B6B5A',
-    'proposed_safe_cw_nbv': '#7884B4',
-    'coverage_greedy': '#B64342',
-    'safe_coverage_greedy': '#E28E2C',
-    'distance_greedy': '#7BAA5B',
-    'fuel_greedy': '#9A4D8E',
-    'random_safe': '#767676',
-}
-METHOD_LABELS_SHORT = {
-    'set_cover_cw_tour': 'Proposed',
-    'certified_graph_search': 'Certified',
-    'proposed_safe_cw_nbv': 'CW-NBV',
-    'coverage_greedy': 'Coverage',
-    'safe_coverage_greedy': 'Safe cov.',
-    'distance_greedy': 'Nearest',
-    'fuel_greedy': 'Fuel',
-    'random_safe': 'Random',
-    'abl_no_transfer_cost': 'No transfer',
-    'abl_no_clearance_filter': 'No clearance',
-    'abl_no_input_check': 'No input',
-    'abl_unweighted_coverage': 'Unweighted',
-}
-
 SET_COVER_METHODS = frozenset({
     'set_cover_cw_tour',
     'abl_no_transfer_cost',
@@ -74,6 +43,16 @@ SET_COVER_METHODS = frozenset({
     'abl_no_input_check',
     'abl_unweighted_coverage',
 })
+
+GRAPH_ADP_VARIANTS: dict[str, tuple[bool, bool, bool, bool]] = {
+    # method: critic, rollout, reference safeguard, local reference search
+    'safe_graph_adp': (True, True, True, True),
+    'safe_graph_adp_critic_only': (True, False, False, False),
+    'safe_graph_adp_critic_safeguard': (True, False, True, False),
+    'safe_graph_adp_rollout': (False, True, True, False),
+    'safe_graph_adp_local_search': (False, False, True, True),
+    'safe_graph_adp_no_local': (True, True, True, False),
+}
 
 
 @dataclass(frozen=True)
@@ -99,6 +78,7 @@ class ExperimentConfig:
     safety_margin: float = 2.0
     initial_state: StateVector = (0.0, -35.0, 10.0, 0.0, 0.0, 0.0)
     methods: tuple[str, ...] = (
+        'safe_graph_adp',
         'set_cover_cw_tour',
         'proposed_safe_cw_nbv',
         'coverage_greedy',
@@ -116,6 +96,18 @@ class ExperimentConfig:
     certified_candidate_limit: int = 18
     certified_time_limit_s: float = 8.0
     certified_max_expansions: int = 150000
+    adp_candidate_limit: int = 96
+    adp_branch_width: int = 8
+    adp_candidate_pool_width: int = 24
+    adp_lookahead_depth: int = 3
+    adp_training_episodes: int = 80
+    adp_learning_rate: float = 0.035
+    adp_exploration_rate: float = 0.25
+    adp_terminal_penalty: float = 500.0
+    adp_action_cost: float = 0.05
+    adp_cost_scale: float = 50.0
+    adp_oracle_node_limit: int = 14
+    adp_reference_improvement_passes: int = 4
 
 
 @dataclass(frozen=True)
@@ -129,6 +121,9 @@ class MethodStep:
     transfer: TransferEstimate
     score: float
     dynamic_cost: float
+    decision_value: float = 0.0
+    safe_action_count: int = 0
+    shield_rejections: int = 0
 
 
 @dataclass(frozen=True)
@@ -164,7 +159,11 @@ class OfflinePlanningExperiment:
 
     def run(self) -> tuple[MethodResult, ...]:
         """Run all configured planning methods."""
-        return tuple(self.run_method(method) for method in self.config.methods)
+        results = []
+        for method in self.config.methods:
+            self._transfer_cache.clear()
+            results.append(self.run_method(method))
+        return tuple(results)
 
     def run_method(self, method: str) -> MethodResult:
         """Run a single planning method with shared visibility and CW evaluator."""
@@ -174,6 +173,9 @@ class OfflinePlanningExperiment:
         current_state = self.config.initial_state
         current_time = 0.0
         steps: list[MethodStep] = []
+
+        if method in GRAPH_ADP_VARIANTS:
+            return self._run_safe_graph_adp(start, method)
 
         if method == 'certified_graph_search':
             return self._run_certified_graph_search(start)
@@ -225,6 +227,277 @@ class OfflinePlanningExperiment:
             coverage_timeline=coverage_timeline,
             summary=summary,
         )
+
+    def _run_safe_graph_adp(
+        self,
+        start_time: float,
+        method: str = 'safe_graph_adp',
+    ) -> MethodResult:
+        """Learn and execute a shielded long-horizon policy on SOOA nodes."""
+        (
+            critic_enabled,
+            rollout_enabled,
+            safeguard_enabled,
+            local_improvement_enabled,
+        ) = GRAPH_ADP_VARIANTS[method]
+        reference_candidates = tuple(self._order_candidates_by_cw_cost(
+            self._weighted_set_cover_candidates('set_cover_cw_tour'),
+            'set_cover_cw_tour',
+        ))
+        candidates = tuple(self._adp_candidate_pool(reference_candidates))
+        target_ids = tuple(sorted(target.target_id for target in self.targets))
+        target_index = {
+            target_id: index
+            for index, target_id in enumerate(target_ids)
+        }
+        target_weights = tuple(
+            self.base_planner.target_area_by_id.get(target_id, 1.0)
+            for target_id in target_ids
+        )
+        nodes = tuple(
+            SafeGraphNode(
+                node_id=candidate.candidate_id,
+                coverage_mask=_target_mask(
+                    self.visibility.visible_targets_by_candidate[candidate.candidate_id],
+                    target_index,
+                ),
+                static_priority=max(0.0, candidate.safety_margin),
+            )
+            for candidate in candidates
+        )
+        candidate_by_id = {
+            candidate.candidate_id: candidate
+            for candidate in candidates
+        }
+        edge_transfer_by_id: dict[
+            tuple[str | None, str],
+            TransferEstimate,
+        ] = {}
+        edge_by_id: dict[tuple[str | None, str], SafeGraphEdge] = {}
+
+        def evaluate_edge(source_id: str | None, target_id: str) -> SafeGraphEdge:
+            key = (source_id, target_id)
+            cached_edge = edge_by_id.get(key)
+            if cached_edge is not None:
+                return cached_edge
+            transfer = edge_transfer_by_id.get(key)
+            if transfer is None:
+                if source_id is None:
+                    source_state = self.config.initial_state
+                else:
+                    source = candidate_by_id[source_id]
+                    source_state = (
+                        source.position[0],
+                        source.position[1],
+                        source.position[2],
+                        0.0,
+                        0.0,
+                        0.0,
+                    )
+                transfer = self._estimate_transfer_from_state(
+                    source_state,
+                    candidate_by_id[target_id],
+                )
+                edge_transfer_by_id[key] = transfer
+            states = tuple(
+                state
+                for _time, state, _command in transfer.trajectory
+            )
+            passive_margin, passive_safe = self.base_planner._passive_safety_audit(
+                states
+            )
+            edge = SafeGraphEdge(
+                source_id=source_id,
+                target_id=target_id,
+                stage_cost=self._dynamic_transfer_cost(transfer),
+                feasible=transfer.feasible and passive_safe is not False,
+                min_clearance=transfer.min_clearance,
+                peak_input=transfer.peak_requested_input,
+                input_limit=self.config.max_acceleration,
+                passive_margin=passive_margin,
+            )
+            edge_by_id[key] = edge
+            return edge
+
+        planner = AdvancedSafePlanner(AdvancedPlannerConfig(
+            method='safe_graph_adp',
+            horizon_steps=self.config.max_viewpoints,
+            time_step=self.config.transfer_duration,
+            safety_margin=self.config.safety_margin,
+            goal_coverage=self.config.coverage_stop_ratio,
+            branch_width=self.config.adp_branch_width,
+            candidate_pool_width=self.config.adp_candidate_pool_width,
+            lookahead_depth=self.config.adp_lookahead_depth,
+            training_episodes=self.config.adp_training_episodes,
+            learning_rate=self.config.adp_learning_rate,
+            exploration_rate=self.config.adp_exploration_rate,
+            terminal_penalty=self.config.adp_terminal_penalty,
+            action_cost=self.config.adp_action_cost,
+            cost_scale=self.config.adp_cost_scale,
+            random_seed=self.config.random_seed,
+            min_new_target_count=self.config.min_new_targets,
+            oracle_node_limit=self.config.adp_oracle_node_limit,
+            reference_improvement_passes=(
+                self.config.adp_reference_improvement_passes
+                if local_improvement_enabled else 0
+            ),
+            enable_critic=critic_enabled,
+            enable_rollout=rollout_enabled,
+            enable_reference_safeguard=safeguard_enabled,
+        ))
+        problem = SafeGraphProblem(
+            nodes=nodes,
+            target_weights=target_weights,
+            edge_evaluator=evaluate_edge,
+            goal_coverage=self.config.coverage_stop_ratio,
+            max_steps=self.config.max_viewpoints,
+            reference_node_ids=tuple(
+                candidate.candidate_id
+                for candidate in reference_candidates
+                if candidate.candidate_id in candidate_by_id
+            ),
+        )
+        graph_plan = planner.plan(problem)
+        exact_cost: float | str = ''
+        optimality_gap: float | str = ''
+        exact_expansions: int | str = ''
+        if len(nodes) <= self.config.adp_oracle_node_limit:
+            exact = planner.solve_exact(problem)
+            exact_cost = exact.total_cost if exact.feasible else ''
+            exact_expansions = exact.expanded_states
+            if exact.feasible and exact.total_cost > 0.0 and graph_plan.success:
+                optimality_gap = (
+                    graph_plan.total_cost - exact.total_cost
+                ) / exact.total_cost
+
+        decision_trace = {
+            decision.node_id: decision
+            for decision in graph_plan.decisions
+        }
+        return self._materialize_candidate_sequence(
+            method,
+            tuple(candidate_by_id[node_id] for node_id in graph_plan.node_ids),
+            planning_time=perf_counter() - start_time,
+            decision_trace=decision_trace,
+            extra_summary={
+                'adp_candidate_pool_size': len(candidates),
+                'adp_goal_reached': graph_plan.success,
+                'adp_graph_cost': graph_plan.total_cost,
+                'adp_training_episodes': graph_plan.training_episodes,
+                'adp_td_update_count': graph_plan.td_update_count,
+                'adp_mean_absolute_td_error': graph_plan.mean_absolute_td_error,
+                'adp_safe_action_evaluations': graph_plan.safe_action_evaluations,
+                'adp_shield_rejections': graph_plan.shield_rejections,
+                'adp_lookahead_depth': self.config.adp_lookahead_depth,
+                'adp_branch_width': self.config.adp_branch_width,
+                'adp_critic_weights': ';'.join(
+                    f'{weight:.9g}'
+                    for weight in graph_plan.critic_weights
+                ),
+                'adp_exact_cost': exact_cost,
+                'adp_optimality_gap': optimality_gap,
+                'adp_exact_expansions': exact_expansions,
+                'adp_policy_source': graph_plan.policy_source,
+                'adp_learned_graph_cost': (
+                    graph_plan.learned_total_cost
+                    if graph_plan.learned_total_cost is not None else ''
+                ),
+                'adp_rollout_graph_cost': (
+                    graph_plan.rollout_total_cost
+                    if graph_plan.rollout_total_cost is not None else ''
+                ),
+                'adp_reference_graph_cost': (
+                    graph_plan.reference_total_cost
+                    if graph_plan.reference_total_cost is not None else ''
+                ),
+                'adp_improved_reference_graph_cost': (
+                    graph_plan.improved_reference_total_cost
+                    if graph_plan.improved_reference_total_cost is not None
+                    else ''
+                ),
+                'adp_incumbent_improvement': (
+                    graph_plan.incumbent_improvement
+                    if graph_plan.incumbent_improvement is not None else ''
+                ),
+                'adp_variant': method,
+                'adp_critic_enabled': graph_plan.critic_enabled,
+                'adp_rollout_enabled': graph_plan.rollout_enabled,
+                'adp_safeguard_enabled': graph_plan.safeguard_enabled,
+                'adp_local_improvement_enabled': (
+                    graph_plan.local_improvement_enabled
+                ),
+            },
+        )
+
+    def _adp_candidate_pool(
+        self,
+        reference_candidates: tuple[CandidateViewpoint, ...] = (),
+    ) -> list[CandidateViewpoint]:
+        """Build a coverage-preserving candidate pool for graph ADP."""
+        limit = min(
+            len(self.candidates),
+            max(1, self.config.adp_candidate_limit),
+        )
+        remaining = {
+            candidate.candidate_id: candidate
+            for candidate in self.candidates
+        }
+        covered: set[str] = set()
+        selected: list[CandidateViewpoint] = []
+        for candidate in reference_candidates:
+            if len(selected) >= limit:
+                break
+            if candidate.candidate_id not in remaining:
+                continue
+            selected.append(candidate)
+            covered.update(
+                self.visibility.visible_targets_by_candidate[
+                    candidate.candidate_id
+                ]
+            )
+            remaining.pop(candidate.candidate_id, None)
+        while remaining and len(selected) < limit:
+            ranked = []
+            for candidate in remaining.values():
+                visible = self.visibility.visible_targets_by_candidate[
+                    candidate.candidate_id
+                ]
+                new_targets = visible - covered
+                gain = self._area_gain(new_targets)
+                ranked.append((
+                    gain,
+                    len(new_targets),
+                    candidate.safety_margin,
+                    candidate,
+                ))
+            gain, _count, _margin, candidate = max(
+                ranked,
+                key=lambda item: (item[0], item[1], item[2], item[3].candidate_id),
+            )
+            if gain <= 0.0:
+                break
+            selected.append(candidate)
+            covered.update(
+                self.visibility.visible_targets_by_candidate[candidate.candidate_id]
+            )
+            remaining.pop(candidate.candidate_id, None)
+
+        if len(selected) < limit:
+            fill = sorted(
+                remaining.values(),
+                key=lambda candidate: (
+                    self._area_gain(
+                        self.visibility.visible_targets_by_candidate[
+                            candidate.candidate_id
+                        ]
+                    ),
+                    candidate.safety_margin,
+                    candidate.candidate_id,
+                ),
+                reverse=True,
+            )
+            selected.extend(fill[:limit - len(selected)])
+        return selected
 
     def _run_set_cover_cw_tour(self, start_time: float, method: str) -> MethodResult:
         selected_candidates = self._weighted_set_cover_candidates(method)
@@ -473,7 +746,11 @@ class OfflinePlanningExperiment:
                     if method == 'abl_unweighted_coverage'
                     else gain
                 )
-                dynamic_cost = 0.0 if method == 'abl_no_transfer_cost' else self._dynamic_transfer_cost(transfer)
+                dynamic_cost = (
+                    0.0
+                    if method == 'abl_no_transfer_cost'
+                    else self._dynamic_transfer_cost(transfer)
+                )
                 safety_credit = (
                     0.0 if method == 'abl_no_clearance_filter'
                     else 0.2 * max(0.0, min(transfer.min_clearance, 10.0))
@@ -513,6 +790,7 @@ class OfflinePlanningExperiment:
         candidates: tuple[CandidateViewpoint, ...],
         planning_time: float,
         extra_summary: dict[str, float | int | str | bool] | None = None,
+        decision_trace: dict[str, GraphDecision] | None = None,
     ) -> MethodResult:
         """Roll out an ordered candidate sequence into standard result outputs."""
         covered: set[str] = set()
@@ -526,12 +804,20 @@ class OfflinePlanningExperiment:
                 continue
             transfer = self._estimate_transfer_from_state(current_state, candidate)
             dynamic_cost = self._dynamic_transfer_cost(transfer)
-            score = self._score(
-                method,
-                current_state,
-                candidate,
-                new_targets,
-                transfer,
+            decision = (
+                decision_trace.get(candidate.candidate_id)
+                if decision_trace is not None else None
+            )
+            score = (
+                -decision.estimated_cost_to_go
+                if decision is not None
+                else self._score(
+                    method,
+                    current_state,
+                    candidate,
+                    new_targets,
+                    transfer,
+                )
             )
             covered.update(new_targets)
             current_state = transfer.next_state
@@ -545,6 +831,18 @@ class OfflinePlanningExperiment:
                 transfer=transfer,
                 score=score,
                 dynamic_cost=dynamic_cost,
+                decision_value=(
+                    decision.estimated_cost_to_go
+                    if decision is not None else 0.0
+                ),
+                safe_action_count=(
+                    decision.safe_action_count
+                    if decision is not None else 0
+                ),
+                shield_rejections=(
+                    decision.shield_rejections
+                    if decision is not None else 0
+                ),
             ))
             if self._coverage_ratio(covered) >= self.config.coverage_stop_ratio:
                 break
@@ -656,13 +954,13 @@ class OfflinePlanningExperiment:
         return ordered
 
     def save(self, results: tuple[MethodResult, ...]) -> Path:
-        """Save paper-ready comparison CSV, JSON, and figures."""
+        """Save paper-ready comparison data without rendering figures."""
         run_dir = self._run_dir()
         raw_dir = run_dir / 'raw'
-        figures_dir = run_dir / 'figures'
         config_dir = run_dir / 'config_snapshot'
         output_dirs = (
-            raw_dir, figures_dir, config_dir, run_dir / 'rosbag', run_dir / 'videos',
+            raw_dir, config_dir, run_dir / 'figures', run_dir / 'rosbag',
+            run_dir / 'videos',
         )
         for directory in output_dirs:
             directory.mkdir(parents=True, exist_ok=True)
@@ -677,11 +975,6 @@ class OfflinePlanningExperiment:
         self._write_summary(run_dir / 'summary.json', results)
         self._write_summary_md(run_dir / 'summary.md', results)
         _write_json(config_dir / 'offline_planning_experiment_config.json', self._config_dict())
-        self._plot_coverage(figures_dir / 'coverage_comparison.png', results)
-        self._plot_delta_v(figures_dir / 'delta_v_comparison.png', results)
-        self._plot_energy_efficiency(figures_dir / 'energy_efficiency_comparison.png', results)
-        self._plot_safety(figures_dir / 'safety_comparison.png', results)
-        self._plot_peak_input(figures_dir / 'peak_input_comparison.png', results)
         return run_dir
 
     def _select_candidate(
@@ -808,6 +1101,8 @@ class OfflinePlanningExperiment:
         infeasible_penalty = 80.0 if not transfer.feasible else 0.0
         keepout_penalty = 160.0 * max(0.0, -transfer.min_clearance)
 
+        if method in GRAPH_ADP_VARIANTS:
+            return -self._dynamic_transfer_cost(transfer)
         if method == 'proposed_safe_cw_nbv':
             clearance_reward = min(transfer.min_clearance, 8.0)
             return (
@@ -946,12 +1241,20 @@ class OfflinePlanningExperiment:
             sum(step.transfer.tracking_error**2 for step in steps)
             / max(1, len(steps))
         )
-        feasible = bool(steps) and all(step.transfer.feasible for step in steps)
+        trajectory_feasible = (
+            bool(steps)
+            and all(step.transfer.feasible for step in steps)
+        )
         passive_margins = [
             margin for step in steps
             for margin in [self._passive_margin_for_step(step)]
             if margin is not None
         ]
+        passive_safe = (
+            all(margin >= 0.0 for margin in passive_margins)
+            if passive_margins else None
+        )
+        feasible = trajectory_feasible and passive_safe is not False
         return {
             'method': method,
             'geometry_backend': self.config.geometry_backend,
@@ -988,10 +1291,7 @@ class OfflinePlanningExperiment:
             'passive_margin_min': min(passive_margins) if passive_margins else None,
             'passive_safety_horizon': self.config.passive_safety_horizon,
             'passive_safety_distance': self.base_planner._passive_safety_distance(),
-            'passive_safe': (
-                all(margin >= 0.0 for margin in passive_margins)
-                if passive_margins else None
-            ),
+            'passive_safe': passive_safe,
             'input_feasible': all(
                 step.transfer.peak_requested_input
                 <= self.config.max_acceleration + 1.0e-9
@@ -1000,7 +1300,7 @@ class OfflinePlanningExperiment:
             'clearance_feasible': all(
                 step.transfer.min_clearance >= 0.0 for step in steps
             ),
-            'trajectory_feasible': feasible,
+            'trajectory_feasible': trajectory_feasible,
             'mission_duration': trajectory[-1][0] if trajectory else 0.0,
             'planning_time': planning_time,
             'trajectory_sample_count': len(trajectory),
@@ -1078,6 +1378,18 @@ class OfflinePlanningExperiment:
             'certificate_status', 'certificate_expansions',
             'certificate_candidate_count', 'certificate_target_count',
             'certificate_objective_cost',
+            'adp_candidate_pool_size', 'adp_goal_reached', 'adp_graph_cost',
+            'adp_training_episodes', 'adp_td_update_count',
+            'adp_mean_absolute_td_error', 'adp_safe_action_evaluations',
+            'adp_shield_rejections', 'adp_lookahead_depth',
+            'adp_branch_width', 'adp_critic_weights', 'adp_exact_cost',
+            'adp_optimality_gap', 'adp_exact_expansions',
+            'adp_policy_source', 'adp_learned_graph_cost',
+            'adp_rollout_graph_cost', 'adp_reference_graph_cost',
+            'adp_improved_reference_graph_cost',
+            'adp_incumbent_improvement',
+            'adp_variant', 'adp_critic_enabled', 'adp_rollout_enabled',
+            'adp_safeguard_enabled', 'adp_local_improvement_enabled',
         ]
         with path.open('w', newline='') as handle:
             writer = csv.DictWriter(handle, fieldnames=fieldnames)
@@ -1098,6 +1410,8 @@ class OfflinePlanningExperiment:
             'selected_inspection_action', 'sooa_visible_target_count',
             'sooa_delta_v', 'sooa_min_clearance', 'sooa_peak_input',
             'sooa_passive_margin', 'sooa_passive_safe',
+            'adp_estimated_cost_to_go', 'adp_safe_action_count',
+            'adp_shield_rejections',
         ]
         with path.open('w', newline='') as handle:
             writer = csv.DictWriter(handle, fieldnames=fieldnames)
@@ -1143,6 +1457,18 @@ class OfflinePlanningExperiment:
                         'sooa_passive_safe': (
                             passive_margin >= 0.0
                             if passive_margin is not None else ''
+                        ),
+                        'adp_estimated_cost_to_go': (
+                            step.decision_value
+                            if result.method in GRAPH_ADP_VARIANTS else ''
+                        ),
+                        'adp_safe_action_count': (
+                            step.safe_action_count
+                            if result.method in GRAPH_ADP_VARIANTS else ''
+                        ),
+                        'adp_shield_rejections': (
+                            step.shield_rejections
+                            if result.method in GRAPH_ADP_VARIANTS else ''
                         ),
                     })
 
@@ -1321,79 +1647,6 @@ class OfflinePlanningExperiment:
             )
         path.write_text('\n'.join(lines) + '\n')
 
-    @staticmethod
-    def _plot_coverage(path: Path, results: tuple[MethodResult, ...]) -> None:
-        figure, axis = plt.subplots(figsize=(7.0, 4.0))
-        for result in results:
-            final_raw = float(result.summary['final_coverage_ratio'])
-            final_inspectable = float(result.summary['final_inspectable_coverage_ratio'])
-            scale_factor = final_inspectable / max(final_raw, 1.0e-12)
-            is_proposed = result.method == 'set_cover_cw_tour'
-            axis.step(
-                [row[0] for row in result.coverage_timeline],
-                [min(1.0, row[1] * scale_factor) for row in result.coverage_timeline],
-                where='post',
-                linewidth=2.5 if is_proposed else 1.65,
-                color=METHOD_COLORS.get(result.method, '#4D4D4D'),
-                alpha=1.0 if is_proposed else 0.76,
-                label=_method_label(result.method),
-            )
-        axis.axhline(0.98, color='#272727', linestyle='--', linewidth=0.9, alpha=0.55)
-        axis.text(0.99, 0.955, '98% stop target', transform=axis.transAxes,
-                  ha='right', va='center', fontsize=8, color='#272727')
-        axis.set_xlabel('Mission time (s)')
-        axis.set_ylabel('Inspectable area coverage')
-        axis.set_ylim(0.0, 1.0)
-        axis.grid(True, axis='y', color='#E1E1E1', linewidth=0.6)
-        axis.spines['top'].set_visible(False)
-        axis.spines['right'].set_visible(False)
-        axis.legend(frameon=False, ncol=2, fontsize=8, loc='lower right')
-        figure.tight_layout()
-        _save_figure(figure, path)
-        plt.close(figure)
-
-    @staticmethod
-    def _plot_delta_v(path: Path, results: tuple[MethodResult, ...]) -> None:
-        _plot_bar(
-            path,
-            results,
-            key='total_delta_v',
-            ylabel=r'Total $\Delta v$ (m s$^{-1}$)',
-            title='',
-        )
-
-    @staticmethod
-    def _plot_energy_efficiency(path: Path, results: tuple[MethodResult, ...]) -> None:
-        _plot_bar(
-            path,
-            results,
-            key='delta_v_per_raw_coverage',
-            ylabel=r'$\Delta v$ per covered area ratio (m s$^{-1}$)',
-            title='',
-        )
-
-    @staticmethod
-    def _plot_safety(path: Path, results: tuple[MethodResult, ...]) -> None:
-        _plot_bar(
-            path,
-            results,
-            key='min_clearance',
-            ylabel='Minimum clearance (m)',
-            title='',
-            flag_infeasible=True,
-        )
-
-    @staticmethod
-    def _plot_peak_input(path: Path, results: tuple[MethodResult, ...]) -> None:
-        _plot_bar(
-            path,
-            results,
-            key='peak_requested_input',
-            ylabel='Peak requested input (m s$^{-2}$)',
-            title='',
-        )
-
-
 def _planner_config(config: ExperimentConfig) -> OfflinePlannerConfig:
     return OfflinePlannerConfig(
         geometry_backend=config.geometry_backend,
@@ -1476,20 +1729,6 @@ def _reconstruct_candidate_sequence(
     return tuple(sequence)
 
 
-def _method_label(method: str) -> str:
-    labels = {
-        'set_cover_cw_tour': 'Proposed dynamics-aware tour',
-        'certified_graph_search': 'Certified graph optimum',
-        'proposed_safe_cw_nbv': 'CW-NBV baseline',
-        'coverage_greedy': 'Coverage greedy',
-        'safe_coverage_greedy': 'Safe coverage greedy',
-        'distance_greedy': 'Nearest NBV',
-        'fuel_greedy': 'Fuel greedy',
-        'random_safe': 'Random safe',
-    }
-    return labels.get(method, method)
-
-
 def _camera_attitude(
     position: StateVector | tuple[float, float, float],
     aim_position: tuple[float, float, float] | None = None,
@@ -1563,95 +1802,6 @@ def _rotation_matrix_to_quaternion(
         qz = 0.25 * scale_value
     norm_value = math.sqrt(qx * qx + qy * qy + qz * qz + qw * qw)
     return (qx / norm_value, qy / norm_value, qz / norm_value, qw / norm_value)
-
-
-def _plot_bar(
-    path: Path,
-    results: tuple[MethodResult, ...],
-    key: str,
-    ylabel: str,
-    title: str,
-    flag_infeasible: bool = False,
-) -> None:
-    figure, axis = plt.subplots(figsize=(7.0, 3.15))
-    labels = [METHOD_LABELS_SHORT.get(result.method, _method_label(result.method)) for result in results]
-    values = [float(result.summary[key]) for result in results]
-    y_positions = list(range(len(results)))
-    colors = [METHOD_COLORS.get(result.method, '#767676') for result in results]
-    edge_colors = [
-        '#0F4D92' if result.method == 'set_cover_cw_tour' else '#4D4D4D'
-        for result in results
-    ]
-    line_widths = [1.3 if result.method == 'set_cover_cw_tour' else 0.5 for result in results]
-    axis.barh(
-        y_positions,
-        values,
-        color=colors,
-        edgecolor=edge_colors,
-        linewidth=line_widths,
-        alpha=0.96,
-        height=0.64,
-    )
-    axis.invert_yaxis()
-    axis.set_yticks(y_positions)
-    axis.set_yticklabels(labels)
-    axis.set_xlabel(ylabel)
-    if title:
-        axis.set_title(title)
-    axis.grid(True, axis='x', color='#E1E1E1', linewidth=0.6)
-    axis.set_axisbelow(True)
-    x_min = min(values) if values else 0.0
-    x_max = max(values) if values else 1.0
-    span = max(x_max - min(0.0, x_min), 1.0e-9)
-    left_limit = min(0.0, x_min - 0.14 * span)
-    right_limit = x_max + 0.18 * span
-    axis.set_xlim(left_limit, right_limit)
-    if x_min < 0.0:
-        axis.axvline(0.0, color='#272727', linewidth=0.9, alpha=0.65)
-    for y_position, value, result in zip(y_positions, values, results):
-        text = f'{value:.2f}' if value >= 1.0 else f'{value:.3f}'
-        if value < 0.0:
-            x_text = value - 0.018 * span
-            ha = 'right'
-        else:
-            x_text = value + 0.018 * span
-            ha = 'left'
-        axis.text(
-            x_text,
-            y_position,
-            text,
-            va='center',
-            ha=ha,
-            fontsize=8,
-            color='#272727',
-            fontweight='bold' if result.method == 'set_cover_cw_tour' else 'normal',
-        )
-    if flag_infeasible and any(
-        result.method == 'coverage_greedy' and not result.summary['feasible']
-        for result in results
-    ):
-        for y_position, result in zip(y_positions, results):
-            if result.method == 'coverage_greedy':
-                axis.text(
-                    right_limit - 0.01 * span,
-                    y_position,
-                    'keep-out violation',
-                    va='center',
-                    ha='right',
-                    fontsize=7,
-                    color='#B64342',
-                )
-    axis.spines['top'].set_visible(False)
-    axis.spines['right'].set_visible(False)
-    figure.tight_layout()
-    _save_figure(figure, path)
-    plt.close(figure)
-
-
-def _save_figure(figure, path: Path) -> None:
-    figure.savefig(path, dpi=360, bbox_inches='tight')
-    figure.savefig(path.with_suffix('.pdf'), bbox_inches='tight')
-    figure.savefig(path.with_suffix('.svg'), bbox_inches='tight')
 
 
 def _write_json(path: Path, payload: dict[str, object]) -> None:

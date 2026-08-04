@@ -30,9 +30,9 @@ The workspace has progressed beyond the initial skeleton through the baseline re
 - Paper experiment launch workflow
 - Deterministic Monte Carlo comparison utility
 - Optional Basilisk backend adapter and availability check
-- Placeholder scaffold for future advanced safe planners
+- Safety-shielded graph approximate policy-iteration planner and exact reduced-graph oracle
 
-Advanced MPC, CBF-QP, HJI, ADP, or other research solvers are not implemented yet. The active baseline remains the ROS-native HCW workflow.
+The advanced graph planner is implemented for offline paper experiments. It uses the same ROS-native HCW transfer model and does not replace the online dynamics, controller, or safety-filter interfaces. MPC, CBF-QP, and HJI solvers remain future work.
 
 ## Repository Layout
 
@@ -60,14 +60,15 @@ OrbInspectLatex/           Paper draft material
 From the workspace root:
 
 ```bash
-cd /home/rugang/robotics/projects/OrbInspect
+cd ~/orbinspect_ros2
 source /opt/ros/jazzy/setup.bash
 colcon build --symlink-install
 source install/setup.bash
 ros2 pkg list | grep orbinspect
 ```
 
-If your local workspace is symlinked or moved, use the new workspace path in place of `/home/rugang/robotics/projects/OrbInspect`.
+If your local workspace uses another location, enter that workspace root before
+running the same commands.
 
 ## Tests
 
@@ -185,6 +186,16 @@ data/results/<timestamp-or-run-id>/
   summary.md
 ```
 
+Run the independently archived graph-policy study:
+
+```bash
+ros2 run orbinspect_guidance offline_adp_study \
+  --config src/orbinspect_guidance/config/offline_planning_experiment.yaml
+```
+
+The experiment writes simulation data only. Generate paper figures afterward
+with `offline_planning_plots`; each figure has a separate plotting function.
+
 Key CSV files produced by the logging and experiment workflow include:
 
 ```text
@@ -219,7 +230,17 @@ ros2 run orbinspect_guidance offline_coverage_planner \
   --config src/orbinspect_guidance/config/offline_coverage_planner.yaml
 ```
 
-The planner loads YAML configuration, generates viewpoints and selected inspection poses, and writes raw CSV, figures, and summary files to the configured result directory.
+The planner loads YAML configuration, runs the simulation, and writes raw CSV
+and summary files to the configured result directory. Plotting is a separate,
+repeatable step that only reads the saved result files:
+
+```bash
+ros2 run orbinspect_guidance offline_planning_plots \
+  --result-dir data/results/<run-id>
+```
+
+Use `--figure <name>` to regenerate one figure. Each supported figure has its
+own plotting function in `offline_planning_plots.py`.
 
 ## Core ROS Nodes
 
@@ -229,7 +250,7 @@ Important executable entry points include:
 - `orbinspect_control`: `controller_node`, `reference_publisher_node`
 - `orbinspect_safety`: `safety_monitor_node`, `safety_filter_node`
 - `orbinspect_perception`: `coverage_node`, `target_marker_node`
-- `orbinspect_guidance`: `inspection_planner_node`, `offline_trajectory_node`, `offline_coverage_planner`, `advanced_safe_planner_node`
+- `orbinspect_guidance`: `inspection_planner_node`, `offline_trajectory_node`, `offline_coverage_planner`, `offline_planning_experiment`, `offline_planning_plots`, `advanced_safe_planner_node`
 - `orbinspect_mission`: `mission_manager_node`
 - `orbinspect_eval`: `logger_node`, `monte_carlo_runner`
 - `orbinspect_gazebo`: `chaser_pose_follower`, `follow_camera_pose_node`, `image_video_recorder`
