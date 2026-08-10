@@ -21,6 +21,40 @@
 \providecommand{\BIBdecl}{\relax}
 \BIBdecl
 
+\bibitem{faghihi2022kinodynamic}
+S.~Faghihi, S.~Tavana, and A.~H.~J. de~Ruiter, ``Kinodynamic on-orbit
+  inspection path planning for full-coverage inspection in close proximity of
+  space structures,'' \emph{Acta Astronautica}, vol. 198, pp. 354--365, 2022.
+
+\bibitem{faghihi2023multiple}
+------, ``Multiple spacecraft coordination and motion planning for
+  full-coverage inspection of large complex space structures,'' \emph{Acta
+  Astronautica}, vol. 202, pp. 119--129, 2023.
+
+\bibitem{apodaca2025trajectory}
+B.~Apodaca, T.~Helgeson, E.~Atkins, and L.~Stirling, ``In-orbit space structure
+  inspection trajectory generation,'' \emph{IEEE Robotics and Automation
+  Letters}, vol.~10, no.~9, pp. 8810--8817, 2025.
+
+\bibitem{scott2003view}
+W.~R. Scott, G.~Roth, and J.-F. Rivest, ``View planning for automated
+  three-dimensional object reconstruction and inspection,'' \emph{ACM Computing
+  Surveys}, vol.~35, no.~1, pp. 64--96, 2003.
+
+\bibitem{hou2024relative}
+Z.~Hou, B.~Jiao, and Z.~Dang, ``Relative orbit design of cubesats for on-orbit
+  visual inspection of china space station,'' \emph{Advances in Space
+  Research}, vol.~73, no.~1, pp. 170--186, 2024.
+
+\bibitem{deka2023astrodynamics}
+T.~Deka and J.~W. McMahon, ``Astrodynamics-informed kinodynamic sampling-based
+  motion planning for relative spacecraft motion,'' \emph{Journal of Guidance,
+  Control, and Dynamics}, vol.~46, no.~12, pp. 2330--2345, 2023.
+
+\bibitem{bertsekas2020rollout}
+D.~P. Bertsekas, \emph{Rollout, Policy Iteration, and Distributed Reinforcement
+  Learning}.\hskip 1em plus 0.5em minus 0.4em\relax Athena Scientific, 2020.
+
 \bibitem{clohessy1960terminal}
 W.~H. Clohessy and R.~S. Wiltshire, ``Terminal guidance system for satellite
   rendezvous,'' \emph{Journal of the Aerospace Sciences}, vol.~27, no.~9, pp.
@@ -31,34 +65,20 @@ J.~R. Wertz, D.~F. Everett, and J.~J. Puschell, \emph{Space Mission
   Engineering: The New SMAD}.\hskip 1em plus 0.5em minus 0.4em\relax Microcosm
   Press, 2011.
 
-\bibitem{hou2024relative}
-Z.~Hou, B.~Jiao, and Z.~Dang, ``Relative orbit design of cubesats for on-orbit
-  visual inspection of china space station,'' \emph{Advances in Space
-  Research}, vol.~73, pp. 170--186, 2024.
-
 \bibitem{zhou2026formation}
 H.~Zhou, B.~Jiao, Z.~Hou, and Z.~Dang, ``Satellite formation control for
   cooperative observation around the rotating china space station,''
   \emph{Space: Science \& Technology}, vol.~6, p. 0348, 2026.
 
-\bibitem{scott2003view}
-W.~R. Scott, G.~Roth, and J.-F. Rivest, ``View planning for automated
-  three-dimensional object reconstruction and inspection,'' \emph{ACM Computing
-  Surveys}, vol.~35, no.~1, pp. 64--96, 2003.
-
 \bibitem{lavalle1998rapidly}
 S.~M. LaValle, ``Rapidly-exploring random trees: A new tool for path
-  planning,'' \emph{Technical Report, Iowa State University}, 1998, technical
-  report.
+  planning,'' Department of Computer Science, Iowa State University, Tech. Rep.
+  TR 98-11, October 1998.
 
 \bibitem{karaman2011sampling}
 S.~Karaman and E.~Frazzoli, ``Sampling-based algorithms for optimal motion
   planning,'' \emph{The International Journal of Robotics Research}, vol.~30,
   no.~7, pp. 846--894, 2011.
-
-\bibitem{bertsekas2020rollout}
-D.~P. Bertsekas, \emph{Rollout, Policy Iteration, and Distributed Reinforcement
-  Learning}.\hskip 1em plus 0.5em minus 0.4em\relax Athena Scientific, 2020.
 
 \bibitem{bertsekas1996neuro}
 D.~P. Bertsekas and J.~N. Tsitsiklis, \emph{Neuro-Dynamic Programming}.\hskip
@@ -76,11 +96,6 @@ M.~Alshiekh, R.~Bloem, R.~Ehlers, B.~K{\"o}nighofer, S.~Niekum, and U.~Topcu,
   AAAI Conference on Artificial Intelligence}, vol.~32, no.~1, 2018, pp.
   2669--2678.
 
-\bibitem{apodaca2025trajectory}
-B.~Apodaca, T.~Helgeson, E.~Atkins, and L.~Stirling, ``In-orbit space structure
-  inspection trajectory generation,'' \emph{IEEE Robotics and Automation
-  Letters}, 2025.
-
 \bibitem{zhou2026tomographic}
 J.~Zhou, G.~Kang, J.~Wu, X.~Tao, C.~Xu, Y.~Qiu, and J.~Wu, ``Tomographic
   inspection path planning for spacecraft with complex structures,'' \emph{Acta
@@ -93,7 +108,8 @@ T.~E. Ogri, M.~Qureshi, Z.~I. Bell, W.~A. Makumi, K.~Volle, and
 
 \bibitem{nasa_iss_gltf_model}
 {National Aeronautics and Space Administration}, ``{International Space Station
-  glTF Model},'' \url{https://solarsystem.nasa.gov/gltf_embed/2378/}, accessed:
-  2026-06-25.
+  glTF Model},''
+  \url{https://science.nasa.gov/resource/international-space-station-3d-model/},
+  2019, updated Nov. 2, 2024; accessed Aug. 10, 2026.
 
 \end{thebibliography}

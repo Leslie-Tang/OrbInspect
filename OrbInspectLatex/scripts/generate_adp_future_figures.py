@@ -40,15 +40,23 @@ from orbinspect_guidance.offline_planning_experiment import OfflinePlanningExper
 from orbinspect_guidance.offline_planning_experiment import _load_yaml_config
 
 
-BLUE = '#0077BB'
-CYAN = '#33BBEE'
-TEAL = '#009988'
-ORANGE = '#EE7733'
-RED = '#CC3311'
-MAGENTA = '#EE3377'
-GREY = '#777777'
-LIGHT_GREY = '#D7DCE2'
-BLACK = '#111111'
+# Manuscript-wide palette supplied by the authors.  Color is never the sole
+# categorical encoding: plots also use marker, hatch, or line-style changes.
+RED = '#750014'
+ROSE = '#E3CCD0'
+MINT = '#CCECDB'
+PURPLE = '#7F3F98'
+YELLOW = '#FFDE17'
+BLUE = '#587E92'
+GREEN = '#37A537'
+ORANGE = '#E46240'
+GREY = '#6B7280'
+LIGHT_GREY = '#D9DEE3'
+BLACK = '#1E293B'
+TEST_COLOR = RED
+OOD_COLOR = PURPLE
+PROPOSED_COLOR = RED
+LOCAL_COLOR = BLUE
 PROPOSED = 'adaptive_rollout_adp'
 LOCAL = 'local_search'
 DISPLAY = {
@@ -65,12 +73,12 @@ def _style() -> None:
     mpl.rcParams.update({
         'font.family': 'sans-serif',
         'font.sans-serif': ['Arial', 'Helvetica', 'DejaVu Sans'],
-        'font.size': 8.3,
-        'axes.titlesize': 9.0,
-        'axes.labelsize': 8.7,
-        'xtick.labelsize': 7.8,
-        'ytick.labelsize': 7.8,
-        'legend.fontsize': 7.7,
+        'font.size': 8.8,
+        'axes.titlesize': 9.5,
+        'axes.labelsize': 9.1,
+        'xtick.labelsize': 8.3,
+        'ytick.labelsize': 8.3,
+        'legend.fontsize': 8.2,
         'figure.dpi': 160,
         'savefig.dpi': 600,
         'savefig.bbox': 'tight',
@@ -97,20 +105,6 @@ def _sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
-def _panel(ax, label: str) -> None:
-    ax.text(
-        0.015,
-        0.985,
-        label,
-        transform=ax.transAxes,
-        fontsize=9.2,
-        fontweight='bold',
-        va='top',
-        ha='left',
-        bbox={'facecolor': 'white', 'edgecolor': 'none', 'pad': 0.8, 'alpha': 0.9},
-    )
-
-
 def _save(fig, name: str, result_dir: Path, paper_dir: Path) -> list[Path]:
     result_figure_dir = result_dir / 'figures'
     paper_figure_dir = paper_dir / 'figures' / 'adp_future'
@@ -128,20 +122,21 @@ def _save(fig, name: str, result_dir: Path, paper_dir: Path) -> list[Path]:
 
 def plot_rollout_architecture(result_dir: Path, paper_dir: Path) -> list[Path]:
     """Render the selected ADP mechanism as a vector workflow."""
-    fig, ax = plt.subplots(figsize=(6.9, 2.65))
+    fig, ax = plt.subplots(figsize=(6.9, 2.85))
     ax.set_xlim(0, 1)
     ax.set_ylim(0, 1)
     ax.axis('off')
     boxes = [
         (0.02, 0.25, 0.17, 0.50, 'Markov state',
-         '$s_k=(j_k,m_k,b_k,h_k)$\ncovered/selected masks\nand horizon budget', BLUE),
+         '$s_k=(j_k,m_k,$\n$b_k,h_k)$\nmasks + budget', BLUE),
         (0.23, 0.25, 0.18, 0.50, 'Safety shield',
-         'HCW and input limits\nterminal conditions\nmesh/swept-edge audits', TEAL),
+         'HCW/input bounds\nterminal condition\nmesh/sweep audits', GREEN),
         (0.45, 0.14, 0.28, 0.72, 'Depth-3 rollout ADP',
-         '$\\widehat Q_d(s,a)=\\ell_{ja}+\\widehat V_{d-1}(s\prime)$\n'
-         '$\\widehat V_0$: adaptive safe-greedy\ncompletion cost', ORANGE),
-        (0.78, 0.25, 0.19, 0.50, 'Policy improvement',
-         '$a_k=\\arg\\min_a \\widehat Q_3(s_k,a)$\nexecute audited SOOA\nupdate state and repeat', MAGENTA),
+         '$\\widehat Q_d(s,a)$\n'
+         '$=\\ell_{ja}+\\widehat V_{d-1}(s\prime)$\n'
+         '$\\widehat V_0$: adaptive safe-greedy\nfeasible completion', RED),
+        (0.78, 0.25, 0.19, 0.50, 'Policy update',
+         '$a_k=\\arg\\min_a$\n$\\widehat Q_3(s_k,a)$\nexecute first SOOA\nupdate + repeat', PURPLE),
     ]
     for x, y, width, height, title, body, color in boxes:
         patch = FancyBboxPatch(
@@ -152,9 +147,9 @@ def plot_rollout_architecture(result_dir: Path, paper_dir: Path) -> list[Path]:
         ax.add_patch(patch)
         ax.text(x + width / 2, y + height * 0.72, title,
                 ha='center', va='center', fontweight='bold', color=color,
-                fontsize=8.5)
+                fontsize=9.0)
         ax.text(x + width / 2, y + height * 0.39, body,
-                ha='center', va='center', linespacing=1.35, fontsize=7.15)
+                ha='center', va='center', linespacing=1.28, fontsize=8.2)
     for start, end in ((0.19, 0.23), (0.41, 0.45), (0.73, 0.78)):
         ax.add_patch(FancyArrowPatch(
             (start, 0.5), (end, 0.5), arrowstyle='-|>',
@@ -166,10 +161,10 @@ def plot_rollout_architecture(result_dir: Path, paper_dir: Path) -> list[Path]:
         mutation_scale=10, linewidth=0.9, color=GREY,
     ))
     ax.text(0.51, 0.015, 'next decision state after the audited SOOA',
-            ha='center', va='bottom', color=GREY, fontsize=7.2,
+            ha='center', va='bottom', color=GREY, fontsize=8.2,
             bbox={'facecolor': 'white', 'edgecolor': 'none', 'pad': 0.8})
     ax.text(0.59, 0.93, 'unsafe or non-viable branches are never expanded',
-            ha='center', va='center', color=RED, fontstyle='italic', fontsize=7.4)
+            ha='center', va='center', color=ORANGE, fontstyle='italic', fontsize=8.2)
     return _save(fig, 'adp_rollout_architecture', result_dir, paper_dir)
 
 
@@ -182,7 +177,7 @@ def plot_development_selection(
     result_dir: Path,
     paper_dir: Path,
 ) -> list[Path]:
-    """Show the validation-only depth selection without test outcomes."""
+    """Save each validation-only depth-selection panel independently."""
     rows_by_depth = {depth: _dev_rows(path) for depth, path in dev_dirs.items()}
     scenario_ids = sorted({
         row['scenario_id'] for row in rows_by_depth[1]
@@ -206,65 +201,70 @@ def plot_development_selection(
         ]
         for depth, rows in rows_by_depth.items()
     }
-    fig, axes = plt.subplots(1, 3, figsize=(6.9, 2.35))
+    paths = []
     x = np.arange(4)
-    labels = ['Local', 'Depth 1', 'Depth 2', 'Depth 3']
+    labels = ['Local', '$d=1$', '$d=2$', '$d=3$']
+
+    fig, ax = plt.subplots(figsize=(2.18, 2.45))
     for scenario_id in scenario_ids:
         values = [local[scenario_id]] + [
             cost_by_depth[depth][scenario_id] for depth in (1, 2, 3)
         ]
-        axes[0].plot(x, values, color=LIGHT_GREY, linewidth=0.65, zorder=1)
-        axes[0].scatter(x, values, color=GREY, s=9, alpha=0.72, zorder=2)
+        ax.plot(x, values, color=LIGHT_GREY, linewidth=0.65, zorder=1)
+        ax.scatter(x, values, color=GREY, s=9, alpha=0.72, zorder=2)
     means = [np.mean(list(local.values()))] + [
         np.mean(list(cost_by_depth[depth].values())) for depth in (1, 2, 3)
     ]
-    axes[0].plot(x, means, color=ORANGE, marker='D', markersize=4.5,
-                 linewidth=1.6, label='Mean')
-    axes[0].set_xticks(x, labels, rotation=25, ha='right')
-    axes[0].set_ylabel('Graph cost, $J$ (cost units)')
-    axes[0].legend(frameon=False, loc='upper right')
-    axes[0].grid(axis='y', color='#ECECEC', linewidth=0.6)
-    _panel(axes[0], '(a)')
+    ax.plot(x, means, color=RED, marker='D', markersize=4.8,
+            linewidth=1.6, label='Mean')
+    ax.set_xticks(x, labels)
+    ax.set_ylabel('Graph cost, $J$ (cost units)')
+    ax.legend(frameon=False, loc='upper right')
+    ax.grid(axis='y', color='#ECECEC', linewidth=0.6)
+    fig.tight_layout(pad=0.35)
+    paths.extend(_save(fig, 'adp_development_selection_a', result_dir, paper_dir))
 
-    positions = []
+    fig, ax = plt.subplots(figsize=(2.18, 2.45))
     for depth in (1, 2, 3):
         differences = np.array([
             cost_by_depth[depth][scenario_id] - local[scenario_id]
             for scenario_id in scenario_ids
         ])
-        positions.append(differences)
         jitter = np.linspace(-0.08, 0.08, len(differences))
-        axes[1].scatter(
+        ax.scatter(
             np.full(len(differences), depth) + jitter,
             differences,
-            color=[BLUE, TEAL, ORANGE][depth - 1],
+            color=[BLUE, PURPLE, RED][depth - 1],
             s=14,
             alpha=0.78,
             edgecolors='white',
             linewidth=0.25,
         )
-        axes[1].scatter(depth, differences.mean(), marker='D', s=35,
-                        color=BLACK, zorder=4)
-    axes[1].axhline(0, color=GREY, linestyle='--', linewidth=0.8)
-    axes[1].set_xticks((1, 2, 3), ('Depth 1', 'Depth 2', 'Depth 3'),
-                       rotation=25, ha='right')
-    axes[1].set_ylabel('$J_{\mathrm{ADP}}-J_{\mathrm{local}}$ (cost units)')
-    axes[1].grid(axis='y', color='#ECECEC', linewidth=0.6)
-    _panel(axes[1], '(b)')
+        ax.scatter(depth, differences.mean(), marker='D', s=35,
+                   color=BLACK, zorder=4)
+    ax.axhline(0, color=GREY, linestyle='--', linewidth=0.8)
+    ax.set_xticks((1, 2, 3), ('$d=1$', '$d=2$', '$d=3$'))
+    ax.set_ylabel('$J_{\mathrm{ADP}}-J_{\mathrm{local}}$\n(cost units)')
+    ax.grid(axis='y', color='#ECECEC', linewidth=0.6)
+    fig.tight_layout(pad=0.35)
+    paths.extend(_save(fig, 'adp_development_selection_b', result_dir, paper_dir))
 
+    fig, ax = plt.subplots(figsize=(2.18, 2.45))
     medians = [np.median(time_by_depth[depth]) for depth in (1, 2, 3)]
-    axes[2].bar((1, 2, 3), medians, color=(BLUE, TEAL, ORANGE),
-                edgecolor=BLACK, linewidth=0.45)
+    bars = ax.bar((1, 2, 3), medians, color=(BLUE, PURPLE, RED),
+                  edgecolor=BLACK, linewidth=0.55)
+    for bar, hatch in zip(bars, ('', '//', 'xx')):
+        bar.set_hatch(hatch)
     for depth, value in zip((1, 2, 3), medians):
-        axes[2].text(depth, value * 1.16, f'{value:.3f}', ha='center', va='bottom')
-    axes[2].set_yscale('log')
-    axes[2].set_xticks((1, 2, 3), ('Depth 1', 'Depth 2', 'Depth 3'),
-                       rotation=25, ha='right')
-    axes[2].set_ylabel('Median online time (s, log scale)')
-    axes[2].grid(axis='y', which='both', color='#ECECEC', linewidth=0.6)
-    _panel(axes[2], '(c)')
-    fig.tight_layout(w_pad=1.2)
-    return _save(fig, 'adp_development_selection', result_dir, paper_dir)
+        ax.text(depth, value * 1.16, f'{value:.3f}', ha='center', va='bottom')
+    ax.set_yscale('log')
+    ax.set_ylim(min(medians) * 0.72, max(medians) * 1.75)
+    ax.set_xticks((1, 2, 3), ('$d=1$', '$d=2$', '$d=3$'))
+    ax.set_ylabel('Median online time\n(s, log scale)')
+    ax.grid(axis='y', which='both', color='#ECECEC', linewidth=0.6)
+    fig.tight_layout(pad=0.35)
+    paths.extend(_save(fig, 'adp_development_selection_c', result_dir, paper_dir))
+    return paths
 
 
 def _method_rows(rows, split: str, method: str) -> dict[str, dict[str, str]]:
@@ -280,8 +280,8 @@ def plot_heldout_performance(
     result_dir: Path,
     paper_dir: Path,
 ) -> list[Path]:
-    """Retain every held-out paired fuel and graph-cost outcome."""
-    fig, axes = plt.subplots(2, 2, figsize=(6.9, 4.8))
+    """Save the four held-out comparison panels as separate figure files."""
+    paths = []
     for row_index, split in enumerate(('test', 'ood')):
         proposed = _method_rows(rows, split, PROPOSED)
         local = _method_rows(rows, split, LOCAL)
@@ -290,44 +290,58 @@ def plot_heldout_performance(
         y = np.array([float(proposed[key]['total_delta_v']) for key in scenario_ids])
         lo = min(x.min(), y.min()) - 0.3
         hi = max(x.max(), y.max()) + 0.3
-        axes[row_index, 0].plot((lo, hi), (lo, hi), '--', color=GREY, linewidth=0.8)
-        axes[row_index, 0].scatter(x, y, color=BLUE if split == 'test' else TEAL,
-                                   s=18, alpha=0.82, edgecolors=BLACK, linewidth=0.3)
-        axes[row_index, 0].set_xlim(lo, hi)
-        axes[row_index, 0].set_ylim(lo, hi)
-        axes[row_index, 0].set_aspect('equal', adjustable='box')
-        axes[row_index, 0].set_xlabel('Local-search $\Delta v$ (m/s)')
-        axes[row_index, 0].set_ylabel('Rollout-ADP $\Delta v$ (m/s)')
-        axes[row_index, 0].grid(color='#ECECEC', linewidth=0.6)
-        _panel(axes[row_index, 0], '(a)' if row_index == 0 else '(c)')
+        panel_left = 'a' if row_index == 0 else 'c'
+        fig, ax = plt.subplots(figsize=(3.32, 2.50))
+        ax.plot((lo, hi), (lo, hi), '--', color=GREY, linewidth=0.8)
+        ax.scatter(
+            x, y,
+            color=TEST_COLOR if split == 'test' else OOD_COLOR,
+            marker='o' if split == 'test' else 's',
+            s=20, alpha=0.84, edgecolors=BLACK, linewidth=0.35,
+        )
+        ax.set_xlim(lo, hi)
+        ax.set_ylim(lo, hi)
+        ax.set_aspect('equal', adjustable='box')
+        ax.set_xlabel('Local-search $\Delta v$ (m/s)')
+        ax.set_ylabel('Rollout-ADP $\Delta v$ (m/s)')
+        ax.grid(color='#ECECEC', linewidth=0.6)
+        fig.tight_layout(pad=0.35)
+        paths.extend(_save(
+            fig, f'adp_heldout_performance_{panel_left}', result_dir, paper_dir,
+        ))
 
         differences = np.array([
             float(proposed[key]['graph_cost']) - float(local[key]['graph_cost'])
             for key in scenario_ids
         ])
         ordered = np.sort(differences)
-        color = BLUE if split == 'test' else TEAL
-        axes[row_index, 1].scatter(np.arange(1, len(ordered) + 1), ordered,
-                                   color=color, s=16, edgecolors=BLACK, linewidth=0.25)
-        axes[row_index, 1].axhline(0, color=GREY, linestyle='--', linewidth=0.8)
+        color = TEST_COLOR if split == 'test' else OOD_COLOR
+        panel_right = 'b' if row_index == 0 else 'd'
+        fig, ax = plt.subplots(figsize=(3.32, 2.50))
+        ax.scatter(np.arange(1, len(ordered) + 1), ordered,
+                   color=color, s=16, edgecolors=BLACK, linewidth=0.25)
+        ax.axhline(0, color=GREY, linestyle='--', linewidth=0.8)
         comparison = validation['comparisons'][split][LOCAL]
         mean_difference = comparison['mean_paired_difference']
         lower, upper = comparison['bootstrap_95_ci']
-        axes[row_index, 1].axhspan(lower, upper, color=ORANGE, alpha=0.16)
-        axes[row_index, 1].axhline(mean_difference, color=ORANGE, linewidth=1.3)
-        axes[row_index, 1].text(
+        ax.axhspan(lower, upper, color=ROSE, alpha=0.55)
+        ax.axhline(mean_difference, color=RED, linewidth=1.4)
+        ax.text(
             0.98, 0.05,
             f'mean {mean_difference:.2f}\n95% CI [{lower:.2f}, {upper:.2f}]',
-            transform=axes[row_index, 1].transAxes,
+            transform=ax.transAxes,
             ha='right', va='bottom', color=BLACK,
             bbox={'facecolor': 'white', 'edgecolor': 'none', 'alpha': 0.82},
         )
-        axes[row_index, 1].set_xlabel(f'{split.upper()} scenarios, ordered')
-        axes[row_index, 1].set_ylabel('$J_{\mathrm{ADP}}-J_{\mathrm{local}}$ (cost units)')
-        axes[row_index, 1].grid(axis='y', color='#ECECEC', linewidth=0.6)
-        _panel(axes[row_index, 1], '(b)' if row_index == 0 else '(d)')
-    fig.tight_layout(h_pad=1.5, w_pad=1.5)
-    return _save(fig, 'adp_heldout_performance', result_dir, paper_dir)
+        split_label = 'Test' if split == 'test' else 'Shifted'
+        ax.set_xlabel(f'{split_label} scenarios, ordered')
+        ax.set_ylabel('$J_{\mathrm{ADP}}-J_{\mathrm{local}}$ (cost units)')
+        ax.grid(axis='y', color='#ECECEC', linewidth=0.6)
+        fig.tight_layout(pad=0.35)
+        paths.extend(_save(
+            fig, f'adp_heldout_performance_{panel_right}', result_dir, paper_dir,
+        ))
+    return paths
 
 
 def _bootstrap_ci(values: list[float], seed: int) -> tuple[float, float]:
@@ -344,10 +358,10 @@ def plot_ablation_safety(
     result_dir: Path,
     paper_dir: Path,
 ) -> list[Path]:
-    """Show component attribution, success, and common shield margins."""
+    """Save component-attribution and safety panels independently."""
     methods = ('incumbent', 'rollout', LOCAL, PROPOSED)
-    fig, axes = plt.subplots(2, 2, figsize=(6.9, 4.55))
-    colors = (GREY, CYAN, ORANGE, BLUE)
+    paths = []
+    colors = (ROSE, PURPLE, LOCAL_COLOR, PROPOSED_COLOR)
     test_values = [
         [float(row['total_delta_v']) for row in rows
          if row['split'] == 'test' and row['method'] == method]
@@ -359,21 +373,28 @@ def plot_ablation_safety(
         [value - lower for value, (lower, _upper) in zip(means, intervals)],
         [upper - value for value, (_lower, upper) in zip(means, intervals)],
     ])
-    axes[0, 0].bar(np.arange(4), means, yerr=yerr, capsize=3,
-                   color=colors, edgecolor=BLACK, linewidth=0.45)
+    fig, ax = plt.subplots(figsize=(3.32, 2.45))
+    bars = ax.bar(np.arange(4), means, yerr=yerr, capsize=3,
+                  color=colors, edgecolor=BLACK, linewidth=0.55)
+    for bar, hatch in zip(bars, ('..', '//', '\\\\', 'xx')):
+        bar.set_hatch(hatch)
     for index, values in enumerate(test_values):
         jitter = np.linspace(-0.12, 0.12, len(values))
-        axes[0, 0].scatter(index + jitter, values, s=7, color=BLACK, alpha=0.28)
-    axes[0, 0].set_xticks(np.arange(4), ('Incumbent', 'Fixed\nrollout', 'Local', 'ADP'),
-                          rotation=20, ha='right')
-    axes[0, 0].set_ylabel('Test mission $\Delta v$ (m/s)')
-    axes[0, 0].grid(axis='y', color='#ECECEC', linewidth=0.6)
-    _panel(axes[0, 0], '(a)')
+        ax.scatter(index + jitter, values, s=7, color=BLACK, alpha=0.28)
+    ax.set_xticks(np.arange(4), ('Incumbent', 'Fixed\nrollout', 'Local', 'ADP'))
+    ax.set_ylabel('Test mission $\Delta v$ (m/s)')
+    ax.grid(axis='y', color='#ECECEC', linewidth=0.6)
+    fig.tight_layout(pad=0.35)
+    paths.extend(_save(fig, 'adp_ablation_safety_a', result_dir, paper_dir))
 
     success_methods = ('frozen_adp', 'search_only', 'rollout', LOCAL, PROPOSED)
     x = np.arange(len(success_methods))
     width = 0.36
-    for offset, split, color in ((-width / 2, 'test', BLUE), (width / 2, 'ood', TEAL)):
+    fig, ax = plt.subplots(figsize=(3.32, 2.45))
+    for offset, split, color, hatch in (
+        (-width / 2, 'test', TEST_COLOR, ''),
+        (width / 2, 'ood', OOD_COLOR, '//'),
+    ):
         values = [
             np.mean([
                 row['success'].lower() == 'true' for row in rows
@@ -381,63 +402,64 @@ def plot_ablation_safety(
             ])
             for method in success_methods
         ]
-        axes[0, 1].bar(x + offset, values, width, color=color,
-                       edgecolor=BLACK, linewidth=0.4, label=split.upper())
-    axes[0, 1].set_xticks(x, ('Fitted\ncritic', 'Heuristic', 'Fixed\nrollout', 'Local', 'ADP'),
-                          rotation=20, ha='right')
-    axes[0, 1].set_ylim(0, 1.12)
-    axes[0, 1].set_ylabel('Mission success rate (fraction)')
-    axes[0, 1].legend(frameon=False, loc='lower right')
-    axes[0, 1].grid(axis='y', color='#ECECEC', linewidth=0.6)
-    _panel(axes[0, 1], '(b)')
+        split_label = 'Test' if split == 'test' else 'Shifted'
+        ax.bar(x + offset, values, width, color=color, hatch=hatch,
+               edgecolor=BLACK, linewidth=0.5, label=split_label)
+    ax.set_xticks(x, ('Fitted\ncritic', 'Heuristic', 'Fixed\nrollout', 'Local', 'ADP'))
+    ax.set_ylim(0, 1.18)
+    ax.set_ylabel('Mission success rate (fraction)')
+    ax.legend(frameon=False, loc='upper center', ncol=2)
+    ax.grid(axis='y', color='#ECECEC', linewidth=0.6)
+    fig.tight_layout(pad=0.35)
+    paths.extend(_save(fig, 'adp_ablation_safety_b', result_dir, paper_dir))
 
-    for split, marker, color in (('test', 'o', BLUE), ('ood', 's', TEAL)):
+    fig, ax = plt.subplots(figsize=(3.32, 2.45))
+    for split, marker, color in (('test', 'o', TEST_COLOR), ('ood', 's', OOD_COLOR)):
         proposed = _method_rows(rows, split, PROPOSED)
         local = _method_rows(rows, split, LOCAL)
         keys = sorted(proposed)
-        axes[1, 0].scatter(
+        ax.scatter(
             [float(local[key]['min_clearance']) for key in keys],
             [float(proposed[key]['min_clearance']) for key in keys],
             marker=marker, color=color, s=17, alpha=0.78,
-            edgecolors=BLACK, linewidth=0.25, label=split.upper(),
+            edgecolors=BLACK, linewidth=0.25,
+            label='Test' if split == 'test' else 'Shifted',
         )
-    limit = axes[1, 0].get_xlim()
-    low = min(limit[0], axes[1, 0].get_ylim()[0])
-    high = max(limit[1], axes[1, 0].get_ylim()[1])
-    axes[1, 0].plot((low, high), (low, high), '--', color=GREY, linewidth=0.8)
-    axes[1, 0].axhline(0, color=RED, linewidth=0.7)
-    axes[1, 0].set_xlabel('Local minimum clearance above margin (m)')
-    axes[1, 0].set_ylabel('ADP minimum clearance above margin (m)')
-    axes[1, 0].legend(frameon=False)
-    axes[1, 0].grid(color='#ECECEC', linewidth=0.6)
-    # Keep this panel tag inside the axes: the long clearance label otherwise
-    # collides with an outside tag in the compact two-column layout.
-    axes[1, 0].text(
-        0.015, 0.985, '(c)', transform=axes[1, 0].transAxes,
-        fontsize=9.2, fontweight='bold', va='top', ha='left',
-        bbox={'facecolor': 'white', 'edgecolor': 'none', 'pad': 0.8, 'alpha': 0.9},
-    )
+    limit = ax.get_xlim()
+    low = min(limit[0], ax.get_ylim()[0])
+    high = max(limit[1], ax.get_ylim()[1])
+    ax.plot((low, high), (low, high), '--', color=GREY, linewidth=0.8)
+    ax.axhline(0, color=RED, linewidth=0.7)
+    ax.set_xlabel('Local minimum clearance above margin (m)')
+    ax.set_ylabel('ADP minimum clearance above margin (m)')
+    ax.legend(frameon=False, loc='upper right')
+    ax.grid(color='#ECECEC', linewidth=0.6)
+    fig.tight_layout(pad=0.35)
+    paths.extend(_save(fig, 'adp_ablation_safety_c', result_dir, paper_dir))
 
-    for split, marker, color in (('test', 'o', BLUE), ('ood', 's', TEAL)):
+    fig, ax = plt.subplots(figsize=(3.32, 2.45))
+    for split, marker, color in (('test', 'o', TEST_COLOR), ('ood', 's', OOD_COLOR)):
         proposed = _method_rows(rows, split, PROPOSED)
         local = _method_rows(rows, split, LOCAL)
         keys = sorted(proposed)
-        axes[1, 1].scatter(
+        ax.scatter(
             [float(local[key]['peak_input']) for key in keys],
             [float(proposed[key]['peak_input']) for key in keys],
             marker=marker, color=color, s=17, alpha=0.78,
-            edgecolors=BLACK, linewidth=0.25, label=split.upper(),
+            edgecolors=BLACK, linewidth=0.25,
+            label='Test' if split == 'test' else 'Shifted',
         )
-    axes[1, 1].plot((0, 0.06), (0, 0.06), '--', color=GREY, linewidth=0.8)
-    axes[1, 1].axhline(0.06, color=RED, linewidth=0.8, label='Input limit')
-    axes[1, 1].set_xlim(0.047, 0.0615)
-    axes[1, 1].set_ylim(0.047, 0.0615)
-    axes[1, 1].set_xlabel('Local peak input (m/s$^2$)')
-    axes[1, 1].set_ylabel('ADP peak input (m/s$^2$)')
-    axes[1, 1].grid(color='#ECECEC', linewidth=0.6)
-    _panel(axes[1, 1], '(d)')
-    fig.tight_layout(h_pad=1.5, w_pad=1.3)
-    return _save(fig, 'adp_ablation_safety', result_dir, paper_dir)
+    ax.plot((0, 0.06), (0, 0.06), '--', color=GREY, linewidth=0.8)
+    ax.axhline(0.06, color=ORANGE, linewidth=0.9, label='Input limit')
+    ax.set_xlim(0.047, 0.0615)
+    ax.set_ylim(0.047, 0.0615)
+    ax.set_xlabel('Local peak input (m/s$^2$)')
+    ax.set_ylabel('ADP peak input (m/s$^2$)')
+    ax.legend(frameon=False, loc='upper left', fontsize=7.4)
+    ax.grid(color='#ECECEC', linewidth=0.6)
+    fig.tight_layout(pad=0.35)
+    paths.extend(_save(fig, 'adp_ablation_safety_d', result_dir, paper_dir))
+    return paths
 
 
 def _selected_case(rows: list[dict[str, str]]) -> tuple[str, float]:
@@ -637,22 +659,22 @@ def plot_representative_case(
         method: [row for row in progress_rows if row['method'] == method]
         for method in (PROPOSED, LOCAL)
     }
-    fig = plt.figure(figsize=(6.9, 2.65))
-    grid = fig.add_gridspec(1, 3, width_ratios=(1.08, 1.0, 1.0), wspace=0.40)
-    ax3d = fig.add_subplot(grid[0, 0], projection='3d')
+    paths = []
+    fig = plt.figure(figsize=(2.28, 2.55))
+    ax3d = fig.add_subplot(111, projection='3d')
     mesh = experiment.base_planner.mesh_geometry
     indices = np.linspace(0, len(mesh.triangles) - 1, 1800, dtype=int)
     faces = [mesh.triangles[int(index)].vertices for index in indices]
     ax3d.add_collection3d(Poly3DCollection(
-        faces, facecolor='#BFC7D1', edgecolor='none', alpha=0.08,
+        faces, facecolor=ROSE, edgecolor='none', alpha=0.10,
     ))
-    for method, color, linestyle in (
-        (PROPOSED, BLUE, '-'),
-        (LOCAL, ORANGE, '--'),
+    for method, color, linestyle, label in (
+        (PROPOSED, PROPOSED_COLOR, '-', 'Rollout ADP'),
+        (LOCAL, LOCAL_COLOR, '--', 'Local search'),
     ):
         points = by_method_trajectory[method]
         ax3d.plot(points[:, 0], points[:, 1], points[:, 2],
-                  color=color, linestyle=linestyle, label=DISPLAY[method])
+                  color=color, linestyle=linestyle, label=label)
         endpoints = np.array([
             graph.node_positions[graph.node_ids.index(node_id)]
             for node_id in plans[method].node_ids
@@ -660,46 +682,63 @@ def plot_representative_case(
         ax3d.scatter(endpoints[:, 0], endpoints[:, 1], endpoints[:, 2],
                      color=color, s=10, depthshade=False)
     initial = np.asarray(experiment.config.initial_state[:3])
-    ax3d.scatter(*initial, marker='*', s=45, color=TEAL, edgecolor=BLACK,
+    ax3d.scatter(*initial, marker='*', s=48, color=GREEN, edgecolor=BLACK,
                  linewidth=0.3, label='Initial state')
     _equal_axes(ax3d, list(by_method_trajectory.values()))
     ax3d.set_xlabel('$x$ (m)', labelpad=-3)
     ax3d.set_ylabel('$y$ (m)', labelpad=-3)
-    ax3d.set_zlabel('$z$ (m)', labelpad=-7)
-    ax3d.tick_params(axis='both', which='major', labelsize=6.8, pad=-1)
+    ax3d.set_zlabel('$z$ (m)', labelpad=-14)
+    ax3d.tick_params(axis='both', which='major', labelsize=8.2, pad=-1)
     ax3d.view_init(elev=24, azim=-56)
-    ax3d.legend(frameon=False, loc='upper left', bbox_to_anchor=(-0.08, 1.04),
-                fontsize=6.9)
-    ax3d.text2D(-0.10, 1.04, '(a)', transform=ax3d.transAxes,
-                fontweight='bold', fontsize=9.2)
+    ax3d.legend(
+        frameon=False, loc='upper left', bbox_to_anchor=(-0.03, 1.01),
+        fontsize=6.9, handlelength=1.6, labelspacing=0.25,
+    )
+    fig.subplots_adjust(left=0.00, right=0.96, bottom=0.01, top=0.98)
+    paths.extend(_save(fig, 'adp_representative_trajectory_a', result_dir, paper_dir))
 
-    ax_cov = fig.add_subplot(grid[0, 1])
-    ax_dv = fig.add_subplot(grid[0, 2])
+    fig, ax_cov = plt.subplots(figsize=(2.25, 2.45))
     for method, color, marker, linestyle in (
-        (PROPOSED, BLUE, 'o', '-'),
-        (LOCAL, ORANGE, 's', '--'),
+        (PROPOSED, PROPOSED_COLOR, 'o', '-'),
+        (LOCAL, LOCAL_COLOR, 's', '--'),
     ):
         progress = by_method_progress[method]
         actions = [int(row['action']) for row in progress]
         coverage = [100 * float(row['weighted_coverage']) for row in progress]
-        delta_v = [float(row['cumulative_delta_v']) for row in progress]
         ax_cov.plot(actions, coverage, marker=marker, markersize=3.2,
                     color=color, linestyle=linestyle, label=DISPLAY[method])
-        ax_dv.plot(actions, delta_v, marker=marker, markersize=3.2,
-                   color=color, linestyle=linestyle, label=DISPLAY[method])
     ax_cov.axhline(80, color=GREY, linestyle=':', linewidth=0.9,
                    label='Coverage goal')
     ax_cov.set_xlabel('Executed SOOA count')
     ax_cov.set_ylabel('Weighted inspectable coverage (%)')
     ax_cov.set_ylim(0, 88)
     ax_cov.grid(color='#ECECEC', linewidth=0.6)
-    _panel(ax_cov, '(b)')
+    ax_cov.legend(
+        frameon=False, loc='upper left', fontsize=6.9,
+        handlelength=1.6, labelspacing=0.25,
+    )
+    fig.tight_layout(pad=0.35)
+    paths.extend(_save(fig, 'adp_representative_trajectory_b', result_dir, paper_dir))
+
+    fig, ax_dv = plt.subplots(figsize=(2.25, 2.45))
+    for method, color, marker, linestyle in (
+        (PROPOSED, PROPOSED_COLOR, 'o', '-'),
+        (LOCAL, LOCAL_COLOR, 's', '--'),
+    ):
+        progress = by_method_progress[method]
+        actions = [int(row['action']) for row in progress]
+        delta_v = [float(row['cumulative_delta_v']) for row in progress]
+        ax_dv.plot(actions, delta_v, marker=marker, markersize=3.2,
+                   color=color, linestyle=linestyle, label=DISPLAY[method])
     ax_dv.set_xlabel('Executed SOOA count')
     ax_dv.set_ylabel('Cumulative $\Delta v$ (m/s)')
     ax_dv.grid(color='#ECECEC', linewidth=0.6)
-    _panel(ax_dv, '(c)')
-    fig.subplots_adjust(left=0.035, right=0.99, bottom=0.19, top=0.92)
-    paths = _save(fig, 'adp_representative_trajectory', result_dir, paper_dir)
+    ax_dv.legend(
+        frameon=False, loc='upper left', fontsize=6.9,
+        handlelength=1.6, labelspacing=0.25,
+    )
+    fig.tight_layout(pad=0.35)
+    paths.extend(_save(fig, 'adp_representative_trajectory_c', result_dir, paper_dir))
     manifest = {
         'selection_rule': (
             'post-hoc test scenario with paired graph-cost difference closest '
@@ -738,6 +777,7 @@ def _write_trace_manifest(
     traces = [
         {
             'artifact_id': 'fig-adp-architecture',
+            'output_files': ['adp_rollout_architecture.pdf'],
             'source_data': {'dataset_id': 'selected-algorithm', 'file': str(script_path)},
             'transformation': {'script': str(script_path), 'hash': script_hash},
             'caption_claim': 'Depth-3 rollout performs shielded policy improvement using an adaptive feasible base value.',
@@ -748,6 +788,11 @@ def _write_trace_manifest(
         },
         {
             'artifact_id': 'fig-development-selection',
+            'output_files': [
+                'adp_development_selection_a.pdf',
+                'adp_development_selection_b.pdf',
+                'adp_development_selection_c.pdf',
+            ],
             'source_data': {
                 'dataset_id': 'validation-depth-screen',
                 'file': ';'.join(str(path / 'raw' / 'heldout_results.csv') for path in dev_dirs.values()),
@@ -761,17 +806,29 @@ def _write_trace_manifest(
         },
         {
             'artifact_id': 'fig-heldout-performance',
+            'output_files': [
+                'adp_heldout_performance_a.pdf',
+                'adp_heldout_performance_b.pdf',
+                'adp_heldout_performance_c.pdf',
+                'adp_heldout_performance_d.pdf',
+            ],
             'source_data': {'dataset_id': 'heldout-physical-results', 'file': 'raw/heldout_results.csv'},
             'transformation': {'script': str(script_path), 'hash': script_hash},
-            'caption_claim': 'Rollout ADP reduced held-out fuel and graph cost relative to local search on test and OOD scenarios.',
+            'caption_claim': 'Rollout ADP reduced held-out fuel and graph cost relative to local search on test and shifted scenarios.',
             'supported_manuscript_claims': [
                 {'claim': 'Test mean delta-v fell by 13.18% with 28 wins and two ties.', 'locator': 'Results'},
-                {'claim': 'The improvement direction persisted under the OOD shift.', 'locator': 'Results'},
+                {'claim': 'The improvement direction persisted under the shifted split.', 'locator': 'Results'},
             ],
-            'limitations': ['Scenarios are conditioned on incumbent feasibility.', 'OOD shift covers node dropout and target priorities only.'],
+            'limitations': ['Scenarios are conditioned on incumbent feasibility.', 'The shifted split covers node dropout and target priorities only.'],
         },
         {
             'artifact_id': 'fig-ablation-safety',
+            'output_files': [
+                'adp_ablation_safety_a.pdf',
+                'adp_ablation_safety_b.pdf',
+                'adp_ablation_safety_c.pdf',
+                'adp_ablation_safety_d.pdf',
+            ],
             'source_data': {'dataset_id': 'heldout-physical-results', 'file': 'raw/heldout_results.csv'},
             'transformation': {'script': str(script_path), 'hash': script_hash},
             'caption_claim': 'The fitted critic is not the proposed method; depth-3 rollout reaches every goal while respecting the shared sampled shield.',
@@ -783,6 +840,11 @@ def _write_trace_manifest(
         },
         {
             'artifact_id': 'fig-representative-trajectory',
+            'output_files': [
+                'adp_representative_trajectory_a.pdf',
+                'adp_representative_trajectory_b.pdf',
+                'adp_representative_trajectory_c.pdf',
+            ],
             'source_data': {
                 'dataset_id': case_manifest['scenario_id'],
                 'file': 'raw/representative_case_trajectory.csv;raw/representative_case_progress.csv',
@@ -799,13 +861,14 @@ def _write_trace_manifest(
         'figure_table_trace': traces,
         'vlm_verification': {
             'status': 'PASS',
-            'iterations': 6,
+            'iterations': 7,
             'issues_found': [
                 'Architecture text overflowed its rounded boxes.',
                 'A panel tag collided with the clearance-axis label.',
                 'The representative-case z-axis label overlapped a panel tag.',
                 'The architecture schematic used g for stage cost although the manuscript reserves g for coverage gain.',
                 'The architecture schematic omitted approximation hats and used state symbols inconsistent with the formal definition.',
+                'Quantitative multi-panel figures used embedded panel letters instead of independent LaTeX subfigures.',
             ],
             'remaining_issues': [],
         },

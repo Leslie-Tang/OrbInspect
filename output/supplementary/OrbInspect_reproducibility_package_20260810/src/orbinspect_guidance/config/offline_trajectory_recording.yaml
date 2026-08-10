@@ -1,0 +1,21 @@
+offline_trajectory_node:
+  ros__parameters:
+    frame_id: lvlh
+    publish_rate: 12.0
+    waypoint_tolerance: 2.5
+    hold_final_waypoint: false
+    advance_by_time: true
+    initial_position_lvlh: [-48.0, -30.0, 10.0]
+    initial_velocity_lvlh: [0.0, 0.0, 0.0]
+    mean_motion: 0.0011313666536110225
+    segment_duration: 4.0
+    integration_dt: 0.25
+    max_acceleration: 0.015
+    position_gain: 0.0012
+    velocity_gain: 0.08
+    safety_margin: 2.0
+    dwell_samples: 0
+    inspection_radius: 30.0
+    z_levels: [8.0, 16.0, 24.0]
+    station_x_extent: 46.0
+    station_y_offset: 30.0

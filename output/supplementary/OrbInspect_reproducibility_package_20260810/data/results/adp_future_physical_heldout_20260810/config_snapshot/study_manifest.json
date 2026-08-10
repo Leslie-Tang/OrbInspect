@@ -1,0 +1,137 @@
+{
+  "base_experiment_config": {
+    "adp_action_cost": 0.05,
+    "adp_branch_width": 8,
+    "adp_candidate_limit": 24,
+    "adp_candidate_pool_width": 18,
+    "adp_cost_scale": 50.0,
+    "adp_exploration_rate": 0.3,
+    "adp_learning_rate": 0.025,
+    "adp_lookahead_depth": 2,
+    "adp_oracle_node_limit": 14,
+    "adp_reference_improvement_passes": 4,
+    "adp_terminal_penalty": 500.0,
+    "adp_training_episodes": 0,
+    "candidate_radius": 34.0,
+    "candidate_stride": 2,
+    "certified_candidate_limit": 18,
+    "certified_max_expansions": 150000,
+    "certified_time_limit_s": 8.0,
+    "coverage_stop_ratio": 0.8,
+    "coverage_threshold": 0.7,
+    "cw_energy_weight": 5.0,
+    "cw_safety_weight": 120.0,
+    "cw_tracking_weight": 0.18,
+    "geometry_backend": "mesh",
+    "initial_state": [
+      0.0,
+      -35.0,
+      10.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "integration_dt": 3.0,
+    "max_acceleration": 0.06,
+    "max_viewpoints": 14,
+    "mesh_occlusion_max_triangles": 0,
+    "mesh_target_count": 90,
+    "methods": [],
+    "min_new_targets": 1,
+    "output_root": "data\\results",
+    "passive_safety_distance": 0.0,
+    "passive_safety_horizon": 0.0,
+    "proposed_beam_width": 6,
+    "proposed_lookahead_depth": 2,
+    "random_seed": 7,
+    "run_id": "",
+    "safety_margin": 2.0,
+    "transfer_duration": 90.0
+  },
+  "edge_count": 576,
+  "evaluation_splits": [
+    "test",
+    "ood"
+  ],
+  "graph_build_or_load_time_s": 34.44958580000093,
+  "graph_source": "generated",
+  "node_count": 24,
+  "quick": false,
+  "split_counts": {
+    "ood": 20,
+    "test": 30,
+    "train": 24,
+    "validation": 12
+  },
+  "superiority": {
+    "comparisons": {
+      "incumbent": {
+        "adaptive_rollout_adp_win_rate": 1,
+        "bootstrap_95_ci": [
+          -24.072963749426265,
+          -14.839019063465585
+        ],
+        "mean_paired_penalized_cost_difference": -19.13517620643015
+      },
+      "local_search": {
+        "adaptive_rollout_adp_win_rate": 0.9333333333333333,
+        "bootstrap_95_ci": [
+          -18.24145410445314,
+          -10.45196310122242
+        ],
+        "mean_paired_penalized_cost_difference": -14.015896930968054
+      },
+      "rollout": {
+        "adaptive_rollout_adp_win_rate": 0.9333333333333333,
+        "bootstrap_95_ci": [
+          -13.919610295089923,
+          -7.467398116870985
+        ],
+        "mean_paired_penalized_cost_difference": -10.497234951029167
+      },
+      "search_only": {
+        "adaptive_rollout_adp_win_rate": 1,
+        "bootstrap_95_ci": [
+          -154.5374904075496,
+          -65.23164805728015
+        ],
+        "mean_paired_penalized_cost_difference": -105.7998732260466
+      }
+    },
+    "criterion": "Adaptive rollout ADP must match local-search success and have an upper 95% paired penalized-cost confidence bound below zero on the held-out test split.",
+    "demonstrated": true,
+    "local_search_median_online_time_s": 0.00760285000433214,
+    "proposed_median_online_time_s": 1.6434437000134494,
+    "proposed_method": "adaptive_rollout_adp"
+  },
+  "superiority_config": {
+    "action_cost": 0.05,
+    "adaptive_rollout_depth": 3,
+    "base_seed": 731,
+    "branch_width": 8,
+    "candidate_limit": 24,
+    "candidate_pool_width": 18,
+    "cost_scale": 50.0,
+    "critic_backend": "ridge",
+    "episodes_per_training_scenario": 12,
+    "exploration_rate": 0.3,
+    "goal_coverage": 0.8,
+    "learning_rate": 0.025,
+    "local_improvement_passes": 3,
+    "lookahead_depth": 2,
+    "max_steps": 14,
+    "mlp_hidden_units": 48,
+    "mlp_regularization": 0.001,
+    "ood_node_increment": 2,
+    "ood_scenarios": 20,
+    "ridge_regularization": 0.1,
+    "scenario_node_count": 0,
+    "terminal_penalty": 500.0,
+    "test_scenarios": 30,
+    "training_scenarios": 24,
+    "training_target": "rollout",
+    "validation_scenarios": 12
+  },
+  "target_count": 41,
+  "training_time_s": 0.4284241000423208
+}

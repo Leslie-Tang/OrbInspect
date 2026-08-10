@@ -1,0 +1,36 @@
+offline_planning_experiment:
+  ros__parameters:
+    output_root: data/results
+    geometry_backend: mesh
+    mesh_target_count: 90
+    mesh_occlusion_max_triangles: 0
+    candidate_radius: 34.0
+    candidate_stride: 2
+    coverage_threshold: 0.70
+    coverage_stop_ratio: 0.80
+    max_viewpoints: 14
+    min_new_targets: 1
+    transfer_duration: 90.0
+    integration_dt: 3.0
+    max_acceleration: 0.060
+    passive_safety_horizon: 0.0
+    passive_safety_distance: 0.0
+    safety_margin: 2.0
+    initial_state: [0.0, -35.0, 10.0, 0.0, 0.0, 0.0]
+    random_seed: 7
+    cw_energy_weight: 5.0
+    cw_tracking_weight: 0.18
+    cw_safety_weight: 120.0
+    adp_candidate_limit: 24
+    adp_branch_width: 8
+    adp_candidate_pool_width: 18
+    adp_lookahead_depth: 2
+    adp_training_episodes: 0
+    adp_learning_rate: 0.025
+    adp_exploration_rate: 0.30
+    adp_terminal_penalty: 500.0
+    adp_action_cost: 0.05
+    adp_cost_scale: 50.0
+    adp_oracle_node_limit: 14
+    adp_reference_improvement_passes: 4
+    methods: []

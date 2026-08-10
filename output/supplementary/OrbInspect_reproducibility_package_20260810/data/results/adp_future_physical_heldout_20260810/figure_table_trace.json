@@ -1,0 +1,131 @@
+{
+  "figure_table_trace": [
+    {
+      "artifact_id": "fig-adp-architecture",
+      "caption_claim": "Depth-3 rollout performs shielded policy improvement using an adaptive feasible base value.",
+      "limitations": [
+        "Conceptual algorithm diagram; it is not a quantitative result."
+      ],
+      "source_data": {
+        "dataset_id": "selected-algorithm",
+        "file": "D:\\\u8bba\u6587\\OrbInspect\\OrbInspectLatex\\scripts\\generate_adp_future_figures.py"
+      },
+      "supported_manuscript_claims": [
+        {
+          "claim": "The proposed method is viability-preserving rollout ADP, not reversal search.",
+          "locator": "Methods"
+        }
+      ],
+      "transformation": {
+        "hash": "b14ab8b519c3fc30d4d30bfea62184feab23212a627fd336e75c9ad0f19d3f83",
+        "script": "D:\\\u8bba\u6587\\OrbInspect\\OrbInspectLatex\\scripts\\generate_adp_future_figures.py"
+      }
+    },
+    {
+      "artifact_id": "fig-development-selection",
+      "caption_claim": "Depth 3 had the lowest validation cost while all rollout depths retained mission success.",
+      "limitations": [
+        "Validation selection is not confirmatory evidence."
+      ],
+      "source_data": {
+        "dataset_id": "validation-depth-screen",
+        "file": "D:\\\u8bba\u6587\\OrbInspect\\data\\results\\adp_dev_adaptive_depth1_fullmesh_20260810\\raw\\heldout_results.csv;D:\\\u8bba\u6587\\OrbInspect\\data\\results\\adp_dev_adaptive_depth2_fullmesh_20260810\\raw\\heldout_results.csv;D:\\\u8bba\u6587\\OrbInspect\\data\\results\\adp_dev_adaptive_depth3_fullmesh_20260810\\raw\\heldout_results.csv"
+      },
+      "supported_manuscript_claims": [
+        {
+          "claim": "Depth 3 was selected on validation before test access.",
+          "locator": "Experimental protocol"
+        }
+      ],
+      "transformation": {
+        "hash": "b14ab8b519c3fc30d4d30bfea62184feab23212a627fd336e75c9ad0f19d3f83",
+        "script": "D:\\\u8bba\u6587\\OrbInspect\\OrbInspectLatex\\scripts\\generate_adp_future_figures.py"
+      }
+    },
+    {
+      "artifact_id": "fig-heldout-performance",
+      "caption_claim": "Rollout ADP reduced held-out fuel and graph cost relative to local search on test and OOD scenarios.",
+      "limitations": [
+        "Scenarios are conditioned on incumbent feasibility.",
+        "OOD shift covers node dropout and target priorities only."
+      ],
+      "source_data": {
+        "dataset_id": "heldout-physical-results",
+        "file": "raw/heldout_results.csv"
+      },
+      "supported_manuscript_claims": [
+        {
+          "claim": "Test mean delta-v fell by 13.18% with 28 wins and two ties.",
+          "locator": "Results"
+        },
+        {
+          "claim": "The improvement direction persisted under the OOD shift.",
+          "locator": "Results"
+        }
+      ],
+      "transformation": {
+        "hash": "b14ab8b519c3fc30d4d30bfea62184feab23212a627fd336e75c9ad0f19d3f83",
+        "script": "D:\\\u8bba\u6587\\OrbInspect\\OrbInspectLatex\\scripts\\generate_adp_future_figures.py"
+      }
+    },
+    {
+      "artifact_id": "fig-ablation-safety",
+      "caption_claim": "The fitted critic is not the proposed method; depth-3 rollout reaches every goal while respecting the shared sampled shield.",
+      "limitations": [
+        "Passive drift is disabled.",
+        "Sampled and swept checks do not prove continuous-time robustness."
+      ],
+      "source_data": {
+        "dataset_id": "heldout-physical-results",
+        "file": "raw/heldout_results.csv"
+      },
+      "supported_manuscript_claims": [
+        {
+          "claim": "Standalone fitted critics failed the held-out success gate.",
+          "locator": "Results"
+        },
+        {
+          "claim": "Every selected edge respected clearance and input thresholds.",
+          "locator": "Results"
+        }
+      ],
+      "transformation": {
+        "hash": "b14ab8b519c3fc30d4d30bfea62184feab23212a627fd336e75c9ad0f19d3f83",
+        "script": "D:\\\u8bba\u6587\\OrbInspect\\OrbInspectLatex\\scripts\\generate_adp_future_figures.py"
+      }
+    },
+    {
+      "artifact_id": "fig-representative-trajectory",
+      "caption_claim": "A median-effect held-out case illustrates how rollout ADP changes the executed route and cumulative fuel.",
+      "limitations": [
+        "Case selected post hoc by median effect and is illustrative, not inferential."
+      ],
+      "source_data": {
+        "dataset_id": "test_002",
+        "file": "raw/representative_case_trajectory.csv;raw/representative_case_progress.csv"
+      },
+      "supported_manuscript_claims": [
+        {
+          "claim": "The aggregate improvement corresponds to a different audited SOOA sequence.",
+          "locator": "Representative case study"
+        }
+      ],
+      "transformation": {
+        "hash": "b14ab8b519c3fc30d4d30bfea62184feab23212a627fd336e75c9ad0f19d3f83",
+        "script": "D:\\\u8bba\u6587\\OrbInspect\\OrbInspectLatex\\scripts\\generate_adp_future_figures.py"
+      }
+    }
+  ],
+  "vlm_verification": {
+    "issues_found": [
+      "Architecture text overflowed its rounded boxes.",
+      "A panel tag collided with the clearance-axis label.",
+      "The representative-case z-axis label overlapped a panel tag.",
+      "The architecture schematic used g for stage cost although the manuscript reserves g for coverage gain.",
+      "The architecture schematic omitted approximation hats and used state symbols inconsistent with the formal definition."
+    ],
+    "iterations": 6,
+    "remaining_issues": [],
+    "status": "PASS"
+  }
+}

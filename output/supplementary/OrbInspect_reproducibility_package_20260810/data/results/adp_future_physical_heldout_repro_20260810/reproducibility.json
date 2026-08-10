@@ -1,0 +1,34 @@
+{
+  "classification": "deterministic with timing fields excluded",
+  "columns_match": true,
+  "compared_fields": [
+    "coverage",
+    "graph_cost",
+    "method",
+    "min_clearance",
+    "peak_input",
+    "penalized_cost",
+    "policy_source",
+    "safe_action_evaluations",
+    "scenario_id",
+    "scenario_seed",
+    "selected_count",
+    "shield_rejections",
+    "split",
+    "success",
+    "total_delta_v"
+  ],
+  "critic_checkpoint_match_excluding_training_time": true,
+  "graph_hash_match": true,
+  "ignored_fields": [
+    "online_time_s"
+  ],
+  "non_timing_cell_mismatches": 0,
+  "original_dir": "data\\results\\adp_future_physical_heldout_20260810",
+  "rerun_dir": "data\\results\\adp_future_physical_heldout_repro_20260810",
+  "rerun_scenario_archive_present": true,
+  "row_count_match": true,
+  "row_count_original": 350,
+  "row_count_rerun": 350,
+  "verdict": "REPRODUCIBLE"
+}
