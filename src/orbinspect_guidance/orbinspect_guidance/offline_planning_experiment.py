@@ -29,6 +29,8 @@ from orbinspect_guidance.offline_coverage_planner import scale
 from orbinspect_guidance.offline_coverage_planner import StateVector
 from orbinspect_guidance.offline_coverage_planner import TransferEstimate
 from orbinspect_guidance.offline_coverage_planner import unit
+from orbinspect_guidance.result_provenance import collect_result_provenance
+from orbinspect_guidance.result_provenance import write_result_manifest
 
 try:
     import yaml
@@ -184,7 +186,7 @@ class OfflinePlanningExperiment:
             return self._run_set_cover_cw_tour(start, method)
 
         while (
-            self._coverage_ratio(covered) < self.config.coverage_stop_ratio
+            self._inspectable_coverage_ratio(covered) < self.config.coverage_stop_ratio
             and remaining
             and len(steps) < self.config.max_viewpoints
         ):
@@ -245,7 +247,11 @@ class OfflinePlanningExperiment:
             'set_cover_cw_tour',
         ))
         candidates = tuple(self._adp_candidate_pool(reference_candidates))
-        target_ids = tuple(sorted(target.target_id for target in self.targets))
+        # The graph objective is normalized over targets that are observable
+        # from at least one candidate.  Normalizing over unreachable mesh
+        # samples can make the requested goal mathematically impossible and
+        # causes a valid shielded policy to be discarded as a failure.
+        target_ids = tuple(sorted(self.inspectable_targets))
         target_index = {
             target_id: index
             for index, target_id in enumerate(target_ids)
@@ -394,6 +400,7 @@ class OfflinePlanningExperiment:
                     f'{weight:.9g}'
                     for weight in graph_plan.critic_weights
                 ),
+                'adp_critic_feature_count': planner.critic_feature_count,
                 'adp_exact_cost': exact_cost,
                 'adp_optimality_gap': optimality_gap,
                 'adp_exact_expansions': exact_expansions,
@@ -422,6 +429,9 @@ class OfflinePlanningExperiment:
                 'adp_variant': method,
                 'adp_critic_enabled': graph_plan.critic_enabled,
                 'adp_rollout_enabled': graph_plan.rollout_enabled,
+                'adp_adaptive_rollout_enabled': (
+                    graph_plan.adaptive_rollout_enabled
+                ),
                 'adp_safeguard_enabled': graph_plan.safeguard_enabled,
                 'adp_local_improvement_enabled': (
                     graph_plan.local_improvement_enabled
@@ -534,7 +544,7 @@ class OfflinePlanningExperiment:
                 score=score,
                 dynamic_cost=dynamic_cost,
             ))
-            if self._coverage_ratio(covered) >= self.config.coverage_stop_ratio:
+            if self._inspectable_coverage_ratio(covered) >= self.config.coverage_stop_ratio:
                 break
 
         trajectory = tuple(sample for step in steps for sample in step.transfer.trajectory)
@@ -579,7 +589,7 @@ class OfflinePlanningExperiment:
             for candidate in candidates
         )
         required_area = self.config.coverage_stop_ratio * max(
-            self.base_planner.total_inspection_area,
+            self.inspectable_area,
             1.0,
         )
         max_depth = min(self.config.max_viewpoints, len(candidates))
@@ -727,7 +737,7 @@ class OfflinePlanningExperiment:
         remaining = {candidate.candidate_id: candidate for candidate in self.candidates}
         current_state = self.config.initial_state
         while (
-            self._coverage_ratio(covered) < self.config.coverage_stop_ratio
+            self._inspectable_coverage_ratio(covered) < self.config.coverage_stop_ratio
             and remaining
             and len(selected) < self.config.max_viewpoints
         ):
@@ -844,7 +854,7 @@ class OfflinePlanningExperiment:
                     if decision is not None else 0
                 ),
             ))
-            if self._coverage_ratio(covered) >= self.config.coverage_stop_ratio:
+            if self._inspectable_coverage_ratio(covered) >= self.config.coverage_stop_ratio:
                 break
 
         trajectory = tuple(sample for step in steps for sample in step.transfer.trajectory)
@@ -906,7 +916,7 @@ class OfflinePlanningExperiment:
                 dynamic_cost=dynamic_cost,
             ))
             previous_index = candidate_index
-            if self._coverage_ratio(covered) >= self.config.coverage_stop_ratio:
+            if self._inspectable_coverage_ratio(covered) >= self.config.coverage_stop_ratio:
                 break
 
         trajectory = tuple(sample for step in steps for sample in step.transfer.trajectory)
@@ -972,9 +982,20 @@ class OfflinePlanningExperiment:
         self._write_all_trajectories(raw_dir / 'trajectory.csv', results)
         self._write_all_attitudes(raw_dir / 'attitude.csv', results)
         self._write_all_coverage(raw_dir / 'coverage.csv', results)
-        self._write_summary(run_dir / 'summary.json', results)
+        config_payload = self._config_dict()
+        provenance = collect_result_provenance(
+            result_kind='offline_planning_experiment',
+            config=config_payload,
+            mesh_path=(
+                self.base_planner.config.iss_mesh_path
+                if self.config.geometry_backend == 'mesh' else None
+            ),
+            critic_feature_count=AdvancedSafePlanner().critic_feature_count,
+        )
+        self._write_summary(run_dir / 'summary.json', results, provenance)
         self._write_summary_md(run_dir / 'summary.md', results)
-        _write_json(config_dir / 'offline_planning_experiment_config.json', self._config_dict())
+        _write_json(config_dir / 'offline_planning_experiment_config.json', config_payload)
+        write_result_manifest(config_dir / 'result_manifest.json', provenance)
         return run_dir
 
     def _select_candidate(
@@ -1272,6 +1293,10 @@ class OfflinePlanningExperiment:
             'coverage_threshold': self.config.coverage_threshold,
             'coverage_stop_ratio': self.config.coverage_stop_ratio,
             'coverage_success': final_coverage >= self.config.coverage_threshold,
+            'inspectable_coverage_success': (
+                self._inspectable_coverage_ratio(_covered_targets_from_steps(steps))
+                >= self.config.coverage_stop_ratio
+            ),
             'total_delta_v': total_delta_v,
             'peak_requested_input': peak_requested_input,
             'input_limit': self.config.max_acceleration,
@@ -1364,7 +1389,8 @@ class OfflinePlanningExperiment:
     def _write_method_comparison(path: Path, results: tuple[MethodResult, ...]) -> None:
         fieldnames = [
             'method', 'final_coverage_ratio', 'final_inspectable_coverage_ratio',
-            'inspectable_area_ratio', 'coverage_success', 'feasible',
+            'inspectable_area_ratio', 'coverage_success',
+            'inspectable_coverage_success', 'feasible',
             'total_delta_v', 'peak_requested_input', 'input_limit',
             'clipped_step_count', 'clipped_step_ratio',
             'min_clearance', 'max_speed', 'rms_tracking_error',
@@ -1382,7 +1408,8 @@ class OfflinePlanningExperiment:
             'adp_training_episodes', 'adp_td_update_count',
             'adp_mean_absolute_td_error', 'adp_safe_action_evaluations',
             'adp_shield_rejections', 'adp_lookahead_depth',
-            'adp_branch_width', 'adp_critic_weights', 'adp_exact_cost',
+            'adp_branch_width', 'adp_critic_weights',
+            'adp_critic_feature_count', 'adp_exact_cost',
             'adp_optimality_gap', 'adp_exact_expansions',
             'adp_policy_source', 'adp_learned_graph_cost',
             'adp_rollout_graph_cost', 'adp_reference_graph_cost',
@@ -1618,10 +1645,15 @@ class OfflinePlanningExperiment:
                     })
 
     @staticmethod
-    def _write_summary(path: Path, results: tuple[MethodResult, ...]) -> None:
+    def _write_summary(
+        path: Path,
+        results: tuple[MethodResult, ...],
+        provenance: dict[str, object],
+    ) -> None:
         _write_json(path, {
             'methods': [result.summary for result in results],
             'best_feasible_method': _best_feasible_method(results),
+            'provenance': provenance,
         })
 
     @staticmethod

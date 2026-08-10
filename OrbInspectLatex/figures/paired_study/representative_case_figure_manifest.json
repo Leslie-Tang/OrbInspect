@@ -1,0 +1,80 @@
+{
+  "artifacts": {
+    "OrbInspectLatex/figures/paired_study/representative_case_progress.pdf": "f7302833e208424b89b77566d011d519ea6246011f73972c1328d0cd3225d6c6",
+    "OrbInspectLatex/figures/paired_study/representative_case_progress.png": "31338b03ed869a1a004dcddaf326430129a2f384a99584dc7d943c294c3de0a2",
+    "OrbInspectLatex/figures/paired_study/representative_case_trajectory.pdf": "d20beff6f3902814632529a9d4098d0425ccf337f237a358841d08a51a99f163",
+    "OrbInspectLatex/figures/paired_study/representative_case_trajectory.png": "a5983b981094236aab258eb7c144f51ef4760fb3d0e8691ed1fb77b70d449619"
+  },
+  "case_study_schema_version": "orbinspect-representative-case/v1",
+  "figure_schema_version": "orbinspect-paper-figures/v1",
+  "figure_table_trace": [
+    {
+      "artifact_id": "fig:representative-trajectory",
+      "caption_claim": "The outcome-independent center-nearest case differs through two local viewpoint-order exchanges while both methods retain the same observation set.",
+      "limitations": [
+        "The case is illustrative; paired inference comes from all 20 scenarios, not this route alone.",
+        "The display uses 2,400 of 247,525 mesh triangles for legibility; all planning, visibility, clearance, and swept-intersection queries use the complete mesh.",
+        "Trajectories are deterministic HCW rollouts and do not include navigation or actuator uncertainty."
+      ],
+      "source_data": {
+        "dataset_id": "paper_sequence_study_20260807_center_nearest_case",
+        "files": [
+          "data/results/paper_sequence_study_20260807/case_study_center_nearest/raw/trajectory.csv",
+          "data/results/paper_sequence_study_20260807/case_study_center_nearest/raw/viewpoints.csv",
+          "data/results/paper_sequence_study_20260807/case_study_center_nearest/config_snapshot/case_study_selection.json"
+        ]
+      },
+      "supported_manuscript_claims": [
+        {
+          "claim": "In the representative center-nearest design case, local search changes the route by exchanging observation-order pairs 4/5 and 7/8.",
+          "locator": "Results, Outcome-Independent Trajectory Case Study"
+        }
+      ],
+      "transformation": {
+        "script": "OrbInspectLatex/scripts/generate_representative_case_figures.py",
+        "sha256": "c8609ee3315f30c12ecda1e09ed68464442fc48b94b275098e6e367a1d7b475f"
+      }
+    },
+    {
+      "artifact_id": "fig:representative-progress",
+      "caption_claim": "Both routes reach 80.49 percent inspectable coverage in 11 actions, while the locally improved route reduces cumulative delta-v by 0.0524 meters per second.",
+      "limitations": [
+        "The action-indexed curves describe one design-selected case and are not uncertainty intervals.",
+        "Coverage is credited only at accepted observation endpoints; transfer-time image acquisition is not modeled."
+      ],
+      "source_data": {
+        "dataset_id": "paper_sequence_study_20260807_center_nearest_case",
+        "files": [
+          "data/results/paper_sequence_study_20260807/case_study_center_nearest/raw/case_progress.csv",
+          "data/results/paper_sequence_study_20260807/case_study_center_nearest/raw/method_comparison.csv",
+          "data/results/paper_sequence_study_20260807/case_study_center_nearest/config_snapshot/case_study_selection.json"
+        ]
+      },
+      "supported_manuscript_claims": [
+        {
+          "claim": "The center-nearest case preserves final inspectable coverage and action count while reducing total delta-v from 11.955 to 11.902 meters per second.",
+          "locator": "Results, Outcome-Independent Trajectory Case Study"
+        }
+      ],
+      "transformation": {
+        "script": "OrbInspectLatex/scripts/generate_representative_case_figures.py",
+        "sha256": "c8609ee3315f30c12ecda1e09ed68464442fc48b94b275098e6e367a1d7b475f"
+      }
+    }
+  ],
+  "selected_scenario_paper_label": 9,
+  "selected_scenario_zero_based": 8,
+  "selection_uses_method_outcomes": false,
+  "source_files": {
+    "data/results/paper_sequence_study_20260807/case_study_center_nearest/config_snapshot/case_study_selection.json": "3811242dbb6878305967d71256954fe69ba27a76757f1298bfd752586059c209",
+    "data/results/paper_sequence_study_20260807/case_study_center_nearest/raw/case_progress.csv": "9f0679305356e32735ea0af8cdd73fa0c2fb9d7ed421b01866628eae44820655",
+    "data/results/paper_sequence_study_20260807/case_study_center_nearest/raw/method_comparison.csv": "a9f3804747b5bab3d2b16be8530197b6445d9cc48a69c217483784fdf4c832a7",
+    "data/results/paper_sequence_study_20260807/case_study_center_nearest/raw/trajectory.csv": "5533cb930b512676e5a49e918aed69c3975ccb9d6e9b4dad68b763268dcab2b5",
+    "data/results/paper_sequence_study_20260807/case_study_center_nearest/raw/viewpoints.csv": "bddee3d3ec36259f66437709cb728764a45ea69422d231088312b26be9b99596",
+    "data/results/paper_sequence_study_20260807/raw/paired_results.csv": "537af9502bfe449e51a2efb4ef44da825f01b80e44a17d59c2615f7f7077660b"
+  },
+  "transformation": {
+    "script": "OrbInspectLatex/scripts/generate_representative_case_figures.py",
+    "sha256": "c8609ee3315f30c12ecda1e09ed68464442fc48b94b275098e6e367a1d7b475f"
+  }
+}

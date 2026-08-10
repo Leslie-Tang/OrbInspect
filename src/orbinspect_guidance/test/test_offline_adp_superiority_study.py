@@ -25,6 +25,13 @@ def test_archived_graph_round_trip(tmp_path: Path) -> None:
     assert loaded == graph
 
 
+def test_archived_graph_masks_reference_only_archived_targets() -> None:
+    graph = _graph()
+    valid_mask = (1 << len(graph.target_ids)) - 1
+
+    assert all(mask & ~valid_mask == 0 for mask in graph.coverage_masks)
+
+
 def test_scenario_splits_are_disjoint_and_reproducible() -> None:
     config = _config()
 
@@ -69,6 +76,7 @@ def test_quick_study_freezes_training_before_heldout_evaluation(
     checkpoint = result_dir / 'raw' / 'critic_checkpoint.json'
     assert checkpoint.is_file()
     assert (result_dir / 'raw' / 'heldout_summary.csv').is_file()
+    assert (result_dir / 'raw' / 'scenarios.json').is_file()
 
 
 def test_scenario_problem_populates_safe_outgoing_topology() -> None:
@@ -142,4 +150,7 @@ def _graph() -> ArchivedGraph:
         target_ids=tuple(f't{index}' for index in range(10)),
         base_target_weights=(1.0,) * 10,
         edges=tuple(edges),
+        node_positions=tuple(
+            (float(index), 0.0, 0.0) for index in range(10)
+        ),
     )

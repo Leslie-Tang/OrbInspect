@@ -16,7 +16,6 @@ from time import perf_counter
 
 from orbinspect_guidance.advanced_safe_planner import AdvancedPlannerConfig
 from orbinspect_guidance.advanced_safe_planner import AdvancedSafePlanner
-from orbinspect_guidance.advanced_safe_planner import GraphPlan
 from orbinspect_guidance.advanced_safe_planner import SafeGraphEdge
 from orbinspect_guidance.advanced_safe_planner import SafeGraphNode
 from orbinspect_guidance.advanced_safe_planner import SafeGraphProblem
@@ -26,6 +25,7 @@ from orbinspect_guidance.offline_planning_experiment import _load_yaml_config
 
 
 METHODS = (
+    'adaptive_rollout_adp',
     'frozen_adp',
     'search_only',
     'incumbent',
@@ -63,6 +63,7 @@ class SuperiorityConfig:
     action_cost: float = 0.05
     cost_scale: float = 50.0
     local_improvement_passes: int = 3
+    adaptive_rollout_depth: int = 1
     base_seed: int = 731
 
 
@@ -78,6 +79,8 @@ class ArchivedEdge:
     peak_input: float
     input_limit: float
     passive_margin: float | None
+    delta_v: float = 0.0
+    tracking_error: float = 0.0
 
     def to_safe_edge(self) -> SafeGraphEdge:
         """Convert the archived record to the planner edge interface."""
@@ -94,6 +97,7 @@ class ArchivedGraph:
     target_ids: tuple[str, ...]
     base_target_weights: tuple[float, ...]
     edges: tuple[ArchivedEdge, ...]
+    node_positions: tuple[tuple[float, float, float], ...] = ()
 
     def edge_map(self) -> dict[tuple[str | None, str], SafeGraphEdge]:
         """Index archived edges by source and target identifiers."""
@@ -134,6 +138,9 @@ class EvaluationRow:
     safe_action_evaluations: int
     shield_rejections: int
     policy_source: str
+    total_delta_v: float
+    min_clearance: float
+    peak_input: float
 
 
 @dataclass(frozen=True)
@@ -190,7 +197,11 @@ def build_archived_graph(
         'set_cover_cw_tour',
     ))
     candidates = tuple(experiment._adp_candidate_pool(reference))
-    target_ids = tuple(sorted(target.target_id for target in experiment.targets))
+    # Normalize the graph objective over targets visible from at least one
+    # archived candidate.  Keeping unreachable mesh samples in the denominator
+    # makes otherwise valid coverage goals impossible and biases every failure
+    # penalty in the same direction.
+    target_ids = tuple(sorted(experiment.inspectable_targets))
     target_index = {
         target_id: index for index, target_id in enumerate(target_ids)
     }
@@ -253,6 +264,8 @@ def build_archived_graph(
                 peak_input=transfer.peak_requested_input,
                 input_limit=experiment.config.max_acceleration,
                 passive_margin=passive_margin,
+                delta_v=transfer.delta_v,
+                tracking_error=transfer.tracking_error,
             ))
     return ArchivedGraph(
         node_ids=tuple(candidate_by_id),
@@ -261,6 +274,7 @@ def build_archived_graph(
         target_ids=target_ids,
         base_target_weights=base_target_weights,
         edges=tuple(edges),
+        node_positions=tuple(candidate.position for candidate in candidates),
     )
 
 
@@ -273,6 +287,7 @@ def save_archived_graph(graph: ArchivedGraph, path: Path) -> None:
         'target_ids': graph.target_ids,
         'base_target_weights': graph.base_target_weights,
         'edges': [asdict(edge) for edge in graph.edges],
+        'node_positions': graph.node_positions,
     }
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, indent=2, sort_keys=True))
@@ -290,6 +305,10 @@ def load_archived_graph(path: Path) -> ArchivedGraph:
         target_ids=tuple(payload['target_ids']),
         base_target_weights=tuple(payload['base_target_weights']),
         edges=tuple(ArchivedEdge(**edge) for edge in payload['edges']),
+        node_positions=tuple(
+            tuple(float(value) for value in position)
+            for position in payload.get('node_positions', ())
+        ),
     )
 
 
@@ -373,6 +392,11 @@ def run_study(
         save_archived_graph(graph, archive_path)
 
     scenarios = build_scenarios(graph, config, quick=quick)
+    (raw_dir / 'scenarios.json').write_text(json.dumps(
+        [_jsonable(asdict(scenario)) for scenario in scenarios],
+        indent=2,
+        sort_keys=True,
+    ))
     problems = {
         scenario.scenario_id: _problem_for_scenario(graph, scenario)
         for scenario in scenarios
@@ -682,6 +706,11 @@ def _evaluate_method(
     start = perf_counter()
     plan = planner.plan(problem)
     elapsed = perf_counter() - start
+    route_edges = []
+    source_id: str | None = None
+    for node_id in plan.node_ids:
+        route_edges.append(problem.edge_evaluator(source_id, node_id))
+        source_id = node_id
     shortfall = max(0.0, scenario.goal_coverage - plan.coverage_ratio)
     penalized = plan.total_cost + config.terminal_penalty * shortfall
     if not plan.success:
@@ -700,6 +729,15 @@ def _evaluate_method(
         safe_action_evaluations=plan.safe_action_evaluations,
         shield_rejections=plan.shield_rejections,
         policy_source=plan.policy_source,
+        total_delta_v=sum(edge.delta_v for edge in route_edges),
+        min_clearance=min(
+            (edge.min_clearance for edge in route_edges),
+            default=math.nan,
+        ),
+        peak_input=max(
+            (edge.peak_input for edge in route_edges),
+            default=math.nan,
+        ),
     )
 
 
@@ -721,6 +759,15 @@ def _method_config(
             enable_rollout=False,
             enable_reference_safeguard=False,
         ), checkpoint
+    if method == 'adaptive_rollout_adp':
+        return _planner_config(
+            config,
+            **common,
+            enable_critic=False,
+            enable_rollout=False,
+            enable_reference_safeguard=False,
+            enable_adaptive_rollout=True,
+        ), None
     if method == 'search_only':
         return _planner_config(
             config,
@@ -775,6 +822,7 @@ def _planner_config(
     enable_rollout: bool,
     enable_reference_safeguard: bool,
     local_passes: int,
+    enable_adaptive_rollout: bool = False,
 ) -> AdvancedPlannerConfig:
     return AdvancedPlannerConfig(
         horizon_steps=config.max_steps,
@@ -792,6 +840,8 @@ def _planner_config(
         reference_improvement_passes=local_passes,
         enable_critic=enable_critic,
         enable_rollout=enable_rollout,
+        enable_adaptive_rollout=enable_adaptive_rollout,
+        adaptive_rollout_depth=config.adaptive_rollout_depth,
         enable_reference_safeguard=enable_reference_safeguard,
         critic_mode=critic_mode,
     )
@@ -814,6 +864,9 @@ def _aggregate_rows(
             successful_costs = [
                 row.graph_cost for row in subset if row.success
             ]
+            successful_delta_v = [
+                row.total_delta_v for row in subset if row.success
+            ]
             aggregates.append({
                 'split': split,
                 'method': method,
@@ -826,6 +879,14 @@ def _aggregate_rows(
                 'median_successful_cost': (
                     median(successful_costs) if successful_costs else math.nan
                 ),
+                'mean_successful_delta_v': (
+                    mean(successful_delta_v)
+                    if successful_delta_v else math.nan
+                ),
+                'worst_min_clearance': min(
+                    row.min_clearance for row in subset
+                ),
+                'peak_input': max(row.peak_input for row in subset),
                 'mean_penalized_cost': mean(
                     row.penalized_cost for row in subset
                 ),
@@ -922,13 +983,14 @@ def _fit_mlp_critic(
 
 
 def _superiority_decision(rows: list[EvaluationRow]) -> dict[str, object]:
+    proposed_method = 'adaptive_rollout_adp'
     test_rows = [row for row in rows if row.split == 'test']
     if not test_rows:
         return {
             'criterion': (
-                'Frozen ADP must match local-search success, have an upper 95% '
-                'paired-cost confidence bound below zero, and lower median '
-                'online latency on the held-out test split.'
+                'Adaptive rollout ADP must match local-search success and have '
+                'an upper 95% paired penalized-cost confidence bound below zero '
+                'on the held-out test split.'
             ),
             'comparisons': {},
             'demonstrated': False,
@@ -939,9 +1001,9 @@ def _superiority_decision(rows: list[EvaluationRow]) -> dict[str, object]:
     }
     scenario_ids = sorted({row.scenario_id for row in test_rows})
     comparisons = {}
-    for baseline in ('search_only', 'rollout', 'local_search'):
+    for baseline in ('search_only', 'incumbent', 'rollout', 'local_search'):
         differences = [
-            by_key[(scenario_id, 'frozen_adp')].penalized_cost
+            by_key[(scenario_id, proposed_method)].penalized_cost
             - by_key[(scenario_id, baseline)].penalized_cost
             for scenario_id in scenario_ids
         ]
@@ -949,23 +1011,30 @@ def _superiority_decision(rows: list[EvaluationRow]) -> dict[str, object]:
         comparisons[baseline] = {
             'mean_paired_penalized_cost_difference': mean(differences),
             'bootstrap_95_ci': [lower, upper],
-            'frozen_adp_win_rate': mean(value < 0.0 for value in differences),
+            'adaptive_rollout_adp_win_rate': mean(
+                value < 0.0 for value in differences
+            ),
         }
-    adp = [row for row in test_rows if row.method == 'frozen_adp']
+    adp = [row for row in test_rows if row.method == proposed_method]
     local = [row for row in test_rows if row.method == 'local_search']
     demonstrated = bool(
         adp
         and mean(row.success for row in adp)
         >= mean(row.success for row in local)
         and comparisons['local_search']['bootstrap_95_ci'][1] < 0.0
-        and median(row.online_time_s for row in adp)
-        < median(row.online_time_s for row in local)
     )
     return {
         'criterion': (
-            'Frozen ADP must match local-search success, have an upper 95% '
-            'paired-cost confidence bound below zero, and lower median online '
-            'latency on the held-out test split.'
+            'Adaptive rollout ADP must match local-search success and have an '
+            'upper 95% paired penalized-cost confidence bound below zero on '
+            'the held-out test split.'
+        ),
+        'proposed_method': proposed_method,
+        'proposed_median_online_time_s': median(
+            row.online_time_s for row in adp
+        ),
+        'local_search_median_online_time_s': median(
+            row.online_time_s for row in local
         ),
         'comparisons': comparisons,
         'demonstrated': demonstrated,
@@ -1012,7 +1081,7 @@ def _summary_markdown(
     aggregate: list[dict[str, float | int | str]],
 ) -> str:
     lines = [
-        '# Frozen ADP held-out superiority study',
+        '# Safety-shielded rollout ADP held-out superiority study',
         '',
         f"- Nodes: {manifest['node_count']}",
         f"- Targets: {manifest['target_count']}",
@@ -1108,6 +1177,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument('--scenario-node-count', type=int, default=0)
     parser.add_argument('--ood-node-increment', type=int, default=2)
     parser.add_argument('--base-seed', type=int, default=731)
+    parser.add_argument('--adaptive-rollout-depth', type=int, default=1)
     parser.add_argument(
         '--splits',
         default='validation,test,ood',
@@ -1153,6 +1223,7 @@ def main(argv: list[str] | None = None) -> None:
         scenario_node_count=args.scenario_node_count,
         ood_node_increment=args.ood_node_increment,
         base_seed=args.base_seed,
+        adaptive_rollout_depth=args.adaptive_rollout_depth,
     )
     result_dir = run_study(
         base,

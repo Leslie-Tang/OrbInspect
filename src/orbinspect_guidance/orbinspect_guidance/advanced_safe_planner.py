@@ -34,6 +34,8 @@ class AdvancedPlannerConfig:
     reference_improvement_passes: int = 4
     enable_critic: bool = True
     enable_rollout: bool = True
+    enable_adaptive_rollout: bool = False
+    adaptive_rollout_depth: int = 1
     enable_reference_safeguard: bool = True
     critic_mode: str = 'online'
 
@@ -62,6 +64,8 @@ class SafeGraphEdge:
     peak_input: float = 0.0
     input_limit: float = math.inf
     passive_margin: float | None = None
+    delta_v: float = 0.0
+    tracking_error: float = 0.0
 
 
 @dataclass(frozen=True)
@@ -123,6 +127,7 @@ class GraphPlan:
     incumbent_improvement: float | None
     critic_enabled: bool
     rollout_enabled: bool
+    adaptive_rollout_enabled: bool
     safeguard_enabled: bool
     local_improvement_enabled: bool
 
@@ -175,6 +180,11 @@ class AdvancedSafePlanner:
     def critic_weights(self) -> tuple[float, ...]:
         """Return the current critic checkpoint weights."""
         return tuple(self._weights)
+
+    @property
+    def critic_feature_count(self) -> int:
+        """Return the action-feature dimension required by checkpoints."""
+        return self._FEATURE_COUNT
 
     def set_critic_weights(self, weights: tuple[float, ...]) -> None:
         """Load a critic checkpoint after validating its feature dimension."""
@@ -432,6 +442,16 @@ class AdvancedSafePlanner:
                     rollout_total_cost = rollout[2]
                 candidate_plans.append((*rollout, 'rollout_adp'))
 
+        if self.config.enable_adaptive_rollout:
+            adaptive_rollout = self._adaptive_rollout_solution(
+                problem,
+                node_index,
+            )
+            candidate_plans.append((
+                *adaptive_rollout,
+                'adaptive_rollout_adp',
+            ))
+
         if self.config.enable_reference_safeguard:
             reference = self._reference_solution(problem, node_index)
         else:
@@ -465,6 +485,7 @@ class AdvancedSafePlanner:
             candidate_plans.append(((), (), 0.0, 0.0, False, 'no_candidate'))
         successful_plans = [plan for plan in candidate_plans if plan[4]]
         source_priority = {
+            'adaptive_rollout_adp': 0,
             'rollout_adp': 0,
             'learned_adp': 1,
             'reference_improved': 2,
@@ -531,12 +552,187 @@ class AdvancedSafePlanner:
             incumbent_improvement=incumbent_improvement,
             critic_enabled=self.config.enable_critic,
             rollout_enabled=self.config.enable_rollout,
+            adaptive_rollout_enabled=self.config.enable_adaptive_rollout,
             safeguard_enabled=self.config.enable_reference_safeguard,
             local_improvement_enabled=(
                 self.config.enable_reference_safeguard
                 and self.config.reference_improvement_passes > 0
             ),
         )
+
+    def _adaptive_rollout_solution(
+        self,
+        problem: SafeGraphProblem,
+        node_index: dict[str, int],
+    ) -> tuple[
+        tuple[str, ...],
+        tuple[GraphDecision, ...],
+        float,
+        float,
+        bool,
+    ]:
+        """Apply repeated one-step rollout with a safe adaptive base policy.
+
+        Each candidate action is retained only when the deterministic base
+        policy reaches the coverage goal from the successor state.  The
+        selected action minimizes its audited stage cost plus that feasible
+        completion cost.  Recomputing the base policy after every decision is
+        the rollout policy-improvement step; it is deliberately distinct from
+        following a fixed incumbent suffix.
+        """
+        state = GraphDecisionState(
+            current_node_id=None,
+            covered_mask=0,
+            selected_mask=0,
+            remaining_steps=min(problem.max_steps, self.config.horizon_steps),
+        )
+        decisions: list[GraphDecision] = []
+        total_cost = 0.0
+        completion_cache: dict[GraphDecisionState, tuple[float, bool]] = {}
+        rollout_cache: dict[
+            tuple[GraphDecisionState, int],
+            tuple[float, bool],
+        ] = {}
+        while (
+            not self._goal_reached(problem, state.covered_mask)
+            and state.remaining_steps > 0
+        ):
+            actions, rejected = self._exhaustive_safe_actions(problem, state)
+            scored = []
+            for action in actions:
+                next_state = self._transition(state, action, node_index)
+                if self._goal_reached(problem, next_state.covered_mask):
+                    completion_cost, completion_success = 0.0, True
+                else:
+                    completion_cost, completion_success = (
+                        self._adaptive_rollout_value(
+                            problem,
+                            next_state,
+                            node_index,
+                            self.config.adaptive_rollout_depth - 1,
+                            completion_cache,
+                            rollout_cache,
+                        )
+                    )
+                if not completion_success:
+                    continue
+                rollout_cost = self._stage_cost(action[1]) + completion_cost
+                scored.append((rollout_cost, action, next_state))
+            if not scored:
+                break
+            rollout_cost, action, next_state = min(
+                scored,
+                key=lambda item: (
+                    item[0],
+                    item[1][1].stage_cost,
+                    item[1][0].node_id,
+                ),
+            )
+            node, edge, new_target_mask, _gain_ratio = action
+            stage_cost = self._stage_cost(edge)
+            total_cost += stage_cost
+            decisions.append(GraphDecision(
+                sequence=len(decisions),
+                node_id=node.node_id,
+                new_target_mask=new_target_mask,
+                coverage_ratio=self._coverage_ratio(
+                    problem,
+                    next_state.covered_mask,
+                ),
+                stage_cost=stage_cost,
+                estimated_cost_to_go=rollout_cost,
+                safe_action_count=len(actions),
+                shield_rejections=rejected,
+            ))
+            state = next_state
+        coverage = self._coverage_ratio(problem, state.covered_mask)
+        return (
+            tuple(decision.node_id for decision in decisions),
+            tuple(decisions),
+            total_cost,
+            coverage,
+            self._goal_reached(problem, state.covered_mask),
+        )
+
+    def _adaptive_rollout_value(
+        self,
+        problem: SafeGraphProblem,
+        state: GraphDecisionState,
+        node_index: dict[str, int],
+        depth: int,
+        completion_cache: dict[GraphDecisionState, tuple[float, bool]],
+        rollout_cache: dict[
+            tuple[GraphDecisionState, int],
+            tuple[float, bool],
+        ],
+    ) -> tuple[float, bool]:
+        """Evaluate a finite rollout tree with the adaptive base at leaves."""
+        if self._goal_reached(problem, state.covered_mask):
+            return 0.0, True
+        cache_key = (state, depth)
+        cached = rollout_cache.get(cache_key)
+        if cached is not None:
+            return cached
+        if depth <= 0:
+            completion = completion_cache.get(state)
+            if completion is None:
+                completion = self._adaptive_base_completion_cost(
+                    problem,
+                    state,
+                    node_index,
+                )
+                completion_cache[state] = completion
+            rollout_cache[cache_key] = completion
+            return completion
+        best_cost = math.inf
+        actions, _rejected = self._exhaustive_safe_actions(problem, state)
+        for action in actions:
+            next_state = self._transition(state, action, node_index)
+            future_cost, success = self._adaptive_rollout_value(
+                problem,
+                next_state,
+                node_index,
+                depth - 1,
+                completion_cache,
+                rollout_cache,
+            )
+            if success:
+                best_cost = min(
+                    best_cost,
+                    self._stage_cost(action[1]) + future_cost,
+                )
+        result = (best_cost, math.isfinite(best_cost))
+        rollout_cache[cache_key] = result
+        return result
+
+    def _adaptive_base_completion_cost(
+        self,
+        problem: SafeGraphProblem,
+        initial_state: GraphDecisionState,
+        node_index: dict[str, int],
+    ) -> tuple[float, bool]:
+        """Return the cost of a deterministic safe gain-efficiency policy."""
+        state = initial_state
+        total_cost = 0.0
+        while (
+            not self._goal_reached(problem, state.covered_mask)
+            and state.remaining_steps > 0
+        ):
+            actions, _rejected = self._exhaustive_safe_actions(problem, state)
+            if not actions:
+                return math.inf, False
+            action = max(
+                actions,
+                key=lambda item: (
+                    item[3] / max(0.05, self._stage_cost(item[1])),
+                    item[3],
+                    -self._stage_cost(item[1]),
+                    item[0].node_id,
+                ),
+            )
+            total_cost += self._stage_cost(action[1])
+            state = self._transition(state, action, node_index)
+        return total_cost, self._goal_reached(problem, state.covered_mask)
 
     def _learned_solution(
         self,
@@ -1138,6 +1334,27 @@ class AdvancedSafePlanner:
                 actions.append((node, edge, new_mask, gain_ratio))
         return actions
 
+    def _exhaustive_safe_actions(
+        self,
+        problem: SafeGraphProblem,
+        state: GraphDecisionState,
+    ) -> tuple[
+        list[tuple[SafeGraphNode, SafeGraphEdge, int, float]],
+        int,
+    ]:
+        """Return all shield-approved actions and account for evaluations."""
+        actions = []
+        rejected = 0
+        for node, new_mask, gain_ratio in self._candidate_actions(problem, state):
+            edge = problem.edge_evaluator(state.current_node_id, node.node_id)
+            self._safe_action_evaluations += 1
+            if not self._edge_is_safe(edge):
+                rejected += 1
+                self._shield_rejections += 1
+                continue
+            actions.append((node, edge, new_mask, gain_ratio))
+        return actions, rejected
+
     def _candidate_actions(
         self,
         problem: SafeGraphProblem,
@@ -1383,6 +1600,8 @@ class AdvancedSafePlanner:
             raise ValueError('training_episodes cannot be negative')
         if self.config.reference_improvement_passes < 0:
             raise ValueError('reference_improvement_passes cannot be negative')
+        if self.config.adaptive_rollout_depth <= 0:
+            raise ValueError('adaptive_rollout_depth must be positive')
         if self.config.critic_mode not in {'online', 'frozen'}:
             raise ValueError("critic_mode must be 'online' or 'frozen'")
         if (
@@ -1395,6 +1614,7 @@ class AdvancedSafePlanner:
         if not (
             self.config.enable_critic
             or self.config.enable_rollout
+            or self.config.enable_adaptive_rollout
             or self.config.enable_reference_safeguard
         ):
             raise ValueError('at least one policy candidate must be enabled')

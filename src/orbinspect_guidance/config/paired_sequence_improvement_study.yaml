@@ -1,0 +1,36 @@
+paired_sequence_improvement_study:
+  ros__parameters:
+    output_root: data/results
+    run_id: paper_sequence_study_20260807
+    scenario_count: 20
+    scenario_seed: 20260807
+    bootstrap_samples: 10000
+    position_half_width: [8.0, 6.0, 6.0]
+    velocity_half_width: [0.012, 0.012, 0.012]
+
+    geometry_backend: mesh
+    mesh_target_count: 90
+    mesh_occlusion_max_triangles: 0
+    candidate_radius: 34.0
+    candidate_stride: 2
+    coverage_threshold: 0.70
+    coverage_stop_ratio: 0.80
+    max_viewpoints: 20
+    min_new_targets: 1
+    transfer_duration: 90.0
+    integration_dt: 3.0
+    max_acceleration: 0.060
+    passive_safety_horizon: 0.0
+    safety_margin: 2.0
+    initial_state: [0.0, -35.0, 10.0, 0.0, 0.0, 0.0]
+    random_seed: 7
+    cw_energy_weight: 5.0
+    cw_tracking_weight: 0.18
+    cw_safety_weight: 120.0
+    adp_candidate_limit: 48
+    adp_branch_width: 8
+    adp_candidate_pool_width: 20
+    adp_lookahead_depth: 1
+    adp_training_episodes: 0
+    adp_oracle_node_limit: 0
+    adp_reference_improvement_passes: 4

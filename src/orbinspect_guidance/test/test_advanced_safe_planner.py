@@ -266,12 +266,36 @@ def test_graph_adp_local_search_can_be_run_without_critic_or_rollout() -> None:
     assert plan.local_improvement_enabled
 
 
+def test_adaptive_rollout_is_a_standalone_viable_policy() -> None:
+    plan = AdvancedSafePlanner(AdvancedPlannerConfig(
+        horizon_steps=2,
+        goal_coverage=1.0,
+        branch_width=3,
+        candidate_pool_width=3,
+        training_episodes=0,
+        action_cost=0.0,
+        enable_critic=False,
+        enable_rollout=False,
+        enable_adaptive_rollout=True,
+        adaptive_rollout_depth=2,
+        enable_reference_safeguard=False,
+        reference_improvement_passes=0,
+    )).plan(_two_step_problem())
+
+    assert plan.success
+    assert plan.node_ids == ('b', 'c')
+    assert plan.total_cost == 5.0
+    assert plan.policy_source == 'adaptive_rollout_adp'
+    assert plan.adaptive_rollout_enabled
+
+
 def test_graph_adp_rejects_configuration_without_policy_candidate() -> None:
     with pytest.raises(ValueError, match='policy candidate'):
         AdvancedSafePlanner(AdvancedPlannerConfig(
             reference_improvement_passes=0,
             enable_critic=False,
             enable_rollout=False,
+            enable_adaptive_rollout=False,
             enable_reference_safeguard=False,
         ))
 

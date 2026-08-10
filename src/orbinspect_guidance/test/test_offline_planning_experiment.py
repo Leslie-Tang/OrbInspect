@@ -111,6 +111,7 @@ def test_offline_planning_experiment_runs_certified_graph_search(tmp_path: Path)
         transfer_duration=90.0,
         integration_dt=5.0,
         max_acceleration=0.06,
+        passive_safety_horizon=0.0,
         methods=('certified_graph_search',),
         certified_candidate_limit=8,
         certified_time_limit_s=3.0,

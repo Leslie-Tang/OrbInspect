@@ -1,12 +1,12 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.10.27)  1 AUG 2026 15:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.2) (preloaded format=pdflatex 2025.3.10)  10 AUG 2026 10:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**main.tex
-(./main.tex
+**./main.tex
+(main.tex
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
-(./IEEEtaes.cls
+(IEEEtaes.cls
 Document Class: IEEEtaes 2022/02/15 V1.1
 -- See the "IEEE Aerospace and Electronic Systems" manual for usage information
 .
@@ -17,7 +17,7 @@ Document Class: IEEEtaes 2022/02/15 V1.1
 \@IEEEtrantmptoksA=\toks17
 LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 3
 84.
-(/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/psnfss\ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 -- Using 8.25in x 10.75in (IEEE Photonics PaperSize) paper.
@@ -91,22 +91,22 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <18> not available
 \@IEEEeqnnumcols=\count271
 \@IEEEeqncolcnt=\count272
 \@AffLeftSkip=\skip52
-(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/color.sty
+(D:\software\MikTex\tex/latex/graphics\color.sty
 Package: color 2024/06/23 v1.3e Standard LaTeX Color (DPC)
 
-(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics-cfg/color.cfg
+(D:\software\MikTex\tex/latex/graphics-cfg\color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package color Info: Driver file: pdftex.def on input line 149.
 
-(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics-def/pdftex.def
+(D:\software\MikTex\tex/latex/graphics-def\pdftex.def
 File: pdftex.def 2024/04/13 v1.2c Graphics/color driver for pdftex
 )
-(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/mathcolor.ltx))
-(/usr/local/texlive/2025/texmf-dist/tex/generic/iftex/ifpdf.sty
+(D:\software\MikTex\tex/latex/graphics\mathcolor.ltx))
+(D:\software\MikTex\tex/generic/iftex\ifpdf.sty
 Package: ifpdf 2019/10/25 v3.4 ifpdf legacy package. Use iftex instead.
 
-(/usr/local/texlive/2025/texmf-dist/tex/generic/iftex/iftex.sty
+(D:\software\MikTex\tex/generic/iftex\iftex.sty
 Package: iftex 2024/12/12 v1.0g TeX engine tests
 ))
 Package color Info: Redefining color white on input line 3361.
@@ -123,7 +123,7 @@ Package color Info: Redefining color white on input line 3361.
 \chkaucount=\count275
 \tempcount=\count276
 
-(/usr/local/texlive/2025/texmf-dist/tex/latex/wrapfig/wrapfig.sty
+(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/wrapfig\wrapfig.sty
 \wrapoverhang=\dimen159
 \WF@size=\dimen160
 \c@WF@wrappedlines=\count277
@@ -131,7 +131,7 @@ Package color Info: Redefining color white on input line 3361.
 \WF@everypar=\toks18
 Package: wrapfig 2003/01/31  v 3.6
 )
-(/usr/local/texlive/2025/texmf-dist/tex/latex/tools/array.sty
+(D:\software\MikTex\tex/latex/tools\array.sty
 Package: array 2024/10/17 v2.6g Tabular extension package (FMi)
 \col@sep=\dimen161
 \ar@mcellbox=\box59
@@ -149,58 +149,56 @@ Package: array 2024/10/17 v2.6g Tabular extension package (FMi)
 \store@outputbox=\box62
 \storedboxheight=\dimen164
 
-(/usr/local/texlive/2025/texmf-dist/tex/latex/hyperref/hyperref.sty
+(D:\software\MikTex\tex/latex/hyperref\hyperref.sty
 Package: hyperref 2024-11-05 v7.01l Hypertext links for LaTeX
 
-(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/keyval.sty
+(D:\software\MikTex\tex/latex/graphics\keyval.sty
 Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
 \KV@toks@=\toks20
 )
-(/usr/local/texlive/2025/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
+(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.sty
 Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
 )
-(/usr/local/texlive/2025/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
+(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/generic/kvdefinekeys\kvdefinekeys.sty
 Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
-)
-(/usr/local/texlive/2025/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+) (C:\Users\Tang\AppData\Roaming\MiKTeX\tex/generic/pdfescape\pdfescape.sty
 Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
 
-(/usr/local/texlive/2025/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty
 Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
 )
-(/usr/local/texlive/2025/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+(D:\software\MikTex\tex/generic/pdftexcmds\pdftexcmds.sty
 Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
 )
 
-(/usr/local/texlive/2025/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/generic/infwarerr\infwarerr.sty
 Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
 )
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
 ))
-(/usr/local/texlive/2025/texmf-dist/tex/latex/hycolor/hycolor.sty
+(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/hycolor\hycolor.sty
 Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
 )
-(/usr/local/texlive/2025/texmf-dist/tex/latex/hyperref/nameref.sty
+(D:\software\MikTex\tex/latex/hyperref\nameref.sty
 Package: nameref 2023-11-26 v2.56 Cross-referencing by name of section
 
-(/usr/local/texlive/2025/texmf-dist/tex/latex/refcount/refcount.sty
+(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/refcount\refcount.sty
 Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 )
-(/usr/local/texlive/2025/texmf-dist/tex/generic/gettitlestring/gettitlestring.s
-ty
+(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/generic/gettitlestring\gettitlestring
+.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
- (/usr/local/texlive/2025/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+ (C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/kvoptions\kvoptions.sty
 Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
 ))
 \c@section@level=\count279
-)
-(/usr/local/texlive/2025/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+) (D:\software\MikTex\tex/latex/etoolbox\etoolbox.sty
 Package: etoolbox 2025/02/11 v2.5l e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count280
 )
-(/usr/local/texlive/2025/texmf-dist/tex/generic/stringenc/stringenc.sty
+(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/generic/stringenc\stringenc.sty
 Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO
 )
 )
@@ -208,17 +206,17 @@ Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO
 \Hy@linkcounter=\count281
 \Hy@pagecounter=\count282
 
-(/usr/local/texlive/2025/texmf-dist/tex/latex/hyperref/pd1enc.def
+(D:\software\MikTex\tex/latex/hyperref\pd1enc.def
 File: pd1enc.def 2024-11-05 v7.01l Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 )
-(/usr/local/texlive/2025/texmf-dist/tex/generic/intcalc/intcalc.sty
+(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/generic/intcalc\intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
 \Hy@SavedSpaceFactor=\count283
 
-(/usr/local/texlive/2025/texmf-dist/tex/latex/hyperref/puenc.def
+(D:\software\MikTex\tex/latex/hyperref\puenc.def
 File: puenc.def 2024-11-05 v7.01l Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
@@ -235,17 +233,17 @@ Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4424.
 \c@Hy@tempcnt=\count284
 
-(/usr/local/texlive/2025/texmf-dist/tex/latex/url/url.sty
+(D:\software\MikTex\tex/latex/url\url.sty
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 4763.
 \XeTeXLinkMargin=\dimen166
 
-(/usr/local/texlive/2025/texmf-dist/tex/generic/bitset/bitset.sty
+(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/generic/bitset\bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
 
-(/usr/local/texlive/2025/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
+(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/generic/bigintcalc\bigintcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 )
 ))
@@ -260,7 +258,7 @@ Package hyperref Info: Link coloring ON on input line 6060.
 Package hyperref Info: Link coloring with OCG OFF on input line 6067.
 Package hyperref Info: PDF/A mode OFF on input line 6072.
 
-(/usr/local/texlive/2025/texmf-dist/tex/latex/base/atbegshi-ltx.sty
+(D:\software\MikTex\tex/latex/base\atbegshi-ltx.sty
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
 )
@@ -270,10 +268,10 @@ package with kernel methods
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
 
-(/usr/local/texlive/2025/texmf-dist/tex/latex/hyperref/hpdftex.def
+(D:\software\MikTex\tex/latex/hyperref\hpdftex.def
 File: hpdftex.def 2024-11-05 v7.01l Hyperref driver for pdfTeX
 
-(/usr/local/texlive/2025/texmf-dist/tex/latex/base/atveryend-ltx.sty
+(D:\software\MikTex\tex/latex/base\atveryend-ltx.sty
 Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend pac
 kage
 with kernel methods
@@ -281,17 +279,19 @@ with kernel methods
 \Fld@listcount=\count289
 \c@bookmark@seq@number=\count290
 
-(/usr/local/texlive/2025/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/rerunfilecheck\rerunfilecheck.s
+ty
 Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
 
-(/usr/local/texlive/2025/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/generic/uniquecounter\uniquecounter.s
+ty
 Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 )
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 85.
 )
 \Hy@SectionHShift=\skip57
-)) (/usr/local/texlive/2025/texmf-dist/tex/latex/amscls/amsthm.sty
+)) (C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/amscls\amsthm.sty
 Package: amsthm 2020/05/29 v2.20.6
 \thm@style=\toks21
 \thm@bodyfont=\toks22
@@ -303,24 +303,24 @@ Package: amsthm 2020/05/29 v2.20.6
 \thm@headsep=\skip60
 \dth@everypar=\toks26
 )
-(/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsmath.sty
+(D:\software\MikTex\tex/latex/amsmath\amsmath.sty
 Package: amsmath 2024/11/05 v2.17t AMS math features
 \@mathmargin=\skip61
 
 For additional information on amsmath, use the `?' option.
-(/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amstext.sty
+(D:\software\MikTex\tex/latex/amsmath\amstext.sty
 Package: amstext 2021/08/26 v2.01 AMS text
 
-(/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsgen.sty
+(D:\software\MikTex\tex/latex/amsmath\amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks27
 \ex@=\dimen169
 ))
-(/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsbsy.sty
+(D:\software\MikTex\tex/latex/amsmath\amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen170
 )
-(/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsopn.sty
+(D:\software\MikTex\tex/latex/amsmath\amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
 \inf@bad=\count291
@@ -371,10 +371,10 @@ LaTeX Info: Redefining \Relbar on input line 970.
 LaTeX Info: Redefining \[ on input line 2953.
 LaTeX Info: Redefining \] on input line 2954.
 )
-(/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(D:\software\MikTex\tex/latex/amsfonts\amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 
-(/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+(D:\software\MikTex\tex/latex/amsfonts\amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
@@ -382,7 +382,7 @@ LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 ))
-(/usr/local/texlive/2025/texmf-dist/tex/latex/booktabs/booktabs.sty
+(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/booktabs\booktabs.sty
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \heavyrulewidth=\dimen178
 \lightrulewidth=\dimen179
@@ -402,7 +402,7 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \@lastruleclass=\count306
 \@thisrulewidth=\dimen190
 )
-(/usr/local/texlive/2025/texmf-dist/tex/latex/float/float.sty
+(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/float\float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count307
 \float@exts=\toks32
@@ -410,16 +410,16 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@float@everytoks=\toks33
 \@floatcapt=\box66
 )
-(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/graphicx.sty
+(D:\software\MikTex\tex/latex/graphics\graphicx.sty
 Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
 
-(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/graphics.sty
+(D:\software\MikTex\tex/latex/graphics\graphics.sty
 Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
 
-(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/trig.sty
+(D:\software\MikTex\tex/latex/graphics\trig.sty
 Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
 )
-(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+(D:\software\MikTex\tex/latex/graphics-cfg\graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 106.
@@ -427,7 +427,7 @@ Package graphics Info: Driver file: pdftex.def on input line 106.
 \Gin@req@height=\dimen191
 \Gin@req@width=\dimen192
 )
-(/usr/local/texlive/2025/texmf-dist/tex/latex/tools/tabularx.sty
+(D:\software\MikTex\tex/latex/tools\tabularx.sty
 Package: tabularx 2023/12/11 v2.12a `tabularx' package (DPC)
 \TX@col@width=\dimen193
 \TX@old@table=\dimen194
@@ -437,23 +437,23 @@ Package: tabularx 2023/12/11 v2.12a `tabularx' package (DPC)
 \TX@cols=\count308
 \TX@ftn=\toks34
 )
-(/usr/local/texlive/2025/texmf-dist/tex/latex/base/textcomp.sty
+(D:\software\MikTex\tex/latex/base\textcomp.sty
 Package: textcomp 2024/04/24 v2.1b Standard LaTeX package
 )
-(/usr/local/texlive/2025/texmf-dist/tex/latex/algorithms/algorithm.sty
+(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/algorithms\algorithm.sty
 Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
 nment
 
-(/usr/local/texlive/2025/texmf-dist/tex/latex/base/ifthen.sty
+(D:\software\MikTex\tex/latex/base\ifthen.sty
 Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
 )
 \@float@every@algorithm=\toks35
 \c@algorithm=\count309
 )
-(/usr/local/texlive/2025/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
+(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/algorithmicx\algpseudocode.sty
 Package: algpseudocode 
 
-(/usr/local/texlive/2025/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
+(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/algorithmicx\algorithmicx.sty
 Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
 
 Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
@@ -469,7 +469,7 @@ Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
 \ALG@tmplength=\skip66
 )
 Document Style - pseudocode environments for use with the `algorithmicx' style
-) (/usr/local/texlive/2025/texmf-dist/tex/latex/cite/cite.sty
+) (C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/cite\cite.sty
 LaTeX Info: Redefining \cite on input line 302.
 LaTeX Info: Redefining \nocite on input line 332.
 Package: cite 2015/02/27  v 5.5
@@ -478,12 +478,11 @@ Package: cite 2015/02/27  v 5.5
 \c@proposition=\count318
 \c@remark=\count319
 
-(/usr/local/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+(D:\software\MikTex\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count320
 \l__pdf_internal_box=\box67
-)
-(./main.aux)
+) (main.aux)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
@@ -505,7 +504,7 @@ LaTeX Font Info:    ... okay on input line 41.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 41.
 LaTeX Font Info:    ... okay on input line 41.
 
-(/usr/local/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+(D:\software\MikTex\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count321
 \scratchdimen=\dimen198
@@ -518,44 +517,41 @@ LaTeX Font Info:    ... okay on input line 41.
 \MPnumerator=\count325
 \makeMPintoPDFobject=\count326
 \everyMPtoPDFconversion=\toks37
-) (/usr/local/texlive/2025/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+) (D:\software\MikTex\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 85.
 
-(/usr/local/texlive/2025/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
-e
+(D:\software\MikTex\tex/latex/00miktex\epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 Package hyperref Info: Link coloring ON on input line 41.
-
-(./main.out) (./main.out)
+ (main.out) (main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
 
 LaTeX Font Info:    Trying to load font information for OT1+phv on input line 6
 5.
-
-(/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/ot1phv.fd
+(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/psnfss\ot1phv.fd
 File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
 )
 LaTeX Font Info:    Calculating math sizes for size <8.25> on input line 65.
 LaTeX Font Info:    Trying to load font information for U+msa on input line 65.
 
 
-(/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
+(D:\software\MikTex\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Trying to load font information for U+msb on input line 65.
 
 
-(/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
+(D:\software\MikTex\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 6
 5.
 
-(/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/ts1ptm.fd
+(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/psnfss\ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
 
@@ -566,41 +562,36 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [1
 
-{/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/loc
-al/texlive/2025/texmf-dist/fonts/enc/dvips/base/8r.enc}]
-Underfull \hbox (badness 5681) in paragraph at lines 91--92
+{C:/Users/Tang/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{D:/software/Mi
+kTex/fonts/enc/dvips/base/8r.enc}]
+Underfull \hbox (badness 5681) in paragraph at lines 92--93
 []\OT1/ptm/m/n/10.28844 proofs of Markov suf-fi-ciency, com-po-si-tional
  []
 
 
-Underfull \hbox (badness 3514) in paragraph at lines 91--92
-\OT1/ptm/m/n/10.28844 preser-va-tion of stored au-dits, graph-objective
- []
 
+pdfTeX warning: pdflatex (file ./figures/orbinspect_sooa_framework_full_mesh.pd
+f): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<figures/orbinspect_sooa_framework_full_mesh.pdf, id=140, 1084.05pt x 767.86874
+pt>
+File: figures/orbinspect_sooa_framework_full_mesh.pdf Graphic file (type pdf)
+<use figures/orbinspect_sooa_framework_full_mesh.pdf>
+Package pdftex.def Info: figures/orbinspect_sooa_framework_full_mesh.pdf  used 
+on input line 98.
+(pdftex.def)             Requested size: 492.0pt x 348.50208pt.
 
-Underfull \hbox (badness 2529) in paragraph at lines 93--94
-\OT1/ptm/m/n/10.28844 vi-su-al-iza-tion in which the ex-per-i-ment writes
- []
-
-<figures/orbinspect_sooa_framework_editable_revised.pdf, id=146, 1084.05pt x 76
-7.88297pt>
-File: figures/orbinspect_sooa_framework_editable_revised.pdf Graphic file (type
- pdf)
-<use figures/orbinspect_sooa_framework_editable_revised.pdf>
-Package pdftex.def Info: figures/orbinspect_sooa_framework_editable_revised.pdf
-  used on input line 98.
-(pdftex.def)             Requested size: 492.0pt x 348.50853pt.
-
-
-LaTeX Font Info:    Calculating math sizes for size <10.28844> on input line 14
-4.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
 [2]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \hbox (badness 10000) in paragraph at lines 139--139
+[]|\OT1/ptm/m/n/8.25 Mesh-based sam-pled
+ []
+
+LaTeX Font Info:    Calculating math sizes for size <10.28844> on input line 14
+4.
+
+Underfull \vbox (badness 5862) has occurred while \output is active []
 
 
 
@@ -611,223 +602,223 @@ Underfull \hbox (badness 1565) in paragraph at lines 163--165
 
 
 
-[3 <./figures/orbinspect_sooa_framework_editable_revised.pdf>]
+[3 <./figures/orbinspect_sooa_framework_full_mesh.pdf>]
 
 
 
 [4]
 
 
-Underfull \hbox (badness 2591) in paragraph at lines 276--277
-\OT1/ptm/m/n/10.28844 selected-node masks. The ap-prox-i-mate plan-ner first
- []
-
-
 
 [5]
+<figures/adp_future/adp_rollout_architecture.pdf, id=306, 400.91783pt x 161.920
+93pt>
+File: figures/adp_future/adp_rollout_architecture.pdf Graphic file (type pdf)
+<use figures/adp_future/adp_rollout_architecture.pdf>
+Package pdftex.def Info: figures/adp_future/adp_rollout_architecture.pdf  used 
+on input line 309.
+(pdftex.def)             Requested size: 492.0pt x 198.71187pt.
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 300.
-
-Underfull \hbox (badness 1881) in paragraph at lines 306--307
-[]\OT1/ptm/m/n/10.28844 Gen-er-ate $\OML/cmm/m/it/10 ^^Y[]$ \OT1/ptm/m/n/10.288
-44 by depth-$\OML/cmm/m/it/10 d$ \OT1/ptm/m/n/10.28844 critic-guided finite-los
-s
- []
+put line 315.
 
 
 
-
-Underfull \hbox (badness 3579) in paragraph at lines 353--354
+Underfull \hbox (badness 3579) in paragraph at lines 370--371
 \OT1/ptm/m/n/10.28844 si-tion is a finite-record com-po-si-tion re-sult, not a
  []
 
 
-Underfull \vbox (badness 1983) has occurred while \output is active []
+Underfull \vbox (badness 6758) has occurred while \output is active []
 
 
 
 [6]
+Underfull \vbox (badness 2970) has occurred while \output is active []
 
 
 
-[7]
-Underfull \vbox (badness 1253) has occurred while \output is active []
+
+
+[7 <./figures/adp_future/adp_rollout_architecture.pdf>]
+<figures/adp_future/adp_development_selection.pdf, id=393, 494.25603pt x 166.24
+904pt>
+File: figures/adp_future/adp_development_selection.pdf Graphic file (type pdf)
+<use figures/adp_future/adp_development_selection.pdf>
+Package pdftex.def Info: figures/adp_future/adp_development_selection.pdf  used
+ on input line 425.
+(pdftex.def)             Requested size: 492.0pt x 165.49011pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
-<figures/gazebo_validation/full_preview_360.png, id=666, 1284.8pt x 722.7pt>
+<figures/gazebo_validation/full_preview_360.png, id=397, 1284.8pt x 722.7pt>
 File: figures/gazebo_validation/full_preview_360.png Graphic file (type png)
 <use figures/gazebo_validation/full_preview_360.png>
 Package pdftex.def Info: figures/gazebo_validation/full_preview_360.png  used o
-n input line 448.
+n input line 467.
 (pdftex.def)             Requested size: 240.0pt x 134.99864pt.
 
-Underfull \hbox (badness 2393) in paragraph at lines 458--459
-[]\OT1/ptm/m/n/10.28844 The com-plete graph pol-icy reaches 98.33% in-
- []
+Underfull \vbox (badness 5022) has occurred while \output is active []
 
 
 
 [8]
-<figures/high_coverage/adp_primary_tradeoff.pdf, id=674, 245.07935pt x 210.3272
-2pt>
-File: figures/high_coverage/adp_primary_tradeoff.pdf Graphic file (type pdf)
-<use figures/high_coverage/adp_primary_tradeoff.pdf>
-Package pdftex.def Info: figures/high_coverage/adp_primary_tradeoff.pdf  used o
-n input line 462.
-(pdftex.def)             Requested size: 240.0pt x 205.96841pt.
-
-
-<figures/high_coverage/primary_trajectory_case_study.pdf, id=676, 244.79697pt x
- 263.466pt>
-File: figures/high_coverage/primary_trajectory_case_study.pdf Graphic file (typ
-e pdf)
-<use figures/high_coverage/primary_trajectory_case_study.pdf>
-Package pdftex.def Info: figures/high_coverage/primary_trajectory_case_study.pd
-f  used on input line 493.
-(pdftex.def)             Requested size: 240.0pt x 258.3155pt.
-<figures/high_coverage/adp_component_ablation.pdf, id=679, 244.4608pt x 222.503
-77pt>
-File: figures/high_coverage/adp_component_ablation.pdf Graphic file (type pdf)
-<use figures/high_coverage/adp_component_ablation.pdf>
-Package pdftex.def Info: figures/high_coverage/adp_component_ablation.pdf  used
- on input line 506.
-(pdftex.def)             Requested size: 240.0pt x 218.44943pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-[9 <./figures/gazebo_validation/full_preview_360.png (PNG copy)> <./figures/hig
-h_coverage/adp_primary_tradeoff.pdf> <./figures/high_coverage/primary_trajector
-y_case_study.pdf>]
-<figures/high_coverage/adp_oracle_gap.pdf, id=726, 244.80753pt x 188.01758pt>
-File: figures/high_coverage/adp_oracle_gap.pdf Graphic file (type pdf)
-<use figures/high_coverage/adp_oracle_gap.pdf>
-Package pdftex.def Info: figures/high_coverage/adp_oracle_gap.pdf  used on inpu
-t line 519.
-(pdftex.def)             Requested size: 240.0pt x 184.33055pt.
-
-Underfull \vbox (badness 7981) has occurred while \output is active []
-
-
-
-<figures/high_coverage/adp_initial_condition.pdf, id=728, 243.29677pt x 211.544
-51pt>
-File: figures/high_coverage/adp_initial_condition.pdf Graphic file (type pdf)
-<use figures/high_coverage/adp_initial_condition.pdf>
-Package pdftex.def Info: figures/high_coverage/adp_initial_condition.pdf  used 
-on input line 530.
-(pdftex.def)             Requested size: 240.0pt x 208.6905pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-[10 <./figures/high_coverage/adp_component_ablation.pdf> <./figures/high_covera
-ge/adp_oracle_gap.pdf>]
-<figures/high_coverage/adp_compute_tradeoff.pdf, id=775, 246.46542pt x 200.7372
+<figures/adp_future/adp_heldout_performance.pdf, id=404, 471.86903pt x 342.8278
 pt>
-File: figures/high_coverage/adp_compute_tradeoff.pdf Graphic file (type pdf)
-<use figures/high_coverage/adp_compute_tradeoff.pdf>
-Package pdftex.def Info: figures/high_coverage/adp_compute_tradeoff.pdf  used o
-n input line 543.
-(pdftex.def)             Requested size: 240.0pt x 195.48058pt.
+File: figures/adp_future/adp_heldout_performance.pdf Graphic file (type pdf)
+<use figures/adp_future/adp_heldout_performance.pdf>
+Package pdftex.def Info: figures/adp_future/adp_heldout_performance.pdf  used o
+n input line 505.
+(pdftex.def)             Requested size: 492.0pt x 357.46887pt.
 
 
 
 
-[11 <./figures/high_coverage/adp_initial_condition.pdf> <./figures/high_coverag
-e/adp_compute_tradeoff.pdf>]
+[9 <./figures/adp_future/adp_development_selection.pdf>]
+<figures/adp_future/adp_ablation_safety.pdf, id=458, 494.24348pt x 324.00246pt>
+
+File: figures/adp_future/adp_ablation_safety.pdf Graphic file (type pdf)
+<use figures/adp_future/adp_ablation_safety.pdf>
+Package pdftex.def Info: figures/adp_future/adp_ablation_safety.pdf  used on in
+put line 543.
+(pdftex.def)             Requested size: 492.0pt x 322.54321pt.
+
+Underfull \hbox (badness 1735) in paragraph at lines 552--553
+[]\OT1/ptm/m/n/10.28844 Rollout ADP reaches 81.79% cov-er-age with 10
+ []
+
+
+
+<figures/adp_future/adp_representative_trajectory.pdf, id=460, 503.86038pt x 18
+8.41931pt>
+File: figures/adp_future/adp_representative_trajectory.pdf Graphic file (type p
+df)
+<use figures/adp_future/adp_representative_trajectory.pdf>
+Package pdftex.def Info: figures/adp_future/adp_representative_trajectory.pdf  
+used on input line 556.
+(pdftex.def)             Requested size: 492.0pt x 183.98839pt.
+
+
+[10 <./figures/gazebo_validation/full_preview_360.png (PNG copy)>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
-(./main.bbl
 
-[12]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[11 <./figures/adp_future/adp_heldout_performance.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[12 <./figures/adp_future/adp_ablation_safety.pdf> <./figures/adp_future/adp_re
+presentative_trajectory.pdf>]
+Underfull \hbox (badness 2096) in paragraph at lines 589--590
+[]\OT1/ptm/m/n/10.28844 On 30 frozen, incumbent-feasible test sce-nar-ios,
+ []
+
+
+Underfull \hbox (badness 3907) in paragraph at lines 589--590
+\OT1/ptm/m/n/10.28844 inspectable-coverage goal. ADP re-duced mean $\OT1/cmr/m/
+n/10 ^^A\OML/cmm/m/it/10 v$
+ []
+
+
+
+(main.bbl
 Underfull \hbox (badness 1789) in paragraph at lines 95--98
 \OT1/ptm/m/n/8.25 Space Sta-tion glTF Model,'' [][]$https : / / solarsystem . n
 asa . gov / gltf[]
  []
 
 )
-<figures/authors/trg.jpg, id=827, 128.08638pt x 156.585pt>
+
+[13]
+<figures/authors/trg.jpg, id=599, 128.08638pt x 156.585pt>
 File: figures/authors/trg.jpg Graphic file (type jpg)
 <use figures/authors/trg.jpg>
-Package pdftex.def Info: figures/authors/trg.jpg  used on input line 582.
+Package pdftex.def Info: figures/authors/trg.jpg  used on input line 598.
 (pdftex.def)             Requested size: 72.26924pt x 88.34883pt.
 File: figures/authors/trg.jpg Graphic file (type jpg)
 <use figures/authors/trg.jpg>
-Package pdftex.def Info: figures/authors/trg.jpg  used on input line 582.
+Package pdftex.def Info: figures/authors/trg.jpg  used on input line 598.
 (pdftex.def)             Requested size: 72.26924pt x 88.34883pt.
-<figures/authors/nx.pdf, id=830, 114.4275pt x 150.5625pt>
+
+
+pdfTeX warning: pdflatex (file ./figures/authors/nx.pdf): PDF inclusion: found 
+PDF version <1.7>, but at most version <1.5> allowed
+<figures/authors/nx.pdf, id=602, 114.4275pt x 150.5625pt>
 File: figures/authors/nx.pdf Graphic file (type pdf)
 <use figures/authors/nx.pdf>
-Package pdftex.def Info: figures/authors/nx.pdf  used on input line 585.
+Package pdftex.def Info: figures/authors/nx.pdf  used on input line 601.
 (pdftex.def)             Requested size: 68.65877pt x 90.34048pt.
 File: figures/authors/nx.pdf Graphic file (type pdf)
 <use figures/authors/nx.pdf>
-Package pdftex.def Info: figures/authors/nx.pdf  used on input line 585.
+Package pdftex.def Info: figures/authors/nx.pdf  used on input line 601.
 (pdftex.def)             Requested size: 68.65877pt x 90.34048pt.
-<figures/authors/CYW.png, id=833, 260.975pt x 343.2825pt>
+<figures/authors/CYW.png, id=605, 260.975pt x 343.2825pt>
 File: figures/authors/CYW.png Graphic file (type png)
 <use figures/authors/CYW.png>
-Package pdftex.def Info: figures/authors/CYW.png  used on input line 589.
+Package pdftex.def Info: figures/authors/CYW.png  used on input line 605.
 (pdftex.def)             Requested size: 68.6762pt x 90.33562pt.
 File: figures/authors/CYW.png Graphic file (type png)
 <use figures/authors/CYW.png>
-Package pdftex.def Info: figures/authors/CYW.png  used on input line 589.
+Package pdftex.def Info: figures/authors/CYW.png  used on input line 605.
 (pdftex.def)             Requested size: 68.6762pt x 90.33562pt.
 
 
 
 
-[13
+[14
 
  <./figures/authors/trg.jpg> <./figures/authors/nx.pdf> <./figures/authors/CYW.
-png>] (./main.aux)
+png>] (main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 636A3DF762CD660130BEF6434BF1B1CB;6143.
+(rerunfilecheck)             Checksum: F0B652F15D37AA36DDDC3508E32E35E9;5632.
  ) 
 Here is how much of TeX's memory you used:
- 12242 strings out of 473190
- 192584 string characters out of 5715799
- 605532 words of memory out of 5000000
- 35195 multiletter control sequences out of 15000+600000
- 606320 words of font info for 135 fonts, out of 8000000 for 9000
+ 12240 strings out of 473523
+ 191174 string characters out of 5727139
+ 605286 words of memory out of 5000000
+ 35171 multiletter control sequences out of 15000+600000
+ 603951 words of font info for 128 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 90i,15n,93p,1673b,577s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
-></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb><
-/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></
-usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb
-></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
-</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></
-usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></us
-r/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/
-local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/lo
-cal/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local
-/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/te
-xlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texli
-ve/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive
-/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/
-2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/20
-25/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2025
-/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/
-2025/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2025/te
-xmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2025/texmf-dist/f
-onts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type
-1/urw/times/utmr8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/time
-s/utmri8a.pfb>
-Output written on main.pdf (13 pages, 2696083 bytes).
+ 90i,15n,93p,1754b,494s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<D:/software/MikTex/fonts/type1/public/amsfonts/cm/cmbx10.pfb><D:/software/Mi
+kTex/fonts/type1/public/amsfonts/cm/cmbx7.pfb><D:/software/MikTex/fonts/type1/p
+ublic/amsfonts/cm/cmex10.pfb><D:/software/MikTex/fonts/type1/public/amsfonts/cm
+/cmmi10.pfb><D:/software/MikTex/fonts/type1/public/amsfonts/cm/cmmi5.pfb><D:/so
+ftware/MikTex/fonts/type1/public/amsfonts/cm/cmmi7.pfb><D:/software/MikTex/font
+s/type1/public/amsfonts/cm/cmmi8.pfb><D:/software/MikTex/fonts/type1/public/ams
+fonts/cm/cmr10.pfb><D:/software/MikTex/fonts/type1/public/amsfonts/cm/cmr5.pfb>
+<D:/software/MikTex/fonts/type1/public/amsfonts/cm/cmr6.pfb><D:/software/MikTex
+/fonts/type1/public/amsfonts/cm/cmr7.pfb><D:/software/MikTex/fonts/type1/public
+/amsfonts/cm/cmr8.pfb><D:/software/MikTex/fonts/type1/public/amsfonts/cm/cmss8.
+pfb><D:/software/MikTex/fonts/type1/public/amsfonts/cm/cmsy10.pfb><D:/software/
+MikTex/fonts/type1/public/amsfonts/cm/cmsy5.pfb><D:/software/MikTex/fonts/type1
+/public/amsfonts/cm/cmsy6.pfb><D:/software/MikTex/fonts/type1/public/amsfonts/c
+m/cmsy7.pfb><D:/software/MikTex/fonts/type1/public/amsfonts/cm/cmsy8.pfb><D:/so
+ftware/MikTex/fonts/type1/public/amsfonts/symbols/msbm10.pfb><D:/software/MikTe
+x/fonts/type1/urw/helvetic/uhvr8a.pfb><D:/software/MikTex/fonts/type1/urw/times
+/utmb8a.pfb><D:/software/MikTex/fonts/type1/urw/times/utmbi8a.pfb><D:/software/
+MikTex/fonts/type1/urw/times/utmr8a.pfb><D:/software/MikTex/fonts/type1/urw/tim
+es/utmri8a.pfb>
+Output written on main.pdf (14 pages, 2866504 bytes).
 PDF statistics:
- 968 PDF objects out of 1000 (max. 8388607)
- 666 compressed objects within 7 object streams
- 114 named destinations out of 1000 (max. 500000)
- 348 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 744 PDF objects out of 1000 (max. 8388607)
+ 112 named destinations out of 1000 (max. 500000)
+ 327 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,0 +1,74 @@
+{
+  "artifacts": {
+    "OrbInspectLatex/figures/paired_study/paired_performance.pdf": "93a7858f82494865f6b237cad2c9e0075d8bddcdcd43c077d58889c92de326cf",
+    "OrbInspectLatex/figures/paired_study/paired_performance.png": "3a31b9ada765b1f4fdc2341a925e2330c847a604d1ae1efcf8692001aff83fde",
+    "OrbInspectLatex/figures/paired_study/paired_safety_audit.pdf": "74704e516793f71ce9bc4d9b066b0e9ad28f65b5aa9690fa9cd8d1b0dd83033e",
+    "OrbInspectLatex/figures/paired_study/paired_safety_audit.png": "a90c765c38c499f93b31fc3df2ea74dd08f78088588b7798096747ccc1cc63b2"
+  },
+  "figure_schema_version": "orbinspect-paper-figures/v1",
+  "figure_table_trace": [
+    {
+      "artifact_id": "fig:paired-performance",
+      "caption_claim": "All 20 paired outcomes favor sequence improvement in delta-v and graph cost, and the improved sequences use fewer SOOAs on average.",
+      "limitations": [
+        "The 20 Latin-hypercube initial states are a designed stress set, not an operational probability sample.",
+        "The comparison is conditional on the fixed mesh-derived candidate graph and common success; all 20 scenarios are common successes."
+      ],
+      "source_data": {
+        "dataset_id": "paper_sequence_study_20260807",
+        "files": [
+          "data/results/paper_sequence_study_20260807/raw/paired_results.csv",
+          "data/results/paper_sequence_study_20260807/raw/method_results.csv",
+          "data/results/paper_sequence_study_20260807/summary.json"
+        ]
+      },
+      "supported_manuscript_claims": [
+        {
+          "claim": "Sequence improvement lowered graph cost and delta-v in all 20 scenarios and reduced mean selected SOOAs from 11.4 to 10.0.",
+          "locator": "Results, Paired Success and Paired Effect Estimates"
+        }
+      ],
+      "transformation": {
+        "script": "OrbInspectLatex/scripts/generate_paired_result_figures.py",
+        "sha256": "d83e6b329fc64c1a7abd4ae6591485667723804fe7a3bb3a4009a145aba1e2b2"
+      }
+    },
+    {
+      "artifact_id": "fig:paired-safety",
+      "caption_claim": "Every recorded sampled clearance remains above the two-meter mesh margin, and every peak requested input remains below the configured acceleration limit.",
+      "limitations": [
+        "Clearance values are deterministic sampled minima above the configured two-meter mesh margin.",
+        "The paired study disables the optional passive-drift audit and does not support a passive-safety claim.",
+        "The audit does not include navigation error, actuator uncertainty, target rotation, or delayed commands."
+      ],
+      "source_data": {
+        "dataset_id": "paper_sequence_study_20260807",
+        "files": [
+          "data/results/paper_sequence_study_20260807/raw/method_results.csv"
+        ]
+      },
+      "supported_manuscript_claims": [
+        {
+          "claim": "Both methods satisfy the recorded full-mesh sampled-clearance and requested-input audits in every paired scenario.",
+          "locator": "Results, Paired Success, Coverage, and Safety"
+        }
+      ],
+      "transformation": {
+        "script": "OrbInspectLatex/scripts/generate_paired_result_figures.py",
+        "sha256": "d83e6b329fc64c1a7abd4ae6591485667723804fe7a3bb3a4009a145aba1e2b2"
+      }
+    }
+  ],
+  "pair_count": 20,
+  "source_files": {
+    "data/results/paper_sequence_study_20260807/config_snapshot/result_manifest.json": "38047cc5d1c0f4f3ae6d7b71b986096e053f7a222a5b484105b1b7c92f55e3e2",
+    "data/results/paper_sequence_study_20260807/raw/method_results.csv": "693b59d5aa1216757536b06242b5054942b1360bc5c4110d7311885828711541",
+    "data/results/paper_sequence_study_20260807/raw/paired_results.csv": "537af9502bfe449e51a2efb4ef44da825f01b80e44a17d59c2615f7f7077660b",
+    "data/results/paper_sequence_study_20260807/summary.json": "b21eec2e0bf58be9c722debb57698a63ad5ae8cb9b79458cea3c0e49aeb32d01"
+  },
+  "study_schema_version": "paired-sequence-improvement/v1",
+  "transformation": {
+    "script": "OrbInspectLatex/scripts/generate_paired_result_figures.py",
+    "sha256": "d83e6b329fc64c1a7abd4ae6591485667723804fe7a3bb3a4009a145aba1e2b2"
+  }
+}

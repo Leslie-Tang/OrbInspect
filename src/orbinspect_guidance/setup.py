@@ -53,8 +53,12 @@ setup(
             'orbinspect_guidance.offline_adp_superiority_study:main',
             'offline_adp_validation_decision = '
             'orbinspect_guidance.offline_adp_validation_decision:main',
+            'offline_sequence_improvement_study = '
+            'orbinspect_guidance.offline_sequence_improvement_study:main',
             'offline_adp_superiority_plots = '
             'orbinspect_guidance.offline_adp_superiority_plots:main',
+            'offline_adp_future_analysis = '
+            'orbinspect_guidance.offline_adp_future_analysis:main',
             'offline_planning_plots = '
             'orbinspect_guidance.offline_planning_plots:main',
             'offline_validation_matrix = '

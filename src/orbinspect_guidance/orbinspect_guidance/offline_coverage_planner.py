@@ -14,11 +14,17 @@ from time import perf_counter
 from typing import Iterable
 
 from orbinspect_dynamics.hcw_dynamics import HCWDynamics
+from orbinspect_guidance.mesh_spatial_index import TriangleSpatialIndex
+from orbinspect_guidance.mesh_spatial_index import (
+    segment_triangle_intersection_fraction,
+)
 from orbinspect_perception.inspection_target_manager import InspectionTarget
 from orbinspect_perception.inspection_target_manager import InspectionTargetManager
 from orbinspect_perception.visibility_checker import CameraModel
 from orbinspect_perception.visibility_checker import VisibilityChecker
 from orbinspect_safety.keepout_zones import KeepoutZoneModel
+from orbinspect_guidance.result_provenance import collect_result_provenance
+from orbinspect_guidance.result_provenance import write_result_manifest
 
 try:
     import yaml
@@ -175,7 +181,7 @@ class IssMeshGeometry:
     """Triangle geometry for mesh target sampling and visibility checks."""
 
     triangles: tuple[MeshTriangle, ...]
-    occluders: tuple[MeshTriangle, ...]
+    spatial_index: TriangleSpatialIndex
     total_area: float
 
     @classmethod
@@ -190,10 +196,17 @@ class IssMeshGeometry:
         triangles = tuple(_mesh_triangles_from_gltf(json_doc, binary, scale))
         if not triangles:
             raise RuntimeError(f'no triangles loaded from mesh: {path}')
+        # Retain the argument for configuration compatibility.  Occlusion and
+        # safety queries now always index every triangle; a stride sample is
+        # not a valid collision or line-of-sight representation.
+        _ = occlusion_max_triangles
         total_area = sum(triangle.area for triangle in triangles)
+        spatial_index = TriangleSpatialIndex(
+            triangle.vertices for triangle in triangles
+        )
         return cls(
             triangles=triangles,
-            occluders=tuple(_downsample_triangles(triangles, occlusion_max_triangles)),
+            spatial_index=spatial_index,
             total_area=total_area,
         )
 
@@ -220,11 +233,26 @@ class IssMeshGeometry:
         start: Vector3,
         end: Vector3,
     ) -> bool:
-        """Return true when the segment intersects the downsampled mesh."""
-        for triangle in self.occluders:
-            if _segment_triangle_intersection(start, end, triangle.vertices):
-                return True
-        return False
+        """Return true when the open segment intersects the full ISS mesh."""
+        return self.spatial_index.intersects_segment(
+            start,
+            end,
+            min_fraction=1.0e-5,
+            max_fraction=1.0 - 1.0e-5,
+        )
+
+    def surface_distance(self, point: Vector3) -> float:
+        """Return unsigned distance from ``point`` to the full ISS mesh."""
+        return self.spatial_index.point_distance(point)
+
+    def segment_crosses_surface(self, start: Vector3, end: Vector3) -> bool:
+        """Return true when a swept motion segment intersects the ISS mesh."""
+        return self.spatial_index.intersects_segment(
+            start,
+            end,
+            min_fraction=1.0e-8,
+            max_fraction=1.0,
+        )
 
 
 class OfflineCoveragePlanner:
@@ -319,8 +347,8 @@ class OfflineCoveragePlanner:
                 key = tuple(round(value * 10.0) for value in position)
                 if key in seen_positions:
                     continue
-                assessment = self.keepout.assess(position)
-                if not assessment.is_safe:
+                clearance = self._station_clearance(position)
+                if clearance < 0.0:
                     continue
                 seen_positions.add(key)
                 candidates.append(
@@ -328,7 +356,7 @@ class OfflineCoveragePlanner:
                         candidate_id=f'cand_{len(candidates):04d}',
                         position=position,
                         source_target_id=target.target_id,
-                        safety_margin=assessment.clearance,
+                        safety_margin=clearance,
                     )
                 )
         if not candidates:
@@ -457,6 +485,7 @@ class OfflineCoveragePlanner:
         peak_requested_input = 0.0
         clipped_step_count = 0
         state = initial_state
+        previous_position = tuple(float(value) for value in initial_state[:3])
 
         for step, command in enumerate(requested_commands):
             requested_input = norm(command)
@@ -465,13 +494,17 @@ class OfflineCoveragePlanner:
                 clipped_step_count += 1
             state = self.dynamics.rk4_step(state, command, dt)
             speed = norm(state[3:6])
-            clearance = self.keepout.assess(state[:3]).clearance
+            position = tuple(float(value) for value in state[:3])
+            clearance = self._station_clearance(position)
+            if self._segment_crosses_station(previous_position, position):
+                clearance = min(clearance, -self.config.safety_margin)
             error = distance(state[:3], target_position)
             delta_v += norm(command) * dt
             max_speed = max(max_speed, speed)
             min_clearance = min(min_clearance, clearance)
             tracking_error_sum += error * error
             trajectory.append(((step + 1) * dt, state, command))
+            previous_position = position
 
         tracking_error = math.sqrt(tracking_error_sum / float(steps))
         terminal_error = distance(state[:3], target_position)
@@ -521,8 +554,20 @@ class OfflineCoveragePlanner:
         self._write_trajectory(raw_dir / 'planned_trajectory.csv', plan.planned_trajectory)
         self._write_coverage(raw_dir / 'coverage_over_time.csv', plan.coverage_timeline)
         self._write_coverage(raw_dir / 'coverage.csv', plan.coverage_timeline)
-        self._write_json(run_dir / 'summary.json', plan.summary)
-        self._write_json(config_dir / 'offline_planner_config.json', self._config_dict())
+        config_payload = self._config_dict()
+        provenance = collect_result_provenance(
+            result_kind='offline_coverage_plan',
+            config=config_payload,
+            mesh_path=(
+                self.config.iss_mesh_path
+                if self.config.geometry_backend == 'mesh' else None
+            ),
+        )
+        summary = dict(plan.summary)
+        summary['provenance'] = provenance
+        self._write_json(run_dir / 'summary.json', summary)
+        self._write_json(config_dir / 'offline_planner_config.json', config_payload)
+        write_result_manifest(config_dir / 'result_manifest.json', provenance)
         self._write_summary_md(run_dir / 'summary.md', plan.summary)
         return run_dir
 
@@ -859,16 +904,36 @@ class OfflineCoveragePlanner:
             drift_state = state
             margin = min(
                 margin,
-                self.keepout.assess(drift_state[:3]).minimum_distance - passive_distance,
+                self._station_surface_distance(drift_state[:3]) - passive_distance,
             )
             for _step in range(steps):
+                previous_position = tuple(float(value) for value in drift_state[:3])
                 drift_state = self.dynamics.rk4_step(drift_state, zero_control, dt)
+                current_position = tuple(float(value) for value in drift_state[:3])
                 margin = min(
                     margin,
-                    self.keepout.assess(drift_state[:3]).minimum_distance
-                    - passive_distance,
+                    self._station_surface_distance(current_position) - passive_distance,
                 )
+                if self._segment_crosses_station(previous_position, current_position):
+                    margin = min(margin, -passive_distance)
         return margin, margin >= 0.0
+
+    def _station_surface_distance(self, position: Iterable[float]) -> float:
+        """Return distance to the active station geometry representation."""
+        point = tuple(float(value) for value in position)
+        if self.config.geometry_backend == 'mesh' and self.mesh_geometry is not None:
+            return self.mesh_geometry.surface_distance(point)
+        return self.keepout.assess(point).minimum_distance
+
+    def _station_clearance(self, position: Iterable[float]) -> float:
+        """Return distance remaining above the configured keep-out margin."""
+        return self._station_surface_distance(position) - self.config.safety_margin
+
+    def _segment_crosses_station(self, start: Vector3, end: Vector3) -> bool:
+        """Return whether a swept segment crosses mesh geometry, when active."""
+        if self.config.geometry_backend == 'mesh' and self.mesh_geometry is not None:
+            return self.mesh_geometry.segment_crosses_surface(start, end)
+        return False
 
     def _passive_safety_distance(self) -> float:
         configured = float(self.config.passive_safety_distance)
@@ -1538,28 +1603,13 @@ def _segment_triangle_intersection(
     end: Vector3,
     vertices: tuple[Vector3, Vector3, Vector3],
 ) -> bool:
-    direction = subtract(end, start)
-    length = norm(direction)
-    if length <= 1.0e-12:
-        return False
-    edge_a = subtract(vertices[1], vertices[0])
-    edge_b = subtract(vertices[2], vertices[0])
-    p_vector = cross(direction, edge_b)
-    determinant = dot(edge_a, p_vector)
-    if abs(determinant) <= 1.0e-10:
-        return False
-    inv_determinant = 1.0 / determinant
-    t_vector = subtract(start, vertices[0])
-    u_value = dot(t_vector, p_vector) * inv_determinant
-    if u_value < 0.0 or u_value > 1.0:
-        return False
-    q_vector = cross(t_vector, edge_a)
-    v_value = dot(direction, q_vector) * inv_determinant
-    if v_value < 0.0 or u_value + v_value > 1.0:
-        return False
-    distance_along_ray = dot(edge_b, q_vector) * inv_determinant
-    segment_fraction = distance_along_ray / length
-    return 1.0e-4 < segment_fraction < 1.0 - 1.0e-4
+    return segment_triangle_intersection_fraction(
+        start,
+        end,
+        vertices,
+        min_fraction=1.0e-4,
+        max_fraction=1.0 - 1.0e-4,
+    ) is not None
 
 
 def _inside_camera_fov(
