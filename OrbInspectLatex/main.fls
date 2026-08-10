@@ -1,6 +1,6 @@
-PWD D:\论文\OrbInspect\OrbInspectLatex
+PWD d:\论文\OrbInspect\OrbInspectLatex
 INPUT C:\Users\Tang\AppData\Local\MiKTeX\miktex\data\le\pdftex\pdflatex.fmt
-INPUT main.tex
+INPUT d:\论文\OrbInspect\OrbInspectLatex\main.tex
 OUTPUT main.log
 INPUT D:\software\MikTex\tex\latex\hyperref\hyperref.sty
 INPUT .\IEEEtaes.cls

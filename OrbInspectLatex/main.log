@@ -1,22 +1,21 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.2) (preloaded format=pdflatex 2025.3.10)  10 AUG 2026 14:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.2) (preloaded format=pdflatex 2025.3.10)  10 AUG 2026 15:23
 entering extended mode
  restricted \write18 enabled.
+ file:line:error style messages enabled.
  %&-line parsing enabled.
-**./main.tex
-(main.tex
+**d:/论文/OrbInspect/OrbInspectLatex/main.tex
+(d:/论文/OrbInspect/OrbInspectLatex/main.tex
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
 (IEEEtaes.cls
 Document Class: IEEEtaes 2022/02/15 V1.1
--- See the "IEEE Aerospace and Electronic Systems" manual for usage information
-.
+-- See the "IEEE Aerospace and Electronic Systems" manual for usage information.
 \@IEEEtrantmpdimenA=\dimen141
 \@IEEEtrantmpdimenB=\dimen142
 \@IEEEtrantmpcountA=\count196
 \@IEEEtrantmpcountB=\count197
 \@IEEEtrantmptoksA=\toks17
-LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 3
-84.
+LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 384.
 (C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/psnfss\ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
@@ -46,7 +45,6 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <8> not available
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.28844> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 742.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <10.28844> not available
-
 (Font)              Font shape `OT1/ptm/b/it' tried instead on input line 742.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 742.
@@ -93,20 +91,15 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <18> not available
 \@AffLeftSkip=\skip52
 (D:\software\MikTex\tex/latex/graphics\color.sty
 Package: color 2024/06/23 v1.3e Standard LaTeX Color (DPC)
-
-(D:\software\MikTex\tex/latex/graphics-cfg\color.cfg
+ (D:\software\MikTex\tex/latex/graphics-cfg\color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package color Info: Driver file: pdftex.def on input line 149.
-
-(D:\software\MikTex\tex/latex/graphics-def\pdftex.def
+ (D:\software\MikTex\tex/latex/graphics-def\pdftex.def
 File: pdftex.def 2024/04/13 v1.2c Graphics/color driver for pdftex
-)
-(D:\software\MikTex\tex/latex/graphics\mathcolor.ltx))
-(D:\software\MikTex\tex/generic/iftex\ifpdf.sty
+) (D:\software\MikTex\tex/latex/graphics\mathcolor.ltx)) (D:\software\MikTex\tex/generic/iftex\ifpdf.sty
 Package: ifpdf 2019/10/25 v3.4 ifpdf legacy package. Use iftex instead.
-
-(D:\software\MikTex\tex/generic/iftex\iftex.sty
+ (D:\software\MikTex\tex/generic/iftex\iftex.sty
 Package: iftex 2024/12/12 v1.0g TeX engine tests
 ))
 Package color Info: Redefining color white on input line 3361.
@@ -122,16 +115,14 @@ Package color Info: Redefining color white on input line 3361.
 \authorcount=\count274
 \chkaucount=\count275
 \tempcount=\count276
-
-(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/wrapfig\wrapfig.sty
+ (C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/wrapfig\wrapfig.sty
 \wrapoverhang=\dimen159
 \WF@size=\dimen160
 \c@WF@wrappedlines=\count277
 \WF@box=\box58
 \WF@everypar=\toks18
 Package: wrapfig 2003/01/31  v 3.6
-)
-(D:\software\MikTex\tex/latex/tools\array.sty
+) (D:\software\MikTex\tex/latex/tools\array.sty
 Package: array 2024/10/17 v2.6g Tabular extension package (FMi)
 \col@sep=\dimen161
 \ar@mcellbox=\box59
@@ -148,47 +139,34 @@ Package: array 2024/10/17 v2.6g Tabular extension package (FMi)
 \@partialpageht=\dimen163
 \store@outputbox=\box62
 \storedboxheight=\dimen164
-
-(D:\software\MikTex\tex/latex/hyperref\hyperref.sty
+ (D:\software\MikTex\tex/latex/hyperref\hyperref.sty
 Package: hyperref 2024-11-05 v7.01l Hypertext links for LaTeX
-
-(D:\software\MikTex\tex/latex/graphics\keyval.sty
+ (D:\software\MikTex\tex/latex/graphics\keyval.sty
 Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
 \KV@toks@=\toks20
-)
-(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.sty
+) (C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.sty
 Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
-)
-(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/generic/kvdefinekeys\kvdefinekeys.sty
+) (C:\Users\Tang\AppData\Roaming\MiKTeX\tex/generic/kvdefinekeys\kvdefinekeys.sty
 Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
 ) (C:\Users\Tang\AppData\Roaming\MiKTeX\tex/generic/pdfescape\pdfescape.sty
 Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
-
-(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty
+ (C:\Users\Tang\AppData\Roaming\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty
 Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
-)
-(D:\software\MikTex\tex/generic/pdftexcmds\pdftexcmds.sty
-Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
-)
-
-(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/generic/infwarerr\infwarerr.sty
+) (D:\software\MikTex\tex/generic/pdftexcmds\pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO)
+ (C:\Users\Tang\AppData\Roaming\MiKTeX\tex/generic/infwarerr\infwarerr.sty
 Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
 )
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
-))
-(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/hycolor\hycolor.sty
+)) (C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/hycolor\hycolor.sty
 Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
-)
-(D:\software\MikTex\tex/latex/hyperref\nameref.sty
+) (D:\software\MikTex\tex/latex/hyperref\nameref.sty
 Package: nameref 2023-11-26 v2.56 Cross-referencing by name of section
-
-(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/refcount\refcount.sty
+ (C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/refcount\refcount.sty
 Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
-)
-(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/generic/gettitlestring\gettitlestring
-.sty
+) (C:\Users\Tang\AppData\Roaming\MiKTeX\tex/generic/gettitlestring\gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
  (C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/kvoptions\kvoptions.sty
 Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
@@ -197,26 +175,21 @@ Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
 ) (D:\software\MikTex\tex/latex/etoolbox\etoolbox.sty
 Package: etoolbox 2025/02/11 v2.5l e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count280
-)
-(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/generic/stringenc\stringenc.sty
-Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO
-)
+) (C:\Users\Tang\AppData\Roaming\MiKTeX\tex/generic/stringenc\stringenc.sty
+Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO)
 )
 \@linkdim=\dimen165
 \Hy@linkcounter=\count281
 \Hy@pagecounter=\count282
-
-(D:\software\MikTex\tex/latex/hyperref\pd1enc.def
+ (D:\software\MikTex\tex/latex/hyperref\pd1enc.def
 File: pd1enc.def 2024-11-05 v7.01l Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
-)
-(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/generic/intcalc\intcalc.sty
+) (C:\Users\Tang\AppData\Roaming\MiKTeX\tex/generic/intcalc\intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
 \Hy@SavedSpaceFactor=\count283
-
-(D:\software\MikTex\tex/latex/hyperref\puenc.def
+ (D:\software\MikTex\tex/latex/hyperref\puenc.def
 File: puenc.def 2024-11-05 v7.01l Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
@@ -232,20 +205,16 @@ Package hyperref Info: Backreferencing OFF on input line 4177.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4424.
 \c@Hy@tempcnt=\count284
-
-(D:\software\MikTex\tex/latex/url\url.sty
+ (D:\software\MikTex\tex/latex/url\url.sty
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 4763.
 \XeTeXLinkMargin=\dimen166
-
-(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/generic/bitset\bitset.sty
+ (C:\Users\Tang\AppData\Roaming\MiKTeX\tex/generic/bitset\bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
-
-(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/generic/bigintcalc\bigintcalc.sty
-Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
-)
+ (C:\Users\Tang\AppData\Roaming\MiKTeX\tex/generic/bigintcalc\bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
 ))
 \Fld@menulength=\count285
 \Field@Width=\dimen167
@@ -257,8 +226,7 @@ Package hyperref Info: backreferencing OFF on input line 6057.
 Package hyperref Info: Link coloring ON on input line 6060.
 Package hyperref Info: Link coloring with OCG OFF on input line 6067.
 Package hyperref Info: PDF/A mode OFF on input line 6072.
-
-(D:\software\MikTex\tex/latex/base\atbegshi-ltx.sty
+ (D:\software\MikTex\tex/latex/base\atbegshi-ltx.sty
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
 )
@@ -267,28 +235,20 @@ package with kernel methods
 \c@Hfootnote=\count288
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
-
-(D:\software\MikTex\tex/latex/hyperref\hpdftex.def
+ (D:\software\MikTex\tex/latex/hyperref\hpdftex.def
 File: hpdftex.def 2024-11-05 v7.01l Hyperref driver for pdfTeX
-
-(D:\software\MikTex\tex/latex/base\atveryend-ltx.sty
-Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend pac
-kage
+ (D:\software\MikTex\tex/latex/base\atveryend-ltx.sty
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend package
 with kernel methods
 )
 \Fld@listcount=\count289
 \c@bookmark@seq@number=\count290
-
-(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/rerunfilecheck\rerunfilecheck.s
-ty
+ (C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/rerunfilecheck\rerunfilecheck.sty
 Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
-
-(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/generic/uniquecounter\uniquecounter.s
-ty
+ (C:\Users\Tang\AppData\Roaming\MiKTeX\tex/generic/uniquecounter\uniquecounter.sty
 Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 )
-Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
-85.
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 285.
 )
 \Hy@SectionHShift=\skip57
 )) (C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/amscls\amsthm.sty
@@ -302,25 +262,21 @@ Package: amsthm 2020/05/29 v2.20.6
 \thm@postskip=\skip59
 \thm@headsep=\skip60
 \dth@everypar=\toks26
-)
-(D:\software\MikTex\tex/latex/amsmath\amsmath.sty
+) (D:\software\MikTex\tex/latex/amsmath\amsmath.sty
 Package: amsmath 2024/11/05 v2.17t AMS math features
 \@mathmargin=\skip61
 
 For additional information on amsmath, use the `?' option.
 (D:\software\MikTex\tex/latex/amsmath\amstext.sty
 Package: amstext 2021/08/26 v2.01 AMS text
-
-(D:\software\MikTex\tex/latex/amsmath\amsgen.sty
+ (D:\software\MikTex\tex/latex/amsmath\amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks27
 \ex@=\dimen169
-))
-(D:\software\MikTex\tex/latex/amsmath\amsbsy.sty
+)) (D:\software\MikTex\tex/latex/amsmath\amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen170
-)
-(D:\software\MikTex\tex/latex/amsmath\amsopn.sty
+) (D:\software\MikTex\tex/latex/amsmath\amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
 \inf@bad=\count291
@@ -370,19 +326,16 @@ LaTeX Info: Redefining \Relbar on input line 970.
 \mathdisplay@stack=\toks31
 LaTeX Info: Redefining \[ on input line 2953.
 LaTeX Info: Redefining \] on input line 2954.
-)
-(D:\software\MikTex\tex/latex/amsfonts\amssymb.sty
+) (D:\software\MikTex\tex/latex/amsfonts\amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
-
-(D:\software\MikTex\tex/latex/amsfonts\amsfonts.sty
+ (D:\software\MikTex\tex/latex/amsfonts\amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
-))
-(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/booktabs\booktabs.sty
+)) (C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/booktabs\booktabs.sty
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \heavyrulewidth=\dimen178
 \lightrulewidth=\dimen179
@@ -401,36 +354,29 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \@thisruleclass=\count305
 \@lastruleclass=\count306
 \@thisrulewidth=\dimen190
-)
-(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/float\float.sty
+) (C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/float\float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count307
 \float@exts=\toks32
 \float@box=\box65
 \@float@everytoks=\toks33
 \@floatcapt=\box66
-)
-(D:\software\MikTex\tex/latex/graphics\graphicx.sty
+) (D:\software\MikTex\tex/latex/graphics\graphicx.sty
 Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
-
-(D:\software\MikTex\tex/latex/graphics\graphics.sty
+ (D:\software\MikTex\tex/latex/graphics\graphics.sty
 Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
-
-(D:\software\MikTex\tex/latex/graphics\trig.sty
+ (D:\software\MikTex\tex/latex/graphics\trig.sty
 Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
-)
-(D:\software\MikTex\tex/latex/graphics-cfg\graphics.cfg
+) (D:\software\MikTex\tex/latex/graphics-cfg\graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 106.
 )
 \Gin@req@height=\dimen191
 \Gin@req@width=\dimen192
-)
-(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/subfig\subfig.sty
+) (C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/subfig\subfig.sty
 Package: subfig 2005/06/28 ver: 1.3 subfig package
-
-(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/caption\caption3.sty
+ (C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/caption\caption3.sty
 Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
 \caption@tempdima=\dimen193
 \captionmargin=\dimen194
@@ -442,11 +388,7 @@ Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
 \caption@hangindent=\dimen256
 Package caption Info: Unknown document class (or package),
 (caption)             standard defaults will be used.
-Package caption Info: \@makecaption = \long macro:#1#2->\ifx \@captype \@IEEEta
-blestring {\centering {\tablecapnumfont #1}\par {\tablecapfont #2}\par }\@IEEEt
-ablecaptionsepspace \else \@IEEEfigurecaptionsepspace \setbox \@tempboxa \hbox 
-{\normalfont \footnotesize {#1.}\enspace #2}\vspace *{2pt}{{\figcapnumfont #1.}
-\hspace *{9.5pt}{\figcapfont #2\par }}\fi  on input line 1175.
+Package caption Info: \@makecaption = \long macro:#1#2->\ifx \@captype \@IEEEtablestring {\centering {\tablecapnumfont #1}\par {\tablecapfont #2}\par }\@IEEEtablecaptionsepspace \else \@IEEEfigurecaptionsepspace \setbox \@tempboxa \hbox {\normalfont \footnotesize {#1.}\enspace #2}\vspace *{2pt}{{\figcapnumfont #1.}\hspace *{9.5pt}{\figcapfont #2\par }}\fi  on input line 1175.
 )
 \c@KVtest=\count308
 \sf@farskip=\skip64
@@ -461,8 +403,7 @@ ablecaptionsepspace \else \@IEEEfigurecaptionsepspace \setbox \@tempboxa \hbox
 \c@lotdepth=\count314
 \sf@top=\skip67
 \sf@bottom=\skip68
-)
-(D:\software\MikTex\tex/latex/tools\tabularx.sty
+) (D:\software\MikTex\tex/latex/tools\tabularx.sty
 Package: tabularx 2023/12/11 v2.12a `tabularx' package (DPC)
 \TX@col@width=\dimen258
 \TX@old@table=\dimen259
@@ -471,24 +412,18 @@ Package: tabularx 2023/12/11 v2.12a `tabularx' package (DPC)
 \TX@delta=\dimen262
 \TX@cols=\count315
 \TX@ftn=\toks34
-)
-(D:\software\MikTex\tex/latex/base\textcomp.sty
+) (D:\software\MikTex\tex/latex/base\textcomp.sty
 Package: textcomp 2024/04/24 v2.1b Standard LaTeX package
-)
-(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/algorithms\algorithm.sty
-Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
-nment
-
-(D:\software\MikTex\tex/latex/base\ifthen.sty
+) (C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/algorithms\algorithm.sty
+Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating environment
+ (D:\software\MikTex\tex/latex/base\ifthen.sty
 Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
 )
 \@float@every@algorithm=\toks35
 \c@algorithm=\count316
-)
-(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/algorithmicx\algpseudocode.sty
+) (C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/algorithmicx\algpseudocode.sty
 Package: algpseudocode 
-
-(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/algorithmicx\algorithmicx.sty
+ (C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/algorithmicx\algorithmicx.sty
 Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
 
 Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
@@ -512,34 +447,32 @@ Package: cite 2015/02/27  v 5.5
 \c@theorem=\count324
 \c@proposition=\count325
 \c@remark=\count326
-
-(D:\software\MikTex\tex/latex/l3backend\l3backend-pdftex.def
+ (D:\software\MikTex\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count327
 \l__pdf_internal_box=\box67
 ) (main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-
-(D:\software\MikTex\tex/context/base/mkii\supp-pdf.mkii
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+ (D:\software\MikTex\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count328
 \scratchdimen=\dimen263
@@ -554,13 +487,11 @@ LaTeX Font Info:    ... okay on input line 42.
 \everyMPtoPDFconversion=\toks37
 ) (D:\software\MikTex\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
-Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
-85.
-
-(D:\software\MikTex\tex/latex/00miktex\epstopdf-sys.cfg
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
+ (D:\software\MikTex\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring ON on input line 42.
+Package hyperref Info: Link coloring ON on input line 46.
  (main.out) (main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
@@ -568,28 +499,21 @@ Package hyperref Info: Link coloring ON on input line 42.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Trying to load font information for OT1+phv on input line 6
-5.
-(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/psnfss\ot1phv.fd
+LaTeX Font Info:    Trying to load font information for OT1+phv on input line 69.
+ (C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/psnfss\ot1phv.fd
 File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
 )
-LaTeX Font Info:    Calculating math sizes for size <8.25> on input line 65.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 65.
-
-
-(D:\software\MikTex\tex/latex/amsfonts\umsa.fd
+LaTeX Font Info:    Calculating math sizes for size <8.25> on input line 69.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 69.
+ (D:\software\MikTex\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 65.
-
-
-(D:\software\MikTex\tex/latex/amsfonts\umsb.fd
+LaTeX Font Info:    Trying to load font information for U+msb on input line 69.
+ (D:\software\MikTex\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 6
-5.
-
-(C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/psnfss\ts1ptm.fd
+LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 69.
+ (C:\Users\Tang\AppData\Roaming\MiKTeX\tex/latex/psnfss\ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
 Underfull \vbox (badness 2035) has occurred while \output is active []
@@ -603,37 +527,33 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [1
 
-{C:/Users/Tang/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{D:/software/Mi
-kTex/fonts/enc/dvips/base/8r.enc}]
-Underfull \hbox (badness 5681) in paragraph at lines 92--93
+{C:/Users/Tang/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{D:/software/MikTex/fonts/enc/dvips/base/8r.enc}]
+Underfull \hbox (badness 5681) in paragraph at lines 96--97
 []\OT1/ptm/m/n/10.28844 proofs of Markov suf-fi-ciency, com-po-si-tional
  []
 
-<figures/orbinspect_sooa_framework_complete.pdf, id=154, 1084.05pt x 767.86874p
-t>
+<figures/orbinspect_sooa_framework_complete.pdf, id=154, 1084.05pt x 767.86874pt>
 File: figures/orbinspect_sooa_framework_complete.pdf Graphic file (type pdf)
 <use figures/orbinspect_sooa_framework_complete.pdf>
-Package pdftex.def Info: figures/orbinspect_sooa_framework_complete.pdf  used o
-n input line 98.
+Package pdftex.def Info: figures/orbinspect_sooa_framework_complete.pdf  used on input line 102.
 (pdftex.def)             Requested size: 492.0pt x 348.50208pt.
 
 
 
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 139--139
+Underfull \hbox (badness 10000) in paragraph at lines 143--143
 []|\OT1/ptm/m/n/8.25 Mesh-based sam-pled
  []
 
-LaTeX Font Info:    Calculating math sizes for size <10.28844> on input line 14
-4.
+LaTeX Font Info:    Calculating math sizes for size <10.28844> on input line 148.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
 
-Underfull \hbox (badness 1565) in paragraph at lines 163--165
+Underfull \hbox (badness 1565) in paragraph at lines 167--169
 \OT1/ptm/m/n/10.28844 constant in-put model but con-structs and prop-a-gates
  []
 
@@ -648,19 +568,16 @@ Underfull \hbox (badness 1565) in paragraph at lines 163--165
 
 
 [5]
-<figures/adp_future/adp_rollout_architecture.pdf, id=269, 400.91783pt x 173.050
-52pt>
+<figures/adp_future/adp_rollout_architecture.pdf, id=271, 400.91783pt x 173.05052pt>
 File: figures/adp_future/adp_rollout_architecture.pdf Graphic file (type pdf)
 <use figures/adp_future/adp_rollout_architecture.pdf>
-Package pdftex.def Info: figures/adp_future/adp_rollout_architecture.pdf  used 
-on input line 312.
+Package pdftex.def Info: figures/adp_future/adp_rollout_architecture.pdf  used on input line 316.
 (pdftex.def)             Requested size: 492.0pt x 212.37027pt.
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 318.
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 322.
 
 
 
-Underfull \hbox (badness 3579) in paragraph at lines 373--374
+Underfull \hbox (badness 3579) in paragraph at lines 377--378
 \OT1/ptm/m/n/10.28844 si-tion is a finite-record com-po-si-tion re-sult, not a
  []
 
@@ -670,9 +587,8 @@ Underfull \vbox (badness 3271) has occurred while \output is active []
 
 
 [6]
-Underfull \hbox (badness 2253) in paragraph at lines 387--388
-[][]\OT1/ptm/m/sc/10.28844 Proposition \OT1/ptm/m/n/10.28844 5 (Base-pol-icy no
--degra-da-tion) []\OT1/ptm/m/it/10.28844 If the
+Underfull \hbox (badness 2253) in paragraph at lines 391--392
+[][]\OT1/ptm/m/sc/10.28844 Proposition \OT1/ptm/m/n/10.28844 5 (Base-pol-icy no-degra-da-tion) []\OT1/ptm/m/it/10.28844 If the
  []
 
 
@@ -687,29 +603,20 @@ Underfull \vbox (badness 7740) has occurred while \output is active []
 
 
 
-<figures/adp_future/adp_development_selection_a.pdf, id=358, 164.97435pt x 185.
-23203pt>
-File: figures/adp_future/adp_development_selection_a.pdf Graphic file (type pdf
-)
+<figures/adp_future/adp_development_selection_a.pdf, id=360, 164.97435pt x 185.23203pt>
+File: figures/adp_future/adp_development_selection_a.pdf Graphic file (type pdf)
 <use figures/adp_future/adp_development_selection_a.pdf>
-Package pdftex.def Info: figures/adp_future/adp_development_selection_a.pdf  us
-ed on input line 429.
+Package pdftex.def Info: figures/adp_future/adp_development_selection_a.pdf  used on input line 433.
 (pdftex.def)             Requested size: 154.9812pt x 174.01637pt.
-<figures/adp_future/adp_development_selection_b.pdf, id=359, 165.99171pt x 185.
-23203pt>
-File: figures/adp_future/adp_development_selection_b.pdf Graphic file (type pdf
-)
+<figures/adp_future/adp_development_selection_b.pdf, id=361, 165.99171pt x 185.23203pt>
+File: figures/adp_future/adp_development_selection_b.pdf Graphic file (type pdf)
 <use figures/adp_future/adp_development_selection_b.pdf>
-Package pdftex.def Info: figures/adp_future/adp_development_selection_b.pdf  us
-ed on input line 432.
+Package pdftex.def Info: figures/adp_future/adp_development_selection_b.pdf  used on input line 436.
 (pdftex.def)             Requested size: 154.9812pt x 172.9508pt.
-<figures/adp_future/adp_development_selection_c.pdf, id=360, 166.73375pt x 185.
-23203pt>
-File: figures/adp_future/adp_development_selection_c.pdf Graphic file (type pdf
-)
+<figures/adp_future/adp_development_selection_c.pdf, id=362, 166.73375pt x 185.23203pt>
+File: figures/adp_future/adp_development_selection_c.pdf Graphic file (type pdf)
 <use figures/adp_future/adp_development_selection_c.pdf>
-Package pdftex.def Info: figures/adp_future/adp_development_selection_c.pdf  us
-ed on input line 435.
+Package pdftex.def Info: figures/adp_future/adp_development_selection_c.pdf  used on input line 439.
 (pdftex.def)             Requested size: 154.9812pt x 172.1905pt.
 
 
@@ -718,120 +625,97 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
-<figures/adp_future/adp_heldout_performance_a.pdf, id=374, 188.71378pt x 187.08
-269pt>
+
+Underfull \vbox (badness 3068) has occurred while \output is active []
+
+
+
+[9 <./figures/adp_future/adp_development_selection_a.pdf> <./figures/adp_future/adp_development_selection_b.pdf> <./figures/adp_future/adp_development_selection_c.pdf>]
+<figures/adp_future/adp_heldout_performance_a.pdf, id=470, 188.71378pt x 187.08269pt>
 File: figures/adp_future/adp_heldout_performance_a.pdf Graphic file (type pdf)
 <use figures/adp_future/adp_heldout_performance_a.pdf>
-Package pdftex.def Info: figures/adp_future/adp_heldout_performance_a.pdf  used
- on input line 511.
+Package pdftex.def Info: figures/adp_future/adp_heldout_performance_a.pdf  used on input line 518.
 (pdftex.def)             Requested size: 231.2406pt x 229.25392pt.
-<figures/adp_future/adp_heldout_performance_b.pdf, id=375, 246.79892pt x 188.21
-504pt>
+<figures/adp_future/adp_heldout_performance_b.pdf, id=471, 246.79892pt x 188.21504pt>
 File: figures/adp_future/adp_heldout_performance_b.pdf Graphic file (type pdf)
 <use figures/adp_future/adp_heldout_performance_b.pdf>
-Package pdftex.def Info: figures/adp_future/adp_heldout_performance_b.pdf  used
- on input line 514.
+Package pdftex.def Info: figures/adp_future/adp_heldout_performance_b.pdf  used on input line 521.
 (pdftex.def)             Requested size: 231.2406pt x 176.35063pt.
-<figures/adp_future/adp_heldout_performance_c.pdf, id=376, 190.1755pt x 186.897
-63pt>
+<figures/adp_future/adp_heldout_performance_c.pdf, id=472, 190.1755pt x 186.89763pt>
 File: figures/adp_future/adp_heldout_performance_c.pdf Graphic file (type pdf)
 <use figures/adp_future/adp_heldout_performance_c.pdf>
-Package pdftex.def Info: figures/adp_future/adp_heldout_performance_c.pdf  used
- on input line 517.
+Package pdftex.def Info: figures/adp_future/adp_heldout_performance_c.pdf  used on input line 524.
 (pdftex.def)             Requested size: 231.2406pt x 227.25618pt.
-<figures/adp_future/adp_heldout_performance_d.pdf, id=377, 246.79892pt x 188.21
-504pt>
+<figures/adp_future/adp_heldout_performance_d.pdf, id=473, 246.79892pt x 188.21504pt>
 File: figures/adp_future/adp_heldout_performance_d.pdf Graphic file (type pdf)
 <use figures/adp_future/adp_heldout_performance_d.pdf>
-Package pdftex.def Info: figures/adp_future/adp_heldout_performance_d.pdf  used
- on input line 520.
+Package pdftex.def Info: figures/adp_future/adp_heldout_performance_d.pdf  used on input line 527.
 (pdftex.def)             Requested size: 231.2406pt x 176.35063pt.
-
-
-[9 <./figures/adp_future/adp_development_selection_a.pdf> <./figures/adp_future
-/adp_development_selection_b.pdf> <./figures/adp_future/adp_development_selecti
-on_c.pdf>]
-
-LaTeX Warning: Text page 10 contains only floats.
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-
-LaTeX Warning: Text page 10 contains only floats.
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-[10 <./figures/adp_future/adp_heldout_performance_a.pdf> <./figures/adp_future/
-adp_heldout_performance_b.pdf> <./figures/adp_future/adp_heldout_performance_c.
-pdf> <./figures/adp_future/adp_heldout_performance_d.pdf>]
-<figures/adp_future/adp_ablation_safety_a.pdf, id=577, 246.8491pt x 184.24332pt
->
+<figures/adp_future/adp_ablation_safety_a.pdf, id=476, 246.8491pt x 184.24332pt>
 File: figures/adp_future/adp_ablation_safety_a.pdf Graphic file (type pdf)
 <use figures/adp_future/adp_ablation_safety_a.pdf>
-Package pdftex.def Info: figures/adp_future/adp_ablation_safety_a.pdf  used on 
-input line 559.
+Package pdftex.def Info: figures/adp_future/adp_ablation_safety_a.pdf  used on input line 566.
 (pdftex.def)             Requested size: 236.1579pt x 176.26431pt.
-<figures/adp_future/adp_ablation_safety_b.pdf, id=578, 248.18848pt x 184.24332p
-t>
+<figures/adp_future/adp_ablation_safety_b.pdf, id=477, 248.18848pt x 184.24332pt>
 File: figures/adp_future/adp_ablation_safety_b.pdf Graphic file (type pdf)
 <use figures/adp_future/adp_ablation_safety_b.pdf>
-Package pdftex.def Info: figures/adp_future/adp_ablation_safety_b.pdf  used on 
-input line 562.
+Package pdftex.def Info: figures/adp_future/adp_ablation_safety_b.pdf  used on input line 569.
 (pdftex.def)             Requested size: 236.1579pt x 175.31128pt.
-<figures/adp_future/adp_ablation_safety_c.pdf, id=579, 248.1822pt x 184.80544pt
->
+<figures/adp_future/adp_ablation_safety_c.pdf, id=478, 248.1822pt x 184.80544pt>
 File: figures/adp_future/adp_ablation_safety_c.pdf Graphic file (type pdf)
 <use figures/adp_future/adp_ablation_safety_c.pdf>
-Package pdftex.def Info: figures/adp_future/adp_ablation_safety_c.pdf  used on 
-input line 565.
+Package pdftex.def Info: figures/adp_future/adp_ablation_safety_c.pdf  used on input line 572.
 (pdftex.def)             Requested size: 236.1579pt x 175.8574pt.
-<figures/adp_future/adp_ablation_safety_d.pdf, id=580, 247.54356pt x 184.1668pt
->
+<figures/adp_future/adp_ablation_safety_d.pdf, id=479, 247.54356pt x 184.1668pt>
 File: figures/adp_future/adp_ablation_safety_d.pdf Graphic file (type pdf)
 <use figures/adp_future/adp_ablation_safety_d.pdf>
-Package pdftex.def Info: figures/adp_future/adp_ablation_safety_d.pdf  used on 
-input line 568.
+Package pdftex.def Info: figures/adp_future/adp_ablation_safety_d.pdf  used on input line 575.
 (pdftex.def)             Requested size: 236.1579pt x 175.70213pt.
 
-Underfull \hbox (badness 1735) in paragraph at lines 577--578
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+
+Underfull \hbox (badness 1735) in paragraph at lines 584--585
 []\OT1/ptm/m/n/10.28844 Rollout ADP reaches 81.79% cov-er-age with 10
  []
 
-
-
-<figures/adp_future/adp_representative_trajectory_a.pdf, id=582, 178.35219pt x 
-179.30225pt>
-File: figures/adp_future/adp_representative_trajectory_a.pdf Graphic file (type
- pdf)
+<figures/adp_future/adp_representative_trajectory_a.pdf, id=481, 178.35219pt x 179.30225pt>
+File: figures/adp_future/adp_representative_trajectory_a.pdf Graphic file (type pdf)
 <use figures/adp_future/adp_representative_trajectory_a.pdf>
-Package pdftex.def Info: figures/adp_future/adp_representative_trajectory_a.pdf
-  used on input line 582.
+Package pdftex.def Info: figures/adp_future/adp_representative_trajectory_a.pdf  used on input line 589.
 (pdftex.def)             Requested size: 154.9812pt x 155.8111pt.
-<figures/adp_future/adp_representative_trajectory_b.pdf, id=583, 170.8533pt x 1
-84.60155pt>
-File: figures/adp_future/adp_representative_trajectory_b.pdf Graphic file (type
- pdf)
+<figures/adp_future/adp_representative_trajectory_b.pdf, id=482, 170.8533pt x 184.60155pt>
+File: figures/adp_future/adp_representative_trajectory_b.pdf Graphic file (type pdf)
 <use figures/adp_future/adp_representative_trajectory_b.pdf>
-Package pdftex.def Info: figures/adp_future/adp_representative_trajectory_b.pdf
-  used on input line 585.
+Package pdftex.def Info: figures/adp_future/adp_representative_trajectory_b.pdf  used on input line 592.
 (pdftex.def)             Requested size: 154.9812pt x 167.46092pt.
-<figures/adp_future/adp_representative_trajectory_c.pdf, id=584, 169.51706pt x 
-184.31932pt>
-File: figures/adp_future/adp_representative_trajectory_c.pdf Graphic file (type
- pdf)
+<figures/adp_future/adp_representative_trajectory_c.pdf, id=483, 169.51706pt x 184.31932pt>
+File: figures/adp_future/adp_representative_trajectory_c.pdf Graphic file (type pdf)
 <use figures/adp_future/adp_representative_trajectory_c.pdf>
-Package pdftex.def Info: figures/adp_future/adp_representative_trajectory_c.pdf
-  used on input line 588.
+Package pdftex.def Info: figures/adp_future/adp_representative_trajectory_c.pdf  used on input line 595.
 (pdftex.def)             Requested size: 154.9812pt x 168.5127pt.
 
 
-[11]
+[10]
+
+LaTeX Warning: Text page 11 contains only floats.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+
+LaTeX Warning: Text page 11 contains only floats.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[11 <./figures/adp_future/adp_heldout_performance_a.pdf> <./figures/adp_future/adp_heldout_performance_b.pdf> <./figures/adp_future/adp_heldout_performance_c.pdf> <./figures/adp_future/adp_heldout_performance_d.pdf>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
@@ -841,111 +725,88 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
-[12 <./figures/adp_future/adp_ablation_safety_a.pdf> <./figures/adp_future/adp_
-ablation_safety_b.pdf> <./figures/adp_future/adp_ablation_safety_c.pdf> <./figu
-res/adp_future/adp_ablation_safety_d.pdf>]
+[12 <./figures/adp_future/adp_ablation_safety_a.pdf> <./figures/adp_future/adp_ablation_safety_b.pdf> <./figures/adp_future/adp_ablation_safety_c.pdf> <./figures/adp_future/adp_ablation_safety_d.pdf>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
 
-Underfull \hbox (badness 2096) in paragraph at lines 621--622
+Underfull \hbox (badness 2096) in paragraph at lines 635--636
 []\OT1/ptm/m/n/10.28844 On 30 frozen, incumbent-feasible test sce-nar-ios,
  []
 
 
-Underfull \hbox (badness 3907) in paragraph at lines 621--622
-\OT1/ptm/m/n/10.28844 inspectable-coverage goal. ADP re-duced mean $\OT1/cmr/m/
-n/10 ^^A\OML/cmm/m/it/10 v$
+Underfull \hbox (badness 3907) in paragraph at lines 635--636
+\OT1/ptm/m/n/10.28844 inspectable-coverage goal. ADP re-duced mean $\OT1/cmr/m/n/10 ^^A\OML/cmm/m/it/10 v$
  []
 
 
+Underfull \vbox (badness 3492) has occurred while \output is active []
 
-[13 <./figures/adp_future/adp_representative_trajectory_a.pdf> <./figures/adp_f
-uture/adp_representative_trajectory_b.pdf> <./figures/adp_future/adp_representa
-tive_trajectory_c.pdf>] (main.bbl
+
+
+[13 <./figures/adp_future/adp_representative_trajectory_a.pdf> <./figures/adp_future/adp_representative_trajectory_b.pdf> <./figures/adp_future/adp_representative_trajectory_c.pdf>] (main.bbl
 
 
 Underfull \hbox (badness 1796) in paragraph at lines 110--114
-\OT1/ptm/m/n/8.25 Space Sta-tion glTF Model,'' [][]$https : / / science . nasa 
-. gov / resource /
+\OT1/ptm/m/n/8.25 Space Sta-tion glTF Model,'' [][]$https : / / science . nasa . gov / resource /
  []
 
 
 Underfull \hbox (badness 2689) in paragraph at lines 110--114
-\OT1/ptm/m/n/8.25 international-[]space-[]station-[]3d-[]model/$[][], 2019, up-
-dated Nov. 2,
+\OT1/ptm/m/n/8.25 international-[]space-[]station-[]3d-[]model/$[][], 2019, up-dated Nov. 2,
  []
 
 )
-<figures/authors/trg.jpg, id=732, 128.08638pt x 156.585pt>
+<figures/authors/trg.jpg, id=738, 128.08638pt x 156.585pt>
 File: figures/authors/trg.jpg Graphic file (type jpg)
 <use figures/authors/trg.jpg>
-Package pdftex.def Info: figures/authors/trg.jpg  used on input line 633.
+Package pdftex.def Info: figures/authors/trg.jpg  used on input line 647.
 (pdftex.def)             Requested size: 72.26924pt x 88.34883pt.
 File: figures/authors/trg.jpg Graphic file (type jpg)
 <use figures/authors/trg.jpg>
-Package pdftex.def Info: figures/authors/trg.jpg  used on input line 633.
+Package pdftex.def Info: figures/authors/trg.jpg  used on input line 647.
 (pdftex.def)             Requested size: 72.26924pt x 88.34883pt.
-<figures/authors/nx.pdf, id=735, 114.4275pt x 150.5625pt>
+<figures/authors/nx.pdf, id=741, 114.4275pt x 150.5625pt>
 File: figures/authors/nx.pdf Graphic file (type pdf)
 <use figures/authors/nx.pdf>
-Package pdftex.def Info: figures/authors/nx.pdf  used on input line 636.
+Package pdftex.def Info: figures/authors/nx.pdf  used on input line 650.
 (pdftex.def)             Requested size: 68.65877pt x 90.34048pt.
 File: figures/authors/nx.pdf Graphic file (type pdf)
 <use figures/authors/nx.pdf>
-Package pdftex.def Info: figures/authors/nx.pdf  used on input line 636.
+Package pdftex.def Info: figures/authors/nx.pdf  used on input line 650.
 (pdftex.def)             Requested size: 68.65877pt x 90.34048pt.
-<figures/authors/CYW.png, id=738, 260.975pt x 343.2825pt>
+<figures/authors/CYW.png, id=744, 260.975pt x 343.2825pt>
 File: figures/authors/CYW.png Graphic file (type png)
 <use figures/authors/CYW.png>
-Package pdftex.def Info: figures/authors/CYW.png  used on input line 640.
+Package pdftex.def Info: figures/authors/CYW.png  used on input line 654.
 (pdftex.def)             Requested size: 68.6762pt x 90.33562pt.
 File: figures/authors/CYW.png Graphic file (type png)
 <use figures/authors/CYW.png>
-Package pdftex.def Info: figures/authors/CYW.png  used on input line 640.
+Package pdftex.def Info: figures/authors/CYW.png  used on input line 654.
 (pdftex.def)             Requested size: 68.6762pt x 90.33562pt.
 
 
-[14 <./figures/authors/trg.jpg> <./figures/authors/nx.pdf> <./figures/authors/C
-YW.png>] (main.aux)
+[14 <./figures/authors/trg.jpg> <./figures/authors/nx.pdf> <./figures/authors/CYW.png>] (main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 8D714CC1AFFE2803D5FD4A160E74BAA3;5617.
+(rerunfilecheck)             Checksum: FFE03847EAFC33DE4BBE77D0A2C7253B;5624.
  ) 
 Here is how much of TeX's memory you used:
- 13340 strings out of 473523
- 215772 string characters out of 5727139
- 624883 words of memory out of 5000000
- 36248 multiletter control sequences out of 15000+600000
+ 13346 strings out of 473523
+ 216012 string characters out of 5727139
+ 624920 words of memory out of 5000000
+ 36252 multiletter control sequences out of 15000+600000
  603444 words of font info for 127 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 90i,15n,93p,1790b,573s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<D:/software/MikTex/fonts/type1/public/amsfonts/cm/cmbx10.pfb><D:/software/Mi
-kTex/fonts/type1/public/amsfonts/cm/cmbx7.pfb><D:/software/MikTex/fonts/type1/p
-ublic/amsfonts/cm/cmex10.pfb><D:/software/MikTex/fonts/type1/public/amsfonts/cm
-/cmmi10.pfb><D:/software/MikTex/fonts/type1/public/amsfonts/cm/cmmi5.pfb><D:/so
-ftware/MikTex/fonts/type1/public/amsfonts/cm/cmmi6.pfb><D:/software/MikTex/font
-s/type1/public/amsfonts/cm/cmmi7.pfb><D:/software/MikTex/fonts/type1/public/ams
-fonts/cm/cmmi8.pfb><D:/software/MikTex/fonts/type1/public/amsfonts/cm/cmr10.pfb
-><D:/software/MikTex/fonts/type1/public/amsfonts/cm/cmr5.pfb><D:/software/MikTe
-x/fonts/type1/public/amsfonts/cm/cmr6.pfb><D:/software/MikTex/fonts/type1/publi
-c/amsfonts/cm/cmr7.pfb><D:/software/MikTex/fonts/type1/public/amsfonts/cm/cmr8.
-pfb><D:/software/MikTex/fonts/type1/public/amsfonts/cm/cmss8.pfb><D:/software/M
-ikTex/fonts/type1/public/amsfonts/cm/cmsy10.pfb><D:/software/MikTex/fonts/type1
-/public/amsfonts/cm/cmsy5.pfb><D:/software/MikTex/fonts/type1/public/amsfonts/c
-m/cmsy6.pfb><D:/software/MikTex/fonts/type1/public/amsfonts/cm/cmsy7.pfb><D:/so
-ftware/MikTex/fonts/type1/public/amsfonts/cm/cmsy8.pfb><D:/software/MikTex/font
-s/type1/public/amsfonts/symbols/msbm10.pfb><D:/software/MikTex/fonts/type1/urw/
-helvetic/uhvr8a.pfb><D:/software/MikTex/fonts/type1/urw/times/utmb8a.pfb><D:/so
-ftware/MikTex/fonts/type1/urw/times/utmbi8a.pfb><D:/software/MikTex/fonts/type1
-/urw/times/utmr8a.pfb><D:/software/MikTex/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (14 pages, 2319110 bytes).
+ 90i,15n,93p,1825b,573s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<D:/software/MikTex/fonts/type1/public/amsfonts/cm/cmbx10.pfb><D:/software/MikTex/fonts/type1/public/amsfonts/cm/cmbx7.pfb><D:/software/MikTex/fonts/type1/public/amsfonts/cm/cmex10.pfb><D:/software/MikTex/fonts/type1/public/amsfonts/cm/cmmi10.pfb><D:/software/MikTex/fonts/type1/public/amsfonts/cm/cmmi5.pfb><D:/software/MikTex/fonts/type1/public/amsfonts/cm/cmmi6.pfb><D:/software/MikTex/fonts/type1/public/amsfonts/cm/cmmi7.pfb><D:/software/MikTex/fonts/type1/public/amsfonts/cm/cmmi8.pfb><D:/software/MikTex/fonts/type1/public/amsfonts/cm/cmr10.pfb><D:/software/MikTex/fonts/type1/public/amsfonts/cm/cmr5.pfb><D:/software/MikTex/fonts/type1/public/amsfonts/cm/cmr6.pfb><D:/software/MikTex/fonts/type1/public/amsfonts/cm/cmr7.pfb><D:/software/MikTex/fonts/type1/public/amsfonts/cm/cmr8.pfb><D:/software/MikTex/fonts/type1/public/amsfonts/cm/cmss8.pfb><D:/software/MikTex/fonts/type1/public/amsfonts/cm/cmsy10.pfb><D:/software/MikTex/fonts/type1/public/amsfonts/cm/cmsy5.pfb><D:/software/MikTex/fonts/type1/public/amsfonts/cm/cmsy6.pfb><D:/software/MikTex/fonts/type1/public/amsfonts/cm/cmsy7.pfb><D:/software/MikTex/fonts/type1/public/amsfonts/cm/cmsy8.pfb><D:/software/MikTex/fonts/type1/public/amsfonts/symbols/msbm10.pfb><D:/software/MikTex/fonts/type1/urw/helvetic/uhvr8a.pfb><D:/software/MikTex/fonts/type1/urw/times/utmb8a.pfb><D:/software/MikTex/fonts/type1/urw/times/utmbi8a.pfb><D:/software/MikTex/fonts/type1/urw/times/utmr8a.pfb><D:/software/MikTex/fonts/type1/urw/times/utmri8a.pfb>
+Output written on main.pdf (14 pages, 2321598 bytes).
 PDF statistics:
- 885 PDF objects out of 1000 (max. 8388607)
+ 891 PDF objects out of 1000 (max. 8388607)
  127 named destinations out of 1000 (max. 500000)
  372 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -33,6 +33,10 @@
 \newcommand{\dv}{\Delta v}
 \newcommand{\unit}[2]{#1~#2}
 
+% Enable only after the Ubuntu/Jazzy campaign has produced audited results.
+\newif\ifincludeROSVerificationResults
+\includeROSVerificationResultsfalse
+
 \newtheorem{theorem}{Theorem}
 \newtheorem{proposition}{Proposition}
 \theoremstyle{remark}
@@ -116,7 +120,7 @@ OrbInspect is positioned at the discrete-action level. Its contribution is neith
 \section{System and Observation Model}
 \label{sec:system}
 
-The present study addresses offline planning. It receives a known station mesh, an initial relative state, camera parameters, a keep-out model, and actuation limits, and returns a time-indexed translational reference, a camera-boresight stream, selected SOOA records, and summary metrics. A future ROS~2 replay layer may publish these records, but no ROS or Gazebo result is used to support the quantitative claims in this manuscript. Table~\ref{tab:assumptions} states the modeling assumptions and their implications for interpreting the results.
+The present study addresses offline planning. It receives a known station mesh, an initial relative state, camera parameters, a keep-out model, and actuation limits, and returns a time-indexed translational reference, a camera-boresight stream, selected SOOA records, and summary metrics. Section~\ref{sec:simulation}-\ref{sec:ros-verification-protocol} predeclares how these records will be tested in ROS~2, but no ROS or Gazebo result is used to support the current quantitative claims. Table~\ref{tab:assumptions} states the modeling assumptions and their implications for interpreting the results.
 
 \begin{table*}[t]
   \centering
@@ -468,11 +472,14 @@ The primary endpoint is the paired penalized graph-cost difference $D_J=J_{\math
 
 The result bundle contains the configuration snapshot, graph and scenario archives, one row per method--scenario pair, statistical output, figure source tables, and script hashes. A second run loads the frozen graph and repeats all 350 method evaluations. Reproducibility is declared only if graph content, scenarios, routes, success flags, coverage, costs, and physical audit metrics match exactly; wall-clock fields are excluded. Figure captions are linked to source files and transformations in a machine-readable trace manifest. The case-study generator reconstructs its routes from the archived scenario and aborts if route cost differs from the held-out row.
 
-\subsection{ROS 2 Execution Interface and Deferred Validation}
+\subsection{Prospective ROS 2 Closed-Loop Verification Protocol}
+\label{sec:ros-verification-protocol}
 
-The offline records connect to a ROS~2 Jazzy execution stack without making Gazebo physics the source of truth. The trajectory replay node reads the saved state, viewpoint, and attitude streams and publishes position, state, and attitude references on dedicated chaser topics. A tracking controller produces a nominal acceleration, the safety filter publishes the command consumed by the HCW dynamics node, and the dynamics node publishes chaser odometry. The evaluation node records trajectory, control, coverage, safety, planner, and mission-event CSV files together with a rosbag; RViz2 and Gazebo Harmonic visualize the same ROS state. This interface preserves the intended separation between planning, closed-loop execution, state propagation, logging, and visualization.
+The frozen records connect to ROS~2 Jazzy without making Gazebo physics the source of truth. A replay node publishes the archived translational and camera-attitude references; the controller and safety filter produce the command consumed by the HCW dynamics node; and that node alone propagates chaser odometry. The logger records the six core CSV streams with a rosbag, while RViz2 and Gazebo Harmonic visualize the same ROS state.
 
-The baseline Jazzy workspace previously completed a short infrastructure smoke run, but that run predates the current SOOA graph planner and is not presented as validation. Closed-loop replay of the frozen routes is deferred until the target Ubuntu~24.04 and ROS~2 Jazzy environment is available. The replay protocol will report planned-versus-executed position error, realized $\Delta v$, minimum executed clearance, safety-filter intervention count, achieved coverage, dropped-reference count, and completion status. These quantities lie outside the present evidence boundary; no synthetic ROS measurements are introduced into the offline comparisons.
+Conversion must preserve node order, timing, scenario initial state, mean motion, $d_{\mathrm{safe}}=\unit{2}{m}$, and $u_{\max}=0.060~\mathrm{m/s^2}$. Archived trajectories are used directly, without standoff reconstruction, smoothing, looping, or control replacement. Direct replay first verifies files, topics, transforms, ordering, identifiers, and logging, but supplies no dynamical evidence. Closed-loop replay then inserts the controller, filter, and HCW node. Tuning is restricted to the 12 validation scenarios; the frozen configuration is applied to paired ADP and local-search runs on all 30 test scenarios, with the 20 shifted cases secondary. Test scenario~2 is illustrative and is run only after the freeze.
+
+Each credited observation must satisfy position error $\le\varepsilon_r=\unit{0.5}{m}$ and terminal speed $\le\varepsilon_v=\unit{0.05}{m/s}$; executed clearance above the mesh margin must remain nonnegative, input must not exceed $u_{\max}$, no swept mesh crossing may occur, no reference may be dropped, and $C^{\mathrm{insp}}\ge0.80$ must be reached within 14 SOOAs. We will report realized $\Delta v$, RMS and maximum tracking error, filter interventions, coverage, completion time, and action count. The ROS claim gate requires no lower ADP success and an upper 95\% paired-bootstrap bound below zero for $\Delta v_{\mathrm{ADP}}-\Delta v_{\mathrm{local}}$. Every run must contain configuration and environment snapshots, the six CSV files, rosbag, summaries, and source revision. The older Jazzy smoke run predates the current planner; until this protocol is completed on Ubuntu~24.04, ROS quantities remain outside the evidence boundary.
 
 \section{Results}
 \label{sec:results}
@@ -590,6 +597,13 @@ Rollout ADP reaches 81.79\% coverage with 10 SOOAs, graph cost 99.204, and \unit
   \label{fig:representative-trajectory}
 \end{figure*}
 
+% This source-level insertion point is intentionally disabled until real ROS 2
+% measurements exist. Populate sections/ros_verification_results.tex and set
+% \includeROSVerificationResultstrue only after the frozen protocol passes.
+\ifincludeROSVerificationResults
+  \input{sections/ros_verification_results}
+\fi
+
 \subsection{Reproducibility and Evidence Boundary}
 
 The frozen-graph rerun reproduces every non-timing field in all 350 method--scenario rows, including selected node sequences, success, coverage, graph cost, $\Delta v$, clearance, and peak input. The result supports a bounded statement: within the frozen SOOA library and incumbent-feasible scenario generator, depth-three rollout ADP consistently improves the strongest local baseline while retaining sampled graph viability. It does not establish superiority for scenarios without a feasible base completion, for different meshes or transfer durations, or under navigation, actuator, and model uncertainty.
@@ -609,9 +623,9 @@ The relation to formation-based observation is similarly complementary. Near-nat
 
 The safety evidence remains limited to the stated model. HCW translation assumes a circular chief and a fixed LVLH target. Clearance samples and swept surface-intersection tests use the complete deterministic ISS mesh, but they do not create a closed-loop proof under navigation error, target rotation, delayed commands, actuator uncertainty, or unmodeled disturbances. The study disables the optional passive-drift audit, so no passive-safety conclusion should be drawn. The full solver also has no continuous-space optimality guarantee.
 
-The camera evidence has comparable boundaries. The visibility model includes range, field of view, incidence, and mesh occlusion, but the offline graph credits a prescribed terminal observation rather than simulating exposure interruption or closed-loop dwell. Illumination, blur, plume contamination, camera slew, and detailed attitude dynamics are omitted. ROS~2 and Gazebo replay remain implementation work and are not treated as validation in the present manuscript.
+The camera evidence has comparable boundaries. The visibility model includes range, field of view, incidence, and mesh occlusion, but the offline graph credits a prescribed terminal observation rather than simulating exposure interruption or closed-loop dwell. Illumination, blur, plume contamination, camera slew, and detailed attitude dynamics are omitted. The ROS~2 interface and execution gates are specified in Section~\ref{sec:simulation}-\ref{sec:ros-verification-protocol}, but the corresponding measurements remain pending and are not treated as validation in the present manuscript.
 
-A flight-oriented development path should first validate closed-loop replay on Ubuntu~24.04 with ROS~2 Jazzy. The next algorithmic study should deliberately include incumbent-infeasible scenarios and compare viability repair, beam rollout, and constrained fitted values under a fixed test protocol. Batched full-mesh edge evaluation and cached passive audits can then support passive-drift experiments. Uncertainty-inflated keep-out volumes, camera-slew and illumination constraints, navigation error, a rotating body frame, and an optional Basilisk backend should follow while retaining HCW as a transparent regression reference.
+The next implementation step is the frozen closed-loop replay campaign defined in Section~\ref{sec:simulation}-\ref{sec:ros-verification-protocol}. The next algorithmic study should deliberately include incumbent-infeasible scenarios and compare viability repair, beam rollout, and constrained fitted values under a fixed test protocol. Batched full-mesh edge evaluation and cached passive audits can then support passive-drift experiments. Uncertainty-inflated keep-out volumes, camera-slew and illumination constraints, navigation error, a rotating body frame, and an optional Basilisk backend should follow while retaining HCW as a transparent regression reference.
 
 \section{Conclusion}
 \label{sec:conclusion}
