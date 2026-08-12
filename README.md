@@ -149,6 +149,54 @@ Real ISS visual trajectory demo:
 ros2 launch orbinspect_bringup demo_real_iss_trajectory.launch.py
 ```
 
+Corrected Gazebo Harmonic + RViz2 verification (real-time HCW closed loop):
+
+```bash
+ros2 launch orbinspect_bringup demo_corrected_rviz.launch.py time_scale:=1.0
+```
+
+This single launch starts the ROS-native HCW dynamics, LQR controller,
+safety filter, verification evaluator, CSV logger, Gazebo Harmonic ISS/chaser
+visualization, and RViz2 trajectory view. Gazebo is visualization only; the
+HCW dynamics node remains the spacecraft-state source of truth. The corrected
+demo records the paper topic set to rosbag2 by default; pass
+`record_bag:=false` only for a disposable visualization check. Use a new
+result-directory suffix if a selected `run_id` already exists. The wrapper
+does this automatically when `run_id` is omitted. The frozen input bundle
+must already exist; generate it with the exporter documented in the paper
+experiment section below if it is absent. The explicit accelerated graphical
+mode is for demo capture and must not replace the headless quantitative
+campaign.
+
+Full-planning RViz video demo with the live chaser-camera view:
+
+```bash
+ros2 launch orbinspect_bringup demo_corrected_rviz.launch.py
+```
+
+The wrapper has no required arguments. It selects corrected scenario
+`validation_002`, displays Gazebo and RViz with the live chaser camera, waits
+10 s for the windows to open, and runs the full task at 5x mission time.
+
+The accepted H.264 recording is saved at
+`data/results/ros_rviz_full_planning_demo_corrected_validation002_radius080_20260812/videos/orbinspect_rviz_full_planning_demo_validation_002.mp4`.
+It shows the full 900 s planned task at 5x mission time, including the RViz
+trajectory/FOV view and a synchronized inset from
+`/chaser/camera/image`. Regenerate the annotated video and its SHA-256
+provenance manifest from the retained raw captures with:
+
+```bash
+python3 OrbInspectLatex/scripts/compose_rviz_planning_demo_video.py \
+  --run-dir data/results/ros_rviz_full_planning_demo_corrected_validation002_radius080_20260812
+```
+
+This demo credited all 10 planned views, reached 81.33% coverage, and passed
+the version-2 full-mesh finite-body audit with zero surface crossings and
+5.692 m minimum clearance above the required margin. It is a demonstration
+artifact, not an additional quantitative campaign row. Gazebo supplies
+visualization and the camera only; the ROS-native HCW node remains the state
+source of truth.
+
 Optional Basilisk backend check and launch:
 
 ```bash

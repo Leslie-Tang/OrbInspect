@@ -1,10 +1,11 @@
+import json
 import math
 from pathlib import Path
 
 from orbinspect_guidance.planned_trajectory_replay_node import _build_standoff_trajectory
 from orbinspect_guidance.planned_trajectory_replay_node import _continuous_attitudes
-from orbinspect_guidance.planned_trajectory_replay_node import _fov_corners
 from orbinspect_guidance.planned_trajectory_replay_node import _finite_difference_acceleration
+from orbinspect_guidance.planned_trajectory_replay_node import _fov_corners
 from orbinspect_guidance.planned_trajectory_replay_node import _load_attitudes
 from orbinspect_guidance.planned_trajectory_replay_node import _load_trajectory
 from orbinspect_guidance.planned_trajectory_replay_node import _load_viewpoints
@@ -13,6 +14,16 @@ from orbinspect_guidance.planned_trajectory_replay_node import _segment_ratio
 from orbinspect_guidance.planned_trajectory_replay_node import _slerp
 from orbinspect_guidance.planned_trajectory_replay_node import PlannedTrajectoryReplayNode
 import pytest
+
+
+class _Publisher:
+    def __init__(self):
+        """Create an empty publisher probe."""
+        self.message = None
+
+    def publish(self, message):
+        """Store the latest published message."""
+        self.message = message
 
 
 def test_loads_planned_replay_csv_files(tmp_path: Path) -> None:
@@ -48,6 +59,47 @@ def test_loads_planned_replay_csv_files(tmp_path: Path) -> None:
     )
     assert abs(quaternion_norm - 1.0) < 1.0e-9
     assert viewpoints[0]['boresight_y'] == 1.0
+
+
+def test_multi_scenario_csv_requires_and_applies_scenario_filter(
+    tmp_path: Path,
+) -> None:
+    raw_dir = tmp_path / 'raw'
+    raw_dir.mkdir()
+    (raw_dir / 'trajectory.csv').write_text(
+        'scenario_id,method,time,rx,ry,rz,vx,vy,vz\n'
+        'test_000,adaptive_rollout_adp,0,1,2,3,0,0,0\n'
+        'test_001,adaptive_rollout_adp,0,9,8,7,0,0,0\n'
+    )
+
+    with pytest.raises(ValueError, match='scenario_id is required'):
+        _load_trajectory(tmp_path, 'adaptive_rollout_adp')
+    selected = _load_trajectory(
+        tmp_path,
+        'adaptive_rollout_adp',
+        'test_001',
+    )
+
+    assert len(selected) == 1
+    assert selected[0]['rx'] == 9.0
+
+
+def test_reference_stream_status_requires_count_gap_and_completion() -> None:
+    node = PlannedTrajectoryReplayNode.__new__(PlannedTrajectoryReplayNode)
+    node.trajectory = [{'time': 0.0}, {'time': 90.0}]
+    node.publish_rate = 20.0
+    node.reference_publish_count = 1782
+    node.maximum_reference_gap = 0.05
+    node.scenario_id = 'test_000'
+    node.method = 'adaptive_rollout_adp'
+    node.reference_status_pub = _Publisher()
+
+    node._publish_reference_status(90.0)
+
+    status = json.loads(node.reference_status_pub.message.data)
+    assert status['passed']
+    assert status['nominal_gap_passed']
+    assert status['minimum_expected_publish_count'] == 1782
 
 
 def test_fov_corners_form_four_far_plane_points() -> None:

@@ -19,6 +19,8 @@
   <exec_depend>orbinspect_mission</exec_depend>
   <exec_depend>orbinspect_perception</exec_depend>
   <exec_depend>orbinspect_safety</exec_depend>
+  <exec_depend>orbinspect_utils</exec_depend>
+  <exec_depend>ros_gz_bridge</exec_depend>
   <exec_depend>rviz2</exec_depend>
 
   <test_depend>ament_copyright</test_depend>

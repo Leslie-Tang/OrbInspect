@@ -9,9 +9,9 @@ import json
 from pathlib import Path
 from time import perf_counter
 
+from orbinspect_guidance.offline_planning_experiment import config_from_args
 from orbinspect_guidance.offline_planning_experiment import ExperimentConfig
 from orbinspect_guidance.offline_planning_experiment import OfflinePlanningExperiment
-from orbinspect_guidance.offline_planning_experiment import config_from_args
 from orbinspect_guidance.offline_planning_experiment import parse_args as parse_base_args
 
 
@@ -163,7 +163,11 @@ def _paper_cases(base: ExperimentConfig) -> list[tuple[str, str, ExperimentConfi
         cases.append((
             'safety_margin',
             f'keepout{safety_margin:g}',
-            replace(base, safety_margin=safety_margin, run_id=f'matrix_lean_keepout{safety_margin:g}'),
+            replace(
+                base,
+                safety_margin=safety_margin,
+                run_id=f'matrix_lean_keepout{safety_margin:g}',
+            ),
         ))
     for duration in (70.0, 90.0, 120.0):
         cases.append((

@@ -12,6 +12,20 @@ tmp/
 data/results/*
 !data/results/.gitkeep
 
+# Curated paper evidence retained intentionally. Large media within these
+# directories are Git LFS objects declared in .gitattributes.
+!data/results/20260812_174012_ros_final_validation002_radius080/
+!data/results/20260812_174012_ros_final_validation002_radius080/**
+!data/results/ros_rviz_full_planning_demo_corrected_validation002_radius080_20260812/
+!data/results/ros_rviz_full_planning_demo_corrected_validation002_radius080_20260812/**
+!data/results/ros_verification_inputs_full_transform_radius080_20260812/
+!data/results/ros_verification_inputs_full_transform_radius080_20260812/**
+!data/results/adp_future_full_transform_radius080_20260812/
+!data/results/adp_future_full_transform_radius080_20260812/**
+
 *.bag
 *.db3
 *.mcap
+
+# Permit only the curated final MCAP after the general rosbag exclusions.
+!data/results/20260812_174012_ros_final_validation002_radius080/rosbag/orbinspect_run/orbinspect_run_0.mcap

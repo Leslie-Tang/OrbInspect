@@ -1,6 +1,9 @@
 from pathlib import Path
 
+from orbinspect_guidance.offline_coverage_planner import _node_transforms
+from orbinspect_guidance.offline_coverage_planner import _transform_point
 from orbinspect_guidance.offline_coverage_planner import config_from_args
+from orbinspect_guidance.offline_coverage_planner import IssMeshGeometry
 from orbinspect_guidance.offline_coverage_planner import OfflineCoveragePlanner
 from orbinspect_guidance.offline_coverage_planner import OfflinePlannerConfig
 from orbinspect_guidance.offline_coverage_planner import parse_args
@@ -117,6 +120,47 @@ def test_offline_planner_loads_yaml_config(tmp_path: Path) -> None:
     )
     assert config.output_root == tmp_path
     assert config.run_id == 'yaml_test'
+
+
+def test_gltf_node_transforms_apply_parent_rotation_to_child_translation() -> None:
+    half_sqrt_two = 2.0**-0.5
+    document = {
+        'scene': 0,
+        'scenes': [{'nodes': [0]}],
+        'nodes': [
+            {
+                'translation': [1.0, 0.0, 0.0],
+                'rotation': [0.0, 0.0, half_sqrt_two, half_sqrt_two],
+                'children': [1],
+            },
+            {'translation': [2.0, 0.0, 0.0]},
+        ],
+    }
+
+    transforms = _node_transforms(document)
+    child_origin = _transform_point(
+        transforms[id(document['nodes'][1])],
+        (0.0, 0.0, 0.0),
+    )
+
+    assert abs(child_origin[0] - 1.0) < 1.0e-12
+    assert abs(child_origin[1] - 2.0) < 1.0e-12
+    assert abs(child_origin[2]) < 1.0e-12
+
+
+def test_iss_mesh_loader_applies_rotated_s4_array_hierarchy() -> None:
+    root = Path(__file__).resolve().parents[3]
+    geometry = IssMeshGeometry.load(
+        root
+        / 'src/orbinspect_description/models/iss_real/meshes/ISS_stationary.glb',
+        1.065,
+        0,
+    )
+    collision_start = (-2.7600903795, 17.4527247275, 40.5175722275)
+    collision_end = (-2.7532443751, 17.4497723870, 40.5217144738)
+
+    assert geometry.segment_crosses_surface(collision_start, collision_end)
+    assert geometry.surface_distance(collision_end) < 0.01
 
 
 def _small_config(tmp_path: Path) -> OfflinePlannerConfig:

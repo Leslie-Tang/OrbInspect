@@ -2,10 +2,10 @@ import csv
 import json
 from pathlib import Path
 
-from orbinspect_guidance.offline_adp_validation_decision import ValidationCandidate
 from orbinspect_guidance.offline_adp_validation_decision import (
     aggregate_validation_decision,
 )
+from orbinspect_guidance.offline_adp_validation_decision import ValidationCandidate
 
 
 def test_validation_gate_withholds_test_for_losing_candidate(tmp_path: Path) -> None:

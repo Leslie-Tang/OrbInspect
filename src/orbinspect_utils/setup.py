@@ -32,6 +32,8 @@ setup(
     },
     entry_points={
         'console_scripts': [
+            'accelerated_clock_node = '
+            'orbinspect_utils.accelerated_clock_node:main',
         ],
     },
 )

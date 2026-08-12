@@ -33,9 +33,9 @@
 \newcommand{\dv}{\Delta v}
 \newcommand{\unit}[2]{#1~#2}
 
-% Enable only after the Ubuntu/Jazzy campaign has produced audited results.
+% Include the corrected Ubuntu/Jazzy closed-loop validation evidence.
 \newif\ifincludeROSVerificationResults
-\includeROSVerificationResultsfalse
+\includeROSVerificationResultstrue
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{proposition}{Proposition}
@@ -68,7 +68,7 @@
 \maketitle
 
 \begin{abstract}
-Autonomous orbital inspection couples a history-dependent surface-coverage objective with dynamically reachable and auditable motion. We formulate the problem on a directed candidate graph whose observation nodes store camera-valid target masks and whose safe observable orbital arc (SOOA) edges store finite-duration Hill--Clohessy--Wiltshire transfers and common audit records. The main contribution is a viability-preserving rollout approximate dynamic programming (ADP) policy. At each decision, finite-depth Bellman lookahead evaluates every shield-admissible action and appends a deterministic adaptive safe-greedy completion as an approximate terminal value; branches without a goal-reaching completion receive infinite value. On the deterministic graph, this construction preserves a feasible completion and cannot cost more than its feasible base policy, without requiring a learned critic. A frozen development study compared fitted-critic, heuristic, fixed-rollout, and adaptive-rollout structures and selected depth three before held-out evaluation. On 30 test scenarios generated conditional on incumbent feasibility, the proposed policy and the strongest local-search baseline both reached the 80\% inspectable-coverage goal in every case. Rollout ADP reduced mean $\Delta v$ from 12.946 to \unit{11.239}{m/s} (13.18\%); the paired difference was \unit{-1.707}{m/s} with a 95\% bootstrap interval $[-2.199,-1.265]$, 28 wins, two numerical ties, and no losses ($p=7.45\times10^{-9}$, exact sign test). The $\Delta v$ reduction persisted in 20 out-of-distribution scenarios (8.37\%). Visibility and clearance queries use all 247,525 ISS triangles. The evidence is deterministic and simulator-only and does not establish continuous-time or closed-loop flight safety.
+Autonomous orbital inspection couples a history-dependent surface-coverage objective with dynamically reachable and auditable motion. We formulate the problem on a directed candidate graph whose observation nodes store camera-valid target masks and whose safe observable orbital arc (SOOA) edges store finite-duration Hill--Clohessy--Wiltshire transfers and common audit records. The main contribution is a viability-preserving rollout approximate dynamic programming (ADP) policy. At each decision, finite-depth Bellman lookahead evaluates every shield-admissible action and appends a deterministic adaptive safe-greedy completion as an approximate terminal value; branches without a goal-reaching completion receive infinite value. On the deterministic graph, this construction preserves a feasible completion and cannot cost more than its feasible base policy, without requiring a learned critic. A frozen development study compared fitted-critic, heuristic, fixed-rollout, and adaptive-rollout structures and selected depth three before held-out evaluation. In the corrected offline study, both the proposed policy and the strongest local-search baseline reached the 80\% inspectable-coverage goal on all 30 incumbent-feasible test scenarios. Rollout ADP reduced mean $\Delta v$ from 12.545 to \unit{12.049}{m/s} (3.96\%); the paired difference was \unit{-0.496}{m/s} with a 95\% bootstrap interval $[-0.863,-0.137]$. A ROS~2 Jazzy closed-loop validation task credited all 10 observations, reached 81.33\% coverage, and passed a post-run finite-body full-mesh audit with no swept crossing. Visibility and clearance queries use all 247,525 ISS triangles after applying the complete glTF node hierarchy, and safety clearance includes a conservative \unit{0.80}{m} chaser bounding radius. The evidence remains deterministic HCW simulation with sampled references; it is not hardware or flight validation and does not establish robust continuous-time safety.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -91,10 +91,10 @@ The finite representation makes sequential optimization and verification explici
 The contributions are:
 \begin{enumerate}
   \item a node--edge representation in which candidate observations store camera-valid target sets and directed SOOAs store source-dependent HCW motion and sampled audit evidence;
-  \item a full-mesh bounding-volume hierarchy used consistently for camera line of sight, candidate clearance, sampled trajectory clearance, and swept surface-crossing rejection;
+  \item a full-mesh bounding-volume hierarchy, including the complete glTF scene-node transforms, used consistently for camera line of sight, finite-body candidate and trajectory clearance, and swept surface-crossing rejection;
   \item a viability-preserving rollout ADP algorithm that combines finite-depth Bellman improvement, an adaptive safe-greedy terminal policy, and infinite value for states without a goal-reaching completion;
   \item proofs of Markov sufficiency, compositional preservation of stored audits, rollout viability and base-policy no-degradation, and exact optimality on exhausted reduced graphs; and
-  \item a split-controlled development and held-out study that reports the unsuccessful fitted critic as a negative ablation, freezes rollout depth on validation, and reports paired effect sizes, confidence intervals, exact sign tests, distribution-shift results, and exact non-timing reproducibility.
+  \item a split-controlled development and held-out study plus an independently audited ROS~2 closed-loop validation task that reports the unsuccessful fitted critic as a negative ablation and retains reproducible full-mesh evidence.
 \end{enumerate}
 
 \begin{figure*}[t]
@@ -120,7 +120,7 @@ OrbInspect is positioned at the discrete-action level. Its contribution is neith
 \section{System and Observation Model}
 \label{sec:system}
 
-The present study addresses offline planning. It receives a known station mesh, an initial relative state, camera parameters, a keep-out model, and actuation limits, and returns a time-indexed translational reference, a camera-boresight stream, selected SOOA records, and summary metrics. Section~\ref{sec:simulation}-\ref{sec:ros-verification-protocol} predeclares how these records will be tested in ROS~2, but no ROS or Gazebo result is used to support the current quantitative claims. Table~\ref{tab:assumptions} states the modeling assumptions and their implications for interpreting the results.
+The planner operates offline. It receives a known station mesh, an initial relative state, camera parameters, a keep-out model, and actuation limits, and returns a time-indexed translational reference, a camera-boresight stream, selected SOOA records, and summary metrics. Section~\ref{sec:ros-verification-protocol} describes ROS~2 closed-loop execution of those records, and Section~\ref{sec:ros-verification-results} reports the corrected validation task separately from the archived graph metrics. Table~\ref{tab:assumptions} states the modeling assumptions and their implications for interpreting both evidence layers.
 
 \begin{table*}[t]
   \centering
@@ -203,7 +203,7 @@ Every sampled state must satisfy
   d_{\mathcal S}(\mathbf r_k)\ge 0,
   \label{eq:limits}
 \end{equation}
-where $d_{\mathcal S}(\mathbf r)=d_{\mathrm{mesh}}(\mathbf r)-d_{\mathrm{safe}}$ is clearance above the required margin and $d_{\mathrm{mesh}}$ is unsigned distance to the closest triangle in the complete ISS mesh; thus $d_{\mathcal S}=0$ is the sampled admissibility boundary. In addition, each consecutive pair of rollout samples is tested for a triangle-surface intersection. This swept test catches a direct mesh crossing even if both endpoints have positive unsigned distance. For a directed rollout from source node $i$ to destination node $j$, define $\Delta v_{ij}=\sum_k\norm{\mathbf u_{ij,k}}_2\dt$, root-mean-square distance $e_{ij}^{\mathrm{rms}}$ from the transfer samples to the destination position, and $d_{ij}^{\min}=\min_k d_{\mathcal S}(\mathbf r_{ij,k})$. The graph stage cost used in the reported study is
+where $d_{\mathcal S}(\mathbf r)=d_{\mathrm{mesh}}(\mathbf r)-r_{\mathrm{veh}}-d_{\mathrm{safe}}$ is finite-body clearance above the required margin, $d_{\mathrm{mesh}}$ is unsigned center distance to the closest triangle in the complete ISS mesh, and $r_{\mathrm{veh}}=\unit{0.80}{m}$ conservatively bounds the chaser visual model; thus $d_{\mathcal S}=0$ is the sampled admissibility boundary. The mesh coordinates are obtained from the complete glTF scene hierarchy---matrix or translation--rotation--scale at every ancestor---followed by the SDF pose and scale. In addition, each consecutive pair of rollout samples is tested for a triangle-surface intersection, and its continuous center-distance lower bound subtracts half the segment length from the smaller endpoint distance by the 1-Lipschitz property of distance to a closed set. This swept test catches a direct mesh crossing even if both endpoints have positive unsigned distance. For a directed rollout from source node $i$ to destination node $j$, define $\Delta v_{ij}=\sum_k\norm{\mathbf u_{ij,k}}_2\dt$, root-mean-square distance $e_{ij}^{\mathrm{rms}}$ from the transfer samples to the destination position, and $d_{ij}^{\min}=\min_k d_{\mathcal S}(\mathbf r_{ij,k})$. The graph stage cost used in the reported study is
 \begin{equation}
   \ell_{ij}=\lambda_v\Delta v_{ij}+\lambda_e e_{ij}^{\mathrm{rms}}+\lambda_s\max(0,-d_{ij}^{\min})+\lambda_a.
   \label{eq:edge-cost}
@@ -417,7 +417,7 @@ With maximum branching factor $B$, depth $d$, and at most $H$ base-policy action
 
 \subsection{Frozen ISS-Mesh Decision Problem}
 
-The benchmark uses the public NASA ISS glTF mesh \cite{nasa_iss_gltf_model}. The transformed mesh contains 247,525 triangles and is sampled into 90 equal-represented-area targets. Candidate generation at a nominal \unit{34}{m} radius with stride two yields 41 targets visible from at least one retained observation. A deterministic coverage-preserving reduction freezes 24 observation nodes. The archive contains 24 initial-to-observation records and $24\times23$ inter-observation records, for 576 directed edges in total. Every method receives this same archive. Each rest-to-rest segment lasts \unit{90}{s} and uses fixed-step RK4 propagation with $\dt=\unit{3}{s}$. The HCW mean motion is $1.13137\times10^{-3}$~rad/s, $u_{\max}=0.060~\mathrm{m/s^2}$, $v_{\max}=\unit{2.0}{m/s}$, $d_{\mathrm{safe}}=\unit{2}{m}$, $\varepsilon_r=\unit{0.5}{m}$, and $\varepsilon_v=\unit{0.05}{m/s}$. Equation~\eqref{eq:edge-cost} uses $(\lambda_v,\lambda_e,\lambda_s,\lambda_a)=(5,0.18,120,0.05)$.
+The benchmark uses the public NASA ISS glTF mesh \cite{nasa_iss_gltf_model}. The fully transformed mesh contains 247,525 triangles and is sampled into 90 equal-represented-area targets. Candidate generation at a nominal \unit{34}{m} radius with stride two yields 41 targets visible from at least one retained observation. A deterministic coverage-preserving reduction freezes 24 observation nodes. The archive contains 24 initial-to-observation records and $24\times23$ inter-observation records, for 576 directed edges in total; 264 satisfy every enabled edge gate. Every method receives this same archive. Each rest-to-rest segment lasts \unit{90}{s} and uses fixed-step RK4 propagation with $\dt=\unit{3}{s}$. The HCW mean motion is $1.13137\times10^{-3}$~rad/s, $u_{\max}=0.060~\mathrm{m/s^2}$, $v_{\max}=\unit{2.0}{m/s}$, $r_{\mathrm{veh}}=\unit{0.80}{m}$, $d_{\mathrm{safe}}=\unit{2}{m}$, $\varepsilon_r=\unit{0.5}{m}$, and $\varepsilon_v=\unit{0.05}{m/s}$. Equation~\eqref{eq:edge-cost} uses $(\lambda_v,\lambda_e,\lambda_s,\lambda_a)=(5,0.18,120,0.05)$.
 
 Every method stops when it first reaches $C^{\mathrm{insp}}\ge0.80$ and may select at most 14 SOOAs. Feasibility requires every selected edge to satisfy the input, speed, full-mesh sampled-clearance, swept mesh-nonintersection, and terminal checks. Passive drift is disabled ($T_p=0$), so passive safety is not inferred. The physical $\Delta v$, minimum clearance above the \unit{2}{m} margin, and peak input are accumulated from the same archived edge records used by the graph objective.
 
@@ -425,7 +425,7 @@ Every method stops when it first reaches $C^{\mathrm{insp}}\ge0.80$ and may sele
 
 The protocol was frozen before test evaluation. Deterministic, disjoint seed ranges define 24 training, 12 validation, 30 test, and 20 distribution-shift scenarios. Training scenarios may fit critic parameters only; validation scenarios select the algorithmic structure and rollout depth; test scenarios support the primary claim; shifted scenarios are inspected only afterward. A scenario removes 0--10\% of graph nodes and multiplies the weights of 6--14\% of targets by a factor sampled from $[2,4]$. The shifted split increases node removal to 15--25\%, changes 12--20\% of target priorities, and uses multipliers in $[5,8]$. Scenarios for which the deterministic incumbent cannot reach the goal are rejected during generation. The resulting inference is therefore conditional on incumbent feasibility, an explicit limitation rather than a population success-rate estimate.
 
-Development considered a frozen fitted critic, a hand-scaled critic heuristic, a fixed-incumbent-suffix rollout, and repeated adaptive rollout. On the full 12-scenario validation set, adaptive depths one, two, and three all reached 12/12 goals; their mean graph costs were 101.424, 97.388, and 93.586, compared with 109.299 for local search. The predeclared lexicographic rule prioritized success, paired penalized cost, then latency. Depth three won all 12 cost pairs and was frozen before either test split was opened. Figure~\ref{fig:adp-development} reports this validation-only selection.
+Development considered a frozen fitted critic, a hand-scaled critic heuristic, a fixed-incumbent-suffix rollout, and repeated adaptive rollout. On the full 12-scenario validation set, adaptive depths one, two, and three all reached 12/12 goals; their mean graph costs were 105.045, 103.879, and 102.444, compared with 109.343 for local search. The predeclared lexicographic rule prioritized success, paired penalized cost, then latency. Depth three won 10 of 12 cost pairs and had the lowest validation mean, so it was selected before the corrected held-out evaluation. Figure~\ref{fig:adp-development} reports this validation-only selection.
 
 \begin{figure*}[t]
   \centering
@@ -470,23 +470,23 @@ The primary endpoint is the paired penalized graph-cost difference $D_J=J_{\math
 
 \subsection{Saved Results and Reproducibility Boundary}
 
-The result bundle contains the configuration snapshot, graph and scenario archives, one row per method--scenario pair, statistical output, figure source tables, and script hashes. A second run loads the frozen graph and repeats all 350 method evaluations. Reproducibility is declared only if graph content, scenarios, routes, success flags, coverage, costs, and physical audit metrics match exactly; wall-clock fields are excluded. Figure captions are linked to source files and transformations in a machine-readable trace manifest. The case-study generator reconstructs its routes from the archived scenario and aborts if route cost differs from the held-out row.
+The result bundle contains the configuration snapshot, graph and scenario archives, one row per method--scenario pair, statistical output, figure source tables, and script hashes. The corrected ROS exporter reconstructs the 124 ADP/local validation, test, and shifted routes and requires success, coverage, costs, and physical audit metrics to match their archived values; wall-clock fields are excluded. Figure captions are linked to source files and transformations in a machine-readable trace manifest. The case-study generator reconstructs its routes from the archived scenario and aborts if route cost differs from the held-out row.
 
-\subsection{Prospective ROS 2 Closed-Loop Verification Protocol}
+\subsection{Frozen ROS 2 Closed-Loop Verification Protocol}
 \label{sec:ros-verification-protocol}
 
-The frozen records connect to ROS~2 Jazzy without making Gazebo physics the source of truth. A replay node publishes the archived translational and camera-attitude references; the controller and safety filter produce the command consumed by the HCW dynamics node; and that node alone propagates chaser odometry. The logger records the six core CSV streams with a rosbag, while RViz2 and Gazebo Harmonic visualize the same ROS state.
+The corrected records connect to ROS~2 Jazzy without making Gazebo physics the source of truth. A replay node publishes the archived translational and camera-attitude references; the controller and safety filter produce the command consumed by the HCW dynamics node; and that node alone propagates chaser odometry. The logger records the six core CSV streams, while RViz2 and Gazebo Harmonic visualize the same ROS state. Figure~\ref{fig:ros-key-camera-views} combines the recorded closed-loop path with synchronized live Gazebo-camera views at every credited observation, replacing a separate interface-only screenshot.
 
-Conversion must preserve node order, timing, scenario initial state, mean motion, $d_{\mathrm{safe}}=\unit{2}{m}$, and $u_{\max}=0.060~\mathrm{m/s^2}$. Archived trajectories are used directly, without standoff reconstruction, smoothing, looping, or control replacement. Direct replay first verifies files, topics, transforms, ordering, identifiers, and logging, but supplies no dynamical evidence. Closed-loop replay then inserts the controller, filter, and HCW node. Tuning is restricted to the 12 validation scenarios; the frozen configuration is applied to paired ADP and local-search runs on all 30 test scenarios, with the 20 shifted cases secondary. Test scenario~2 is illustrative and is run only after the freeze.
+Conversion preserves node order, timing, scenario initial state, mean motion, $r_{\mathrm{veh}}=\unit{0.80}{m}$, $d_{\mathrm{safe}}=\unit{2}{m}$, and $u_{\max}=0.060~\mathrm{m/s^2}$. Archived trajectories are used directly, without standoff reconstruction, smoothing, looping, or control replacement. Direct replay verifies files, topics, transforms, ordering, identifiers, and logging, but supplies no dynamical evidence. Closed-loop replay then inserts the controller, filter, and HCW node. The present corrected ROS evidence is one full validation task, not a rerun of the obsolete pre-correction paired ROS campaign; consequently, it demonstrates interface and execution consistency but does not support a paired ROS performance claim.
 
-Each credited observation must satisfy position error $\le\varepsilon_r=\unit{0.5}{m}$ and terminal speed $\le\varepsilon_v=\unit{0.05}{m/s}$; executed clearance above the mesh margin must remain nonnegative, input must not exceed $u_{\max}$, no swept mesh crossing may occur, no reference may be dropped, and $C^{\mathrm{insp}}\ge0.80$ must be reached within 14 SOOAs. We will report realized $\Delta v$, RMS and maximum tracking error, filter interventions, coverage, completion time, and action count. The ROS claim gate requires no lower ADP success and an upper 95\% paired-bootstrap bound below zero for $\Delta v_{\mathrm{ADP}}-\Delta v_{\mathrm{local}}$. Every run must contain configuration and environment snapshots, the six CSV files, rosbag, summaries, and source revision. The older Jazzy smoke run predates the current planner; until this protocol is completed on Ubuntu~24.04, ROS quantities remain outside the evidence boundary.
+Each credited observation is required to satisfy position error $\le\varepsilon_r=\unit{0.5}{m}$ and terminal speed $\le\varepsilon_v=\unit{0.05}{m/s}$; executed finite-body clearance above the mesh margin must remain nonnegative, input cannot exceed $u_{\max}$, no swept mesh crossing is allowed, the reference-count completion gate must pass, and $C^{\mathrm{insp}}\ge0.80$ must be reached within 14 SOOAs. The accepted visual task retains configuration snapshots, a run manifest, all six CSV streams, summary files, both raw videos, and a version-2 finite-body full-mesh execution audit. That audit also checks a continuous center-distance lower bound between consecutive recorded samples. The former translation-only mesh audit and every result derived from it are excluded from current evidence.
 
 \section{Results}
 \label{sec:results}
 
 \subsection{Held-Out Mission Performance}
 
-The frozen depth-3 rollout policy reached the 80\% goal in all 30 test scenarios and all 20 shifted scenarios. The local, fixed-rollout, and incumbent baselines also had complete success, making their raw graph costs directly comparable. Table~\ref{tab:paired-aggregate} shows that rollout ADP has the lowest mean graph cost and $\Delta v$ on both splits. On test, it selected the same mean number of actions as local search (10.8) but used a different sequence; its mean terminal coverage is slightly lower because it avoids surplus coverage after passing the common threshold. Figure~\ref{fig:paired-performance} shows the paired all-scenario comparisons rather than only aggregate means.
+The frozen depth-3 rollout policy reached the 80\% goal in all 30 test scenarios and all 20 shifted scenarios. The local, fixed-rollout, and incumbent baselines also had complete success, making their raw graph costs directly comparable. Table~\ref{tab:paired-aggregate} shows that rollout ADP has the lowest mean graph cost and $\Delta v$ on both splits. On test, it selected 9.87 actions on average versus 10.17 for local search and used different sequences; its mean terminal coverage is slightly lower because it avoids surplus coverage after passing the common threshold. Figure~\ref{fig:paired-performance} shows the paired all-scenario comparisons rather than only aggregate means.
 
 \begin{table*}[t]
   \centering
@@ -499,15 +499,15 @@ The frozen depth-3 rollout policy reached the 80\% goal in all 30 test scenarios
     \toprule
     Split & Method & Success & $C^{\mathrm{insp}}$ (\%) & Mean SOOAs & Mean $\Delta v$ (m/s) & Mean $J$ \\
     \midrule
-    Test & Proposed rollout ADP & 30/30 & 81.00 & 10.80 & 11.239 & 92.789 \\
-         & Local search & 30/30 & 81.39 & 10.80 & 12.946 & 106.804 \\
-         & Fixed rollout & 30/30 & 81.26 & 10.73 & 12.518 & 103.286 \\
-         & Incumbent & 30/30 & 81.67 & 11.30 & 13.566 & 111.924 \\
+    Test & Proposed rollout ADP & 30/30 & 80.88 & 9.87 & 12.049 & 99.397 \\
+         & Local search & 30/30 & 81.24 & 10.17 & 12.545 & 103.491 \\
+         & Fixed rollout & 30/30 & 81.26 & 10.30 & 12.915 & 106.534 \\
+         & Incumbent & 30/30 & 82.05 & 10.70 & 13.739 & 113.318 \\
     \addlinespace
-    Shifted & Proposed rollout ADP & 20/20 & 80.61 & 9.00 & 11.162 & 92.063 \\
-            & Local search & 20/20 & 81.21 & 9.15 & 12.182 & 100.453 \\
-            & Fixed rollout & 20/20 & 80.97 & 9.15 & 11.979 & 98.782 \\
-            & Incumbent & 20/20 & 81.28 & 9.40 & 13.083 & 107.853 \\
+    Shifted & Proposed rollout ADP & 20/20 & 80.73 & 8.15 & 11.141 & 91.867 \\
+            & Local search & 20/20 & 81.98 & 8.95 & 11.942 & 98.475 \\
+            & Fixed rollout & 20/20 & 81.90 & 8.80 & 12.450 & 102.643 \\
+            & Incumbent & 20/20 & 82.88 & 9.45 & 13.537 & 111.600 \\
     \bottomrule
   \end{tabular}
 \end{table*}
@@ -515,25 +515,25 @@ The frozen depth-3 rollout policy reached the 80\% goal in all 30 test scenarios
 \begin{figure*}[!t]
   \centering
   \subfloat[Test physical $\Delta v$.\label{fig:paired-performance-test-dv}]{%
-    \includegraphics[width=0.47\textwidth]{figures/adp_future/adp_heldout_performance_a.pdf}}
+    \includegraphics[width=0.40\textwidth]{figures/adp_future/adp_heldout_performance_a.pdf}}
   \hfill
   \subfloat[Test graph-cost differences.\label{fig:paired-performance-test-cost}]{%
-    \includegraphics[width=0.47\textwidth]{figures/adp_future/adp_heldout_performance_b.pdf}}
+    \includegraphics[width=0.45\textwidth]{figures/adp_future/adp_heldout_performance_b.pdf}}
   \\[-1ex]
   \subfloat[Shifted physical $\Delta v$.\label{fig:paired-performance-shifted-dv}]{%
-    \includegraphics[width=0.47\textwidth]{figures/adp_future/adp_heldout_performance_c.pdf}}
+    \includegraphics[width=0.45\textwidth]{figures/adp_future/adp_heldout_performance_c.pdf}}
   \hfill
   \subfloat[Shifted graph-cost differences.\label{fig:paired-performance-shifted-cost}]{%
-    \includegraphics[width=0.47\textwidth]{figures/adp_future/adp_heldout_performance_d.pdf}}
-  \caption{Held-out paired performance of proposed rollout ADP versus audited local search. Dashed lines denote parity. Rollout ADP wins 28 of 30 test pairs with two numerical ties and wins 17 of 20 shifted pairs with one tie. The shaded bands and horizontal lines in (b) and (d) report paired-bootstrap intervals and mean differences; coverage success is matched in every panel.}
+    \includegraphics[width=0.45\textwidth]{figures/adp_future/adp_heldout_performance_d.pdf}}
+  \caption{Held-out paired performance of proposed rollout ADP versus audited local search. Dashed lines denote parity. Rollout ADP wins 21 of 30 test pairs with four numerical ties and wins 14 of 20 shifted pairs with one tie. The shaded bands and horizontal lines in (b) and (d) report paired-bootstrap intervals and mean differences; coverage success is matched in every panel.}
   \label{fig:paired-performance}
 \end{figure*}
 
 \subsection{Paired Effect Estimates}
 
-The primary claim gate is passed. On the test split, the ADP-minus-local graph-cost difference is $-14.016$ with 95\% interval $[-18.265,-10.451]$ and $d_z=-1.274$. This is a 13.12\% reduction relative to the local mean. The corresponding physical $\Delta v$ difference is \unit{-1.707}{m/s}, interval $[-2.199,-1.265]$, $d_z=-1.274$, or 13.18\%. Both endpoints have 28 wins, two numerical ties, no losses, and exact sign-test $p=7.45\times10^{-9}$. Mean selected-count difference is zero. Thus the advantage is route quality, not a comparison between a short failed path and a complete mission. Table~\ref{tab:paired-inference} gives the paired estimates for both evaluation splits.
+The primary claim gate is passed. On the test split, the ADP-minus-local graph-cost difference is $-4.093$ with 95\% interval $[-7.028,-1.143]$ and $d_z=-0.487$. This is a 3.96\% reduction relative to the local mean. The corresponding physical $\Delta v$ difference is \unit{-0.496}{m/s}, interval $[-0.863,-0.137]$, $d_z=-0.486$, or 3.96\%. Both endpoints have 21 wins, four numerical ties, five losses, and exact sign-test $p=0.00249$. Mean selected-count difference is $-0.30$. Thus the advantage is not a comparison between a short failed path and a complete mission. Table~\ref{tab:paired-inference} gives the paired estimates for both evaluation splits.
 
-The shifted split is directionally consistent but is treated as a stress test rather than a second confirmatory sample. Graph cost falls by 8.35\% and $\Delta v$ by 8.37\%; the latter paired mean is \unit{-1.020}{m/s}, with interval $[-1.417,-0.635]$, 17 wins, one tie, two losses, and $p=7.29\times10^{-4}$. The effect is smaller under the stronger target-priority and node-dropout shift, which is more informative than claiming uniform dominance.
+The shifted split is directionally consistent but is treated as a stress test rather than a second confirmatory sample. Graph cost falls by 6.71\% and $\Delta v$ by 6.70\%; the latter paired mean is \unit{-0.800}{m/s}, with interval $[-1.423,-0.207]$, 14 wins, one tie, five losses, and $p=0.0636$. The confidence interval for mean effort remains below zero, but the sign test is not significant, so uniform pairwise dominance is not claimed.
 
 \begin{table*}[t]
   \centering
@@ -546,19 +546,19 @@ The shifted split is directionally consistent but is treated as a stress test ra
     \toprule
     Split and endpoint & Mean difference & Median difference & 95\% CI for mean & Win/tie/loss & Sign-test $p$ \\
     \midrule
-    Test: graph cost $J$ & $-14.016$ & $-12.842$ & $[-18.265,-10.451]$ & 28/2/0 & $7.45\times10^{-9}$ \\
-    Test: $\Delta v$ (m/s) & $-1.707$ & $-1.556$ & $[-2.199,-1.265]$ & 28/2/0 & $7.45\times10^{-9}$ \\
-    Shifted: graph cost $J$ & $-8.390$ & $-7.215$ & $[-11.677,-5.223]$ & 17/1/2 & $7.29\times10^{-4}$ \\
-    Shifted: $\Delta v$ (m/s) & $-1.020$ & $-0.873$ & $[-1.417,-0.635]$ & 17/1/2 & $7.29\times10^{-4}$ \\
+    Test: graph cost $J$ & $-4.093$ & $-5.034$ & $[-7.028,-1.143]$ & 21/4/5 & $0.00249$ \\
+    Test: $\Delta v$ (m/s) & $-0.496$ & $-0.614$ & $[-0.863,-0.137]$ & 21/4/5 & $0.00249$ \\
+    Shifted: graph cost $J$ & $-6.608$ & $-6.917$ & $[-11.819,-1.706]$ & 14/1/5 & $0.0636$ \\
+    Shifted: $\Delta v$ (m/s) & $-0.800$ & $-0.846$ & $[-1.423,-0.207]$ & 14/1/5 & $0.0636$ \\
     \bottomrule
   \end{tabular}
 \end{table*}
 
 \subsection{Component and Safety Audit}
 
-The negative critic result clarifies the contribution. The frozen fitted critic succeeds in only 18/30 test and 11/20 shifted scenarios; the unfitted heuristic reaches 25/30 and 13/20. In contrast, fixed rollout, local search, and adaptive rollout all achieve complete success. The learned value approximation is therefore neither concealed nor used to label the successful algorithm ``ADP.'' The successful route is rollout ADP because it uses a base-policy cost-to-go approximation inside repeated truncated Bellman improvement.
+The negative critic result clarifies the contribution. The frozen fitted critic succeeds in only 25/30 test and 9/20 shifted scenarios; the unfitted heuristic reaches 16/30 and 9/20. In contrast, fixed rollout, local search, and adaptive rollout all achieve complete success. The learned value approximation is therefore neither concealed nor used to label the successful algorithm ``ADP.'' The successful route is rollout ADP because it uses a base-policy cost-to-go approximation inside repeated truncated Bellman improvement.
 
-All selected edges share the same shield. Across the proposed test and shifted routes, the worst minimum clearance is \unit{0.0619}{m} above the required \unit{2}{m} mesh distance. Peak proposed inputs are 0.0553 and $0.0556~\mathrm{m/s^2}$ on the two splits, below the $0.060~\mathrm{m/s^2}$ limit. These are sampled deterministic audits; passive drift is disabled and continuous-time robustness is not claimed. Median test online time is \unit{1.64}{s} for rollout ADP versus \unit{0.0076}{s} for local search on the development computer, exposing the expected depth-three computation cost. Figure~\ref{fig:paired-safety} juxtaposes this safety evidence with the unsuccessful critic ablations.
+All selected edges share the same shield. Across the proposed test and shifted routes, the worst minimum finite-body clearance is \unit{0.2196}{m} above the required \unit{2}{m} margin. Peak proposed inputs are 0.0594 and $0.0588~\mathrm{m/s^2}$ on the two splits, below the $0.060~\mathrm{m/s^2}$ limit. These are sampled deterministic audits supplemented by the continuous segment lower bound; passive drift and uncertainty robustness are not claimed. Median test online time is \unit{0.709}{s} for rollout ADP versus \unit{0.00492}{s} for local search on the development computer, exposing the expected depth-three computation cost. Figure~\ref{fig:paired-safety} juxtaposes this safety evidence with the unsuccessful critic ablations.
 
 \begin{figure*}[!t]
   \centering
@@ -579,9 +579,9 @@ All selected edges share the same shield. Across the proposed test and shifted r
 
 \subsection{Representative Generated-Trajectory Case}
 
-To show the route-level mechanism, the figure generator selects test scenario~2 post hoc as the paired graph-cost difference closest to the test median. This outcome-based rule makes the case representative of the observed effect size, but also makes it illustrative rather than inferential. The archived scenario seed is 20733, and reconstructed route costs match the held-out rows exactly.
+To show the route-level mechanism, the figure generator selects test scenario~13 post hoc as the paired graph-cost difference closest to the test median. This outcome-based rule makes the case representative of the observed effect size, but also makes it illustrative rather than inferential. The archived scenario seed is 20753, and reconstructed route costs match the held-out rows exactly.
 
-Rollout ADP reaches 81.79\% coverage with 10 SOOAs, graph cost 99.204, and \unit{12.026}{m/s} $\Delta v$. Local search reaches 83.82\% with 11 SOOAs, cost 111.966, and \unit{13.574}{m/s} $\Delta v$. Figure~\ref{fig:representative-trajectory} shows that ADP does not merely delete the last local action. It selects a different early ordering, accumulates useful coverage faster, and crosses the 80\% goal one action earlier. The local route's surplus terminal coverage does not compensate for its larger cost under the common thresholded objective.
+Rollout ADP reaches 80.41\% coverage with 10 SOOAs, graph cost 106.106, and \unit{12.865}{m/s} $\Delta v$. Local search reaches the same 80.41\% with 11 SOOAs, cost 111.220, and \unit{13.482}{m/s} $\Delta v$. Figure~\ref{fig:representative-trajectory} shows that ADP does not merely delete the last local action. It selects a different early ordering and reaches the common coverage goal one action earlier.
 
 \begin{figure*}[!t]
   \centering
@@ -597,25 +597,24 @@ Rollout ADP reaches 81.79\% coverage with 10 SOOAs, graph cost 99.204, and \unit
   \label{fig:representative-trajectory}
 \end{figure*}
 
-% This source-level insertion point is intentionally disabled until real ROS 2
-% measurements exist. Populate sections/ros_verification_results.tex and set
-% \includeROSVerificationResultstrue only after the frozen protocol passes.
+% Closed-loop execution results are kept in a short separate source file so
+% their evidence boundary remains explicit.
 \ifincludeROSVerificationResults
   \input{sections/ros_verification_results}
 \fi
 
 \subsection{Reproducibility and Evidence Boundary}
 
-The frozen-graph rerun reproduces every non-timing field in all 350 method--scenario rows, including selected node sequences, success, coverage, graph cost, $\Delta v$, clearance, and peak input. The result supports a bounded statement: within the frozen SOOA library and incumbent-feasible scenario generator, depth-three rollout ADP consistently improves the strongest local baseline while retaining sampled graph viability. It does not establish superiority for scenarios without a feasible base completion, for different meshes or transfer durations, or under navigation, actuator, and model uncertainty.
+The corrected route exporter reconstructs all 124 selected ADP/local routes and aborts on any mismatch with archived success, coverage, graph cost, $\Delta v$, clearance, or peak input. The result supports a bounded statement: within the frozen SOOA library and incumbent-feasible scenario generator, depth-three rollout ADP improves the strongest local baseline on average while retaining sampled graph viability. It does not establish superiority for every pair, for scenarios without a feasible base completion, for different meshes or transfer durations, or under navigation, actuator, and model uncertainty.
 
 \section{Discussion}
 \label{sec:discussion}
 
-The central result is algorithmic rather than terminological. A fitted critic is not necessary for approximate dynamic programming: in rollout ADP, the complete cost of a tractable base policy is the approximate value, and Bellman minimization improves its early decisions \cite{bertsekas2020rollout}. This form is more defensible here than the fitted alternatives because the mission has a hard terminal coverage condition. An unconstrained critic may underestimate an incomplete path, whereas the proposed terminal evaluator assigns infinite value unless a shielded completion actually reaches the goal. The fitted critic's 60\% test success rate confirms that this is a material distinction, not only a theoretical preference.
+The central result is algorithmic rather than terminological. A fitted critic is not necessary for approximate dynamic programming: in rollout ADP, the complete cost of a tractable base policy is the approximate value, and Bellman minimization improves its early decisions \cite{bertsekas2020rollout}. This form is more defensible here than the fitted alternatives because the mission has a hard terminal coverage condition. An unconstrained critic may underestimate an incomplete path, whereas the proposed terminal evaluator assigns infinite value unless a shielded completion actually reaches the goal. The fitted critic's 83.3\% test success rate confirms that this is a material distinction, not only a theoretical preference.
 
-The advantage over local sequence improvement is reach. Reversal search explores permutations near one incumbent and cannot introduce an observation absent from that sequence. Rollout ADP evaluates every currently safe observation, anticipates three exact actions, and then asks whether an adaptive base policy can complete the mission. The representative case shows the consequence: a different early sequence reaches the goal with one fewer action and lower $\Delta v$. Across the complete test set, mean action count is unchanged, yet $\Delta v$ falls by 13.18\%, showing that the dominant aggregate mechanism is better transition ordering rather than systematic route truncation.
+The advantage over local sequence improvement is reach. Reversal search explores permutations near one incumbent and cannot introduce an observation absent from that sequence. Rollout ADP evaluates every currently safe observation, anticipates three exact actions, and then asks whether an adaptive base policy can complete the mission. The representative case shows the consequence: a different early sequence reaches the goal with one fewer action and lower $\Delta v$. Across the complete test set, mean action count decreases by 0.30 and $\Delta v$ falls by 3.96\%, so both ordering and modest route truncation contribute.
 
-The benefit has a computational price. The proposed median test planning time is approximately 216 times that of local search in the present Python implementation. This comparison is a diagnostic, not a real-time benchmark: graph records are cached, timing fields vary across reruns, and no optimized parallel expansion is used. Batched action evaluation, transposition tables retained across decisions, dominance pruning for coverage masks, and a learned value used to order (but not eliminate) viable branches are promising routes to reduce latency while preserving the finite-completion safeguard.
+The benefit has a computational price. The proposed median test planning time is approximately 144 times that of local search in the present Python implementation. This comparison is a diagnostic, not a real-time benchmark: graph records are cached, timing fields vary across reruns, and no optimized parallel expansion is used. Batched action evaluation, transposition tables retained across decisions, dominance pruning for coverage masks, and a learned value used to order (but not eliminate) viable branches are promising routes to reduce latency while preserving the finite-completion safeguard.
 
 The paired result is stronger than a single favorable route but narrower than a general robustness claim. Scenario pairing varies target priorities and graph-node availability while holding geometry and edge dynamics fixed. The test and shifted confidence intervals quantify consistency over those designed changes, not a probability of flight improvement. Moreover, scenario generation accepts only instances for which the incumbent is successful. Proposition~\ref{prop:rollout-viability} therefore explains preservation of an available completion; it does not establish recovery when no feasible base completion exists. Such cases require a repair policy, a broader candidate library, or exact feasibility search.
 
@@ -623,22 +622,22 @@ The relation to formation-based observation is similarly complementary. Near-nat
 
 The safety evidence remains limited to the stated model. HCW translation assumes a circular chief and a fixed LVLH target. Clearance samples and swept surface-intersection tests use the complete deterministic ISS mesh, but they do not create a closed-loop proof under navigation error, target rotation, delayed commands, actuator uncertainty, or unmodeled disturbances. The study disables the optional passive-drift audit, so no passive-safety conclusion should be drawn. The full solver also has no continuous-space optimality guarantee.
 
-The camera evidence has comparable boundaries. The visibility model includes range, field of view, incidence, and mesh occlusion, but the offline graph credits a prescribed terminal observation rather than simulating exposure interruption or closed-loop dwell. Illumination, blur, plume contamination, camera slew, and detailed attitude dynamics are omitted. The ROS~2 interface and execution gates are specified in Section~\ref{sec:simulation}-\ref{sec:ros-verification-protocol}, but the corresponding measurements remain pending and are not treated as validation in the present manuscript.
+The camera evidence has comparable boundaries. The visibility model includes range, field of view, incidence, and mesh occlusion, but the offline graph and ROS~2 evaluator credit prescribed terminal observations rather than image formation, exposure interruption, or closed-loop dwell. Illumination, blur, plume contamination, camera slew, and detailed attitude dynamics are omitted. The ROS~2 measurements validate reference publication, translational feedback execution, safety-filter intervention, logging, and the stated sampled acceptance gates; they do not validate image quality or attitude-control performance.
 
-The next implementation step is the frozen closed-loop replay campaign defined in Section~\ref{sec:simulation}-\ref{sec:ros-verification-protocol}. The next algorithmic study should deliberately include incumbent-infeasible scenarios and compare viability repair, beam rollout, and constrained fitted values under a fixed test protocol. Batched full-mesh edge evaluation and cached passive audits can then support passive-drift experiments. Uncertainty-inflated keep-out volumes, camera-slew and illumination constraints, navigation error, a rotating body frame, and an optional Basilisk backend should follow while retaining HCW as a transparent regression reference.
+The next algorithmic study should deliberately include incumbent-infeasible scenarios and compare viability repair, beam rollout, and constrained fitted values under a fixed test protocol. Batched full-mesh edge evaluation and cached passive audits can then support passive-drift experiments. Subsequent execution studies should add uncertainty-inflated keep-out volumes, camera-slew and illumination constraints, navigation error, a rotating body frame, and higher-fidelity or optional Basilisk dynamics while retaining HCW as a transparent regression reference. Hardware-in-the-loop and flight-like sensing remain future validation steps.
 
 \section{Conclusion}
 \label{sec:conclusion}
 
 This paper formulated orbital inspection as viability-preserving rollout approximate dynamic programming over finite-duration observable orbital arcs. The proposed policy retains the current node, covered and selected masks, and remaining budget; expands a finite exact Bellman prefix; and uses a complete adaptive safe-greedy policy as its terminal value. Infinite cost for unsuccessful completions prevents approximate values from trading away the mission goal. Full-mesh queries supply visibility, sampled clearance, and swept surface-crossing checks from one consistent ISS representation.
 
-On 30 frozen, incumbent-feasible test scenarios, rollout ADP and local search both reached the 80\% inspectable-coverage goal. ADP reduced mean $\Delta v$ by 13.18\%, from 12.946 to \unit{11.239}{m/s}; the paired mean difference was \unit{-1.707}{m/s}, with a 95\% interval $[-2.199,-1.265]$, 28 wins, two ties, and no losses. An 8.37\% reduction persisted under stronger node dropout and target-priority shift. The fitted-critic route failed the success gate, while the model-based rollout structure was exactly reproducible in all non-timing fields. The evidence therefore supports rollout ADP as the main contribution, rather than the fitted critic or local reversal search. The conclusion remains limited to a deterministic sampled graph and does not claim passive safety, continuous-time robustness, continuous-space optimality, or ROS execution performance.
+On 30 frozen, incumbent-feasible test scenarios, rollout ADP and local search both reached the 80\% offline inspectable-coverage goal. ADP reduced mean offline $\Delta v$ by 3.96\%, from 12.545 to \unit{12.049}{m/s}; the paired mean difference was \unit{-0.496}{m/s}, with a 95\% interval $[-0.863,-0.137]$, 21 wins, four ties, and five losses. A 6.70\% mean reduction persisted under stronger node dropout and target-priority shift. One corrected ROS~2 closed-loop validation task then credited all 10 planned views and passed the independent version-2 finite-body mesh audit with zero swept crossings. The fitted-critic route failed the offline success gate, while the model-based rollout structure remained reproducible. The combined evidence supports rollout ADP as the main contribution, rather than the fitted critic or local reversal search. It remains limited to deterministic HCW simulation and sampled-reference execution and does not claim passive safety, robust continuous-time safety, continuous-space optimality, hardware validation, or flight performance.
 
 \section*{Acknowledgment}
 This research was supported in part by the Research Centre for Unmanned Autonomous Systems of The Hong Kong Polytechnic University under Grant P0046487. OpenAI Codex was used during manuscript preparation to assist with language editing across all sections, LaTeX formatting, source-checking support, code review, and development of figure-generation scripts. The authors reviewed and verified the mathematical statements, references, source code, figures, and reported results and take responsibility for the content.
 
 \section*{Data and Code Availability}
-The complete reproducibility package accompanies this submission as supplementary material. It contains the experiment configuration, source code, frozen graph and scenarios, raw method rows, statistical outputs, figure source tables, transformation hashes, and deterministic rerun report. A mirrored copy is available from the corresponding author upon reasonable request.
+The reproducibility package accompanying this submission contains the experiment configuration, source code, corrected frozen graph and scenarios, raw method rows, statistical outputs, figure source tables, transformation hashes, and route-export checks. The repository evidence tree additionally retains the corrected ROS input manifest, validation CSV streams and mesh audit, raw/final videos, quarantine records, and figure provenance. A mirrored copy is available from the corresponding author upon reasonable request.
 
 \bibliographystyle{IEEEtran}
 \bibliography{references}

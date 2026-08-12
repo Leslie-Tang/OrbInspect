@@ -8,20 +8,21 @@ from dataclasses import asdict, dataclass, replace
 from datetime import datetime
 import json
 import math
-import numpy as np
 from pathlib import Path
 import random
 from statistics import mean, median
 from time import perf_counter
+
+import numpy as np
 
 from orbinspect_guidance.advanced_safe_planner import AdvancedPlannerConfig
 from orbinspect_guidance.advanced_safe_planner import AdvancedSafePlanner
 from orbinspect_guidance.advanced_safe_planner import SafeGraphEdge
 from orbinspect_guidance.advanced_safe_planner import SafeGraphNode
 from orbinspect_guidance.advanced_safe_planner import SafeGraphProblem
+from orbinspect_guidance.offline_planning_experiment import _load_yaml_config
 from orbinspect_guidance.offline_planning_experiment import ExperimentConfig
 from orbinspect_guidance.offline_planning_experiment import OfflinePlanningExperiment
-from orbinspect_guidance.offline_planning_experiment import _load_yaml_config
 
 
 METHODS = (
@@ -746,11 +747,11 @@ def _method_config(
     config: SuperiorityConfig,
     checkpoint: tuple[float, ...],
 ) -> tuple[AdvancedPlannerConfig, tuple[float, ...] | None]:
-    common = dict(
-        episodes=0,
-        critic_mode='frozen',
-        local_passes=0,
-    )
+    common = {
+        'episodes': 0,
+        'critic_mode': 'frozen',
+        'local_passes': 0,
+    }
     if method == 'frozen_adp':
         return _planner_config(
             config,

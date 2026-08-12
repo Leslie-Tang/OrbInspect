@@ -63,6 +63,14 @@ setup(
             'orbinspect_guidance.offline_planning_plots:main',
             'offline_validation_matrix = '
             'orbinspect_guidance.offline_validation_matrix:main',
+            'ros_route_exporter = '
+            'orbinspect_guidance.ros_route_exporter:main',
+            'verification_evaluator_node = '
+            'orbinspect_guidance.verification_evaluator_node:main',
+            'ros_evidence_audit = '
+            'orbinspect_guidance.ros_evidence_audit:main',
+            'ros_verification_campaign = '
+            'orbinspect_guidance.ros_verification_campaign:main',
             'planned_trajectory_replay_node = '
             'orbinspect_guidance.planned_trajectory_replay_node:main',
         ],

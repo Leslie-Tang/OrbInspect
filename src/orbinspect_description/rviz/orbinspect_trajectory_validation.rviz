@@ -29,7 +29,7 @@ Visualization Manager:
       Reference Frame: lvlh
       Value: true
     - Class: rviz_default_plugins/TF
-      Enabled: true
+      Enabled: false
       Frame Timeout: 15
       Frames:
         All Enabled: true
@@ -39,7 +39,7 @@ Visualization Manager:
       Show Axes: true
       Show Names: true
       Update Interval: 0
-      Value: true
+      Value: false
     - Angle Tolerance: 0.1
       Class: rviz_default_plugins/Odometry
       Enabled: true
@@ -95,7 +95,7 @@ Visualization Manager:
     - Alpha: 1
       Class: rviz_default_plugins/PointStamped
       Color: 255; 80; 80
-      Enabled: true
+      Enabled: false
       History Length: 1
       Name: Current Replay Point
       Radius: 0.8
@@ -105,7 +105,7 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /chaser/reference
-      Value: true
+      Value: false
     - Class: rviz_default_plugins/MarkerArray
       Enabled: true
       Name: Proposed Viewpoints
@@ -117,7 +117,7 @@ Visualization Manager:
         Value: /visualization/planner_markers
       Value: true
     - Class: rviz_default_plugins/Marker
-      Enabled: true
+      Enabled: false
       Name: Current Camera FOV
       Topic:
         Depth: 10
@@ -125,7 +125,7 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /visualization/fov_marker
-      Value: true
+      Value: false
     - Class: rviz_default_plugins/Image
       Enabled: true
       Max Value: 1

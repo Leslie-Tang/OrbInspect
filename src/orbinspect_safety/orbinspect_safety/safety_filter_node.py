@@ -24,6 +24,7 @@ class SafetyFilterNode(Node):
 
         self.declare_parameter('safety_margin', 2.0)
         self.declare_parameter('caution_margin', 8.0)
+        self.declare_parameter('vehicle_radius', 0.80)
         self.declare_parameter('max_acceleration', 0.01)
         self.declare_parameter('max_speed', 0.25)
         self.declare_parameter('repulsion_gain', 0.004)
@@ -35,6 +36,7 @@ class SafetyFilterNode(Node):
             KeepoutZoneModel(
                 safety_margin=self._positive_parameter('safety_margin'),
                 caution_margin=self._positive_parameter('caution_margin'),
+                vehicle_radius=self._nonnegative_parameter('vehicle_radius'),
             )
         )
         self.filter = ProjectionSafetyFilter(
@@ -46,6 +48,7 @@ class SafetyFilterNode(Node):
         )
         self.latest_position: tuple[float, float, float] | None = None
         self.latest_velocity = (0.0, 0.0, 0.0)
+        self.vehicle_radius = self.filter.checker.keepout_model.vehicle_radius
 
         self.safe_control_pub = self.create_publisher(
             AccelStamped,
@@ -137,6 +140,7 @@ class SafetyFilterNode(Node):
             'time': self.get_clock().now().nanoseconds * 1.0e-9,
             'minimum_distance': minimum_distance,
             'safety_margin': safety_margin,
+            'vehicle_radius': self.vehicle_radius,
             'clearance': clearance,
             'is_safe': clearance >= 0.0,
             'in_caution_zone': in_caution_zone,
@@ -172,6 +176,12 @@ def main(args: Sequence[str] | None = None) -> None:
         rclpy.spin(node)
     except (KeyboardInterrupt, ExternalShutdownException):
         pass
+    except RuntimeError as exc:
+        if not (
+            not rclpy.ok()
+            and "Unable to convert call argument '0' to Python object" in str(exc)
+        ):
+            raise
     finally:
         try:
             node.destroy_node()

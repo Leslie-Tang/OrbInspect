@@ -392,7 +392,10 @@ def _fallacy_scan(
             },
             'correlation_causation': {
                 'status': 'scoped',
-                'note': 'paired algorithm intervention is causal only inside the fixed simulator model',
+                'note': (
+                    'paired algorithm intervention is causal only inside the fixed '
+                    'simulator model'
+                ),
             },
             'reverse_causality': {
                 'status': 'not_applicable',
@@ -439,7 +442,8 @@ def _validation_markdown(payload: dict[str, object]) -> str:
         f"- Confidence: {payload['confidence']}",
         f"- Fallacy scan: {payload['fallacy_scan']['checked']}",
         '',
-        '| Split | Baseline | n | Success (ADP/base) | Mean difference [95% CI] | Reduction | W/T/L | Sign p |',
+        '| Split | Baseline | n | Success (ADP/base) | Mean difference [95% CI] '
+        '| Reduction | W/T/L | Sign p |',
         '|---|---|---:|---:|---:|---:|---:|---:|',
     ]
     for split, comparisons in payload['comparisons'].items():

@@ -1,0 +1,11 @@
+# Curated ROS archives and retained media. Keep the path scope narrow so
+# ordinary generated results do not silently become repository objects.
+data/results/20260812_174012_ros_final_validation002_radius080/rosbag/**/*.mcap filter=lfs diff=lfs merge=lfs -text
+data/results/ros_rviz_full_planning_demo_corrected_validation002_radius080_20260812/raw/*.mp4 filter=lfs diff=lfs merge=lfs -text
+data/results/ros_rviz_full_planning_demo_corrected_validation002_radius080_20260812/raw/*.ts filter=lfs diff=lfs merge=lfs -text
+data/results/ros_rviz_full_planning_demo_corrected_validation002_radius080_20260812/videos/*.mp4 filter=lfs diff=lfs merge=lfs -text
+data/results/20260812_174012_ros_final_validation002_radius080/raw/*.csv binary
+data/results/ros_rviz_full_planning_demo_corrected_validation002_radius080_20260812/raw/*.csv binary
+data/results/ros_verification_inputs_full_transform_radius080_20260812/raw/*.csv binary
+data/results/adp_future_full_transform_radius080_20260812/raw/*.csv binary
+data/results/adp_future_full_transform_radius080_20260812/figures/*.svg binary

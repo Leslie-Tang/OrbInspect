@@ -16,6 +16,7 @@ offline_planning_experiment:
     passive_safety_horizon: 300.0
     passive_safety_distance: 0.0
     safety_margin: 2.0
+    vehicle_radius: 0.80
     initial_state: [0.0, -35.0, 10.0, 0.0, 0.0, 0.0]
     random_seed: 7
     proposed_beam_width: 6

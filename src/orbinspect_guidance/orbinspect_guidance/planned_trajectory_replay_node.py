@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import csv
+import json
 import math
 from pathlib import Path
 from typing import Iterable
@@ -12,6 +13,7 @@ from nav_msgs.msg import Odometry, Path as PathMsg
 import rclpy
 from rclpy.executors import ExternalShutdownException
 from rclpy.node import Node
+from std_msgs.msg import String
 from tf2_ros import TransformBroadcaster
 from visualization_msgs.msg import Marker, MarkerArray
 
@@ -23,6 +25,7 @@ class PlannedTrajectoryReplayNode(Node):
         super().__init__('planned_trajectory_replay_node')
         self.declare_parameter('result_dir', 'data/results/offline_high_coverage_experiment')
         self.declare_parameter('method', 'set_cover_cw_tour')
+        self.declare_parameter('scenario_id', '')
         self.declare_parameter('frame_id', 'lvlh')
         self.declare_parameter('child_frame_id', 'chaser_body')
         self.declare_parameter('camera_frame_id', 'chaser_camera')
@@ -48,6 +51,7 @@ class PlannedTrajectoryReplayNode(Node):
 
         self.result_dir = Path(str(self.get_parameter('result_dir').value))
         self.method = str(self.get_parameter('method').value)
+        self.scenario_id = str(self.get_parameter('scenario_id').value)
         self.frame_id = str(self.get_parameter('frame_id').value)
         self.child_frame_id = str(self.get_parameter('child_frame_id').value)
         self.camera_frame_id = str(self.get_parameter('camera_frame_id').value)
@@ -70,8 +74,12 @@ class PlannedTrajectoryReplayNode(Node):
         )
         self.station_mesh_scale = self._positive_parameter('station_mesh_scale')
 
-        csv_trajectory = _load_trajectory(self.result_dir, self.method)
-        self.viewpoints = _load_viewpoints(self.result_dir, self.method)
+        csv_trajectory = _load_trajectory(
+            self.result_dir, self.method, self.scenario_id
+        )
+        self.viewpoints = _load_viewpoints(
+            self.result_dir, self.method, self.scenario_id
+        )
         if self.trajectory_source == 'standoff':
             self.trajectory = _build_standoff_trajectory(
                 csv_trajectory,
@@ -85,7 +93,9 @@ class PlannedTrajectoryReplayNode(Node):
             self.attitudes = _attitudes_from_trajectory(self.trajectory)
         else:
             self.trajectory = csv_trajectory
-            self.attitudes = _load_attitudes(self.result_dir, self.method)
+            self.attitudes = _load_attitudes(
+                self.result_dir, self.method, self.scenario_id
+            )
         if self.stop_before_time > 0.0:
             self.trajectory = [
                 sample for sample in self.trajectory
@@ -96,6 +106,9 @@ class PlannedTrajectoryReplayNode(Node):
 
         self.start_time = self.get_clock().now()
         self.last_index = 0
+        self.reference_publish_count = 0
+        self.previous_replay_time: float | None = None
+        self.maximum_reference_gap = 0.0
         self.latest_odom: Odometry | None = None
         self.executed_path = PathMsg()
         self.executed_path.header.frame_id = self.frame_id
@@ -111,9 +124,18 @@ class PlannedTrajectoryReplayNode(Node):
             '/chaser/attitude_reference',
             10,
         )
+        self.reference_status_pub = self.create_publisher(
+            String,
+            '/verification/reference_status',
+            10,
+        )
         self.planned_path_pub = self.create_publisher(PathMsg, '/inspection/planned_path', 10)
         self.offline_path_pub = self.create_publisher(PathMsg, '/inspection/offline_path', 10)
-        self.executed_path_pub = self.create_publisher(PathMsg, '/chaser/trajectory', 10)
+        self.executed_path_pub = self.create_publisher(
+            PathMsg,
+            '/inspection/executed_path',
+            10,
+        )
         self.marker_pub = self.create_publisher(
             MarkerArray,
             '/visualization/planner_markers',
@@ -148,6 +170,13 @@ class PlannedTrajectoryReplayNode(Node):
     def _tick(self) -> None:
         stamp = self.get_clock().now().to_msg()
         replay_time = self._current_replay_time()
+        if self.previous_replay_time is not None:
+            self.maximum_reference_gap = max(
+                self.maximum_reference_gap,
+                max(0.0, replay_time - self.previous_replay_time),
+            )
+        self.previous_replay_time = replay_time
+        self.reference_publish_count += 1
         index = self._current_index(replay_time)
         sample = self._interpolated_sample(index, replay_time)
         attitude = self._interpolated_attitude(index, replay_time, sample)
@@ -163,6 +192,7 @@ class PlannedTrajectoryReplayNode(Node):
         self.attitude_reference_pub.publish(
             _make_pose(stamp, self.frame_id, sample, attitude)
         )
+        self._publish_reference_status(replay_time)
         display_sample = sample
         if self.publish_mode == 'replay':
             odom = _make_odometry(
@@ -201,6 +231,32 @@ class PlannedTrajectoryReplayNode(Node):
         if index < self.last_index:
             self._reset_executed_path()
         self.last_index = index
+
+    def _publish_reference_status(self, replay_time: float) -> None:
+        final_time = float(self.trajectory[-1]['time'])
+        complete = replay_time + 1.0e-9 >= final_time
+        minimum_count = math.floor(final_time * self.publish_rate * 0.99)
+        maximum_gap = 1.5 / self.publish_rate
+        payload = {
+            'event': 'reference_stream_status',
+            'scenario_id': self.scenario_id,
+            'method': self.method,
+            'complete': complete,
+            'reference_publish_count': self.reference_publish_count,
+            'minimum_expected_publish_count': minimum_count,
+            'maximum_reference_gap_s': self.maximum_reference_gap,
+            'maximum_allowed_reference_gap_s': maximum_gap,
+            'nominal_gap_passed': (
+                self.maximum_reference_gap <= maximum_gap + 1.0e-9
+            ),
+            'passed': (
+                complete
+                and self.reference_publish_count >= minimum_count
+            ),
+        }
+        self.reference_status_pub.publish(String(
+            data=json.dumps(payload, sort_keys=True)
+        ))
 
     def _current_replay_time(self) -> float:
         elapsed = (self.get_clock().now() - self.start_time).nanoseconds * 1.0e-9
@@ -327,9 +383,9 @@ class PlannedTrajectoryReplayNode(Node):
             sphere.pose.position.y = row['viewpoint_y']
             sphere.pose.position.z = row['viewpoint_z']
             sphere.pose.orientation.w = 1.0
-            sphere.scale.x = 1.2
-            sphere.scale.y = 1.2
-            sphere.scale.z = 1.2
+            sphere.scale.x = 0.35
+            sphere.scale.y = 0.35
+            sphere.scale.z = 0.35
             sphere.color.r = 0.1
             sphere.color.g = 0.65
             sphere.color.b = 1.0
@@ -343,18 +399,18 @@ class PlannedTrajectoryReplayNode(Node):
             ray.id = 1000 + index
             ray.type = Marker.ARROW
             ray.action = Marker.ADD
-            ray.scale.x = 0.18
-            ray.scale.y = 0.45
-            ray.scale.z = 0.45
+            ray.scale.x = 0.04
+            ray.scale.y = 0.10
+            ray.scale.z = 0.10
             ray.color.r = 1.0
             ray.color.g = 0.8
             ray.color.b = 0.1
-            ray.color.a = 0.9
+            ray.color.a = 0.35
             start = Point(x=row['viewpoint_x'], y=row['viewpoint_y'], z=row['viewpoint_z'])
             end = Point(
-                x=row['viewpoint_x'] + 6.0 * row['boresight_x'],
-                y=row['viewpoint_y'] + 6.0 * row['boresight_y'],
-                z=row['viewpoint_z'] + 6.0 * row['boresight_z'],
+                x=row['viewpoint_x'] + 3.0 * row['boresight_x'],
+                y=row['viewpoint_y'] + 3.0 * row['boresight_y'],
+                z=row['viewpoint_z'] + 3.0 * row['boresight_z'],
             )
             ray.points = [start, end]
             markers.markers.append(ray)
@@ -378,7 +434,7 @@ class PlannedTrajectoryReplayNode(Node):
         marker.color.r = 0.72
         marker.color.g = 0.74
         marker.color.b = 0.78
-        marker.color.a = 0.92
+        marker.color.a = 1.0
         return marker
 
     def _make_fov_marker(
@@ -421,12 +477,18 @@ class PlannedTrajectoryReplayNode(Node):
         return value
 
 
-def _load_trajectory(result_dir: Path, method: str) -> list[dict[str, float]]:
+def _load_trajectory(
+    result_dir: Path,
+    method: str,
+    scenario_id: str = '',
+) -> list[dict[str, float]]:
     rows = []
-    for row in _read_csv(result_dir / 'raw' / 'trajectory.csv'):
-        if row.get('method') != method:
-            continue
-        rows.append({
+    for row in _select_rows(
+        result_dir / 'raw' / 'trajectory.csv',
+        method,
+        scenario_id,
+    ):
+        sample = {
             'time': float(row['time']),
             'rx': float(row['rx']),
             'ry': float(row['ry']),
@@ -434,21 +496,32 @@ def _load_trajectory(result_dir: Path, method: str) -> list[dict[str, float]]:
             'vx': float(row['vx']),
             'vy': float(row['vy']),
             'vz': float(row['vz']),
-        })
+        }
+        if all(row.get(axis, '') != '' for axis in ('ax', 'ay', 'az')):
+            sample.update({
+                'ax': float(row['ax']),
+                'ay': float(row['ay']),
+                'az': float(row['az']),
+            })
+        rows.append(sample)
     return rows
 
 
-def _load_attitudes(result_dir: Path, method: str) -> dict[float, dict[str, float]]:
-    rows = []
-    for row in _read_csv(result_dir / 'raw' / 'attitude.csv'):
-        if row.get('method') != method:
-            continue
-        rows.append({
-            'time': float(row['time']),
-            'boresight_x': float(row['boresight_x']),
-            'boresight_y': float(row['boresight_y']),
-            'boresight_z': float(row['boresight_z']),
-        })
+def _load_attitudes(
+    result_dir: Path,
+    method: str,
+    scenario_id: str = '',
+) -> dict[float, dict[str, float]]:
+    rows = [{
+        'time': float(row['time']),
+        'boresight_x': float(row['boresight_x']),
+        'boresight_y': float(row['boresight_y']),
+        'boresight_z': float(row['boresight_z']),
+    } for row in _select_rows(
+        result_dir / 'raw' / 'attitude.csv',
+        method,
+        scenario_id,
+    )]
     return _continuous_attitudes(rows)
 
 
@@ -494,20 +567,51 @@ def _least_aligned_axis(vector: tuple[float, float, float]) -> tuple[float, floa
     return min(axes, key=lambda axis: abs(_dot(axis, vector)))
 
 
-def _load_viewpoints(result_dir: Path, method: str) -> list[dict[str, float]]:
-    viewpoints = []
-    for row in _read_csv(result_dir / 'raw' / 'viewpoints.csv'):
-        if row.get('method') != method:
-            continue
-        viewpoints.append({
-            'viewpoint_x': float(row['viewpoint_x']),
-            'viewpoint_y': float(row['viewpoint_y']),
-            'viewpoint_z': float(row['viewpoint_z']),
-            'boresight_x': float(row['boresight_x']),
-            'boresight_y': float(row['boresight_y']),
-            'boresight_z': float(row['boresight_z']),
-        })
-    return viewpoints
+def _load_viewpoints(
+    result_dir: Path,
+    method: str,
+    scenario_id: str = '',
+) -> list[dict[str, float]]:
+    return [{
+        'viewpoint_x': float(row['viewpoint_x']),
+        'viewpoint_y': float(row['viewpoint_y']),
+        'viewpoint_z': float(row['viewpoint_z']),
+        'boresight_x': float(row['boresight_x']),
+        'boresight_y': float(row['boresight_y']),
+        'boresight_z': float(row['boresight_z']),
+    } for row in _select_rows(
+        result_dir / 'raw' / 'viewpoints.csv',
+        method,
+        scenario_id,
+    )]
+
+
+def _select_rows(
+    path: Path,
+    method: str,
+    scenario_id: str,
+) -> list[dict[str, str]]:
+    method_rows = [
+        row for row in _read_csv(path)
+        if row.get('method') == method
+    ]
+    scenario_values = {
+        row['scenario_id'] for row in method_rows
+        if row.get('scenario_id')
+    }
+    if scenario_id and scenario_values:
+        method_rows = [
+            row for row in method_rows
+            if row.get('scenario_id') == scenario_id
+        ]
+    elif not scenario_id and len(scenario_values) > 1:
+        raise ValueError(
+            f'scenario_id is required for multi-scenario input {path}'
+        )
+    if not method_rows:
+        selection = f'{method}/{scenario_id}' if scenario_id else method
+        raise ValueError(f'no rows found for {selection} in {path}')
+    return method_rows
 
 
 def _build_standoff_trajectory(
@@ -1016,6 +1120,12 @@ def main(args: list[str] | None = None) -> None:
         rclpy.spin(node)
     except (KeyboardInterrupt, ExternalShutdownException):
         pass
+    except RuntimeError as exc:
+        if not (
+            not rclpy.ok()
+            and "Unable to convert call argument '0' to Python object" in str(exc)
+        ):
+            raise
     finally:
         try:
             node.destroy_node()

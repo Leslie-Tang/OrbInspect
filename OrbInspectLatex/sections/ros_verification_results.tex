@@ -1,22 +1,59 @@
-% Populate this file only with measurements produced by the frozen protocol in
-% Section~\ref{sec:ros-verification-protocol}. Do not enable its inclusion while
-% any value remains unknown.
-
-\subsection{ROS 2 Closed-Loop Verification Results}
+\subsection{Corrected ROS 2 Closed-Loop Verification Result}
 \label{sec:ros-verification-results}
 
-% Required paragraph 1: Ubuntu, ROS 2, Gazebo, Python, CPU, source revision,
-% run identifiers, and confirmation that validation-only tuning was frozen.
+The corrected validation task ran on Ubuntu~24.04.4 with ROS~2 Jazzy,
+Gazebo Harmonic, and RViz2. Gazebo supplied the station/chaser rendering and
+camera image only; the ROS-native HCW node remained the state source of truth.
+The input route was reconstructed from the corrected 24-node graph using the
+complete glTF scene hierarchy and a conservative
+$r_{\mathrm{veh}}=\unit{0.80}{m}$ chaser bounding radius. The route manifest
+records 10 planned SOOAs, \unit{900}{s} mission duration, 81.33\% planned
+coverage, and \unit{2.808}{m} minimum planned finite-body clearance above the
+required \unit{2}{m} margin.
 
-% Required paragraph 2: interface-integrity and closed-loop acceptance-gate
-% outcomes, including any failed or excluded run with its predeclared reason.
+The 5$\times$ graphical closed-loop execution credited all 10 terminal
+observations, reached 81.33\% coverage, and completed at mission time
+\unit{900.01}{s} without a failed action. The post-run audit evaluated 18,918
+recorded trajectory samples and every intervening segment against all 247,525
+fully transformed ISS triangles. No segment crossed the mesh. The smallest
+sampled center distance was \unit{8.506}{m}; after the continuous segment lower
+bound and the \unit{0.80}{m} vehicle radius, the minimum body distance was
+\unit{7.692}{m}, or \unit{5.692}{m} above the required safety margin. Peak
+filtered acceleration was $0.0600~\mathrm{m/s^2}$. Terminal, reference-stream,
+data-presence, acceleration, full-mesh, swept-crossing, and finite-body gates
+all passed.
 
-% Required table: paired ADP/local-search mission success, realized Delta-v,
-% tracking error, clearance, peak input, filter interventions, coverage, and
-% completion for test and shifted splits. Report paired intervals and sign tests.
+The retained evidence directory contains the six core CSV streams,
+configuration and route manifests, launch log, summary, version-2 mesh audit,
+raw RViz and camera streams, an annotated H.264 video, and a milestone preview.
+The 198.3-s video uses RViz2 as the main view and the live
+\texttt{/chaser/camera/image} topic as an inset. It is an execution and
+interface demonstration, not an additional held-out comparison row.
+Figure~\ref{fig:ros-key-camera-views} links all ten synchronized camera frames
+to their exact credited positions in two orthogonal projections of the recorded
+closed-loop trajectory.
 
-% Required figure: planned-versus-executed representative trajectories and
-% tracking/safety time histories. State that test scenario 2 is illustrative.
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.95\textwidth]{figures/ros_key_camera_views_trajectory.pdf}
+  \caption{Trajectory-linked camera views from the accepted corrected
+  \texttt{validation\_002} task. Views 1--5 link locally to the radial--cross-track
+  ($x$--$z$) projection, and views 6--10 link to the along-track--cross-track
+  ($y$--$z$) projection; hollow gray markers retain the other observations as
+  context. Inset labels give mission time and cumulative coverage. Dashed gray
+  and solid blue denote planned and executed paths, and the star is the initial
+  state. Apparent overlap in either projection does not imply contact: the
+  annotated clearances and collision decision use the full 3-D transformed mesh
+  and swept path. Gazebo rendered the views, while ROS HCW dynamics propagated
+  state; coverage came from frozen geometric visibility masks, not image pixels.}
+  \label{fig:ros-key-camera-views}
+\end{figure*}
 
-% Required final paragraph: reconcile ROS and offline findings without replacing
-% archived graph metrics by executed quantities or expanding the safety claim.
+The earlier paired ROS campaign used a translation-only interpretation of the
+glTF node hierarchy. Re-auditing its illustrative route with the complete
+hierarchy exposed a swept intersection with the S4 truss and a negative
+finite-body clearance. Those numerical ROS campaign claims and their old video
+are therefore excluded rather than carried into the corrected manuscript. The
+current result establishes consistency of one complete closed-loop task with
+the corrected geometry and audit; paired ROS method superiority would require a
+new full campaign from the corrected route bundle.

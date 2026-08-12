@@ -816,7 +816,7 @@ def _write_trace_manifest(
             'transformation': {'script': str(script_path), 'hash': script_hash},
             'caption_claim': 'Rollout ADP reduced held-out fuel and graph cost relative to local search on test and shifted scenarios.',
             'supported_manuscript_claims': [
-                {'claim': 'Test mean delta-v fell by 13.18% with 28 wins and two ties.', 'locator': 'Results'},
+                {'claim': 'Test mean delta-v fell by 3.96% with 21 wins, four ties, and five losses.', 'locator': 'Results'},
                 {'claim': 'The improvement direction persisted under the shifted split.', 'locator': 'Results'},
             ],
             'limitations': ['Scenarios are conditioned on incumbent feasibility.', 'The shifted split covers node dropout and target priorities only.'],

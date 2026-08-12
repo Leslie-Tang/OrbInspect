@@ -78,6 +78,7 @@ class ExperimentConfig:
     passive_safety_horizon: float = 300.0
     passive_safety_distance: float = 0.0
     safety_margin: float = 2.0
+    vehicle_radius: float = 0.80
     initial_state: StateVector = (0.0, -35.0, 10.0, 0.0, 0.0, 0.0)
     methods: tuple[str, ...] = (
         'safe_graph_adp',
@@ -674,7 +675,7 @@ class OfflinePlanningExperiment:
                 break
 
         if best_state is None:
-            sequence = tuple()
+            sequence = ()
             certificate_status = 'infeasible_or_limit_reached'
         else:
             sequence = _reconstruct_candidate_sequence(best_state, parent, candidates)
@@ -1190,7 +1191,8 @@ class OfflinePlanningExperiment:
         raise ValueError(f'unknown method: {method}')
 
     def _transfer_acceptable(self, method: str, transfer: TransferEstimate) -> bool:
-        """Return whether a transfer can be selected by a method.
+        """
+        Return whether a transfer can be selected by a method.
 
         Ablation methods intentionally remove one planning check, but the
         resulting trajectory is still evaluated by the full feasibility metrics
@@ -1679,6 +1681,7 @@ class OfflinePlanningExperiment:
             )
         path.write_text('\n'.join(lines) + '\n')
 
+
 def _planner_config(config: ExperimentConfig) -> OfflinePlannerConfig:
     return OfflinePlannerConfig(
         geometry_backend=config.geometry_backend,
@@ -1694,6 +1697,7 @@ def _planner_config(config: ExperimentConfig) -> OfflinePlannerConfig:
         passive_safety_horizon=config.passive_safety_horizon,
         passive_safety_distance=config.passive_safety_distance,
         safety_margin=config.safety_margin,
+        vehicle_radius=config.vehicle_radius,
         initial_state=config.initial_state,
         output_root=config.output_root,
         run_id=config.run_id,

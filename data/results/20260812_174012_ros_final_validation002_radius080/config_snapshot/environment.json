@@ -1,0 +1,32 @@
+{
+  "captured_at_utc": "2026-08-12T09:41:39.485824+00:00",
+  "cpu_model": "AMD Ryzen 7 7840H with Radeon 780M Graphics",
+  "gazebo_sim_version": "8.11.0",
+  "kernel": "6.17.0-35-generic",
+  "machine": "x86_64",
+  "os_release": {
+    "BUG_REPORT_URL": "https://bugs.launchpad.net/ubuntu/",
+    "HOME_URL": "https://www.ubuntu.com/",
+    "ID": "ubuntu",
+    "ID_LIKE": "debian",
+    "LOGO": "ubuntu-logo",
+    "NAME": "Ubuntu",
+    "PRETTY_NAME": "Ubuntu 24.04.4 LTS",
+    "PRIVACY_POLICY_URL": "https://www.ubuntu.com/legal/terms-and-policies/privacy-policy",
+    "SUPPORT_URL": "https://help.ubuntu.com/",
+    "UBUNTU_CODENAME": "noble",
+    "VERSION": "24.04.4 LTS (Noble Numbat)",
+    "VERSION_CODENAME": "noble",
+    "VERSION_ID": "24.04"
+  },
+  "python_version": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+  "rmw_implementation": "",
+  "ros_distro": "jazzy",
+  "ros_package_versions": [
+    "ros-jazzy-ros-base\t0.11.0-1noble.20260616.084325",
+    "ros-jazzy-ros-gz-sim\t1.0.22-1noble.20260615.173223",
+    "ros-jazzy-rviz2\t14.1.22-1noble.20260615.174609"
+  ],
+  "ros_version": "2",
+  "schema_version": "orbinspect-environment/v1"
+}

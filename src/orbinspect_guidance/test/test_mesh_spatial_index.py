@@ -1,9 +1,9 @@
 import math
 
-from orbinspect_guidance.mesh_spatial_index import TriangleSpatialIndex
 from orbinspect_guidance.mesh_spatial_index import (
     segment_triangle_intersection_fraction,
 )
+from orbinspect_guidance.mesh_spatial_index import TriangleSpatialIndex
 
 
 TRIANGLE = ((0.0, -1.0, -1.0), (0.0, 1.0, -1.0), (0.0, 0.0, 1.0))

@@ -85,6 +85,57 @@ class BoxPrimitive:
 
 
 @dataclass(frozen=True)
+class OrientedBoxPrimitive:
+    """Solid box whose orthonormal local axes are expressed in world coordinates."""
+
+    name: str
+    center: Vector3
+    size: Vector3
+    axes: tuple[Vector3, Vector3, Vector3]
+
+    def __post_init__(self) -> None:
+        """Reject non-orthonormal axes before they reach safety calculations."""
+        normalized = tuple(unit(axis) for axis in self.axes)
+        for index, axis in enumerate(normalized):
+            if norm(subtract(axis, self.axes[index])) > 1.0e-6:
+                raise ValueError('oriented-box axes must be unit length')
+        if any(
+            abs(dot(normalized[left], normalized[right])) > 1.0e-6
+            for left, right in ((0, 1), (0, 2), (1, 2))
+        ):
+            raise ValueError('oriented-box axes must be orthogonal')
+
+    def distance_to(self, point: Sequence[float]) -> SurfaceDistance:
+        """Return signed distance and outward direction from this oriented box."""
+        point_vector = vector3(point)
+        relative = subtract(point_vector, self.center)
+        local_point = tuple(dot(relative, axis) for axis in self.axes)
+        local = BoxPrimitive(self.name, (0.0, 0.0, 0.0), self.size).distance_to(
+            local_point
+        )
+        direction = tuple(
+            sum(local.direction[index] * self.axes[index][axis] for index in range(3))
+            for axis in range(3)
+        )
+        closest_point = add(
+            self.center,
+            tuple(
+                sum(
+                    local.closest_point[index] * self.axes[index][axis]
+                    for index in range(3)
+                )
+                for axis in range(3)
+            ),
+        )
+        return SurfaceDistance(
+            self.name,
+            local.distance,
+            direction,
+            closest_point,
+        )
+
+
+@dataclass(frozen=True)
 class CylinderPrimitive:
     """Finite solid cylinder primitive aligned to one world axis."""
 
@@ -209,7 +260,7 @@ class CylinderPrimitive:
         return (radial[0] / radial_norm, radial[1] / radial_norm)
 
 
-StationPrimitive = BoxPrimitive | CylinderPrimitive
+StationPrimitive = BoxPrimitive | OrientedBoxPrimitive | CylinderPrimitive
 
 
 def vector3(values: Sequence[float]) -> Vector3:

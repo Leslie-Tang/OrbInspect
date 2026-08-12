@@ -5,8 +5,8 @@ from launch.actions import DeclareLaunchArgument
 from launch.actions import IncludeLaunchDescription
 from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import LaunchConfiguration
 from launch.substitutions import AnonName
+from launch.substitutions import LaunchConfiguration
 from launch.substitutions import PathJoinSubstitution
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
@@ -98,7 +98,9 @@ def generate_launch_description() -> LaunchDescription:
             name='hcw_dynamics_node',
             output='screen',
             parameters=[{
-                'initial_position_lvlh': [0.004700701439663278, -105.76186219724731, 30.23951855559007],
+                'initial_position_lvlh': [
+                    0.004700701439663278, -105.76186219724731, 30.23951855559007,
+                ],
                 'initial_velocity_lvlh': [0.0, 0.0, 0.0],
                 'integration_dt': 0.05,
                 'publish_rate': 20.0,
@@ -121,7 +123,9 @@ def generate_launch_description() -> LaunchDescription:
                 'riccati_iterations': 300,
                 'mpc_horizon': 8,
                 'mpc_max_iterations': 35,
-                'default_reference': [0.004700701439663278, -105.76186219724731, 30.23951855559007],
+                'default_reference': [
+                    0.004700701439663278, -105.76186219724731, 30.23951855559007,
+                ],
                 'frame_id': 'lvlh',
                 'publish_safe_command_passthrough': False,
             }],
@@ -181,7 +185,9 @@ def generate_launch_description() -> LaunchDescription:
                 'result_root': 'data/results',
                 'run_id': '',
                 'max_acceleration': 0.03,
-                'default_reference': [0.004700701439663278, -105.76186219724731, 30.23951855559007],
+                'default_reference': [
+                    0.004700701439663278, -105.76186219724731, 30.23951855559007,
+                ],
                 'save_figures': True,
             }],
             condition=IfCondition(record),

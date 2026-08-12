@@ -24,6 +24,7 @@ class SafetyMonitorNode(Node):
 
         self.declare_parameter('safety_margin', 2.0)
         self.declare_parameter('caution_margin', 8.0)
+        self.declare_parameter('vehicle_radius', 0.80)
         self.declare_parameter('publish_rate', 5.0)
         self.declare_parameter('frame_id', 'lvlh')
 
@@ -32,6 +33,7 @@ class SafetyMonitorNode(Node):
             KeepoutZoneModel(
                 safety_margin=self._positive_parameter('safety_margin'),
                 caution_margin=self._positive_parameter('caution_margin'),
+                vehicle_radius=self._nonnegative_parameter('vehicle_radius'),
             )
         )
         publish_rate = self._positive_parameter('publish_rate')
@@ -63,6 +65,8 @@ class SafetyMonitorNode(Node):
             'time': self.get_clock().now().nanoseconds * 1.0e-9,
             'minimum_distance': assessment.minimum_distance,
             'safety_margin': assessment.safety_margin,
+            'vehicle_radius': assessment.vehicle_radius,
+            'body_clearance': assessment.body_clearance,
             'clearance': assessment.clearance,
             'is_safe': assessment.is_safe,
             'in_caution_zone': assessment.in_caution_zone,
@@ -85,9 +89,10 @@ class SafetyMonitorNode(Node):
         chaser.pose.position.y = self.latest_position[1]
         chaser.pose.position.z = self.latest_position[2]
         chaser.pose.orientation.w = 1.0
-        chaser.scale.x = assessment.safety_margin * 2.0
-        chaser.scale.y = assessment.safety_margin * 2.0
-        chaser.scale.z = assessment.safety_margin * 2.0
+        marker_radius = assessment.required_center_distance
+        chaser.scale.x = marker_radius * 2.0
+        chaser.scale.y = marker_radius * 2.0
+        chaser.scale.z = marker_radius * 2.0
         if assessment.is_safe:
             chaser.color.r = 0.1
             chaser.color.g = 0.8
@@ -125,6 +130,12 @@ class SafetyMonitorNode(Node):
         value = float(self.get_parameter(name).value)
         if value <= 0.0:
             raise ValueError(f'{name} must be positive')
+        return value
+
+    def _nonnegative_parameter(self, name: str) -> float:
+        value = float(self.get_parameter(name).value)
+        if value < 0.0:
+            raise ValueError(f'{name} must be non-negative')
         return value
 
 

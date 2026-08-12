@@ -571,7 +571,8 @@ class AdvancedSafePlanner:
         float,
         bool,
     ]:
-        """Apply repeated one-step rollout with a safe adaptive base policy.
+        """
+        Apply repeated one-step rollout with a safe adaptive base policy.
 
         Each candidate action is retained only when the deterministic base
         policy reaches the coverage goal from the successor state.  The

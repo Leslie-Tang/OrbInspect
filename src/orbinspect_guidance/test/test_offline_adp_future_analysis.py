@@ -1,8 +1,7 @@
-import pytest
-
 from orbinspect_guidance.offline_adp_future_analysis import _apply_holm
 from orbinspect_guidance.offline_adp_future_analysis import _two_sided_sign_test
 from orbinspect_guidance.offline_adp_future_analysis import verify_reproducibility
+import pytest
 
 
 def test_exact_sign_test_ignores_ties() -> None:

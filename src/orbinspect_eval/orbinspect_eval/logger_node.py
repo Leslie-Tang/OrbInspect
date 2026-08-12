@@ -83,6 +83,13 @@ MISSION_EVENT_COLUMNS = (
     'current_waypoint_id',
     'current_waypoint_index',
     'coverage_ratio',
+    'position_error',
+    'terminal_speed',
+    'credited',
+    'credited_actions',
+    'failed_actions',
+    'success',
+    'reason',
 )
 
 SAFETY_COLUMNS = (
@@ -145,6 +152,7 @@ class CsvLoggerNode(Node):
         self.reference = tuple(self._vector_parameter('default_reference', 3))
         self.reference_velocity = (0.0, 0.0, 0.0)
         self.reference_acceleration = (0.0, 0.0, 0.0)
+        self.received_reference_state = False
         self.boresight = (1.0, 0.0, 0.0)
 
         self.result_dir = self._create_result_dir()
@@ -167,6 +175,8 @@ class CsvLoggerNode(Node):
         self.mission_event_rows: list[dict[str, object]] = []
         self.safety_rows: list[dict[str, object]] = []
         self.planner_rows: list[dict[str, object]] = []
+        self.verification_status: dict[str, object] = {}
+        self.reference_status: dict[str, object] = {}
         self.finalized = False
 
         self.create_subscription(Odometry, '/chaser/odom', self._odom_callback, 10)
@@ -222,6 +232,18 @@ class CsvLoggerNode(Node):
             String,
             '/planner/event',
             self._planner_event_callback,
+            10,
+        )
+        self.create_subscription(
+            String,
+            '/verification/status',
+            self._verification_status_callback,
+            10,
+        )
+        self.create_subscription(
+            String,
+            '/verification/reference_status',
+            self._reference_status_callback,
             10,
         )
         self.get_logger().info(f'logging results to {self.result_dir}')
@@ -306,6 +328,8 @@ class CsvLoggerNode(Node):
         self._record_control_sample(stamp_key, nominal, safe)
 
     def _reference_callback(self, msg: PointStamped) -> None:
+        if self.received_reference_state:
+            return
         self.reference = (
             float(msg.point.x),
             float(msg.point.y),
@@ -315,6 +339,7 @@ class CsvLoggerNode(Node):
         self.reference_acceleration = (0.0, 0.0, 0.0)
 
     def _reference_state_callback(self, msg: Odometry) -> None:
+        self.received_reference_state = True
         self.reference = (
             float(msg.pose.pose.position.x),
             float(msg.pose.pose.position.y),
@@ -362,6 +387,13 @@ class CsvLoggerNode(Node):
             'current_waypoint_id': str(event.get('current_waypoint_id', '')),
             'current_waypoint_index': int(event.get('current_waypoint_index', -1)),
             'coverage_ratio': float(event.get('coverage_ratio', 0.0)),
+            'position_error': float(event.get('position_error', 0.0)),
+            'terminal_speed': float(event.get('terminal_speed', 0.0)),
+            'credited': bool(event.get('credited', False)),
+            'credited_actions': int(event.get('credited_actions', 0)),
+            'failed_actions': int(event.get('failed_actions', 0)),
+            'success': bool(event.get('success', False)),
+            'reason': str(event.get('reason', '')),
         })
 
     def _safety_status_callback(self, msg: String) -> None:
@@ -408,6 +440,24 @@ class CsvLoggerNode(Node):
             'evaluated_candidates': int(event.get('evaluated_candidates', 0)),
             'planning_time': float(event.get('planning_time', 0.0)),
         })
+
+    def _verification_status_callback(self, msg: String) -> None:
+        try:
+            status = json.loads(msg.data)
+        except json.JSONDecodeError:
+            self.get_logger().warning('ignored malformed /verification/status JSON')
+            return
+        if isinstance(status, dict):
+            self.verification_status = status
+
+    def _reference_status_callback(self, msg: String) -> None:
+        try:
+            status = json.loads(msg.data)
+        except json.JSONDecodeError:
+            self.get_logger().warning('ignored malformed reference-status JSON')
+            return
+        if isinstance(status, dict):
+            self.reference_status = status
 
     def _record_control_sample(
         self,
@@ -504,19 +554,33 @@ class CsvLoggerNode(Node):
             'planner_samples': len(self.planner_rows),
             'cumulative_delta_v': self.cumulative_delta_v,
             'mean_position_tracking_error': _mean(position_errors),
+            'rms_position_tracking_error': _rms(position_errors),
             'max_position_tracking_error': max(position_errors) if position_errors else 0.0,
             'mean_velocity_tracking_error': _mean(velocity_errors),
             'max_velocity_tracking_error': max(velocity_errors) if velocity_errors else 0.0,
+            'filter_intervention_samples': sum(
+                bool(row['filter_active']) for row in self.safety_rows
+            ),
+            'final_coverage': (
+                float(self.coverage_rows[-1]['coverage_ratio'])
+                if self.coverage_rows else 0.0
+            ),
+            'verification': self.verification_status,
+            'reference_stream': self.reference_status,
+            'run_manifest': self._load_run_manifest(),
             'figures': [path.name for path in figure_paths],
             'topics': [
                 '/chaser/odom',
                 '/chaser/reference_state',
+                '/chaser/attitude_reference',
                 '/chaser/control_command',
                 '/chaser/safe_control_command',
                 '/inspection/coverage_map',
                 '/mission/event',
                 '/chaser/safety_status',
                 '/planner/event',
+                '/verification/status',
+                '/verification/reference_status',
             ],
         }
         with (self.result_dir / 'summary.json').open('w') as summary_file:
@@ -544,8 +608,26 @@ class CsvLoggerNode(Node):
         if self.coverage_rows:
             final_coverage = self.coverage_rows[-1]['coverage_ratio']
             lines.append(f'- Final coverage ratio: {final_coverage:.6f}')
+        if self.verification_status:
+            lines.append(
+                f"- Verification success: {self.verification_status.get('success', False)}"
+            )
+            lines.append(
+                f"- Verification reason: {self.verification_status.get('reason', '')}"
+            )
         with (self.result_dir / 'summary.md').open('w') as summary_file:
             summary_file.write('\n'.join(lines) + '\n')
+
+    def _load_run_manifest(self) -> dict[str, object]:
+        path = self.result_dir / 'config_snapshot' / 'run_manifest.json'
+        if not path.is_file():
+            return {}
+        try:
+            payload = json.loads(path.read_text())
+        except (OSError, json.JSONDecodeError) as exc:
+            self.get_logger().warning(f'failed to read run manifest: {exc}')
+            return {}
+        return payload if isinstance(payload, dict) else {}
 
     @staticmethod
     def _write_csv(
@@ -637,6 +719,14 @@ def _mean(values: Sequence[float]) -> float:
     return sum(float(value) for value in values) / len(values)
 
 
+def _rms(values: Sequence[float]) -> float:
+    if not values:
+        return 0.0
+    return math.sqrt(
+        sum(float(value) ** 2 for value in values) / len(values)
+    )
+
+
 def main(args: list[str] | None = None) -> None:
     rclpy.init(args=args)
     node = CsvLoggerNode()
@@ -644,6 +734,17 @@ def main(args: list[str] | None = None) -> None:
         rclpy.spin(node)
     except (KeyboardInterrupt, ExternalShutdownException):
         pass
+    except RuntimeError as exc:
+        # Jazzy can surface a pybind11 ``take_message`` conversion error when
+        # SIGINT invalidates the context between an executor readiness check
+        # and the subscription take. Suppress only that shutdown race; a
+        # conversion failure while ROS is live remains a hard error.
+        shutdown_take_race = (
+            not rclpy.ok()
+            and "Unable to convert call argument '0' to Python object" in str(exc)
+        )
+        if not shutdown_take_race:
+            raise
     finally:
         original_sigint = signal.getsignal(signal.SIGINT)
         original_sigterm = signal.getsignal(signal.SIGTERM)

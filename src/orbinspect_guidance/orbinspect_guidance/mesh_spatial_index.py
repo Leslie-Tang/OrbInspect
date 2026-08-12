@@ -1,4 +1,5 @@
-"""Dependency-free spatial queries over triangle meshes.
+"""
+Dependency-free spatial queries over triangle meshes.
 
 The index is intentionally implemented without SciPy, ``rtree``, or a graphics
 engine so the offline paper experiments use the same deterministic geometry in
@@ -74,7 +75,8 @@ class TriangleSpatialIndex:
         min_fraction: float = 0.0,
         max_fraction: float = 1.0,
     ) -> bool:
-        """Return whether any mesh triangle intersects a segment interval.
+        """
+        Return whether any mesh triangle intersects a segment interval.
 
         Fractions are expressed along ``end - start``.  Visibility checks can
         exclude both endpoints, while swept-safety checks can include them.
@@ -185,7 +187,8 @@ def segment_triangle_intersection_fraction(
     min_fraction: float = 0.0,
     max_fraction: float = 1.0,
 ) -> float | None:
-    """Return the segment fraction of a Moller-Trumbore intersection.
+    """
+    Return the segment fraction of a Moller-Trumbore intersection.
 
     The Moller-Trumbore parameter is already a fraction because the ray
     direction is ``end - start``.  It must not be divided by segment length.

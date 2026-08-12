@@ -5,14 +5,20 @@ from __future__ import annotations
 
 DEFAULT_ROSBAG_TOPICS = (
     '/chaser/odom',
+    '/chaser/reference_state',
+    '/chaser/attitude_reference',
     '/chaser/control_command',
     '/chaser/safe_control_command',
     '/chaser/safety_status',
     '/inspection/coverage_map',
     '/inspection/current_waypoint',
     '/inspection/planned_path',
+    '/inspection/executed_path',
     '/planner/status',
     '/planner/event',
+    '/mission/event',
+    '/verification/status',
+    '/verification/reference_status',
 )
 
 

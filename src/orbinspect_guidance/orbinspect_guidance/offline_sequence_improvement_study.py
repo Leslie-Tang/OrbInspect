@@ -13,13 +13,13 @@ import random
 import statistics
 from typing import Iterable
 
-from orbinspect_guidance.offline_planning_experiment import ExperimentConfig
-from orbinspect_guidance.offline_planning_experiment import MethodResult
-from orbinspect_guidance.offline_planning_experiment import OfflinePlanningExperiment
 from orbinspect_guidance.offline_planning_experiment import _planner_config
 from orbinspect_guidance.offline_planning_experiment import (
     _safe_load_yaml_mapping_from_text,
 )
+from orbinspect_guidance.offline_planning_experiment import ExperimentConfig
+from orbinspect_guidance.offline_planning_experiment import MethodResult
+from orbinspect_guidance.offline_planning_experiment import OfflinePlanningExperiment
 from orbinspect_guidance.result_provenance import collect_result_provenance
 from orbinspect_guidance.result_provenance import write_result_manifest
 
@@ -443,7 +443,7 @@ def _summary_markdown(summary: dict[str, object]) -> str:
         interval = endpoint['bootstrap_95_percent_ci_for_mean']
         lines.append(
             f"| {label} | {float(endpoint['mean_difference']):.6g} | "
-            f"[{float(interval[0]):.6g}, {float(interval[1]):.6g}] | "
+            f'[{float(interval[0]):.6g}, {float(interval[1]):.6g}] | '
             f"{endpoint['local_better_count']} / {endpoint['tie_count']} / "
             f"{endpoint['incumbent_better_count']} | "
             f"{float(endpoint['exact_two_sided_sign_test_p']):.6g} |"

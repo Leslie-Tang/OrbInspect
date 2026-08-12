@@ -158,6 +158,12 @@ def main(args: list[str] | None = None) -> None:
         rclpy.spin(node)
     except (KeyboardInterrupt, ExternalShutdownException):
         pass
+    except RuntimeError as exc:
+        if not (
+            not rclpy.ok()
+            and "Unable to convert call argument '0' to Python object" in str(exc)
+        ):
+            raise
     finally:
         try:
             node.destroy_node()

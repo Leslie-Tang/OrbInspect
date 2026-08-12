@@ -10,10 +10,10 @@ import json
 from pathlib import Path
 from time import perf_counter
 
+from orbinspect_guidance.offline_planning_experiment import _load_yaml_config
 from orbinspect_guidance.offline_planning_experiment import ExperimentConfig
 from orbinspect_guidance.offline_planning_experiment import MethodResult
 from orbinspect_guidance.offline_planning_experiment import OfflinePlanningExperiment
-from orbinspect_guidance.offline_planning_experiment import _load_yaml_config
 
 
 @dataclass(frozen=True)
@@ -366,7 +366,7 @@ def _write_summary_md(path: Path, rows: list[dict[str, object]]) -> None:
             f"| {float(row['min_clearance']):.3f} "
             f"| {row['feasible']} "
             f"| {float(row['planning_time']):.3f} "
-            f"| {gap_text} |"
+            f'| {gap_text} |'
         )
     path.write_text('\n'.join(lines) + '\n')
 

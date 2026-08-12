@@ -11,20 +11,20 @@ import math
 from pathlib import Path
 import struct
 from time import perf_counter
-from typing import Iterable
+from typing import Iterable, Sequence
 
 from orbinspect_dynamics.hcw_dynamics import HCWDynamics
-from orbinspect_guidance.mesh_spatial_index import TriangleSpatialIndex
 from orbinspect_guidance.mesh_spatial_index import (
     segment_triangle_intersection_fraction,
 )
+from orbinspect_guidance.mesh_spatial_index import TriangleSpatialIndex
+from orbinspect_guidance.result_provenance import collect_result_provenance
+from orbinspect_guidance.result_provenance import write_result_manifest
 from orbinspect_perception.inspection_target_manager import InspectionTarget
 from orbinspect_perception.inspection_target_manager import InspectionTargetManager
 from orbinspect_perception.visibility_checker import CameraModel
 from orbinspect_perception.visibility_checker import VisibilityChecker
 from orbinspect_safety.keepout_zones import KeepoutZoneModel
-from orbinspect_guidance.result_provenance import collect_result_provenance
-from orbinspect_guidance.result_provenance import write_result_manifest
 
 try:
     import yaml
@@ -33,6 +33,7 @@ except ModuleNotFoundError:  # pragma: no cover - minimal offline Python fallbac
 
 
 Vector3 = tuple[float, float, float]
+Matrix4 = tuple[tuple[float, float, float, float], ...]
 StateVector = tuple[float, float, float, float, float, float]
 ControlVector = tuple[float, float, float]
 
@@ -58,6 +59,7 @@ class OfflinePlannerConfig:
     position_gain: float = 0.0008
     velocity_gain: float = 0.08
     safety_margin: float = 2.0
+    vehicle_radius: float = 0.80
     initial_state: StateVector = (0.0, -35.0, 10.0, 0.0, 0.0, 0.0)
     output_root: Path = Path('data/results')
     run_id: str = ''
@@ -261,7 +263,10 @@ class OfflineCoveragePlanner:
     def __init__(self, config: OfflinePlannerConfig) -> None:
         """Create planner with deterministic geometry and dynamics settings."""
         self.config = config
-        self.keepout = KeepoutZoneModel(safety_margin=config.safety_margin)
+        self.keepout = KeepoutZoneModel(
+            safety_margin=config.safety_margin,
+            vehicle_radius=config.vehicle_radius,
+        )
         self.visibility_checker = VisibilityChecker(
             CameraModel(max_range=max(config.candidate_radius + 20.0, 35.0))
         )
@@ -319,8 +324,13 @@ class OfflineCoveragePlanner:
             self.total_inspection_area = float(len(targets))
             return targets
         if self.config.geometry_backend == 'mesh':
+            mesh_path = self.config.iss_mesh_path
+            if not mesh_path.is_absolute() and not mesh_path.is_file():
+                workspace_path = Path(__file__).resolve().parents[3] / mesh_path
+                if workspace_path.is_file():
+                    mesh_path = workspace_path
             self.mesh_geometry = IssMeshGeometry.load(
-                self.config.iss_mesh_path,
+                mesh_path,
                 self.config.iss_mesh_scale,
                 self.config.mesh_occlusion_max_triangles,
             )
@@ -460,7 +470,8 @@ class OfflineCoveragePlanner:
         initial_state: StateVector,
         target_position: Vector3,
     ) -> TransferEstimate:
-        """Roll out a rest-to-rest terminal HCW transfer to one viewpoint.
+        """
+        Roll out a rest-to-rest terminal HCW transfer to one viewpoint.
 
         The transfer solves the discrete HCW map for the minimum-energy
         piecewise-constant acceleration sequence that reaches
@@ -486,6 +497,7 @@ class OfflineCoveragePlanner:
         clipped_step_count = 0
         state = initial_state
         previous_position = tuple(float(value) for value in initial_state[:3])
+        previous_clearance = self._station_clearance(previous_position)
 
         for step, command in enumerate(requested_commands):
             requested_input = norm(command)
@@ -496,15 +508,31 @@ class OfflineCoveragePlanner:
             speed = norm(state[3:6])
             position = tuple(float(value) for value in state[:3])
             clearance = self._station_clearance(position)
+            segment_length = distance(previous_position, position)
+            continuous_clearance_lower_bound = (
+                min(previous_clearance, clearance) - 0.5 * segment_length
+            )
             if self._segment_crosses_station(previous_position, position):
-                clearance = min(clearance, -self.config.safety_margin)
+                clearance = min(
+                    clearance,
+                    -self.config.safety_margin - self.config.vehicle_radius,
+                )
+                continuous_clearance_lower_bound = min(
+                    continuous_clearance_lower_bound,
+                    clearance,
+                )
             error = distance(state[:3], target_position)
             delta_v += norm(command) * dt
             max_speed = max(max_speed, speed)
-            min_clearance = min(min_clearance, clearance)
+            min_clearance = min(
+                min_clearance,
+                clearance,
+                continuous_clearance_lower_bound,
+            )
             tracking_error_sum += error * error
             trajectory.append(((step + 1) * dt, state, command))
             previous_position = position
+            previous_clearance = clearance
 
         tracking_error = math.sqrt(tracking_error_sum / float(steps))
         terminal_error = distance(state[:3], target_position)
@@ -927,7 +955,11 @@ class OfflineCoveragePlanner:
 
     def _station_clearance(self, position: Iterable[float]) -> float:
         """Return distance remaining above the configured keep-out margin."""
-        return self._station_surface_distance(position) - self.config.safety_margin
+        return (
+            self._station_surface_distance(position)
+            - self.config.vehicle_radius
+            - self.config.safety_margin
+        )
 
     def _segment_crosses_station(self, start: Vector3, end: Vector3) -> bool:
         """Return whether a swept segment crosses mesh geometry, when active."""
@@ -939,7 +971,7 @@ class OfflineCoveragePlanner:
         configured = float(self.config.passive_safety_distance)
         if configured > 0.0:
             return configured
-        return float(self.config.safety_margin)
+        return float(self.config.safety_margin + self.config.vehicle_radius)
 
     def _transfer_rejection_reason(
         self,
@@ -1210,6 +1242,7 @@ class OfflineCoveragePlanner:
             lines.append(f'- {key}: {value}')
         path.write_text('\n'.join(lines) + '\n')
 
+
 def add(left: Vector3, right: Vector3) -> Vector3:
     """Return vector addition."""
     return (left[0] + right[0], left[1] + right[1], left[2] + right[2])
@@ -1378,7 +1411,7 @@ def _mesh_segments_from_gltf(
     if not isinstance(nodes, list) or not isinstance(meshes, list):
         return []
 
-    node_transforms = _node_translations(json_doc)
+    node_transforms = _node_transforms(json_doc)
     segments: list[tuple[Vector3, Vector3]] = []
     stride = 1
     edge_budget = max_edges
@@ -1396,7 +1429,7 @@ def _mesh_segments_from_gltf(
         mesh_index = int(node['mesh'])
         if mesh_index >= len(meshes) or not isinstance(meshes[mesh_index], dict):
             continue
-        translation = node_transforms.get(id(node), (0.0, 0.0, 0.0))
+        transform = node_transforms.get(id(node), _identity_matrix())
         mesh = meshes[mesh_index]
         primitives = mesh.get('primitives', [])
         if not isinstance(primitives, list):
@@ -1426,7 +1459,7 @@ def _mesh_segments_from_gltf(
                     if len(points) < 3:
                         continue
                 transformed = [
-                    _transform_iss_vertex(point, translation, scale)
+                    _transform_iss_vertex(point, transform, scale)
                     for point in points
                 ]
                 segments.extend((
@@ -1449,7 +1482,7 @@ def _mesh_triangles_from_gltf(
     if not isinstance(nodes, list) or not isinstance(meshes, list):
         return []
 
-    node_transforms = _node_translations(json_doc)
+    node_transforms = _node_transforms(json_doc)
     triangles: list[MeshTriangle] = []
     for node in nodes:
         if not isinstance(node, dict) or 'mesh' not in node:
@@ -1457,7 +1490,7 @@ def _mesh_triangles_from_gltf(
         mesh_index = int(node['mesh'])
         if mesh_index >= len(meshes) or not isinstance(meshes[mesh_index], dict):
             continue
-        translation = node_transforms.get(id(node), (0.0, 0.0, 0.0))
+        transform = node_transforms.get(id(node), _identity_matrix())
         mesh = meshes[mesh_index]
         primitives = mesh.get('primitives', [])
         if not isinstance(primitives, list):
@@ -1474,18 +1507,18 @@ def _mesh_triangles_from_gltf(
                 triangles.extend(_triangles_from_indexed_positions(
                     positions,
                     indices,
-                    translation,
+                    transform,
                     scale,
                 ))
             else:
-                triangles.extend(_triangles_from_positions(positions, translation, scale))
+                triangles.extend(_triangles_from_positions(positions, transform, scale))
     return _orient_triangles_outward(triangles)
 
 
 def _triangles_from_indexed_positions(
     positions: list[Vector3],
     indices: list[int],
-    translation: Vector3,
+    transform: Matrix4,
     scale_factor: float,
 ) -> list[MeshTriangle]:
     triangles: list[MeshTriangle] = []
@@ -1494,7 +1527,7 @@ def _triangles_from_indexed_positions(
         if max(triangle_indices) >= len(positions):
             continue
         vertices = tuple(
-            _transform_iss_vertex(positions[index], translation, scale_factor)
+            _transform_iss_vertex(positions[index], transform, scale_factor)
             for index in triangle_indices
         )
         triangle = _make_mesh_triangle(vertices)
@@ -1505,13 +1538,13 @@ def _triangles_from_indexed_positions(
 
 def _triangles_from_positions(
     positions: list[Vector3],
-    translation: Vector3,
+    transform: Matrix4,
     scale_factor: float,
 ) -> list[MeshTriangle]:
     triangles: list[MeshTriangle] = []
     for start in range(0, len(positions) - 2, 3):
         vertices = tuple(
-            _transform_iss_vertex(point, translation, scale_factor)
+            _transform_iss_vertex(point, transform, scale_factor)
             for point in positions[start:start + 3]
         )
         triangle = _make_mesh_triangle(vertices)
@@ -1649,7 +1682,8 @@ def _camera_basis(boresight: Vector3) -> tuple[Vector3, Vector3]:
     return right, up
 
 
-def _node_translations(json_doc: dict[str, object]) -> dict[int, Vector3]:
+def _node_transforms(json_doc: dict[str, object]) -> dict[int, Matrix4]:
+    """Return full world transforms for all nodes in the active glTF scene."""
     nodes = json_doc.get('nodes', [])
     if not isinstance(nodes, list):
         return {}
@@ -1662,22 +1696,111 @@ def _node_translations(json_doc: dict[str, object]) -> dict[int, Vector3]:
     else:
         root_indices = list(range(len(nodes)))
 
-    transforms: dict[int, Vector3] = {}
+    transforms: dict[int, Matrix4] = {}
 
-    def visit(node_index: int, parent_translation: Vector3) -> None:
+    def visit(node_index: int, parent_transform: Matrix4) -> None:
         if node_index >= len(nodes) or not isinstance(nodes[node_index], dict):
             return
         node = nodes[node_index]
-        translation_values = node.get('translation', (0.0, 0.0, 0.0))
-        local_translation = _vector3_from_values(translation_values)
-        translation = add(parent_translation, local_translation)
-        transforms[id(node)] = translation
+        transform = _matrix_multiply(parent_transform, _node_local_transform(node))
+        transforms[id(node)] = transform
         for child_index in node.get('children', []):
-            visit(int(child_index), translation)
+            visit(int(child_index), transform)
 
     for root_index in root_indices:
-        visit(int(root_index), (0.0, 0.0, 0.0))
+        visit(int(root_index), _identity_matrix())
     return transforms
+
+
+def _node_local_transform(node: dict[str, object]) -> Matrix4:
+    """Return a glTF node matrix, honoring matrix or translation/rotation/scale."""
+    matrix_values = node.get('matrix')
+    if isinstance(matrix_values, (list, tuple)) and len(matrix_values) == 16:
+        # glTF stores matrices in column-major order.
+        return tuple(tuple(
+            float(matrix_values[column * 4 + row])
+            for column in range(4)
+        ) for row in range(4))
+
+    translation = _vector3_from_values(node.get('translation', (0.0, 0.0, 0.0)))
+    scale_values = _vector3_from_values(node.get('scale', (1.0, 1.0, 1.0)))
+    rotation_values = node.get('rotation', (0.0, 0.0, 0.0, 1.0))
+    if not isinstance(rotation_values, (list, tuple)) or len(rotation_values) != 4:
+        rotation_values = (0.0, 0.0, 0.0, 1.0)
+    x_value, y_value, z_value, w_value = (
+        float(value) for value in rotation_values
+    )
+    magnitude = math.sqrt(
+        x_value * x_value + y_value * y_value
+        + z_value * z_value + w_value * w_value
+    )
+    if magnitude <= 1.0e-12:
+        raise ValueError('glTF node quaternion must be nonzero')
+    x_value /= magnitude
+    y_value /= magnitude
+    z_value /= magnitude
+    w_value /= magnitude
+    rotation = (
+        (
+            1.0 - 2.0 * (y_value * y_value + z_value * z_value),
+            2.0 * (x_value * y_value - z_value * w_value),
+            2.0 * (x_value * z_value + y_value * w_value),
+            0.0,
+        ),
+        (
+            2.0 * (x_value * y_value + z_value * w_value),
+            1.0 - 2.0 * (x_value * x_value + z_value * z_value),
+            2.0 * (y_value * z_value - x_value * w_value),
+            0.0,
+        ),
+        (
+            2.0 * (x_value * z_value - y_value * w_value),
+            2.0 * (y_value * z_value + x_value * w_value),
+            1.0 - 2.0 * (x_value * x_value + y_value * y_value),
+            0.0,
+        ),
+        (0.0, 0.0, 0.0, 1.0),
+    )
+    scaled_rotation = tuple(tuple(
+        rotation[row][column] * scale_values[column]
+        if column < 3 else rotation[row][column]
+        for column in range(4)
+    ) for row in range(4))
+    return tuple(tuple(
+        translation[row] if column == 3 and row < 3
+        else scaled_rotation[row][column]
+        for column in range(4)
+    ) for row in range(4))
+
+
+def _identity_matrix() -> Matrix4:
+    """Return a 4-by-4 identity matrix."""
+    return (
+        (1.0, 0.0, 0.0, 0.0),
+        (0.0, 1.0, 0.0, 0.0),
+        (0.0, 0.0, 1.0, 0.0),
+        (0.0, 0.0, 0.0, 1.0),
+    )
+
+
+def _matrix_multiply(left: Matrix4, right: Matrix4) -> Matrix4:
+    """Multiply two 4-by-4 row-major matrices."""
+    return tuple(tuple(
+        sum(left[row][index] * right[index][column] for index in range(4))
+        for column in range(4)
+    ) for row in range(4))
+
+
+def _transform_point(transform: Matrix4, point: Vector3) -> Vector3:
+    """Apply one homogeneous transform to a 3-D point."""
+    values = (*point, 1.0)
+    transformed = tuple(
+        sum(transform[row][column] * values[column] for column in range(4))
+        for row in range(4)
+    )
+    if abs(transformed[3]) <= 1.0e-12:
+        raise ValueError('glTF node transform produced zero homogeneous scale')
+    return tuple(transformed[index] / transformed[3] for index in range(3))
 
 
 def _read_accessor_vec3(
@@ -1742,13 +1865,17 @@ def _accessor_buffer(
     return accessor, offset, stride
 
 
-def _transform_iss_vertex(point: Vector3, translation: Vector3, scale_factor: float) -> Vector3:
-    translated = add(point, translation)
+def _transform_iss_vertex(
+    point: Vector3,
+    transform: Matrix4,
+    scale_factor: float,
+) -> Vector3:
+    transformed = _transform_point(transform, point)
     # Match the SDF visual pose: roll=0, pitch=90 deg, yaw=0, then scale.
     return (
-        scale_factor * translated[2],
-        scale_factor * translated[1],
-        -scale_factor * translated[0],
+        scale_factor * transformed[2],
+        scale_factor * transformed[1],
+        -scale_factor * transformed[0],
     )
 
 
@@ -1775,6 +1902,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument('--transfer-duration', type=float)
     parser.add_argument('--integration-dt', type=float)
     parser.add_argument('--max-acceleration', type=float)
+    parser.add_argument('--vehicle-radius', type=float)
     parser.add_argument('--mesh-target-count', type=int)
     parser.add_argument('--mesh-occlusion-max-triangles', type=int)
     parser.add_argument('--output-root')
@@ -1795,6 +1923,7 @@ def config_from_args(args: argparse.Namespace) -> OfflinePlannerConfig:
         'transfer_duration': args.transfer_duration,
         'integration_dt': args.integration_dt,
         'max_acceleration': args.max_acceleration,
+        'vehicle_radius': args.vehicle_radius,
         'mesh_target_count': args.mesh_target_count,
         'mesh_occlusion_max_triangles': args.mesh_occlusion_max_triangles,
         'output_root': args.output_root,

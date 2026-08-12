@@ -57,6 +57,7 @@ class ControllerNode(Node):
         self.reference = tuple(self._vector_parameter('default_reference', 3))
         self.reference_velocity = (0.0, 0.0, 0.0)
         self.feedforward_acceleration = (0.0, 0.0, 0.0)
+        self.received_reference_state = False
         self.trajectory = Path()
         self.trajectory.header.frame_id = self.frame_id
 
@@ -98,6 +99,8 @@ class ControllerNode(Node):
         self._append_trajectory_pose(msg)
 
     def _reference_callback(self, msg: PointStamped) -> None:
+        if self.received_reference_state:
+            return
         self.reference = (
             float(msg.point.x),
             float(msg.point.y),
@@ -107,6 +110,7 @@ class ControllerNode(Node):
         self.feedforward_acceleration = (0.0, 0.0, 0.0)
 
     def _reference_state_callback(self, msg: Odometry) -> None:
+        self.received_reference_state = True
         self.reference = (
             float(msg.pose.pose.position.x),
             float(msg.pose.pose.position.y),
@@ -186,6 +190,12 @@ def main(args: list[str] | None = None) -> None:
         rclpy.spin(node)
     except (KeyboardInterrupt, ExternalShutdownException):
         pass
+    except RuntimeError as exc:
+        if not (
+            not rclpy.ok()
+            and "Unable to convert call argument '0' to Python object" in str(exc)
+        ):
+            raise
     finally:
         try:
             node.destroy_node()

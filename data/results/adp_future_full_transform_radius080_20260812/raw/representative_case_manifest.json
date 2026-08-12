@@ -1,0 +1,44 @@
+{
+  "methods": {
+    "adaptive_rollout_adp": {
+      "coverage": 0.8041326772968242,
+      "graph_cost": 106.10611443148206,
+      "node_ids": [
+        "cand_0005",
+        "cand_0010",
+        "cand_0070",
+        "cand_0009",
+        "cand_0021",
+        "cand_0016",
+        "cand_0066",
+        "cand_0055",
+        "cand_0051",
+        "cand_0062"
+      ],
+      "total_delta_v": 12.864874556877359
+    },
+    "local_search": {
+      "coverage": 0.8041326772968242,
+      "graph_cost": 111.21987887606436,
+      "node_ids": [
+        "cand_0005",
+        "cand_0010",
+        "cand_0013",
+        "cand_0070",
+        "cand_0009",
+        "cand_0021",
+        "cand_0015",
+        "cand_0066",
+        "cand_0055",
+        "cand_0063",
+        "cand_0062"
+      ],
+      "total_delta_v": 13.482331447623995
+    }
+  },
+  "scenario_graph_cost_difference": -5.113764444582301,
+  "scenario_id": "test_013",
+  "scenario_seed": 20753,
+  "selection_rule": "post-hoc test scenario with paired graph-cost difference closest to the test median; illustrative only",
+  "test_median_graph_cost_difference": -5.033643663226975
+}

@@ -1,10 +1,9 @@
-import pytest
-
 from orbinspect_guidance.advanced_safe_planner import AdvancedPlannerConfig
 from orbinspect_guidance.advanced_safe_planner import AdvancedSafePlanner
 from orbinspect_guidance.advanced_safe_planner import SafeGraphEdge
 from orbinspect_guidance.advanced_safe_planner import SafeGraphNode
 from orbinspect_guidance.advanced_safe_planner import SafeGraphProblem
+import pytest
 
 
 def test_graph_adp_prefers_lower_long_horizon_cost() -> None:
