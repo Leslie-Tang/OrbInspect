@@ -97,12 +97,12 @@ The contributions are:
   \item a split-controlled development and held-out study plus an independently audited ROS~2 closed-loop validation task that reports the unsuccessful fitted critic as a negative ablation and retains reproducible full-mesh evidence.
 \end{enumerate}
 
-\begin{figure*}[t]
+\begin{figure}[t]
   \centering
-  \includegraphics[width=\textwidth]{figures/orbinspect_sooa_framework_complete.pdf}
+  \includegraphics[width=\linewidth]{figures/orbinspect_sooa_framework_complete.pdf}
   \caption{OrbInspect formulation and data flow. (a) Candidate observations are generated around an ISS-scale structure outside the full-mesh safety margin. (b) Range, field of view, incidence, and full-mesh line of sight define the fixed visible-target mask $G_j$ at each prescribed observation. (c) Each ordered node pair is assigned a separately solved finite-duration HCW transfer; its trajectory, controls, cost, sampled constraints, and swept-mesh crossing test determine the directed-edge indicator $\chi_{ij}$. (d) Edges with $\chi_{ij}=1$ form the safe directed SOOA graph whose shield-admissible actions are passed to the rollout-ADP policy in Fig.~\ref{fig:adp-architecture}.}
   \label{fig:sooa-framework}
-\end{figure*}
+\end{figure}
 
 \section{Related Work}
 \label{sec:related}
@@ -311,12 +311,12 @@ where $\widehat Q_d(s,a)=\ell_{ja}+\widehat V_{d-1}(f(s,a))$.
 Only actions with finite completion value participate in the minimization. The rollout policy selects the minimizing first action, applies Eq.~\eqref{eq:mdp-transition}, and rebuilds the depth-$d$ tree at the new state. This repeated policy-improvement step distinguishes the proposed method from following a fixed incumbent suffix. State--depth memoization removes duplicate subproblems within one decision.
 Figure~\ref{fig:adp-architecture} shows how the finite-completion test, safety shield, and repeated depth-$d$ improvement interact.
 
-\begin{figure*}[t]
+\begin{figure}[t]
   \centering
-  \includegraphics[width=\textwidth]{figures/adp_future/adp_rollout_architecture.pdf}
+  \includegraphics[width=\linewidth]{figures/adp_future/adp_rollout_architecture.pdf}
   \caption{Proposed viability-preserving rollout ADP. The finite candidate-graph state carries current node, covered and selected masks, and remaining budget. The safety shield removes inadmissible SOOAs before search. A depth-$d$ exact prefix is terminated by a complete adaptive safe-greedy simulation; a branch is viable only if this completion reaches the coverage goal. The first minimizing action is executed and the value is recomputed.}
   \label{fig:adp-architecture}
-\end{figure*}
+\end{figure}
 
 \begin{algorithm}[t]
 \caption{Viability-preserving rollout ADP}
