@@ -1,0 +1,7 @@
+depth,mean_cost,median_time_s,mean_safe_action_evaluations,success_count,scenario_count,source
+1,101.42417804441314,0.039874450012575835,5709.5,12,12,output/supplementary/OrbInspect_reproducibility_package_20260810/data/results/adp_dev_adaptive_depth1_fullmesh_20260810/raw/heldout_summary.csv
+2,97.38799838580746,0.29587594998884015,42434.916666666664,12,12,output/supplementary/OrbInspect_reproducibility_package_20260810/data/results/adp_dev_adaptive_depth2_fullmesh_20260810/raw/heldout_summary.csv
+3,93.58593589613572,1.684590249991743,243087.08333333334,12,12,output/supplementary/OrbInspect_reproducibility_package_20260810/data/results/adp_dev_adaptive_depth3_fullmesh_20260810/raw/heldout_summary.csv
+4,92.4305342826598,3.8471840615002293,1203705.5,12,12,output/supplementary/OrbInspect_reproducibility_package_20260810/data/results/adp_dev_adaptive_depth4_fullmesh_20260821/raw/heldout_summary.csv
+5,92.36930257109616,14.966280341999664,4243491.75,12,12,output/supplementary/OrbInspect_reproducibility_package_20260810/data/results/adp_dev_adaptive_depth5_fullmesh_20260821/raw/heldout_summary.csv
+6,91.56414202489208,38.42087587399965,11730359.333333334,12,12,output/supplementary/OrbInspect_reproducibility_package_20260810/data/results/adp_dev_adaptive_depth6_fullmesh_20260821/raw/heldout_summary.csv

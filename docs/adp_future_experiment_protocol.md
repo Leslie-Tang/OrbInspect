@@ -65,6 +65,29 @@ decision interval.  The frozen held-out configuration is:
 
 No test or OOD method rows were evaluated during this selection.
 
+## Post-selection validation sensitivity extension
+
+After the depth-3 configuration had been frozen and the held-out study had
+been completed, depths 4--6 were evaluated on the same 24-node graph and the
+same 12 validation scenarios.  These runs are a computational sensitivity
+extension, not a new hyperparameter-selection screen: they did not open test
+or OOD rows for the alternative depths and they do not alter the confirmatory
+depth-3 comparison.
+
+All three added depths achieved 12/12 validation success.  Their mean graph
+costs, median online times, and mean safe-action evaluations were:
+
+| Depth | Mean graph cost | Median online time (s) | Mean safe-action evaluations |
+|---:|---:|---:|---:|
+| 4 | 92.431 | 3.847 | 1,203,706 |
+| 5 | 92.369 | 14.966 | 4,243,492 |
+| 6 | 91.564 | 38.421 | 11,730,359 |
+
+Relative to depth 3, depths 4, 5, and 6 reduce mean cost by 1.23%, 1.30%, and
+2.16%, respectively, while their median runtimes are 2.28, 8.88, and 22.81
+times larger.  Thus depth 3 remains the selected cost--computation compromise,
+not the minimum-cost configuration when planning time is unconstrained.
+
 ## Predeclared selection rule
 
 Rank candidates on the validation split by:

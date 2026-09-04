@@ -1,0 +1,30 @@
+{
+  "artifact_id": "fig-adp-depth-sensitivity",
+  "caption_claim": "Cost decreases with deeper lookahead, while online time and safe-action evaluations increase rapidly; depth three is the pre-test cost--computation compromise.",
+  "generated_files": [
+    "OrbInspectLatex/figures/adp_future/adp_depth_tradeoff_a.pdf",
+    "OrbInspectLatex/figures/adp_future/adp_depth_tradeoff_a.png",
+    "OrbInspectLatex/figures/adp_future/adp_depth_tradeoff_a.svg",
+    "OrbInspectLatex/figures/adp_future/adp_depth_tradeoff_b.pdf",
+    "OrbInspectLatex/figures/adp_future/adp_depth_tradeoff_b.png",
+    "OrbInspectLatex/figures/adp_future/adp_depth_tradeoff_b.svg",
+    "OrbInspectLatex/figures/adp_future/adp_depth_tradeoff_c.pdf",
+    "OrbInspectLatex/figures/adp_future/adp_depth_tradeoff_c.png",
+    "OrbInspectLatex/figures/adp_future/adp_depth_tradeoff_c.svg"
+  ],
+  "limitations": [
+    "Depths four through six are post-selection validation-only evidence.",
+    "Wall-clock time is environment-sensitive and is not a real-time benchmark."
+  ],
+  "script": "OrbInspectLatex/scripts/generate_depth_tradeoff_figure.py",
+  "script_sha256": "f48b4dc4eebcd3e1f71891c39bc153c52ec3fe352def1317aba8ecb2765e9752",
+  "source_files": [
+    "output/supplementary/OrbInspect_reproducibility_package_20260810/data/results/adp_dev_adaptive_depth1_fullmesh_20260810/raw/heldout_summary.csv",
+    "output/supplementary/OrbInspect_reproducibility_package_20260810/data/results/adp_dev_adaptive_depth2_fullmesh_20260810/raw/heldout_summary.csv",
+    "output/supplementary/OrbInspect_reproducibility_package_20260810/data/results/adp_dev_adaptive_depth3_fullmesh_20260810/raw/heldout_summary.csv",
+    "output/supplementary/OrbInspect_reproducibility_package_20260810/data/results/adp_dev_adaptive_depth4_fullmesh_20260821/raw/heldout_summary.csv",
+    "output/supplementary/OrbInspect_reproducibility_package_20260810/data/results/adp_dev_adaptive_depth5_fullmesh_20260821/raw/heldout_summary.csv",
+    "output/supplementary/OrbInspect_reproducibility_package_20260810/data/results/adp_dev_adaptive_depth6_fullmesh_20260821/raw/heldout_summary.csv"
+  ],
+  "source_table": "OrbInspectLatex/data/adp_depth_sensitivity_20260821.csv"
+}

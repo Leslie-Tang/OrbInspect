@@ -22,10 +22,10 @@
 \citation{apodaca2025trajectory}
 \citation{zhou2026tomographic}
 \citation{ogri2025switched}
-\@writefile{toc}{\contentsline {section}{\numberline {II}Related Work}{2}{section.9}\protected@file@percent }
-\newlabel{sec:related}{{II}{2}{}{section.9}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces OrbInspect formulation and data flow. (a) Candidate observations are generated around an ISS-scale structure outside the full-mesh safety margin. (b) Range, field of view, incidence, and full-mesh line of sight define the fixed visible-target mask $G_j$ at each prescribed observation. (c) Each ordered node pair is assigned a separately solved finite-duration HCW transfer; its trajectory, controls, cost, sampled constraints, and swept-mesh crossing test determine the directed-edge indicator $\chi _{ij}$. (d) Edges with $\chi _{ij}=1$ form the safe directed SOOA graph whose shield-admissible actions are passed to the rollout-ADP policy in Fig.~\ref {fig:adp-architecture}.}}{2}{figure.8}\protected@file@percent }
 \newlabel{fig:sooa-framework}{{1}{2}{OrbInspect formulation and data flow. (a) Candidate observations are generated around an ISS-scale structure outside the full-mesh safety margin. (b) Range, field of view, incidence, and full-mesh line of sight define the fixed visible-target mask $G_j$ at each prescribed observation. (c) Each ordered node pair is assigned a separately solved finite-duration HCW transfer; its trajectory, controls, cost, sampled constraints, and swept-mesh crossing test determine the directed-edge indicator $\chi _{ij}$. (d) Edges with $\chi _{ij}=1$ form the safe directed SOOA graph whose shield-admissible actions are passed to the rollout-ADP policy in Fig.~\ref {fig:adp-architecture}}{figure.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {II}Related Work}{2}{section.9}\protected@file@percent }
+\newlabel{sec:related}{{II}{2}{}{section.9}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {III}System and Observation Model}{3}{section.10}\protected@file@percent }
 \newlabel{sec:system}{{III}{3}{}{section.10}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {A}Relative Dynamics}{3}{subsection.13}\protected@file@percent }
@@ -34,9 +34,9 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {B}Visibility, Prescribed Observation, and Coverage}{3}{subsection.16}\protected@file@percent }
 \newlabel{eq:visibility}{{3}{3}{}{equation.17}{}}
 \newlabel{eq:coverage}{{4}{3}{}{equation.18}{}}
+\newlabel{eq:inspectable-coverage}{{5}{3}{}{equation.19}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Modeling assumptions and the boundary of the reported evidence.}}{4}{table.12}\protected@file@percent }
 \newlabel{tab:assumptions}{{I}{4}{Modeling assumptions and the boundary of the reported evidence}{table.12}{}}
-\newlabel{eq:inspectable-coverage}{{5}{4}{}{equation.19}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {C}Dynamic Feasibility and SOOAs}{4}{subsection.20}\protected@file@percent }
 \newlabel{eq:limits}{{6}{4}{}{equation.21}{}}
 \newlabel{eq:edge-cost}{{7}{4}{}{equation.22}{}}
@@ -51,17 +51,17 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {B}SOOA Construction and Safety Shield}{5}{subsection.29}\protected@file@percent }
 \newlabel{eq:terminal-transfer}{{12}{5}{}{equation.30}{}}
 \newlabel{eq:safe-action-set}{{13}{5}{}{equation.31}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Proposed viability-preserving rollout ADP. The finite candidate-graph state carries current node, covered and selected masks, and remaining budget. The safety shield removes inadmissible SOOAs before search. A depth-$d$ exact prefix is terminated by a complete adaptive safe-greedy simulation; a branch is viable only if this completion reaches the coverage goal. The first minimizing action is executed and the value is recomputed.}}{5}{figure.37}\protected@file@percent }
+\newlabel{fig:adp-architecture}{{2}{5}{Proposed viability-preserving rollout ADP. The finite candidate-graph state carries current node, covered and selected masks, and remaining budget. The safety shield removes inadmissible SOOAs before search. A depth-$d$ exact prefix is terminated by a complete adaptive safe-greedy simulation; a branch is viable only if this completion reaches the coverage goal. The first minimizing action is executed and the value is recomputed}{figure.37}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {C}Adaptive Base Policy and Rollout Value}{5}{subsection.32}\protected@file@percent }
 \newlabel{eq:base-policy}{{14}{5}{}{equation.33}{}}
 \newlabel{eq:base-value}{{15}{5}{}{equation.34}{}}
 \newlabel{eq:rollout-value}{{16}{5}{}{equation.35}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {D}Properties and Exact Oracle}{5}{subsection.39}\protected@file@percent }
-\newlabel{sec:theory}{{D}{5}{}{subsection.39}{}}
-\newlabel{prop:submodular-coverage}{{1}{5}{Monotone submodularity of fixed-mask coverage}{proposition.40}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Proposed viability-preserving rollout ADP. The finite candidate-graph state carries current node, covered and selected masks, and remaining budget. The safety shield removes inadmissible SOOAs before search. A depth-$d$ exact prefix is terminated by a complete adaptive safe-greedy simulation; a branch is viable only if this completion reaches the coverage goal. The first minimizing action is executed and the value is recomputed.}}{6}{figure.37}\protected@file@percent }
-\newlabel{fig:adp-architecture}{{2}{6}{Proposed viability-preserving rollout ADP. The finite candidate-graph state carries current node, covered and selected masks, and remaining budget. The safety shield removes inadmissible SOOAs before search. A depth-$d$ exact prefix is terminated by a complete adaptive safe-greedy simulation; a branch is viable only if this completion reaches the coverage goal. The first minimizing action is executed and the value is recomputed}{figure.37}{}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Viability-preserving rollout ADP}}{6}{algorithm.38}\protected@file@percent }
 \newlabel{alg:safe-graph-api}{{1}{6}{}{algorithm.38}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {D}Properties and Exact Oracle}{6}{subsection.39}\protected@file@percent }
+\newlabel{sec:theory}{{D}{6}{}{subsection.39}{}}
+\newlabel{prop:submodular-coverage}{{1}{6}{Monotone submodularity of fixed-mask coverage}{proposition.40}{}}
 \newlabel{prop:markov-sufficiency}{{2}{6}{Markov sufficiency}{proposition.42}{}}
 \newlabel{prop:audit-composition}{{3}{6}{Compositional preservation of stored audits}{proposition.43}{}}
 \newlabel{prop:rollout-viability}{{4}{6}{Rollout viability}{proposition.45}{}}
@@ -72,81 +72,83 @@
 \newlabel{sec:simulation}{{V}{7}{}{section.49}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {A}Frozen ISS-Mesh Decision Problem}{7}{subsection.50}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {B}Split Discipline and Structure Selection}{7}{subsection.51}\protected@file@percent }
-\newlabel{fig:adp-development-cost}{{3a}{8}{Subfigure 3a}{subfigure.52}{}}
-\newlabel{sub@fig:adp-development-cost}{{(a)}{a}{Subfigure 3a\relax }{subfigure.52}{}}
-\newlabel{fig:adp-development-difference}{{3b}{8}{Subfigure 3b}{subfigure.53}{}}
-\newlabel{sub@fig:adp-development-difference}{{(b)}{b}{Subfigure 3b\relax }{subfigure.53}{}}
-\newlabel{fig:adp-development-time}{{3c}{8}{Subfigure 3c}{subfigure.54}{}}
-\newlabel{sub@fig:adp-development-time}{{(c)}{c}{Subfigure 3c\relax }{subfigure.54}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Validation-only structure selection. All adaptive rollout depths retained mission success; increasing the exact prefix from one to three reduced validation graph cost at increased online computation. Depth three was frozen before held-out evaluation. Validation outcomes are development evidence, not confirmatory test evidence.}}{8}{figure.56}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Validation graph cost.}}}{8}{subfigure.3.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Paired cost difference.}}}{8}{subfigure.3.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {Median online time.}}}{8}{subfigure.3.3}\protected@file@percent }
-\newlabel{fig:adp-development}{{3}{8}{Validation-only structure selection. All adaptive rollout depths retained mission success; increasing the exact prefix from one to three reduced validation graph cost at increased online computation. Depth three was frozen before held-out evaluation. Validation outcomes are development evidence, not confirmatory test evidence}{figure.56}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Paired methods evaluated under identical geometry, dynamics, shield, and stopping rules.}}{8}{table.58}\protected@file@percent }
-\newlabel{tab:baseline-definitions}{{II}{8}{Paired methods evaluated under identical geometry, dynamics, shield, and stopping rules}{table.58}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {C}Predeclared Held-Out Inference}{8}{subsection.59}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {D}Saved Results and Reproducibility Boundary}{8}{subsection.60}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {E}Frozen ROS 2 Closed-Loop Verification Protocol}{8}{subsection.61}\protected@file@percent }
-\newlabel{sec:ros-verification-protocol}{{E}{8}{}{subsection.61}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {VI}Results}{9}{section.62}\protected@file@percent }
-\newlabel{sec:results}{{VI}{9}{}{section.62}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {A}Held-Out Mission Performance}{9}{subsection.63}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {B}Paired Effect Estimates}{9}{subsection.72}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {C}Component and Safety Audit}{9}{subsection.75}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {D}Representative Generated-Trajectory Case}{9}{subsection.82}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Aggregate held-out results. Every listed method reaches the goal in every scenario. Coverage is weighted inspectable coverage at termination.}}{10}{table.65}\protected@file@percent }
-\newlabel{tab:paired-aggregate}{{III}{10}{Aggregate held-out results. Every listed method reaches the goal in every scenario. Coverage is weighted inspectable coverage at termination}{table.65}{}}
-\newlabel{fig:paired-performance-test-dv}{{4a}{10}{Subfigure 4a}{subfigure.66}{}}
-\newlabel{sub@fig:paired-performance-test-dv}{{(a)}{a}{Subfigure 4a\relax }{subfigure.66}{}}
-\newlabel{fig:paired-performance-test-cost}{{4b}{10}{Subfigure 4b}{subfigure.67}{}}
-\newlabel{sub@fig:paired-performance-test-cost}{{(b)}{b}{Subfigure 4b\relax }{subfigure.67}{}}
-\newlabel{fig:paired-performance-shifted-dv}{{4c}{10}{Subfigure 4c}{subfigure.68}{}}
-\newlabel{sub@fig:paired-performance-shifted-dv}{{(c)}{c}{Subfigure 4c\relax }{subfigure.68}{}}
-\newlabel{fig:paired-performance-shifted-cost}{{4d}{10}{Subfigure 4d}{subfigure.69}{}}
-\newlabel{sub@fig:paired-performance-shifted-cost}{{(d)}{d}{Subfigure 4d\relax }{subfigure.69}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Held-out paired performance of proposed rollout ADP versus audited local search. Dashed lines denote parity. Rollout ADP wins 21 of 30 test pairs with four numerical ties and wins 14 of 20 shifted pairs with one tie. The shaded bands and horizontal lines in (b) and (d) report paired-bootstrap intervals and mean differences; coverage success is matched in every panel.}}{10}{figure.71}\protected@file@percent }
+\newlabel{fig:adp-depth-sensitivity-cost}{{3a}{8}{Subfigure 3a}{subfigure.54}{}}
+\newlabel{sub@fig:adp-depth-sensitivity-cost}{{(a)}{a}{Subfigure 3a\relax }{subfigure.54}{}}
+\newlabel{fig:adp-depth-sensitivity-time}{{3b}{8}{Subfigure 3b}{subfigure.55}{}}
+\newlabel{sub@fig:adp-depth-sensitivity-time}{{(b)}{b}{Subfigure 3b\relax }{subfigure.55}{}}
+\newlabel{fig:adp-depth-sensitivity-evaluations}{{3c}{8}{Subfigure 3c}{subfigure.56}{}}
+\newlabel{sub@fig:adp-depth-sensitivity-evaluations}{{(c)}{c}{Subfigure 3c\relax }{subfigure.56}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Validation rollout-depth sensitivity. The red square marks the original pre-test choice, $d=3$; the $d=4$--$6$ points are post-selection validation-only evidence. All depths retain 12/12 mission success. Cost improves monotonically but flattens after $d=3$, whereas online time and shield-admissible action evaluations grow rapidly on logarithmic axes. Absolute wall-clock time is environment-sensitive; it is shown to characterize computational burden, not real-time capability.}}{8}{figure.58}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Mean validation graph cost.}}}{8}{subfigure.3.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Median online planning time.}}}{8}{subfigure.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {Mean safe-action evaluations.}}}{8}{subfigure.3.3}\protected@file@percent }
+\newlabel{fig:adp-depth-sensitivity}{{3}{8}{Validation rollout-depth sensitivity. The red square marks the original pre-test choice, $d=3$; the $d=4$--$6$ points are post-selection validation-only evidence. All depths retain 12/12 mission success. Cost improves monotonically but flattens after $d=3$, whereas online time and shield-admissible action evaluations grow rapidly on logarithmic axes. Absolute wall-clock time is environment-sensitive; it is shown to characterize computational burden, not real-time capability}{figure.58}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C}Predeclared Held-Out Inference}{8}{subsection.61}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {D}Saved Results and Reproducibility Boundary}{8}{subsection.62}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {E}Frozen ROS 2 Closed-Loop Verification Protocol}{8}{subsection.63}\protected@file@percent }
+\newlabel{sec:ros-verification-protocol}{{E}{8}{}{subsection.63}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Results}{8}{section.64}\protected@file@percent }
+\newlabel{sec:results}{{VI}{8}{}{section.64}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A}Held-Out Mission Performance}{8}{subsection.65}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Validation rollout-depth sensitivity on the frozen 24-node, 41-target graph (12 scenarios; 80\% coverage goal; at most 14 SOOAs). Depths one--three formed the original pre-test selection screen; depths four--six are a post-selection validation-only sensitivity extension. All rows have 12/12 success, hence penalized and graph costs are equal. Negative $\Delta J$ denotes a lower mean cost than depth three.}}{9}{table.53}\protected@file@percent }
+\newlabel{tab:depth-sensitivity}{{II}{9}{Validation rollout-depth sensitivity on the frozen 24-node, 41-target graph (12 scenarios; 80\% coverage goal; at most 14 SOOAs). Depths one--three formed the original pre-test selection screen; depths four--six are a post-selection validation-only sensitivity extension. All rows have 12/12 success, hence penalized and graph costs are equal. Negative $\Delta J$ denotes a lower mean cost than depth three}{table.53}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Paired methods evaluated under identical geometry, dynamics, shield, and stopping rules.}}{9}{table.60}\protected@file@percent }
+\newlabel{tab:baseline-definitions}{{III}{9}{Paired methods evaluated under identical geometry, dynamics, shield, and stopping rules}{table.60}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B}Paired Effect Estimates}{9}{subsection.74}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {C}Component and Safety Audit}{9}{subsection.77}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {IV}{\ignorespaces Aggregate held-out results. Every listed method reaches the goal in every scenario. Coverage is weighted inspectable coverage at termination.}}{10}{table.67}\protected@file@percent }
+\newlabel{tab:paired-aggregate}{{IV}{10}{Aggregate held-out results. Every listed method reaches the goal in every scenario. Coverage is weighted inspectable coverage at termination}{table.67}{}}
+\newlabel{fig:paired-performance-test-dv}{{4a}{10}{Subfigure 4a}{subfigure.68}{}}
+\newlabel{sub@fig:paired-performance-test-dv}{{(a)}{a}{Subfigure 4a\relax }{subfigure.68}{}}
+\newlabel{fig:paired-performance-test-cost}{{4b}{10}{Subfigure 4b}{subfigure.69}{}}
+\newlabel{sub@fig:paired-performance-test-cost}{{(b)}{b}{Subfigure 4b\relax }{subfigure.69}{}}
+\newlabel{fig:paired-performance-shifted-dv}{{4c}{10}{Subfigure 4c}{subfigure.70}{}}
+\newlabel{sub@fig:paired-performance-shifted-dv}{{(c)}{c}{Subfigure 4c\relax }{subfigure.70}{}}
+\newlabel{fig:paired-performance-shifted-cost}{{4d}{10}{Subfigure 4d}{subfigure.71}{}}
+\newlabel{sub@fig:paired-performance-shifted-cost}{{(d)}{d}{Subfigure 4d\relax }{subfigure.71}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Held-out paired performance of proposed rollout ADP versus audited local search. Dashed lines denote parity. Rollout ADP wins 21 of 30 test pairs with four numerical ties and wins 14 of 20 shifted pairs with one tie. The shaded bands and horizontal lines in (b) and (d) report paired-bootstrap intervals and mean differences; coverage success is matched in every panel.}}{10}{figure.73}\protected@file@percent }
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Test physical $\Delta v$.}}}{10}{subfigure.4.1}\protected@file@percent }
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Test graph-cost differences.}}}{10}{subfigure.4.2}\protected@file@percent }
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {Shifted physical $\Delta v$.}}}{10}{subfigure.4.3}\protected@file@percent }
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {Shifted graph-cost differences.}}}{10}{subfigure.4.4}\protected@file@percent }
-\newlabel{fig:paired-performance}{{4}{10}{Held-out paired performance of proposed rollout ADP versus audited local search. Dashed lines denote parity. Rollout ADP wins 21 of 30 test pairs with four numerical ties and wins 14 of 20 shifted pairs with one tie. The shaded bands and horizontal lines in (b) and (d) report paired-bootstrap intervals and mean differences; coverage success is matched in every panel}{figure.71}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {E}Corrected ROS 2 Closed-Loop Verification Result}{10}{subsection.88}\protected@file@percent }
-\newlabel{sec:ros-verification-results}{{E}{10}{}{subsection.88}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {IV}{\ignorespaces Paired rollout-ADP minus local-search inference. Confidence intervals use 10,000 paired bootstrap resamples. The exact sign test excludes numerical ties.}}{11}{table.74}\protected@file@percent }
-\newlabel{tab:paired-inference}{{IV}{11}{Paired rollout-ADP minus local-search inference. Confidence intervals use 10,000 paired bootstrap resamples. The exact sign test excludes numerical ties}{table.74}{}}
-\newlabel{fig:paired-safety-dv}{{5a}{11}{Subfigure 5a}{subfigure.76}{}}
-\newlabel{sub@fig:paired-safety-dv}{{(a)}{a}{Subfigure 5a\relax }{subfigure.76}{}}
-\newlabel{fig:paired-safety-success}{{5b}{11}{Subfigure 5b}{subfigure.77}{}}
-\newlabel{sub@fig:paired-safety-success}{{(b)}{b}{Subfigure 5b\relax }{subfigure.77}{}}
-\newlabel{fig:paired-safety-clearance}{{5c}{11}{Subfigure 5c}{subfigure.78}{}}
-\newlabel{sub@fig:paired-safety-clearance}{{(c)}{c}{Subfigure 5c\relax }{subfigure.78}{}}
-\newlabel{fig:paired-safety-input}{{5d}{11}{Subfigure 5d}{subfigure.79}{}}
-\newlabel{sub@fig:paired-safety-input}{{(d)}{d}{Subfigure 5d\relax }{subfigure.79}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Component and safety audit. Bootstrap intervals accompany the method means in (a). Panel (b) exposes the failure of standalone fitted and hand-scaled critics; fixed rollout, local search, and proposed adaptive rollout reach every goal. Panels (c) and (d) compare the common sampled shield margins, with horizontal colored lines denoting acceptance limits. Passive drift and uncertainty are not evaluated.}}{11}{figure.81}\protected@file@percent }
+\newlabel{fig:paired-performance}{{4}{10}{Held-out paired performance of proposed rollout ADP versus audited local search. Dashed lines denote parity. Rollout ADP wins 21 of 30 test pairs with four numerical ties and wins 14 of 20 shifted pairs with one tie. The shaded bands and horizontal lines in (b) and (d) report paired-bootstrap intervals and mean differences; coverage success is matched in every panel}{figure.73}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {V}{\ignorespaces Paired rollout-ADP minus local-search inference. Confidence intervals use 10,000 paired bootstrap resamples. The exact sign test excludes numerical ties.}}{10}{table.76}\protected@file@percent }
+\newlabel{tab:paired-inference}{{V}{10}{Paired rollout-ADP minus local-search inference. Confidence intervals use 10,000 paired bootstrap resamples. The exact sign test excludes numerical ties}{table.76}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {D}Representative Generated-Trajectory Case}{10}{subsection.84}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {E}Corrected ROS 2 Closed-Loop Verification Result}{10}{subsection.90}\protected@file@percent }
+\newlabel{sec:ros-verification-results}{{E}{10}{}{subsection.90}{}}
+\newlabel{fig:paired-safety-dv}{{5a}{11}{Subfigure 5a}{subfigure.78}{}}
+\newlabel{sub@fig:paired-safety-dv}{{(a)}{a}{Subfigure 5a\relax }{subfigure.78}{}}
+\newlabel{fig:paired-safety-success}{{5b}{11}{Subfigure 5b}{subfigure.79}{}}
+\newlabel{sub@fig:paired-safety-success}{{(b)}{b}{Subfigure 5b\relax }{subfigure.79}{}}
+\newlabel{fig:paired-safety-clearance}{{5c}{11}{Subfigure 5c}{subfigure.80}{}}
+\newlabel{sub@fig:paired-safety-clearance}{{(c)}{c}{Subfigure 5c\relax }{subfigure.80}{}}
+\newlabel{fig:paired-safety-input}{{5d}{11}{Subfigure 5d}{subfigure.81}{}}
+\newlabel{sub@fig:paired-safety-input}{{(d)}{d}{Subfigure 5d\relax }{subfigure.81}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Component and safety audit. Bootstrap intervals accompany the method means in (a). Panel (b) exposes the failure of standalone fitted and hand-scaled critics; fixed rollout, local search, and proposed adaptive rollout reach every goal. Panels (c) and (d) compare the common sampled shield margins, with horizontal colored lines denoting acceptance limits. Passive drift and uncertainty are not evaluated.}}{11}{figure.83}\protected@file@percent }
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Test $\Delta v$ distributions.}}}{11}{subfigure.5.1}\protected@file@percent }
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Mission success by method.}}}{11}{subfigure.5.2}\protected@file@percent }
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {Minimum clearance above margin.}}}{11}{subfigure.5.3}\protected@file@percent }
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {Peak commanded input.}}}{11}{subfigure.5.4}\protected@file@percent }
-\newlabel{fig:paired-safety}{{5}{11}{Component and safety audit. Bootstrap intervals accompany the method means in (a). Panel (b) exposes the failure of standalone fitted and hand-scaled critics; fixed rollout, local search, and proposed adaptive rollout reach every goal. Panels (c) and (d) compare the common sampled shield margins, with horizontal colored lines denoting acceptance limits. Passive drift and uncertainty are not evaluated}{figure.81}{}}
+\newlabel{fig:paired-safety}{{5}{11}{Component and safety audit. Bootstrap intervals accompany the method means in (a). Panel (b) exposes the failure of standalone fitted and hand-scaled critics; fixed rollout, local search, and proposed adaptive rollout reach every goal. Panels (c) and (d) compare the common sampled shield margins, with horizontal colored lines denoting acceptance limits. Passive drift and uncertainty are not evaluated}{figure.83}{}}
+\newlabel{fig:representative-route}{{6a}{11}{Subfigure 6a}{subfigure.85}{}}
+\newlabel{sub@fig:representative-route}{{(a)}{a}{Subfigure 6a\relax }{subfigure.85}{}}
+\newlabel{fig:representative-coverage}{{6b}{11}{Subfigure 6b}{subfigure.86}{}}
+\newlabel{sub@fig:representative-coverage}{{(b)}{b}{Subfigure 6b\relax }{subfigure.86}{}}
+\newlabel{fig:representative-dv}{{6c}{11}{Subfigure 6c}{subfigure.87}{}}
+\newlabel{sub@fig:representative-dv}{{(c)}{c}{Subfigure 6c\relax }{subfigure.87}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Illustrative median-effect held-out case. Markers in (a) are terminal observations and the star is the common initial state. The ADP route reaches the coverage goal after 10 actions; local search uses 11. The selection is post hoc and does not replace the all-scenario inference.}}{11}{figure.89}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Generated LVLH routes.}}}{11}{subfigure.6.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Coverage accumulation.}}}{11}{subfigure.6.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {Cumulative physical $\Delta v$.}}}{11}{subfigure.6.3}\protected@file@percent }
+\newlabel{fig:representative-trajectory}{{6}{11}{Illustrative median-effect held-out case. Markers in (a) are terminal observations and the star is the common initial state. The ADP route reaches the coverage goal after 10 actions; local search uses 11. The selection is post hoc and does not replace the all-scenario inference}{figure.89}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Trajectory-linked camera views from the accepted corrected \texttt  {validation\_002} task. Views 1--5 link locally to the radial--cross-track ($x$--$z$) projection, and views 6--10 link to the along-track--cross-track ($y$--$z$) projection; hollow gray markers retain the other observations as context. Inset labels give mission time and cumulative coverage. Dashed gray and solid blue denote planned and executed paths, and the star is the initial state. Apparent overlap in either projection does not imply contact: the annotated clearances and collision decision use the full 3-D transformed mesh and swept path. Gazebo rendered the views, while ROS HCW dynamics propagated state; coverage came from frozen geometric visibility masks, not image pixels.}}{11}{figure.92}\protected@file@percent }
+\newlabel{fig:ros-key-camera-views}{{7}{11}{Trajectory-linked camera views from the accepted corrected \texttt {validation\_002} task. Views 1--5 link locally to the radial--cross-track ($x$--$z$) projection, and views 6--10 link to the along-track--cross-track ($y$--$z$) projection; hollow gray markers retain the other observations as context. Inset labels give mission time and cumulative coverage. Dashed gray and solid blue denote planned and executed paths, and the star is the initial state. Apparent overlap in either projection does not imply contact: the annotated clearances and collision decision use the full 3-D transformed mesh and swept path. Gazebo rendered the views, while ROS HCW dynamics propagated state; coverage came from frozen geometric visibility masks, not image pixels}{figure.92}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {F}Reproducibility and Evidence Boundary}{11}{subsection.93}\protected@file@percent }
 \citation{bertsekas2020rollout}
-\newlabel{fig:representative-route}{{6a}{12}{Subfigure 6a}{subfigure.83}{}}
-\newlabel{sub@fig:representative-route}{{(a)}{a}{Subfigure 6a\relax }{subfigure.83}{}}
-\newlabel{fig:representative-coverage}{{6b}{12}{Subfigure 6b}{subfigure.84}{}}
-\newlabel{sub@fig:representative-coverage}{{(b)}{b}{Subfigure 6b\relax }{subfigure.84}{}}
-\newlabel{fig:representative-dv}{{6c}{12}{Subfigure 6c}{subfigure.85}{}}
-\newlabel{sub@fig:representative-dv}{{(c)}{c}{Subfigure 6c\relax }{subfigure.85}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Illustrative median-effect held-out case. Markers in (a) are terminal observations and the star is the common initial state. The ADP route reaches the coverage goal after 10 actions; local search uses 11. The selection is post hoc and does not replace the all-scenario inference.}}{12}{figure.87}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Generated LVLH routes.}}}{12}{subfigure.6.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Coverage accumulation.}}}{12}{subfigure.6.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {Cumulative physical $\Delta v$.}}}{12}{subfigure.6.3}\protected@file@percent }
-\newlabel{fig:representative-trajectory}{{6}{12}{Illustrative median-effect held-out case. Markers in (a) are terminal observations and the star is the common initial state. The ADP route reaches the coverage goal after 10 actions; local search uses 11. The selection is post hoc and does not replace the all-scenario inference}{figure.87}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {F}Reproducibility and Evidence Boundary}{12}{subsection.91}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {VII}Discussion}{12}{section.92}\protected@file@percent }
-\newlabel{sec:discussion}{{VII}{12}{}{section.92}{}}
 \citation{zhou2026formation}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Trajectory-linked camera views from the accepted corrected \texttt  {validation\_002} task. Views 1--5 link locally to the radial--cross-track ($x$--$z$) projection, and views 6--10 link to the along-track--cross-track ($y$--$z$) projection; hollow gray markers retain the other observations as context. Inset labels give mission time and cumulative coverage. Dashed gray and solid blue denote planned and executed paths, and the star is the initial state. Apparent overlap in either projection does not imply contact: the annotated clearances and collision decision use the full 3-D transformed mesh and swept path. Gazebo rendered the views, while ROS HCW dynamics propagated state; coverage came from frozen geometric visibility masks, not image pixels.}}{13}{figure.90}\protected@file@percent }
-\newlabel{fig:ros-key-camera-views}{{7}{13}{Trajectory-linked camera views from the accepted corrected \texttt {validation\_002} task. Views 1--5 link locally to the radial--cross-track ($x$--$z$) projection, and views 6--10 link to the along-track--cross-track ($y$--$z$) projection; hollow gray markers retain the other observations as context. Inset labels give mission time and cumulative coverage. Dashed gray and solid blue denote planned and executed paths, and the star is the initial state. Apparent overlap in either projection does not imply contact: the annotated clearances and collision decision use the full 3-D transformed mesh and swept path. Gazebo rendered the views, while ROS HCW dynamics propagated state; coverage came from frozen geometric visibility masks, not image pixels}{figure.90}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VII}Discussion}{12}{section.94}\protected@file@percent }
+\newlabel{sec:discussion}{{VII}{12}{}{section.94}{}}
 \bibstyle{IEEEtran}
 \bibdata{references}
 \bibcite{faghihi2022kinodynamic}{1}
@@ -163,15 +165,15 @@
 \bibcite{karaman2011sampling}{12}
 \bibcite{bertsekas1996neuro}{13}
 \bibcite{achiam2017cpo}{14}
+\@writefile{toc}{\contentsline {section}{\numberline {VIII}Conclusion}{13}{section.95}\protected@file@percent }
+\newlabel{sec:conclusion}{{VIII}{13}{}{section.95}{}}
+\@writefile{toc}{\contentsline {section}{REFERENCES}{13}{section.95}\protected@file@percent }
 \bibcite{alshiekh2018shielding}{15}
 \bibcite{zhou2026tomographic}{16}
 \bibcite{ogri2025switched}{17}
 \bibcite{nasa_iss_gltf_model}{18}
-\@writefile{toc}{\contentsline {section}{\numberline {VIII}Conclusion}{14}{section.93}\protected@file@percent }
-\newlabel{sec:conclusion}{{VIII}{14}{}{section.93}{}}
-\@writefile{toc}{\contentsline {section}{REFERENCES}{14}{section.93}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{Biographies}{15}{IEEEbiography.94}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{Rugang Tang}{15}{IEEEbiography.95}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{Xin Ning}{15}{IEEEbiography.96}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{Chih-Yung Wen}{15}{IEEEbiography.97}\protected@file@percent }
-\gdef \@abspage@last{15}
+\@writefile{toc}{\contentsline {section}{Biographies}{14}{IEEEbiography.96}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{Rugang Tang}{14}{IEEEbiography.97}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{Xin Ning}{14}{IEEEbiography.98}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{Chih-Yung Wen}{14}{IEEEbiography.99}\protected@file@percent }
+\gdef \@abspage@last{14}
