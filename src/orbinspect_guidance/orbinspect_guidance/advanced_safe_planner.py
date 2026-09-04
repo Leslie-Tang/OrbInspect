@@ -102,6 +102,7 @@ class SafeGraphProblem:
     goal_coverage: float
     max_steps: int
     reference_node_ids: tuple[str, ...] = ()
+    required_target_mask: int = 0
 
 
 @dataclass(frozen=True)
@@ -809,7 +810,7 @@ class AdvancedSafePlanner:
             tuple(decisions),
             total_cost,
             coverage,
-            coverage + 1.0e-12 >= problem.goal_coverage,
+            self._goal_reached(problem, state.covered_mask),
         )
 
     def solve_exact(self, problem: SafeGraphProblem) -> ExactGraphSolution:
@@ -1522,10 +1523,20 @@ class AdvancedSafePlanner:
         state: GraphDecisionState,
     ) -> float:
         coverage = self._coverage_ratio(problem, state.covered_mask)
-        if coverage + 1.0e-12 >= problem.goal_coverage:
+        if self._goal_reached(problem, state.covered_mask):
             return 0.0
-        gap = (problem.goal_coverage - coverage) / max(problem.goal_coverage, 1.0e-12)
-        return self.config.terminal_penalty * (0.5 + gap)
+        coverage_gap = max(0.0, problem.goal_coverage - coverage) / max(
+            problem.goal_coverage,
+            1.0e-12,
+        )
+        required_count = problem.required_target_mask.bit_count()
+        missing_required = (
+            problem.required_target_mask & ~state.covered_mask
+        ).bit_count()
+        required_gap = missing_required / max(1, required_count)
+        return self.config.terminal_penalty * (
+            0.5 + max(coverage_gap, required_gap)
+        )
 
     def _edge_is_safe(self, edge: SafeGraphEdge) -> bool:
         passive_safe = edge.passive_margin is None or edge.passive_margin >= 0.0
@@ -1540,7 +1551,14 @@ class AdvancedSafePlanner:
         return edge.stage_cost + self.config.action_cost
 
     def _goal_reached(self, problem: SafeGraphProblem, covered_mask: int) -> bool:
-        return self._coverage_ratio(problem, covered_mask) + 1.0e-12 >= problem.goal_coverage
+        coverage_reached = (
+            self._coverage_ratio(problem, covered_mask) + 1.0e-12
+            >= problem.goal_coverage
+        )
+        required_reached = (
+            covered_mask & problem.required_target_mask
+        ) == problem.required_target_mask
+        return coverage_reached and required_reached
 
     def _coverage_ratio(self, problem: SafeGraphProblem, covered_mask: int) -> float:
         return self._mask_weight(problem, covered_mask) / self._total_weight(problem)
@@ -1652,6 +1670,10 @@ class AdvancedSafePlanner:
                 + ', '.join(sorted(unknown_reference_ids))
             )
         valid_mask = (1 << len(problem.target_weights)) - 1
+        if problem.required_target_mask < 0:
+            raise ValueError('required target mask cannot be negative')
+        if problem.required_target_mask & ~valid_mask:
+            raise ValueError('required target mask references an unknown target')
         for node in problem.nodes:
             if node.coverage_mask & ~valid_mask:
                 raise ValueError(f'node {node.node_id} references an unknown target')

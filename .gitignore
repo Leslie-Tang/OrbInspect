@@ -22,6 +22,8 @@ data/results/*
 !data/results/ros_verification_inputs_full_transform_radius080_20260812/**
 !data/results/adp_future_full_transform_radius080_20260812/
 !data/results/adp_future_full_transform_radius080_20260812/**
+!data/results/high_coverage_key_targets_20260904/
+!data/results/high_coverage_key_targets_20260904/**
 
 *.bag
 *.db3

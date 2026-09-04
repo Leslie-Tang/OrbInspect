@@ -70,6 +70,70 @@ def test_graph_adp_shield_rejects_unsafe_low_cost_edge() -> None:
     assert plan.success
 
 
+def test_graph_adp_requires_mandatory_targets_beyond_coverage_goal() -> None:
+    nodes = (
+        SafeGraphNode('bulk', 0b011),
+        SafeGraphNode('required', 0b100),
+    )
+
+    def edge_evaluator(source_id: str | None, target_id: str) -> SafeGraphEdge:
+        return SafeGraphEdge(
+            source_id=source_id,
+            target_id=target_id,
+            stage_cost=1.0,
+            feasible=True,
+            min_clearance=1.0,
+            peak_input=0.01,
+            input_limit=0.02,
+        )
+
+    planner = AdvancedSafePlanner(AdvancedPlannerConfig(
+        horizon_steps=2,
+        goal_coverage=2.0 / 3.0,
+        branch_width=2,
+        candidate_pool_width=2,
+        lookahead_depth=1,
+        training_episodes=0,
+        action_cost=0.0,
+        enable_critic=False,
+        enable_rollout=False,
+        enable_adaptive_rollout=True,
+        enable_reference_safeguard=False,
+        reference_improvement_passes=0,
+    ))
+    plan = planner.plan(SafeGraphProblem(
+        nodes=nodes,
+        target_weights=(1.0, 1.0, 1.0),
+        edge_evaluator=edge_evaluator,
+        goal_coverage=2.0 / 3.0,
+        max_steps=2,
+        required_target_mask=0b100,
+    ))
+
+    covered_mask = 0
+    for decision in plan.decisions:
+        covered_mask |= decision.new_target_mask
+    assert plan.success
+    assert len(plan.node_ids) == 2
+    assert covered_mask & 0b100
+
+
+def test_graph_adp_rejects_unknown_required_target() -> None:
+    problem = _two_step_problem()
+    invalid_problem = SafeGraphProblem(
+        nodes=problem.nodes,
+        target_weights=problem.target_weights,
+        edge_evaluator=problem.edge_evaluator,
+        goal_coverage=problem.goal_coverage,
+        max_steps=problem.max_steps,
+        reference_node_ids=problem.reference_node_ids,
+        required_target_mask=1 << len(problem.target_weights),
+    )
+
+    with pytest.raises(ValueError, match='required target mask'):
+        AdvancedSafePlanner(AdvancedPlannerConfig()).plan(invalid_problem)
+
+
 def test_graph_adp_training_is_deterministic() -> None:
     config = AdvancedPlannerConfig(
         horizon_steps=2,
