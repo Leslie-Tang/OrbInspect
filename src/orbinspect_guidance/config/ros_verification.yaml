@@ -50,6 +50,7 @@ verification_evaluator_node:
     position_tolerance: 0.5
     velocity_tolerance: 0.05
     goal_coverage: 0.80
+    goal_mode: coverage
     max_sooas: 14
     publish_rate: 20.0
     frame_id: lvlh

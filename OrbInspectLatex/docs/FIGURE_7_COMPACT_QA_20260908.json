@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "manuscript_pages": 13,
+  "figure7_page": 12,
+  "figure_printed_mm": [
+    172.92,
+    75.27
+  ],
+  "metadata_font_printed_pt": 7.22,
+  "nominal_minimum_main_annotation_pt": 7.12,
+  "height_reduction_vs_old_at_same_width_percent": 30.53,
+  "protected_files_verified": 133,
+  "main_tex_change": "Reference-column break retuned from 23 to 17 only",
+  "section_body_unchanged": true,
+  "other_figure_files_unchanged": true,
+  "pages_1_to_11_text_unchanged": true,
+  "bibliography_entries": 33,
+  "overflow_or_reference_warnings": [],
+  "manuscript_sha256": "5b442c9cad2a9f4d9b9946392d36ed1ccc329b1cb59e793df7dd7c5908b01e77"
+}

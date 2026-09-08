@@ -10,6 +10,9 @@ from pathlib import Path
 
 from nav_msgs.msg import Odometry
 from orbinspect_interfaces.msg import CoverageMap
+from orbinspect_guidance.observation_credit import credit_observation
+from orbinspect_guidance.observation_credit import coverage_metrics
+from orbinspect_guidance.observation_credit import load_observation_mission
 import rclpy
 from rclpy.executors import ExternalShutdownException
 from rclpy.node import Node
@@ -28,6 +31,7 @@ class VerificationEvaluatorNode(Node):
         self.declare_parameter('position_tolerance', 0.5)
         self.declare_parameter('velocity_tolerance', 0.05)
         self.declare_parameter('goal_coverage', 0.80)
+        self.declare_parameter('goal_mode', 'coverage')
         self.declare_parameter('max_sooas', 14)
         self.declare_parameter('publish_rate', 20.0)
         self.declare_parameter('frame_id', 'lvlh')
@@ -39,7 +43,8 @@ class VerificationEvaluatorNode(Node):
             raise ValueError('scenario_id and method are required')
         self.position_tolerance = self._positive('position_tolerance')
         self.velocity_tolerance = self._positive('velocity_tolerance')
-        self.goal_coverage = self._positive('goal_coverage')
+        self.goal_coverage = float(self.get_parameter('goal_coverage').value)
+        self.goal_mode = str(self.get_parameter('goal_mode').value)
         self.max_sooas = int(self.get_parameter('max_sooas').value)
         if self.max_sooas <= 0:
             raise ValueError('max_sooas must be positive')
@@ -51,6 +56,12 @@ class VerificationEvaluatorNode(Node):
             self.scenario_id,
             self.method,
         )
+        self.mission = load_observation_mission(
+            self.result_dir, self.scenario_id, self.method,
+            goal_mode=self.goal_mode, goal_coverage=self.goal_coverage,
+        )
+        self.covered_target_ids: frozenset[str] = frozenset()
+        self.new_targets_seen = 0
         self.latest_state: tuple[float, ...] | None = None
         self.start_time = self.get_clock().now()
         self.next_observation = 0
@@ -103,11 +114,13 @@ class VerificationEvaluatorNode(Node):
             self.velocity_tolerance,
         )
         credited = bool(result['credited'])
+        self.covered_target_ids, self.new_targets_seen = credit_observation(
+            self.covered_target_ids, observation['visible_target_ids'],
+            credited, self.mission,
+        )
+        metrics = coverage_metrics(self.covered_target_ids, self.mission)
+        self.coverage = float(metrics['coverage_ratio'])
         if credited:
-            self.coverage = max(
-                self.coverage,
-                float(observation['weighted_coverage']),
-            )
             self.credited_actions += 1
         else:
             self.failed_actions += 1
@@ -120,6 +133,7 @@ class VerificationEvaluatorNode(Node):
             'current_waypoint_id': observation['candidate_id'],
             'current_waypoint_index': int(observation['action']),
             'coverage_ratio': self.coverage,
+            **metrics,
             **result,
         }
         self.event_pub.publish(String(data=json.dumps(event, sort_keys=True)))
@@ -135,22 +149,21 @@ class VerificationEvaluatorNode(Node):
         msg = CoverageMap()
         msg.header.stamp = self.get_clock().now().to_msg()
         msg.header.frame_id = self.frame_id
-        msg.total_targets = int(observation['total_targets'])
-        msg.inspected_targets = int(observation['covered_targets'])
+        msg.total_targets = len(self.mission.target_weights)
+        msg.inspected_targets = len(self.covered_target_ids)
         msg.coverage_ratio = self.coverage
         msg.visible_target_count = int(observation['visible_target_count'])
-        msg.new_targets_seen = (
-            int(observation['visible_target_count']) if credited else 0
-        )
+        msg.new_targets_seen = self.new_targets_seen if credited else 0
         self.coverage_pub.publish(msg)
 
     def _finish(self, elapsed: float) -> None:
         if self.finished:
             return
         self.finished = True
+        metrics = coverage_metrics(self.covered_target_ids, self.mission)
         success = (
-            self.coverage >= self.goal_coverage
-            and self.credited_actions <= self.max_sooas
+            bool(metrics['mission_goal_reached'])
+            and self.next_observation <= self.max_sooas
             and self.failed_actions == 0
         )
         payload = {
@@ -160,6 +173,7 @@ class VerificationEvaluatorNode(Node):
             'current_waypoint_id': '',
             'current_waypoint_index': self.next_observation,
             'coverage_ratio': self.coverage,
+            **metrics,
             'credited_actions': self.credited_actions,
             'failed_actions': self.failed_actions,
             'success': success,
@@ -240,6 +254,7 @@ def _load_observations(
             ),
             'weighted_coverage': float(row['weighted_coverage']),
             'visible_target_count': len(visible),
+            'visible_target_ids': frozenset(visible),
             'covered_targets': int(row['covered_target_count']),
             'total_targets': int(row['total_target_count']),
         })

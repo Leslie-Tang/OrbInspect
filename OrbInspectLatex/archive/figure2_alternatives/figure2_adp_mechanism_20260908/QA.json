@@ -1,0 +1,654 @@
+{
+  "native_cells": 94,
+  "editable_labels": 63,
+  "palette_subset_of_figure1": true,
+  "native_connected_edges": 9,
+  "native_and_svg_same_geometry_and_math_source": true,
+  "figure_size_mm": [
+    182,
+    80.81666666666666
+  ],
+  "minimum_text_pt": 7.3700787401574805,
+  "visual_review": "passed: figure export, native draw.io export, and final manuscript page 6; no clipping or overlapping labels",
+  "live_drawio_export": "passed: documented embed protocol; 48 rendered math expressions, zero math errors",
+  "native_roundtrip_preserves_all_labels_geometry_and_links": true,
+  "numerical_tests_passed": 6,
+  "manuscript_pages": 13,
+  "figure2_manuscript_page": 6,
+  "figure1_all_assets_byte_identical": true,
+  "manuscript_changes_limited_to_figure2_block_and_intro": true,
+  "undefined_references_or_overfull_boxes": false,
+  "export_math_note": "Editable native MathJax and vector-outlined publication math share canonical LaTeX; font rasterization is renderer-specific.",
+  "label_metrics": [
+    {
+      "id": "cell-2",
+      "font_size": 30.0,
+      "original_font_size": 30.0,
+      "width": 341.72999918460846,
+      "box_width": 602.0,
+      "line_heights": [
+        36.0
+      ]
+    },
+    {
+      "id": "cell-4",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 357.1559979915619,
+      "box_width": 582.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "cell-5",
+      "font_size": 25.0,
+      "original_font_size": 25.0,
+      "width": 291.74999964237213,
+      "box_width": 598.0,
+      "line_heights": [
+        32.0
+      ]
+    },
+    {
+      "id": "v-0",
+      "font_size": 28.0,
+      "original_font_size": 28.0,
+      "width": 26.0,
+      "box_width": 52.0,
+      "line_heights": [
+        33.6
+      ]
+    },
+    {
+      "id": "v-1",
+      "font_size": 28.0,
+      "original_font_size": 28.0,
+      "width": 26.0,
+      "box_width": 52.0,
+      "line_heights": [
+        33.6
+      ]
+    },
+    {
+      "id": "v-2",
+      "font_size": 28.0,
+      "original_font_size": 28.0,
+      "width": 26.0,
+      "box_width": 52.0,
+      "line_heights": [
+        33.6
+      ]
+    },
+    {
+      "id": "v-3",
+      "font_size": 28.0,
+      "original_font_size": 28.0,
+      "width": 26.0,
+      "box_width": 52.0,
+      "line_heights": [
+        33.6
+      ]
+    },
+    {
+      "id": "v-4",
+      "font_size": 28.0,
+      "original_font_size": 28.0,
+      "width": 26.0,
+      "box_width": 52.0,
+      "line_heights": [
+        33.6
+      ]
+    },
+    {
+      "id": "v-5",
+      "font_size": 28.0,
+      "original_font_size": 28.0,
+      "width": 26.0,
+      "box_width": 52.0,
+      "line_heights": [
+        33.6
+      ]
+    },
+    {
+      "id": "cell-21",
+      "font_size": 24.0,
+      "original_font_size": 24.0,
+      "width": 269.07999897003174,
+      "box_width": 302.0,
+      "line_heights": [
+        28.799999999999997
+      ]
+    },
+    {
+      "id": "cell-22",
+      "font_size": 24.925,
+      "original_font_size": 27.0,
+      "width": 13.0,
+      "box_width": 54.0,
+      "line_heights": [
+        29.91
+      ]
+    },
+    {
+      "id": "cell-23",
+      "font_size": 24.925,
+      "original_font_size": 27.0,
+      "width": 13.0,
+      "box_width": 54.0,
+      "line_heights": [
+        29.91
+      ]
+    },
+    {
+      "id": "cell-24",
+      "font_size": 24.925,
+      "original_font_size": 27.0,
+      "width": 13.0,
+      "box_width": 54.0,
+      "line_heights": [
+        29.91
+      ]
+    },
+    {
+      "id": "cell-25",
+      "font_size": 24.925,
+      "original_font_size": 27.0,
+      "width": 13.0,
+      "box_width": 54.0,
+      "line_heights": [
+        29.91
+      ]
+    },
+    {
+      "id": "cell-26",
+      "font_size": 24.925,
+      "original_font_size": 27.0,
+      "width": 13.0,
+      "box_width": 54.0,
+      "line_heights": [
+        29.91
+      ]
+    },
+    {
+      "id": "cell-27",
+      "font_size": 24.925,
+      "original_font_size": 27.0,
+      "width": 32.0,
+      "box_width": 54.0,
+      "line_heights": [
+        29.91
+      ]
+    },
+    {
+      "id": "cell-28",
+      "font_size": 24.0,
+      "original_font_size": 24.0,
+      "width": 80.01599979400635,
+      "box_width": 103.0,
+      "line_heights": [
+        28.799999999999997
+      ]
+    },
+    {
+      "id": "cell-29",
+      "font_size": 25.0,
+      "original_font_size": 25.0,
+      "width": 100.0,
+      "box_width": 138.0,
+      "line_heights": [
+        31.0
+      ]
+    },
+    {
+      "id": "cell-30",
+      "font_size": 25.0,
+      "original_font_size": 25.0,
+      "width": 100.0,
+      "box_width": 138.0,
+      "line_heights": [
+        31.0
+      ]
+    },
+    {
+      "id": "cell-31",
+      "font_size": 25.0,
+      "original_font_size": 25.0,
+      "width": 78.0,
+      "box_width": 140.0,
+      "line_heights": [
+        30.0
+      ]
+    },
+    {
+      "id": "cell-32",
+      "font_size": 25.0,
+      "original_font_size": 25.0,
+      "width": 100.0,
+      "box_width": 147.0,
+      "line_heights": [
+        31.0
+      ]
+    },
+    {
+      "id": "cell-33",
+      "font_size": 25.0,
+      "original_font_size": 25.0,
+      "width": 78.0,
+      "box_width": 140.0,
+      "line_heights": [
+        30.0
+      ]
+    },
+    {
+      "id": "cell-34",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 166.16599929332733,
+      "box_width": 333.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "cell-35",
+      "font_size": 24.0,
+      "original_font_size": 24.0,
+      "width": 248.13599824905396,
+      "box_width": 322.0,
+      "line_heights": [
+        28.799999999999997
+      ]
+    },
+    {
+      "id": "cell-37",
+      "font_size": 25.0,
+      "original_font_size": 25.0,
+      "width": 468.2499974966049,
+      "box_width": 578.0,
+      "line_heights": [
+        30.0
+      ]
+    },
+    {
+      "id": "cell-39",
+      "font_size": 30.0,
+      "original_font_size": 30.0,
+      "width": 498.41999888420105,
+      "box_width": 954.0,
+      "line_heights": [
+        36.0
+      ]
+    },
+    {
+      "id": "cell-41",
+      "font_size": 28.0,
+      "original_font_size": 28.0,
+      "width": 352.0,
+      "box_width": 930.0,
+      "line_heights": [
+        37.0
+      ]
+    },
+    {
+      "id": "cell-42",
+      "font_size": 25.0,
+      "original_font_size": 25.0,
+      "width": 424.27499824762344,
+      "box_width": 570.0,
+      "line_heights": [
+        30.0
+      ]
+    },
+    {
+      "id": "cell-43",
+      "font_size": 25.0,
+      "original_font_size": 25.0,
+      "width": 97.0,
+      "box_width": 366.0,
+      "line_heights": [
+        30.0
+      ]
+    },
+    {
+      "id": "cell-45",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 93.48199951648712,
+      "box_width": 132.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "cell-46",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 32.0,
+      "box_width": 158.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "cell-47",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 118.0,
+      "box_width": 238.0,
+      "line_heights": [
+        32.0
+      ]
+    },
+    {
+      "id": "cell-48",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 91.0,
+      "box_width": 188.0,
+      "line_heights": [
+        33.0
+      ]
+    },
+    {
+      "id": "cell-49",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 99.68399977684021,
+      "box_width": 178.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "cell-51",
+      "font_size": 27.0,
+      "original_font_size": 27.0,
+      "width": 14.0,
+      "box_width": 132.0,
+      "line_heights": [
+        32.4
+      ]
+    },
+    {
+      "id": "cell-52",
+      "font_size": 27.0,
+      "original_font_size": 27.0,
+      "width": 14.0,
+      "box_width": 158.0,
+      "line_heights": [
+        32.4
+      ]
+    },
+    {
+      "id": "cell-53",
+      "font_size": 27.0,
+      "original_font_size": 27.0,
+      "width": 14.0,
+      "box_width": 238.0,
+      "line_heights": [
+        32.4
+      ]
+    },
+    {
+      "id": "cell-54",
+      "font_size": 27.0,
+      "original_font_size": 27.0,
+      "width": 14.0,
+      "box_width": 188.0,
+      "line_heights": [
+        32.4
+      ]
+    },
+    {
+      "id": "cell-55",
+      "font_size": 25.0,
+      "original_font_size": 25.0,
+      "width": 127.82499939203262,
+      "box_width": 178.0,
+      "line_heights": [
+        30.0
+      ]
+    },
+    {
+      "id": "cell-57",
+      "font_size": 27.0,
+      "original_font_size": 27.0,
+      "width": 14.0,
+      "box_width": 132.0,
+      "line_heights": [
+        32.4
+      ]
+    },
+    {
+      "id": "cell-58",
+      "font_size": 27.0,
+      "original_font_size": 27.0,
+      "width": 14.0,
+      "box_width": 158.0,
+      "line_heights": [
+        32.4
+      ]
+    },
+    {
+      "id": "cell-59",
+      "font_size": 27.0,
+      "original_font_size": 27.0,
+      "width": 102.0,
+      "box_width": 238.0,
+      "line_heights": [
+        32.4
+      ]
+    },
+    {
+      "id": "cell-60",
+      "font_size": 27.0,
+      "original_font_size": 27.0,
+      "width": 14.0,
+      "box_width": 188.0,
+      "line_heights": [
+        32.4
+      ]
+    },
+    {
+      "id": "cell-61",
+      "font_size": 25.0,
+      "original_font_size": 25.0,
+      "width": 97.27499932050705,
+      "box_width": 178.0,
+      "line_heights": [
+        30.0
+      ]
+    },
+    {
+      "id": "cell-63",
+      "font_size": 27.0,
+      "original_font_size": 27.0,
+      "width": 14.0,
+      "box_width": 132.0,
+      "line_heights": [
+        32.4
+      ]
+    },
+    {
+      "id": "cell-64",
+      "font_size": 27.0,
+      "original_font_size": 27.0,
+      "width": 35.0,
+      "box_width": 158.0,
+      "line_heights": [
+        32.4
+      ]
+    },
+    {
+      "id": "cell-65",
+      "font_size": 27.0,
+      "original_font_size": 27.0,
+      "width": 48.0,
+      "box_width": 238.0,
+      "line_heights": [
+        32.4
+      ]
+    },
+    {
+      "id": "cell-66",
+      "font_size": 27.0,
+      "original_font_size": 27.0,
+      "width": 48.0,
+      "box_width": 188.0,
+      "line_heights": [
+        32.4
+      ]
+    },
+    {
+      "id": "cell-67",
+      "font_size": 25.0,
+      "original_font_size": 25.0,
+      "width": 84.72499996423721,
+      "box_width": 178.0,
+      "line_heights": [
+        30.0
+      ]
+    },
+    {
+      "id": "cell-74",
+      "font_size": 25.0,
+      "original_font_size": 25.0,
+      "width": 455.7499974966049,
+      "box_width": 954.0,
+      "line_heights": [
+        30.0
+      ]
+    },
+    {
+      "id": "cell-76",
+      "font_size": 30.0,
+      "original_font_size": 30.0,
+      "width": 528.4799981117249,
+      "box_width": 954.0,
+      "line_heights": [
+        36.0
+      ]
+    },
+    {
+      "id": "cell-78",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 144.02599966526031,
+      "box_width": 317.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "cell-79",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 169.0,
+      "box_width": 321.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "cell-81",
+      "font_size": 25.0,
+      "original_font_size": 25.0,
+      "width": 219.5499986410141,
+      "box_width": 542.0,
+      "line_heights": [
+        30.0
+      ]
+    },
+    {
+      "id": "tail-2",
+      "font_size": 28.0,
+      "original_font_size": 28.0,
+      "width": 26.0,
+      "box_width": 52.0,
+      "line_heights": [
+        33.6
+      ]
+    },
+    {
+      "id": "tail-5",
+      "font_size": 28.0,
+      "original_font_size": 28.0,
+      "width": 26.0,
+      "box_width": 52.0,
+      "line_heights": [
+        33.6
+      ]
+    },
+    {
+      "id": "tail-4",
+      "font_size": 28.0,
+      "original_font_size": 28.0,
+      "width": 26.0,
+      "box_width": 52.0,
+      "line_heights": [
+        33.6
+      ]
+    },
+    {
+      "id": "cell-87",
+      "font_size": 24.094166666666666,
+      "original_font_size": 25.0,
+      "width": 13.0,
+      "box_width": 48.0,
+      "line_heights": [
+        28.912999999999997
+      ]
+    },
+    {
+      "id": "cell-88",
+      "font_size": 24.094166666666666,
+      "original_font_size": 25.0,
+      "width": 13.0,
+      "box_width": 48.0,
+      "line_heights": [
+        28.912999999999997
+      ]
+    },
+    {
+      "id": "cell-89",
+      "font_size": 24.0,
+      "original_font_size": 24.0,
+      "width": 125.39999914169312,
+      "box_width": 132.0,
+      "line_heights": [
+        28.799999999999997
+      ]
+    },
+    {
+      "id": "cell-90",
+      "font_size": 24.0,
+      "original_font_size": 24.0,
+      "width": 125.39999914169312,
+      "box_width": 132.0,
+      "line_heights": [
+        28.799999999999997
+      ]
+    },
+    {
+      "id": "cell-91",
+      "font_size": 24.0,
+      "original_font_size": 24.0,
+      "width": 125.39999914169312,
+      "box_width": 132.0,
+      "line_heights": [
+        28.799999999999997
+      ]
+    },
+    {
+      "id": "cell-94",
+      "font_size": 28.0,
+      "original_font_size": 28.0,
+      "width": 392.0,
+      "box_width": 930.0,
+      "line_heights": [
+        33.6
+      ]
+    }
+  ]
+}

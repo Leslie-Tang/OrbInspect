@@ -3,6 +3,7 @@ install/
 log/
 
 .pytest_cache/
+.venv-review/
 __pycache__/
 *.py[cod]
 

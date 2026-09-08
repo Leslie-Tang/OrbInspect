@@ -1,0 +1,32 @@
+{
+  "changes": [
+    {
+      "before": "a  Mission inputs",
+      "after": "I. Mission inputs"
+    },
+    {
+      "before": "b  Camera and LOS",
+      "after": "II. Camera and LOS"
+    },
+    {
+      "before": "c  HCW transfer \u2192 SOOA graph",
+      "after": "III. HCW transfer \u2192 SOOA graph"
+    },
+    {
+      "before": "d  Rollout ADP",
+      "after": "IV. Rollout ADP"
+    },
+    {
+      "before": "e  Replanning",
+      "after": "V. Replanning"
+    }
+  ],
+  "all_other_native_svg_objects_identical": true,
+  "geometry_fonts_colors_and_equations_unchanged": true,
+  "native_export_heading_text_equal": true,
+  "visual_review": "passed: page 3 Roman headings and matching caption are legible without overlap or clipping",
+  "manuscript_changed_pages": [3],
+  "all_other_manuscript_pages_pixel_identical": true,
+  "manuscript_source_only_five_caption_identifiers_changed": true,
+  "compiled_manuscript_pages": 13
+}

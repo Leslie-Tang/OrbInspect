@@ -1,0 +1,22 @@
+\begin{table*}[t]
+  \centering
+  \caption{Required-target results. Resource means use successful routes of each method; the final column includes every scenario with the fixed failure penalty}
+  \label{tab:paired-aggregate}
+  \renewcommand{\arraystretch}{1.08}
+  \setlength{\tabcolsep}{5pt}
+  \footnotesize
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}llrrrrr@{}}
+    \toprule
+    Split & Method & Complete & Mean SOOAs & Mean $\Delta v$ (m/s) & Mean $J$ & Penalized $J$ \\
+    \midrule
+    Test & Task-aware incumbent & 0/50 & -- & -- & -- & 911.242 \\
+    Test & One-step ADP & 43/50 & 8.21 & 16.512 & 135.945 & 256.913 \\
+    Test & ADP-seeded local search & 43/50 & 8.21 & 15.777 & 129.892 & 251.707 \\
+    Test & Depth-three ADP & 43/50 & 9.00 & 14.033 & 115.641 & 239.451 \\
+    Shifted & Task-aware incumbent & 0/30 & -- & -- & -- & 851.059 \\
+    Shifted & One-step ADP & 8/30 & 9.25 & 17.012 & 140.102 & 770.694 \\
+    Shifted & ADP-seeded local search & 8/30 & 8.88 & 15.888 & 130.841 & 768.224 \\
+    Shifted & Depth-three ADP & 9/30 & 9.11 & 14.656 & 120.751 & 736.225 \\
+    \bottomrule
+  \end{tabular*}
+\end{table*}

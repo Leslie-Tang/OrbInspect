@@ -6,6 +6,176 @@ from orbinspect_guidance.advanced_safe_planner import SafeGraphProblem
 import pytest
 
 
+def _required_planner(depth: int = 1, **overrides) -> AdvancedSafePlanner:
+    settings = dict(
+        horizon_steps=6,
+        goal_coverage=0.0,
+        branch_width=6,
+        candidate_pool_width=6,
+        lookahead_depth=3,
+        training_episodes=0,
+        action_cost=0.0,
+        enable_critic=False,
+        enable_rollout=False,
+        enable_adaptive_rollout=True,
+        adaptive_rollout_depth=depth,
+        enable_reference_safeguard=False,
+        reference_improvement_passes=0,
+    )
+    settings.update(overrides)
+    return AdvancedSafePlanner(AdvancedPlannerConfig(**settings))
+
+
+def _directed_required_problem(nodes, costs, *, required_mask, max_steps=6):
+    def evaluate(source_id, target_id):
+        cost = costs.get((source_id, target_id))
+        return SafeGraphEdge(
+            source_id=source_id,
+            target_id=target_id,
+            stage_cost=cost if cost is not None else 100.0,
+            feasible=cost is not None,
+            min_clearance=1.0 if cost is not None else -1.0,
+        )
+
+    target_count = max(required_mask.bit_length(), *(n.coverage_mask.bit_length() for n in nodes))
+    return SafeGraphProblem(
+        nodes=nodes,
+        target_weights=(1.0,) * target_count,
+        edge_evaluator=evaluate,
+        goal_coverage=0.0,
+        max_steps=max_steps,
+        required_target_mask=required_mask,
+        goal_mode='required',
+    )
+
+
+def test_required_completion_can_succeed_below_global_coverage_threshold() -> None:
+    problem = _directed_required_problem(
+        (SafeGraphNode('key', 0b01), SafeGraphNode('background', 0b10)),
+        {(None, 'key'): 2.0, (None, 'background'): 0.1, ('key', 'background'): 0.1},
+        required_mask=0b01,
+    )
+    problem = replace(problem, target_weights=(1.0, 9.0), goal_coverage=0.8)
+    planner = _required_planner()
+
+    for plan in (planner.base_policy_plan(problem), planner.plan(problem)):
+        assert plan.success
+        assert plan.node_ids == ('key',)
+        assert plan.coverage_ratio == pytest.approx(0.1)
+        assert plan.required_target_count == plan.required_covered_count == 1
+        assert plan.missing_required_target_mask == 0
+        assert plan.termination_reason == 'complete'
+    assert planner.solve_exact(problem).total_cost == 2.0
+
+    # Legacy coverage+mask and the explicit hybrid goal preserve conjunction.
+    for mode in ('coverage', 'hybrid'):
+        conjunction = replace(problem, goal_mode=mode)
+        plan = planner.plan(conjunction)
+        assert plan.success
+        assert plan.node_ids == ('key', 'background')
+        assert plan.coverage_ratio == 1.0
+
+
+def test_high_global_coverage_does_not_hide_a_missing_required_item() -> None:
+    problem = _directed_required_problem(
+        (SafeGraphNode('background', 0b01), SafeGraphNode('key', 0b10)),
+        {(None, 'background'): 1.0},
+        required_mask=0b10,
+    )
+    problem = replace(problem, target_weights=(9.0, 1.0))
+    planner = _required_planner()
+    base = planner.base_policy_plan(problem)
+
+    assert base.coverage_ratio == pytest.approx(0.9)
+    assert not base.success
+    assert base.required_covered_count == 0
+    assert base.missing_required_target_mask == 0b10
+    assert base.termination_reason == 'base_completion_failed'
+    assert not planner.solve_exact(problem).feasible
+
+
+@pytest.mark.parametrize('policy', ['base', 'adaptive', 'learned', 'suffix', 'reference'])
+def test_required_missions_preserve_zero_gain_transit_connectors(policy) -> None:
+    problem = _directed_required_problem(
+        (SafeGraphNode('transit', 0), SafeGraphNode('key', 0b1)),
+        {(None, 'transit'): 1.0, ('transit', 'key'): 2.0},
+        required_mask=0b1,
+        max_steps=2,
+    )
+    problem = replace(problem, reference_node_ids=('transit', 'key'))
+    options = {}
+    if policy == 'learned':
+        options = dict(enable_adaptive_rollout=False, enable_critic=True)
+    elif policy == 'suffix':
+        options = dict(enable_adaptive_rollout=False, enable_rollout=True)
+    elif policy == 'reference':
+        options = dict(enable_adaptive_rollout=False, enable_reference_safeguard=True,
+                       reference_improvement_passes=2)
+    planner = _required_planner(**options)
+    plan = planner.base_policy_plan(problem) if policy == 'base' else planner.plan(problem)
+
+    assert plan.success
+    assert plan.node_ids == ('transit', 'key')
+    assert plan.decisions[0].new_target_mask == 0
+    assert plan.total_cost == 3.0
+    assert planner.solve_exact(problem).total_cost == 3.0
+
+
+def test_failed_base_completion_is_not_an_infeasibility_certificate() -> None:
+    problem = _directed_required_problem(
+        (SafeGraphNode('transit', 0), SafeGraphNode('trap', 0b01),
+         SafeGraphNode('viable', 0b01), SafeGraphNode('last', 0b10)),
+        {(None, 'transit'): 1.0, ('transit', 'trap'): 0.1,
+         ('transit', 'viable'): 2.0, ('viable', 'last'): 2.0},
+        required_mask=0b11,
+        max_steps=3,
+    )
+    shallow = _required_planner(depth=1)
+    base = shallow.base_policy_plan(problem)
+    adp1 = shallow.plan(problem)
+    exact = shallow.solve_exact(problem)
+    adp2 = _required_planner(depth=2).plan(problem)
+
+    assert base.node_ids == ('transit', 'trap')
+    assert base.termination_reason == 'base_completion_failed'
+    assert not base.success
+    assert not adp1.success
+    assert adp1.termination_reason == 'no_certified_completion'
+    assert exact.feasible
+    assert exact.node_ids == ('transit', 'viable', 'last')
+    assert adp2.success
+    assert adp2.total_cost == exact.total_cost == 5.0
+
+
+@pytest.mark.parametrize('depth', [1, 2, 3])
+def test_required_adp_respects_successful_base_cost_bound(depth) -> None:
+    problem = replace(_two_step_problem(), goal_mode='required',
+                      goal_coverage=0.0, required_target_mask=0b11)
+    planner = _required_planner(depth=depth)
+    base = planner.base_policy_plan(problem)
+    plan = planner.plan(problem)
+    exact = planner.solve_exact(problem)
+
+    assert base.success and plan.success and exact.feasible
+    assert exact.total_cost <= plan.total_cost <= base.total_cost
+    assert len(plan.node_ids) == len(set(plan.node_ids))
+    assert len(plan.node_ids) <= problem.max_steps
+
+
+@pytest.mark.parametrize('changes', [
+    dict(goal_mode='required', required_target_mask=0),
+    dict(goal_mode='hybrid', required_target_mask=0),
+    dict(goal_mode='required', required_target_mask=-1),
+    dict(goal_mode='required', required_target_mask=0b100),
+    dict(goal_mode='unknown', required_target_mask=0b01),
+    dict(goal_mode='coverage', goal_coverage=0.0),
+    dict(goal_mode='hybrid', goal_coverage=0.0, required_target_mask=0b01),
+])
+def test_required_goal_validation_rejects_ambiguous_or_invalid_tasks(changes) -> None:
+    with pytest.raises(ValueError):
+        _required_planner().plan(replace(_two_step_problem(), **changes))
+
+
 def test_graph_adp_prefers_lower_long_horizon_cost() -> None:
     problem = _two_step_problem()
     planner = AdvancedSafePlanner(AdvancedPlannerConfig(
@@ -399,3 +569,4 @@ def _two_step_problem() -> SafeGraphProblem:
         goal_coverage=1.0,
         max_steps=2,
     )
+from dataclasses import replace

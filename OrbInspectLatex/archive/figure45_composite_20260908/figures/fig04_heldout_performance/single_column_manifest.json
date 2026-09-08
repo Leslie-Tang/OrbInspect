@@ -1,0 +1,1114 @@
+{
+  "number": 4,
+  "layout": "single-column 2x2",
+  "geometry": {
+    "width_pt": 239.10336239103364,
+    "height_pt": 266.0,
+    "axes": 4,
+    "text_size_pt": 9
+  },
+  "generator_sha256": "1b8589bc822da6e759176c2c9542b285bc59cd4f5de66124a6d8374a606bcacb",
+  "evidence": {
+    "source": "data/confirmation/raw/scenario_results.csv",
+    "source_sha256": "335ec2b4e176e8425a0e30fea30a31f859ef07fa413c2a7c7472ca054988f068",
+    "primary_profile": "required09",
+    "bootstrap_seed": 60935,
+    "bootstrap_replicates": 10000,
+    "cohorts": {
+      "test": {
+        "joint_success_n": 43,
+        "joint_scenario_ids": [
+          "required09_test_000",
+          "required09_test_001",
+          "required09_test_002",
+          "required09_test_003",
+          "required09_test_004",
+          "required09_test_005",
+          "required09_test_006",
+          "required09_test_007",
+          "required09_test_008",
+          "required09_test_009",
+          "required09_test_010",
+          "required09_test_011",
+          "required09_test_012",
+          "required09_test_014",
+          "required09_test_015",
+          "required09_test_016",
+          "required09_test_018",
+          "required09_test_019",
+          "required09_test_020",
+          "required09_test_021",
+          "required09_test_022",
+          "required09_test_023",
+          "required09_test_024",
+          "required09_test_026",
+          "required09_test_027",
+          "required09_test_028",
+          "required09_test_032",
+          "required09_test_033",
+          "required09_test_034",
+          "required09_test_035",
+          "required09_test_036",
+          "required09_test_037",
+          "required09_test_039",
+          "required09_test_040",
+          "required09_test_041",
+          "required09_test_042",
+          "required09_test_043",
+          "required09_test_044",
+          "required09_test_045",
+          "required09_test_046",
+          "required09_test_047",
+          "required09_test_048",
+          "required09_test_049"
+        ],
+        "mean_graph_cost_difference": -14.250863474264364,
+        "bootstrap_95_ci": [
+          -15.715417519961724,
+          -12.461035388934702
+        ],
+        "mean_delta_v_difference": -1.7437685194835815,
+        "delta_v_bootstrap_95_ci": [
+          -1.9229347958012653,
+          -1.5251434631134668
+        ],
+        "pairs": [
+          {
+            "scenario_id": "required09_test_000",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_001",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_002",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.98590903765317,
+              "graph_cost": 131.77185738421707,
+              "min_clearance": 1.7781803100982474,
+              "peak_input": 0.059201291408881127
+            }
+          },
+          {
+            "scenario_id": "required09_test_003",
+            "adp": {
+              "total_delta_v": 16.36095124645883,
+              "graph_cost": 134.73093989294745,
+              "min_clearance": 3.043484822370052,
+              "peak_input": 0.05951490068870389
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_004",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_005",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_006",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_007",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_008",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_009",
+            "adp": {
+              "total_delta_v": 14.19375393327171,
+              "graph_cost": 116.94863572336958,
+              "min_clearance": 0.3126404740316717,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_010",
+            "adp": {
+              "total_delta_v": 15.049556992944074,
+              "graph_cost": 123.97295667804889,
+              "min_clearance": 3.1132871756951523,
+              "peak_input": 0.0585962290483111
+            },
+            "local": {
+              "total_delta_v": 16.429177611126157,
+              "graph_cost": 135.28110219797708,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.05883338561662903
+            }
+          },
+          {
+            "scenario_id": "required09_test_011",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_012",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_014",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_015",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_016",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_018",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_019",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_020",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_021",
+            "adp": {
+              "total_delta_v": 16.36095124645883,
+              "graph_cost": 134.73093989294745,
+              "min_clearance": 3.043484822370052,
+              "peak_input": 0.05951490068870389
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_022",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_023",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_024",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_026",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_027",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_028",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_032",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_033",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_034",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_035",
+            "adp": {
+              "total_delta_v": 16.36095124645883,
+              "graph_cost": 134.73093989294745,
+              "min_clearance": 3.043484822370052,
+              "peak_input": 0.05951490068870389
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_036",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_037",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_039",
+            "adp": {
+              "total_delta_v": 15.049556992944074,
+              "graph_cost": 123.97295667804889,
+              "min_clearance": 3.1132871756951523,
+              "peak_input": 0.0585962290483111
+            },
+            "local": {
+              "total_delta_v": 16.429177611126157,
+              "graph_cost": 135.28110219797708,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.05883338561662903
+            }
+          },
+          {
+            "scenario_id": "required09_test_040",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_041",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_042",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_043",
+            "adp": {
+              "total_delta_v": 14.379198452297974,
+              "graph_cost": 118.47958257423159,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.329187070980835,
+              "graph_cost": 126.26243195504061,
+              "min_clearance": 3.1132871756951523,
+              "peak_input": 0.0585962290483111
+            }
+          },
+          {
+            "scenario_id": "required09_test_044",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_045",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_046",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_047",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_048",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_test_049",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.98590903765317,
+              "graph_cost": 131.77185738421707,
+              "min_clearance": 1.7781803100982474,
+              "peak_input": 0.059201291408881127
+            }
+          }
+        ]
+      },
+      "ood": {
+        "joint_success_n": 8,
+        "joint_scenario_ids": [
+          "required09_ood_003",
+          "required09_ood_007",
+          "required09_ood_010",
+          "required09_ood_012",
+          "required09_ood_013",
+          "required09_ood_014",
+          "required09_ood_019",
+          "required09_ood_026"
+        ],
+        "mean_graph_cost_difference": -9.890341615422582,
+        "bootstrap_95_ci": [
+          -14.110724327935092,
+          -4.6878163301625975
+        ],
+        "mean_delta_v_difference": -1.2074987656765561,
+        "delta_v_bootstrap_95_ci": [
+          -1.7129288483217695,
+          -0.5749972416813978
+        ],
+        "pairs": [
+          {
+            "scenario_id": "required09_ood_003",
+            "adp": {
+              "total_delta_v": 14.379198452297974,
+              "graph_cost": 118.47958257423159,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.996627767814982,
+              "graph_cost": 131.73526276046704,
+              "min_clearance": 3.1132871756951523,
+              "peak_input": 0.0585962290483111
+            }
+          },
+          {
+            "scenario_id": "required09_ood_007",
+            "adp": {
+              "total_delta_v": 13.768885294460114,
+              "graph_cost": 113.47191958718973,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.98590903765317,
+              "graph_cost": 131.77185738421707,
+              "min_clearance": 1.7781803100982474,
+              "peak_input": 0.059201291408881127
+            }
+          },
+          {
+            "scenario_id": "required09_ood_010",
+            "adp": {
+              "total_delta_v": 14.379198452297974,
+              "graph_cost": 118.47958257423159,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.996627767814982,
+              "graph_cost": 131.73526276046704,
+              "min_clearance": 3.1132871756951523,
+              "peak_input": 0.0585962290483111
+            }
+          },
+          {
+            "scenario_id": "required09_ood_012",
+            "adp": {
+              "total_delta_v": 14.379198452297974,
+              "graph_cost": 118.47958257423159,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.956044876996415,
+              "graph_cost": 131.35272754775906,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_ood_013",
+            "adp": {
+              "total_delta_v": 15.26569364180504,
+              "graph_cost": 125.74574097896988,
+              "min_clearance": 3.043484822370052,
+              "peak_input": 0.05858419313244918
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_ood_014",
+            "adp": {
+              "total_delta_v": 14.719442152980792,
+              "graph_cost": 121.27271973080889,
+              "min_clearance": 2.80753987333066,
+              "peak_input": 0.05694549534924951
+            },
+            "local": {
+              "total_delta_v": 15.940248878846493,
+              "graph_cost": 131.3225233633999,
+              "min_clearance": 3.1132871756951523,
+              "peak_input": 0.0585962290483111
+            }
+          },
+          {
+            "scenario_id": "required09_ood_019",
+            "adp": {
+              "total_delta_v": 16.36095124645883,
+              "graph_cost": 134.73093989294745,
+              "min_clearance": 3.043484822370052,
+              "peak_input": 0.05951490068870389
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          },
+          {
+            "scenario_id": "required09_ood_026",
+            "adp": {
+              "total_delta_v": 14.19375393327171,
+              "graph_cost": 116.94863572336958,
+              "min_clearance": 0.3126404740316717,
+              "peak_input": 0.059201291408881127
+            },
+            "local": {
+              "total_delta_v": 15.743617807385604,
+              "graph_cost": 129.60460091435027,
+              "min_clearance": 3.2643887457740823,
+              "peak_input": 0.059205790001008125
+            }
+          }
+        ]
+      }
+    },
+    "success": {
+      "test": {
+        "incumbent": {
+          "complete": 0,
+          "total": 50
+        },
+        "one_step_adp": {
+          "complete": 43,
+          "total": 50
+        },
+        "seeded_local_search": {
+          "complete": 43,
+          "total": 50
+        },
+        "adaptive_rollout_adp": {
+          "complete": 43,
+          "total": 50
+        }
+      },
+      "ood": {
+        "incumbent": {
+          "complete": 0,
+          "total": 30
+        },
+        "one_step_adp": {
+          "complete": 8,
+          "total": 30
+        },
+        "seeded_local_search": {
+          "complete": 8,
+          "total": 30
+        },
+        "adaptive_rollout_adp": {
+          "complete": 9,
+          "total": 30
+        }
+      }
+    },
+    "matched_effort": {
+      "n": 43,
+      "scenario_ids": [
+        "required09_test_000",
+        "required09_test_001",
+        "required09_test_002",
+        "required09_test_003",
+        "required09_test_004",
+        "required09_test_005",
+        "required09_test_006",
+        "required09_test_007",
+        "required09_test_008",
+        "required09_test_009",
+        "required09_test_010",
+        "required09_test_011",
+        "required09_test_012",
+        "required09_test_014",
+        "required09_test_015",
+        "required09_test_016",
+        "required09_test_018",
+        "required09_test_019",
+        "required09_test_020",
+        "required09_test_021",
+        "required09_test_022",
+        "required09_test_023",
+        "required09_test_024",
+        "required09_test_026",
+        "required09_test_027",
+        "required09_test_028",
+        "required09_test_032",
+        "required09_test_033",
+        "required09_test_034",
+        "required09_test_035",
+        "required09_test_036",
+        "required09_test_037",
+        "required09_test_039",
+        "required09_test_040",
+        "required09_test_041",
+        "required09_test_042",
+        "required09_test_043",
+        "required09_test_044",
+        "required09_test_045",
+        "required09_test_046",
+        "required09_test_047",
+        "required09_test_048",
+        "required09_test_049"
+      ],
+      "methods": {
+        "one_step_adp": {
+          "values": [
+            16.385268295751978,
+            16.385268295751978,
+            18.022897583524003,
+            16.385268295751978,
+            16.385268295751978,
+            16.385268295751978,
+            16.385268295751978,
+            16.385268295751978,
+            16.385268295751978,
+            16.385268295751978,
+            17.071332558128116,
+            16.385268295751978,
+            16.385268295751978,
+            16.385268295751978,
+            16.385268295751978,
+            16.385268295751978,
+            16.385268295751978,
+            16.385268295751978,
+            16.385268295751978,
+            16.385268295751978,
+            16.385268295751978,
+            16.385268295751978,
+            16.385268295751978,
+            16.385268295751978,
+            16.385268295751978,
+            16.385268295751978,
+            16.385268295751978,
+            16.385268295751978,
+            16.385268295751978,
+            16.385268295751978,
+            16.385268295751978,
+            16.385268295751978,
+            17.071332558128116,
+            16.385268295751978,
+            16.385268295751978,
+            16.385268295751978,
+            17.175025867001455,
+            16.385268295751978,
+            16.385268295751978,
+            16.385268295751978,
+            16.385268295751978,
+            16.385268295751978,
+            18.022897583524003
+          ],
+          "mean": 16.51171352067165,
+          "bootstrap_95_ci": [
+            16.417178261443894,
+            16.639510237341856
+          ]
+        },
+        "seeded_local_search": {
+          "values": [
+            15.743617807385604,
+            15.743617807385604,
+            15.98590903765317,
+            15.743617807385604,
+            15.743617807385604,
+            15.743617807385604,
+            15.743617807385604,
+            15.743617807385604,
+            15.743617807385604,
+            15.743617807385604,
+            16.429177611126157,
+            15.743617807385604,
+            15.743617807385604,
+            15.743617807385604,
+            15.743617807385604,
+            15.743617807385604,
+            15.743617807385604,
+            15.743617807385604,
+            15.743617807385604,
+            15.743617807385604,
+            15.743617807385604,
+            15.743617807385604,
+            15.743617807385604,
+            15.743617807385604,
+            15.743617807385604,
+            15.743617807385604,
+            15.743617807385604,
+            15.743617807385604,
+            15.743617807385604,
+            15.743617807385604,
+            15.743617807385604,
+            15.743617807385604,
+            16.429177611126157,
+            15.743617807385604,
+            15.743617807385604,
+            15.743617807385604,
+            15.329187070980835,
+            15.743617807385604,
+            15.743617807385604,
+            15.743617807385604,
+            15.743617807385604,
+            15.743617807385604,
+            15.98590903765317
+          ],
+          "mean": 15.777135745330055,
+          "bootstrap_95_ci": [
+            15.730647286328077,
+            15.829929531479383
+          ]
+        },
+        "adaptive_rollout_adp": {
+          "values": [
+            13.768885294460114,
+            13.768885294460114,
+            13.768885294460114,
+            16.36095124645883,
+            13.768885294460114,
+            13.768885294460114,
+            13.768885294460114,
+            13.768885294460114,
+            13.768885294460114,
+            14.19375393327171,
+            15.049556992944074,
+            13.768885294460114,
+            13.768885294460114,
+            13.768885294460114,
+            13.768885294460114,
+            13.768885294460114,
+            13.768885294460114,
+            13.768885294460114,
+            13.768885294460114,
+            16.36095124645883,
+            13.768885294460114,
+            13.768885294460114,
+            13.768885294460114,
+            13.768885294460114,
+            13.768885294460114,
+            13.768885294460114,
+            13.768885294460114,
+            13.768885294460114,
+            13.768885294460114,
+            16.36095124645883,
+            13.768885294460114,
+            13.768885294460114,
+            15.049556992944074,
+            13.768885294460114,
+            13.768885294460114,
+            13.768885294460114,
+            14.379198452297974,
+            13.768885294460114,
+            13.768885294460114,
+            13.768885294460114,
+            13.768885294460114,
+            13.768885294460114,
+            13.768885294460114
+          ],
+          "mean": 14.033367225846474,
+          "bootstrap_95_ci": [
+            13.84335922724701,
+            14.259581832709875
+          ]
+        }
+      }
+    }
+  }
+}

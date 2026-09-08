@@ -1,0 +1,20 @@
+\begin{table*}[t]
+  \centering
+  \caption{Post-selection required-target depth diagnostic on the same 12 validation scenarios. Graph-cost means use the 9 scenarios completed at all six depths. Time and screen counts include all 12 cases; ratios use depth three. Negative $\Delta J$ denotes lower mean cost. All depths were rerun sequentially; the primary depth-three test results are unchanged}
+  \label{tab:depth-sensitivity}
+  \renewcommand{\arraystretch}{1.08}
+  \setlength{\tabcolsep}{5pt}
+  \footnotesize
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}crrrrrrr@{}}
+    \toprule
+    Depth & Complete & Mean $J$ & $\Delta J$ (\%) & Median time (s) & Time ($\times$) & Mean screens & Screens ($\times$) \\
+    \midrule
+    1 & 9/12 & 135.714 & +14.51 & 0.0272 & 0.03 & 7,132 & 0.02 \\
+    2 & 9/12 & 133.450 & +12.60 & 0.2207 & 0.22 & 65,928 & 0.20 \\
+    \textbf{3} & \textbf{9/12} & \textbf{118.520} & \textbf{+0.00} & \textbf{1.0094} & \textbf{1.00} & \textbf{322,349} & \textbf{1.00} \\
+    4 & 9/12 & 115.272 & -2.74 & 4.6760 & 4.63 & 1,527,408 & 4.74 \\
+    5 & 9/12 & 115.272 & -2.74 & 17.6601 & 17.50 & 5,757,081 & 17.86 \\
+    6 & 9/12 & 115.272 & -2.74 & 53.0133 & 52.52 & 17,454,611 & 54.15 \\
+    \bottomrule
+  \end{tabular*}
+\end{table*}

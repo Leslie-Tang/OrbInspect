@@ -1,0 +1,122 @@
+{
+  "source": "data/results/20260905_101500_required_target_confirmation/raw/scenario_results.csv",
+  "primary_profile": "required09",
+  "source_sha256": "335ec2b4e176e8425a0e30fea30a31f859ef07fa413c2a7c7472ca054988f068",
+  "style": "existing IEEE manuscript Python style and panel dimensions",
+  "script_sha256": "769315e88ce1beaf074780fce851ab13f5f1518ff8f55c73b36a71fd445ca98c",
+  "bootstrap_seed": 60935,
+  "bootstrap_replicates": 10000,
+  "cohorts": {
+    "test": {
+      "joint_success_n": 43,
+      "joint_scenario_ids": [
+        "required09_test_000",
+        "required09_test_001",
+        "required09_test_002",
+        "required09_test_003",
+        "required09_test_004",
+        "required09_test_005",
+        "required09_test_006",
+        "required09_test_007",
+        "required09_test_008",
+        "required09_test_009",
+        "required09_test_010",
+        "required09_test_011",
+        "required09_test_012",
+        "required09_test_014",
+        "required09_test_015",
+        "required09_test_016",
+        "required09_test_018",
+        "required09_test_019",
+        "required09_test_020",
+        "required09_test_021",
+        "required09_test_022",
+        "required09_test_023",
+        "required09_test_024",
+        "required09_test_026",
+        "required09_test_027",
+        "required09_test_028",
+        "required09_test_032",
+        "required09_test_033",
+        "required09_test_034",
+        "required09_test_035",
+        "required09_test_036",
+        "required09_test_037",
+        "required09_test_039",
+        "required09_test_040",
+        "required09_test_041",
+        "required09_test_042",
+        "required09_test_043",
+        "required09_test_044",
+        "required09_test_045",
+        "required09_test_046",
+        "required09_test_047",
+        "required09_test_048",
+        "required09_test_049"
+      ],
+      "mean_graph_cost_difference": -14.250863474264364,
+      "bootstrap_95_ci": [
+        -15.715417519961724,
+        -12.461035388934702
+      ],
+      "mean_delta_v_difference": -1.7437685194835815,
+      "delta_v_bootstrap_95_ci": [
+        -1.9229347958012653,
+        -1.5251434631134668
+      ]
+    },
+    "ood": {
+      "joint_success_n": 8,
+      "joint_scenario_ids": [
+        "required09_ood_003",
+        "required09_ood_007",
+        "required09_ood_010",
+        "required09_ood_012",
+        "required09_ood_013",
+        "required09_ood_014",
+        "required09_ood_019",
+        "required09_ood_026"
+      ],
+      "mean_graph_cost_difference": -9.890341615422582,
+      "bootstrap_95_ci": [
+        -14.110724327935092,
+        -4.6878163301625975
+      ],
+      "mean_delta_v_difference": -1.2074987656765561,
+      "delta_v_bootstrap_95_ci": [
+        -1.7129288483217695,
+        -0.5749972416813978
+      ]
+    }
+  },
+  "generated_files": [
+    "data/results/20260905_101500_required_target_confirmation/figures/adp_rollout_architecture.pdf",
+    "data/results/20260905_101500_required_target_confirmation/figures/adp_rollout_architecture.png",
+    "data/results/20260905_101500_required_target_confirmation/figures/adp_rollout_architecture.svg",
+    "data/results/20260905_101500_required_target_confirmation/figures/adp_heldout_performance_a.pdf",
+    "data/results/20260905_101500_required_target_confirmation/figures/adp_heldout_performance_a.png",
+    "data/results/20260905_101500_required_target_confirmation/figures/adp_heldout_performance_a.svg",
+    "data/results/20260905_101500_required_target_confirmation/figures/adp_heldout_performance_b.pdf",
+    "data/results/20260905_101500_required_target_confirmation/figures/adp_heldout_performance_b.png",
+    "data/results/20260905_101500_required_target_confirmation/figures/adp_heldout_performance_b.svg",
+    "data/results/20260905_101500_required_target_confirmation/figures/adp_heldout_performance_c.pdf",
+    "data/results/20260905_101500_required_target_confirmation/figures/adp_heldout_performance_c.png",
+    "data/results/20260905_101500_required_target_confirmation/figures/adp_heldout_performance_c.svg",
+    "data/results/20260905_101500_required_target_confirmation/figures/adp_heldout_performance_d.pdf",
+    "data/results/20260905_101500_required_target_confirmation/figures/adp_heldout_performance_d.png",
+    "data/results/20260905_101500_required_target_confirmation/figures/adp_heldout_performance_d.svg",
+    "data/results/20260905_101500_required_target_confirmation/figures/adp_ablation_safety_a.pdf",
+    "data/results/20260905_101500_required_target_confirmation/figures/adp_ablation_safety_a.png",
+    "data/results/20260905_101500_required_target_confirmation/figures/adp_ablation_safety_a.svg",
+    "data/results/20260905_101500_required_target_confirmation/figures/adp_ablation_safety_b.pdf",
+    "data/results/20260905_101500_required_target_confirmation/figures/adp_ablation_safety_b.png",
+    "data/results/20260905_101500_required_target_confirmation/figures/adp_ablation_safety_b.svg",
+    "data/results/20260905_101500_required_target_confirmation/figures/adp_ablation_safety_c.pdf",
+    "data/results/20260905_101500_required_target_confirmation/figures/adp_ablation_safety_c.png",
+    "data/results/20260905_101500_required_target_confirmation/figures/adp_ablation_safety_c.svg",
+    "data/results/20260905_101500_required_target_confirmation/figures/adp_ablation_safety_d.pdf",
+    "data/results/20260905_101500_required_target_confirmation/figures/adp_ablation_safety_d.png",
+    "data/results/20260905_101500_required_target_confirmation/figures/adp_ablation_safety_d.svg"
+  ],
+  "four_method_cost_n": 43
+}

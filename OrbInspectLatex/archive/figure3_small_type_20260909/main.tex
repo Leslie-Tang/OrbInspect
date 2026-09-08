@@ -1,0 +1,441 @@
+%% IEEE TAES manuscript wrapper based on the TAES template.
+\PassOptionsToPackage{hypertexnames=false}{hyperref}
+\documentclass{IEEEtaes}
+
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage[caption=false,font=footnotesize]{subfig}
+\usepackage{tabularx}
+\usepackage{textcomp}
+\usepackage[urlcolor=blue,linkcolor=blue,citecolor=blue]{hyperref}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{cite}
+
+\makeatletter
+\setlength{\@fptop}{0pt}
+\setlength{\@fpsep}{12pt}
+\setlength{\@dblfptop}{0pt}
+\setlength{\@dblfpsep}{12pt}
+\makeatother
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\dt}{\Delta t}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\los}{\mathrm{LOS}}
+\newcommand{\fov}{\mathrm{FOV}}
+\newcommand{\dv}{\Delta v}
+\newcommand{\unit}[2]{#1~#2}
+\input{tables/required_target_numbers}
+
+% Include the corrected Ubuntu/Jazzy closed-loop validation evidence.
+\newif\ifincludeROSVerificationResults
+\includeROSVerificationResultstrue
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\theoremstyle{plain}
+
+\begin{document}
+\bstctlcite{IEEEfullAuthorNames}
+
+\title{Viability-Preserving Rollout Approximate Dynamic Programming for Required-Target Orbital Inspection}
+
+\author{Rugang Tang}
+\affil{The Hong Kong Polytechnic University, Hung Hom, Kowloon, Hong Kong SAR}
+
+\author{Xin Ning}
+\affil{School of Astronautics, Northwestern Polytechnical University, Xi'an, Shaanxi 710072, China}
+
+\author{Chih-Yung Wen}
+\affil{Department of Aeronautical and Aviation Engineering, The Hong Kong Polytechnic University, Hung Hom, Kowloon, Hong Kong SAR}
+
+\receiveddate{}
+
+\corresp{This work was supported in part by the Research Centre for Unmanned Autonomous Systems of The Hong Kong Polytechnic University under Grant P0046487. {\itshape (Corresponding author: Rugang Tang)}.}
+
+\authoraddress{Rugang Tang is with the Department of Aeronautical and Aviation Engineering, The Hong Kong Polytechnic University, Hung Hom, Kowloon, Hong Kong SAR (e-mail: \href{mailto:rugtang@polyu.edu.hk}{rugtang@polyu.edu.hk}). Xin Ning is with the School of Astronautics, Northwestern Polytechnical University, Xi'an, Shaanxi 710072, China. Chih-Yung Wen is with the Department of Aeronautical and Aviation Engineering, The Hong Kong Polytechnic University, Hung Hom, Kowloon, Hong Kong SAR.}
+
+\supplementary{Supplementary material containing data and code is available with this article. Color versions of one or more figures are available online at \href{https://ieeexplore.ieee.org}{https://ieeexplore.ieee.org}.}
+\markboth{OrbInspect}{Rollout ADP for Orbital Inspection}
+
+\maketitle
+
+\begin{abstract}
+Autonomous orbital inspection must limit maneuver effort while completing prescribed observations under relative-motion and safety constraints. This paper develops a viability-preserving rollout approximate dynamic programming (ADP) formulation on a directed graph of audited orbital arcs. A finite Bellman prefix uses the completion cost of a deterministic task-aware base policy as its approximate terminal value. Uncertified completions receive infinite value, while safe connecting actions remain available even without immediate inspection gain. Under deterministic finite-graph assumptions, exhaustive rollout preserves a completion certificate and does not exceed the graph cost of a completing base policy. Offline experiments on an International Space Station mesh evaluate nine prescribed targets across \RTTestN{} test and \RTOodN{} shifted scenarios, including loss of required visibility. Depth-three ADP completes \RTTestSuccess{} and \RTOodSuccess{} missions, respectively. On 43 jointly completed test missions, mean maneuver velocity increment, $\Delta v$, decreases by 11.05\% relative to one-step-ADP-seeded local search. The paired reduction is \unit{1.744}{m/s}, with a 95\% interval of \unit{1.525--1.923}{m/s}. A depth-one-to-six diagnostic quantifies the additional computation required for further cost improvement. These results demonstrate maneuver-efficient inspection through completion-certified ADP sequencing on the tested finite graph.
+\end{abstract}
+
+\begin{IEEEkeywords}
+spacecraft inspection, approximate dynamic programming, safe observable orbital arc, relative orbital dynamics, inspection requirements
+\end{IEEEkeywords}
+
+\section{Introduction}
+\label{sec:introduction}
+
+Orbital inspection provides visual evidence for assessing spacecraft condition and planning on-orbit servicing \cite{flores2014review}. Robot-aided inspection and flaw detection were demonstrated during STS-85 \cite{kimura2000inspection}, and subsequent planning studies address coverage of large structures with one or several free-flying inspectors \cite{faghihi2022kinodynamic,faghihi2023multiple,apodaca2025trajectory}. An autonomous inspector must decide where to observe and how to reach each observation. Relative dynamics couple these decisions because viewpoint order changes transfer feasibility and cumulative maneuver effort.
+
+Next-best-view methods model observation quality \cite{scott2003view}, kinodynamic planners combine coverage and differential constraints \cite{faghihi2022kinodynamic,faghihi2023multiple}, and relative-orbit planners exploit natural motion \cite{hou2024relative,deka2023astrodynamics}. A prescribed inspection mission also distinguishes mandatory surface targets from optional background coverage. An aggregate threshold can be reached while a required target remains unobserved. We therefore fix target identities and optimize the viewpoints and sequence needed to observe every prescribed item.
+
+The planning challenge is to reduce cumulative maneuver effort while preserving a feasible continuation to all required observations. A low-cost immediate transfer can leave costly remaining observations or exhaust the budget before completing the task. Each safe observable orbital arc (SOOA) combines a source-dependent Hill--Clohessy--Wiltshire (HCW) transfer, a stabilized camera observation, and feasibility audits. Safe connecting arcs remain useful even when they reveal no new target immediately. Fig.~\ref{fig:sooa-framework} presents the resulting workflow, from mission inputs and arc construction to rollout ADP and inspection records.
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/fig01_framework/viability_preserving_rollout_adp.pdf}
+  \caption{Viability-preserving rollout ADP for orbital inspection. I. ISS mesh and required targets $\mathcal K$ (orange rings). II. Camera-valid targets $G_j$ from range, FOV, incidence $\theta\leq\theta_{\max}$, and LOS checks. III. HCW transfer, motion audits, and directed SOOA construction; C70 and C68 are archived candidate IDs. IV. Depth-$d$ Bellman lookahead with complete greedy base-policy tails. At each leaf, $\sum\ell$ denotes the full tail cost; $+\infty$ denotes no certified completion within the remaining budget. V. First-action selection and planning-state updates toward the required goal $\Gamma_{\mathcal K}(m)=1$. The tree is schematic; the 9/9 route is an archived offline plan. ISS geometry: \href{https://science.nasa.gov/resource/international-space-station-3d-model/}{NASA}. Camera photograph: \href{https://commons.wikimedia.org/wiki/File:SVCam-ECO_Series_black_with_Tubus.JPG}{A.~Lucke}, \href{https://creativecommons.org/licenses/by-sa/3.0/}{CC BY-SA 3.0} (illustrative hardware).}
+  \label{fig:sooa-framework}
+\end{figure*}
+
+The main contribution is a viability-preserving rollout approximate dynamic programming (ADP) formulation for maneuver-efficient required-target inspection. It specializes established rollout policy improvement \cite{bertsekas1997combinatorial,bertsekas2020rollout} using complete task-aware base-policy evaluations and finite-depth Bellman expansion. Actions are evaluated by approximate total graph cost, with infinite values rejecting uncertified completions. The analysis establishes completion preservation and base-policy no-degradation for SOOA sequencing, with exact dynamic programming providing a reference on tractable graphs.
+
+The contributions are:
+\begin{enumerate}
+  \item a rollout ADP formulation for maneuver-efficient required-target inspection, combining a required-target terminal predicate, finite-depth Bellman improvement, and complete task-aware base-policy evaluation;
+  \item a finite-graph analysis establishing Markov sufficiency, specializing rollout completion and cost-improvement guarantees to SOOA sequencing, and proving exact optimality on exhausted reduced graphs;
+  \item a directed SOOA representation with full-mesh visibility and motion audits, including complete GL Transmission Format (glTF) scene-node transforms, that admits safe connecting actions without requiring immediate inspection gain; and
+  \item a reproducible comparison showing an 11.05\% reduction in mean $\Delta v$ relative to one-step-ADP-seeded local search on 43 jointly completed test missions. Historical Robot Operating System 2 (ROS~2) execution evidence is reported separately.
+\end{enumerate}
+
+
+\section{Related Work}
+\label{sec:related}
+
+\emph{Orbital inspection and sensing:} Inspection connects spacecraft observation to servicing decisions \cite{flores2014review,kimura2000inspection}. Vision-based navigation has also been tested aboard the International Space Station (ISS) with the VERTIGO/SPHERES facility \cite{tweddle2016facility}. That intravehicular microgravity testbed provides experimental sensing evidence, distinct from external structure inspection. For external missions, camera visibility and collision avoidance must be considered together: Wang et al. combine position and attitude constraints in barrier-function-based inspection trajectory generation and tracking \cite{wang2024inspection}. These requirements motivate the separation of observation acceptance, transfer admissibility, and task completion in OrbInspect.
+
+\emph{Relative motion and inspection planning:} The Clohessy--Wiltshire equations describe relative motion near a circular chief orbit \cite{clohessy1960terminal,wertz2011space}. Williams derives inspection transfers using line-of-sight switching maneuvers \cite{williams2002inspection}; Hou et al. design relative orbits for visual inspection of the China Space Station \cite{hou2024relative}; and Zhou et al. combine near-natural relative ellipses with formation control around a rotating station \cite{zhou2026formation}. These approaches exploit orbital geometry and natural motion, which also determine the source-dependent costs and admissibility of the SOOA edges.
+
+Robotic view planning couples sensor range, incidence, occlusion, and reconstruction quality to motion cost \cite{scott2003view}. Rapidly exploring random trees and asymptotically optimal sampling methods provide motion-search foundations \cite{lavalle1998rapidly,karaman2011sampling}. Spacecraft inspection planners extend these ideas to kinodynamic coverage \cite{faghihi2022kinodynamic,faghihi2023multiple}, receding-horizon inspection of unknown noncooperative objects \cite{maestrini2022guidance}, and astrodynamics-informed transfer sampling \cite{deka2023astrodynamics}. Recent methods further address coverage--energy trade-offs \cite{apodaca2025trajectory} and surface-aware tomographic paths \cite{zhou2026tomographic}. The present decision problem instead fixes a candidate library and prescribed target identities, then optimizes their completion sequence over audited transfers.
+
+\emph{ADP and learning-based spacecraft control:} ADP replaces expensive exact cost-to-go calculations with tractable approximations \cite{bertsekas1996neuro,bertsekas2020rollout}. Combinatorial rollout uses heuristic completions to improve sequential decisions \cite{bertsekas1997combinatorial}; its policy-iteration interpretation also connects rollout with model predictive control \cite{bertsekas2005survey}. Value and policy iteration provide a broader theoretical basis for terminal-set optimal control \cite{bertsekas2017iterations}. OrbInspect uses a complete base-policy simulation as its value approximation, rather than a learned critic.
+
+Reinforcement learning offers a complementary route to approximate optimal feedback control from trajectory data \cite{kiumarsi2018survey}. Spacecraft applications include constrained six-degree-of-freedom proximity control \cite{hu2021learning} and actor--critic ADP with motion constraints, input saturation, and disturbance compensation \cite{tian2024proximity}. For inspection specifically, van Wijk et al. combine deep reinforcement learning (DRL) with discrete control barrier functions and run-time assurance \cite{vanwijk2024inspection}. These studies concern learned control policies; the present model-based ADP contribution concerns completion-certified observation sequencing.
+
+\emph{Safety and completion guarantees:} Constrained policy optimization regulates expected constraint costs \cite{achiam2017cpo}, whereas shielding restricts action selection using a specified safety model \cite{alshiekh2018shielding}. Control barrier functions impose conditions for forward invariance \cite{ames2017barrier}, and predictive barrier functions provide a recovery mechanism toward the feasible set of a predictive safety filter \cite{wabersich2023predictive}. OrbInspect separates these control-level concerns from finite-task viability: motion audits admit SOOA edges, while finite rollout values certify a continuation to every required target. The resulting completion and cost bounds specialize established rollout principles to a directed inspection graph; they do not replace continuous-state safety certificates.
+
+\section{System and Observation Model}
+\label{sec:system}
+
+The planner operates offline. It receives a known station mesh, a fixed nonempty required-target set, an initial relative state, camera parameters, a keep-out model, and actuation limits. It returns a time-indexed translational reference, a camera-boresight stream, selected SOOA records, accepted target identities, and summary metrics. Table~\ref{tab:assumptions} states the modeling assumptions and their implications for interpreting both evidence layers.
+
+\begin{table*}[t]
+  \centering
+  \caption{Modeling assumptions and the boundary of the reported evidence}
+  \label{tab:assumptions}
+  \renewcommand{\arraystretch}{1.08}
+  \setlength{\tabcolsep}{5pt}
+  \footnotesize
+  \begin{tabularx}{\linewidth}{@{}p{0.18\linewidth}p{0.34\linewidth}X@{}}
+    \toprule
+    Assumption & Role in the baseline & Consequence for interpretation \\
+    \midrule
+    Circular chief orbit & Supports linear HCW relative translation in the LVLH frame. & Quantitative results compare planners under the same local linear model, not a perturbed flight ephemeris. \\
+    Station fixed in LVLH & Keeps mesh targets and the mesh safety geometry stationary during one planning run. & Rotating appendages or station attitude motion require a body-frame extension. \\
+    Known mesh and state & Makes visibility, occlusion, and transfer evaluation deterministic. & Navigation, map, and shape uncertainty are not represented by the present safety margin. \\
+    Prescribed camera attitude & Points the boresight toward each candidate observation target and exports the corresponding quaternion stream. & Camera slew time, reaction-wheel limits, and closed-loop attitude error are outside the optimization. \\
+    Mesh-based sampled safety & Computes distance to the full International Space Station (ISS) triangle mesh at every rollout sample and rejects sampled motion segments that intersect the mesh. & Positive sampled clearance and surface nonintersection are planning audits rather than a robust continuous-time collision certificate. \\
+    No illumination or plume model & Isolates view geometry and translational feasibility. & Sun angle, shadow, contamination, and plume-impingement restrictions must be added for flight design. \\
+    \bottomrule
+  \end{tabularx}
+\end{table*}
+
+\subsection{Relative Dynamics}
+
+The inspected structure is fixed in a local-vertical/local-horizontal (LVLH) frame attached to a nominal circular chief orbit. Its axes are radial, along-track, and cross-track, respectively. The chaser state is $\mathbf{x}=[\mathbf{r}^{\mathsf T},\mathbf{v}^{\mathsf T}]^{\mathsf T}\in\R^6$, where $\mathbf r=[r_x,r_y,r_z]^{\mathsf T}$ and $\mathbf v=[v_x,v_y,v_z]^{\mathsf T}$. With mean motion $n$ and commanded acceleration $\mathbf{u}=[a_x,a_y,a_z]^{\mathsf T}$, the HCW model is
+\begin{equation}
+  \begin{aligned}
+  \dot{\mathbf{x}}&=A_{\mathrm{HCW}}\mathbf{x}+B\mathbf{u},\\
+  A_{\mathrm{HCW}}&=\begin{bmatrix}0&I\\K_n&C_n\end{bmatrix},
+  &B&=\begin{bmatrix}0\\I\end{bmatrix},\\
+  K_n&=\operatorname{diag}(3n^2,0,-n^2),
+  &C_n&=\begin{bmatrix}0&2n&0\\-2n&0&0\\0&0&0\end{bmatrix}.
+  \end{aligned}
+  \label{eq:hcw-continuous}
+\end{equation}
+For the continuous HCW model, piecewise-constant acceleration over $\dt$ has the exact zero-order-hold map
+\begin{equation}
+  \begin{aligned}
+  \mathbf{x}_{k+1}&=A_d\mathbf{x}_k+B_d\mathbf{u}_k,\\
+  A_d&=e^{A_{\mathrm{HCW}}\dt},\\
+  B_d&=\int_0^{\dt}e^{A_{\mathrm{HCW}}\tau}B\,d\tau.
+  \end{aligned}
+  \label{eq:hcw-discrete}
+\end{equation}
+The implementation constructs and propagates each boundary map with fixed-step fourth-order Runge--Kutta integration under the same piecewise-constant input model. The numerical map is $\mathbf x_{k+1}=\widetilde A_d\mathbf x_k+\widetilde B_d\mathbf u_k$, with \eqref{eq:hcw-discrete} providing the exact continuous-model reference. Each rest-to-rest segment uses finite-duration thrust and is accepted when its terminal position and velocity errors satisfy the prescribed tolerances.
+
+\subsection{Visibility, Prescribed Observation, and Coverage}
+
+The structure is represented by surface samples $\mathcal T=\{(p_i,n_i,a_i)\}_{i=1}^{N}$ with represented areas $a_i>0$. Mission priority weights are separately defined as $w_i=a_i\eta_i$, where $\eta_i>0$ is a priority multiplier; they are not geometric areas. A fixed nonempty set $\mathcal K\subseteq\mathcal T$ specifies the required inspection items before scenario evaluation. The camera attitude $q_k$ defines unit boresight $b(q_k)$, and $\mathcal O$ denotes the occluding mesh. Target $i$ is visible when
+\begin{align}
+  r_{\min}^{\mathrm{cam}}&\le\norm{p_i-\mathbf r_k}\le r_{\max}^{\mathrm{cam}},\nonumber\\
+  \arccos\!\frac{(p_i-\mathbf r_k)^{\mathsf T}b(q_k)}
+  {\norm{p_i-\mathbf r_k}}&\le\alpha_{\max},\nonumber\\
+  \arccos\!\frac{(\mathbf r_k-p_i)^{\mathsf T}n_i}
+  {\norm{\mathbf r_k-p_i}\norm{n_i}}&\le\theta_{\max},\nonumber\\
+  \los(\mathbf r_k,p_i,\mathcal O)&=1.
+  \label{eq:visibility}
+\end{align}
+Fig.~\ref{fig:sooa-framework}, panel~II, illustrates the range, field-of-view, incidence-angle, and line-of-sight tests in \eqref{eq:visibility}. Line of sight is queried against a deterministic bounding-volume hierarchy containing every ISS mesh triangle; intersections at the target endpoint are excluded, while interior segment intersections block the view. In a closed-loop execution model, dwell could be accumulated as $\tau_{i,k+1}=\tau_{i,k}+\dt$ while target $i$ remains visible and accepted when $\tau_i\ge\tau_{\min}$. The offline study instead treats every candidate as a stabilized terminal observation with its prescribed exposure completed a priori. Applying \eqref{eq:visibility} at the candidate pose $(\mathbf r_k,q_k)=(\bar{\mathbf r}_j,\bar q_j)$ yields its fixed visibility mask $G_j$. Selecting node $j$ credits this mask, so $m_{k+1}=m_k\lor G_j$. The sampled-area coverage represented by mask $m_k$ is
+\begin{equation}
+  C^{\mathrm{area}}(m_k)=\frac{\sum_i a_i m_{i,k}}{\sum_i a_i}.
+  \label{eq:coverage}
+\end{equation}
+
+Candidate generation can make a subset of the sampled surface invisible from every candidate observation. For the nonempty set $\mathcal T_{\mathrm{insp}}=\cup_{j=1}^{M}G_j$, we also report priority-weighted inspectable coverage:
+\begin{equation}
+  C_k^{\mathrm{insp}}=
+  \frac{\sum_{i\in\mathcal T_{\mathrm{insp}}}w_i m_{i,k}}
+  {\sum_{i\in\mathcal T_{\mathrm{insp}}}w_i}.
+  \label{eq:inspectable-coverage}
+\end{equation}
+Equation~\eqref{eq:coverage} estimates credited area over the original surface samples, whereas \eqref{eq:inspectable-coverage} is a priority-weighted score conditional on the candidate library. Their denominators remain fixed after scenario-specific observation loss. Neither is the primary required-target completion metric, which is
+\begin{equation}
+  \begin{aligned}
+  C^{\mathcal K}(m)&=\frac{|\mathcal K\cap\operatorname{supp}(m)|}{|\mathcal K|},\\
+  \Gamma_{\mathcal K}(m)&=\mathbf1\{\mathcal K\subseteq\operatorname{supp}(m)\}.
+  \end{aligned}
+  \label{eq:required-goal}
+\end{equation}
+Mission success requires $\Gamma_{\mathcal K}=1$, independently of optional area coverage. One observation can credit several required items, and different viewpoints can satisfy the same item. Completion denotes acceptance of the prescribed samples under \eqref{eq:visibility}. Reported mission duration is transfer-only; observation exposure is assumed complete at each stabilized candidate.
+
+\subsection{Dynamic Feasibility and SOOAs}
+
+Every sampled state must satisfy
+\begin{equation}
+  \norm{\mathbf u_k}_2\le u_{\max},\qquad
+  \norm{\mathbf v_k}_2\le v_{\max},\qquad
+  d_{\mathcal S}(\mathbf r_k)\ge 0,
+  \label{eq:limits}
+\end{equation}
+where $d_{\mathcal S}(\mathbf r)=d_{\mathrm{mesh}}(\mathbf r)-r_{\mathrm{veh}}-d_{\mathrm{safe}}$ is finite-body clearance above the required margin, $d_{\mathrm{mesh}}$ is unsigned center distance to the closest triangle in the complete ISS mesh, and $r_{\mathrm{veh}}=\unit{0.80}{m}$ conservatively bounds the chaser visual model; thus $d_{\mathcal S}=0$ is the sampled admissibility boundary. The mesh coordinates are obtained from the complete glTF scene hierarchy (a matrix or translation--rotation--scale at every ancestor), followed by the Simulation Description Format (SDF) pose and scale. In addition, each consecutive pair of rollout samples is tested for a triangle-surface intersection, and its continuous center-distance lower bound subtracts half the segment length from the smaller endpoint distance by the 1-Lipschitz property of distance to a closed set. This swept test catches a direct mesh crossing even if both endpoints have positive unsigned distance. For a directed rollout from source node $i$ to destination node $j$, define $\Delta v_{ij}=\sum_k\norm{\mathbf u_{ij,k}}_2\dt$, root-mean-square distance $e_{ij}^{\mathrm{rms}}$ from the transfer samples to the destination position, and $d_{ij}^{\min}=\min_k d_{\mathcal S}(\mathbf r_{ij,k})$. The graph stage cost used in the reported study is
+\begin{equation}
+  \ell_{ij}=\lambda_v\Delta v_{ij}+\lambda_e e_{ij}^{\mathrm{rms}}+\lambda_s\max(0,-d_{ij}^{\min})+\lambda_a.
+  \label{eq:edge-cost}
+\end{equation}
+For every shield-admissible edge, the clearance-violation term is zero. It remains in the shared cost implementation so deliberately unshielded comparison methods can be evaluated with the same expression.
+
+A candidate observation node and a directed SOOA edge are, respectively,
+\begin{equation}
+  \begin{aligned}
+  v_j&=(\bar{\mathbf r}_j,\bar q_j,G_j),\\
+  a_{ij}&=\bigl(\mathbf x_{ij}[1{:}K],\mathbf u_{ij}[0{:}K-1],q_{ij}[1{:}K],\\
+  &\qquad \Delta v_{ij},d_{ij}^{\min},u_{ij}^{\max},v_{ij}^{\max},e_{ij}^{r},e_{ij}^{v},\rho_{ij}\bigr).
+  \end{aligned}
+  \label{eq:sooa}
+\end{equation}
+Here $\bar{\mathbf r}_j$ and $\bar q_j$ are the terminal observation pose and prescribed attitude, $G_j\subseteq\mathcal T$ is its camera-valid target set, and $e_{ij}^{r}$ and $e_{ij}^{v}$ are terminal position and velocity errors. The stored state and attitude arrays contain the $K$ post-step samples; the source state is held by node $v_i$. The initial condition is a distinguished source node $v_0$ with no visibility reward. For passive horizon $T_p=L_p\dt$, an optional audit can propagate zero-input HCW drift from every stored edge state and record $\rho_{ij}=\min_{1\le k\le K,\,0\le l\le L_p}d_{\mathcal S}(\mathbf r_{ij,k}^{\mathrm{drift}}(l))$. The reported study disables this optional audit and therefore makes no passive-safety claim; it retains input, speed, full-mesh sampled clearance, swept surface-intersection, and terminal checks. Throughout this paper, ``safe'' means admissible under the audits explicitly enabled for the reported experiment. These deterministic checks do not certify robustness between samples or under model and state uncertainty.
+
+\section{Viability-Preserving Rollout ADP}
+\label{sec:algorithm}
+
+\subsection{Candidate Graph and Markov State}
+
+Let $\mathcal V=\{v_0,v_1,\ldots,v_M\}$ contain the initial node and the $M$ candidate observation nodes in \eqref{eq:sooa}. A directed edge from $v_i$ to $v_j$ is the source-dependent SOOA $a_{ij}$, and it is absent when an enabled audit fails. Thus visibility $G_j$ is node dependent, whereas trajectory, cost, clearance, input, terminal error, and passive margin are edge dependent. This separation is necessary because reaching the same observation from two different source nodes generally produces different HCW motion and audit values.
+
+A node identifier is not a sufficient decision state because the value of a view changes after its targets have been covered. The finite-horizon Markov state is
+\begin{equation}
+  s_k=(j_k,m_k,b_k,h_k),
+  \label{eq:mdp-state}
+\end{equation}
+where $j_k\in\{0,\ldots,M\}$ is the current node, $m_k\in\{0,1\}^{N}$ is the covered-target mask, $b_k\in\{0,1\}^{M}$ is the selected-observation mask, and $h_k$ is the remaining action budget. Selecting destination $a\in\{1,\ldots,M\}$ traverses edge $a_{j_ka}$ and gives the deterministic transition
+\begin{equation}
+  f(s_k,a)=\left(a,\;m_k\lor G_a,\;b_k\lor\mathbf e_a,\;h_k-1\right).
+  \label{eq:mdp-transition}
+\end{equation}
+The required set $\mathcal K$ is fixed problem data. The shield-admissible action set $\mathcal U_s(s)$ is defined below. The constrained graph problem minimizes total stage cost subject to \eqref{eq:required-goal}, with zero terminal cost for a completed task and value $+\infty$ when no admissible completion exists within the remaining budget. Its Bellman recursion is
+\begin{equation}
+  \begin{aligned}
+  V^\star(s)&=
+    \begin{cases}
+    0, & \Gamma_{\mathcal K}(m)=1,\\
+    +\infty, & h=0\ \text{or}\ \mathcal U_s(s)=\varnothing,\\
+    \min\limits_{a\in\mathcal U_s(s)}
+      Q^\star(s,a), & \text{otherwise},
+    \end{cases}\\
+  Q^\star(s,a)&=\ell_{j a}+V^\star(f(s,a)).
+  \end{aligned}
+  \label{eq:bellman}
+\end{equation}
+Here $j$ and $h$ are the current-node and remaining-budget components of $s$. Exact evaluation is exponential in the coverage and selected-node masks. The proposed method approximates this recursion with a short exact prefix and a computationally inexpensive, goal-aware terminal policy.
+
+\subsection{SOOA Construction and Safety Shield}
+
+Area-weighted targets are sampled from the mesh, and camera seeds are generated on offset shells around their outward normals. The binary visibility matrix $V_{ij}=\mathbf 1\{i\in G_j\}$ is computed once from the terminal observation geometry. For a transition to $\bar{\mathbf x}_j=[\bar{\mathbf r}_j^{\mathsf T},\mathbf0^{\mathsf T}]^{\mathsf T}$, the planner solves the minimum-energy piecewise-constant HCW boundary-value problem under the numerical fourth-order Runge--Kutta (RK4) map
+\begin{equation}
+  \begin{aligned}
+  \min_{\mathbf u_0,\ldots,\mathbf u_{K-1}}\quad&
+  \sum_{k=0}^{K-1}\norm{\mathbf u_k}_2^2\\
+  \mathrm{s.t.}\quad&
+  \mathbf x_{k+1}=\widetilde A_d\mathbf x_k+\widetilde B_d\mathbf u_k,\\
+  &\mathbf x_K=\bar{\mathbf x}_j.
+  \end{aligned}
+  \label{eq:terminal-transfer}
+\end{equation}
+If the terminal influence matrix $\mathcal B_K=[\widetilde A_d^{K-1}\widetilde B_d\ \cdots\ \widetilde B_d]$ has full row rank, the stacked minimum-norm command from source state $\mathbf x_i^{\mathrm{src}}$ is $\mathbf U_{ij}^\star=\mathcal B_K^{\mathsf T}(\mathcal B_K\mathcal B_K^{\mathsf T})^{-1}(\bar{\mathbf x}_j-\widetilde A_d^K\mathbf x_i^{\mathrm{src}})$. The implementation computes this expression through the $6\times6$ Gram system and then propagates the requested input without clipping. Let $\chi_{ij}=1$ exactly when every stored edge sample satisfies \eqref{eq:limits}, $e_{ij}^{r}\le\varepsilon_r$, $e_{ij}^{v}\le\varepsilon_v$, and $\rho_{ij}\ge0$ when the passive audit is enabled. The shield then admits
+\begin{equation}
+  \mathcal U_s(s)=\{a\in\{1,\ldots,M\}:b_a=0,\;\chi_{ja}=1\},
+  \label{eq:safe-action-set}
+\end{equation}
+where $j$ is the current-node component of $s$. Safe unvisited nodes remain admissible when they provide no immediate inspection gain, because a connecting action may be needed to reach a required target on the directed graph. The finite budget and no-revisit mask bound such connections. The shield makes an inadmissible edge unavailable to incumbent construction, local search, and exact recursion \cite{alshiekh2018shielding}. Its guarantee remains conditional on the sampled numerical rollout and deterministic model used to compute $\chi_{ij}$.
+
+\subsection{Adaptive Base Policy and Rollout Value}
+
+Let $g_{\mathcal K}(s,a)=|\mathcal K\cap(G_a\setminus\operatorname{supp}(m))|$ count newly accepted required targets, and let $\epsilon=0.05$ prevent division by a near-zero stage cost. For the required-target task, the deterministic adaptive base policy is
+\begin{equation}
+  \mu(s)\in\arg\max_{a\in\mathcal U_s(s)}
+  \left(\frac{g_{\mathcal K}(s,a)}{\max\{\epsilon,\ell_{ja}\}},
+  g_{\mathcal K}(s,a),-\ell_{ja}\right),
+  \label{eq:base-policy}
+\end{equation}
+where the tuple is compared lexicographically, followed by deterministic node-identifier tie breaking. The policy recomputes gain after every accepted observation; zero-gain ties favor lower stage cost. Starting from state $s$, its completion value is
+\begin{equation}
+  \widehat V_0(s)=
+  \begin{cases}
+  \sum_{k=0}^{L-1}\ell_{j_k\mu(s_k)}, & \mu\text{ reaches }\Gamma_{\mathcal K}=1\text{ within }h,\\
+  +\infty, & \text{otherwise}.
+  \end{cases}
+  \label{eq:base-value}
+\end{equation}
+Thus $\widehat V_0$ approximates the cost-to-go through a complete, shielded base-policy simulation.
+
+For rollout depth $d\ge1$, define the truncated Bellman value
+\begin{equation}
+  \widehat V_d(s)=
+  \begin{cases}
+    0, & \Gamma_{\mathcal K}(m)=1,\\
+    +\infty, & h=0,\\
+    \min\limits_{a\in\mathcal U_s(s)}\widehat Q_d(s,a), & \text{otherwise},
+  \end{cases}
+  \label{eq:rollout-value}
+\end{equation}
+where $\widehat Q_d(s,a)=\ell_{ja}+\widehat V_{d-1}(f(s,a))$.
+The minimum over an empty action set is $+\infty$. The policy selects a finite-valued minimizing action, applies \eqref{eq:mdp-transition}, and rebuilds the depth-$d$ tree at the successor state. State--depth memoization removes duplicate subproblems within each decision. The guarantees below require exhaustive prefix evaluation and the same deterministic Markov base policy at every leaf.
+Fig.~\ref{fig:adp-architecture} gives a worked decision on an illustrative graph, separating motion admissibility from completion certification and showing the continuation retained after replanning.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\columnwidth]{figures/fig02_rollout_example/adp_rollout_mechanism.pdf}
+  \caption{Illustrative completion-certified rollout ADP, with initial state $s=(0,\mathbf0,\mathbf0,3)$. I. Solid edges are admissible, edge labels are stage costs, and $G_j$ lists visible targets. The dashed transfer is excluded. II. At $d=2$, rollout selects zero-gain connector $v_2$ for total cost 4, versus base-policy cost 8; action 3 has no certified completion. III. The successor $s'=(2,\mathbf0,\mathbf e_2,2)$ retains a cost-3 completion. Counts indicate covered required targets; $J_{\mathrm{rollout}}$ is realized graph cost. The example illustrates Propositions~\ref{prop:rollout-viability} and~\ref{prop:base-bound}. Assigned costs and audit flags are illustrative, not experimental HCW data; the primary study uses $d=3$.}
+  \label{fig:adp-architecture}
+\end{figure}
+
+\begin{algorithm}[t]
+\caption{Viability-preserving rollout ADP}
+\label{alg:safe-graph-api}
+\begin{algorithmic}[1]
+\Require Candidate graph, shield $\mathcal U_s$, required set $\mathcal K$, budget $H$, depth $d$
+\State $s\gets(0,\mathbf0,\mathbf0,H)$; $\pi\gets()$
+\While{$\Gamma_{\mathcal K}(m)=0$ and $h>0$}
+  \State Enumerate every $a\in\mathcal U_s(s)$
+  \For{each admissible $a$}
+    \State $\widehat Q_d(s,a)\gets\ell_{ja}+\widehat V_{d-1}(f(s,a))$
+  \EndFor
+  \State Discard every action with $\widehat Q_d(s,a)=+\infty$
+  \If{no finite action remains} \State \Return no certified completion \EndIf
+  \State $a^\star\gets\arg\min_a \widehat Q_d(s,a)$ with deterministic ties
+  \State Append $a^\star$ and its audit record to $\pi$
+  \State $s\gets f(s,a^\star)$
+\EndWhile
+\State \Return $\pi$ if $\Gamma_{\mathcal K}(m)=1$; otherwise return no certified completion
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Properties and Exact Oracle}
+\label{sec:theory}
+
+The coverage result below records the standard diminishing-returns structure of weighted set coverage \cite{nemhauser1978submodular}. The subsequent analysis makes the SOOA state and audit assumptions explicit and specializes rollout feasibility and policy-improvement arguments \cite{bertsekas1997combinatorial,bertsekas2020rollout} to the required-target terminal predicate.
+
+\begin{proposition}[Monotone submodularity of fixed-mask coverage]
+\label{prop:submodular-coverage}
+For an observation set $S\subseteq\{1,\ldots,M\}$, let $F(S)=\sum_{i=1}^{N}w_i\mathbf1\{i\in\cup_{j\in S}G_j\}$. If all $w_i\ge0$, then $F$ is normalized, monotone, and submodular.
+\end{proposition}
+
+\begin{IEEEproof}
+Clearly $F(\varnothing)=0$. If $A\subseteq B$, every target covered by $A$ is covered by $B$, so nonnegative weights give $F(A)\le F(B)$. For $a\notin B$, the marginal gain $F(A\cup\{a\})-F(A)$ is the total weight in $G_a\setminus\cup_{j\in A}G_j$. Since $A\subseteq B$, this set contains $G_a\setminus\cup_{j\in B}G_j$, proving diminishing returns.
+\end{IEEEproof}
+
+\begin{remark}[Role of submodularity]
+Proposition~\ref{prop:submodular-coverage} also holds for required-target gain by assigning unit weight to $\mathcal K$ and zero elsewhere. It does not justify removing zero-gain connecting actions or supply a greedy approximation ratio for a directed inspection tour. Both SOOA cost and the admissibility of the next observation depend on the current node.
+\end{remark}
+
+\begin{proposition}[Markov sufficiency]
+\label{prop:markov-sufficiency}
+For a fixed deterministic candidate graph with fixed node masks, required set $\mathcal K$, source-dependent edge records, target weights, revisit rule, and horizon, the state in \eqref{eq:mdp-state} is Markov for the finite graph decision problem.
+\end{proposition}
+
+\begin{IEEEproof}
+The current node $j_k$ identifies the source of every possible next edge; $m_k$ and fixed $\mathcal K$ determine the remaining inspection requirements; $b_k$ determines which observations remain selectable under the no-revisit rule; and $h_k$ determines the remaining budget. By assumption, visibility masks and edge costs and audits are deterministic records indexed only by the current and destination nodes. Equations~\eqref{eq:mdp-transition}, \eqref{eq:bellman}, and \eqref{eq:safe-action-set} therefore depend on no earlier history once $(j_k,m_k,b_k,h_k)$ is given. The proposition concerns binary prescribed-observation acceptance; partial dwell, multiple independent look directions, or time-dependent illumination would require additional state.
+\end{IEEEproof}
+
+\begin{proposition}[Compositional preservation of stored audits]
+\label{prop:audit-composition}
+Consider a sequence $(a_{j_{k-1}j_k})_{k=1}^{L}$ whose first source is $v_0$, whose idealized rest-to-rest endpoints match exactly, and whose every edge has $\chi_{j_{k-1}j_k}=1$. Then every stored sample of the concatenated sequence satisfies the input, speed, and clearance inequalities, every edge endpoint satisfies its terminal conditions, and every stored passive-drift rollout has nonnegative margin when that audit is enabled.
+\end{proposition}
+
+\begin{IEEEproof}
+By the definition of $\chi_{ij}$, all stated conditions hold on each accepted edge record. Exact endpoint matching identifies the terminal state of edge $k$ with the source state of edge $k+1$, so the records concatenate without an unmodeled jump. The sample set of the complete trajectory is the finite union of the per-edge sample sets; therefore every member of that union retains the corresponding per-edge audit result.
+\end{IEEEproof}
+
+\begin{remark}[Meaning of audit preservation]
+The proposition is a finite-record composition result, not a continuous-time barrier certificate. It does not cover inter-sample clearance, endpoint perturbations beyond tolerance, closed-loop tracking error, or robustness to model and state uncertainty.
+\end{remark}
+
+\begin{proposition}[Rollout viability]
+\label{prop:rollout-viability}
+For the deterministic finite graph, if $\widehat V_d(s)<+\infty$, Algorithm~\ref{alg:safe-graph-api} selects a shield-admissible action whose successor has a finite goal-reaching completion within the remaining budget. Replanning preserves this property until the goal is reached.
+\end{proposition}
+
+\begin{IEEEproof}
+Finiteness in \eqref{eq:rollout-value} provides a certificate consisting of shield-admissible prefix actions followed, unless the goal is reached earlier, by a base-policy completion. The selected first action is part of such a certificate, so its successor retains a goal-reaching sequence within the reduced budget. When the depth-$d$ tree is rebuilt, the certificate tail remains admissible; if another exact prefix action is required, the next action of the certified base completion supplies it. Determinism preserves the recorded masks, costs, and audits. Induction over the decreasing action budget therefore proves goal attainment.
+\end{IEEEproof}
+
+\begin{proposition}[Base-policy no-degradation]
+\label{prop:base-bound}
+If the adaptive base policy reaches the goal from $s$, then $\widehat V_d(s)$ is finite and $\widehat V_d(s)\le\widehat V_0(s)$ for every $d\ge1$. For a fixed depth $d$, the realized graph cost of repeated replanning in Algorithm~\ref{alg:safe-graph-api} is no greater than $\widehat V_d(s)$ and therefore no greater than the base-policy cost.
+\end{proposition}
+
+\begin{IEEEproof}
+The first $d$ base-policy actions, truncated if the goal is reached earlier, followed by the remaining base completion form a feasible certificate in \eqref{eq:rollout-value}; hence $\widehat V_d(s)\le\widehat V_0(s)$. Now take a minimizing depth-$d$ certificate at a replanning state and let $s'$ be the successor of its first action $a$. The certificate tail, extended when necessary by the next base-policy action, is feasible in the rebuilt depth-$d$ tree at $s'$. Therefore $\ell_{ja}+\widehat V_d(s')\le\widehat V_d(s)$. Summing this inequality over successive replans telescopes to a realized cost no greater than the initial $\widehat V_d(s)$. The result concerns the graph stage cost; reductions in physical $\Delta v$ are evaluated separately.
+\end{IEEEproof}
+
+For reduced-graph certification, exact recursion caches \eqref{eq:bellman} for every reachable tuple $(j,m,b,h)$ and enumerates every action in $\mathcal U_s(s)$ rather than a local reversal neighborhood.
+
+\begin{theorem}[Optimality on an exhausted reduced SOOA graph]
+\label{thm:reduced-optimality}
+For fixed finite nodes, deterministic visibility masks, deterministic audited edge costs, a required set $\mathcal K$, the no-revisit rule, and horizon $H$, exhaustive evaluation of \eqref{eq:bellman} returns a minimum-cost task-completing shield-feasible sequence when one exists. If no such sequence exists, it returns value $+\infty$ and reports infeasibility.
+\end{theorem}
+
+\begin{IEEEproof}
+Proceed by induction on the remaining budget $h$. At $h=0$, \eqref{eq:bellman} returns zero exactly for a goal state and $+\infty$ otherwise, which is correct. Assume the recursion is correct for all states with at most $h-1$ remaining actions. At a state with $h$ actions, every feasible sequence begins with exactly one $a\in\mathcal U_s(s)$ and then a feasible continuation from $f(s,a)$; by the induction hypothesis, the recursion assigns that continuation its minimum cost or $+\infty$ if none exists. Minimizing over every admissible first action therefore returns the minimum total cost, or $+\infty$ when all continuations are infeasible. The claim is limited to the exhausted sampled graph and does not extend to omitted camera poses or continuous-space trajectories.
+\end{IEEEproof}
+
+With maximum branching factor $B$, depth $d$, and at most $H$ base-policy actions, direct decision evaluation costs $O(HB^{d+1})$ in the worst case. Memoization reduces repeated evaluation when prefixes reach the same mask state. Fig.~\ref{fig:adp-depth-sensitivity} and Table~\ref{tab:depth-sensitivity} quantify the offline cost--computation trade-off for $d=1,\ldots,6$.
+
+\input{sections/required_target_study}
+
+% \section*{Acknowledgment}
+% OpenAI Codex was used to assist with drafting and revision in the Abstract, Introduction, System and Observation Model, Viability-Preserving Rollout ADP, Experimental Protocol, Results, Discussion, Conclusion, and Data and Code Availability sections; with LaTeX formatting and source checking; and with implementation, testing, offline experiment orchestration, statistical tabulation, and figure-generation scripts. The authors retain responsibility for reviewing and validating all AI-assisted text, mathematical statements, references, source code, figures, and reported results, and for the scientific content of the article.
+
+% Balance the final reference page; retune if the bibliography or text changes.
+\IEEEtriggeratref{17}
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+% \begin{IEEEbiography}
+%     [{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{figures/authors/trg.jpg}}]{Rugang Tang} received the B.Eng. degree in aircraft design and engineering from Northwestern Polytechnical University, Xi'an, China, in 2020. He is pursuing the Ph.D. degree in aircraft design with the Department of Aeronautical and Aviation Engineering, The Hong Kong Polytechnic University, Hong Kong. His research interests include multi-agent and nonlinear systems, reach-avoid differential graphical games, and approximate dynamic programming.
+% \end{IEEEbiography}
+
+% \begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{figures/authors/nx.pdf}}]{Xin Ning} received the B.Eng., M.Eng., and Ph.D. degrees from Northwestern Polytechnical University, Xi'an, China, in 2004, 2007, and 2011, respectively. He is a Professor and Vice Dean of the School of Astronautics at Northwestern Polytechnical University and was a visiting scholar at the University of Calgary. His research interests include aerospace flight dynamics, navigation, guidance and control, spacecraft on-orbit servicing, trajectory planning, intelligent optimization, nonlinear systems, and modeling.
+% \end{IEEEbiography}
+
+% \begin{IEEEbiography}
+%     [{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{figures/authors/CYW.png}}]{Chih-Yung Wen} received the B.S. degree from National Taiwan University in 1986 and the M.S. and Ph.D. degrees from the California Institute of Technology in 1989 and 1994, respectively. He is Head and Chair Professor of Aeronautical Engineering with the Department of Aeronautical and Aviation Engineering, The Hong Kong Polytechnic University, and Associate Director of its Research Institute for Sports Science and Technology. His professional activities span mechanical and aerospace engineering.
+% \end{IEEEbiography}
+
+\end{document}

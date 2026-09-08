@@ -186,7 +186,7 @@ trajectory/FOV view and a synchronized inset from
 provenance manifest from the retained raw captures with:
 
 ```bash
-python3 OrbInspectLatex/scripts/compose_rviz_planning_demo_video.py \
+python3 tools/paper/compose_rviz_planning_demo_video.py \
   --run-dir data/results/ros_rviz_full_planning_demo_corrected_validation002_radius080_20260812
 ```
 

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="239.103362pt" height="18pt" viewBox="0 0 239.103362 18" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-09-08T15:50:30.753095</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.7, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 18 
+L 239.103362 18 
+L 239.103362 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="legend_1">
+   <g id="patch_2">
+    <path d="M 68.49215 11.326641 
+L 76.14215 11.326641 
+L 76.14215 5.026641 
+L 68.49215 5.026641 
+z
+" style="fill: #750014; stroke: #1e293b; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="line2d_1">
+    <defs>
+     <path id="m8db01d7418" d="M 0 1.5 
+C 0.397805 1.5 0.77937 1.341951 1.06066 1.06066 
+C 1.341951 0.77937 1.5 0.397805 1.5 0 
+C 1.5 -0.397805 1.341951 -0.77937 1.06066 -1.06066 
+C 0.77937 -1.341951 0.397805 -1.5 0 -1.5 
+C -0.397805 -1.5 -0.77937 -1.341951 -1.06066 -1.06066 
+C -1.341951 -0.77937 -1.5 -0.397805 -1.5 0 
+C -1.5 0.397805 -1.341951 0.77937 -1.06066 1.06066 
+C -0.77937 1.341951 -0.397805 1.5 0 1.5 
+z
+" style="stroke: #1e293b; stroke-width: 0.3"/>
+    </defs>
+    <g>
+     <use xlink:href="#m8db01d7418" x="83.56715" y="8.176641" style="fill: #750014; stroke: #1e293b; stroke-width: 0.3"/>
+    </g>
+   </g>
+   <g id="text_1">
+    <text style="font-size: 9px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #1e293b" x="90.99215" y="11.326641" transform="rotate(-0 90.99215 11.326641)">Test</text>
+   </g>
+   <g id="patch_3">
+    <path d="M 120.093087 11.326641 
+L 127.743087 11.326641 
+L 127.743087 5.026641 
+L 120.093087 5.026641 
+z
+" style="fill: url(#h07197fb6d3); stroke: #1e293b; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="line2d_2">
+    <defs>
+     <path id="m2601270897" d="M -1.5 1.5 
+L 1.5 1.5 
+L 1.5 -1.5 
+L -1.5 -1.5 
+z
+" style="stroke: #1e293b; stroke-width: 0.3; stroke-linejoin: miter"/>
+    </defs>
+    <g>
+     <use xlink:href="#m2601270897" x="135.168087" y="8.176641" style="fill: #7f3f98; stroke: #1e293b; stroke-width: 0.3; stroke-linejoin: miter"/>
+    </g>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 9px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #1e293b" x="142.593087" y="11.326641" transform="rotate(-0 142.593087 11.326641)">Shifted</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <pattern id="h07197fb6d3" patternUnits="userSpaceOnUse" x="0" y="0" width="72" height="72">
+   <rect x="0" y="0" width="73" height="73" fill="#7f3f98"/>
+   <path d="M -36 36 
+L 36 -36 
+M -30 42 
+L 42 -30 
+M -24 48 
+L 48 -24 
+M -18 54 
+L 54 -18 
+M -12 60 
+L 60 -12 
+M -6 66 
+L 66 -6 
+M 0 72 
+L 72 0 
+M 6 78 
+L 78 6 
+M 12 84 
+L 84 12 
+M 18 90 
+L 90 18 
+M 24 96 
+L 96 24 
+M 30 102 
+L 102 30 
+M 36 108 
+L 108 36 
+" style="fill: #1e293b; stroke: #1e293b; stroke-width: 1.0; stroke-linecap: butt; stroke-linejoin: miter"/>
+  </pattern>
+ </defs>
+</svg>

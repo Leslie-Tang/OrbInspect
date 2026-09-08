@@ -94,7 +94,13 @@ class GraphDecision:
 
 @dataclass(frozen=True)
 class SafeGraphProblem:
-    """Finite candidate graph, target weights, goal, and lazy edge evaluator."""
+    """Finite candidate graph with an explicit inspection-completion goal.
+
+    ``required`` completes when every required bit is observed; global weighted
+    coverage remains a descriptive metric. ``hybrid`` additionally requires
+    ``goal_coverage``. The default ``coverage`` preserves the historical
+    conjunction when a nonzero ``required_target_mask`` is supplied.
+    """
 
     nodes: tuple[SafeGraphNode, ...]
     target_weights: tuple[float, ...]
@@ -103,11 +109,12 @@ class SafeGraphProblem:
     max_steps: int
     reference_node_ids: tuple[str, ...] = ()
     required_target_mask: int = 0
+    goal_mode: str = 'coverage'
 
 
 @dataclass(frozen=True)
 class GraphPlan:
-    """Complete learned graph policy result and training diagnostics."""
+    """Audited graph policy result, task completion, and training diagnostics."""
 
     node_ids: tuple[str, ...]
     decisions: tuple[GraphDecision, ...]
@@ -131,6 +138,11 @@ class GraphPlan:
     adaptive_rollout_enabled: bool
     safeguard_enabled: bool
     local_improvement_enabled: bool
+    goal_mode: str = 'coverage'
+    required_target_count: int = 0
+    required_covered_count: int = 0
+    missing_required_target_mask: int = 0
+    termination_reason: str = 'complete'
 
 
 @dataclass(frozen=True)
@@ -257,7 +269,7 @@ class AdvancedSafePlanner:
                     continue
                 node = problem.nodes[index]
                 new_mask = node.coverage_mask & ~state.covered_mask
-                if new_mask.bit_count() < self.config.min_new_target_count:
+                if not self._action_has_required_gain(problem, new_mask):
                     continue
                 edge = problem.edge_evaluator(state.current_node_id, node_id)
                 self._safe_action_evaluations += 1
@@ -505,6 +517,8 @@ class AdvancedSafePlanner:
             selected_plan = min(
                 candidate_plans,
                 key=lambda plan: (
+                    (-self._required_completion_count(problem, plan[1])
+                     if problem.goal_mode in {'required', 'hybrid'} else 0),
                     -plan[3],
                     plan[2],
                     source_priority.get(plan[5], 99),
@@ -523,6 +537,12 @@ class AdvancedSafePlanner:
             if reference_total_cost is not None and selected_success
             else None
         )
+        required_covered = self._required_completion_count(
+            problem, selected_decisions,
+        )
+        covered_mask = 0
+        for decision in selected_decisions:
+            covered_mask |= decision.new_target_mask
 
         return GraphPlan(
             node_ids=selected_node_ids,
@@ -559,6 +579,87 @@ class AdvancedSafePlanner:
                 self.config.enable_reference_safeguard
                 and self.config.reference_improvement_passes > 0
             ),
+            goal_mode=problem.goal_mode,
+            required_target_count=problem.required_target_mask.bit_count(),
+            required_covered_count=required_covered,
+            missing_required_target_mask=(
+                problem.required_target_mask & ~covered_mask
+            ),
+            termination_reason=(
+                'complete' if selected_success else 'no_certified_completion'
+            ),
+        )
+
+    def base_policy_plan(self, problem: SafeGraphProblem) -> GraphPlan:
+        """Execute the same deterministic base policy used by adaptive ADP.
+
+        The returned failure reports only a failed greedy completion. It is
+        not a graph infeasibility certificate; ``solve_exact`` is available
+        for exhaustible reduced graphs. No critic fitting occurs here.
+        """
+        self._validate_problem(problem)
+        self._safe_action_evaluations = 0
+        self._shield_rejections = 0
+        self._action_cache = None
+        self._value_cache = {}
+        node_index = {node.node_id: i for i, node in enumerate(problem.nodes)}
+        state = GraphDecisionState(
+            None, 0, 0, min(problem.max_steps, self.config.horizon_steps),
+        )
+        decisions = []
+        while not self._goal_reached(problem, state.covered_mask):
+            if state.remaining_steps <= 0:
+                break
+            actions, rejected = self._exhaustive_safe_actions(problem, state)
+            if not actions:
+                break
+            action = max(
+                actions,
+                key=lambda item: self._base_action_key(problem, state, item),
+            )
+            next_state = self._transition(state, action, node_index)
+            decisions.append(GraphDecision(
+                sequence=len(decisions),
+                node_id=action[0].node_id,
+                new_target_mask=action[2],
+                coverage_ratio=self._coverage_ratio(problem, next_state.covered_mask),
+                stage_cost=self._stage_cost(action[1]),
+                estimated_cost_to_go=0.0,
+                safe_action_count=len(actions),
+                shield_rejections=rejected,
+            ))
+            state = next_state
+        success = self._goal_reached(problem, state.covered_mask)
+        missing = problem.required_target_mask & ~state.covered_mask
+        return GraphPlan(
+            node_ids=tuple(item.node_id for item in decisions),
+            decisions=tuple(decisions),
+            total_cost=sum(item.stage_cost for item in decisions),
+            coverage_ratio=self._coverage_ratio(problem, state.covered_mask),
+            success=success,
+            critic_weights=tuple(self._weights),
+            training_episodes=0,
+            td_update_count=0,
+            mean_absolute_td_error=0.0,
+            safe_action_evaluations=self._safe_action_evaluations,
+            shield_rejections=self._shield_rejections,
+            policy_source='deterministic_base',
+            learned_total_cost=None,
+            rollout_total_cost=None,
+            reference_total_cost=None,
+            improved_reference_total_cost=None,
+            incumbent_improvement=None,
+            critic_enabled=False,
+            rollout_enabled=False,
+            adaptive_rollout_enabled=False,
+            safeguard_enabled=False,
+            local_improvement_enabled=False,
+            goal_mode=problem.goal_mode,
+            required_target_count=problem.required_target_mask.bit_count(),
+            required_covered_count=(problem.required_target_mask.bit_count()
+                                    - missing.bit_count()),
+            missing_required_target_mask=missing,
+            termination_reason='complete' if success else 'base_completion_failed',
         )
 
     def _adaptive_rollout_solution(
@@ -576,7 +677,7 @@ class AdvancedSafePlanner:
         Apply repeated one-step rollout with a safe adaptive base policy.
 
         Each candidate action is retained only when the deterministic base
-        policy reaches the coverage goal from the successor state.  The
+        policy reaches the problem's completion goal from the successor state. The
         selected action minimizes its audited stage cost plus that feasible
         completion cost.  Recomputing the base policy after every decision is
         the rollout policy-improvement step; it is deliberately distinct from
@@ -671,6 +772,8 @@ class AdvancedSafePlanner:
         """Evaluate a finite rollout tree with the adaptive base at leaves."""
         if self._goal_reached(problem, state.covered_mask):
             return 0.0, True
+        if state.remaining_steps <= 0:
+            return math.inf, False
         cache_key = (state, depth)
         cached = rollout_cache.get(cache_key)
         if cached is not None:
@@ -713,7 +816,7 @@ class AdvancedSafePlanner:
         initial_state: GraphDecisionState,
         node_index: dict[str, int],
     ) -> tuple[float, bool]:
-        """Return the cost of a deterministic safe gain-efficiency policy."""
+        """Return the cost of the deterministic, task-aware safe base policy."""
         state = initial_state
         total_cost = 0.0
         while (
@@ -725,12 +828,7 @@ class AdvancedSafePlanner:
                 return math.inf, False
             action = max(
                 actions,
-                key=lambda item: (
-                    item[3] / max(0.05, self._stage_cost(item[1])),
-                    item[3],
-                    -self._stage_cost(item[1]),
-                    item[0].node_id,
-                ),
+                key=lambda item: self._base_action_key(problem, state, item),
             )
             total_cost += self._stage_cost(action[1])
             state = self._transition(state, action, node_index)
@@ -971,7 +1069,7 @@ class AdvancedSafePlanner:
                     continue
                 node = problem.nodes[index]
                 new_mask = node.coverage_mask & ~state.covered_mask
-                if new_mask.bit_count() < self.config.min_new_target_count:
+                if not self._action_has_required_gain(problem, new_mask):
                     continue
                 edge = problem.edge_evaluator(state.current_node_id, node_id)
                 self._safe_action_evaluations += 1
@@ -1088,7 +1186,7 @@ class AdvancedSafePlanner:
                 continue
             node = problem.nodes[index]
             new_mask = node.coverage_mask & ~state.covered_mask
-            if new_mask.bit_count() < self.config.min_new_target_count:
+            if not self._action_has_required_gain(problem, new_mask):
                 continue
             edge = problem.edge_evaluator(state.current_node_id, node_id)
             self._safe_action_evaluations += 1
@@ -1194,7 +1292,7 @@ class AdvancedSafePlanner:
                 return None
             node = problem.nodes[index]
             new_mask = node.coverage_mask & ~state.covered_mask
-            if new_mask.bit_count() < self.config.min_new_target_count:
+            if not self._action_has_required_gain(problem, new_mask):
                 continue
             edge = problem.edge_evaluator(state.current_node_id, node_id)
             self._safe_action_evaluations += 1
@@ -1367,15 +1465,58 @@ class AdvancedSafePlanner:
             if state.selected_mask & (1 << index):
                 continue
             new_mask = node.coverage_mask & ~state.covered_mask
-            if new_mask.bit_count() < self.config.min_new_target_count:
+            if not self._action_has_required_gain(problem, new_mask):
                 continue
             gain_ratio = self._mask_weight(problem, new_mask) / self._total_weight(problem)
             actions.append((node, new_mask, gain_ratio))
         actions.sort(
-            key=lambda item: (item[2], item[0].static_priority, item[0].node_id),
+            key=lambda item: (
+                (item[1] & problem.required_target_mask).bit_count()
+                if problem.goal_mode in {'required', 'hybrid'} else 0,
+                item[2], item[0].static_priority, item[0].node_id,
+            ),
             reverse=True,
         )
         return actions
+
+    def _action_has_required_gain(
+        self, problem: SafeGraphProblem, new_mask: int,
+    ) -> bool:
+        """Admit transit views in required missions under the no-revisit budget.
+
+        Zero-gain connectors can be necessary for a safe path to a required
+        observation. Legacy coverage missions retain their novelty filter.
+        """
+        return (
+            problem.goal_mode in {'required', 'hybrid'}
+            or new_mask.bit_count() >= self.config.min_new_target_count
+        )
+
+    def _base_action_key(
+        self,
+        problem: SafeGraphProblem,
+        state: GraphDecisionState,
+        action: tuple[SafeGraphNode, SafeGraphEdge, int, float],
+    ) -> tuple[float, float, float, str]:
+        """Rank safe actions by unmet required items per audited stage cost."""
+        gain = action[3]
+        if (
+            problem.goal_mode in {'required', 'hybrid'}
+            and problem.required_target_mask & ~state.covered_mask
+        ):
+            gain = float((action[2] & problem.required_target_mask).bit_count())
+        cost = self._stage_cost(action[1])
+        return gain / max(0.05, cost), gain, -cost, action[0].node_id
+
+    @staticmethod
+    def _required_completion_count(
+        problem: SafeGraphProblem, decisions: tuple[GraphDecision, ...],
+    ) -> int:
+        """Count distinct credited required items, without weighting them."""
+        covered_mask = 0
+        for decision in decisions:
+            covered_mask |= decision.new_target_mask
+        return (covered_mask & problem.required_target_mask).bit_count()
 
     def _transition(
         self,
@@ -1417,6 +1558,14 @@ class AdvancedSafePlanner:
         coverage_after = self._coverage_ratio(problem, next_mask)
         goal = max(problem.goal_coverage, 1.0e-12)
         gap_after = max(0.0, problem.goal_coverage - coverage_after) / goal
+        required_gap = (
+            (problem.required_target_mask & ~next_mask).bit_count()
+            / max(1, problem.required_target_mask.bit_count())
+        )
+        if problem.goal_mode == 'required':
+            gap_after = required_gap
+        elif problem.goal_mode == 'hybrid':
+            gap_after = max(gap_after, required_gap)
         used_fraction = 1.0 - state.remaining_steps / max(
             1.0,
             float(min(problem.max_steps, self.config.horizon_steps)),
@@ -1529,6 +1678,8 @@ class AdvancedSafePlanner:
             problem.goal_coverage,
             1.0e-12,
         )
+        if problem.goal_mode == 'required':
+            coverage_gap = 0.0
         required_count = problem.required_target_mask.bit_count()
         missing_required = (
             problem.required_target_mask & ~state.covered_mask
@@ -1558,6 +1709,8 @@ class AdvancedSafePlanner:
         required_reached = (
             covered_mask & problem.required_target_mask
         ) == problem.required_target_mask
+        if problem.goal_mode == 'required':
+            return required_reached
         return coverage_reached and required_reached
 
     def _coverage_ratio(self, problem: SafeGraphProblem, covered_mask: int) -> float:
@@ -1645,8 +1798,10 @@ class AdvancedSafePlanner:
             raise ValueError('discount must lie in (0, 1]')
         if self.config.cost_scale <= 0.0:
             raise ValueError('cost_scale must be positive')
-        if not 0.0 < self.config.goal_coverage <= 1.0:
-            raise ValueError('goal_coverage must lie in (0, 1]')
+        # The problem owns goal semantics; zero is valid only for its required
+        # mode, as checked by _validate_problem before any planning occurs.
+        if not 0.0 <= self.config.goal_coverage <= 1.0:
+            raise ValueError('goal_coverage must lie in [0, 1]')
 
     @staticmethod
     def _validate_problem(problem: SafeGraphProblem) -> None:
@@ -1656,8 +1811,12 @@ class AdvancedSafePlanner:
             raise ValueError('safe graph requires target weights')
         if problem.max_steps <= 0:
             raise ValueError('safe graph max_steps must be positive')
-        if not 0.0 < problem.goal_coverage <= 1.0:
-            raise ValueError('safe graph goal_coverage must lie in (0, 1]')
+        if problem.goal_mode not in {'coverage', 'required', 'hybrid'}:
+            raise ValueError('safe graph goal_mode must be coverage, required, or hybrid')
+        if not 0.0 <= problem.goal_coverage <= 1.0 or (
+            problem.goal_mode != 'required' and problem.goal_coverage == 0.0
+        ):
+            raise ValueError('safe graph goal_coverage must be positive except in required mode')
         node_ids = tuple(node.node_id for node in problem.nodes)
         if len(set(node_ids)) != len(node_ids):
             raise ValueError('safe graph node identifiers must be unique')
@@ -1672,6 +1831,8 @@ class AdvancedSafePlanner:
         valid_mask = (1 << len(problem.target_weights)) - 1
         if problem.required_target_mask < 0:
             raise ValueError('required target mask cannot be negative')
+        if problem.goal_mode in {'required', 'hybrid'} and not problem.required_target_mask:
+            raise ValueError('required and hybrid goals need a nonempty required target mask')
         if problem.required_target_mask & ~valid_mask:
             raise ValueError('required target mask references an unknown target')
         for node in problem.nodes:

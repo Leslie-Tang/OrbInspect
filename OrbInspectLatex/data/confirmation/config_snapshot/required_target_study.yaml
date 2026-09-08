@@ -1,0 +1,45 @@
+schema_version: 1
+study_name: required_target_adp_fresh_comparator_confirmation
+source_study: data/results/20260905_093000_required_target_adp
+primary_profile: required09
+required_counts: [9]
+validation_scenarios: 12
+test_scenarios: 50
+ood_scenarios: 30
+seed_base: 202609350000
+test_dropout_range: [0.0, 0.10]
+ood_dropout_range: [0.15, 0.25]
+test_priority_fraction: [0.06, 0.14]
+ood_priority_fraction: [0.12, 0.20]
+test_priority_multiplier: [2.0, 4.0]
+ood_priority_multiplier: [5.0, 8.0]
+max_steps: 14
+branch_width: 8
+candidate_pool_width: 18
+adaptive_rollout_depth: 3
+lookahead_depth: 2
+local_improvement_passes: 3
+action_cost: 0.05
+cost_scale: 50.0
+terminal_penalty: 500.0
+evaluation_failure_penalty: 500.0
+evaluation_missing_fraction_penalty: 500.0
+transfer_duration_s: 90.0
+coverage_baseline_goal: 0.8
+bootstrap_seed: 60935
+bootstrap_replicates: 10000
+methods: [incumbent, one_step_adp, seeded_local_search, adaptive_rollout_adp, coverage_only80]
+validation_depths: [1, 2, 3]
+primary_comparator: seeded_local_search
+primary_endpoint: paired_all_scenario_penalized_graph_cost_difference
+secondary_endpoints: [all_required_completion, joint_success_graph_cost, joint_success_delta_v]
+notes: >-
+  This confirmation follows the first required-target campaign, which exposed
+  failure of the greedy seed. The nine-item geometric requirement is copied
+  unchanged. The comparator is three-pass audited local search initialized by
+  a successful one-step rollout ADP route; it is not a non-ADP baseline.
+  Target sets, depth three, comparator, fresh seeds, and scoring are frozen
+  before this campaign is evaluated. No scenario is rejected or replaced.
+  A failed one-step seed leaves seeded local search without a certified route.
+  ADP3 has no one-step fallback. All base_* fields refer to the original greedy
+  completion. Timing of seeded local search includes its one-step seed.

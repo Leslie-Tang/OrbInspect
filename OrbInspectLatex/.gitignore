@@ -1,0 +1,18 @@
+/build/
+/.DS_Store
+**/.DS_Store
+__pycache__/
+*.py[cod]
+/.pytest_cache/
+# Editors that bypass latexmk should not add build debris to the source root.
+/main.aux
+/main.bbl
+/main.blg
+/main.fdb_latexmk
+/main.fls
+/main.log
+/main.out
+/main.pdf
+/main.spl
+/main.synctex.gz
+/texput.*

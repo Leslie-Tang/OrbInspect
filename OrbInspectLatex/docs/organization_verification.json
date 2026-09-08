@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "manuscript_pages": 12,
+  "local_compilation_inputs": 32,
+  "figure_groups": 7,
+  "verified_figure_files": 52,
+  "preserved_inventory_files": 756,
+  "external_project_compilation_inputs": 0,
+  "isolated_source_zip_build": true,
+  "repository_paths_in_isolated_recorder": false,
+  "page_text_identical_to_original_path_build": true,
+  "page_pixels_identical_at_120_dpi": true,
+  "baseline": "Latest author source preserved during the move; original include paths",
+  "regression_tests_passed": 19,
+  "manuscript_changes": "Path substitutions only; concurrent author figure-width edits preserved",
+  "figure_content_changes": false,
+  "experiment_data_changes": false,
+  "overfull_or_unresolved_reference_warnings": false,
+  "visual_review": "All-page contact sheet and complete Figure 2 page inspected"
+}

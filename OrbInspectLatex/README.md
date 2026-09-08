@@ -1,89 +1,147 @@
-# OrbInspect Paper
+# OrbInspect manuscript
 
-This folder contains the IEEE Transactions on Aerospace and Electronic Systems
-LaTeX manuscript for OrbInspect.
+Self-contained LaTeX source for the IEEE Transactions on Aerospace and Electronic
+Systems manuscript. The current text, tables, figure artwork and editable
+draw.io diagrams are included. No parent-repository files, ROS installation,
+Python plotting environment or network connection are required to compile.
+A standard TeX installation is still required.
 
-The manuscript is self-contained: the final study bundle, every plotted PDF,
-the editable framework diagram, and the replay evidence cited by the paper are
-copied into this directory. The paper deliberately separates HCW simulation,
-saved numerical results, read-only figure generation, ROS execution/logging
-validation, and Gazebo Harmonic visual replay.
+## Build or share
 
-The main manuscript and algorithms are in `main.tex`; the compact, separately
-corrected ROS closed-loop validation evidence is included from
-`sections/ros_verification_results.tex`.
+Run from this folder:
 
-## Build
-
-```bash
-cd OrbInspectLatex
-make
+```sh
+make          # PDF: build/main.pdf
+make check    # Check local dependencies, figure hashes and embedded images
+make package  # Portable source ZIP: build/OrbInspectLatex_source.zip
 ```
 
-If `latexmk` is unavailable:
+Requirements: pdfLaTeX, BibTeX and latexmk, with the usual LaTeX science,
+graphics and publisher packages (TeX Live or MacTeX). The journal class
+`IEEEtaes.cls` and bibliography style `IEEEtran.bst` are included locally.
+`make check` and packaging use only Python 3's standard library. On Ubuntu,
+review `scripts/install_tex_ubuntu.sh` before using it to install TeX packages.
 
-```bash
-pdflatex main.tex
-bibtex main
-pdflatex main.tex
-pdflatex main.tex
+For Overleaf, upload the source ZIP and select `main.tex` with pdfLaTeX.
+The ZIP excludes historical archives, repository-dependent tools and build
+debris. It retains the editable figures, local evidence snapshots and docs.
+For manual builds without latexmk, use `pdflatex main.tex`, `bibtex main`,
+then `pdflatex main.tex` twice; that fallback writes temporary files in the root.
+
+The bibliography prints author names in every reference, including consecutive
+entries with identical authors. The `IEEEfullAuthorNames` control entry in
+`references.bib`, activated before the first citation in `main.tex`, disables
+repeated-name dashes and forced author-list truncation without modifying the
+publisher's bibliography style. It does not appear as a numbered reference.
+
+## Folder map
+
+```text
+OrbInspectLatex/
+├── main.tex                 Main article and entry point
+├── references.bib           Bibliography
+├── IEEEtaes.cls             Local journal class
+├── IEEEtran.bst             Local bibliography style
+├── sections/               Included manuscript sections
+├── tables/                 Nine included TeX tables/numerical files
+├── figures/                Seven numbered figure folders and an index
+├── data/                   Local copies of current evidence for inspection
+├── scripts/                Standalone checks, packaging and TeX installer
+├── docs/                   Provenance, integrity and organization notes
+├── build/                  Generated PDF, logs and shareable ZIP
+└── archive/                Preserved pre-organization files and alternatives
 ```
 
-## Structure
+## Find and edit a figure
 
-- `main.tex`: complete manuscript source, including all sections and algorithms.
-- `IEEEtaes.cls`: manuscript document class.
-- `references.bib`: manuscript bibliography.
-- `figures/01_orbinspect_sooa_framework.pdf`: publication figure inserted in
-  the manuscript.
-- `figures/orbinspect_sooa_framework_editable.pptx`: fully editable source for
-  the framework figure.
-- `figures/high_coverage/`: standalone primary tradeoff and trajectory case
-  study, seven-way component ablation, exact-oracle, initial-condition, and
-  compute figures.
-- `figures/iss_mesh/`: NASA ISS mesh preview figures.
-- `figures/gazebo_validation/`: Gazebo frames and ROS smoke-run figures.
-- `figures/ros_visual_interface.pdf`: synchronized live Gazebo-camera and RViz2
-  views from the accepted corrected verification task. This source artifact is
-  retained for provenance but is no longer a separate manuscript figure because
-  the trajectory-linked camera-view figure supplies the same interface evidence
-  with task context. Its source streams and SHA-256 provenance manifest remain under
-  `../data/results/ros_rviz_full_planning_demo_corrected_`
-  `validation002_radius080_20260812/figures/`.
-- `figures/ros_key_camera_views_trajectory.pdf`: all ten synchronized credited
-  camera views linked by local numbered leader lines to their exact locations
-  in radial--cross-track and along-track--cross-track projections of the complete
-  corrected closed-loop trajectory.
-- `figures/ros_key_camera_views/`: the same ten synchronized camera views saved
-  individually as annotated vector PDF and 600-dpi PNG files, named by
-  sequence, waypoint ID, and mission time.
-- `data/adp_paper_study_20260731_final/`: final independent-case study archive,
-  including the primary, exact-oracle, initial-condition, and compute cases.
-- `data/adp_component_ablation_20260801/`: cold-cache critic, rollout,
-  safeguard, and local-search component ablation.
-- `data/iss_mesh/`: copied NASA ISS GLB used to regenerate mesh-overlaid
-  trajectory figures without leaving this folder.
-- `data/phase10_smoke/`: ROS execution CSV, JSON, Markdown, manifest, and
-  config snapshot artifacts.
-- `data/video_capture/`: Gazebo validation videos and preview frames.
-- `../src/orbinspect_guidance/orbinspect_guidance/offline_adp_study.py`: runs
-  the simulation cases and saves their records.
-- `../src/orbinspect_guidance/orbinspect_guidance/offline_planning_plots.py`:
-  loads only saved records; each manuscript result figure has one public
-  plotting function.
-- `scripts/generate_corrected_ros_visual_interface_figure.py`: validates the
-  accepted corrected task and version-2 mesh audit, extracts synchronized
-  Gazebo-camera/RViz frames, and regenerates the manuscript PDF/PNG plus its
-  provenance manifest.
-- `scripts/generate_ros_key_camera_views_figure.py`: extracts each credited
-  terminal camera frame, aligns it with the exact executed trajectory sample,
-  overlays the fully transformed ISS mesh, and generates the trajectory-linked
-  publication PDF/PNG and source-hash manifest.
-- `scripts/compose_rviz_planning_demo_video.py`: validates the completed
-  corrected `validation_002` ROS run, synchronizes the retained RViz and
-  chaser-camera streams, and regenerates the annotated H.264 full-task video,
-  milestone preview, and SHA-256 provenance manifest. The authoritative output
-  remains under `../data/results/ros_rviz_full_planning_demo_corrected_`
-  `validation002_radius080_20260812/videos/`.
-- `templates/official_elsevier_elsarticle_2024/`: downloaded official Elsevier
-  template archive retained only as a reference.
+| Figure | Folder | Editable/source format |
+|---|---|---|
+| 1 | `figures/fig01_framework/` | draw.io, SVG, PDF, PNG; credits/assets |
+| 2 | `figures/fig02_rollout_example/` | draw.io, SVG, PDF, PNG; checked graph |
+| 3 | `figures/fig03_depth_tradeoff/` | Three PDF/SVG/PNG panels |
+| 4 | `figures/fig04_heldout_performance/` | Four separate PDF/SVG/PNG panels; LaTeX subfigures; data manifest |
+| 5 | `figures/fig05_ablation_safety/` | Four separate PDF/SVG/PNG panels and shared legend; LaTeX subfigures; data manifest |
+| 6 | `figures/fig06_representative_trajectory/` | Three PDF/SVG/PNG panels |
+| 7 | `figures/fig07_ros_camera_views/` | Compact two-column SVG/PDF/PNG; local snapshot and Python generator |
+
+The manuscript uses the PDFs. For Figures 1 and 2, edit the native `.drawio`
+file and export a matching PDF at its original aspect ratio, retaining its
+filename. Keep SVG/PNG previews synchronized. Do not stretch the export or
+substitute an older diagram. `figures/manifest.json` records the approved
+files and hashes at organization time; an intentional later revision should
+update this manifest after visual review. Figure 2 remains the compact
+three-panel design with unchanged information.
+
+Figure 3 uses approximately 7-point axis and tick lettering at its actual
+single-column, three-panel size. Its standalone generator,
+`scripts/generate_depth_figure.py`, reads only the included six-depth diagnostic
+CSV and verifies every plotted statistic against the frozen reference manifest.
+It stages three editable SVGs and matching PDF/PNG exports under
+`build/figure3_readable_preview/`; review them before updating the active figures
+and their hashes. The previous small-type exports are preserved in
+`archive/figure3_small_type_20260909/`. See
+`docs/FIGURE_3_READABLE_FONTS_20260909.md` for the typography revision.
+
+Figures 4 and 5 use approximately 9-point lettering at the actual column width.
+Each uses four independent vector PDFs assembled into a 2-by-2 grid with
+`\subfloat` in `sections/required_target_study.tex`. LaTeX generates the letters
+and subcaptions; individual labels end in `-a`, `-b`, `-c`, and `-d`. Figure 5
+also includes an unnumbered shared-legend strip. Do not add panel letters to
+the image files or replace the subfigures with a composite export.
+Their optional local generator is `scripts/generate_result_figures.py` (NumPy
+and matplotlib); it reads only the included frozen confirmation snapshot and
+verifies the original cohorts and statistics before exporting. The previous
+two-column panel exports are preserved in `archive/figure45_two_column_20260908/`.
+See `docs/FIGURES_4_5_SINGLE_COLUMN_20260908.md` for the layout and checks.
+The subsequent native-subfigure conversion is documented in
+`docs/FIGURES_4_5_LATEX_SUBFIGURES_20260908.md`; its previous composites are
+preserved in `archive/figure45_composite_20260908/`.
+
+Figures 3--6 now share the teal/purple palette of Figures 1 and 2. The revision
+changes colors only, including the editable SVGs and matching PDF/PNG exports.
+`scripts/figure_palette.py` defines the shared colors; the optional
+`scripts/recolor_result_figures.py` stages and checks the full four-figure set.
+See `docs/FIGURE_PALETTE_20260908.md` for the role mapping and verification.
+The previous figure files remain in `archive/figure36_prepalette_20260908/`.
+
+Figure 7 uses a compact two-column layout: two central trajectory projections
+and five camera views on each side, in two columns plus a centered final view.
+Matching numbers preserve the view-to-position correspondence without long
+leaders. The original camera pixels, trajectory coordinates and equal spatial
+scales are retained. The optional `scripts/generate_ros_camera_figure.py` reads
+only `data/historical_ros/figure7/` and exports editable SVG plus PDF/PNG;
+it requires NumPy, matplotlib and Pillow, but no ROS, video decoder or mesh loader.
+The original single-column figure and section are preserved in
+`archive/figure7_single_column_20260908/`. See
+`docs/FIGURE_7_COMPACT_TWO_COLUMN_20260908.md` for the layout and checks.
+
+## Evidence and historical material
+
+`data/` separates development, confirmation, six-depth diagnostic and historical
+ROS evidence. These are unchanged local inspection snapshots, not new results
+or a complete ROS rerun package. See `data/README.md` for scope and provenance.
+The primary contribution remains rollout ADP; Figure 2 is an illustrative graph,
+not experimental HCW data.
+
+`archive/preorganization_20260908/` preserves the entire previous LaTeX tree,
+including older templates, figures, data, scripts and build files. Additional
+Figure 2 alternatives are in `archive/figure2_alternatives/`. Nothing was
+deleted. Archives are not used by compilation or included in the source ZIP.
+
+Repository-dependent experiment and figure-generation tools now live in
+`tools/paper/`, relative to the repository root. They remain separate from this
+portable manuscript and require the full OrbInspect repository and their
+recorded environments. Start with that folder's README before regenerating.
+
+The organization changed file paths only, not scientific content. Existing
+concurrent figure-width edits were preserved. See `docs/ORGANIZATION.md` and
+`docs/organization_manifest.json` for the inventory and verification record.
+
+The subsequent table-layout revision uses single-column floats for Tables II
+and IV and full-width alignment for Tables III, V and VI. Data, captions and
+font sizes are unchanged. See `docs/TABLE_LAYOUT_20260908.md` for verification.
+
+The later terminology cleanup replaces internal run/profile keys with academic
+display labels, preserving exact identifiers in `docs/MANUSCRIPT_IDENTIFIER_MAP.md`
+and the evidence snapshots. `docs/TAES_CODE_SHARING.md` records review-stage
+repository guidance; it does not assert that a public code release exists.

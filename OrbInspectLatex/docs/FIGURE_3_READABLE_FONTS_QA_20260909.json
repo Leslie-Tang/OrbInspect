@@ -1,0 +1,37 @@
+{
+  "status": "passed",
+  "page_counts": {
+    "before": 13,
+    "after": 13
+  },
+  "measured_graph_cost_axis_fonts": {
+    "before": [
+      {
+        "page": 8,
+        "font_pt": 4.186
+      }
+    ],
+    "after": [
+      {
+        "page": 9,
+        "font_pt": 7.192
+      }
+    ]
+  },
+  "bibliography_entries": 33,
+  "protected_files_checked": 138,
+  "only_protected_change": "main.tex: manual reference-column break 17 to 16",
+  "other_figures_data_tables_sections_and_bibliography_unchanged": true,
+  "editable_svg_text_elements": {
+    "a": 12,
+    "b": 13,
+    "c": 14
+  },
+  "vector_pdfs_without_raster_images": true,
+  "undefined_references_overfull_boxes_or_latex_warnings": false,
+  "figure3_page": 9,
+  "figure7_page": 12,
+  "visual_review": "Three staged panels; compiled Figure 3 page; full-manuscript contact sheet; final pages 12 and 13. No clipped or overlapping figure text.",
+  "manuscript_sha256": "cb34ce3d32fbfd6ae21a1ce3fc3d74d0878ad8daa5fe380c84f36bed0a9619e8",
+  "portable_source_zip_regeneration": "passed: all three PNGs byte-identical outside repository"
+}
