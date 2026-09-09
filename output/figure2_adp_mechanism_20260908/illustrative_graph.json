@@ -1,0 +1,164 @@
+{
+  "kind": "Illustrative finite graph; not experimental or physical HCW data",
+  "audit_flags": "Assigned for illustration, not computed collision certificates",
+  "required_targets": [
+    1,
+    2
+  ],
+  "initial_state": [
+    0,
+    0,
+    0,
+    3
+  ],
+  "depth": 2,
+  "node_target_sets": {
+    "0": [],
+    "1": [
+      1
+    ],
+    "2": [],
+    "3": [],
+    "4": [
+      2
+    ],
+    "5": [
+      1
+    ]
+  },
+  "audited_edges": [
+    {
+      "source": 0,
+      "destination": 1,
+      "cost": 2.0
+    },
+    {
+      "source": 1,
+      "destination": 4,
+      "cost": 6.0
+    },
+    {
+      "source": 0,
+      "destination": 2,
+      "cost": 1.0
+    },
+    {
+      "source": 2,
+      "destination": 5,
+      "cost": 1.0
+    },
+    {
+      "source": 5,
+      "destination": 4,
+      "cost": 2.0
+    },
+    {
+      "source": 0,
+      "destination": 3,
+      "cost": 0.5
+    }
+  ],
+  "audit_rejected_transfer": {
+    "source": 0,
+    "destination": 4,
+    "chi": 0
+  },
+  "decision_rows": [
+    {
+      "action": 1,
+      "stage_cost": 2.0,
+      "continuation_value": 6.0,
+      "rollout_value": 8.0
+    },
+    {
+      "action": 2,
+      "stage_cost": 1.0,
+      "continuation_value": 3.0,
+      "rollout_value": 4.0
+    },
+    {
+      "action": 3,
+      "stage_cost": 0.5,
+      "continuation_value": "+infinity",
+      "rollout_value": "+infinity"
+    }
+  ],
+  "base_route": [
+    0,
+    1,
+    4
+  ],
+  "base_cost": 8.0,
+  "replanned_route": [
+    0,
+    2,
+    5,
+    4
+  ],
+  "replanned_cost": 4.0,
+  "state_trace": [
+    {
+      "state": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "chosen_action": 2,
+      "successor": [
+        2,
+        0,
+        2,
+        2
+      ],
+      "value_before": 4.0,
+      "value_after": 3.0,
+      "covered_required_targets": 0
+    },
+    {
+      "state": [
+        2,
+        0,
+        2,
+        2
+      ],
+      "chosen_action": 5,
+      "successor": [
+        5,
+        1,
+        18,
+        1
+      ],
+      "value_before": 3.0,
+      "value_after": 2.0,
+      "covered_required_targets": 1
+    },
+    {
+      "state": [
+        5,
+        1,
+        18,
+        1
+      ],
+      "chosen_action": 4,
+      "successor": [
+        4,
+        3,
+        26,
+        0
+      ],
+      "value_before": 2.0,
+      "value_after": 0.0,
+      "covered_required_targets": 2
+    }
+  ],
+  "reachable_states_checked": 7,
+  "depths_checked": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ]
+}

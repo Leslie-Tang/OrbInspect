@@ -1,0 +1,7 @@
+depth,mean_cost,median_time_s,mean_safety_screen_evaluations,success_count,scenario_count,source
+1,105.04535502894586,0.010452061978867278,3890.9166666666665,12,12,data/results/adp_depth_corrected_postselection_d1_20260905/raw/heldout_summary.csv
+2,103.87924292610677,0.06450389549718238,25923.0,12,12,data/results/adp_depth_corrected_postselection_d2_20260905/raw/heldout_summary.csv
+3,102.44354537247361,0.30603675000020303,144748.91666666666,12,12,data/results/adp_depth_corrected_postselection_d3_20260905/raw/heldout_summary.csv
+4,101.21094805304033,1.4586887914920226,601659.5,12,12,data/results/adp_depth_corrected_postselection_d4_20260905/raw/heldout_summary.csv
+5,100.86969904028103,4.582242625008803,1945743.4166666667,12,12,data/results/adp_depth_corrected_postselection_d5_20260905/raw/heldout_summary.csv
+6,99.44258822618423,9.918844187981449,4955065.666666667,12,12,data/results/adp_depth_corrected_postselection_d6_20260905/raw/heldout_summary.csv

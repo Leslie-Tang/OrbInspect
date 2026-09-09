@@ -1,0 +1,15 @@
+{
+  "schema_version": "orbinspect-rviz-video-timing/v1",
+  "launch_log_start_wall_epoch_s": 1786509860.9966693,
+  "mission_process_start_wall_epoch_s": 1786509891.0944996,
+  "rviz_capture_start_wall_epoch_s": 1786509874.2,
+  "rviz_capture_duration_s": 198.381333333,
+  "camera_first_frame_wall_epoch_s": 1786509867.525904,
+  "camera_last_frame_wall_epoch_s": 1786510082.7290142,
+  "camera_recorder_stop_wall_epoch_s": 1786510090.9031258,
+  "mission_time_scale": 5.0,
+  "mission_duration_s": 900.0,
+  "planned_action_count": 10,
+  "scenario_id": "validation_002",
+  "method": "adaptive_rollout_adp"
+}

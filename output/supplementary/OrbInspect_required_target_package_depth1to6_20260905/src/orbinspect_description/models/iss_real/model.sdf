@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<sdf version="1.10">
+  <model name="iss_real">
+    <static>true</static>
+    <link name="iss_real_visual">
+      <visual name="nasa_iss_glb_visual">
+        <pose>0 0 0 0 1.57079632679 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://iss_real/meshes/ISS_stationary.glb</uri>
+            <scale>1.065 1.065 1.065</scale>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>

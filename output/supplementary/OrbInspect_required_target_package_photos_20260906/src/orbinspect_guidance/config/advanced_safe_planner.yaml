@@ -1,0 +1,24 @@
+advanced_safe_planner_node:
+  ros__parameters:
+    method: safe_graph_adp
+    horizon_steps: 36
+    time_step: 90.0
+    safety_margin: 2.0
+    goal_coverage: 0.98
+    branch_width: 8
+    candidate_pool_width: 24
+    lookahead_depth: 3
+    training_episodes: 80
+    learning_rate: 0.035
+    exploration_rate: 0.25
+    terminal_penalty: 500.0
+    action_cost: 0.05
+    cost_scale: 50.0
+    random_seed: 7
+    min_new_target_count: 1
+    oracle_node_limit: 14
+    reference_improvement_passes: 4
+    enable_critic: true
+    enable_rollout: true
+    enable_reference_safeguard: true
+    publish_rate: 1.0

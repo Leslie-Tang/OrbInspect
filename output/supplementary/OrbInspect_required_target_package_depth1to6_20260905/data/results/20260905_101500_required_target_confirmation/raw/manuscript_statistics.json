@@ -1,0 +1,238 @@
+{
+  "source": "data/results/20260905_101500_required_target_confirmation/raw/scenario_results.csv",
+  "primary_profile": "required09",
+  "splits": {
+    "test": {
+      "n": 50,
+      "adp_success": 43,
+      "methods": {
+        "incumbent": {
+          "n": 50,
+          "success": 0,
+          "mean_delta_v_complete": NaN,
+          "mean_graph_cost_complete": NaN,
+          "mean_actions_complete": NaN,
+          "mean_penalized_cost_all": 911.2424267236496
+        },
+        "one_step_adp": {
+          "n": 50,
+          "success": 43,
+          "mean_delta_v_complete": 16.51171352067165,
+          "mean_graph_cost_complete": 135.94519552752436,
+          "mean_actions_complete": 8.209302325581396,
+          "mean_penalized_cost_all": 256.91286815367096
+        },
+        "seeded_local_search": {
+          "n": 50,
+          "success": 43,
+          "mean_delta_v_complete": 15.777135745330055,
+          "mean_graph_cost_complete": 129.8917019968544,
+          "mean_actions_complete": 8.209302325581396,
+          "mean_penalized_cost_all": 251.70686371729477
+        },
+        "adaptive_rollout_adp": {
+          "n": 50,
+          "success": 43,
+          "mean_delta_v_complete": 14.033367225846474,
+          "mean_graph_cost_complete": 115.64083852259002,
+          "mean_actions_complete": 9.0,
+          "mean_penalized_cost_all": 239.4511211294274
+        }
+      },
+      "penalized_cost_paired": {
+        "n": 50,
+        "mean": -12.255742587867351,
+        "ci": [
+          -14.154832689177335,
+          -10.21220568013374
+        ],
+        "wins_ties_losses": [
+          40,
+          7,
+          3
+        ],
+        "sign_p": 3.0213413992896676e-09
+      },
+      "graph_cost_paired": {
+        "n": 43,
+        "mean": -14.250863474264364,
+        "ci": [
+          -15.715417519961724,
+          -12.461035388934702
+        ],
+        "wins_ties_losses": [
+          40,
+          0,
+          3
+        ],
+        "sign_p": 3.0213413992896676e-09
+      },
+      "total_delta_v_paired": {
+        "n": 43,
+        "mean": -1.7437685194835815,
+        "ci": [
+          -1.9229347958012653,
+          -1.5251434631134668
+        ],
+        "wins_ties_losses": [
+          40,
+          0,
+          3
+        ],
+        "sign_p": 3.0213413992896676e-09
+      },
+      "coverage_only80_required_complete": 1
+    },
+    "ood": {
+      "n": 30,
+      "adp_success": 9,
+      "methods": {
+        "incumbent": {
+          "n": 30,
+          "success": 0,
+          "mean_delta_v_complete": NaN,
+          "mean_graph_cost_complete": NaN,
+          "mean_actions_complete": NaN,
+          "mean_penalized_cost_all": 851.0590761020911
+        },
+        "one_step_adp": {
+          "n": 30,
+          "success": 8,
+          "mean_delta_v_complete": 17.012396266490008,
+          "mean_graph_cost_complete": 140.1015125246381,
+          "mean_actions_complete": 9.25,
+          "mean_penalized_cost_all": 770.6937366732369
+        },
+        "seeded_local_search": {
+          "n": 30,
+          "success": 8,
+          "mean_delta_v_complete": 15.888288968910356,
+          "mean_graph_cost_complete": 130.8414295699201,
+          "mean_actions_complete": 8.875,
+          "mean_penalized_cost_all": 768.2243812186454
+        },
+        "adaptive_rollout_adp": {
+          "n": 30,
+          "success": 9,
+          "mean_delta_v_complete": 14.655696798078518,
+          "mean_graph_cost_complete": 120.75107036162315,
+          "mean_actions_complete": 9.11111111111111,
+          "mean_penalized_cost_all": 736.2253211084869
+        }
+      },
+      "penalized_cost_paired": {
+        "n": 30,
+        "mean": -31.99906011015842,
+        "ci": [
+          -91.4942025155297,
+          -1.2405984195971784
+        ],
+        "wins_ties_losses": [
+          8,
+          21,
+          1
+        ],
+        "sign_p": 0.0390625
+      },
+      "graph_cost_paired": {
+        "n": 8,
+        "mean": -9.890341615422582,
+        "ci": [
+          -14.110724327935092,
+          -4.6878163301625975
+        ],
+        "wins_ties_losses": [
+          7,
+          0,
+          1
+        ],
+        "sign_p": 0.0703125
+      },
+      "total_delta_v_paired": {
+        "n": 8,
+        "mean": -1.2074987656765561,
+        "ci": [
+          -1.7129288483217695,
+          -0.5749972416813978
+        ],
+        "wins_ties_losses": [
+          7,
+          0,
+          1
+        ],
+        "sign_p": 0.0703125
+      },
+      "coverage_only80_required_complete": 0
+    }
+  },
+  "profiles": {
+    "required06:test": {
+      "n": 50,
+      "adp_success": 40,
+      "local_success": 0,
+      "required_n": "6"
+    },
+    "required09:test": {
+      "n": 50,
+      "adp_success": 37,
+      "local_success": 0,
+      "required_n": "9"
+    },
+    "required12:test": {
+      "n": 50,
+      "adp_success": 38,
+      "local_success": 0,
+      "required_n": "12"
+    },
+    "required06:ood": {
+      "n": 30,
+      "adp_success": 10,
+      "local_success": 0,
+      "required_n": "6"
+    },
+    "required09:ood": {
+      "n": 30,
+      "adp_success": 10,
+      "local_success": 0,
+      "required_n": "9"
+    },
+    "required12:ood": {
+      "n": 30,
+      "adp_success": 10,
+      "local_success": 1,
+      "required_n": "12"
+    }
+  },
+  "validation_depth": [
+    {
+      "depth": 1,
+      "success_n": 9,
+      "n": 12,
+      "common_success_n": 9,
+      "mean_common_cost": 135.7143291180459,
+      "mean_penalized_cost": 351.7857468385344,
+      "median_time_s": 0.025190437532728538,
+      "mean_safety_evaluations": 7131.833333333333
+    },
+    {
+      "depth": 2,
+      "success_n": 9,
+      "n": 12,
+      "common_success_n": 9,
+      "mean_common_cost": 133.44970044918605,
+      "mean_penalized_cost": 350.0872753368895,
+      "median_time_s": 0.22436568746343255,
+      "mean_safety_evaluations": 65928.25
+    },
+    {
+      "depth": 3,
+      "success_n": 9,
+      "n": 12,
+      "common_success_n": 9,
+      "mean_common_cost": 118.5204363683402,
+      "mean_penalized_cost": 338.89032727625516,
+      "median_time_s": 1.0116683125088457,
+      "mean_safety_evaluations": 322349.0
+    }
+  ]
+}

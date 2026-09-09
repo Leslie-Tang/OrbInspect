@@ -1,0 +1,176 @@
+{
+  "purpose": "Illustrative method records, not new experimental evidence",
+  "scenario_id": "required09_test_000",
+  "selection_rule": "Jointly successful test pair nearest the median ADP-minus-local graph-cost difference; scenario-ID tie break; illustrative only",
+  "curve": {
+    "source_id": "cand_0070",
+    "destination_id": "cand_0068",
+    "action": 4,
+    "columns": [
+      "elapsed_transfer_time_s",
+      "radial_position_m"
+    ],
+    "values": [
+      [
+        0.0,
+        -21.267895854685477
+      ],
+      [
+        3.0,
+        -21.108499578058606
+      ],
+      [
+        6.0,
+        -20.640754431261406
+      ],
+      [
+        9.0,
+        -19.885852310220145
+      ],
+      [
+        12.0,
+        -18.86508605399925
+      ],
+      [
+        15.0,
+        -17.599847937552152
+      ],
+      [
+        18.0,
+        -16.111628160814437
+      ],
+      [
+        21.0,
+        -14.422013334171314
+      ],
+      [
+        24.0,
+        -12.552684960331414
+      ],
+      [
+        27.0,
+        -10.525417912639053
+      ],
+      [
+        30.0,
+        -8.362078909857129
+      ],
+      [
+        33.0,
+        -6.084624987452907
+      ],
+      [
+        36.0,
+        -3.715101965419006
+      ],
+      [
+        39.0,
+        -1.2756429126619886
+      ],
+      [
+        42.0,
+        1.2115333920090046
+      ],
+      [
+        45.0,
+        3.724124002261051
+      ],
+      [
+        48.0,
+        6.239743349951085
+      ],
+      [
+        51.0,
+        8.735924794141718
+      ],
+      [
+        54.0,
+        11.190122173386545
+      ],
+      [
+        57.0,
+        13.57971136125212
+      ],
+      [
+        60.0,
+        15.881991825043787
+      ],
+      [
+        63.0,
+        18.07418818770244
+      ],
+      [
+        66.0,
+        20.133451792839224
+      ],
+      [
+        69.0,
+        22.036862272875194
+      ],
+      [
+        72.0,
+        23.761429120252753
+      ],
+      [
+        75.0,
+        25.284093261685793
+      ],
+      [
+        78.0,
+        26.581728635415264
+      ],
+      [
+        81.0,
+        27.631143771436903
+      ],
+      [
+        84.0,
+        28.409083374667826
+      ],
+      [
+        87.0,
+        28.892229911018497
+      ],
+      [
+        90.0,
+        29.057205196336717
+      ]
+    ],
+    "source_state_included": true
+  },
+  "node_masks": {
+    "cand_0005": [
+      "mesh_00001",
+      "mesh_00005"
+    ],
+    "cand_0000": [
+      "mesh_00007"
+    ],
+    "cand_0070": [
+      "mesh_00010",
+      "mesh_00088"
+    ]
+  },
+  "directed_audit_examples": [
+    {
+      "source_id": "cand_0070",
+      "target_id": "cand_0009",
+      "feasible": true
+    },
+    {
+      "source_id": "cand_0009",
+      "target_id": "cand_0070",
+      "feasible": false
+    }
+  ],
+  "abbreviations": {
+    "C070": "cand_0070",
+    "T01": "mesh_00001"
+  },
+  "sources": {
+    "data/results/20260905_101500_required_target_confirmation/raw/hcw_graph.json": "e90f40f0aaf87464ad5b5ef6b39979aa3c5f0b7049fe0ec17ad5e5b1a19b0af2",
+    "data/results/20260905_101500_required_target_confirmation/raw/representative_case_manifest.json": "a10583ba2e32b731dfad868ef1302a448a19790c3863973207cbd36e1267640e",
+    "data/results/20260905_101500_required_target_confirmation/raw/representative_case_trajectory.csv": "78d2b5df766b39dcffef019e36b149e2e46e1afc62dec12e426bacb35cacf78e",
+    "data/results/20260905_101500_required_target_confirmation/config_snapshot/base_experiment_config.json": "fac496ad6874c03e8c35be6a91e7b63aed3c7fa099d2a8321ae9ba59a57e1cb4"
+  }
+}

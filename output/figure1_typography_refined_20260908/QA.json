@@ -1,0 +1,850 @@
+{
+  "scope": "Figure 1 title, typography, and vertical spacing only",
+  "canvas_before": [
+    1680,
+    1160
+  ],
+  "canvas_after": [
+    1680,
+    990
+  ],
+  "height_reduction_percent": 14.66,
+  "only_deleted_object": "Redundant in-image title",
+  "all_other_text_and_math_preserved": true,
+  "palette_camera_bytes_stencil_data_preserved": true,
+  "rigid_scientific_illustrations_verified": true,
+  "native_svg_geometry_from_same_cells": true,
+  "native_export_math_tokens_equal": true,
+  "bold_labels_before": 28,
+  "bold_labels_after": 5,
+  "label_metrics": [
+    {
+      "id": "4",
+      "label": "a  Mission inputs",
+      "font_size": 30.0,
+      "original_font_size": 30.0,
+      "width": 243.38999927043915,
+      "box_width": 398.0,
+      "line_heights": [
+        36.0
+      ]
+    },
+    {
+      "id": "97",
+      "label": "Required targets \\(\\displaystyle \\mathcal{K}\\)",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 219.41999888420105,
+      "box_width": 357.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "99",
+      "label": "b  Camera and LOS",
+      "font_size": 30.0,
+      "original_font_size": 30.0,
+      "width": 276.7499989271164,
+      "box_width": 398.0,
+      "line_heights": [
+        36.0
+      ]
+    },
+    {
+      "id": "104",
+      "label": "Camera \\(\\displaystyle \\bar{\\mathbf{r}}_j\\)",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 121.68399977684021,
+      "box_width": 130.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "109",
+      "label": "\\(\\displaystyle p_i\\)",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 21.0,
+      "box_width": 64.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "110",
+      "label": "\\(\\displaystyle n_i\\)",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 24.0,
+      "box_width": 47.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "113",
+      "label": "\\(\\displaystyle \\theta\\)",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 13.0,
+      "box_width": 35.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "114",
+      "label": "Clear LOS",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 121.36799955368042,
+      "box_width": 154.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "115",
+      "label": "Range",
+      "font_size": 25.38187389963573,
+      "original_font_size": 26.0,
+      "width": 74.77499999999999,
+      "box_width": 76.0,
+      "line_heights": [
+        30.45824867956287
+      ]
+    },
+    {
+      "id": "117",
+      "label": "\\(\\displaystyle \\alpha_{\\max}\\)",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 53.0,
+      "box_width": 92.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "119",
+      "label": "\\(\\displaystyle b(\\bar{q}_j)\\)",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 54.0,
+      "box_width": 82.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "127",
+      "label": "Mesh",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 63.56999981403351,
+      "box_width": 111.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "128",
+      "label": "Occluded",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 109.82399940490723,
+      "box_width": 126.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "129",
+      "label": "Range · FOV · incidence · clear LOS",
+      "font_size": 24.102077548878924,
+      "original_font_size": 26.0,
+      "width": 389.827,
+      "box_width": 392.0,
+      "line_heights": [
+        28.92249305865471
+      ]
+    },
+    {
+      "id": "131",
+      "label": "Valid targets → \\(\\displaystyle G_j\\)",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 214.96399903297424,
+      "box_width": 219.24,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "133",
+      "label": "\\(\\displaystyle s=(j,m,b,h)\\)",
+      "font_size": 28.0,
+      "original_font_size": 28.0,
+      "width": 169.0,
+      "box_width": 375.0,
+      "line_heights": [
+        33.6
+      ]
+    },
+    {
+      "id": "hcw-c-1",
+      "label": "c  HCW transfer → SOOA graph",
+      "font_size": 30.0,
+      "original_font_size": 30.0,
+      "width": 451.7399990558624,
+      "box_width": 792.0,
+      "line_heights": [
+        36.0
+      ]
+    },
+    {
+      "id": "hcw-c-3",
+      "label": "1  Solve HCW",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 163.25399959087372,
+      "box_width": 230.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "hcw-c-5",
+      "label": "2  Audit motion",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 173.41999888420105,
+      "box_width": 213.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "hcw-c-7",
+      "label": "3  Build graph",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 160.41999888420105,
+      "box_width": 229.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "hcw-c-8",
+      "label": "Rest-to-rest · 90 s",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 206.62199914455414,
+      "box_width": 242.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "hcw-c-13",
+      "label": "C70",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 47.68399977684021,
+      "box_width": 53.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "hcw-c-14",
+      "label": "C68",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 47.68399977684021,
+      "box_width": 60.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "hcw-c-17",
+      "label": "x",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 13.0,
+      "box_width": 25.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "hcw-c-18",
+      "label": "z",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 13.0,
+      "box_width": 25.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "hcw-c-19",
+      "label": "Trajectory + control",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 223.23599910736084,
+      "box_width": 240.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "hcw-c-20",
+      "label": "\\(\\displaystyle \\mathbf{x}_{ij}(t),\\;\\mathbf{u}_{ij}(t)\\)",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 139.0,
+      "box_width": 238.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "hcw-c-24",
+      "label": "Input + speed",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 158.28799843788147,
+      "box_width": 176.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "hcw-c-26",
+      "label": "Mesh clearance",
+      "font_size": 24.720175797389473,
+      "original_font_size": 26.0,
+      "width": 174.475,
+      "box_width": 176.0,
+      "line_heights": [
+        29.664210956867365
+      ]
+    },
+    {
+      "id": "hcw-c-28",
+      "label": "Terminal errors",
+      "font_size": 25.741369146303725,
+      "original_font_size": 26.0,
+      "width": 174.475,
+      "box_width": 176.0,
+      "line_heights": [
+        30.88964297556447
+      ]
+    },
+    {
+      "id": "hcw-c-29",
+      "label": "All pass: \\(\\displaystyle \\chi_{ij}=1\\)",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 179.48199951648712,
+      "box_width": 232.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "hcw-c-30",
+      "label": "Fail → omit edge",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 196.50799918174744,
+      "box_width": 228.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "hcw-c-32",
+      "label": "pass",
+      "font_size": 22.659091031871554,
+      "original_font_size": 26.0,
+      "width": 47.856,
+      "box_width": 49.0,
+      "line_heights": [
+        27.190909238245865
+      ]
+    },
+    {
+      "id": "hcw-c-33",
+      "label": "SOOA \\(\\displaystyle a_{ij}\\)",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 112.36799955368042,
+      "box_width": 226.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "hcw-c-36",
+      "label": "C70",
+      "font_size": 25.0,
+      "original_font_size": 25.0,
+      "width": 45.84999978542328,
+      "box_width": 50.0,
+      "line_heights": [
+        30.0
+      ]
+    },
+    {
+      "id": "hcw-c-37",
+      "label": "C68",
+      "font_size": 25.0,
+      "original_font_size": 25.0,
+      "width": 45.84999978542328,
+      "box_width": 50.0,
+      "line_heights": [
+        30.0
+      ]
+    },
+    {
+      "id": "hcw-c-39",
+      "label": "\\(\\displaystyle \\ell_{ij}\\)",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 27.0,
+      "box_width": 67.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "hcw-c-40",
+      "label": "Source \\(\\displaystyle i\\)",
+      "font_size": 24.023543847680887,
+      "original_font_size": 26.0,
+      "width": 91.78513161798496,
+      "box_width": 93.0,
+      "line_heights": [
+        28.828252617217064
+      ]
+    },
+    {
+      "id": "hcw-c-41",
+      "label": "View \\(\\displaystyle j\\)",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 74.56999981403351,
+      "box_width": 95.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "hcw-c-42",
+      "label": "Edge: motion + cost",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 230.51599836349487,
+      "box_width": 245.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "hcw-c-44",
+      "label": "Node: view + mask \\(\\displaystyle G_j\\)",
+      "font_size": 23.04598227776912,
+      "original_font_size": 26.0,
+      "width": 228.72148198718946,
+      "box_width": 230.0,
+      "line_heights": [
+        27.655178733322945
+      ]
+    },
+    {
+      "id": "adp-d-1",
+      "label": "d  Rollout ADP",
+      "font_size": 30.0,
+      "original_font_size": 30.0,
+      "width": 210.0,
+      "box_width": 792.0,
+      "line_heights": [
+        36.0
+      ]
+    },
+    {
+      "id": "adp-d-3",
+      "label": "1  Exact lookahead",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 221.12999832630157,
+      "box_width": 319.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "adp-d-5",
+      "label": "2  Full policy tails",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 197.93799936771393,
+      "box_width": 420.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "adp-d-6",
+      "label": "Safe actions · depth \\(\\displaystyle d\\)",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 251.0419980287552,
+      "box_width": 329.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "adp-d-7",
+      "label": "Deterministic greedy \\(\\displaystyle \\mu\\)",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 260.16599929332733,
+      "box_width": 430.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "adp-d-9",
+      "label": "Leaves",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 83.82399940490723,
+      "box_width": 91.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "adp-d-21",
+      "label": "\\(\\displaystyle s\\)",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 13.0,
+      "box_width": 50.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "adp-d-34",
+      "label": "Goal within budget",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 215.33199858665466,
+      "box_width": 217.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "adp-d-35",
+      "label": "\\(\\displaystyle \\widehat{V}_0(s)=\\sum\\ell\\)",
+      "font_size": 28.0,
+      "original_font_size": 28.0,
+      "width": 148.0,
+      "box_width": 193.0,
+      "line_heights": [
+        40.0
+      ]
+    },
+    {
+      "id": "adp-d-37",
+      "label": "No completion",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 166.16599929332733,
+      "box_width": 217.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "adp-d-38",
+      "label": "\\(\\displaystyle \\widehat{V}_0(s)=+\\infty\\)",
+      "font_size": 28.0,
+      "original_font_size": 28.0,
+      "width": 146.0,
+      "box_width": 193.0,
+      "line_heights": [
+        33.6
+      ]
+    },
+    {
+      "id": "adp-d-39",
+      "label": "\\(\\displaystyle a\\in\\mathcal{U}_s(s)\\)",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 101.0,
+      "box_width": 269.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "adp-d-40",
+      "label": "Until goal or budget limit",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 278.87599873542786,
+      "box_width": 427.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "adp-d-44",
+      "label": "3  Bellman backup · discard \\(\\displaystyle +\\infty\\) actions",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 463.1819976568222,
+      "box_width": 690.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "adp-d-46",
+      "label": "\\(\\displaystyle \\widehat{Q}_d(s,a)=\\ell_{ja}+\\widehat{V}_{d-1}(f(s,a))\\)",
+      "font_size": 28.0,
+      "original_font_size": 28.0,
+      "width": 352.0,
+      "box_width": 680.0,
+      "line_heights": [
+        37.0
+      ]
+    },
+    {
+      "id": "235",
+      "label": "e  Replanning",
+      "font_size": 30.0,
+      "original_font_size": 30.0,
+      "width": 196.70999944210052,
+      "box_width": 290.0,
+      "line_heights": [
+        36.0
+      ]
+    },
+    {
+      "id": "237",
+      "label": "First action \\(\\displaystyle a^\\star\\)",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 171.36799955368042,
+      "box_width": 270.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "238",
+      "label": "Minimum finite \\(\\displaystyle \\widehat{Q}_d(s,a)\\)",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 265.7979997396469,
+      "box_width": 270.0,
+      "line_heights": [
+        33.0
+      ]
+    },
+    {
+      "id": "242",
+      "label": "Append arc + update",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 242.1119978427887,
+      "box_width": 270.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "243",
+      "label": "\\(\\displaystyle s^{\\prime}=f(s,a^\\star)\\)",
+      "font_size": 28.0,
+      "original_font_size": 28.0,
+      "width": 154.0,
+      "box_width": 270.0,
+      "line_heights": [
+        33.6
+      ]
+    },
+    {
+      "id": "246",
+      "label": "Required goal\nreached?",
+      "font_size": 23.67875,
+      "original_font_size": 26.0,
+      "width": 147.40021790318193,
+      "box_width": 230.0,
+      "line_heights": [
+        28.4145,
+        28.4145
+      ]
+    },
+    {
+      "id": "248",
+      "label": "Yes",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 44.79799973964691,
+      "box_width": 70.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "249",
+      "label": "Planned route",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 161.87599873542786,
+      "box_width": 296.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "251",
+      "label": "z (m)",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 59.20200026035309,
+      "box_width": 88.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "253",
+      "label": "-60",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 37.56999981403351,
+      "box_width": 48.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "255",
+      "label": "0",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 14.455999851226807,
+      "box_width": 48.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "257",
+      "label": "60",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 28.911999702453613,
+      "box_width": 48.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "258",
+      "label": "-80",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 37.56999981403351,
+      "box_width": 40.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "259",
+      "label": "0",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 14.455999851226807,
+      "box_width": 40.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "260",
+      "label": "60",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 28.911999702453613,
+      "box_width": 40.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "261",
+      "label": "x (m)",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 59.20200026035309,
+      "box_width": 90.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "367",
+      "label": "Required targets: 9/9",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 242.78799843788147,
+      "box_width": 301.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "369",
+      "label": "No",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 33.2279999256134,
+      "box_width": 43.0,
+      "line_heights": [
+        31.2
+      ]
+    },
+    {
+      "id": "371",
+      "label": "State update and replan",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 277.5239975452423,
+      "box_width": 352.0,
+      "line_heights": [
+        31.2
+      ]
+    }
+  ],
+  "live_drawio_rendering": "Not verified; native/source parity and PDF rendering are checked separately.",
+  "visual_review": "passed: standalone figure and manuscript page inspected; no clipped labels or annotation overlap"
+}

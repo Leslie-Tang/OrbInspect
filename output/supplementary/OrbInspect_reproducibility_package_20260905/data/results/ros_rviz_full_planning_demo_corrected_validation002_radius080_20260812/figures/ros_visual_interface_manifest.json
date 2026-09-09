@@ -1,0 +1,38 @@
+{
+  "camera_elapsed_seconds": 131.6740961074829,
+  "interpretation": "Synchronized views from the accepted corrected full-task run; Gazebo is visual-only and ROS HCW dynamics is the state truth.",
+  "mesh_audit_passed": true,
+  "method": "adaptive_rollout_adp",
+  "minimum_body_clearance_m": 5.692127720480195,
+  "outputs_sha256": {
+    "OrbInspectLatex/figures/ros_visual_interface.pdf": "96f5078bddb841d4a47e19fc2a516e01b24997c72ded70f947fc3103bdffbe5c",
+    "OrbInspectLatex/figures/ros_visual_interface.png": "096e360339b63900fbc1ebd03d1f58a03419e45766dfd26b9cec2c20514c1421"
+  },
+  "rviz_elapsed_seconds": 125.0,
+  "scenario_id": "validation_002",
+  "schema_version": "orbinspect-corrected-ros-visual-interface/v2",
+  "script_sha256": "2b60e88ec5588180666a1c05fa07c238341cf4716780acaa1ac2470fb8311e3b",
+  "source_run": "data/results/ros_rviz_full_planning_demo_corrected_validation002_radius080_20260812",
+  "sources_sha256": {
+    "data/results/ros_rviz_full_planning_demo_corrected_validation002_radius080_20260812/config_snapshot/video_timing.json": "7c71c744f0ce77b02751503b21996b55ec17c1a06e929d42dd161333924f49ec",
+    "data/results/ros_rviz_full_planning_demo_corrected_validation002_radius080_20260812/mesh_execution_audit.json": "9ac1b2365d0c61a512059877c8770bce3c1110460e7c3e91182619787a8544e3",
+    "data/results/ros_rviz_full_planning_demo_corrected_validation002_radius080_20260812/raw/camera_sensor_raw.mp4": "7a40f54932604510ecd72acb4e46e9801e80a7eebb4c5e6e47aa2c68a05bd4c1",
+    "data/results/ros_rviz_full_planning_demo_corrected_validation002_radius080_20260812/raw/rviz_window_raw.mp4": "8930bc2d82a491ef5a39a6a63de06ae8daa6e891fd684078334454df35b551fc",
+    "data/results/ros_rviz_full_planning_demo_corrected_validation002_radius080_20260812/summary.json": "602d690828877c21a05e64592af54866ae648443e0a809c6e796d28356f5b4bf",
+    "data/results/ros_rviz_full_planning_demo_corrected_validation002_radius080_20260812/videos/video_manifest.json": "3b1e7619ae60e538b7d3202dd9244e31c695472817e42f29127c47573dc1e51e"
+  },
+  "vehicle_bounding_radius_m": 0.8,
+  "verification": {
+    "coverage_ratio": 0.8133146978144941,
+    "credited_actions": 10,
+    "current_waypoint_id": "",
+    "current_waypoint_index": 10,
+    "event": "mission_complete",
+    "failed_actions": 0,
+    "reason": "all_execution_gates_passed",
+    "state": "complete",
+    "success": true,
+    "time": 900.006570665
+  },
+  "video_sha256": "0b954553816c2a4bb1a398c111958e75bf8ed944d7550b39e82897766182b1a7"
+}

@@ -1,0 +1,172 @@
+{
+  "adaptive_rollout_depth": 3,
+  "aggregates": [
+    {
+      "goal_coverage": 0.95,
+      "mean_safe_action_evaluations": 177808.40740740742,
+      "mean_successful_coverage": 0.9595523944527767,
+      "mean_successful_delta_v": 17.264255591240662,
+      "mean_successful_graph_cost": 142.35413168127297,
+      "mean_successful_selected_count": 13.043478260869565,
+      "mean_successful_unweighted_inspectable_coverage": 0.9512195121951219,
+      "mean_successful_whole_surface_coverage": 0.43333333333333335,
+      "median_online_time_s": 0.7437398420006502,
+      "planner_failure_count": 4,
+      "required_compliance_count": 23,
+      "requirement": "coverage_only",
+      "scenario_count": 30,
+      "sentinel_compliance_count": 23,
+      "sentinel_compliance_rate_successful": 1.0,
+      "structural_failure_count": 3,
+      "structurally_feasible_count": 27,
+      "structurally_feasible_rate": 0.9,
+      "success_count": 23,
+      "success_rate_all": 0.7666666666666667,
+      "success_rate_structurally_feasible": 0.8518518518518519
+    },
+    {
+      "goal_coverage": 0.95,
+      "mean_safe_action_evaluations": 177808.40740740742,
+      "mean_successful_coverage": 0.9595523944527767,
+      "mean_successful_delta_v": 17.264255591240662,
+      "mean_successful_graph_cost": 142.35413168127297,
+      "mean_successful_selected_count": 13.043478260869565,
+      "mean_successful_unweighted_inspectable_coverage": 0.9512195121951219,
+      "mean_successful_whole_surface_coverage": 0.43333333333333335,
+      "median_online_time_s": 0.7326724249869585,
+      "planner_failure_count": 4,
+      "required_compliance_count": 23,
+      "requirement": "six_spatial_sentinels",
+      "scenario_count": 30,
+      "sentinel_compliance_count": 23,
+      "sentinel_compliance_rate_successful": 1.0,
+      "structural_failure_count": 3,
+      "structurally_feasible_count": 27,
+      "structurally_feasible_rate": 0.9,
+      "success_count": 23,
+      "success_rate_all": 0.7666666666666667,
+      "success_rate_structurally_feasible": 0.8518518518518519
+    },
+    {
+      "goal_coverage": 0.98,
+      "mean_safe_action_evaluations": 135308.05263157896,
+      "mean_successful_coverage": 0.9805143785085296,
+      "mean_successful_delta_v": 19.505742425733878,
+      "mean_successful_graph_cost": 160.77385802746227,
+      "mean_successful_selected_count": 13.6,
+      "mean_successful_unweighted_inspectable_coverage": 0.975609756097561,
+      "mean_successful_whole_surface_coverage": 0.4444444444444444,
+      "median_online_time_s": 0.5091662219783757,
+      "planner_failure_count": 9,
+      "required_compliance_count": 10,
+      "requirement": "coverage_only",
+      "scenario_count": 30,
+      "sentinel_compliance_count": 10,
+      "sentinel_compliance_rate_successful": 1.0,
+      "structural_failure_count": 11,
+      "structurally_feasible_count": 19,
+      "structurally_feasible_rate": 0.6333333333333333,
+      "success_count": 10,
+      "success_rate_all": 0.3333333333333333,
+      "success_rate_structurally_feasible": 0.5263157894736842
+    },
+    {
+      "goal_coverage": 0.98,
+      "mean_safe_action_evaluations": 135308.05263157896,
+      "mean_successful_coverage": 0.9805143785085296,
+      "mean_successful_delta_v": 19.505742425733878,
+      "mean_successful_graph_cost": 160.77385802746227,
+      "mean_successful_selected_count": 13.6,
+      "mean_successful_unweighted_inspectable_coverage": 0.975609756097561,
+      "mean_successful_whole_surface_coverage": 0.4444444444444444,
+      "median_online_time_s": 0.49471530999289826,
+      "planner_failure_count": 9,
+      "required_compliance_count": 10,
+      "requirement": "six_spatial_sentinels",
+      "scenario_count": 30,
+      "sentinel_compliance_count": 10,
+      "sentinel_compliance_rate_successful": 1.0,
+      "structural_failure_count": 11,
+      "structurally_feasible_count": 19,
+      "structurally_feasible_rate": 0.6333333333333333,
+      "success_count": 10,
+      "success_rate_all": 0.3333333333333333,
+      "success_rate_structurally_feasible": 0.5263157894736842
+    }
+  ],
+  "evaluation_splits": [
+    "test"
+  ],
+  "goals": [
+    0.95,
+    0.98
+  ],
+  "inspectable_target_count": 41,
+  "max_steps": 14,
+  "mesh_target_count": 90,
+  "node_count": 24,
+  "schema_version": "orbinspect-high-coverage-key-targets/v1",
+  "sentinel_selection_splits": [
+    "ood",
+    "test"
+  ],
+  "sentinels": [
+    {
+      "criterion": "min_x",
+      "observable_in_selection_scenarios": 50,
+      "position_x": -19.535295100212096,
+      "position_y": 9.276899007558823,
+      "position_z": 16.242956390790642,
+      "target_id": "mesh_00010",
+      "visible_node_count": 3
+    },
+    {
+      "criterion": "max_x",
+      "observable_in_selection_scenarios": 50,
+      "position_x": 24.66450081573286,
+      "position_y": -27.133142238102455,
+      "position_z": 39.7583108252287,
+      "target_id": "mesh_00015",
+      "visible_node_count": 5
+    },
+    {
+      "criterion": "min_y",
+      "observable_in_selection_scenarios": 50,
+      "position_x": 23.2825708853252,
+      "position_y": -27.647872935913814,
+      "position_z": -39.75828767657279,
+      "target_id": "mesh_00059",
+      "visible_node_count": 2
+    },
+    {
+      "criterion": "max_y",
+      "observable_in_selection_scenarios": 50,
+      "position_x": -13.48911227155204,
+      "position_y": 36.042552825726695,
+      "position_z": 39.758293051123616,
+      "target_id": "mesh_00019",
+      "visible_node_count": 3
+    },
+    {
+      "criterion": "min_z",
+      "observable_in_selection_scenarios": 50,
+      "position_x": -7.871667548018455,
+      "position_y": 29.218841159490427,
+      "position_z": -57.909347450137126,
+      "target_id": "mesh_00053",
+      "visible_node_count": 2
+    },
+    {
+      "criterion": "max_z",
+      "observable_in_selection_scenarios": 50,
+      "position_x": -8.41712626704057,
+      "position_y": 27.255299675852168,
+      "position_z": 57.90932971835136,
+      "target_id": "mesh_00028",
+      "visible_node_count": 4
+    }
+  ],
+  "source_graph_sha256": "e90f40f0aaf87464ad5b5ef6b39979aa3c5f0b7049fe0ec17ad5e5b1a19b0af2",
+  "source_scenarios_sha256": "3f59a5e2e8dab0c2dddb9538321ab5f8890d15b8bfc9fcf5933096e2d5a5b920",
+  "source_study_root": "data/results/adp_future_full_transform_radius080_20260812"
+}

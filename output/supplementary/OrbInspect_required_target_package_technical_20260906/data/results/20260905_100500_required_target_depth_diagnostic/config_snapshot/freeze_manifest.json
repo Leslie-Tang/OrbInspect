@@ -1,0 +1,69 @@
+{
+  "classification": "post_selection_user_requested_validation_diagnostic",
+  "completion_filter": "Keep all twelve scenarios at each depth, including visibility-impossible cases.",
+  "depth_selection": "Post-selection diagnostic; depth three was already fixed and evaluated.",
+  "diagnostic_depths": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "expected_plan_count": 72,
+  "frozen_at_utc": "2026-09-05T10:07:46.071662+00:00",
+  "input_hashes": {
+    "config_snapshot/base_experiment_config.json": "fac496ad6874c03e8c35be6a91e7b63aed3c7fa099d2a8321ae9ba59a57e1cb4",
+    "config_snapshot/required_target_depth_diagnostic.yaml": "45311af6815b61fe03dac7023a64b978000806354284675a6313cfef7b120ecc",
+    "config_snapshot/required_target_study.yaml": "83b43b1ddd59679d1b42191c81f339e3036f96eb0af25fb9ad7a45a5ae38f45b",
+    "config_snapshot/required_targets.json": "6388780d64571b7f970f9ba69c07a03db1427236db11122daf65bfaf6f49dcd2",
+    "config_snapshot/runtime_environment.json": "9863ba4b2b1b24128c351faadd277ef86f7c4593fdcb51bcbcc829feb0b056bd",
+    "raw/hcw_graph.json": "e90f40f0aaf87464ad5b5ef6b39979aa3c5f0b7049fe0ec17ad5e5b1a19b0af2",
+    "raw/scenarios.json": "97cf0d10b90573cd780797a2c13331b49dea98000f9cf50bacb381aa06af238f",
+    "raw/target_positions.csv": "73810927ffd53d7eff5a0f3fd46ac4cb6776a9482d47c1d1c05c833e3e4c006a"
+  },
+  "observation_time_scope": "Observations are presumed stabilized with exposure completed a priori; mission_duration_s is transfer-only and adds no modeled exposure duration.",
+  "primary_profile": "required09",
+  "primary_test_policy_changed": false,
+  "primary_test_results_recomputed": false,
+  "reference_depth": 3,
+  "required_target_ids": [
+    "mesh_00055",
+    "mesh_00052",
+    "mesh_00059",
+    "mesh_00007",
+    "mesh_00001",
+    "mesh_00079",
+    "mesh_00033",
+    "mesh_00015",
+    "mesh_00019"
+  ],
+  "scenario_count": 12,
+  "scenario_ids": [
+    "required09_validation_000",
+    "required09_validation_001",
+    "required09_validation_002",
+    "required09_validation_003",
+    "required09_validation_004",
+    "required09_validation_005",
+    "required09_validation_006",
+    "required09_validation_007",
+    "required09_validation_008",
+    "required09_validation_009",
+    "required09_validation_010",
+    "required09_validation_011"
+  ],
+  "screen_count_scope": "safe_action_evaluations counts ADP screens only and excludes the separate preliminary greedy-base call.",
+  "source_hashes": {
+    "OrbInspectLatex/scripts/run_required_target_confirmation.py": "54433d050bb01b23e89e9ee5e38e72f69a02f745d39d1a7f734b80a5c9fec792",
+    "OrbInspectLatex/scripts/run_required_target_depth_diagnostic.py": "1f7ae2e4a87909371a6ca6b5a6aa84ffc1517783f6dd21fb433fbe5d3e7e5199",
+    "OrbInspectLatex/scripts/run_required_target_study.py": "9f4152764dd781417b9721f74620c9fdd643a17c7fc59dd949993907ab42f9c0",
+    "src/orbinspect_guidance/orbinspect_guidance/advanced_safe_planner.py": "15e9d3cbb78ddcef69105c34badbb05e73a559ad7683e544de72ca598dc806f2",
+    "src/orbinspect_guidance/orbinspect_guidance/offline_adp_superiority_study.py": "1db2aba801c3f57153367d3bf98f9ea7c2f3db06bfc46a118ea8f445ef111601"
+  },
+  "source_scenarios_sha256": "074ff868201907242ff4954ff6adc932a254b6ddcee5f1b52d64f31669f163ae",
+  "source_study": "data/results/20260905_101500_required_target_confirmation",
+  "source_validation_results_sha256": "f56b3246530fa8e720425b3f2ee40ac58876583bc82830c041182f13b5f0488e",
+  "study_name": "required_target_depth_one_to_six_diagnostic",
+  "timing_scope": "online_time_s includes standalone greedy-base construction plus ADP planning; graph loading and result serialization are excluded."
+}

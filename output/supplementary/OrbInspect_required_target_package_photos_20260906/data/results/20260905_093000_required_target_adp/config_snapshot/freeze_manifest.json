@@ -1,0 +1,33 @@
+{
+  "depth_selection": "Depth three fixed in advance; all validation depths descriptive.",
+  "failure_penalty": "cost + 500*required_missing_fraction + 500*not_required_complete",
+  "frozen_at_utc": "2026-09-05T09:32:41.812336+00:00",
+  "input_hashes": {
+    "config_snapshot/required_target_study.yaml": "7cddf250e1ba3099ff5f94efb6f0829a3bfa542bedd520496f95f6a43a9074f7",
+    "config_snapshot/required_targets.json": "766f7270419ea7c95eba350a0f19ef27636feb07b86d2ffbefe7a5cf725f8ad3",
+    "raw/hcw_graph.json": "e90f40f0aaf87464ad5b5ef6b39979aa3c5f0b7049fe0ec17ad5e5b1a19b0af2",
+    "raw/scenarios.json": "d30dcb734b5fe118d2429cec6d3eea62cb128c91a4d2391f4e56bf0eda722342",
+    "raw/target_positions.csv": "73810927ffd53d7eff5a0f3fd46ac4cb6776a9482d47c1d1c05c833e3e4c006a"
+  },
+  "primary_profile": "required09",
+  "prior_scenario_archives_scanned": [
+    "data/results/adp_depth_corrected_postselection_d1_20260905/raw/scenarios.json",
+    "data/results/adp_depth_corrected_postselection_d2_20260905/raw/scenarios.json",
+    "data/results/adp_depth_corrected_postselection_d3_20260905/raw/scenarios.json",
+    "data/results/adp_depth_corrected_postselection_d4_20260905/raw/scenarios.json",
+    "data/results/adp_depth_corrected_postselection_d5_20260905/raw/scenarios.json",
+    "data/results/adp_depth_corrected_postselection_d6_20260905/raw/scenarios.json",
+    "data/results/adp_future_full_transform_radius080_20260812/raw/scenarios.json"
+  ],
+  "prior_seed_count": 86,
+  "rejected_scenario_count": 0,
+  "scenario_count": 276,
+  "scenario_sampling": "Unconditional; no resampling for missing visibility or failed base policy.",
+  "source_graph_sha256": "e90f40f0aaf87464ad5b5ef6b39979aa3c5f0b7049fe0ec17ad5e5b1a19b0af2",
+  "source_hashes": {
+    "OrbInspectLatex/scripts/run_required_target_study.py": "9f4152764dd781417b9721f74620c9fdd643a17c7fc59dd949993907ab42f9c0",
+    "src/orbinspect_guidance/orbinspect_guidance/advanced_safe_planner.py": "15e9d3cbb78ddcef69105c34badbb05e73a559ad7683e544de72ca598dc806f2",
+    "src/orbinspect_guidance/orbinspect_guidance/offline_adp_superiority_study.py": "1db2aba801c3f57153367d3bf98f9ea7c2f3db06bfc46a118ea8f445ef111601"
+  },
+  "visibility_bound": "Necessary visibility condition only; not a feasibility certificate."
+}

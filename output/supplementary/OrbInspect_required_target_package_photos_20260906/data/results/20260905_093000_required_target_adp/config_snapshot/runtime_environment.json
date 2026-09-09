@@ -1,0 +1,8 @@
+{
+  "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "machine": "arm64",
+  "processor": "Apple M4",
+  "python": "3.14.0 (v3.14.0:ebf955df7a8, Oct 7 2025, 08:20:14) [Clang 16.0.0 (clang-1600.0.26.6)]",
+  "numpy": "2.3.4",
+  "runtime_note": "Offline graph planning measured sequentially on the author workstation; no ROS runtime or hardware flight claim. Each timing includes construction of the shared deterministic base route."
+}

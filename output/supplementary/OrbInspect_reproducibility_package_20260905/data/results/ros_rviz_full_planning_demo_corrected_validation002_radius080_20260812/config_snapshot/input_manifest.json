@@ -1,0 +1,71 @@
+{
+  "exporter_sha256": "c763e120e5fb84cdfbaa7ce8a8b872dc14a79063bd4adb7e104c45d6cdcae75c",
+  "git_revision": "e27343b4c82df14fd460a1ec0091002120fee242",
+  "integration_dt": 3.0,
+  "max_acceleration": 0.06,
+  "mean_motion": 0.0011313666536110225,
+  "mesh_sha256": "26dba905b4b7555edbcb0c5f5a61b5c18659f5166076ab27dbb0e64025759fca",
+  "mesh_transform": "full_gltf_scene_hierarchy_then_sdf_pitch_90_scale",
+  "methods": [
+    "adaptive_rollout_adp"
+  ],
+  "output_files_sha256": {
+    "attitude.csv": "e177a8833d6bb20992591a6f6da4f7d7fdab47e50d9ce0b7cc9065e20aec547d",
+    "trajectory.csv": "58f97bae0c8153433a8ceb211754682ed1539b97ec8c6fd82fc5f4fab8bc2795",
+    "viewpoints.csv": "99c0b1ba115117771c19a7384e797055a8a726b2a684417b55fba21d8b63eb6b"
+  },
+  "route_count": 1,
+  "routes": [
+    {
+      "action_count": 10,
+      "duration_s": 900.0,
+      "initial_state": [
+        0.0,
+        -35.0,
+        10.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "method": "adaptive_rollout_adp",
+      "metrics_archived": false,
+      "planned_coverage": 0.8133146978144941,
+      "planned_delta_v": 11.666088217139569,
+      "planned_graph_cost": 96.27320105738197,
+      "planned_min_clearance": 2.8075398733306414,
+      "planned_peak_input": 0.042536150420512585,
+      "route_node_ids": [
+        "cand_0005",
+        "cand_0010",
+        "cand_0070",
+        "cand_0068",
+        "cand_0021",
+        "cand_0016",
+        "cand_0009",
+        "cand_0052",
+        "cand_0055",
+        "cand_0051"
+      ],
+      "scenario_id": "validation_002",
+      "scenario_seed": 10734,
+      "split": "validation",
+      "success": true
+    }
+  ],
+  "safety_margin": 2.0,
+  "scenario_count": 1,
+  "schema_version": "orbinspect-ros-verification-input/v2",
+  "source_files_sha256": {
+    "hcw_graph.json": "e90f40f0aaf87464ad5b5ef6b39979aa3c5f0b7049fe0ec17ad5e5b1a19b0af2",
+    "heldout_results.csv": "d5696d4075feb0a0d50cd5cd6fb79e9cdb2545720d1d14a004c20b415a0d4f14",
+    "scenarios.json": "3f59a5e2e8dab0c2dddb9538321ab5f8890d15b8bfc9fcf5933096e2d5a5b920"
+  },
+  "source_result_root": "/home/rugang/robotics/projects/OrbInspect/data/results/adp_future_full_transform_radius080_20260812",
+  "splits": [
+    "validation",
+    "test",
+    "ood"
+  ],
+  "transfer_duration": 90.0,
+  "vehicle_bounding_radius": 0.8
+}

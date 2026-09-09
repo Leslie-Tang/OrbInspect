@@ -1,0 +1,20 @@
+{
+  "cpu_brand": "Apple M4",
+  "limitation": "Ordinary desktop background processes and thermal/scheduling variation are not controlled.",
+  "logical_cpu_count": 10,
+  "machine": "arm64",
+  "numpy_version": "2.3.4",
+  "physical_memory_bytes": "17179869184",
+  "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "processor": "arm",
+  "python_executable": "/Users/supocoral/Github/OrbInspect/.venv-review/bin/python",
+  "python_version": "3.14.0 (v3.14.0:ebf955df7a8, Oct  7 2025, 08:20:14) [Clang 16.0.0 (clang-1600.0.26.6)]",
+  "pyyaml_version": "6.0.3",
+  "recorded_at_utc": "2026-09-05T10:07:46.049856+00:00",
+  "scheduling": "One plan at a time in depth-ascending order; no concurrent heavy project jobs requested.",
+  "thread_environment": {
+    "MKL_NUM_THREADS": null,
+    "OMP_NUM_THREADS": null,
+    "OPENBLAS_NUM_THREADS": null
+  }
+}

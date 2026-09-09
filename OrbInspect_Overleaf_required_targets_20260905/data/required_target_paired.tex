@@ -1,0 +1,20 @@
+\begin{table*}[t]
+  \centering
+  \caption{ADP-minus-seeded-local effects. The predeclared penalized endpoint includes all scenarios; physical resources and graph cost use jointly complete pairs. Intervals are percentile 95\% paired-bootstrap intervals; sign tests exclude ties}
+  \label{tab:required-paired}
+  \renewcommand{\arraystretch}{1.08}
+  \setlength{\tabcolsep}{5pt}
+  \footnotesize
+  \begin{tabular}{@{}llrrlrr@{}}
+    \toprule
+    Split & Endpoint & Pairs & Mean difference & 95\% interval & Win/tie/loss & Sign-test $p$ \\
+    \midrule
+    Test & $J_{\mathrm{pen}}$ (all) & 50 & -12.256 & $[-14.155,-10.212]$ & 40/7/3 & $3.02\times10^{-9}$ \\
+    Test & $J$ & 43 & -14.251 & $[-15.715,-12.461]$ & 40/0/3 & $3.02\times10^{-9}$ \\
+    Test & $\Delta v$ (m/s) & 43 & -1.744 & $[-1.923,-1.525]$ & 40/0/3 & $3.02\times10^{-9}$ \\
+    Shifted & $J_{\mathrm{pen}}$ (all) & 30 & -31.999 & $[-91.494,-1.241]$ & 8/21/1 & 0.0391 \\
+    Shifted & $J$ & 8 & -9.890 & $[-14.111,-4.688]$ & 7/0/1 & 0.0703 \\
+    Shifted & $\Delta v$ (m/s) & 8 & -1.207 & $[-1.713,-0.575]$ & 7/0/1 & 0.0703 \\
+    \bottomrule
+  \end{tabular}
+\end{table*}

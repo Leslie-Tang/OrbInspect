@@ -1,0 +1,106 @@
+{"kind":"deck","id":"pr/46atfd","name":"Deck"}
+{"kind":"layout","layoutId":"/ppt/slideMasters/slideMaster1.xml","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout1.xml","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/y90nupkv","slide":1,"title":"A","textShapes":36}
+{"kind":"shape","id":"sh/i1w3yp8f","slide":1,"name":"flow-rightArrow","bbox":[699,224,42,44]}
+{"kind":"shape","id":"sh/547294r6","slide":1,"name":"flow-downArrow","bbox":[1052,467,44,42]}
+{"kind":"shape","id":"sh/k3yl0zql","slide":1,"name":"flow-leftArrow","bbox":[699,704,42,44]}
+{"kind":"shape","id":"sh/7qp4be9c","slide":1,"name":"panel-A-surface","bbox":[24,24,684,452]}
+{"kind":"textbox","id":"sh/65g3298r","slide":1,"name":"panel-A-badge","text":"A","textPreview":"A","textChars":1,"textLines":1,"bbox":[42,40,48,48]}
+{"kind":"textbox","id":"sh/ts7md4r2","slide":1,"name":"panel-A-title","text":"Candidate observations around the structure","textPreview":"Candidate observations around the structure","textChars":43,"textLines":1,"bbox":[106,39,580,50]}
+{"kind":"shape","id":"sh/sryl4zqx","slide":1,"name":"panel-B-surface","bbox":[732,24,684,452]}
+{"kind":"textbox","id":"sh/fu94fe98","slide":1,"name":"panel-B-badge","text":"B","textPreview":"B","textChars":1,"textLines":1,"bbox":[750,40,48,48]}
+{"kind":"textbox","id":"sh/utg3698n","slide":1,"name":"panel-B-title","text":"Fixed camera-valid mask at each observation","textPreview":"Fixed camera-valid mask at each observation","textChars":43,"textLines":1,"bbox":[814,39,580,50]}
+{"kind":"shape","id":"sh/wn6dc7eh","slide":1,"name":"panel-C-surface","bbox":[732,500,684,452]}
+{"kind":"textbox","id":"sh/hofulsf2","slide":1,"name":"panel-C-badge","text":"C","textPreview":"C","textChars":1,"textLines":1,"bbox":[750,516,48,48]}
+{"kind":"textbox","id":"sh/ul4vaxgb","slide":1,"name":"panel-C-title","text":"Source-dependent SOOA construction and audits","textPreview":"Source-dependent SOOA construction and audits","textChars":45,"textLines":1,"bbox":[814,515,580,50]}
+{"kind":"shape","id":"sh/vmdcj2xw","slide":1,"name":"panel-D-surface","bbox":[24,500,684,452]}
+{"kind":"textbox","id":"sh/4r6dg7et","slide":1,"name":"panel-D-badge","text":"D","textPreview":"D","textChars":1,"textLines":1,"bbox":[42,516,48,48]}
+{"kind":"textbox","id":"sh/5sfepcfe","slide":1,"name":"panel-D-title","text":"Safe directed graph passed to rollout ADP","textPreview":"Safe directed graph passed to rollout ADP","textChars":41,"textLines":1,"bbox":[106,515,580,50]}
+{"kind":"shape","id":"sh/ipovexwn","slide":1,"name":"A-candidate-shell","bbox":[88,118,520,275]}
+{"kind":"shape","id":"sh/3qxwn2x8","slide":1,"name":"A-safety-shell","bbox":[174,166,348,180]}
+{"kind":"shape","id":"sh/sfqdkrep","slide":1,"name":"A-truss","bbox":[238,248,262,24]}
+{"kind":"shape","id":"sh/dgzetcfa","slide":1,"name":"A-panel-170","bbox":[194,208,74,64]}
+{"kind":"shape","id":"sh/1cvuxc7e","slide":1,"name":"A-panel-256","bbox":[280,208,74,64]}
+{"kind":"shape","id":"sh/0bmd476t","slide":1,"name":"A-panel-392","bbox":[416,208,74,64]}
+{"kind":"shape","id":"sh/zadcv2p8","slide":1,"name":"A-panel-478","bbox":[502,208,74,64]}
+{"kind":"shape","id":"sh/e94v2hon","slide":1,"name":"A-core","bbox":[333,194,82,110]}
+{"kind":"shape","id":"sh/90ve1w7q","slide":1,"name":"A-spine","bbox":[356,154,36,190]}
+{"kind":"shape","id":"sh/ozmd8r65","slide":1,"name":"A-candidate-1","bbox":[123,221,26,26]}
+{"kind":"shape","id":"sh/nydczmpk","slide":1,"name":"A-candidate-mark-1","bbox":[131,229,10,10]}
+{"kind":"shape","id":"sh/mx4v6hoz","slide":1,"name":"A-candidate-2","bbox":[187,129,26,26]}
+{"kind":"shape","id":"sh/p4bu5s76","slide":1,"name":"A-candidate-mark-2","bbox":[195,137,10,10]}
+{"kind":"shape","id":"sh/432dwn6l","slide":1,"name":"A-candidate-3","bbox":[339,105,26,26]}
+{"kind":"shape","id":"sh/uxgjq907","slide":1,"name":"A-candidate-mark-3","bbox":[347,113,10,10]}
+{"kind":"shape","id":"sh/vyp0je1s","slide":1,"name":"A-candidate-4","bbox":[495,129,26,26]}
+{"kind":"shape","id":"sh/wzy1szid","slide":1,"name":"A-candidate-mark-4","bbox":[503,137,10,10]}
+{"kind":"shape","id":"sh/h072l4jy","slide":1,"name":"A-candidate-5","bbox":[567,227,26,26]}
+{"kind":"shape","id":"sh/i1gje90j","slide":1,"name":"A-candidate-mark-5","bbox":[575,235,10,10]}
+{"kind":"shape","id":"sh/j2pkne14","slide":1,"name":"A-candidate-6","bbox":[501,345,26,26]}
+{"kind":"shape","id":"sh/43y1gji9","slide":1,"name":"A-candidate-mark-6","bbox":[509,353,10,10]}
+{"kind":"shape","id":"sh/54r2poju","slide":1,"name":"A-candidate-7","bbox":[341,383,26,26]}
+{"kind":"shape","id":"sh/y5wjip0z","slide":1,"name":"A-candidate-mark-7","bbox":[349,391,10,10]}
+{"kind":"shape","id":"sh/z650ba1k","slide":1,"name":"A-candidate-8","bbox":[177,345,26,26]}
+{"kind":"shape","id":"sh/z2xgf6to","slide":1,"name":"A-candidate-mark-8","bbox":[185,353,10,10]}
+{"kind":"shape","id":"sh/e1oz61c3","slide":1,"name":"A-target-1","bbox":[316,246,14,14]}
+{"kind":"shape","id":"sh/14fyhgbe","slide":1,"name":"A-target-2","bbox":[366,208,14,14]}
+{"kind":"shape","id":"sh/036h8but","slide":1,"name":"A-target-3","bbox":[410,260,14,14]}
+{"kind":"shape","id":"sh/nqxgjqtk","slide":1,"name":"A-target-4","bbox":[352,300,14,14]}
+{"kind":"shape","id":"sh/mpozalcz","slide":1,"name":"A-target-5","bbox":[454,238,14,14]}
+{"kind":"shape","id":"sh/9sfylgbq","slide":1,"name":"A-current-state","bbox":[106,389,28,28]}
+{"kind":"textbox","id":"sh/or6hcvu5","slide":1,"name":"A-current-state-label","text":"current state x0","textPreview":"current state x0","textChars":16,"textLines":1,"bbox":[140,387,180,30]}
+{"kind":"textbox","id":"sh/buh0nqtg","slide":1,"name":"A-node-definition","text":"node j = (r_j, q_j)","textPreview":"node j = (r_j, q_j)","textChars":19,"textLines":1,"bbox":[378,406,286,30]}
+{"kind":"textbox","id":"sh/at8zelcb","slide":1,"name":"A-safety-label","text":"mesh clearance >= d_safe","textPreview":"mesh clearance >= d_safe","textChars":24,"textLines":1,"bbox":[271,338,242,30]}
+{"kind":"shape","id":"sh/8zqx4vq9","slide":1,"name":"A-covered-marker","bbox":[56,436,18,18]}
+{"kind":"textbox","id":"sh/t0jyd0ru","slide":1,"name":"A-covered-label","text":"covered target","textPreview":"covered target","textChars":14,"textLines":1,"bbox":[84,432,190,28]}
+{"kind":"shape","id":"sh/6x8f2583","slide":1,"name":"A-uncovered-marker","bbox":[274,436,18,18]}
+{"kind":"textbox","id":"sh/7yhgbq9o","slide":1,"name":"A-uncovered-label","text":"not yet covered","textPreview":"not yet covered","textChars":15,"textLines":1,"bbox":[302,432,190,28]}
+{"kind":"shape","id":"sh/kvqx0vqd","slide":1,"name":"B-camera-body","bbox":[792,156,84,64]}
+{"kind":"shape","id":"sh/lwzy90ry","slide":1,"name":"B-camera-lens","bbox":[864,172,30,30]}
+{"kind":"shape","id":"sh/yt8fyl87","slide":1,"name":"B-target-surface","bbox":[1206,136,102,174]}
+{"kind":"shape","id":"sh/juhg7q9s","slide":1,"name":"B-visible-target","bbox":[1223,242,22,22]}
+{"kind":"shape","id":"sh/wr6xwbq1","slide":1,"name":"B-occluded-target","bbox":[1320,246,22,22]}
+{"kind":"shape","id":"sh/xsfy5grm","slide":1,"name":"B-occluder","bbox":[1292,200,88,70]}
+{"kind":"shape","id":"sh/dc7md8fe","slide":1,"bbox":[876,188,347,65]}
+{"kind":"shape","id":"sh/cby5k3yt","slide":1,"bbox":[876,188,444,69]}
+{"kind":"shape","id":"sh/ra54bix8","slide":1,"name":"B-fov-upper","bbox":[890,174,332,6]}
+{"kind":"shape","id":"sh/q9wnidgn","slide":1,"name":"B-fov-lower","bbox":[890,200,332,64]}
+{"kind":"textbox","id":"sh/5onm98f2","slide":1,"name":"B-range-label","text":"range","textPreview":"range","textChars":5,"textLines":1,"bbox":[1002,120,84,28]}
+{"kind":"textbox","id":"sh/4ne5g3yh","slide":1,"name":"B-fov-label","text":"FOV","textPreview":"FOV","textChars":3,"textLines":1,"bbox":[958,208,70,28]}
+{"kind":"textbox","id":"sh/3m547yxw","slide":1,"name":"B-los-pass-label","text":"LOS pass","textPreview":"LOS pass","textChars":8,"textLines":1,"bbox":[1092,174,130,32]}
+{"kind":"textbox","id":"sh/ilw3etgr","slide":1,"name":"B-los-fail-label","text":"LOS blocked","textPreview":"LOS blocked","textChars":11,"textLines":1,"bbox":[1258,270,140,44]}
+{"kind":"shape","id":"sh/9kr6lsfm","slide":1,"name":"B-mask-box","bbox":[774,332,600,116]}
+{"kind":"textbox","id":"sh/oji5sne1","slide":1,"name":"B-mask-equation","text":"G_j = {target i : range, FOV, incidence, and full-mesh LOS all pass}","textPreview":"G_j = {target i : range, FOV, incidence, and full-mesh LOS all pass}","textChars":68,"textLines":1,"bbox":[794,338,560,52]}
+{"kind":"textbox","id":"sh/6psjmpwj","slide":1,"name":"B-credit-semantics","text":"Coverage is credited only at the prescribed observation; exposure is not integrated.","textPreview":"Coverage is credited only at the prescribed observation; exposure is not integrated.","textChars":84,"textLines":1,"bbox":[794,398,560,46]}
+{"kind":"textbox","id":"sh/7q1kfudo","slide":1,"name":"C-source-node","text":"i","textPreview":"i","textChars":1,"textLines":1,"bbox":[802,630,72,72]}
+{"kind":"textbox","id":"sh/8ra1oze9","slide":1,"name":"C-destination-node","text":"j","textPreview":"j","textChars":1,"textLines":1,"bbox":[1270,630,72,72]}
+{"kind":"shape","id":"sh/ts32h4vu","slide":1,"bbox":[874,666,396,0]}
+{"kind":"shape","id":"sh/ylsjipw7","slide":1,"bbox":[874,666,396,0]}
+{"kind":"textbox","id":"sh/jm1kbuds","slide":1,"name":"C-forward-label","text":"a_ij: finite-duration HCW transfer","textPreview":"a_ij: finite-duration HCW transfer","textChars":34,"textLines":1,"bbox":[908,594,330,54]}
+{"kind":"textbox","id":"sh/kna1kzed","slide":1,"name":"C-reverse-label","text":"a_ji is solved separately; a_ij != a_ji","textPreview":"a_ji is solved separately; a_ij != a_ji","textChars":39,"textLines":1,"bbox":[886,704,374,52]}
+{"kind":"shape","id":"sh/loj2dkvy","slide":1,"name":"C-audit-box","bbox":[780,758,432,166]}
+{"kind":"textbox","id":"sh/ihc3u9cr","slide":1,"name":"C-audit-title","text":"For each directed pair: solve the transfer; store trajectory, controls, and cost.","textPreview":"For each directed pair: solve the transfer; store trajectory, controls, and cost.","textChars":81,"textLines":1,"bbox":[802,768,388,78]}
+{"kind":"textbox","id":"sh/3ilknedw","slide":1,"name":"C-audit-list","text":"Audit input, speed, terminal,\nclearance, and swept crossing.","textPreview":"Audit input, speed, terminal, | clearance, and swept crossing.","textChars":60,"textLines":2,"bbox":[806,854,380,58]}
+{"kind":"shape","id":"sh/rehk7e50","slide":1,"name":"C-pass-box","bbox":[1234,772,136,64]}
+{"kind":"textbox","id":"sh/qd8jy94v","slide":1,"name":"C-pass-text","text":"PASS\nchi_ij = 1","textPreview":"PASS | chi_ij = 1","textChars":15,"textLines":2,"bbox":[1244,780,116,48]}
+{"kind":"shape","id":"sh/d0j29on6","slide":1,"name":"C-fail-box","bbox":[1234,856,136,64]}
+{"kind":"textbox","id":"sh/cfa10jml","slide":1,"name":"C-fail-text","text":"FAIL\nchi_ij = 0","textPreview":"FAIL | chi_ij = 0","textChars":15,"textLines":2,"bbox":[1244,864,116,48]}
+{"kind":"textbox","id":"sh/3ahk3u54","slide":1,"name":"D-node-1","text":"s","textPreview":"s","textChars":1,"textLines":1,"bbox":[225,605,50,50]}
+{"kind":"textbox","id":"sh/298ju94j","slide":1,"name":"D-node-2","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[337,675,50,50]}
+{"kind":"textbox","id":"sh/pcz254na","slide":1,"name":"D-node-3","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[307,809,50,50]}
+{"kind":"textbox","id":"sh/4bq1wzmp","slide":1,"name":"D-node-4","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[153,817,50,50]}
+{"kind":"textbox","id":"sh/f6x0zu58","slide":1,"name":"D-node-5","text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[105,683,50,50]}
+{"kind":"shape","id":"sh/u5ojqpon","slide":1,"bbox":[267.68,647.68,76.64,34.64]}
+{"kind":"shape","id":"sh/kbmh0v25","slide":1,"bbox":[147.68,647.68,84.64,42.64]}
+{"kind":"shape","id":"sh/5cvy903q","slide":1,"bbox":[332,725,30,84]}
+{"kind":"shape","id":"sh/ip4zyl4f","slide":1,"bbox":[203,834,104,8]}
+{"kind":"shape","id":"sh/jadg7ql0","slide":1,"bbox":[147.68,725.68,30.32,91.32]}
+{"kind":"shape","id":"sh/sf6h4v2h","slide":1,"bbox":[155,700,182,8]}
+{"kind":"shape","id":"sh/tgfyd032","slide":1,"bbox":[195.68,717.68,148.64,106.64]}
+{"kind":"textbox","id":"sh/6d4z25kb","slide":1,"name":"D-current-label","text":"current graph state","textPreview":"current graph state","textChars":19,"textLines":1,"bbox":[136,560,228,34]}
+{"kind":"textbox","id":"sh/7edgbalw","slide":1,"name":"D-graph-note","text":"only chi_ij = 1 edges enter the shielded action set A_sh(s_k)","textPreview":"only chi_ij = 1 edges enter the shielded action set A_sh(s_k)","textChars":61,"textLines":1,"bbox":[76,880,370,42]}
+{"kind":"shape","id":"sh/8j2xsbmd","slide":1,"name":"D-adp-box","bbox":[454,642,232,214]}
+{"kind":"textbox","id":"sh/9kby1g3i","slide":1,"name":"D-adp-title","text":"Rollout ADP","textPreview":"Rollout ADP","textChars":11,"textLines":1,"bbox":[472,658,196,42]}
+{"kind":"textbox","id":"sh/yhkza1wv","slide":1,"name":"D-adp-body","text":"depth-3 lookahead\nfeasible completion\nexecute; replan","textPreview":"depth-3 lookahead | feasible completion | execute; replan","textChars":53,"textLines":3,"bbox":[474,720,192,96]}
+{"kind":"shape","id":"sh/jitg36dg","slide":1,"bbox":[387,700,67,49]}
+{"kind":"notes","id":"nt/y90nupkv","slide":1,"text":"[Sources]\n- Local manuscript: /Users/supocoral/Github/OrbInspect/OrbInspectLatex/main.tex, especially the visibility/dwell model (lines 243–260), dynamic feasibility and cost (lines 264–287), SOOA definition and passive audit (lines 289–319), and finite graph (lines 344–372, 465–501).\n- Local implementation: src/orbinspect_safety/orbinspect_safety/keepout_zones.py (station-primitive safety envelope rather than an ellipsoid).\n- All visual elements are native editable PowerPoint shapes; no external image assets are embedded."}

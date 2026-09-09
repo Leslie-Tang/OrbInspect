@@ -1,0 +1,11 @@
+{
+  "manuscript_tex_byte_identical": true,
+  "figure_numbering_unchanged": true,
+  "manuscript_pages": 13,
+  "figure1_page": 3,
+  "page_dimensions_unchanged": true,
+  "new_export_matches_manuscript_asset": true,
+  "no_undefined_references_or_overflow": true,
+  "sha256": "74f6d671f484d15107c90b544b6cb2724e00bba848201106cf202f45fa1aaac6",
+  "visual_review": "passed: all-page contact sheet and affected pages inspected, with Figure 1 checked at 150 dpi"
+}

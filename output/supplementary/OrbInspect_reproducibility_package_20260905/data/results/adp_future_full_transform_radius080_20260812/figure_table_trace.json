@@ -1,0 +1,157 @@
+{
+  "figure_table_trace": [
+    {
+      "artifact_id": "fig-adp-architecture",
+      "caption_claim": "Depth-3 rollout performs shielded policy improvement using an adaptive feasible base value.",
+      "limitations": [
+        "Conceptual algorithm diagram; it is not a quantitative result."
+      ],
+      "output_files": [
+        "adp_rollout_architecture.pdf"
+      ],
+      "source_data": {
+        "dataset_id": "selected-algorithm",
+        "file": "/home/rugang/robotics/projects/OrbInspect/OrbInspectLatex/scripts/generate_adp_future_figures.py"
+      },
+      "supported_manuscript_claims": [
+        {
+          "claim": "The proposed method is viability-preserving rollout ADP, not reversal search.",
+          "locator": "Methods"
+        }
+      ],
+      "transformation": {
+        "hash": "9343bd8413826ee0c2384ed6c13f2294f1467f17e204c1898b3d8a7580694b6a",
+        "script": "/home/rugang/robotics/projects/OrbInspect/OrbInspectLatex/scripts/generate_adp_future_figures.py"
+      }
+    },
+    {
+      "artifact_id": "fig-development-selection",
+      "caption_claim": "Depth 3 had the lowest validation cost while all rollout depths retained mission success.",
+      "limitations": [
+        "Validation selection is not confirmatory evidence."
+      ],
+      "output_files": [
+        "adp_development_selection_a.pdf",
+        "adp_development_selection_b.pdf",
+        "adp_development_selection_c.pdf"
+      ],
+      "source_data": {
+        "dataset_id": "validation-depth-screen",
+        "file": "data/results/adp_dev_radius080_depth1_20260812/raw/heldout_results.csv;data/results/adp_dev_radius080_depth2_20260812/raw/heldout_results.csv;data/results/adp_dev_radius080_depth3_20260812/raw/heldout_results.csv"
+      },
+      "supported_manuscript_claims": [
+        {
+          "claim": "Depth 3 was selected on validation before test access.",
+          "locator": "Experimental protocol"
+        }
+      ],
+      "transformation": {
+        "hash": "9343bd8413826ee0c2384ed6c13f2294f1467f17e204c1898b3d8a7580694b6a",
+        "script": "/home/rugang/robotics/projects/OrbInspect/OrbInspectLatex/scripts/generate_adp_future_figures.py"
+      }
+    },
+    {
+      "artifact_id": "fig-heldout-performance",
+      "caption_claim": "Rollout ADP reduced held-out fuel and graph cost relative to local search on test and shifted scenarios.",
+      "limitations": [
+        "Scenarios are conditioned on incumbent feasibility.",
+        "The shifted split covers node dropout and target priorities only."
+      ],
+      "output_files": [
+        "adp_heldout_performance_a.pdf",
+        "adp_heldout_performance_b.pdf",
+        "adp_heldout_performance_c.pdf",
+        "adp_heldout_performance_d.pdf"
+      ],
+      "source_data": {
+        "dataset_id": "heldout-physical-results",
+        "file": "raw/heldout_results.csv"
+      },
+      "supported_manuscript_claims": [
+        {
+          "claim": "Test mean delta-v fell by 3.96% with 21 wins, four ties, and five losses.",
+          "locator": "Results"
+        },
+        {
+          "claim": "The improvement direction persisted under the shifted split.",
+          "locator": "Results"
+        }
+      ],
+      "transformation": {
+        "hash": "9343bd8413826ee0c2384ed6c13f2294f1467f17e204c1898b3d8a7580694b6a",
+        "script": "/home/rugang/robotics/projects/OrbInspect/OrbInspectLatex/scripts/generate_adp_future_figures.py"
+      }
+    },
+    {
+      "artifact_id": "fig-ablation-safety",
+      "caption_claim": "The fitted critic is not the proposed method; depth-3 rollout reaches every goal while respecting the shared sampled shield.",
+      "limitations": [
+        "Passive drift is disabled.",
+        "Sampled and swept checks do not prove continuous-time robustness."
+      ],
+      "output_files": [
+        "adp_ablation_safety_a.pdf",
+        "adp_ablation_safety_b.pdf",
+        "adp_ablation_safety_c.pdf",
+        "adp_ablation_safety_d.pdf"
+      ],
+      "source_data": {
+        "dataset_id": "heldout-physical-results",
+        "file": "raw/heldout_results.csv"
+      },
+      "supported_manuscript_claims": [
+        {
+          "claim": "Standalone fitted critics failed the held-out success gate.",
+          "locator": "Results"
+        },
+        {
+          "claim": "Every selected edge respected clearance and input thresholds.",
+          "locator": "Results"
+        }
+      ],
+      "transformation": {
+        "hash": "9343bd8413826ee0c2384ed6c13f2294f1467f17e204c1898b3d8a7580694b6a",
+        "script": "/home/rugang/robotics/projects/OrbInspect/OrbInspectLatex/scripts/generate_adp_future_figures.py"
+      }
+    },
+    {
+      "artifact_id": "fig-representative-trajectory",
+      "caption_claim": "A median-effect held-out case illustrates how rollout ADP changes the executed route and cumulative fuel.",
+      "limitations": [
+        "Case selected post hoc by median effect and is illustrative, not inferential."
+      ],
+      "output_files": [
+        "adp_representative_trajectory_a.pdf",
+        "adp_representative_trajectory_b.pdf",
+        "adp_representative_trajectory_c.pdf"
+      ],
+      "source_data": {
+        "dataset_id": "test_013",
+        "file": "raw/representative_case_trajectory.csv;raw/representative_case_progress.csv"
+      },
+      "supported_manuscript_claims": [
+        {
+          "claim": "The aggregate improvement corresponds to a different audited SOOA sequence.",
+          "locator": "Representative case study"
+        }
+      ],
+      "transformation": {
+        "hash": "9343bd8413826ee0c2384ed6c13f2294f1467f17e204c1898b3d8a7580694b6a",
+        "script": "/home/rugang/robotics/projects/OrbInspect/OrbInspectLatex/scripts/generate_adp_future_figures.py"
+      }
+    }
+  ],
+  "vlm_verification": {
+    "issues_found": [
+      "Architecture text overflowed its rounded boxes.",
+      "A panel tag collided with the clearance-axis label.",
+      "The representative-case z-axis label overlapped a panel tag.",
+      "The architecture schematic used g for stage cost although the manuscript reserves g for coverage gain.",
+      "The architecture schematic omitted approximation hats and used state symbols inconsistent with the formal definition.",
+      "Quantitative multi-panel figures used embedded panel letters instead of independent LaTeX subfigures."
+    ],
+    "iterations": 7,
+    "remaining_issues": [],
+    "status": "PASS"
+  }
+}

@@ -1,0 +1,48 @@
+\subsection{Historical Corrected ROS 2 Survey Execution}
+\label{sec:ros-verification-results}
+
+The historical 80\%-survey validation task ran on Ubuntu~24.04.4 with ROS~2 Jazzy,
+Gazebo Harmonic, and RViz2. Gazebo supplied the station/chaser rendering and
+camera image only; the ROS-native HCW node remained the state source of truth.
+The input route was reconstructed from the corrected 24-node graph using the
+complete glTF scene hierarchy and a conservative
+$r_{\mathrm{veh}}=\unit{0.80}{m}$ chaser bounding radius. The route manifest
+records 10 planned SOOAs, \unit{900}{s} mission duration, 81.33\% planned
+coverage, and \unit{2.808}{m} minimum planned finite-body clearance above the
+required \unit{2}{m} margin.
+
+The $5\times$ graphical closed-loop execution credited all 10 terminal
+observations, reached 81.33\% coverage, and completed at mission time
+\unit{900.01}{s} without a failed action. The post-run audit evaluated $18\,918$
+recorded trajectory samples and every intervening segment against all $247\,525$
+fully transformed ISS triangles. No segment crossed the mesh. The smallest
+sampled center distance was \unit{8.506}{m}; after the continuous segment lower
+bound and the \unit{0.80}{m} vehicle radius, the minimum body distance was
+\unit{7.692}{m}, or \unit{5.692}{m} above the required safety margin. Peak
+filtered acceleration was $0.0600~\mathrm{m/s^2}$. Terminal, reference-stream,
+data-presence, acceleration, full-mesh, swept-crossing, and finite-body gates
+all passed.
+
+Fig.~\ref{fig:ros-key-camera-views} links the ten synchronized camera frames
+to their credited positions in two orthogonal projections of the executed trajectory.
+The evidence directory contains six CSV streams, configuration and route manifests,
+the launch log, mesh audit, raw RViz and camera streams, and a 198.3-s annotated video.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.95\linewidth]{figures/ros_key_camera_views_trajectory.pdf}
+  \caption{Historical survey execution: trajectory-linked camera views from
+  the accepted corrected \texttt{validation\_002} task with an 80\% inspectable-coverage goal. Views 1--5 link locally to the radial--cross-track
+  ($x$--$z$) projection, and views 6--10 link to the along-track--cross-track
+  ($y$--$z$) projection; hollow gray markers retain the other observations as
+  context. Inset labels give mission time and cumulative coverage. Dashed gray
+  and solid blue denote planned and executed paths, and the star is the initial
+  state. Clearance is evaluated against the full 3-D mesh and swept path.
+  Gazebo renders the views, ROS HCW dynamics propagate state, and frozen
+  geometric visibility masks determine credited coverage.}
+  \label{fig:ros-key-camera-views}
+\end{figure}
+
+Earlier translation-only ROS results are excluded because the complete glTF
+hierarchy exposed an S4-truss intersection and negative finite-body clearance.
+The retained execution uses the corrected geometry and audit.

@@ -1,0 +1,73 @@
+{
+  "status": "review drafts; manuscript unchanged",
+  "pages": [
+    {
+      "name": "A - Integrated figure",
+      "stem": "A_integrated",
+      "native_cells": 318,
+      "photo_objects": 1,
+      "vector_mesh_facets": 31969,
+      "label_count": 45,
+      "word_count": 121,
+      "width_mm": 182,
+      "height_mm": 106.16666666666667,
+      "min_font_pt": 6.755905511811024,
+      "text_width_warnings": []
+    },
+    {
+      "name": "B1 - Mission-to-plan overview",
+      "stem": "B1_overview",
+      "native_cells": 298,
+      "photo_objects": 1,
+      "vector_mesh_facets": 29271,
+      "label_count": 33,
+      "word_count": 72,
+      "width_mm": 182,
+      "height_mm": 76.91666666666667,
+      "min_font_pt": 6.755905511811024,
+      "text_width_warnings": []
+    },
+    {
+      "name": "B2 - ADP mechanism",
+      "stem": "B2_adp_mechanism",
+      "native_cells": 99,
+      "photo_objects": 0,
+      "vector_mesh_facets": 0,
+      "label_count": 32,
+      "word_count": 131,
+      "width_mm": 182,
+      "height_mm": 89.91666666666667,
+      "min_font_pt": 7.062992125984253,
+      "text_width_warnings": []
+    }
+  ],
+  "evidence_scenario": "required09_test_000",
+  "source_hashes": {
+    "data/results/20260905_101500_required_target_confirmation/raw/hcw_graph.json": "e90f40f0aaf87464ad5b5ef6b39979aa3c5f0b7049fe0ec17ad5e5b1a19b0af2",
+    "data/results/20260905_101500_required_target_confirmation/raw/representative_case_manifest.json": "a10583ba2e32b731dfad868ef1302a448a19790c3863973207cbd36e1267640e",
+    "data/results/20260905_101500_required_target_confirmation/raw/representative_case_trajectory.csv": "78d2b5df766b39dcffef019e36b149e2e46e1afc62dec12e426bacb35cacf78e",
+    "data/results/20260905_101500_required_target_confirmation/raw/target_positions.csv": "73810927ffd53d7eff5a0f3fd46ac4cb6776a9482d47c1d1c05c833e3e4c006a",
+    "data/results/20260905_101500_required_target_confirmation/config_snapshot/base_experiment_config.json": "fac496ad6874c03e8c35be6a91e7b63aed3c7fa099d2a8321ae9ba59a57e1cb4",
+    "src/orbinspect_description/models/iss_real/meshes/ISS_stationary.glb": "26dba905b4b7555edbcb0c5f5a61b5c18659f5166076ab27dbb0e64025759fca",
+    "src/orbinspect_description/models/iss_real/model.sdf": "2c54fb53e81a6423c2d3b4e396a6c2ea1f3b41e6cb8db1137ebade5d8ab50e47"
+  },
+  "preserved_sha256": {
+    "OrbInspectLatex/main.tex": "b9f55331f459eba887a0f2f18c4710e299e146f0783c84ccae2b75ccb7b0147d",
+    "OrbInspectLatex/main.pdf": "2ddbe42ab1a3b822972042d12e0c001d92e5b2bda67493174b06e711b305b281",
+    "OrbInspectLatex/figures/required_target/orbinspect_framework.drawio": "835a81472933fd08b44ecdc631b03b5504b0e067246f029d4ab9e9c301262c04",
+    "OrbInspectLatex/figures/required_target/orbinspect_framework.pdf": "bbb00d620f0ebe19c2b6ff814fd05af09fa044bda3868354ce551a03bd7a0e31"
+  },
+  "manuscript_and_current_figure_unchanged": true,
+  "validation": {
+    "native_pages": 3,
+    "separate_files_match_master": true,
+    "native_stencil_paths_validated": true,
+    "original_camera_bytes_preserved": true,
+    "archived_sources_and_current_paper_hashes_match": true,
+    "all_graph_arcs_are_archived_passed_audits": true,
+    "required_target_count_and_route_record_match": true,
+    "review_pdf_pages_and_text_bounds_checked": true,
+    "drawio_browser_import": "All three pages opened and visually inspected; native shapes and editable equations rendered.",
+    "equation_export": "Vector outlines; corresponding draw.io equations are editable text."
+  }
+}

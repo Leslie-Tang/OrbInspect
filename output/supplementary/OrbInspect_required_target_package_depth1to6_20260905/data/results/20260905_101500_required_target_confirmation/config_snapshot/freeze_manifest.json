@@ -1,0 +1,59 @@
+{
+  "comparator": "Three-pass audited local search seeded by complete depth-one ADP, not a non-ADP baseline.",
+  "depth_selection": "Depth three unchanged; validation depths are descriptive only.",
+  "design_reason": "Original campaign exposed failed greedy seeds; comparator changed before new scenarios were evaluated.",
+  "failure_penalty": "cost + 500*required_missing_fraction + 500*not_required_complete",
+  "fallback": "ADP3 receives no one-step fallback.",
+  "frozen_at_utc": "2026-09-05T09:43:18.172764+00:00",
+  "input_hashes": {
+    "config_snapshot/base_experiment_config.json": "fac496ad6874c03e8c35be6a91e7b63aed3c7fa099d2a8321ae9ba59a57e1cb4",
+    "config_snapshot/required_target_study.yaml": "83b43b1ddd59679d1b42191c81f339e3036f96eb0af25fb9ad7a45a5ae38f45b",
+    "config_snapshot/required_targets.json": "6388780d64571b7f970f9ba69c07a03db1427236db11122daf65bfaf6f49dcd2",
+    "raw/hcw_graph.json": "e90f40f0aaf87464ad5b5ef6b39979aa3c5f0b7049fe0ec17ad5e5b1a19b0af2",
+    "raw/scenarios.json": "074ff868201907242ff4954ff6adc932a254b6ddcee5f1b52d64f31669f163ae",
+    "raw/target_positions.csv": "73810927ffd53d7eff5a0f3fd46ac4cb6776a9482d47c1d1c05c833e3e4c006a"
+  },
+  "methods": [
+    "incumbent",
+    "one_step_adp",
+    "seeded_local_search",
+    "adaptive_rollout_adp",
+    "coverage_only80"
+  ],
+  "predecessor_study": "data/results/20260905_093000_required_target_adp",
+  "primary_comparator": "seeded_local_search",
+  "primary_endpoint": "paired_all_scenario_penalized_graph_cost_difference",
+  "primary_profile": "required09",
+  "prior_scenario_archives_scanned": [
+    "data/results/20260905_093000_required_target_adp/raw/scenarios.json",
+    "data/results/adp_depth_corrected_postselection_d1_20260905/raw/scenarios.json",
+    "data/results/adp_depth_corrected_postselection_d2_20260905/raw/scenarios.json",
+    "data/results/adp_depth_corrected_postselection_d3_20260905/raw/scenarios.json",
+    "data/results/adp_depth_corrected_postselection_d4_20260905/raw/scenarios.json",
+    "data/results/adp_depth_corrected_postselection_d5_20260905/raw/scenarios.json",
+    "data/results/adp_depth_corrected_postselection_d6_20260905/raw/scenarios.json",
+    "data/results/adp_future_full_transform_radius080_20260812/raw/scenarios.json"
+  ],
+  "prior_seed_count": 362,
+  "rejected_scenario_count": 0,
+  "required_ids_copied_unchanged": [
+    "mesh_00055",
+    "mesh_00052",
+    "mesh_00059",
+    "mesh_00007",
+    "mesh_00001",
+    "mesh_00079",
+    "mesh_00033",
+    "mesh_00015",
+    "mesh_00019"
+  ],
+  "scenario_count": 92,
+  "scenario_sampling": "Unconditional new seeds; requirements never shrink after node loss.",
+  "source_graph_sha256": "e90f40f0aaf87464ad5b5ef6b39979aa3c5f0b7049fe0ec17ad5e5b1a19b0af2",
+  "source_hashes": {
+    "OrbInspectLatex/scripts/run_required_target_confirmation.py": "54433d050bb01b23e89e9ee5e38e72f69a02f745d39d1a7f734b80a5c9fec792",
+    "OrbInspectLatex/scripts/run_required_target_study.py": "9f4152764dd781417b9721f74620c9fdd643a17c7fc59dd949993907ab42f9c0",
+    "src/orbinspect_guidance/orbinspect_guidance/advanced_safe_planner.py": "15e9d3cbb78ddcef69105c34badbb05e73a559ad7683e544de72ca598dc806f2",
+    "src/orbinspect_guidance/orbinspect_guidance/offline_adp_superiority_study.py": "1db2aba801c3f57153367d3bf98f9ea7c2f3db06bfc46a118ea8f445ef111601"
+  }
+}
