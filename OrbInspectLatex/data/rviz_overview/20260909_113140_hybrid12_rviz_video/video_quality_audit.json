@@ -1,0 +1,130 @@
+{
+  "full_video_width": 1920,
+  "full_video_height": 1080,
+  "full_video_fps": "15/1",
+  "full_video_duration_s": 1816.8,
+  "full_video_frames": 27252,
+  "chapters": 12,
+  "observations_checked": [
+    {
+      "camera_psnr_to_source_db": 48.53242886898633,
+      "global_view_psnr_to_source_db": 53.885094880930275,
+      "observation": 1,
+      "video_time_s": 152.33333333333334,
+      "camera_std": 18.127215669183535,
+      "global_std": 46.81794389744443
+    },
+    {
+      "camera_psnr_to_source_db": 43.54046547453179,
+      "global_view_psnr_to_source_db": 53.61330465201612,
+      "observation": 2,
+      "video_time_s": 302.3333333333333,
+      "camera_std": 23.18007871870388,
+      "global_std": 46.832880131423785,
+      "camera_difference_from_previous_view": 17.26783822571525
+    },
+    {
+      "camera_psnr_to_source_db": 46.27095776026765,
+      "global_view_psnr_to_source_db": 53.59417312097381,
+      "observation": 3,
+      "video_time_s": 452.3333333333333,
+      "camera_std": 22.182323627629483,
+      "global_std": 46.823422426626294,
+      "camera_difference_from_previous_view": 17.054648299655707
+    },
+    {
+      "camera_psnr_to_source_db": 49.91473612321269,
+      "global_view_psnr_to_source_db": 54.159820631903756,
+      "observation": 4,
+      "video_time_s": 602.3333333333334,
+      "camera_std": 10.836420568091272,
+      "global_std": 46.81237617368912,
+      "camera_difference_from_previous_view": 12.343152096888488
+    },
+    {
+      "camera_psnr_to_source_db": 46.95120366436654,
+      "global_view_psnr_to_source_db": 54.60159591539135,
+      "observation": 5,
+      "video_time_s": 752.3333333333334,
+      "camera_std": 18.621644206850544,
+      "global_std": 46.79768961207864,
+      "camera_difference_from_previous_view": 11.271585353632961
+    },
+    {
+      "camera_psnr_to_source_db": 50.778315093259174,
+      "global_view_psnr_to_source_db": 56.01528144894161,
+      "observation": 6,
+      "video_time_s": 902.3333333333334,
+      "camera_std": 15.330744169995864,
+      "global_std": 46.79533219200153,
+      "camera_difference_from_previous_view": 11.79802193161402
+    },
+    {
+      "camera_psnr_to_source_db": 48.210449298730076,
+      "global_view_psnr_to_source_db": 54.912482233668285,
+      "observation": 7,
+      "video_time_s": 1052.3333333333333,
+      "camera_std": 21.459550899755577,
+      "global_std": 46.820045263479244,
+      "camera_difference_from_previous_view": 13.188706542979235
+    },
+    {
+      "camera_psnr_to_source_db": 44.5682280976363,
+      "global_view_psnr_to_source_db": 54.00186796543938,
+      "observation": 8,
+      "video_time_s": 1202.3333333333333,
+      "camera_std": 19.094380619078837,
+      "global_std": 46.82321628424716,
+      "camera_difference_from_previous_view": 16.554309197105372
+    },
+    {
+      "camera_psnr_to_source_db": 47.39484129141403,
+      "global_view_psnr_to_source_db": 54.44822236153157,
+      "observation": 9,
+      "video_time_s": 1352.3333333333333,
+      "camera_std": 26.606129322272558,
+      "global_std": 46.83322083008105,
+      "camera_difference_from_previous_view": 19.508082987967676
+    },
+    {
+      "camera_psnr_to_source_db": 49.84736596713462,
+      "global_view_psnr_to_source_db": 56.299342604381124,
+      "observation": 10,
+      "video_time_s": 1502.3333333333333,
+      "camera_std": 28.957950291323538,
+      "global_std": 46.81178389140642,
+      "camera_difference_from_previous_view": 20.01774696328745
+    },
+    {
+      "camera_psnr_to_source_db": 47.341103573320424,
+      "global_view_psnr_to_source_db": 55.31885387742649,
+      "observation": 11,
+      "video_time_s": 1652.3333333333333,
+      "camera_std": 29.392340871038268,
+      "global_std": 46.81693663819107,
+      "camera_difference_from_previous_view": 22.271706142140335
+    },
+    {
+      "camera_psnr_to_source_db": 54.37119567390036,
+      "global_view_psnr_to_source_db": 57.75483247498588,
+      "observation": 12,
+      "video_time_s": 1802.3333333333333,
+      "camera_std": 34.35301696777512,
+      "global_std": 46.84774646945776,
+      "camera_difference_from_previous_view": 20.13115752968713
+    }
+  ],
+  "all_observation_frames_decoded": true,
+  "all_camera_views_nonblank": true,
+  "all_global_views_nonblank": true,
+  "all_successive_camera_views_differ": true,
+  "minimum_camera_psnr_to_source_db": 43.54046547453179,
+  "minimum_global_psnr_to_source_db": 53.59417312097381,
+  "preview_duration_s": 181.666667,
+  "preview_samples_decoded_s": [
+    1,
+    90,
+    180
+  ],
+  "visual_review": "All twelve camera views, complete global framing and final labels checked; no overlap with either image region."
+}

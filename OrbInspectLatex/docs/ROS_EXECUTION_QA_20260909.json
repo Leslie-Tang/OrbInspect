@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "pdf": "output/pdf/OrbInspect_IEEE_TAES_ROS_execution_check_20260909.pdf",
+  "pdf_sha256": "4273306bce5b6f58a89c39620192091a83a80a4ceeba1649ec4569b42f809246",
+  "pages": 13,
+  "figures_byte_identical": 72,
+  "approved_figure_manifest_files_verified": 60,
+  "abstract_unchanged": true,
+  "offline_datasets_tables_and_results_unchanged": true,
+  "ros_computational_source_unchanged": true,
+  "discussion_conclusion_unchanged": true,
+  "evidence_snapshot_files_verified": 42,
+  "event_accounting_passed": true,
+  "required_target_execution_success": false,
+  "required_targets_accepted": "7/9",
+  "historical_figure7_retained": true,
+  "bibliography_entries": 33,
+  "latex_overflow_or_undefined_references": false,
+  "formatting_tests": "2 pre-existing failures, retained in execution report",
+  "numeric_consistency_findings_reviewed": "Counts versus lengths and configured 0.060 versus historical measured 0.0600; no conflicting measurement was found."
+}

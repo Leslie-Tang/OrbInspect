@@ -1,0 +1,51 @@
+build/orbinspect_guidance/pytest.xml: 106 tests, 0 errors, 2 failures, 1 skipped
+- orbinspect_guidance.test.test_flake8 test_flake8
+  <<< failure message
+    AssertionError: Found 38 code style errors / warnings:
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/orbinspect_guidance/ros_route_exporter.py:8:1: I100 Import statements are in the wrong order. 'from dataclasses import replace' should be before 'from datetime import datetime'
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/orbinspect_guidance/ros_route_exporter.py:26:1: I100 Import statements are in the wrong order. 'from orbinspect_guidance.observation_credit import ObservationMission' should be before 'from orbinspect_guidance.offline_planning_experiment import OfflinePlanningExperiment'
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/orbinspect_guidance/ros_route_exporter.py:27:1: I100 Import statements are in the wrong order. 'from orbinspect_guidance.observation_credit import coverage_metrics' should be before 'from orbinspect_guidance.observation_credit import ObservationMission'
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/orbinspect_guidance/ros_route_exporter.py:197:100: E501 line too long (104 > 99 characters)
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/orbinspect_guidance/ros_route_exporter.py:224:100: E501 line too long (116 > 99 characters)
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/orbinspect_guidance/ros_route_exporter.py:230:100: E501 line too long (108 > 99 characters)
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/orbinspect_guidance/ros_route_exporter.py:329:100: E501 line too long (102 > 99 characters)
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/orbinspect_guidance/ros_route_exporter.py:343:100: E501 line too long (102 > 99 characters)
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/orbinspect_guidance/ros_route_exporter.py:490:100: E501 line too long (104 > 99 characters)
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/orbinspect_guidance/verification_evaluator_node.py:13:1: I100 Import statements are in the wrong order. 'from orbinspect_guidance.observation_credit import credit_observation' should be before 'from orbinspect_interfaces.msg import CoverageMap'
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/orbinspect_guidance/verification_evaluator_node.py:14:1: I100 Import statements are in the wrong order. 'from orbinspect_guidance.observation_credit import coverage_metrics' should be before 'from orbinspect_guidance.observation_credit import credit_observation'
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/test/test_advanced_safe_planner.py:10:16: C408 Unnecessary dict call - rewrite as a literal.
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/test/test_advanced_safe_planner.py:108:19: C408 Unnecessary dict call - rewrite as a literal.
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/test/test_advanced_safe_planner.py:110:19: C408 Unnecessary dict call - rewrite as a literal.
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/test/test_advanced_safe_planner.py:112:19: C408 Unnecessary dict call - rewrite as a literal.
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/test/test_advanced_safe_planner.py:166:5: C408 Unnecessary dict call - rewrite as a literal.
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/test/test_advanced_safe_planner.py:167:5: C408 Unnecessary dict call - rewrite as a literal.
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/test/test_advanced_safe_planner.py:168:5: C408 Unnecessary dict call - rewrite as a literal.
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/test/test_advanced_safe_planner.py:169:5: C408 Unnecessary dict call - rewrite as a literal.
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/test/test_advanced_safe_planner.py:170:5: C408 Unnecessary dict call - rewrite as a literal.
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/test/test_advanced_safe_planner.py:171:5: C408 Unnecessary dict call - rewrite as a literal.
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/test/test_advanced_safe_planner.py:172:5: C408 Unnecessary dict call - rewrite as a literal.
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/test/test_advanced_safe_planner.py:572:1: I100 Import statements are in the wrong order. 'from dataclasses import replace' should be before 'import pytest' and in a different group.
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/test/test_advanced_safe_planner.py:572:1: E305 expected 2 blank lines after class or function definition, found 0
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/test/test_advanced_safe_planner.py:572:1: E402 module level import not at top of file
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/test/test_required_target_study.py:11:1: I100 Import statements are in the wrong order. 'from orbinspect_guidance.offline_adp_superiority_study import ArchivedEdge, ArchivedGraph' should be before 'import yaml'
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/test/test_required_target_study.py:24:100: E501 line too long (107 > 99 characters)
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/test/test_required_target_study.py:37:100: E501 line too long (102 > 99 characters)
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/test/test_required_target_study.py:44:100: E501 line too long (106 > 99 characters)
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/test/test_required_target_study.py:56:100: E501 line too long (122 > 99 characters)
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/test/test_ros_route_exporter.py:72:100: E501 line too long (110 > 99 characters)
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/test/test_ros_route_exporter.py:76:100: E501 line too long (110 > 99 characters)
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/test/test_verification_evaluator_node.py:11:1: I100 Import statements are in the wrong order. 'from orbinspect_guidance.observation_credit import credit_observation' should be before 'from orbinspect_guidance.observation_credit import ObservationMission'
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/test/test_verification_evaluator_node.py:12:1: I100 Import statements are in the wrong order. 'from orbinspect_guidance.observation_credit import coverage_metrics' should be before 'from orbinspect_guidance.observation_credit import credit_observation'
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/test/test_verification_evaluator_node.py:145:100: E501 line too long (101 > 99 characters)
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/test/test_verification_evaluator_node.py:158:100: E501 line too long (107 > 99 characters)
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/test/test_verification_evaluator_node.py:166:100: E501 line too long (101 > 99 characters)
+      /home/rugang/robotics/projects/OrbInspect/src/orbinspect_guidance/test/test_verification_evaluator_node.py:172:100: E501 line too long (100 > 99 characters)
+    assert 1 == 0
+  >>>
+- orbinspect_guidance.test.test_pep257 test_pep257
+  <<< failure message
+    AssertionError: Found code style errors / warnings
+    assert 1 == 0
+  >>>
+
+Summary: 184 tests, 0 errors, 2 failures, 10 skipped

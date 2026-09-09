@@ -1,0 +1,14 @@
+{
+  "latest_generator_reproduces_active_manifest_and_all_raw_hashes": true,
+  "regenerated_bundle": "/home/rugang/robotics/projects/OrbInspect/data/results/20260909_041957_dwell_schedule_regeneration_check",
+  "checks": {
+    "planner.csv": true,
+    "trajectory.csv": true,
+    "safety.csv": true,
+    "control.csv": true,
+    "coverage.csv": true,
+    "mission_events.csv": true,
+    "attitude.csv": true,
+    "viewpoints.csv": true
+  }
+}

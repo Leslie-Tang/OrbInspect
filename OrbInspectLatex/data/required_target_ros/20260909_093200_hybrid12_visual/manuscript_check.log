@@ -1,0 +1,11 @@
+make: Entering directory '/home/rugang/robotics/projects/OrbInspect/OrbInspectLatex'
+python3 scripts/check_project.py
+{
+  "local_compilation_inputs": 33,
+  "figure_groups": 7,
+  "verified_figure_files": 60,
+  "external_project_inputs": 0,
+  "native_diagram_images": "embedded",
+  "status": "passed"
+}
+make: Leaving directory '/home/rugang/robotics/projects/OrbInspect/OrbInspectLatex'

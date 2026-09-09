@@ -1,0 +1,262 @@
+{
+  "date": "2026-09-09",
+  "scope": "Figure 7 layout only; camera emphasis requested by user",
+  "source_snapshot": "data/required_target_ros/20260909_040344_required09_dwell60_visual",
+  "source_snapshot_files_verified": 70,
+  "protected_figure_files_unchanged": 67,
+  "style_functions_identical_to_accepted_layout": [
+    "configure_style",
+    "camera_panel",
+    "projection"
+  ],
+  "camera_width_mm_before": 17.8,
+  "camera_width_mm_after": 24.0,
+  "camera_linear_size_increase_percent": 34.8314606741573,
+  "camera_area_increase_percent": 81.79522787526827,
+  "projection_linear_scale_ratio": 0.7,
+  "figure_mm_before": [
+    170,
+    74
+  ],
+  "figure_mm_after": [
+    170,
+    72
+  ],
+  "figure_height_reduction_percent": 2.7027027027026973,
+  "figure": {
+    "status": "passed",
+    "figure_mm": [
+      170.0,
+      72.0
+    ],
+    "camera_views": 9,
+    "trajectory_rows": 27188,
+    "image_pixels_unchanged": true,
+    "trajectory_coordinates_unchanged": true,
+    "equal_spatial_scaling": true,
+    "text_within_canvas": true,
+    "markers_within_axes": true,
+    "layout": "Two camera columns on each side, centered fifth view when present; two central projections",
+    "camera_width_mm": 24.0,
+    "camera_column_gap_mm": 1.0,
+    "camera_row_pitch_mm": 23.3,
+    "projection_spatial_scale_relative_to_previous_layout": 0.7,
+    "projection_rectangles_mm": {
+      "xz": [
+        58.8,
+        26.0,
+        23.939999999999998,
+        32.76
+      ],
+      "yz": [
+        94.5,
+        26.0,
+        23.28,
+        32.76
+      ]
+    },
+    "right_marker_padding_mm": 0.6,
+    "projection_view_limits_m": {
+      "x": [
+        -58.46153846153846,
+        58.46153846153846
+      ],
+      "y": [
+        -50.38461538461539,
+        63.31501831501832
+      ],
+      "z": [
+        -80,
+        80
+      ]
+    },
+    "correspondence": "Matching observation numbers; active 1-5 left and 6-9 right; inactive hollow markers retained",
+    "minimum_annotation_font_pt": 7.0,
+    "snapshot_sha256": "c5866b5366c45298d67fa2b5e94feaec284deb6a4a8cfc6ed693fee22b39349a",
+    "script_sha256": "529731fd41d0547a06c63ad3baa1046db51f57ea77ae97c31dbcf7b76cbe3ff7",
+    "output_sha256": {
+      "ros_key_camera_views_trajectory.svg": "c75267307c26c122e8ad17cb37e6f6da8b2651596ce029babcb1257f99d78cd3",
+      "ros_key_camera_views_trajectory.pdf": "c9438c7e5e7eba90349b39040cc53f7fd97afe1719c842755e90b21a53a1172f",
+      "ros_key_camera_views_trajectory.png": "49353dad4b2282747e3bbf518bb2db49f6218ab5b5602a79d34c1724cf50f13a"
+    }
+  },
+  "font_audit": {
+    "pdf": "OrbInspectLatex/build/figure7_camera_emphasis/preview/ros_key_camera_views_trajectory.pdf",
+    "auditable": true,
+    "minimum_required_pt": 5.0,
+    "minimum_found_pt": 7.0,
+    "text_run_count": 79,
+    "below_minimum_count": 0,
+    "below_minimum": [],
+    "warnings": []
+  },
+  "source_audit": {
+    "source": "OrbInspectLatex/scripts/generate_ros_camera_figure.py",
+    "backend": "python",
+    "summary": {
+      "ready": true,
+      "strict": false,
+      "counts": {
+        "PASS": 17,
+        "WARN": 3,
+        "FAIL": 0
+      }
+    },
+    "findings": [
+      {
+        "check_id": "SOURCE-SYNTAX",
+        "level": "PASS",
+        "message": "Python source parses successfully",
+        "evidence": []
+      },
+      {
+        "check_id": "FONT-FAMILY",
+        "level": "PASS",
+        "message": "A publication-safe sans-serif family is configured",
+        "evidence": [
+          "Arial",
+          "Helvetica",
+          "sans-serif"
+        ]
+      },
+      {
+        "check_id": "FONT-SIZE",
+        "level": "PASS",
+        "message": "All detected text sizes are at least 5 pt (minimum 7 pt)",
+        "evidence": []
+      },
+      {
+        "check_id": "FONT-GLYPH-FLOOR",
+        "level": "WARN",
+        "message": "Mathtext may shrink script glyphs below 5 pt (about 4.90 pt from a 7 pt parent); use a Unicode glyph or audit PDF Tf operators",
+        "evidence": [
+          "$c_2={c2:+.2f}$"
+        ]
+      },
+      {
+        "check_id": "LEGEND-LABEL-CASE",
+        "level": "PASS",
+        "message": "No auditable literal legend labels detected",
+        "evidence": []
+      },
+      {
+        "check_id": "COLOR-MAP",
+        "level": "PASS",
+        "message": "No rainbow/jet/hsv color mapping detected",
+        "evidence": []
+      },
+      {
+        "check_id": "EDITABLE-TEXT",
+        "level": "PASS",
+        "message": "SVG and PDF editable-text settings are configured",
+        "evidence": []
+      },
+      {
+        "check_id": "EXPORT-VECTOR",
+        "level": "PASS",
+        "message": "Both SVG and PDF exports are present",
+        "evidence": []
+      },
+      {
+        "check_id": "EXPORT-RASTER",
+        "level": "WARN",
+        "message": "PNG preview is present but no TIFF submission raster was found",
+        "evidence": []
+      },
+      {
+        "check_id": "RASTER-DPI",
+        "level": "PASS",
+        "message": "A raster export of at least 600 dpi is configured",
+        "evidence": [
+          "600"
+        ]
+      },
+      {
+        "check_id": "FINAL-WIDTH",
+        "level": "WARN",
+        "message": "Detected width 24.0 mm is not near the common 89/183 mm defaults; verify the target journal",
+        "evidence": []
+      },
+      {
+        "check_id": "DATA-SAMPLING",
+        "level": "PASS",
+        "message": "No high-confidence row-sampling operation detected",
+        "evidence": []
+      },
+      {
+        "check_id": "DATA-EXCLUSION",
+        "level": "PASS",
+        "message": "No high-confidence missing-data exclusion detected",
+        "evidence": []
+      },
+      {
+        "check_id": "DEMO-DATA",
+        "level": "PASS",
+        "message": "No obvious simulated-data generator detected",
+        "evidence": []
+      },
+      {
+        "check_id": "LOG-GUARD",
+        "level": "PASS",
+        "message": "No logarithmic transform or axis detected",
+        "evidence": []
+      },
+      {
+        "check_id": "INTERP-MONOTONIC",
+        "level": "PASS",
+        "message": "No NumPy interpolation requiring an increasing x-grid detected",
+        "evidence": []
+      },
+      {
+        "check_id": "UNCERTAINTY-ENCODING",
+        "level": "PASS",
+        "message": "No stochastic aggregate requiring a variability audit was inferred",
+        "evidence": []
+      },
+      {
+        "check_id": "ROTATION-ANCHOR",
+        "level": "PASS",
+        "message": "No rotated Matplotlib text detected",
+        "evidence": []
+      },
+      {
+        "check_id": "ANNOTATION-WORKAROUND",
+        "level": "PASS",
+        "message": "No high-risk hard-coded label height or opaque white text mask detected",
+        "evidence": []
+      },
+      {
+        "check_id": "BACKEND-EXCLUSIVE",
+        "level": "PASS",
+        "message": "No obvious cross-backend plotting reference found for python",
+        "evidence": []
+      }
+    ]
+  },
+  "source_audit_warning_resolution": [
+    "Historical-only math subscripts are not used by the current required-target figure; its actual minimum PDF glyph size is 7 pt.",
+    "PNG, SVG and PDF match the established manuscript export contract; no TIFF was requested.",
+    "The source detector mistakes the 24 mm camera width for the canvas width. The exported PDF is 170 by 72 mm, matching the existing IEEE manuscript width."
+  ],
+  "historical_nine_ten_layout_compatibility": "passed",
+  "manuscript_source_sha256": {
+    "main.tex": "ba2a778788c0ecc33ab1523f01a3ec24c826bf388bdab66da767e5e58879621b",
+    "sections/required_target_study.tex": "abd71e241cdc841fed3ded4fb68bac6f3751f8a9ddf8c635b455a4930fe7e8c4",
+    "sections/ros_verification_results.tex": "10dd40f8cf34fc81c73af0460747a8fd6f8f3b76829475bb93d2c1816517493f"
+  },
+  "prior_pdf": "output/pdf/OrbInspect_IEEE_TAES_ROS_full_required_completion_20260909.pdf",
+  "pages": 13,
+  "figure7_page": 12,
+  "all_manuscript_prose_unchanged": true,
+  "latex_warnings": [],
+  "status": "passed",
+  "reviewed_pdf": "output/pdf/OrbInspect_IEEE_TAES_ROS_full_required_completion_camera_emphasis_20260909.pdf",
+  "reviewed_pdf_sha256": "f3b637505ef7bed6181e2c1ad75da13892f7e7fcd7fd3559c6d4104d68e815b9",
+  "project_check": "passed: 7 figure groups, 60 figure files, 33 local compilation inputs",
+  "visual_review": [
+    "All nine camera frames and both trajectory projections inspected after final padding correction",
+    "Manuscript pages 12 and 13 inspected; no clipped labels, images or markers; final bibliography remains balanced"
+  ],
+  "source_diff_whitespace_check": "passed for edited generator and documentation; generated matplotlib SVG path lines retain exporter whitespace",
+  "ros_source_and_offline_study_unchanged": true
+}

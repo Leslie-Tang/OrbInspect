@@ -1,0 +1,36 @@
+{
+  "passed": true,
+  "pdf": "/home/rugang/robotics/projects/OrbInspect/output/pdf/OrbInspect_IEEE_TAES_ROS_full_required_completion_20260909.pdf",
+  "pdf_sha256": "490c8c01e4c7189ebbf54fc7d827dfba8595f99e6e3be09340d17929111292d5",
+  "pages": 13,
+  "required_targets_accepted": "9/9",
+  "execution_audit_passed": true,
+  "camera_audit_passed": true,
+  "figure_style_function_identical_to_original": true,
+  "protected_figure_files_unchanged": 67,
+  "abstract_unchanged": true,
+  "ROS_runtime_source_and_offline_study_unchanged": true,
+  "figure_size_mm": [
+    170,
+    74
+  ],
+  "camera_count": 9,
+  "figure_pdf_minimum_glyph_pt": 7.0,
+  "visual_review": [
+    "all nine camera panels and both trajectory projections",
+    "13-page manuscript; pages 11\u201313 inspected after final edit",
+    "no clipped trajectories, image crops, label collisions or sparse trailing page"
+  ],
+  "build": "12 packages passed; LaTeX compiled without overfull boxes or undefined references",
+  "new_tool_tests": "5 passed",
+  "earlier_validation": "66 focused checks passed; full colcon test retained 2 pre-existing guidance lint failures (flake8/pep257) in the initial preflight log",
+  "scope": "Uniform 60-s execution settling after each unchanged transfer; no offline or paired ROS improvement claim",
+  "camera_timing_diagnostics": {
+    "nonincreasing_receipt_indices": [
+      124,
+      1965
+    ],
+    "nonincreasing_sensor_stamp_indices": [],
+    "backward_sensor_stamp_indices": []
+  }
+}

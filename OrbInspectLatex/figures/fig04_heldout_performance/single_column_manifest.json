@@ -8,31 +8,32 @@
       "width_pt": 117.16064757160649,
       "height_pt": 112.0,
       "axes": 1,
-      "text_size_pt": 9
+      "text_size_pt": 8.0
     },
     "b": {
       "stem": "adp_heldout_performance_b",
       "width_pt": 117.16064757160649,
       "height_pt": 112.0,
       "axes": 1,
-      "text_size_pt": 9
+      "text_size_pt": 8.0
     },
     "c": {
       "stem": "adp_heldout_performance_c",
       "width_pt": 117.16064757160649,
       "height_pt": 112.0,
       "axes": 1,
-      "text_size_pt": 9
+      "text_size_pt": 8.0
     },
     "d": {
       "stem": "adp_heldout_performance_d",
       "width_pt": 117.16064757160649,
       "height_pt": 112.0,
       "axes": 1,
-      "text_size_pt": 9
+      "text_size_pt": 8.0
     }
   },
-  "generator_sha256": "5bb6c86417000f506932d5a0d4085f1385c36193eb994ad52ab4961627b09f08",
+  "generator_sha256": "64f58928a7624ec1e3853dbca385bbd49569400d2849bd462ae3259c2d7e4558",
+  "typography_sha256": "ff259417d5f7af3bdf4223d7ee852942fe499a8e91d75ed43125468628fd8dc7",
   "palette_sha256": "226d5485bfa0dc376c62680576166351dae5aa96580b0331b60562f264192938",
   "evidence": {
     "source": "data/confirmation/raw/scenario_results.csv",

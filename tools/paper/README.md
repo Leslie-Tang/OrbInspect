@@ -10,6 +10,14 @@ None of these tools is needed to compile or share the LaTeX paper. Use
 
 ## Current workflows
 
+- Required-target ROS evidence: after the existing full-mesh audit, run
+  `python3 tools/paper/audit_required_target_ros.py <execution-directory>` in
+  the sourced Jazzy environment. It checks both event topics against the frozen
+  per-view target IDs, retains rejected observations, and integrates stamped
+  safe-control commands to the final verification event. A failed mission
+  produces an audit file and exits with status 1; this is not an accepted run.
+  `python3 -m pytest -q tools/paper/tests/test_required_target_ros_audit.py`
+  checks rejection/duplicate handling and the timestamped integration boundary.
 - Experiment execution: `run_required_target_study.py`,
   `run_required_target_confirmation.py`, `run_required_target_depth_diagnostic.py`.
   These still require the full repository, frozen inputs and recorded environment.
@@ -84,3 +92,54 @@ pytest tools/paper/tests/test_figure2_example.py test/test_required_target_depth
 
 The folder organization changes paths and output routing only. No dynamics,
 planner mathematics, experiment configuration or recorded results changed.
+
+## Required-target completion and camera evidence
+
+- `screen_required_target_routes.py` runs a synchronous diagnostic with the
+  production HCW/LQR/filter functions and the unchanged ROS verification YAML.
+  It is not ROS execution evidence. The complete search inventory is retained.
+- `add_ros_terminal_dwell.py SOURCE DESTINATION` derives an execution-only
+  schedule using `config/required_target_settling.yaml`. It preserves every
+  archived transfer sample and target identity, appends stationary HCW holds,
+  and evaluates observations after the holds. The input manifest distinguishes
+  archived transfer metrics from the extended schedule; existing destinations
+  are rejected.
+- `record_gazebo_pose.py OUTPUT.jsonl` records the named Gazebo chaser pose with
+  simulator stamps and wall receipt times. Set the same `GZ_PARTITION` as the
+  graphical launch. Stop it cleanly after the mission.
+- `audit_required_target_ros.py RUN` reconstructs target unions from both event
+  topics and integrates stamped safe-control commands. Its receipt-based
+  control integral requires an unaccelerated wall-clock run. Run the independent
+  `ros_evidence_audit` first. Per-action intervals come from the actual exported
+  observation times, including any declared settling periods.
+- `prepare_required_target_camera_snapshot.py RUN CAPTURE OUTPUT` selects
+  uncropped camera messages within 0.2 s of accepted observations. It requires
+  matching event streams, checks named Gazebo pose alignment, matches recorded
+  odometry to the executed CSV, and retains hashes, timing diagnostics and
+  portable figure arrays. Failed camera or execution checks prevent output.
+- `OrbInspectLatex/scripts/generate_ros_camera_figure.py --snapshot-dir SNAPSHOT
+  --output-dir OUTPUT [--font-dir ARIAL_DIRECTORY]` supports nine or ten views
+  in the approved compact style. It verifies source pixels and coordinates,
+  label bounds, and equal physical scaling between both trajectory projections.
+  The optional font directory supplies the same Arial family on hosts where it
+  is not installed; it does not change global font settings.
+
+The execution adaptation is described in
+`OrbInspectLatex/docs/ROS_SETTLING_PROTOCOL_20260909.md`. It does not change the
+frozen planning study or establish a paired ROS maneuver saving.
+
+
+## Supplemental twelve-observation hybrid execution
+
+`prepare_higher_coverage_ros_inputs.py` freezes the selected 95%-goal hybrid ADP
+plan from the unchanged parent scenario. `refine_ros_viewpoints.py`, configured
+by `config/hybrid12_viewpoint_refinements.yaml`, materializes the two declared
+position/aim refinements with recomputed HCW transfers and visibility, then adds
+the uniform 60-s settling periods. Both create inputs, not execution evidence.
+`audit_required_target_ros.py` checks required and hybrid goals, including the
+background threshold when every required target has already been accepted.
+`prepare_required_target_camera_snapshot.py` retains empty startup scenes as
+diagnostics and rejects duplicate named chaser poses; selected-frame timing and
+pose gates are unchanged. The current source/inputs, search inventories, retained
+failure and audited recordings are documented in
+`OrbInspectLatex/docs/ROS_TWELVE_OBSERVATIONS_20260909.md`.

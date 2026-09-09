@@ -1,0 +1,6 @@
+{
+  "associated_graphical_run": "/home/rugang/robotics/projects/OrbInspect/data/results/20260909_040344_required09_dwell60_visual",
+  "clock_basis": "ROS wall time, Gazebo image header simulation time; match events and frames using MCAP wall-clock receipt timestamps and retain Gazebo clock and actual scene poses",
+  "storage": "MCAP zstd_fast; original sensor messages",
+  "selection_rule": "Nearest camera receipt to each accepted terminal event, absolute mismatch <=0.2 s, no endpoint clamping"
+}

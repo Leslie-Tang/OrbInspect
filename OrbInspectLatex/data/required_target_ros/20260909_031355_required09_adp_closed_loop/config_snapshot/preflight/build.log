@@ -1,0 +1,26 @@
+Starting >>> orbinspect_interfaces
+Starting >>> orbinspect_description
+Starting >>> orbinspect_gazebo
+Starting >>> orbinspect_utils
+Finished <<< orbinspect_description [0.39s]
+Finished <<< orbinspect_interfaces [0.45s]
+Starting >>> orbinspect_dynamics
+Starting >>> orbinspect_perception
+Starting >>> orbinspect_safety
+Starting >>> orbinspect_control
+Starting >>> orbinspect_eval
+Finished <<< orbinspect_utils [1.78s]
+Finished <<< orbinspect_gazebo [1.80s]
+Finished <<< orbinspect_perception [1.74s]
+Finished <<< orbinspect_dynamics [1.74s]
+Finished <<< orbinspect_eval [1.77s]
+Finished <<< orbinspect_safety [1.78s]
+Starting >>> orbinspect_guidance
+Finished <<< orbinspect_control [1.79s]
+Finished <<< orbinspect_guidance [0.96s]
+Starting >>> orbinspect_mission
+Finished <<< orbinspect_mission [0.97s]
+Starting >>> orbinspect_bringup
+Finished <<< orbinspect_bringup [1.02s]
+
+Summary: 12 packages finished [5.79s]

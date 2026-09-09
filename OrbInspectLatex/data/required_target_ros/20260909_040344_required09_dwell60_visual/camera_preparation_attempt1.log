@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/home/rugang/robotics/projects/OrbInspect/tools/paper/prepare_required_target_camera_snapshot.py", line 196, in <module>
+    prepare(args.run, args.capture, args.output)
+  File "/home/rugang/robotics/projects/OrbInspect/tools/paper/prepare_required_target_camera_snapshot.py", line 75, in prepare
+    raise ValueError('Camera timestamps must increase strictly')
+ValueError: Camera timestamps must increase strictly

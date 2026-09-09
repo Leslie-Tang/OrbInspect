@@ -1,0 +1,88 @@
+{
+  "kind": "synchronous screening; not ROS execution",
+  "input_manifest_sha256": "ab238a1edd862899b7d2864076b393ec1f8cc715d53e03f098c51f88a2bb387e",
+  "runtime_config_sha256": "dacd4e02f942c97f1d46285100e0a74bf58c77cd72751e729537d36f3a3d917d",
+  "results": [
+    {
+      "scenario_id": "required09_test_000",
+      "events": [
+        {
+          "action": 1,
+          "candidate_id": "cand_0005",
+          "time": 150.0,
+          "position_error": 0.00011623302374680771,
+          "speed": 8.851566293942873e-06,
+          "accepted": true
+        },
+        {
+          "action": 2,
+          "candidate_id": "cand_0000",
+          "time": 300.0,
+          "position_error": 0.050097922485264255,
+          "speed": 0.0038153513468387485,
+          "accepted": true
+        },
+        {
+          "action": 3,
+          "candidate_id": "cand_0070",
+          "time": 450.0,
+          "position_error": 0.0002674605904926056,
+          "speed": 2.036828734621629e-05,
+          "accepted": true
+        },
+        {
+          "action": 4,
+          "candidate_id": "cand_0068",
+          "time": 600.0,
+          "position_error": 0.0010259496947710362,
+          "speed": 7.813218298094423e-05,
+          "accepted": true
+        },
+        {
+          "action": 5,
+          "candidate_id": "cand_0021",
+          "time": 750.0,
+          "position_error": 0.00030206367010190434,
+          "speed": 2.3007227992263766e-05,
+          "accepted": true
+        },
+        {
+          "action": 6,
+          "candidate_id": "cand_0015",
+          "time": 900.0,
+          "position_error": 0.0001413143179876626,
+          "speed": 1.0761982116874088e-05,
+          "accepted": true
+        },
+        {
+          "action": 7,
+          "candidate_id": "cand_0052",
+          "time": 1050.0,
+          "position_error": 0.0006324928417221884,
+          "speed": 4.817528142993134e-05,
+          "accepted": true
+        },
+        {
+          "action": 8,
+          "candidate_id": "cand_0062",
+          "time": 1200.0,
+          "position_error": 0.014776277522381668,
+          "speed": 0.0011254259695396892,
+          "accepted": true
+        },
+        {
+          "action": 9,
+          "candidate_id": "cand_0045",
+          "time": 1350.0,
+          "position_error": 0.0005015678308122744,
+          "speed": 3.8199894552711634e-05,
+          "accepted": true
+        }
+      ],
+      "all_observations_accepted": true,
+      "accepted_count": 9,
+      "filter_interventions": 1401,
+      "delta_v": 15.943991076610176
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "conclusion": "One supplemental 12-observation ROS execution reaches all nine required targets and at least 95% fixed weighted background coverage, only if the recorded audits pass.",
+  "evidence_chain": [
+    "12-view hybrid ADP seed with the same required IDs, target weights and available nodes",
+    "retained failed synchronous test of the original endpoints",
+    "two explicit endpoint/aim refinements with recomputed full-mesh visibility and HCW transfers",
+    "unchanged 60-s dwell and runtime/acceptance gates",
+    "recorded normal-speed execution, independent target/mesh/camera audits"
+  ],
+  "archetype": "Trajectory projections with corresponding camera evidence",
+  "backend": "Python/matplotlib",
+  "style": "Preserve approved fonts, line/mesh treatment, uncropped RGB frames and first ten observation colors; extend palette for views 11\u201312.",
+  "layout": "170 by 47 mm; two smaller equally scaled projections left; 12 camera panels in two rows of six right; 7-pt minimum text.",
+  "exports": [
+    "PDF embedded Arial",
+    "SVG live text",
+    "600-dpi PNG"
+  ],
+  "reviewer_limits": [
+    "Supplemental selected case, not held-out confirmation",
+    "Two of 12 viewpoint endpoints and aims refined after a failed tracking diagnostic",
+    "Fixed 41-sample weighted denominator; not a continuous surface-area guarantee",
+    "Geometry and tracking supply credit, not image-based recognition",
+    "No paired ROS fuel-saving or online ADP claim"
+  ],
+  "prior_nine_view_style_regression_pixels_identical": true,
+  "marker_mapping": "Odd-numbered observations highlighted in x-z, even-numbered in y-z; camera rows remain chronological 1-6 and 7-12.",
+  "planned_minimum_active_marker_center_separation_mm": 4.25090620204006
+}

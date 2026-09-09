@@ -1,0 +1,291 @@
+{
+  "status": "passed",
+  "scenario_id": "required09_test_000",
+  "selection_rule": "Jointly successful test pair nearest the median ADP-minus-local graph-cost difference; scenario-ID tie break; illustrative only",
+  "panels": {
+    "a": {
+      "width_pt": 161.3947696139477,
+      "height_pt": 142.1,
+      "text_size_pt": 8.0
+    },
+    "b": {
+      "width_pt": 104.00996264009963,
+      "height_pt": 112.9,
+      "text_size_pt": 8.0
+    },
+    "c": {
+      "width_pt": 104.00996264009963,
+      "height_pt": 112.9,
+      "text_size_pt": 8.0
+    }
+  },
+  "camera": {
+    "elevation_deg": 24,
+    "azimuth_deg": -56
+  },
+  "shared_method_legend": "panel a",
+  "input_provenance": {
+    "purpose": "Display-only geometry: exact existing Figure 6 face selection, never used for planning or safety.",
+    "source": "src/orbinspect_description/models/iss_real/meshes/ISS_stationary.glb",
+    "source_sha256": "26dba905b4b7555edbcb0c5f5a61b5c18659f5166076ab27dbb0e64025759fca",
+    "scale": 1.065,
+    "source_triangle_count": 247525,
+    "display_triangle_count": 1800,
+    "selection": "numpy.linspace(0, triangle_count - 1, 1800, dtype=int)",
+    "original_generator": "tools/paper/generate_required_target_details.py",
+    "display_mesh_sha256": "005bbacd906be5c429545c177ad2eed72fa256cad38e9b64d45489887d819cfc",
+    "frozen_inputs_sha256": {
+      "raw/representative_case_manifest.json": "a10583ba2e32b731dfad868ef1302a448a19790c3863973207cbd36e1267640e",
+      "raw/representative_case_trajectory.csv": "78d2b5df766b39dcffef019e36b149e2e46e1afc62dec12e426bacb35cacf78e",
+      "raw/representative_case_progress.csv": "3d5341ee0e0a0cc63bf79d7eb1b405129ba58285adf8cb08637e6e8754bcc3dc",
+      "raw/target_positions.csv": "73810927ffd53d7eff5a0f3fd46ac4cb6776a9482d47c1d1c05c833e3e4c006a",
+      "raw/hcw_graph.json": "e90f40f0aaf87464ad5b5ef6b39979aa3c5f0b7049fe0ec17ad5e5b1a19b0af2",
+      "config_snapshot/base_experiment_config.json": "fac496ad6874c03e8c35be6a91e7b63aed3c7fa099d2a8321ae9ba59a57e1cb4"
+    }
+  },
+  "trajectory_samples": {
+    "adaptive_rollout_adp": 270,
+    "seeded_local_search": 240
+  },
+  "required_target_ids": [
+    "mesh_00055",
+    "mesh_00052",
+    "mesh_00059",
+    "mesh_00007",
+    "mesh_00001",
+    "mesh_00079",
+    "mesh_00033",
+    "mesh_00015",
+    "mesh_00019"
+  ],
+  "plotted_progress": {
+    "adaptive_rollout_adp": [
+      {
+        "method": "adaptive_rollout_adp",
+        "action": "0",
+        "candidate_id": "initial",
+        "required_coverage": "0.0",
+        "weighted_coverage": "0.0",
+        "whole_sample_coverage": "0.0",
+        "cumulative_delta_v": "0.0",
+        "cumulative_graph_cost": "0.0",
+        "covered_target_mask": "0"
+      },
+      {
+        "method": "adaptive_rollout_adp",
+        "action": "1",
+        "candidate_id": "cand_0005",
+        "required_coverage": "0.1111111111111111",
+        "weighted_coverage": "0.04142284395801456",
+        "whole_sample_coverage": "0.022222222222222223",
+        "cumulative_delta_v": "0.5136259428055551",
+        "cumulative_graph_cost": "4.262164001319716",
+        "covered_target_mask": "3"
+      },
+      {
+        "method": "adaptive_rollout_adp",
+        "action": "2",
+        "candidate_id": "cand_0000",
+        "required_coverage": "0.2222222222222222",
+        "weighted_coverage": "0.062134265937021836",
+        "whole_sample_coverage": "0.03333333333333333",
+        "cumulative_delta_v": "2.3034958428058165",
+        "cumulative_graph_cost": "18.99980871152708",
+        "covered_target_mask": "11"
+      },
+      {
+        "method": "adaptive_rollout_adp",
+        "action": "3",
+        "candidate_id": "cand_0070",
+        "required_coverage": "0.2222222222222222",
+        "weighted_coverage": "0.1337234496671767",
+        "whole_sample_coverage": "0.05555555555555555",
+        "cumulative_delta_v": "3.4566984267719274",
+        "cumulative_graph_cost": "28.511845171159358",
+        "covered_target_mask": "1099511627851"
+      },
+      {
+        "method": "adaptive_rollout_adp",
+        "action": "4",
+        "candidate_id": "cand_0068",
+        "required_coverage": "0.2222222222222222",
+        "weighted_coverage": "0.2467354773553461",
+        "whole_sample_coverage": "0.1",
+        "cumulative_delta_v": "5.4370879781101",
+        "cumulative_graph_cost": "44.80707666493219",
+        "covered_target_mask": "1099517919327"
+      },
+      {
+        "method": "adaptive_rollout_adp",
+        "action": "5",
+        "candidate_id": "cand_0021",
+        "required_coverage": "0.4444444444444444",
+        "weighted_coverage": "0.40117034900153004",
+        "whole_sample_coverage": "0.16666666666666666",
+        "cumulative_delta_v": "6.753999746807362",
+        "cumulative_graph_cost": "55.676056182807734",
+        "covered_target_mask": "1099518294111"
+      },
+      {
+        "method": "adaptive_rollout_adp",
+        "action": "6",
+        "candidate_id": "cand_0015",
+        "required_coverage": "0.5555555555555556",
+        "weighted_coverage": "0.46330461493855196",
+        "whole_sample_coverage": "0.2",
+        "cumulative_delta_v": "7.370722407371643",
+        "cumulative_graph_cost": "60.78935698833747",
+        "covered_target_mask": "1099518312031"
+      },
+      {
+        "method": "adaptive_rollout_adp",
+        "action": "7",
+        "candidate_id": "cand_0052",
+        "required_coverage": "0.7777777777777778",
+        "weighted_coverage": "0.5970280646057285",
+        "whole_sample_coverage": "0.25555555555555554",
+        "cumulative_delta_v": "10.127002999992552",
+        "cumulative_graph_cost": "83.48539695733083",
+        "covered_target_mask": "1101447691871"
+      },
+      {
+        "method": "adaptive_rollout_adp",
+        "action": "8",
+        "candidate_id": "cand_0062",
+        "required_coverage": "0.8888888888888888",
+        "weighted_coverage": "0.6893286703148908",
+        "whole_sample_coverage": "0.28888888888888886",
+        "cumulative_delta_v": "11.72868183574439",
+        "cumulative_graph_cost": "96.67740507257795",
+        "covered_target_mask": "1402095402591"
+      },
+      {
+        "method": "adaptive_rollout_adp",
+        "action": "9",
+        "candidate_id": "cand_0045",
+        "required_coverage": "1.0",
+        "weighted_coverage": "0.7721743582309198",
+        "whole_sample_coverage": "0.3333333333333333",
+        "cumulative_delta_v": "13.768885294460114",
+        "cumulative_graph_cost": "113.47191958718973",
+        "covered_target_mask": "1408739180127"
+      }
+    ],
+    "seeded_local_search": [
+      {
+        "method": "seeded_local_search",
+        "action": "0",
+        "candidate_id": "initial",
+        "required_coverage": "0.0",
+        "weighted_coverage": "0.0",
+        "whole_sample_coverage": "0.0",
+        "cumulative_delta_v": "0.0",
+        "cumulative_graph_cost": "0.0",
+        "covered_target_mask": "0"
+      },
+      {
+        "method": "seeded_local_search",
+        "action": "1",
+        "candidate_id": "cand_0000",
+        "required_coverage": "0.1111111111111111",
+        "weighted_coverage": "0.02071142197900728",
+        "whole_sample_coverage": "0.011111111111111112",
+        "cumulative_delta_v": "2.108515272035063",
+        "cumulative_graph_cost": "17.34768012275153",
+        "covered_target_mask": "8"
+      },
+      {
+        "method": "seeded_local_search",
+        "action": "2",
+        "candidate_id": "cand_0005",
+        "required_coverage": "0.2222222222222222",
+        "weighted_coverage": "0.062134265937021836",
+        "whole_sample_coverage": "0.03333333333333333",
+        "cumulative_delta_v": "3.90005166045938",
+        "cumulative_graph_cost": "32.093649619675105",
+        "covered_target_mask": "11"
+      },
+      {
+        "method": "seeded_local_search",
+        "action": "3",
+        "candidate_id": "cand_0066",
+        "required_coverage": "0.2222222222222222",
+        "weighted_coverage": "0.12426853187404367",
+        "whole_sample_coverage": "0.06666666666666667",
+        "cumulative_delta_v": "6.627902000909721",
+        "cumulative_graph_cost": "54.52228408650903",
+        "covered_target_mask": "755914244107"
+      },
+      {
+        "method": "seeded_local_search",
+        "action": "4",
+        "candidate_id": "cand_0045",
+        "required_coverage": "0.3333333333333333",
+        "weighted_coverage": "0.2071142197900728",
+        "whole_sample_coverage": "0.1111111111111111",
+        "cumulative_delta_v": "8.726676535250897",
+        "cumulative_graph_cost": "71.79846205974565",
+        "covered_target_mask": "762558021643"
+      },
+      {
+        "method": "seeded_local_search",
+        "action": "5",
+        "candidate_id": "cand_0062",
+        "required_coverage": "0.4444444444444444",
+        "weighted_coverage": "0.2994148254992349",
+        "whole_sample_coverage": "0.14444444444444443",
+        "cumulative_delta_v": "10.765836423063375",
+        "cumulative_graph_cost": "88.58775735156351",
+        "covered_target_mask": "1063205732363"
+      },
+      {
+        "method": "seeded_local_search",
+        "action": "6",
+        "candidate_id": "cand_0052",
+        "required_coverage": "0.6666666666666666",
+        "weighted_coverage": "0.4331382751664116",
+        "whole_sample_coverage": "0.2",
+        "cumulative_delta_v": "12.367598189597732",
+        "cumulative_graph_cost": "101.78018714065774",
+        "covered_target_mask": "1065135112203"
+      },
+      {
+        "method": "seeded_local_search",
+        "action": "7",
+        "candidate_id": "cand_0015",
+        "required_coverage": "0.8888888888888888",
+        "weighted_coverage": "0.6082845687916029",
+        "whole_sample_coverage": "0.2777777777777778",
+        "cumulative_delta_v": "15.124496293928049",
+        "cumulative_graph_cost": "124.47931528110634",
+        "covered_target_mask": "1065135470091"
+      },
+      {
+        "method": "seeded_local_search",
+        "action": "8",
+        "candidate_id": "cand_0021",
+        "required_coverage": "1.0",
+        "weighted_coverage": "0.6497074127496174",
+        "whole_sample_coverage": "0.3",
+        "cumulative_delta_v": "15.743617807385602",
+        "cumulative_graph_cost": "129.60460091435024",
+        "covered_target_mask": "1065135504907"
+      }
+    ]
+  },
+  "frozen_final_totals_match": true,
+  "generator_sha256": "4d53b7417e61ccc14d29a9efb63c3e8686ab506984e15487a702987981eae013",
+  "palette_sha256": "226d5485bfa0dc376c62680576166351dae5aa96580b0331b60562f264192938",
+  "typography_sha256": "ff259417d5f7af3bdf4223d7ee852942fe499a8e91d75ed43125468628fd8dc7",
+  "outputs_sha256": {
+    "adp_representative_trajectory_a.svg": "279bc32cee3b0d860778bc471f7bf1ec189e45217a7ce41d608612d0b0805584",
+    "adp_representative_trajectory_a.pdf": "8f1966a2038ae48a3733bed0d89c76b4193346061c410eeadffe3164543e5c2d",
+    "adp_representative_trajectory_a.png": "8555f704ecbcf0ebe40cc36db726a9d799ee52192711ba91fa1828b5cd29cb4b",
+    "adp_representative_trajectory_b.svg": "dbbb4c8c2f1325e880978d498b3885f0aaa3a944f652c69a5b73ad259ecd13b3",
+    "adp_representative_trajectory_b.pdf": "10856ea3d40859ba711a632ffb9c7d66b23ac1f3de5c08c97127bbc2fe6c91c3",
+    "adp_representative_trajectory_b.png": "0eee693607bf8398ffcb03173b0ea0d70ec2aa8463a7754ae0d080500eb3878c",
+    "adp_representative_trajectory_c.svg": "3e5c51d396b83d5a91629a8cfa0cd31b28a5d3d555172a4737a1899490ad9126",
+    "adp_representative_trajectory_c.pdf": "92173cc4c85ae20155ab12997f5bb9c2f51179236f6d967cbd310fa26281eeb2",
+    "adp_representative_trajectory_c.png": "cf4e36802e5248f533b18297933acfa2640beb729a3939cc1f4e81cfe5cf919b"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "kind": "reference timing diagnostic; separate from the unchanged count-completion gate",
+  "nominal_threshold_s": 0.075,
+  "message_count": 36177,
+  "maximum_recorded_header_gap_s": 0.05131387710571289,
+  "gaps_above_nominal": [],
+  "publisher_status": {
+    "complete": true,
+    "event": "reference_stream_status",
+    "maximum_allowed_reference_gap_s": 0.075,
+    "maximum_reference_gap_s": 0.2487230520000001,
+    "method": "adaptive_rollout_adp",
+    "minimum_expected_publish_count": 35640,
+    "nominal_gap_passed": false,
+    "passed": true,
+    "reference_publish_count": 36186,
+    "scenario_id": "required09_test_000_bg95"
+  }
+}

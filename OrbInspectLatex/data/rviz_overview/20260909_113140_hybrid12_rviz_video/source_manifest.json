@@ -1,0 +1,53 @@
+{
+  "source_kind": "Single frame from the recorded real-time RViz video",
+  "case": "required09_test_000_bg95",
+  "repeat_execution_id": "20260909_113140_hybrid12_rviz_video_execution",
+  "video_frame_time_s": 1375.0,
+  "video_frame_index_at_15_fps": 20625,
+  "source_dimensions_px": [
+    1920,
+    1080
+  ],
+  "global_crop_xyxy": [
+    260,
+    200,
+    960,
+    1020
+  ],
+  "camera_crop_xyxy": [
+    1198,
+    311,
+    1920,
+    827
+  ],
+  "crop_rule": "Retain the entire station, full planned route, executed trajectory up to this frame and field-of-view frustum in the global panel; retain the complete displayed camera image. Remove only interface controls, overlays and empty margins.",
+  "pixel_operations": "Rectangular crops only; no brightness, contrast, gamma, recoloring, or generated content. Spatial dimensions and aspect ratios are preserved.",
+  "selection": "One frame during the transfer from observation 9 to 10, selected to show central-module detail absent from the terminal camera panels in Figure 7. Both panels remain synchronized to this single video frame.",
+  "files": {
+    "mesh_execution_audit.json": "ee1eea6f2f51bda9157a8bb65614d32bdec4e62d01e432456a65d2a3fd2caf39",
+    "execution_manifest.json": "bbcb4e0043665eff023878d22eb1e96701ef97b48a0f2aa2a854b45545bc03ac",
+    "video_quality_audit.json": "42f8d7356172e70d9864ab4425954f240e4496eca4b2bea2cedd7ed225457277",
+    "required_target_execution_audit.json": "86f8e64f82417feb4db8777ef3b58f4bf15f4fae4317cce3c925aa53aea91f56",
+    "capture_finished.json": "368cf3e59ae7e0cbeb7c592b25a424caa1216efdc54b2e2ec91fc8e74807d999",
+    "video_completion.png": "131281c5d5cab83bf5471d20f558ff2910eb4f9824a15654aa758e0d54624be4",
+    "capture_summary.json": "8865544d0f647e4a4beacd71b9100aee5fa3ad45f163466014f29fb975924b35",
+    "video_transfer_09_to_10.png": "b769890596b598ee005a3b81338fcf708005aa886efc9508259aedc13f5cf67e",
+    "video_events.jsonl": "8b458acf640f667d1dda8a7df6ac81ff0ddb88f8b5a97fc844c40e4645812f74"
+  },
+  "frame_file": "video_transfer_09_to_10.png",
+  "retained_previous_frame": "video_completion.png",
+  "video_sha256": "129ffa710cf4dd53edccb1e3b066a8804a3d760571c769873b6c35aa5aac2622",
+  "frame_state": {
+    "phase": "transfer",
+    "from_observation": 9,
+    "to_observation": 10,
+    "accepted_observations": 9,
+    "accepted_required_count": 7,
+    "weighted_coverage": 0.7627194404377868,
+    "video_time_s": 1375.0,
+    "estimated_mission_time_s": 1374.0095262022307,
+    "video_mission_offset_s": 0.9904737977691433,
+    "timing_note": "Mission time estimated from recorded video/event alignment; 24 s after the previous accepted observation and within the 90 s transfer. Counts use the last credited event before this frame.",
+    "source_event_time_s": 1350.037210678
+  }
+}

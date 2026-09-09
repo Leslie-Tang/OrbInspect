@@ -1,0 +1,24 @@
+\label{sec:ros-verification-results}
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=\textwidth]{figures/fig07_ros_camera_views/ros_key_camera_views_trajectory.pdf}
+  \caption{Required-target ROS~2 execution with \unit{60}{s} terminal settling
+  after each frozen transfer. All nine observations pass. Numbered markers
+  in (a) and (b) match camera views 1--5 (top row) and 6--9 (bottom row),
+  respectively; hollow gray markers retain the other observations. Both
+  projections use the same spatial scale. Labels give mission time, accepted
+  required targets (Req), and weighted background coverage (Bg).
+  Uncropped Gazebo frames and trajectory
+  positions come from the same execution. Frozen visibility masks gated by
+  terminal tracking determine target credit. The minimum swept-body margin is
+  audited against the full 3-D mesh.}
+  \label{fig:ros-key-camera-views}
+\end{figure*}
+
+The original \unit{810}{s} execution accepted 7/9 required targets; observations 2 and 8 failed tracking after safety-filter interventions. Synchronous screening of the eight distinct successful held-out ADP routes found none that passed every observation. We retained the median-effect route and added \unit{60}{s} stationary settling after each \unit{90}{s} transfer. This post-hoc adjustment extends execution to \unit{1350}{s}; target IDs, route, transfer samples, visibility masks, safety settings, and acceptance tolerances remain unchanged. The failed run and screening inventory are retained.
+
+After an accelerated headless check passed, a separate normal-speed graphical run used Ubuntu~24.04.4, ROS~2 Jazzy, Gazebo Harmonic, RViz2, and Python~3.12.3. It accepted all nine observations and required targets at \unit{1350.038}{s}, with 77.22\% weighted background coverage (30/41 inspectable samples). Maximum terminal position error and speed were \unit{0.050}{m} and \unit{0.0038}{m/s}.
+
+Integrating $27\,185$ timestamped safe-control messages through the final event gave \unit{15.929}{m/s} executed $\Delta v$, versus \unit{13.840}{m/s} for the transfer-and-hold reference. The safety stream reported $1\,402$ interventions. Auditing $27\,188$ trajectory samples and their connecting segments against $247\,525$ transformed triangles found no surface crossing. Minimum swept-body clearance was \unit{5.353}{m} above the required \unit{2}{m} margin; peak acceleration was $0.0600~\mathrm{m/s^2}$. All execution and full-mesh audit gates passed.
+
+Fig.~\ref{fig:ros-key-camera-views} matches camera frames within \unit{0.036}{s} of accepted event receipts. Both bags contain identical verification events, and named Gazebo poses confirm image--trajectory alignment. Images do not supply fresh visibility credit or defect detection. This single adjusted execution provides no paired ROS saving; the 11.05\% result remains the unchanged offline aggregate.

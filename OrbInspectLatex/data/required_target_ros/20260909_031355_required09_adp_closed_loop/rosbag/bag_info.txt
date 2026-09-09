@@ -1,0 +1,23 @@
+
+Files:             orbinspect_run_0.mcap
+Bag size:          1.7 GiB
+Storage id:        mcap
+ROS Distro:        jazzy
+Duration:          819.600061420s
+Start:             Sep  9 2026 11:13:56.304069987 (1788923636.304069987)
+End:               Sep  9 2026 11:27:35.904131407 (1788924455.904131407)
+Messages:          131984
+Topic information: Topic: /chaser/attitude_reference | Type: geometry_msgs/msg/PoseStamped | Count: 16393 | Serialization Format: cdr
+                   Topic: /chaser/control_command | Type: geometry_msgs/msg/AccelStamped | Count: 16391 | Serialization Format: cdr
+                   Topic: /chaser/odom | Type: nav_msgs/msg/Odometry | Count: 16392 | Serialization Format: cdr
+                   Topic: /chaser/reference_state | Type: nav_msgs/msg/Odometry | Count: 16393 | Serialization Format: cdr
+                   Topic: /chaser/safe_control_command | Type: geometry_msgs/msg/AccelStamped | Count: 16391 | Serialization Format: cdr
+                   Topic: /chaser/safety_status | Type: std_msgs/msg/String | Count: 16391 | Serialization Format: cdr
+                   Topic: /inspection/coverage_map | Type: orbinspect_interfaces/msg/CoverageMap | Count: 9 | Serialization Format: cdr
+                   Topic: /inspection/executed_path | Type: nav_msgs/msg/Path | Count: 16392 | Serialization Format: cdr
+                   Topic: /inspection/planned_path | Type: nav_msgs/msg/Path | Count: 819 | Serialization Format: cdr
+                   Topic: /mission/event | Type: std_msgs/msg/String | Count: 10 | Serialization Format: cdr
+                   Topic: /verification/reference_status | Type: std_msgs/msg/String | Count: 16393 | Serialization Format: cdr
+                   Topic: /verification/status | Type: std_msgs/msg/String | Count: 10 | Serialization Format: cdr
+Service:           0
+Service information: 

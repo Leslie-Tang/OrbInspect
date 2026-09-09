@@ -1,0 +1,12 @@
+orbinspect_bringup
+orbinspect_control
+orbinspect_description
+orbinspect_dynamics
+orbinspect_eval
+orbinspect_gazebo
+orbinspect_guidance
+orbinspect_interfaces
+orbinspect_mission
+orbinspect_perception
+orbinspect_safety
+orbinspect_utils

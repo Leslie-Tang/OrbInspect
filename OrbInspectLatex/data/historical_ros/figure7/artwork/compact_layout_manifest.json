@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "figure_mm": [
+    170.0,
+    74.0
+  ],
+  "camera_views": 10,
+  "trajectory_rows": 18918,
+  "image_pixels_unchanged": true,
+  "trajectory_coordinates_unchanged": true,
+  "equal_spatial_scaling": true,
+  "text_within_canvas": true,
+  "layout": "Two columns plus a centered fifth view on each side; two central projections",
+  "correspondence": "Matching observation numbers; active 1-5 left and 6-10 right; inactive hollow markers retained",
+  "minimum_annotation_font_pt": 7.0,
+  "snapshot_sha256": "9ba40f90442904b1a7035df9d345511fc7af49ade728fbbc74c2a3749f0e3bb7",
+  "script_sha256": "88fb6e710b356b5a9093b83f5fd9434167ca83df7460ea53a20c1e154a061b4a",
+  "output_sha256": {
+    "ros_key_camera_views_trajectory.svg": "6754bb0fc9d80283f67abcc7e7ba481a436a8e075391c9114656dfbb62cce89c",
+    "ros_key_camera_views_trajectory.pdf": "cb4b294cfd7ee74bd884d7b07504edb22983a7298c0ae8b35908266db659859b",
+    "ros_key_camera_views_trajectory.png": "d854757ae416a4dbfc28326bd8f43a1c21837b5956887c39f309591a2e90a5b2"
+  }
+}

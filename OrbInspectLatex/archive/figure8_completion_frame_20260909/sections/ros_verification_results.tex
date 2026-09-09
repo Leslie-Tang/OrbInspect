@@ -1,0 +1,39 @@
+\label{sec:ros-verification-results}
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=\textwidth]{figures/fig07_ros_camera_views/ros_key_camera_views_trajectory.pdf}
+  \caption{Supplemental ROS~2 execution with twelve \unit{90}{s} transfers and
+  \unit{60}{s} settling intervals. All observations pass, accepting 9/9 required
+  targets and 95.86\% weighted background coverage. Panels (a) and (b) highlight
+  odd- and even-numbered views; hollow markers show the others. Both projections
+  have equal spatial scale. Camera rows 1--6 and 7--12 show mission time,
+  accepted required targets (Req), and weighted coverage (Bg). Uncropped frames
+  and trajectories come from the same execution. Target credit uses fixed
+  visibility masks and terminal tracking; the swept-body margin is audited
+  against the full 3-D mesh.}
+  \label{fig:ros-key-camera-views}
+\end{figure*}
+
+To increase the earlier nine-view result from 77.22\% background coverage, we added a 95\% goal using the same nine required IDs and 41-sample weights, and selected a twelve-view hybrid ADP plan. Synchronous screening rejected views 5 and 12 because their endpoints lay inside the unchanged caution zone. We shifted them by \unit{8}{m} and \unit{6}{m}, adjusted their camera aims, and recomputed all transfers and visibility masks. The observation order, camera criteria, safety settings and acceptance tolerances were retained, with \unit{60}{s} settling after each \unit{90}{s} transfer. This post-hoc case, its failed diagnostic and refinement search are archived separately from the unchanged held-out study.
+
+The subsequent normal-speed graphical run used Ubuntu~24.04.4, ROS~2 Jazzy, Gazebo Harmonic, RViz2, and Python~3.12.3. All twelve observations passed at \unit{1800.035}{s}, accepting 9/9 required targets and 95.86\% weighted background coverage (39/41 inspectable samples). Maximum terminal position error and speed were \unit{0.050}{m} and \unit{0.0038}{m/s}.
+
+Integrating $36\,172$ timestamped safe-control messages through the final event gave \unit{20.477}{m/s} executed $\Delta v$, versus \unit{18.027}{m/s} for the transfer-and-hold reference. The safety stream reported $1\,847$ interventions. Auditing $36\,181$ trajectory samples and their connecting segments against $247\,525$ transformed triangles found no surface crossing. Minimum swept-body clearance was \unit{3.380}{m} above the required \unit{2}{m} margin; peak acceleration was $0.0600~\mathrm{m/s^2}$. All execution and full-mesh audit gates passed. Reference-count completion passed, although the publisher reported a maximum \unit{0.249}{s} gap, exceeding the \unit{0.075}{s} nominal timing diagnostic.
+
+Fig.~\ref{fig:ros-key-camera-views} matches camera frames within \unit{0.074}{s} of accepted event receipts. Both bags contain identical verification events, and named Gazebo poses confirm image--trajectory alignment. Images do not supply fresh visibility credit or defect detection. This selected, adjusted execution provides no paired ROS saving; the 11.05\% result remains the unchanged offline aggregate.
+
+Figure~\ref{fig:rviz-execution-overview} shows a separate repeat execution of the
+same reference (Supplementary Video~1).
+
+\begingroup
+\setlength{\intextsep}{3pt}
+\setlength{\abovecaptionskip}{0pt}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{figures/fig08_rviz_overview/rviz_execution_overview.pdf}
+  \caption{RViz display: (a) planned (blue) and executed (orange) trajectories
+  with camera field of view (yellow); (b) onboard Gazebo camera.
+  Crops from one post-completion video frame.}
+  \label{fig:rviz-execution-overview}
+\end{figure}
+\endgroup

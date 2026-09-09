@@ -1,0 +1,6 @@
+{
+  "plan_snapshot": "/home/rugang/robotics/projects/OrbInspect/data/results/20260909_090745_hybrid12_plan",
+  "transfer_inputs": "/home/rugang/robotics/projects/OrbInspect/data/results/20260909_090745_hybrid12_transfers",
+  "execution_inputs": "/home/rugang/robotics/projects/OrbInspect/data/results/20260909_090745_hybrid12_dwell60_inputs",
+  "scenario_id": "required09_test_000_bg95"
+}

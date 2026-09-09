@@ -1,0 +1,125 @@
+{
+  "scope": "Archived planned samples, not executed measurements",
+  "samples": [
+    {
+      "time": 93.0,
+      "full_mesh_center_distance_m": 33.41660869958582
+    },
+    {
+      "time": 96.0,
+      "full_mesh_center_distance_m": 33.25359654057068
+    },
+    {
+      "time": 99.0,
+      "full_mesh_center_distance_m": 32.84626974915937
+    },
+    {
+      "time": 102.0,
+      "full_mesh_center_distance_m": 32.31709134361212
+    },
+    {
+      "time": 105.0,
+      "full_mesh_center_distance_m": 31.698211240537837
+    },
+    {
+      "time": 108.0,
+      "full_mesh_center_distance_m": 31.026478383661598
+    },
+    {
+      "time": 111.0,
+      "full_mesh_center_distance_m": 29.98501468986428
+    },
+    {
+      "time": 114.0,
+      "full_mesh_center_distance_m": 28.46207923172012
+    },
+    {
+      "time": 117.0,
+      "full_mesh_center_distance_m": 26.866296185799182
+    },
+    {
+      "time": 120.0,
+      "full_mesh_center_distance_m": 25.170158704200173
+    },
+    {
+      "time": 123.0,
+      "full_mesh_center_distance_m": 23.493051790019717
+    },
+    {
+      "time": 126.0,
+      "full_mesh_center_distance_m": 21.892554485695253
+    },
+    {
+      "time": 129.0,
+      "full_mesh_center_distance_m": 20.433722952865608
+    },
+    {
+      "time": 132.0,
+      "full_mesh_center_distance_m": 19.153033131546678
+    },
+    {
+      "time": 135.0,
+      "full_mesh_center_distance_m": 17.387730617981934
+    },
+    {
+      "time": 138.0,
+      "full_mesh_center_distance_m": 15.868111794369653
+    },
+    {
+      "time": 141.0,
+      "full_mesh_center_distance_m": 14.679721338714087
+    },
+    {
+      "time": 144.0,
+      "full_mesh_center_distance_m": 13.899457245740905
+    },
+    {
+      "time": 147.0,
+      "full_mesh_center_distance_m": 13.57172948164627
+    },
+    {
+      "time": 150.0,
+      "full_mesh_center_distance_m": 13.686815040964305
+    },
+    {
+      "time": 153.0,
+      "full_mesh_center_distance_m": 14.178885566596218
+    },
+    {
+      "time": 156.0,
+      "full_mesh_center_distance_m": 14.946706643060757
+    },
+    {
+      "time": 159.0,
+      "full_mesh_center_distance_m": 15.880787808886527
+    },
+    {
+      "time": 162.0,
+      "full_mesh_center_distance_m": 16.88152157919559
+    },
+    {
+      "time": 165.0,
+      "full_mesh_center_distance_m": 17.864224475482793
+    },
+    {
+      "time": 168.0,
+      "full_mesh_center_distance_m": 18.763351147497524
+    },
+    {
+      "time": 171.0,
+      "full_mesh_center_distance_m": 19.52567490693312
+    },
+    {
+      "time": 174.0,
+      "full_mesh_center_distance_m": 20.10805613238334
+    },
+    {
+      "time": 177.0,
+      "full_mesh_center_distance_m": 20.475943663429057
+    },
+    {
+      "time": 180.0,
+      "full_mesh_center_distance_m": 20.602372560191334
+    }
+  ]
+}

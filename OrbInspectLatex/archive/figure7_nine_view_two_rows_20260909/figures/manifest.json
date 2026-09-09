@@ -1,0 +1,286 @@
+{
+  "figures": [
+    {
+      "number": 1,
+      "directory": "figures/fig01_framework",
+      "files": [
+        {
+          "file": "figures/fig01_framework/viability_preserving_rollout_adp.drawio",
+          "sha256": "0b6979f6b33cfdff48aef4107311eb31deab0df24d27a7e3053f9365abe3a194"
+        },
+        {
+          "file": "figures/fig01_framework/viability_preserving_rollout_adp.pdf",
+          "sha256": "c5f4547d8f5e8ebe903deba0c1632b4f4616bda58433d16658ca526879a31e29"
+        },
+        {
+          "file": "figures/fig01_framework/viability_preserving_rollout_adp.png",
+          "sha256": "24bded88c465c0dfab1a82f1075e2f352a83eebe014a5bddfe5fb91a5764d5f9"
+        },
+        {
+          "file": "figures/fig01_framework/viability_preserving_rollout_adp.svg",
+          "sha256": "171839d9442c7a8151160893480e4cb856faea7b95b840d594af306cdb11f7b2"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "directory": "figures/fig02_rollout_example",
+      "files": [
+        {
+          "file": "figures/fig02_rollout_example/adp_rollout_mechanism.drawio",
+          "sha256": "d602f51a43057918c293526170ce4d3a8acd9fdf556f69d514c0f845129b552c"
+        },
+        {
+          "file": "figures/fig02_rollout_example/adp_rollout_mechanism.pdf",
+          "sha256": "cdc16dc2c0dba6c2967162bb152021a31ae32fb0c5c1644aee443cb09842ea0d"
+        },
+        {
+          "file": "figures/fig02_rollout_example/adp_rollout_mechanism.png",
+          "sha256": "4c3828030b224f217890ea6d765b4c70eb93d617cb8bf8d221c5b4d74d909cb0"
+        },
+        {
+          "file": "figures/fig02_rollout_example/adp_rollout_mechanism.svg",
+          "sha256": "cf3feaed080a1f30f88699ab46d80d502349c990d267632e9edc70e9de264cdf"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "directory": "figures/fig03_depth_tradeoff",
+      "files": [
+        {
+          "file": "figures/fig03_depth_tradeoff/adp_depth_tradeoff_a.pdf",
+          "sha256": "105da3e6851127a1069bbd1b75c2a2559d0f34f820ae13515df96db2654dee72"
+        },
+        {
+          "file": "figures/fig03_depth_tradeoff/adp_depth_tradeoff_a.png",
+          "sha256": "757b7e60cef3917f48642eca741683135bc6f32f996996698a54420f92c71c95"
+        },
+        {
+          "file": "figures/fig03_depth_tradeoff/adp_depth_tradeoff_a.svg",
+          "sha256": "b6fc7d9c098b7eb5c1f7e525d56f3afed24b499b1c4f59fce97d38e93e6cda2d"
+        },
+        {
+          "file": "figures/fig03_depth_tradeoff/adp_depth_tradeoff_b.pdf",
+          "sha256": "97fcbb9dd61ef9290a5cba0c3bce4e913a41966b598c65e032e423bd0471b01b"
+        },
+        {
+          "file": "figures/fig03_depth_tradeoff/adp_depth_tradeoff_b.png",
+          "sha256": "79e957b8909ad0c0bab3c4486e1002625e538c64becf72e53707567972b03be1"
+        },
+        {
+          "file": "figures/fig03_depth_tradeoff/adp_depth_tradeoff_b.svg",
+          "sha256": "81f67e267cefdfce318147257cd67ff745427670ace3d93c53b39c17d3156ba8"
+        },
+        {
+          "file": "figures/fig03_depth_tradeoff/adp_depth_tradeoff_c.pdf",
+          "sha256": "50834f66e5fc6a1b4e3cc63fba97cb6f1b3918968a4824810132cf958029ab16"
+        },
+        {
+          "file": "figures/fig03_depth_tradeoff/adp_depth_tradeoff_c.png",
+          "sha256": "ab046737d88fc559435f0a325a20302336f30f81106bb232c433b978af67b317"
+        },
+        {
+          "file": "figures/fig03_depth_tradeoff/adp_depth_tradeoff_c.svg",
+          "sha256": "9101df204b5c4b785f55c8ab249ae1a1c09235eb8dd0a06b3694d7002b008ea8"
+        },
+        {
+          "file": "figures/fig03_depth_tradeoff/readable_typography_manifest.json",
+          "sha256": "138ea43b9cc9ea57b1a09c7e54d28be044a8c584621aeedd1d93f53bf85abfd2"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "directory": "figures/fig04_heldout_performance",
+      "files": [
+        {
+          "file": "figures/fig04_heldout_performance/adp_heldout_performance_a.pdf",
+          "sha256": "b4bd0c5109caab507200b82e30eed572e7df4a31df082af6865b5dc2aa1ad8b3"
+        },
+        {
+          "file": "figures/fig04_heldout_performance/adp_heldout_performance_a.png",
+          "sha256": "dda543f2ad6f6b8214a5aa1d8ce751b28c48a457413e5d5ef0ac7b433d1f3c55"
+        },
+        {
+          "file": "figures/fig04_heldout_performance/adp_heldout_performance_a.svg",
+          "sha256": "49838d74eefb4f71d5e09dee21d43a3bec5ee7026110f6e2ad956a9598bdf3ba"
+        },
+        {
+          "file": "figures/fig04_heldout_performance/adp_heldout_performance_b.pdf",
+          "sha256": "7a3619fd78ae67a8a40d5c340806e39eb427e3bb78dba87c1c8a9df8db39d548"
+        },
+        {
+          "file": "figures/fig04_heldout_performance/adp_heldout_performance_b.png",
+          "sha256": "4e74692a6377c4f9ff8dc2b9aa41758a639aa918bf2f5fdf215055aa5699fbf8"
+        },
+        {
+          "file": "figures/fig04_heldout_performance/adp_heldout_performance_b.svg",
+          "sha256": "eba86dea5db34c3cd80e87fd65f96b34b243b25aa0c097e6092e11777f689f11"
+        },
+        {
+          "file": "figures/fig04_heldout_performance/adp_heldout_performance_c.pdf",
+          "sha256": "25c9da0cecc4a096958909df4599188c95793f7632476d72bae4b346c6efb8f1"
+        },
+        {
+          "file": "figures/fig04_heldout_performance/adp_heldout_performance_c.png",
+          "sha256": "677b580f8382fa910c954e9e26169f25bdb0884af3d2d0b38bf05403b5bfd009"
+        },
+        {
+          "file": "figures/fig04_heldout_performance/adp_heldout_performance_c.svg",
+          "sha256": "89482d39e5c9981f516e37f53d35971089723e0f1c9378fb2611891bc35c5782"
+        },
+        {
+          "file": "figures/fig04_heldout_performance/adp_heldout_performance_d.pdf",
+          "sha256": "e98c698636e979277d09a5ead34125fa84d2c296ceaf41cb5470dafb52535f83"
+        },
+        {
+          "file": "figures/fig04_heldout_performance/adp_heldout_performance_d.png",
+          "sha256": "765f417cb237ff8a0ec7ca78dbef0cfa9019852da7cdafc1f1e50463578f965e"
+        },
+        {
+          "file": "figures/fig04_heldout_performance/adp_heldout_performance_d.svg",
+          "sha256": "8f2164c2626840b2bbe3edbe653b50d16fe3b9172761c03278a402e2ceada518"
+        },
+        {
+          "file": "figures/fig04_heldout_performance/single_column_manifest.json",
+          "sha256": "1b7a60431ea6255019811c201558b24928ab885334489448297d9396e1e44733"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "directory": "figures/fig05_ablation_safety",
+      "files": [
+        {
+          "file": "figures/fig05_ablation_safety/adp_ablation_safety_a.pdf",
+          "sha256": "23079f857f5ccb96671951e5fc0a336e95d8e030cf302ddc0214949f1b0051e9"
+        },
+        {
+          "file": "figures/fig05_ablation_safety/adp_ablation_safety_a.png",
+          "sha256": "336f33d6e4d9e38b2d0ae36bcb41a68d5a7a1cd869575a305942e38fea9873fd"
+        },
+        {
+          "file": "figures/fig05_ablation_safety/adp_ablation_safety_a.svg",
+          "sha256": "686e8118a3992a86dbe1ba0550cd87b24c1b573c2fc924d8b94daa65c9875030"
+        },
+        {
+          "file": "figures/fig05_ablation_safety/adp_ablation_safety_b.pdf",
+          "sha256": "5f06e03a94fab0194c362d6b0b25d3a9fca89b5586b6b2f24758d6a09aa76a3a"
+        },
+        {
+          "file": "figures/fig05_ablation_safety/adp_ablation_safety_b.png",
+          "sha256": "05a6786e7ff912e18a0ac8754997585e457541abc4095563b55259d83208ca1e"
+        },
+        {
+          "file": "figures/fig05_ablation_safety/adp_ablation_safety_b.svg",
+          "sha256": "312fb8fe0e7941311888a22303de96cc1feefb2fc95b407acf3db02c536799a8"
+        },
+        {
+          "file": "figures/fig05_ablation_safety/adp_ablation_safety_c.pdf",
+          "sha256": "876e8531eb033535671fdc996458d3e45e0dbe0bc8440cb4ec0dfc51a582dfb7"
+        },
+        {
+          "file": "figures/fig05_ablation_safety/adp_ablation_safety_c.png",
+          "sha256": "3063556137c4678f83e0a125df34f52ced8b691732ad2f601dbe8c3bd500968f"
+        },
+        {
+          "file": "figures/fig05_ablation_safety/adp_ablation_safety_c.svg",
+          "sha256": "20a5d290beef24ef713445d7dc5dc0a0ece17bda49a039c117e590c5b07dbd7a"
+        },
+        {
+          "file": "figures/fig05_ablation_safety/adp_ablation_safety_d.pdf",
+          "sha256": "126efc4b47a917c9e77ae31e581b685743f6fe4a56cf1776a13753178a40b683"
+        },
+        {
+          "file": "figures/fig05_ablation_safety/adp_ablation_safety_d.png",
+          "sha256": "a605ddea703ccb36f986da6f0b5b0585c33cc6183231c5d1e4981ec24ded845c"
+        },
+        {
+          "file": "figures/fig05_ablation_safety/adp_ablation_safety_d.svg",
+          "sha256": "a5f87b34c63132d8a6beeca84a027ebd42b6899ac8ad73e62ca4385b3d05a0a1"
+        },
+        {
+          "file": "figures/fig05_ablation_safety/adp_ablation_safety_legend.pdf",
+          "sha256": "dba967de9e4d95df75f5cf93677973c42bd34429501655d63c00c42a7429f0ca"
+        },
+        {
+          "file": "figures/fig05_ablation_safety/adp_ablation_safety_legend.png",
+          "sha256": "72ab264a7a9f898f3008720d5b7ba3e94b2c018ae4cde9935d239bc52d9592af"
+        },
+        {
+          "file": "figures/fig05_ablation_safety/adp_ablation_safety_legend.svg",
+          "sha256": "946f8da2a06f528f22365701d377aeb7a47f92e07afa7bae2496d838581ce581"
+        },
+        {
+          "file": "figures/fig05_ablation_safety/single_column_manifest.json",
+          "sha256": "7512a8fda850dc67767eb66d7452411e94c50c712f99b4524373d85929e19353"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "directory": "figures/fig06_representative_trajectory",
+      "files": [
+        {
+          "file": "figures/fig06_representative_trajectory/adp_representative_trajectory_a.pdf",
+          "sha256": "ced3d661b95e2449fe0084f0b2ddf5b3e86e2047d347198667b0adc03324c1f3"
+        },
+        {
+          "file": "figures/fig06_representative_trajectory/adp_representative_trajectory_a.png",
+          "sha256": "42ce06a3e7c1f93db06ad70a111d552235190dc4ad00bf92da6e033b52f4dbbf"
+        },
+        {
+          "file": "figures/fig06_representative_trajectory/adp_representative_trajectory_a.svg",
+          "sha256": "08138afc558ffdfe39aa1482115af5b0b24b5d646c0a36fc7038f561373e02e0"
+        },
+        {
+          "file": "figures/fig06_representative_trajectory/adp_representative_trajectory_b.pdf",
+          "sha256": "414bc14bee9a6e1551bb1824acd03be1072cab9bad76a82b735547d505f930fb"
+        },
+        {
+          "file": "figures/fig06_representative_trajectory/adp_representative_trajectory_b.png",
+          "sha256": "cd679dbbac2ff64e97edf68c82be6e4bf538527ccc8d0965c63c2c98842ce0cf"
+        },
+        {
+          "file": "figures/fig06_representative_trajectory/adp_representative_trajectory_b.svg",
+          "sha256": "93430cda4b373d8177a49247c02fb9c2e23ac2569dbb8d2879f6be9894e02be9"
+        },
+        {
+          "file": "figures/fig06_representative_trajectory/adp_representative_trajectory_c.pdf",
+          "sha256": "9801ebb104fc926cf881c08846d334122b9fbb3ea0fc35df01ec4c485e561f73"
+        },
+        {
+          "file": "figures/fig06_representative_trajectory/adp_representative_trajectory_c.png",
+          "sha256": "41d74482dd695582449d0e81f7fc05d1fa01ceca4293524c985a72b9f5a9741f"
+        },
+        {
+          "file": "figures/fig06_representative_trajectory/adp_representative_trajectory_c.svg",
+          "sha256": "ea55081936c15a89c15efb94c085403fcc9979743c6b3e73247c214f2ce94c29"
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "directory": "figures/fig07_ros_camera_views",
+      "files": [
+        {
+          "file": "figures/fig07_ros_camera_views/compact_layout_manifest.json",
+          "sha256": "055b80b5f176e52c7b7bf78a97fef0f48c548298b7c9c8a4af5123e7eecc6271"
+        },
+        {
+          "file": "figures/fig07_ros_camera_views/ros_key_camera_views_trajectory.pdf",
+          "sha256": "35dc859fc28a46c7c588b149bfdac44162985b39f5408a754e4e6592e2c07c13"
+        },
+        {
+          "file": "figures/fig07_ros_camera_views/ros_key_camera_views_trajectory.png",
+          "sha256": "3401821ea461a56a4fe7c7fa7ce2d07585e60df9644642701b36514b9f187fce"
+        },
+        {
+          "file": "figures/fig07_ros_camera_views/ros_key_camera_views_trajectory.svg",
+          "sha256": "92a3eada71a87d10ddb72e9fae6a99d7209cb75ce509d026daf087c6a5998166"
+        }
+      ]
+    }
+  ]
+}

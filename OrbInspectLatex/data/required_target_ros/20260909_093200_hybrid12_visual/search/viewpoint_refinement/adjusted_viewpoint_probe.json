@@ -1,0 +1,271 @@
+{
+  "adjustments": [
+    {
+      "original_id": "cand_0063",
+      "adjusted_id": "cand_0063_rosclear",
+      "original_position": [
+        7.1672668915132745,
+        11.571294664875204,
+        -61.59617538183524
+      ],
+      "adjusted_position": [
+        11.086794358028794,
+        13.834234902765218,
+        -64.07975483780073
+      ],
+      "shift_m": 5.162534357768546,
+      "proxy_body_clearance_before": 3.1374656422314544,
+      "proxy_body_clearance_after": 8.299999999996986,
+      "outside_caution": true
+    },
+    {
+      "original_id": "cand_0013",
+      "adjusted_id": "cand_0013_rosclear",
+      "original_position": [
+        -1.563469170619293,
+        5.883515063149469,
+        58.14943848153044
+      ],
+      "adjusted_position": [
+        -5.981162095107342,
+        3.332958863997897,
+        58.14943848153044
+      ],
+      "shift_m": 5.101112398303144,
+      "proxy_body_clearance_before": 3.198887601696857,
+      "proxy_body_clearance_after": 8.299999999996123,
+      "outside_caution": true
+    }
+  ],
+  "recomputed_coverage": 0.8964428901049636,
+  "required_complete": true,
+  "covered_in_fixed_universe": [
+    "mesh_00001",
+    "mesh_00005",
+    "mesh_00006",
+    "mesh_00007",
+    "mesh_00008",
+    "mesh_00010",
+    "mesh_00011",
+    "mesh_00012",
+    "mesh_00015",
+    "mesh_00016",
+    "mesh_00019",
+    "mesh_00020",
+    "mesh_00024",
+    "mesh_00025",
+    "mesh_00028",
+    "mesh_00029",
+    "mesh_00033",
+    "mesh_00034",
+    "mesh_00039",
+    "mesh_00041",
+    "mesh_00048",
+    "mesh_00049",
+    "mesh_00052",
+    "mesh_00053",
+    "mesh_00055",
+    "mesh_00059",
+    "mesh_00060",
+    "mesh_00064",
+    "mesh_00065",
+    "mesh_00068",
+    "mesh_00070",
+    "mesh_00071",
+    "mesh_00072",
+    "mesh_00073",
+    "mesh_00079",
+    "mesh_00087"
+  ],
+  "visible_outside_fixed_universe": [],
+  "route": [
+    {
+      "candidate_id": "cand_0016",
+      "position": [
+        47.15438218014242,
+        1.9132428633870262,
+        39.75474212287527
+      ],
+      "source_target_id": "mesh_00016",
+      "safety_margin": 30.881542619772965,
+      "visible_target_ids": [
+        "mesh_00015",
+        "mesh_00016",
+        "mesh_00024",
+        "mesh_00025",
+        "mesh_00034"
+      ]
+    },
+    {
+      "candidate_id": "cand_0021",
+      "position": [
+        37.17635404906447,
+        32.28739450664882,
+        39.75388600862191
+      ],
+      "source_target_id": "mesh_00020",
+      "safety_margin": 32.515836673920674,
+      "visible_target_ids": [
+        "mesh_00019",
+        "mesh_00020",
+        "mesh_00024",
+        "mesh_00028",
+        "mesh_00029",
+        "mesh_00033"
+      ]
+    },
+    {
+      "candidate_id": "cand_0068",
+      "position": [
+        29.057205196336707,
+        37.70409602829488,
+        1.486281695834873
+      ],
+      "source_target_id": "mesh_00074",
+      "safety_margin": 22.788196654051596,
+      "visible_target_ids": [
+        "mesh_00006",
+        "mesh_00008",
+        "mesh_00039",
+        "mesh_00041"
+      ]
+    },
+    {
+      "candidate_id": "cand_0045",
+      "position": [
+        25.76697330621689,
+        54.95296338639528,
+        -50.223460083259454
+      ],
+      "source_target_id": "mesh_00050",
+      "safety_margin": 38.86191907595125,
+      "visible_target_ids": [
+        "mesh_00052",
+        "mesh_00053",
+        "mesh_00064",
+        "mesh_00065"
+      ]
+    },
+    {
+      "candidate_id": "cand_0063_rosclear",
+      "position": [
+        11.086794358028794,
+        13.834234902765218,
+        -64.07975483780073
+      ],
+      "source_target_id": "mesh_00070",
+      "safety_margin": 1.3276208162193228,
+      "visible_target_ids": [
+        "mesh_00068",
+        "mesh_00070"
+      ]
+    },
+    {
+      "candidate_id": "cand_0062",
+      "position": [
+        7.4038132011875835,
+        -0.22808597444695908,
+        -68.702571188211
+      ],
+      "source_target_id": "mesh_00068",
+      "safety_margin": 6.268840934199984,
+      "visible_target_ids": [
+        "mesh_00068",
+        "mesh_00070",
+        "mesh_00079"
+      ]
+    },
+    {
+      "candidate_id": "cand_0055",
+      "position": [
+        45.92088104692785,
+        17.141790760942456,
+        -41.4783779233683
+      ],
+      "source_target_id": "mesh_00060",
+      "safety_margin": 32.6328492471919,
+      "visible_target_ids": [
+        "mesh_00048",
+        "mesh_00049",
+        "mesh_00059",
+        "mesh_00060",
+        "mesh_00065",
+        "mesh_00071"
+      ]
+    },
+    {
+      "candidate_id": "cand_0052",
+      "position": [
+        45.477154697086974,
+        1.9083032715960648,
+        -39.7547140181887
+      ],
+      "source_target_id": "mesh_00058",
+      "safety_margin": 28.09260454402936,
+      "visible_target_ids": [
+        "mesh_00048",
+        "mesh_00049",
+        "mesh_00055",
+        "mesh_00059",
+        "mesh_00060"
+      ]
+    },
+    {
+      "candidate_id": "cand_0066",
+      "position": [
+        47.10610591334751,
+        5.947555696210703,
+        -17.285705478945466
+      ],
+      "source_target_id": "mesh_00072",
+      "safety_margin": 22.995279730375515,
+      "visible_target_ids": [
+        "mesh_00072",
+        "mesh_00073",
+        "mesh_00087"
+      ]
+    },
+    {
+      "candidate_id": "cand_0005",
+      "position": [
+        -14.216049847602841,
+        -36.53834050628878,
+        15.53200695987428
+      ],
+      "source_target_id": "mesh_00004",
+      "safety_margin": 30.67185234784091,
+      "visible_target_ids": [
+        "mesh_00001",
+        "mesh_00005"
+      ]
+    },
+    {
+      "candidate_id": "cand_0000",
+      "position": [
+        -47.848664349308564,
+        4.91803559574651,
+        19.240079866583297
+      ],
+      "source_target_id": "mesh_00000",
+      "safety_margin": 17.802372560191287,
+      "visible_target_ids": [
+        "mesh_00007"
+      ]
+    },
+    {
+      "candidate_id": "cand_0013_rosclear",
+      "position": [
+        -5.981162095107342,
+        3.332958863997897,
+        58.14943848153044
+      ],
+      "source_target_id": "mesh_00012",
+      "safety_margin": 1.9544385197680638,
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012"
+      ]
+    }
+  ]
+}

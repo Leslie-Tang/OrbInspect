@@ -1,0 +1,6 @@
+{
+  "associated_graphical_run": "/home/rugang/robotics/projects/OrbInspect/data/results/20260909_093200_hybrid12_visual",
+  "clock_basis": "ROS wall time; Gazebo sensor stamps; nearest MCAP wall receipt and named Gazebo scene-pose alignment",
+  "storage": "MCAP zstd_fast; original sensor messages",
+  "selection_rule": "Nearest receipt within 0.2 s, no endpoint clamping"
+}

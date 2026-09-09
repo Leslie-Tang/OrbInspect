@@ -34,7 +34,7 @@
 \newcommand{\unit}[2]{#1~#2}
 \input{tables/required_target_numbers}
 
-% Include the corrected Ubuntu/Jazzy closed-loop validation evidence.
+% Include required-target execution checks and the historical survey evidence.
 \newif\ifincludeROSVerificationResults
 \includeROSVerificationResultstrue
 
@@ -100,7 +100,7 @@ The contributions are:
   \item a rollout ADP formulation for maneuver-efficient required-target inspection, combining a required-target terminal predicate, finite-depth Bellman improvement, and complete task-aware base-policy evaluation;
   \item a finite-graph analysis establishing Markov sufficiency, specializing rollout completion and cost-improvement guarantees to SOOA sequencing, and proving exact optimality on exhausted reduced graphs;
   \item a directed SOOA representation with full-mesh visibility and motion audits, including complete GL Transmission Format (glTF) scene-node transforms, that admits safe connecting actions without requiring immediate inspection gain; and
-  \item a reproducible comparison showing an 11.05\% reduction in mean $\Delta v$ relative to one-step-ADP-seeded local search on 43 jointly completed test missions. Historical Robot Operating System 2 (ROS~2) execution evidence is reported separately.
+  \item a reproducible comparison showing an 11.05\% reduction in mean $\Delta v$ relative to one-step-ADP-seeded local search on 43 jointly completed test missions. Robot Operating System 2 (ROS~2) execution checks are reported separately.
 \end{enumerate}
 
 
@@ -423,7 +423,7 @@ With maximum branching factor $B$, depth $d$, and at most $H$ base-policy action
 % OpenAI Codex was used to assist with drafting and revision in the Abstract, Introduction, System and Observation Model, Viability-Preserving Rollout ADP, Experimental Protocol, Results, Discussion, Conclusion, and Data and Code Availability sections; with LaTeX formatting and source checking; and with implementation, testing, offline experiment orchestration, statistical tabulation, and figure-generation scripts. The authors retain responsibility for reviewing and validating all AI-assisted text, mathematical statements, references, source code, figures, and reported results, and for the scientific content of the article.
 
 % Balance the final reference page; retune if the bibliography or text changes.
-\IEEEtriggeratref{16}
+\IEEEtriggeratref{0}
 \bibliographystyle{IEEEtran}
 \bibliography{references}
 

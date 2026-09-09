@@ -1,7 +1,84 @@
 # Ubuntu handover: required-target ROS validation and manuscript update
 
+**Figures 3--6 font consistency (2026-09-10):** axes, ticks, legends and notes
+now use 8 pt Arial at the final manuscript size (math scripts: 5.6 pt).
+The Figure 6 generators now read frozen CSVs and a portable snapshot of its
+original display faces; no planner or simulation was rerun. Its method legend
+is shared above the 3D panel, and alternate horizontal tick labels prevent
+crowding. The manuscript remains 13 pages, with unchanged data, captions,
+colors and Figures 1, 2, 7 and 8. Current PDF:
+`output/pdf/OrbInspect_IEEE_TAES_with_RViz_overview_20260909.pdf`.
+See `OrbInspectLatex/docs/FIGURES_3_6_UNIFORM_FONTS_20260910.md`.
+
+**Figure 7 number fit (2026-09-09):** waypoint numbers in the two trajectory
+projections now use 5.2 pt Arial Bold, reduced from 7 pt to fit the original
+circles, including IDs 10--12. Circle sizes, paths, camera panels and Figure 8
+are preserved. The current PDF remains
+`output/pdf/OrbInspect_IEEE_TAES_with_RViz_overview_20260909.pdf`.
+See `OrbInspectLatex/docs/FIGURE_7_MARKER_LABELS_20260909.md`.
+
+**Additional Figure 8 (2026-09-09):** the manuscript now includes a compact
+RViz overview from one transfer frame of the recorded repeat below.
+The frame at video time 1375 s shows central-module detail during transfer
+9 to 10, avoiding the final camera view already illustrated in Figure 7.
+Both panels are synchronized; their progress labels report 9/12 observations,
+7/9 required targets and 76.27% coverage. The repeat still completes with the
+final totals recorded below. The earlier completion-frame Figure 8 is archived
+under `OrbInspectLatex/archive/figure8_completion_frame_20260909/`.
+Figure 7 and all prior figure artwork are unchanged. Both figures fit on page 12
+of the 13-page manuscript. The new output is
+`output/pdf/OrbInspect_IEEE_TAES_with_RViz_overview_20260909.pdf`; the portable
+source ZIP is `OrbInspectLatex/build/OrbInspectLatex_source.zip`.
+The video is also staged as `output/supplementary/Supplementary_Video_1.mp4`.
+See `OrbInspectLatex/docs/FIGURE_8_RVIZ_OVERVIEW_20260909.md` for provenance and checks.
+
+**RViz video follow-up (2026-09-09):** the same twelve-observation input bundle
+was rerun at normal speed as `20260909_113140_hybrid12_rviz_video_execution`.
+It accepted 12/12 observations, all nine required targets, and 95.8577156%
+weighted coverage. Target/event, full-mesh and reference-timing checks passed.
+The recording shows the live spacecraft camera beside the global RViz trajectory
+view. The full 1080p MP4 (30:16.8), 10× preview (3:01.7), original capture and
+validation notes are in
+[`data/results/20260909_113140_hybrid12_rviz_video/summary.md`](data/results/20260909_113140_hybrid12_rviz_video/summary.md).
+This video task did not change the manuscript or Figure 7.
+
+**Current result, twelve-observation follow-up (2026-09-09):** the supplemental
+normal-speed run `20260909_093200_hybrid12_visual` accepted 12/12 observations,
+all nine required targets and 95.8577156% weighted background coverage (39/41).
+It keeps the parent target IDs, weights and safety settings, adds a 95% hybrid
+goal, and refines two viewpoints after an archived 10/12 tracking diagnostic.
+The 90-s transfers retain 60-s terminal settling. Execution, full-mesh and camera
+alignment audits passed. The publisher's 0.248723-s maximum reference interval
+exceeded the 0.075-s nominal timing diagnostic and is explicitly disclosed;
+reference-count completion passed. Figure 7 now uses twelve original frames in
+a 170 by 47 mm, two-by-six layout with the approved style. The nine-view figure
+is archived separately. See `OrbInspectLatex/docs/ROS_TWELVE_OBSERVATIONS_20260909.md`.
+The reviewed output is `output/pdf/OrbInspect_IEEE_TAES_ROS_12_observations_20260909.pdf`.
+All updates below are earlier history; the frozen offline study remains unchanged.
+
+
 Prepared: 2026-09-09. Implementation baseline: `440c476` on `main`.
 Repository: https://github.com/Leslie-Tang/OrbInspect
+
+**Completed execution follow-up, 2026-09-09:** the original 810-s headless run
+accepted 7/9 required targets and is retained. A subsequent normal-speed
+graphical run of the same median-effect route, with a declared uniform 60-s
+terminal settling interval after each transfer, accepted all nine observations
+and required targets in 1,350.038 s. Execution, full-mesh and per-view camera
+alignment audits passed. The ROS manuscript and Figure 7 now use this run;
+the approved figure style and Figures 1–6 are preserved. See
+`OrbInspectLatex/docs/ROS_FULL_COMPLETION_20260909.md` and
+`OrbInspectLatex/docs/ROS_SETTLING_PROTOCOL_20260909.md` for the search inventory,
+retained failures, timing adjustment and evidence. No paired ROS saving is
+claimed. The original handover instructions below are retained as history.
+
+**Figure 7 layout follow-up, 2026-09-09:** two trajectory projections now appear
+on the left, with camera views 1--5 above views 6--9 on the right. The legend fills
+the spare tenth position. The 170 by 44 mm export saves 38.9% of the previous
+72 mm height; each camera view is 20.8 mm wide. Colors, typography, frame pixels
+and execution evidence are preserved. See
+`OrbInspectLatex/docs/FIGURE_7_TWO_ROWS_20260909.md`; the preceding 24 mm camera
+layout is archived in `OrbInspectLatex/archive/figure7_camera_emphasis_20260909/`.
 
 This replaces the earlier Windows finishing guide, preserved unchanged in
 `docs/handover_windows_20260812.md`. That historical guide's figure paths,

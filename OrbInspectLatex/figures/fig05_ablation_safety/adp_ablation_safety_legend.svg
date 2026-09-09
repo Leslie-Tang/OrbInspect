@@ -6,11 +6,11 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-09-08T17:24:09.694359</dc:date>
+    <dc:date>2026-09-09T23:55:34.028351</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
-      <dc:title>Matplotlib v3.10.7, https://matplotlib.org/</dc:title>
+      <dc:title>Matplotlib v3.6.3, https://matplotlib.org/</dc:title>
      </cc:Agent>
     </dc:creator>
    </cc:Work>
@@ -30,16 +30,16 @@ z
   </g>
   <g id="legend_1">
    <g id="patch_2">
-    <path d="M 68.49215 11.326641 
-L 76.14215 11.326641 
-L 76.14215 5.026641 
-L 68.49215 5.026641 
+    <path d="M 74.165431 11.068125 
+L 80.965431 11.068125 
+L 80.965431 5.468125 
+L 74.165431 5.468125 
 z
 " style="fill: #3f91a6; stroke: #000000; stroke-width: 0.5; stroke-linejoin: miter"/>
    </g>
    <g id="line2d_1">
     <defs>
-     <path id="m7daadc8d79" d="M 0 1.5 
+     <path id="m2cb7f3f3e2" d="M 0 1.5 
 C 0.397805 1.5 0.77937 1.341951 1.06066 1.06066 
 C 1.341951 0.77937 1.5 0.397805 1.5 0 
 C 1.5 -0.397805 1.341951 -0.77937 1.06066 -1.06066 
@@ -52,23 +52,23 @@ z
 " style="stroke: #000000; stroke-width: 0.3"/>
     </defs>
     <g>
-     <use xlink:href="#m7daadc8d79" x="83.56715" y="8.176641" style="fill: #3f91a6; stroke: #000000; stroke-width: 0.3"/>
+     <use xlink:href="#m2cb7f3f3e2" x="87.565431" y="8.268125" style="fill: #3f91a6; stroke: #000000; stroke-width: 0.3"/>
     </g>
    </g>
    <g id="text_1">
-    <text style="font-size: 9px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: start" x="90.99215" y="11.326641" transform="rotate(-0 90.99215 11.326641)">Test</text>
+    <text style="font: 8px 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: start" x="94.165431" y="11.068125" transform="rotate(-0 94.165431 11.068125)">Test</text>
    </g>
    <g id="patch_3">
-    <path d="M 120.093087 11.326641 
-L 127.743087 11.326641 
-L 127.743087 5.026641 
-L 120.093087 5.026641 
+    <path d="M 120.032931 11.068125 
+L 126.832931 11.068125 
+L 126.832931 5.468125 
+L 120.032931 5.468125 
 z
-" style="fill: url(#h6a0283bf51); stroke: #000000; stroke-width: 0.5; stroke-linejoin: miter"/>
+" style="fill: url(#h9eb859346c); stroke: #000000; stroke-width: 0.5; stroke-linejoin: miter"/>
    </g>
    <g id="line2d_2">
     <defs>
-     <path id="m136d9add32" d="M -1.5 1.5 
+     <path id="m0621a77a2d" d="M -1.5 1.5 
 L 1.5 1.5 
 L 1.5 -1.5 
 L -1.5 -1.5 
@@ -76,16 +76,16 @@ z
 " style="stroke: #000000; stroke-width: 0.3; stroke-linejoin: miter"/>
     </defs>
     <g>
-     <use xlink:href="#m136d9add32" x="135.168087" y="8.176641" style="fill: #8771aa; stroke: #000000; stroke-width: 0.3; stroke-linejoin: miter"/>
+     <use xlink:href="#m0621a77a2d" x="133.432931" y="8.268125" style="fill: #8771aa; stroke: #000000; stroke-width: 0.3; stroke-linejoin: miter"/>
     </g>
    </g>
    <g id="text_2">
-    <text style="font-size: 9px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: start" x="142.593087" y="11.326641" transform="rotate(-0 142.593087 11.326641)">Shifted</text>
+    <text style="font: 8px 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: start" x="140.032931" y="11.068125" transform="rotate(-0 140.032931 11.068125)">Shifted</text>
    </g>
   </g>
  </g>
  <defs>
-  <pattern id="h6a0283bf51" patternUnits="userSpaceOnUse" x="0" y="0" width="72" height="72">
+  <pattern id="h9eb859346c" patternUnits="userSpaceOnUse" x="0" y="0" width="72" height="72">
    <rect x="0" y="0" width="73" height="73" fill="#8771aa"/>
    <path d="M -36 36 
 L 36 -36 

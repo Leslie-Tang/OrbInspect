@@ -1,0 +1,52 @@
+observation_count: 12
+terminal_dwell_s: 60.0
+action_cost: 0.05
+selection_reason: Supplemental 12-view hybrid route; views 5 and 12 refined after
+  synchronous tracking failure, with recomputed transfers and visibility; unchanged
+  safety margins, camera gates, target IDs and weights.
+refinements:
+- original_id: cand_0063
+  candidate_id: cand_0063_safe
+  position:
+  - 15.167266891513275
+  - 11.571294664875204
+  - -61.59617538183524
+  source_target_id: mesh_00045
+  displacement_m: 8.0
+  body_clearance: 9.855297196542368
+  original_visible:
+  - mesh_00045
+  - mesh_00070
+  visible_target_ids:
+  - mesh_00045
+  - mesh_00068
+  - mesh_00070
+  preserves_original_visibility: true
+  aim_position:
+  - -13.372391116619111
+  - 5.905034939646721
+  - -16.31811008118093
+- original_id: cand_0013
+  candidate_id: cand_0013_safe
+  position:
+  - -5.703573616712612
+  - 1.619262353067862
+  - 58.97143848153044
+  aim_position:
+  - 0.12388174810011598
+  - 6.274852870942527
+  - 32.112260910102016
+  displacement_m: 6
+  body_clearance: 8.91644958137356
+  visible_target_ids:
+  - mesh_00010
+  - mesh_00011
+  - mesh_00012
+  - mesh_00031
+  - mesh_00036
+  original_visible:
+  - mesh_00010
+  - mesh_00011
+  - mesh_00012
+  - mesh_00031
+  - mesh_00036

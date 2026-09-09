@@ -1,0 +1,963 @@
+{
+  "status": "passed",
+  "date": "2026-09-10",
+  "scope": "Figure 3\u20136 final-size typography only",
+  "main_text_font_pt": 8.0,
+  "math_script_font_pt": 5.6,
+  "manuscript_pages": 13,
+  "figures": [
+    {
+      "number": 3,
+      "panels": [
+        {
+          "file": "figures/fig03_depth_tradeoff/adp_depth_tradeoff_a.pdf",
+          "size_pt": [
+            75.31755828857422,
+            113.38582611083984
+          ],
+          "text_sizes_pt": {
+            "8.0": 20
+          },
+          "fonts": [
+            "ArialMT",
+            "DejaVuSans",
+            "DejaVuSans-Oblique"
+          ],
+          "all_text_inside_canvas": true,
+          "fonts_embedded": true,
+          "editable_svg_text": true,
+          "pdf_svg_dimensions_match": true,
+          "sha256": "046d6f965c8ba23ac3eaad72292c5e6c78a02653ccb8994558275bde7b3a0d51"
+        },
+        {
+          "file": "figures/fig03_depth_tradeoff/adp_depth_tradeoff_b.pdf",
+          "size_pt": [
+            75.31755828857422,
+            113.38582611083984
+          ],
+          "text_sizes_pt": {
+            "8.0": 19,
+            "5.6": 3
+          },
+          "fonts": [
+            "ArialMT",
+            "DejaVuSans-Oblique"
+          ],
+          "all_text_inside_canvas": true,
+          "fonts_embedded": true,
+          "editable_svg_text": true,
+          "pdf_svg_dimensions_match": true,
+          "sha256": "781d6c6583639ce047d7b90177a57503bfa5751c7193aa6eaaf0229aebb88e5f"
+        },
+        {
+          "file": "figures/fig03_depth_tradeoff/adp_depth_tradeoff_c.pdf",
+          "size_pt": [
+            75.31755828857422,
+            113.38582611083984
+          ],
+          "text_sizes_pt": {
+            "8.0": 18,
+            "5.6": 2
+          },
+          "fonts": [
+            "ArialMT",
+            "DejaVuSans-Oblique"
+          ],
+          "all_text_inside_canvas": true,
+          "fonts_embedded": true,
+          "editable_svg_text": true,
+          "pdf_svg_dimensions_match": true,
+          "sha256": "a4ff0fac281387c76612d9836869b8f608b8605edec32e186d8b5ad136e6bc11"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "panels": [
+        {
+          "file": "figures/fig04_heldout_performance/adp_heldout_performance_a.pdf",
+          "size_pt": [
+            117.16064453125,
+            112.0
+          ],
+          "text_sizes_pt": {
+            "8.0": 14
+          },
+          "fonts": [
+            "ArialMT",
+            "DejaVuSans",
+            "DejaVuSans-Oblique"
+          ],
+          "all_text_inside_canvas": true,
+          "fonts_embedded": true,
+          "editable_svg_text": true,
+          "pdf_svg_dimensions_match": true,
+          "sha256": "6594f132718c1275434744bf7a642a913743b5a3a329640f7387ff2d0e94737f"
+        },
+        {
+          "file": "figures/fig04_heldout_performance/adp_heldout_performance_b.pdf",
+          "size_pt": [
+            117.16064453125,
+            112.0
+          ],
+          "text_sizes_pt": {
+            "8.0": 10,
+            "5.6": 2
+          },
+          "fonts": [
+            "ArialMT",
+            "DejaVuSans",
+            "DejaVuSans-Oblique"
+          ],
+          "all_text_inside_canvas": true,
+          "fonts_embedded": true,
+          "editable_svg_text": true,
+          "pdf_svg_dimensions_match": true,
+          "sha256": "646f6a90b1932b088e103852fc4d3202c077621f128ab7ee0e4c8fff2595071d"
+        },
+        {
+          "file": "figures/fig04_heldout_performance/adp_heldout_performance_c.pdf",
+          "size_pt": [
+            117.16064453125,
+            112.0
+          ],
+          "text_sizes_pt": {
+            "8.0": 14
+          },
+          "fonts": [
+            "ArialMT",
+            "DejaVuSans",
+            "DejaVuSans-Oblique"
+          ],
+          "all_text_inside_canvas": true,
+          "fonts_embedded": true,
+          "editable_svg_text": true,
+          "pdf_svg_dimensions_match": true,
+          "sha256": "d1888cf2bedfdcc07e23c92027c4c39ca17c2c82d8366522f137ad7d8af27c95"
+        },
+        {
+          "file": "figures/fig04_heldout_performance/adp_heldout_performance_d.pdf",
+          "size_pt": [
+            117.16064453125,
+            112.0
+          ],
+          "text_sizes_pt": {
+            "8.0": 10,
+            "5.6": 2
+          },
+          "fonts": [
+            "ArialMT",
+            "DejaVuSans",
+            "DejaVuSans-Oblique"
+          ],
+          "all_text_inside_canvas": true,
+          "fonts_embedded": true,
+          "editable_svg_text": true,
+          "pdf_svg_dimensions_match": true,
+          "sha256": "646b8c377b6b5652e7eb2f67c168a182a084407cedce8754ac3f9546d23d4032"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "panels": [
+        {
+          "file": "figures/fig05_ablation_safety/adp_ablation_safety_a.pdf",
+          "size_pt": [
+            109.987548828125,
+            101.0
+          ],
+          "text_sizes_pt": {
+            "8.0": 14
+          },
+          "fonts": [
+            "ArialMT",
+            "DejaVuSans",
+            "DejaVuSans-Oblique"
+          ],
+          "all_text_inside_canvas": true,
+          "fonts_embedded": true,
+          "editable_svg_text": true,
+          "pdf_svg_dimensions_match": true,
+          "sha256": "6be090a4a88fc2f61bc5015b1761878df030ab557c61a0617c500c0f26968588"
+        },
+        {
+          "file": "figures/fig05_ablation_safety/adp_ablation_safety_b.pdf",
+          "size_pt": [
+            129.11581420898438,
+            101.0
+          ],
+          "text_sizes_pt": {
+            "8.0": 9
+          },
+          "fonts": [
+            "ArialMT",
+            "DejaVuSans",
+            "DejaVuSans-Oblique"
+          ],
+          "all_text_inside_canvas": true,
+          "fonts_embedded": true,
+          "editable_svg_text": true,
+          "pdf_svg_dimensions_match": true,
+          "sha256": "4e2318f4b1248702e34141a7e95ee1afa83634e3b782dd8a0b4e53bb24ce504b"
+        },
+        {
+          "file": "figures/fig05_ablation_safety/adp_ablation_safety_c.pdf",
+          "size_pt": [
+            109.987548828125,
+            116.0
+          ],
+          "text_sizes_pt": {
+            "8.0": 8
+          },
+          "fonts": [
+            "ArialMT"
+          ],
+          "all_text_inside_canvas": true,
+          "fonts_embedded": true,
+          "editable_svg_text": true,
+          "pdf_svg_dimensions_match": true,
+          "sha256": "581e05223426b6cd5d115825f909d0b6c4372e8163bdb58c3bf1409aa063bd85"
+        },
+        {
+          "file": "figures/fig05_ablation_safety/adp_ablation_safety_d.pdf",
+          "size_pt": [
+            129.11581420898438,
+            116.0
+          ],
+          "text_sizes_pt": {
+            "8.0": 8,
+            "5.6": 2
+          },
+          "fonts": [
+            "ArialMT",
+            "DejaVuSans"
+          ],
+          "all_text_inside_canvas": true,
+          "fonts_embedded": true,
+          "editable_svg_text": true,
+          "pdf_svg_dimensions_match": true,
+          "sha256": "6c87377815c8165cd3853b9a199c4ca237a5410cbe2aa778865fd26bd808953d"
+        },
+        {
+          "file": "figures/fig05_ablation_safety/adp_ablation_safety_legend.pdf",
+          "size_pt": [
+            239.10336303710938,
+            18.0
+          ],
+          "text_sizes_pt": {
+            "8.0": 2
+          },
+          "fonts": [
+            "ArialMT"
+          ],
+          "all_text_inside_canvas": true,
+          "fonts_embedded": true,
+          "editable_svg_text": true,
+          "pdf_svg_dimensions_match": true,
+          "sha256": "12e7692c5f397f3dfa725b2525b2725209095755440825ec2eacdd32cb656c1e"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "panels": [
+        {
+          "file": "figures/fig06_representative_trajectory/adp_representative_trajectory_a.pdf",
+          "size_pt": [
+            161.394775390625,
+            142.10000610351562
+          ],
+          "text_sizes_pt": {
+            "8.0": 22
+          },
+          "fonts": [
+            "ArialMT",
+            "DejaVuSans-Oblique"
+          ],
+          "all_text_inside_canvas": true,
+          "fonts_embedded": true,
+          "editable_svg_text": true,
+          "pdf_svg_dimensions_match": true,
+          "sha256": "8f1966a2038ae48a3733bed0d89c76b4193346061c410eeadffe3164543e5c2d"
+        },
+        {
+          "file": "figures/fig06_representative_trajectory/adp_representative_trajectory_b.pdf",
+          "size_pt": [
+            104.00996398925781,
+            112.9000015258789
+          ],
+          "text_sizes_pt": {
+            "8.0": 13
+          },
+          "fonts": [
+            "ArialMT"
+          ],
+          "all_text_inside_canvas": true,
+          "fonts_embedded": true,
+          "editable_svg_text": true,
+          "pdf_svg_dimensions_match": true,
+          "sha256": "10856ea3d40859ba711a632ffb9c7d66b23ac1f3de5c08c97127bbc2fe6c91c3"
+        },
+        {
+          "file": "figures/fig06_representative_trajectory/adp_representative_trajectory_c.pdf",
+          "size_pt": [
+            104.00996398925781,
+            112.9000015258789
+          ],
+          "text_sizes_pt": {
+            "8.0": 16
+          },
+          "fonts": [
+            "ArialMT",
+            "DejaVuSans",
+            "DejaVuSans-Oblique"
+          ],
+          "all_text_inside_canvas": true,
+          "fonts_embedded": true,
+          "editable_svg_text": true,
+          "pdf_svg_dimensions_match": true,
+          "sha256": "92173cc4c85ae20155ab12997f5bb9c2f51179236f6d967cbd310fa26281eeb2"
+        }
+      ]
+    }
+  ],
+  "compiled_page_text": [
+    {
+      "page": 9,
+      "text_size_counts_pt": {
+        "8.001": 57,
+        "5.6": 5
+      }
+    },
+    {
+      "page": 10,
+      "text_size_counts_pt": {
+        "8.0": 48,
+        "5.6": 4
+      }
+    },
+    {
+      "page": 11,
+      "text_size_counts_pt": {
+        "8.0": 70,
+        "5.6": 2,
+        "8.001": 22
+      }
+    }
+  ],
+  "unchanged_input_and_artwork_count": 343,
+  "unchanged_input_and_artwork_sha256": {
+    "OrbInspectLatex/main.tex": "ba2a778788c0ecc33ab1523f01a3ec24c826bf388bdab66da767e5e58879621b",
+    "OrbInspectLatex/sections/ros_verification_results.tex": "d2eb8edfc86c6c241b629130807ece8cbae409b043228a38bac22249f90af211",
+    "OrbInspectLatex/sections/required_target_study.tex": "ae643c76f8edab9ef731e812a581a9055c1b1bdad1025c020b9617677727432e",
+    "OrbInspectLatex/tables/required_target_aggregate.tex": "e6a86381ee00cc7ab47df7553beca7374483773b2b0d73929980d69da06c61e5",
+    "OrbInspectLatex/tables/required_target_objective_ablation.tex": "56ac1a2208c3a6afb5181f0e5c15755025ee6a7d3d7b8223bf4ecf5098ccddd5",
+    "OrbInspectLatex/tables/required_target_case.tex": "a153133d90caf0ad9d0836495bdf2e6b6261795d4f26b2717f45f4d7930001f8",
+    "OrbInspectLatex/tables/required_target_depth_rationale.tex": "f05700fcf319daa4e158f06e212b2a0dc11f1868bb0e5b8b5b9a9322f238f2f9",
+    "OrbInspectLatex/tables/required_target_profiles.tex": "afdde1585a02b708d9c494533c0f7f443ec4a6e9a465d2f8505c3fcd96c3118d",
+    "OrbInspectLatex/tables/required_target_numbers.tex": "4cd3e17500cc296efa0c48956b5d9f60be509f60f00e62bf865353aa2b8e0ead",
+    "OrbInspectLatex/tables/required_target_paired.tex": "69ad71c0bd00afa58d09100fdc81f06dfa66d1bd59261941043470fecd252488",
+    "OrbInspectLatex/tables/required_target_depth_table.tex": "1b0b5f87f11365d5e260675f1e4a4d2a3583cea39d19f52f17687ebd98145d1e",
+    "OrbInspectLatex/tables/required_target_profile_results.tex": "6376e5312c0f86fc5b9191a65d8239deadf6b38fc6ffb99561b75dcf62988997",
+    "OrbInspectLatex/data/README.md": "a0ca061c17d1b7beedbe7a869f2351bf1d01edee07614cda87490559257d5eb0",
+    "OrbInspectLatex/data/development/summary.md": "e80f34eb284208174748cfe1e9820e2b7357a679ae899477b142cd5ba43d1ab0",
+    "OrbInspectLatex/data/development/summary.json": "3a3ee8b1c21b53d4d047bb15c8cc8453dde5bc6f62e7e0db8a0e96654e80fc5d",
+    "OrbInspectLatex/data/depth_diagnostic/summary.md": "29311bf3aaea9bd911ea350f5dbd5d8f91035a6eb8a2bb7655f6f1fb03c34634",
+    "OrbInspectLatex/data/depth_diagnostic/summary.json": "c16c80daaea320ab4c5625d4e766029ff5e8f7c434a472027e01720f651d92e8",
+    "OrbInspectLatex/data/required_target_ros/README.md": "9879dbf6f8b2a45e1b412acf106d835991e51da462faa837e60754464568a316",
+    "OrbInspectLatex/data/historical_ros/mesh_execution_audit.json": "9ac1b2365d0c61a512059877c8770bce3c1110460e7c3e91182619787a8544e3",
+    "OrbInspectLatex/data/historical_ros/summary.md": "e1a9d8561b43d5709c192648ec8fa77d280f7b22aa5493c7d07d672b443d697e",
+    "OrbInspectLatex/data/historical_ros/summary.json": "602d690828877c21a05e64592af54866ae648443e0a809c6e796d28356f5b4bf",
+    "OrbInspectLatex/data/rviz_overview/README.md": "6c0cca558be948d41e36731d7c02c03fdb4e06fe2824a354b548a3a58179bee4",
+    "OrbInspectLatex/data/confirmation/figure_reference.json": "8280532b993db783cb7552e9dacb3a26ea2d29b4524790e0696762538635f0d7",
+    "OrbInspectLatex/data/confirmation/summary.md": "6024858239b652d49eec3a3ff11d60545ddac59ed1941bc4996958505a03673a",
+    "OrbInspectLatex/data/confirmation/summary.json": "20853a51925f2d8cfe7a3b623c325465e6b1df82b41304732120c03d55f27320",
+    "OrbInspectLatex/data/development/raw/heldout_summary.csv": "85981fd7de56bdceab9f92b5a7ba93ea150402e197eab567f0f0b4a1c76ed961",
+    "OrbInspectLatex/data/development/raw/paired_comparisons.csv": "72ac9e75b01f22835ac93ce3abb80ccb7eae118202133e47e02ab1387149a91a",
+    "OrbInspectLatex/data/development/raw/heldout_results.csv": "81716f4c54623d9bbc4483764607917ef39b3668369ceddc7a61c4ec4c968f57",
+    "OrbInspectLatex/data/development/raw/target_positions.csv": "73810927ffd53d7eff5a0f3fd46ac4cb6776a9482d47c1d1c05c833e3e4c006a",
+    "OrbInspectLatex/data/development/raw/hcw_graph.json": "e90f40f0aaf87464ad5b5ef6b39979aa3c5f0b7049fe0ec17ad5e5b1a19b0af2",
+    "OrbInspectLatex/data/development/raw/validation_depth_results.csv": "62ae3193ddd59bbec19488376b71fa216fb6e0d18a0245b2e874ae4bb691a9a6",
+    "OrbInspectLatex/data/development/raw/scenario_results.csv": "81716f4c54623d9bbc4483764607917ef39b3668369ceddc7a61c4ec4c968f57",
+    "OrbInspectLatex/data/development/raw/scenarios.json": "d30dcb734b5fe118d2429cec6d3eea62cb128c91a4d2391f4e56bf0eda722342",
+    "OrbInspectLatex/data/development/config_snapshot/freeze_manifest.json": "f7a7677c89aec0b206dc00777f84352732fa1e14b7eadcf07a00e4a05b1cd5fd",
+    "OrbInspectLatex/data/development/config_snapshot/required_target_study.yaml": "7cddf250e1ba3099ff5f94efb6f0829a3bfa542bedd520496f95f6a43a9074f7",
+    "OrbInspectLatex/data/development/config_snapshot/required_targets.json": "766f7270419ea7c95eba350a0f19ef27636feb07b86d2ffbefe7a5cf725f8ad3",
+    "OrbInspectLatex/data/development/config_snapshot/base_experiment_config.json": "fac496ad6874c03e8c35be6a91e7b63aed3c7fa099d2a8321ae9ba59a57e1cb4",
+    "OrbInspectLatex/data/development/config_snapshot/runtime_environment.json": "7cbc1ebdbef7a09999bd131356a327dc49da7409981070fd564411fb19c38f9b",
+    "OrbInspectLatex/data/depth_diagnostic/raw/depth_summary.csv": "76947a2234003f262a3f510761754c51e4af0805d1d4805a04c0913b2f196247",
+    "OrbInspectLatex/data/depth_diagnostic/raw/target_positions.csv": "73810927ffd53d7eff5a0f3fd46ac4cb6776a9482d47c1d1c05c833e3e4c006a",
+    "OrbInspectLatex/data/depth_diagnostic/raw/hcw_graph.json": "e90f40f0aaf87464ad5b5ef6b39979aa3c5f0b7049fe0ec17ad5e5b1a19b0af2",
+    "OrbInspectLatex/data/depth_diagnostic/raw/progress.json": "214924a793d3853474aaf23f757f3899de8e4511b8077478146b6ee4fb4aa737",
+    "OrbInspectLatex/data/depth_diagnostic/raw/validation_depth_results.csv": "d20ed34285caeae175cff4132ed992f2caf3e8865ee6e9dd4fb5d721f06d8252",
+    "OrbInspectLatex/data/depth_diagnostic/raw/manuscript_depth_table.tex": "f12770105e4fb68a0c04cb0391c8f16f8c22d4b2c184f6c853d0bd6c4bd79dda",
+    "OrbInspectLatex/data/depth_diagnostic/raw/manuscript_depth_statistics.csv": "5dd930ece542abdbf0709e20b992e0887f7db9b636157ddcbecefda1490f51f8",
+    "OrbInspectLatex/data/depth_diagnostic/raw/scenarios.json": "97cf0d10b90573cd780797a2c13331b49dea98000f9cf50bacb381aa06af238f",
+    "OrbInspectLatex/data/depth_diagnostic/config_snapshot/freeze_manifest.json": "471b2e4ad88a6f5eaf2aabb73134f119b612b8895c0c9afe57dc18a6b26aa56a",
+    "OrbInspectLatex/data/depth_diagnostic/config_snapshot/required_target_study.yaml": "83b43b1ddd59679d1b42191c81f339e3036f96eb0af25fb9ad7a45a5ae38f45b",
+    "OrbInspectLatex/data/depth_diagnostic/config_snapshot/required_targets.json": "6388780d64571b7f970f9ba69c07a03db1427236db11122daf65bfaf6f49dcd2",
+    "OrbInspectLatex/data/depth_diagnostic/config_snapshot/base_experiment_config.json": "fac496ad6874c03e8c35be6a91e7b63aed3c7fa099d2a8321ae9ba59a57e1cb4",
+    "OrbInspectLatex/data/depth_diagnostic/config_snapshot/runtime_environment.json": "9863ba4b2b1b24128c351faadd277ef86f7c4593fdcb51bcbcc829feb0b056bd",
+    "OrbInspectLatex/data/depth_diagnostic/config_snapshot/required_target_depth_diagnostic.yaml": "45311af6815b61fe03dac7023a64b978000806354284675a6313cfef7b120ecc",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/snapshot_manifest.json": "f59642d6604ca288446a1a0fec37cfe9361793ea38e67a4f27f89a13604e8368",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/mesh_execution_audit.json": "2c28e19b6772726d52bbe8da5a0fea0ae93a208a7048c1320e47d5e4c7a04479",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/required_target_execution_audit.json": "d02ec20b7e219de6f9fb076e22679b798a9a5793b0476faab776892128255f97",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/required_target_audit.log": "ef60c963df865ab9957a7ed73a03604e396dab0fe6551df53b9b8ecf08ce02ea",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/launch.log": "2ba2c23eb1ab24d8e5ed9eab5e714a4510c583047fe925cf0473de8c41603922",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/summary.md": "f2ff6ec03903198971d2f8a8f7ffd47d50bb9258a87e2780f66bf4895e8c1398",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/summary.json": "b4a2f7982aefda624a509a9ae48fb7f3bd5accbec87ae7aef99e44327b244080",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/font_provenance.json": "ad4759eec259c7fac7a44af2d3b34a37c8f8c914e20efdb67f4e95fe878427a1",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/snapshot_manifest.json": "6d0707b9dcb0771a9b01f7b6cc530bd9f7642cd6686c97321617f6d38cb6172b",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/figure_pdf_qa.json": "55fe2dbb9993187a9aaf02350c4c8c7f6a060d14efa05d6ecfec1410bcce6fda",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/mesh_execution_audit.json": "8dd1e8b6f6e8234caf07753123b6b447ee0e51968bd167d49e50af7ff5349c87",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/required_target_execution_audit.json": "c4675cf93e577e1df75aa28e7da2a91a5410e2b40907f3e7078fb71df53d3262",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/launch_completion.json": "bdf67bc000d3c14e9d3867eb4e661dde0d8a180a7fdc184ef2450cbba2a8c914",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/figure_generation.log": "ec387a52cf1583d6d754565095b4d59ab9395047ff2b726d5182a6528d3d8d15",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/figure_source_qa.json": "4089814568dc206be030d643333030db433d7f96f9a1ef0e0d90f55c512aed3e",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/target_audit.log": "cbd429df89d7c04d2ab6bf814cc0eba56488a9ca81a0ba48f8e2f7c4de02556b",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/reference_timing_diagnostic.log": "1e3ff56698e1e2d880b92d48d8b93d375803352189ef594600462f496e3d4d2a",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/reference_timing_diagnostic.json": "1e3ff56698e1e2d880b92d48d8b93d375803352189ef594600462f496e3d4d2a",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/tool_tests.log": "f9e270a1148f8079728fc97df1841a3afa34d3e9b6eb4dd211e305897b916afd",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/manuscript_check.log": "b517caa3e1cdf1f3fe4e6e0ac20f8bf6b50e804cbae1fb4c8611fc31ebcbd5c8",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/camera_preparation_attempt1_empty_scene.log": "2082e45d4ac8e0ff8d524e3f65e0642e801cb09fc89fe73b1152e65a5d9d15aa",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/mesh_audit.log": "8dd1e8b6f6e8234caf07753123b6b447ee0e51968bd167d49e50af7ff5349c87",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/camera_preparation.log": "22b4096984f33d5cde5d2caa61057b08e701ba94063dfceb8470e75671d15506",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/launch.log": "2da43a3f84d5fc6fa15e109eaf301a9d4cfce079e3ff17886fca8eac3eff03b9",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/delivery_qa.json": "fbf4193c46a9f88121a2b270f88d9bac2d95258908b390f7f40bc03ae85b9678",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/summary.md": "1f60b028e71500d3c1f89f3aa87651fb557e9abc9370373f3849ad129a7a1795",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/manuscript_build.log": "9be24b0cdd5681434dd832dd383b9d2d7124c25df6adf1686dba4f5416a443d7",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/summary.json": "77b19108b2fccaae1816a2b0ea0adb27903d0a70c005a58ec4128e901b6da4ef",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/font_provenance.json": "ad4759eec259c7fac7a44af2d3b34a37c8f8c914e20efdb67f4e95fe878427a1",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/snapshot_manifest.json": "5d3977fa8431fd45714d3cb8cdb020bbcdc728cdcf3fe1de90b2a0738ebd49a8",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/figure_pdf_qa.json": "9b4cd9b197ade6e88b5f92ddb04fc17c37bcba3f0ab5236755987032f1e07f0c",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/camera_preparation_attempt1.log": "e0a84139a06a92c674ed34ee029dec58faa2f837dac95cb4940c2cfa64463cba",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/mesh_execution_audit.json": "770933e1fca0dbcef5c14c8b241db42aeef54dd52ef81b057b36d9762176e95e",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/required_target_execution_audit.json": "c6c5cc62d05e1a4fa324cae357ee633c0d7517b16328b7cb8530e6fa8e30733e",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/figure_source_qa.json": "ea14b9df2477baf1fee98bf9755eb88bcc4bd4287983a092fff93ad642bb91b6",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/synchronous_screen.json": "d4808fa5aef8681b26f5161157384f6a5f8bb902321fa7319d9094f66c184d30",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/tool_tests.log": "dd16cbdbb2cff39a7ff41edae14420833d1d368adba1f7523723a58e363ea28d",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/regeneration_check.json": "01dc467407217db53fa97cf2228e3c6f5d41a1e515388bc204e9f8037e3051e9",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/launch.log": "c77f02cd807099eb472503f5b692f96b5244269c8d5afb2cb0a389f902a389ec",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/final_build.log": "112bc48698d877eda7a9a4e6178d3512743344cebb22d2d1897543620e54ad89",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/delivery_qa.json": "db8137c371360fdbc11aac0c17a523ad27ec9bb2f173e0b0c656d26737091203",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/figure_contract.json": "4ae993b14c8bdc218f8882a31f8babfb9fcdc6ce4eca8f56272762753aa71b40",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/summary.md": "a9f2535dfe7d3f73f111e40f333a4b059d352f5f1d163308b4b30bb7186ec250",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/manuscript_build.log": "0f0e38c9340f2c3701658451d38d22f0a8a7c9d6bd146382262ab90f6746045f",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/summary.json": "644f9311e6888de77697d2f7e7a6acdb90ced54fe679de31abd09fb480dfc120",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/figures/README.md": "fa5679bcf827429b5d1c560c8a5b82b18398301c645465de4f022c070645ccc0",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/raw/planner.csv": "4c6421f6cfa6558453db1ab6e7fccef0be91c8dc7198dc994a60a14c8ed15671",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/raw/trajectory.csv": "fdeca3cfb9497b14ac9db44d05ee0802e9e0283153971094cfc6bd9ba2f212ef",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/raw/safety.csv": "8a552b68d12d1709aa4035ef066bcdff4cc46fa0352824a179b981e735597a68",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/raw/safe_control_integral_samples.csv": "e93ff81f5689e4de18c7453617f2bd4e2da28fa59b17518ec4c1962680db4ee5",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/raw/control.csv": "028f20a6a9c298f17d18353f3047776825673eb8fcc5af6304f021305ffdbc3f",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/raw/mission_event_messages.json": "bd1bd8200972e7bd2f9cd9d8f5b7aa0e18e07acf2b1e68addd0cab362bdd3b87",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/raw/coverage.csv": "4db03812e2ea1451aa5d4ab9d0c932c89c8d3be8848ff1c2127ad8497f3cdeca",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/raw/mission_events.csv": "e4698492de7a1b9f7e7908183b4f818670d2deab9d48dc5a7ee6ec9669133412",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/raw/verification_events.json": "9d41c1b362a431767fd61a274b412394bf3565d710cc0c1b23fef1fc4117960c",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/config_snapshot/ros_verification.yaml": "dacd4e02f942c97f1d46285100e0a74bf58c77cd72751e729537d36f3a3d917d",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/config_snapshot/input_manifest.json": "70ba8704bc160b9de90c3d5851ba4219796ab84981fe08dcd867fac256dd7d63",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/config_snapshot/environment.json": "c4d50f66b6a61272c30d7853393001e2cdf6787afa5a7300997f8d5a14e0389c",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/config_snapshot/run_manifest.json": "585f9d248803816f099e4ee39b6c31cb7734549b3c3eddb6b93db88cded7c945",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/videos/README.md": "4e8b74ff762889711b6192cd62d56f96edbca58cc03641f23ef4da06ffe51115",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/rosbag/metadata.yaml": "733d42a2a87f439360c4ac588e61285825c2336a46f4a1297d37288b30e3a39b",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/rosbag/README.md": "c3a82faf3443c8cb524eb0a8d58d28b0da10f63579ea33b19e2d83ee20498bce",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/rosbag/bag_info.txt": "f8a2c79380b63ea4b7f2cce6bda9fded30497e20e8eba97c1ecd1ffa0a031a60",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/config_snapshot/replay_inputs/manifest.json": "70ba8704bc160b9de90c3d5851ba4219796ab84981fe08dcd867fac256dd7d63",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/config_snapshot/preflight/replay_validation.json": "46557e0f7fe776bbc8a52dc5e9107e79c57a92802b2cedf336bb6a60b9a79f6a",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/config_snapshot/preflight/focused_tests.log": "7c0cec8840eb5cb221002f10d2d1ba844b60766bb3f2cf450c3d0e457259338a",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/config_snapshot/preflight/planned_proxy_filter_diagnostic.json": "b652ce3f857141e854d5a1bf28ae46d385d718b52af3774cdfa14b547d3b7810",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/config_snapshot/preflight/test_results.log": "e01453d9c5a20b6e0819236da147c50be91ff803dba9ca9155b321432acaa42a",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/config_snapshot/preflight/preflight.log": "0342606b62a1db995d6c3fa0f4a67db459e5a7cec8c7ce47d90d961c532200bf",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/config_snapshot/preflight/planned_arc2_full_mesh_distances.json": "9569ecbdf6900979f0690000a0064ea356549cf218ee3d3baee645919cbd943f",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/config_snapshot/preflight/packages.log": "9151404c3dce7ef8c4c4fce184fa5f9ebc18118875c74799e9ba7c0eeb7b2c6b",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/config_snapshot/preflight/preflight_status.json": "b77b9752d11b832aa3f5677c84303956e0ad41b3c419e9fcb76c71d9db093c69",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/config_snapshot/preflight/build.log": "f52888545330563ebdf96dad10f55941282a418d7f9ca8bf6b8471a9904fff36",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/config_snapshot/replay_inputs/raw/planner.csv": "cef4d1674ee22a5dd14244503588d6ad226056f5c20dddbfc0d367f7d523362e",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/config_snapshot/replay_inputs/raw/trajectory.csv": "433dc27df179e8a6941e1ec2aa871ce9f635cfdd7c411bc942223397a0d73cb2",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/config_snapshot/replay_inputs/raw/safety.csv": "25357df88a57a139453940e2d7a5542e68e399ce97c2c9804a750620281df595",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/config_snapshot/replay_inputs/raw/control.csv": "1fd48f518a5bb663d369c06ace6e99c21e77e99618270ac8887116c3e7e1d46e",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/config_snapshot/replay_inputs/raw/coverage.csv": "00a81287ba10d2291b6006c95ab169898823e6481d92bc74a54a5695f946583e",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/config_snapshot/replay_inputs/raw/mission_events.csv": "a107963eddcf880efe53e645f8751d2f84aee7a454514e700738efa5617296d7",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/config_snapshot/replay_inputs/raw/attitude.csv": "5e48a681180af67d5e194f2515a7c0079cf83d43bfacfebe44bbaa8135b33daa",
+    "OrbInspectLatex/data/required_target_ros/20260909_031355_required09_adp_closed_loop/config_snapshot/replay_inputs/raw/viewpoints.csv": "c74e9a2f254e16716dac212a52e30cb12cd6ca2bee305f7fbfc871688e977ab6",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/raw/planner.csv": "4c6421f6cfa6558453db1ab6e7fccef0be91c8dc7198dc994a60a14c8ed15671",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/raw/trajectory.csv": "bb045b8d4efffa433794fd61beebf792fc284f1e33929199e81499ae0ce51b57",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/raw/safety.csv": "de4c5ea9315f677332af06e1d3d5905779a722d5c82f6e3226cf1512d373ea32",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/raw/safe_control_integral_samples.csv": "53258cf706065cca6b2525434bbd2379e17879e8d2de425de1dbca839a59480b",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/raw/control.csv": "b428c044427d631e893fcdd542e2425b7deec62ca0b8ef4c356a267bc81ba198",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/raw/mission_event_messages.json": "8b92002970a9ac69cab3902a3a5d1b8e5b6229dba854fcbd85373924b6dee33b",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/raw/coverage.csv": "af4eed1cd8fc6b96469367a7e54e23763be14b2fedf6f38b1804a5e8c6b27c7d",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/raw/mission_events.csv": "fb68df4e8c29c71fb6e4ba6db9e7b34663765c20b2ce8a4453a5030653dcdd29",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/raw/verification_events.json": "f1dd5fef56e9ab17ab322e73023b3837b35a596a1ec3b4aa9faeb4c6da9789c0",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/config_snapshot/ros_verification.yaml": "dacd4e02f942c97f1d46285100e0a74bf58c77cd72751e729537d36f3a3d917d",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/config_snapshot/input_manifest.json": "d6cae3671b4ce4809d5b10614dd15b67f140b28c639f548ed90d3d9e4146c14e",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/config_snapshot/environment.json": "7e93d2b50fae1def188598f92e730a0169fffca16732d9cd9e8887566930c419",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/config_snapshot/run_manifest.json": "defb423a823b0328ea666611591ee71994d8b650430f72ceaf387ed365f08baa",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/figure7/view_09.png": "3a0af6a1f00449d8e9db04bd46fb74cc4ad83fb73910a118ff9bce2d3e1cdd8e",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/figure7/snapshot.json": "53cafdc30358dc61806a6e96c62a912dcb286a2bd38fc01b799135b72bf0d309",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/figure7/view_07.png": "573b5ec3217108999fd2ac782006f1bb554641187a4103a6c4e54e6cefb172d0",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/figure7/view_01.png": "c24eec6c2193d612186aaca792c0d0d7172fe3b77699064680bac4763c4afa65",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/figure7/view_10.png": "5fd4ff53e698f0774e8f054206af8a5a05d2b85022c9f18c3dc06ef21ae46315",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/figure7/view_04.png": "18fe7d0eaa0e05ca620576dd8a3e3a9bc584f1af8e0863de53fd595059f9bd6a",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/figure7/camera_message_timestamps.npz": "7893f68550a25cf29afcd9e2122e4e0990b0b94f58df31f3fbca9d22f9ee0331",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/figure7/view_02.png": "f566cdcab3aa6a73164e2a5bb2f00adebef42c0b1851b559fdc693b63f3dae3e",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/figure7/view_03.png": "725095a812ec6421cb51f22b3a00af4f66f4fdd35a934e31d625b825483891b7",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/figure7/trajectory_and_display_mesh.npz": "f5e016d281c19ccfe13e338be4e4483b5e3bd55bebc01097fc87e88ee6219ff5",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/figure7/view_06.png": "59108f7f8ec6a97d26d169a22b0a6fa1f5d1f3366025a511330d5d827e59c4f5",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/figure7/view_08.png": "8dd654a6459ec27d530a3d1867b20099e8c7b6870b96c37f1c19af0d2d3010e3",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/figure7/view_11.png": "24a5b7ce8dfa6d6a0ac3706f4fc49ab14aec6751a96bb6c8ce6536804d3b841e",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/figure7/camera_audit.json": "5e190519e229451a54912878118b58336435fc30f6f20ef91cd5afbaed81c6eb",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/figure7/view_12.png": "7abbc18b704a5ad6d97cdf1a1fd93b86df0060e0390de8089e843410d287ea15",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/figure7/view_05.png": "edb33e3fb8a29ba4135977fb797d1b963682e0b1a498a972ceff04087be50a53",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/figure7/camera_timing_diagnostics.json": "b413f4b9b5636c8f057c876ef3e03fe1c3274003cc8a3842a5c9769170b99e47",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/figure7/scene_pose_stream_diagnostics.json": "d56c1ecb1d3456c7529b04eafe3ff2c34a0adebda8eea70d697fa705287b0126",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/videos/README.md": "acc63af68d9f76c2a41b2ae88ff8fdce5f1d0f89601f0dbdd3c4a9ac7785e2db",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/tools/screen_required_target_routes.py": "b2bfe010856a6fc2f9a6a33260bff202185c4f19e07ca1bdf4fbb5e6841520d2",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/tools/generate_ros_camera_figure.py": "c0e442df0777f3b8e9b53666f4cb5b92655de49274420fb6e0b8bd45bd29c237",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/tools/record_gazebo_pose.py": "89500522e93a4541ffe1c5e6ec367e1f8ce38162e7b021a3efbd5d3e5a43d92c",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/tools/refine_ros_viewpoints.py": "12eb0d2ea61af09658906e3c14d1322f53edac9ca8856fe9cc8ce2e5c225826c",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/tools/audit_required_target_ros.py": "ff0474cac08190053df3074cf24fa9719c3872eb4b349e7069a891e2f5cf832f",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/tools/prepare_required_target_camera_snapshot.py": "2741c9765f589abc97767ddb82f4f3355439fdfaa6047c7a3f67e7fd2f1d7377",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/tools/add_ros_terminal_dwell.py": "a6c6d1f63935951516c1d2d08bb965e507d58f00900b667c134a675280de2074",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/tools/prepare_higher_coverage_ros_inputs.py": "662b695f90b293ee700c0771d251288ca114775b0308daf43baea6fddb40ba1c",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/rosbag/README.md": "7cc9d2b13a3de80e04ee78e103b9c4ea5ea3b2293257089c29a3e6b808be7f9a",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/search/original12_synchronous_screen.json": "5d376349fa23dcca851ad9ebd556700ee4b021cf8090eb4b072a76cd78ac989b",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/search/refined_synchronous_screen.json": "1c628d80917d63b5d2507293dcc729e013b2023a02f92ffdbfa6ddaa55325902",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/config_snapshot/replay_inputs/manifest.json": "d6cae3671b4ce4809d5b10614dd15b67f140b28c639f548ed90d3d9e4146c14e",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/config_snapshot/capture_protocol/monitor.py": "509938089c7786ad87f1b51f3d8cff7d75e45115c7e2618174159ead22fe6df8",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/config_snapshot/capture_protocol/finalize_manuscript_text.py": "9881b1c7e03f8068ed4433cb9063a1c4926c8347c12f9a8c57d6b65b8b23709a",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/config_snapshot/capture_protocol/audit_reference_timing.py": "8f52c22761f5dce57be96823f6a1f6349f858b432131cdc235845e07a76971b6",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/config_snapshot/capture_protocol/figure_source_qa_notes.json": "1f5d426c645ffde305021e22e10230ed82fdcae763ff798338dec4d1e25a1fdb",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/config_snapshot/capture_protocol/ros_results_template.tex": "d1bc7253e80153eed66f06e7bff14a083997e63d76c2e792ae8cca515e3944d1",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/config_snapshot/capture_protocol/protected_files_before_promotion.json": "eff3cdcc5276e61584fe91c47d6101d4e5f4ad7491c0cff6ce6560544961d8fc",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/config_snapshot/capture_protocol/reference_timing_note.md": "61151ecc387b43406e1e66e2aedf61cffbc88f95016ba98f490f338dd9b62e79",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/config_snapshot/capture_protocol/run_capture.py": "aefbe1c4068e26e8861334e27e671752dbf8cf9b058877f38559a781e38839ee",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/config_snapshot/capture_protocol/curate_evidence.py": "163a8e00f6c94af72217ebea62f18498f92c8f619ae8469ae370cdba33b30ffc",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/config_snapshot/capture_protocol/selection_protocol.json": "3932394553ab2676f16a3dd5e86c20452502c25e94ee63dc78f823dc850f316b",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/config_snapshot/capture_protocol/figure_contract.json": "c948a13a7d916314dac2be3f4795662d309ac4a913343db0b41da993122775d9",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/config_snapshot/replay_inputs/raw/planner.csv": "94a9bbb51c726939fb5def0804734a4827e56af66de852c83b7920e91ca61357",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/config_snapshot/replay_inputs/raw/trajectory.csv": "a1adbdd44d5cfceae476c1f9eb623699509023ec53eb7285651aa50794460e3b",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/config_snapshot/replay_inputs/raw/safety.csv": "961b6c90d1067b3fca7096379dd88481f6fd8b522a241a3d3a52e61018631ebe",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/config_snapshot/replay_inputs/raw/control.csv": "82d8a4591173d9dc002433005bed62b11c513a78da410b1f4015f16479a3ada1",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/config_snapshot/replay_inputs/raw/coverage.csv": "5f1c4e59d25f85af13958e5d41a1454c826626f566efe64ada6326d0c371dbcb",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/config_snapshot/replay_inputs/raw/mission_events.csv": "c2c1a08886c3ecdcef478525faede9c7653d1e07c8ac043e5431acfa24458b20",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/config_snapshot/replay_inputs/raw/attitude.csv": "23b3b27de579848e90a227109a8c65716de207e7cde17898b6498ae8c61633db",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/config_snapshot/replay_inputs/raw/viewpoints.csv": "b84114d7c7d92c6b9a4310366872857e4fced7b471b2fa73b1c3e0287f9ec33c",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/config_snapshot/replay_inputs/config_snapshot/terminal_dwell.yaml": "ada16bc4d039eddef9af3a5f74274687f0d118284f3c3c25fea6e7a99304e256",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/config_snapshot/replay_inputs/config_snapshot/frozen_input_manifest.json": "aeef1943ff2a6df846b66770d546bf7a0659535198474ddd4f48dcc61dc24414",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/rosbag/core/metadata.yaml": "7a3db531cd6de2a8771821d3680749a0976f4d30c5aa00eb297983ee7ff21bc9",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/rosbag/camera/capture_manifest.json": "d259251363809c4422fd734e62edffdfd583215ab2aa49dd263ac1b5cc88d8ee",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/rosbag/camera/metadata.yaml": "233ec96fa2fad25a7cb7ba2ed43968cdacda1b3d6a35a84b7d7533afa91d725e",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/search/background_coverage/hybrid_search.py": "06a3eb6eb40b1475c5c4d9a117d40ac01da0cee6d90d297466f7bd9dd720b476",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/search/background_coverage/extension_search.json": "ad5edffceb71fa1d66353b2309c427f015440f6f5744ab76bf7783a0c416ba91",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/search/background_coverage/hybrid_search.log": "feac937481588345f9a1def2825442c6963e6b4974d928298d63a557646f6617",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/search/background_coverage/summary.md": "cb68b16d401acee3a816f95ad7d7ea102792372202ac86aa5260ebab3bbcf959",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/search/background_coverage/hybrid_search.json": "0ca81a8742b411766ecf818f766b8f057f1047fe565d0a5801e30bab6c3283a8",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/search/background_coverage/summary.json": "f059f3dca203aef52d88deda10baf3b2697f1fbeb54cd858ba818284e269bb37",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/search/viewpoint_refinement/search_dense_viewpoint.py": "b44a71ec9ab40b778daa872d0f1a4feac62d9756721fb7048e2c7677eed89217",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/search/viewpoint_refinement/search_viewpoint_refinements.py": "a6fb4dc0483d4ebf5fe327cb2829a813597a37f4e13e90a47ddc6dab85bfe24d",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/search/viewpoint_refinement/exported_paths.json": "74a7c2142396e6296b00794e509e48f26ab86d6782de38249a3f4480fb10f1ea",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/search/viewpoint_refinement/adjusted_viewpoint_probe.json": "9f6e3eb15c97b597757b7349e8784b798bf54e658bdce09a5199c9a88849643c",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/search/viewpoint_refinement/centered_aim_search.json": "8fb45509ad847aa658fc80cd1a3643c7f85425004d011e685eb437fbfaea9ed4",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/search/viewpoint_refinement/search_centered_aim.py": "42e4bc598316dfa9dd1a159110a5152b0355a198740de295303563584885206c",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/search/viewpoint_refinement/refinement_materialization.log": "e59ccf38d7603c887d3fddc95300e7e0c30e4f24089ab969d78b7ebef6dcd973",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/search/viewpoint_refinement/centered_aim_search.log": "d1fb4fceab89c704a40384fdfed26b9dd7009335b382ff7f32bbfc48a8f84c42",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/search/viewpoint_refinement/viewpoint_refinement_search.log": "76e67fb4ed3ff1f9316c24a7d370296ef08d5e0b0d8e259ca1b281c5ad70a0d3",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/search/viewpoint_refinement/dense_viewpoint_search.log": "bd604e08fd3050fd7d9377f5caa4e0d6ebba1454c7532806d97c38e7405b7f2f",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/search/viewpoint_refinement/dense_viewpoint_search.json": "9d1baea4779abe02293c4b49db13c5e305a13d55cc68c568ca9bc23505ba72be",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/search/viewpoint_refinement/summary.md": "ed786dc30763dbeb454ddc369a68aaee1556b8c200af92913ac77c78f3c7b21b",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/search/viewpoint_refinement/summary.json": "65527af4144d1f13b9f2f015ffcfab05f00d2a3d75a327478d3473b25df133a5",
+    "OrbInspectLatex/data/required_target_ros/20260909_093200_hybrid12_visual/search/viewpoint_refinement/viewpoint_refinement_search.json": "8d05151450b031436823de8ff1ef1cdc5b2b15c24bd356a7afa2e8ec1ecb2df0",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/probe/mesh_execution_audit.json": "c63ef4f7860caddd9a802ac81fd9719fb1e799a7a965573e9e3ae2801fc0d5ca",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/probe/target_identity_audit.json": "cc4364745e27473de396866c65bfc62ab21d0be80293ddb716d409e64282f911",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/probe/summary.json": "26075fc6ef677f85d31d04d762c9db351a0d93425f966f74d70665945605377c",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/raw/planner.csv": "4c6421f6cfa6558453db1ab6e7fccef0be91c8dc7198dc994a60a14c8ed15671",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/raw/trajectory.csv": "be8901037eb22ac28a23a6ebc79d278269af7a3244b583e5287db66781341172",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/raw/safety.csv": "f89f22733396262ae1cb6b8c0d75593c15cfef8ec33e8fcb3f276d7e49f2d88d",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/raw/safe_control_integral_samples.csv": "f1c5bd40174c1d5970ce1ade80bcce1eeb2fbaeb7810c716a5b039489f0e8fb7",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/raw/control.csv": "e67196f6d3061113bed8312caca06ee16b43b1c801556624fe83ec604e469c14",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/raw/mission_event_messages.json": "6ad2e47f892f24aa4d3552b866df5d744202fcca53b8745069b2f81a858a7175",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/raw/coverage.csv": "0e4ee6c65c5f639721e713cc693ec7361d8ed291e6f5859f3c4ea3794f6cb6ed",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/raw/mission_events.csv": "c8db838864d4c9aeadcb54e4d77af572983a122a4cebacb1445537131dbc6d57",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/raw/verification_events.json": "cfb8d9f4f16c30678d90b402bd8010d79000257d3db48e8428be16d28943211c",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/config_snapshot/ros_verification.yaml": "dacd4e02f942c97f1d46285100e0a74bf58c77cd72751e729537d36f3a3d917d",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/config_snapshot/terminal_dwell.yaml": "994965a5f2c711a615095c023c6554f0088b4531a742eeab635227a544727f45",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/config_snapshot/input_manifest.json": "ab238a1edd862899b7d2864076b393ec1f8cc715d53e03f098c51f88a2bb387e",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/config_snapshot/environment.json": "031a9664f6bf831b83b76bcf083093da9c2d85029eea490689fbb08db57642bd",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/config_snapshot/run_manifest.json": "bddfe76ca1b3bfaf1af1df8917a60354f75db3366ce05788f47b84e4726b169e",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/config_snapshot/schedule_generator_at_export.py": "f146004b181f4ccc126781004a7ca551ea2e5725e76e67c6a241f65b6a8a09ee",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/figure7/view_09.png": "17450c83dba023dc9b02111abfb287a5771f470fd11bc16d3b006999c66ab6b9",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/figure7/snapshot.json": "c5866b5366c45298d67fa2b5e94feaec284deb6a4a8cfc6ed693fee22b39349a",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/figure7/view_07.png": "bb486f80be4c94b77cfd39f367707d9a74dac09477ebec76f8978ef04c17b5a8",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/figure7/view_01.png": "0d3ce6ea32e098d6d3ee1e54fec7d0ac999dd259d8efc01397ed4259d3d9208f",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/figure7/view_04.png": "69fcaa1aa54a8db47990169dbbc9ae5d13ff554973104b1f009dfdc00bdbe929",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/figure7/camera_message_timestamps.npz": "780bbf4c4600840ae79f5b843ec95283cbdd6404d6f2f7b65e9690c463f9d53c",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/figure7/view_02.png": "b193f79a313686b207244e56af64224ee31e817d39aa5fd2d04a17a10e70ec40",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/figure7/view_03.png": "d660d6f529994b47e0c73f791b1a202402219f5da60dc7b7833efa8df4ddbdfa",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/figure7/trajectory_and_display_mesh.npz": "98c2b7b233b7a33809afb401bd765e670efb6b5f7ff61be1250fde0d42b69219",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/figure7/view_06.png": "e665e674ae0166379eb918b09d28ec5df5bee853256bb24f962fc9e2f992d166",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/figure7/view_08.png": "d6de29887489a7e6db7b62d05fe96d729dbe70e87877b16e37d906b81e5c5b92",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/figure7/camera_audit.json": "2ba39d704a0c9ffc67596ef19050e9a81f8b0faf074734b77c2fe37a5c1f401b",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/figure7/view_05.png": "fb21972a8ccc44439e076a49186b7b1fbedc119ca6dd31d8fca146a45495a3b9",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/figure7/camera_timing_diagnostics.json": "f09bb4aab9479373da7dca06c826301a22da9cfbcd8075379fe1241c968cf095",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/videos/README.md": "936c2e0cb118c2299d079dedef391aaca11f2fa714c08cef04eafeae5a50eb76",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/tools/screen_required_target_routes.py": "b2bfe010856a6fc2f9a6a33260bff202185c4f19e07ca1bdf4fbb5e6841520d2",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/tools/generate_ros_camera_figure.py": "d83cb3743649bf375821a228a530272f69fe428b7ab369e691dce3074a4a68af",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/tools/record_gazebo_pose.py": "89500522e93a4541ffe1c5e6ec367e1f8ce38162e7b021a3efbd5d3e5a43d92c",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/tools/audit_required_target_ros.py": "258d0fd1c4bb3ebb8ab5b9253bc1f12cf59b5db5cfa80224ca17dd2d3fd55057",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/tools/prepare_required_target_camera_snapshot.py": "f27b45473807e34d772da0635cb72a513a3cfb1c50f9385f6276837f036dc36a",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/tools/add_ros_terminal_dwell.py": "9325440d956438c95f9ad1c875ecf283522a11bd1c840ca346b8ecd1267df679",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/rosbag/README.md": "275734c52cc5faf7dfee3152c4e258f3a67b39f75ebd340065b5a6fb68154e1b",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/search/synchronous_screen.json": "983ac04fb9ac004a90c6170852502b62ec6fe02aaed08eacd3bdff6e6131fd41",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/search/selection_protocol.json": "8231e0a0f4ae71c57fefcae26b80b50402e26adcb5ca93961c9ba280434d837e",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/config_snapshot/replay_inputs/manifest.json": "ab238a1edd862899b7d2864076b393ec1f8cc715d53e03f098c51f88a2bb387e",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/config_snapshot/replay_inputs/raw/planner.csv": "83fbcbfbe14ffc506b1ca395e7d2ff30e622a98726868e18adfd918beda5fa24",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/config_snapshot/replay_inputs/raw/trajectory.csv": "38c913ed42dc4cf67f48f0c45fe56654106407f98b326ebcfb5593bb36b627b3",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/config_snapshot/replay_inputs/raw/safety.csv": "bef6dec3307df2c904aea3568e8d21cf98479928bc1bb7e6c564e09780e93fc2",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/config_snapshot/replay_inputs/raw/control.csv": "94700150b9254871fb03ebf5f2919b66125f57c678cbf5a6ad9f950ba179d5b5",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/config_snapshot/replay_inputs/raw/coverage.csv": "f384ef01a33fdf765125ab5126e8fd1a15c2bd7edbbbe37261e9efb31fe37cb6",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/config_snapshot/replay_inputs/raw/mission_events.csv": "69dc82d2fd5e35b5eef5eff53d7bb47cb609dcf1b9180e6561f7c64dc6f65f70",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/config_snapshot/replay_inputs/raw/attitude.csv": "715964382c0a593d5e8400380d6ee9cee4ce2c98946ce871355a6f6350b5cf36",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/config_snapshot/replay_inputs/raw/viewpoints.csv": "14edeb55996746157ac3774637c9c54d7bb13a8eb4abb3261d2cff61e8b1ccdf",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/rosbag/core/metadata.yaml": "022ccbf4043c9b025aa4ad90a6d2e8654ee7cba7093f20de1f3b611e83a68dd7",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/rosbag/camera/capture_manifest.json": "da7bb03c0f45b9f4871bf55cbde9c3aa0ffa6860409c6c492feb0154378a63e0",
+    "OrbInspectLatex/data/required_target_ros/20260909_040344_required09_dwell60_visual/rosbag/camera/metadata.yaml": "fc0906be0b05340602fd22a41edcb6c4230210e2d593209927cb73123d1a2c54",
+    "OrbInspectLatex/data/historical_ros/figure7/view_09.png": "f35233736b518095d91f89b69023e810783e901b456c9db56d475656d21f6280",
+    "OrbInspectLatex/data/historical_ros/figure7/snapshot.json": "9ba40f90442904b1a7035df9d345511fc7af49ade728fbbc74c2a3749f0e3bb7",
+    "OrbInspectLatex/data/historical_ros/figure7/view_07.png": "8c4543e985eaab6560b9da4b68a7215fb705cea76ad2a975b924bf5b0ad3fab0",
+    "OrbInspectLatex/data/historical_ros/figure7/view_01.png": "c66216a0c8041ec1a7f90d031f3479238dec2da2a143b78a5bf6e29e73b55c1f",
+    "OrbInspectLatex/data/historical_ros/figure7/view_10.png": "4382c3cdf7ae30d573b16b6ea12b3343d10e7369b7f8b09bd6d526bc78afeeba",
+    "OrbInspectLatex/data/historical_ros/figure7/view_04.png": "6b603c8b98e017fe44b255737d441d0187a07eaa59086cf68f5edb1de1fe72c9",
+    "OrbInspectLatex/data/historical_ros/figure7/view_02.png": "df92202689350eed05cc84b4ab59e41444d0b2741704a02c6d2d9097a485bf77",
+    "OrbInspectLatex/data/historical_ros/figure7/view_03.png": "f046073ea2640429a9a0de50d557394fcd9f073551d972961562faf96ce9c7b8",
+    "OrbInspectLatex/data/historical_ros/figure7/trajectory_and_display_mesh.npz": "749972cc2197541d1cb8a597737a3ce1668354deaf47bd41b4077134a54b3b97",
+    "OrbInspectLatex/data/historical_ros/figure7/view_06.png": "27750d9b4fa39268d30557dc4a3aebc9faf7e96f1f10fae6535367df4861fee4",
+    "OrbInspectLatex/data/historical_ros/figure7/view_08.png": "bdb37e1acdd9e5831007d83d26d24d7a0bb799d593dac658f144a6df345a3dc4",
+    "OrbInspectLatex/data/historical_ros/figure7/view_05.png": "bfe7f6a5d9840e8d5813c69b304e6a5fa6bf2c7640c0ff0dbe35cb2311740355",
+    "OrbInspectLatex/data/historical_ros/figure7/artwork/ros_key_camera_views_trajectory.svg": "6754bb0fc9d80283f67abcc7e7ba481a436a8e075391c9114656dfbb62cce89c",
+    "OrbInspectLatex/data/historical_ros/figure7/artwork/ros_key_camera_views_trajectory.pdf": "cb4b294cfd7ee74bd884d7b07504edb22983a7298c0ae8b35908266db659859b",
+    "OrbInspectLatex/data/historical_ros/figure7/artwork/compact_layout_manifest.json": "371c0f498a18769016f22b1814c0f7168deb8c82d6aecb115f783f5931e0458c",
+    "OrbInspectLatex/data/historical_ros/figure7/artwork/caption.tex": "ec776bb86309548c774128209d9cc010dcc60f5ef66c210c01556f760d70fd84",
+    "OrbInspectLatex/data/historical_ros/figure7/artwork/ros_key_camera_views_trajectory.png": "d854757ae416a4dbfc28326bd8f43a1c21837b5956887c39f309591a2e90a5b2",
+    "OrbInspectLatex/data/rviz_overview/20260909_113140_hybrid12_rviz_video/source_manifest.json": "9b07510fef56c7c7cbeabd2e79ebba3bc0ed3f6bcff4582e604156a4bb3de929",
+    "OrbInspectLatex/data/rviz_overview/20260909_113140_hybrid12_rviz_video/mesh_execution_audit.json": "ee1eea6f2f51bda9157a8bb65614d32bdec4e62d01e432456a65d2a3fd2caf39",
+    "OrbInspectLatex/data/rviz_overview/20260909_113140_hybrid12_rviz_video/execution_manifest.json": "bbcb4e0043665eff023878d22eb1e96701ef97b48a0f2aa2a854b45545bc03ac",
+    "OrbInspectLatex/data/rviz_overview/20260909_113140_hybrid12_rviz_video/video_quality_audit.json": "42f8d7356172e70d9864ab4425954f240e4496eca4b2bea2cedd7ed225457277",
+    "OrbInspectLatex/data/rviz_overview/20260909_113140_hybrid12_rviz_video/required_target_execution_audit.json": "86f8e64f82417feb4db8777ef3b58f4bf15f4fae4317cce3c925aa53aea91f56",
+    "OrbInspectLatex/data/rviz_overview/20260909_113140_hybrid12_rviz_video/capture_finished.json": "368cf3e59ae7e0cbeb7c592b25a424caa1216efdc54b2e2ec91fc8e74807d999",
+    "OrbInspectLatex/data/rviz_overview/20260909_113140_hybrid12_rviz_video/video_transfer_09_to_10.png": "b769890596b598ee005a3b81338fcf708005aa886efc9508259aedc13f5cf67e",
+    "OrbInspectLatex/data/rviz_overview/20260909_113140_hybrid12_rviz_video/video_completion.png": "131281c5d5cab83bf5471d20f558ff2910eb4f9824a15654aa758e0d54624be4",
+    "OrbInspectLatex/data/rviz_overview/20260909_113140_hybrid12_rviz_video/capture_summary.json": "8865544d0f647e4a4beacd71b9100aee5fa3ad45f163466014f29fb975924b35",
+    "OrbInspectLatex/data/rviz_overview/20260909_113140_hybrid12_rviz_video/video_events.jsonl": "8b458acf640f667d1dda8a7df6ac81ff0ddb88f8b5a97fc844c40e4645812f74",
+    "OrbInspectLatex/data/confirmation/raw/representative_case_progress.csv": "3d5341ee0e0a0cc63bf79d7eb1b405129ba58285adf8cb08637e6e8754bcc3dc",
+    "OrbInspectLatex/data/confirmation/raw/heldout_summary.csv": "4f240acf303598bb85da7cdd9ddeb93f32207554ec1a74629b56a585e7d1e0f5",
+    "OrbInspectLatex/data/confirmation/raw/manuscript_statistics.json": "d23d70e94e1e4b869a285c3e58d6af36611d81c885adb86ad408b84a2b2eaa8f",
+    "OrbInspectLatex/data/confirmation/raw/paired_comparisons.csv": "aa883615b1b2a5e472f8c39d7d30dedd769c831ca260637be56fbe2bc8dccd04",
+    "OrbInspectLatex/data/confirmation/raw/representative_case_trajectory.csv": "78d2b5df766b39dcffef019e36b149e2e46e1afc62dec12e426bacb35cacf78e",
+    "OrbInspectLatex/data/confirmation/raw/heldout_results.csv": "335ec2b4e176e8425a0e30fea30a31f859ef07fa413c2a7c7472ca054988f068",
+    "OrbInspectLatex/data/confirmation/raw/target_positions.csv": "73810927ffd53d7eff5a0f3fd46ac4cb6776a9482d47c1d1c05c833e3e4c006a",
+    "OrbInspectLatex/data/confirmation/raw/hcw_graph.json": "e90f40f0aaf87464ad5b5ef6b39979aa3c5f0b7049fe0ec17ad5e5b1a19b0af2",
+    "OrbInspectLatex/data/confirmation/raw/validation_depth_results.csv": "f56b3246530fa8e720425b3f2ee40ac58876583bc82830c041182f13b5f0488e",
+    "OrbInspectLatex/data/confirmation/raw/scenario_results.csv": "335ec2b4e176e8425a0e30fea30a31f859ef07fa413c2a7c7472ca054988f068",
+    "OrbInspectLatex/data/confirmation/raw/representative_case_manifest.json": "a10583ba2e32b731dfad868ef1302a448a19790c3863973207cbd36e1267640e",
+    "OrbInspectLatex/data/confirmation/raw/scenarios.json": "074ff868201907242ff4954ff6adc932a254b6ddcee5f1b52d64f31669f163ae",
+    "OrbInspectLatex/data/confirmation/config_snapshot/freeze_manifest.json": "8c07247309485a880929f8224f0a2048887fee5e9f13c3fa26c65d58db702079",
+    "OrbInspectLatex/data/confirmation/config_snapshot/required_target_study.yaml": "83b43b1ddd59679d1b42191c81f339e3036f96eb0af25fb9ad7a45a5ae38f45b",
+    "OrbInspectLatex/data/confirmation/config_snapshot/required_targets.json": "6388780d64571b7f970f9ba69c07a03db1427236db11122daf65bfaf6f49dcd2",
+    "OrbInspectLatex/data/confirmation/config_snapshot/base_experiment_config.json": "fac496ad6874c03e8c35be6a91e7b63aed3c7fa099d2a8321ae9ba59a57e1cb4",
+    "OrbInspectLatex/figures/fig01_framework/viability_preserving_rollout_adp.png": "24bded88c465c0dfab1a82f1075e2f352a83eebe014a5bddfe5fb91a5764d5f9",
+    "OrbInspectLatex/figures/fig01_framework/README.md": "66bd6e8fe22571e1c84e88ee5c4b92fc4de24465d65ff8878d28bffe8f7f8eb2",
+    "OrbInspectLatex/figures/fig01_framework/viability_preserving_rollout_adp.drawio": "0b6979f6b33cfdff48aef4107311eb31deab0df24d27a7e3053f9365abe3a194",
+    "OrbInspectLatex/figures/fig01_framework/NOTATION_NOTES.md": "0be80e25c6a5d369905845034296036bcbf9c95e06326563de3d15e0f9953730",
+    "OrbInspectLatex/figures/fig01_framework/QA.json": "2c12cfe5b2db9517941ba199f49500841f62cb5bd95af204c0a930e480ffb0b4",
+    "OrbInspectLatex/figures/fig01_framework/viability_preserving_rollout_adp.pdf": "c5f4547d8f5e8ebe903deba0c1632b4f4616bda58433d16658ca526879a31e29",
+    "OrbInspectLatex/figures/fig01_framework/viability_preserving_rollout_adp.svg": "171839d9442c7a8151160893480e4cb856faea7b95b840d594af306cdb11f7b2",
+    "OrbInspectLatex/figures/fig01_framework/assets/camera_alexander_lucke.jpg": "6882fba51eaa084d38f21e3edc622811ba07d3107942e12f85dd97a83486832d",
+    "OrbInspectLatex/figures/fig01_framework/assets/evidence.json": "88ea2c46409777a0849e51d3e76baf176af822800d31161c47b0c1084f269459",
+    "OrbInspectLatex/figures/fig01_framework/assets/IMAGE_CREDITS.md": "73fde8ad222992ee86cdcc40ce336b235c2138c648aa3b5e520b142cdfd16a73",
+    "OrbInspectLatex/figures/fig02_rollout_example/README.md": "86e6ddd1733d7cda9a3a4afcbffe75a1a398cf93e854b7f42c10df4ca95ad889",
+    "OrbInspectLatex/figures/fig02_rollout_example/adp_rollout_mechanism.drawio": "d602f51a43057918c293526170ce4d3a8acd9fdf556f69d514c0f845129b552c",
+    "OrbInspectLatex/figures/fig02_rollout_example/QA.json": "05407ba83567cb41d683bf9c74138a05ae54965b08e380fad9e3f1ca244b7666",
+    "OrbInspectLatex/figures/fig02_rollout_example/adp_rollout_mechanism.svg": "cf3feaed080a1f30f88699ab46d80d502349c990d267632e9edc70e9de264cdf",
+    "OrbInspectLatex/figures/fig02_rollout_example/adp_rollout_mechanism.pdf": "cdc16dc2c0dba6c2967162bb152021a31ae32fb0c5c1644aee443cb09842ea0d",
+    "OrbInspectLatex/figures/fig02_rollout_example/illustrative_graph.json": "66387080c4f56103473ec39939874c367ada42fd7748adf03e359d5b10c7efaa",
+    "OrbInspectLatex/figures/fig02_rollout_example/adp_rollout_mechanism.png": "4c3828030b224f217890ea6d765b4c70eb93d617cb8bf8d221c5b4d74d909cb0",
+    "OrbInspectLatex/figures/fig07_ros_camera_views/ros_key_camera_views_trajectory.svg": "338b45a7f49051a226c28928056ecd332154ceea1c8d50fb91c86caea89ac19e",
+    "OrbInspectLatex/figures/fig07_ros_camera_views/ros_key_camera_views_trajectory.pdf": "19741ac5991f40cd640df9c4f8d9c97e88389b24ef7bc1b70648d693ea077924",
+    "OrbInspectLatex/figures/fig07_ros_camera_views/compact_layout_manifest.json": "853c41d81d22b84a93c2af77d2bfefc57384a185f903c27206bc3d30b8b49957",
+    "OrbInspectLatex/figures/fig07_ros_camera_views/ros_key_camera_views_trajectory.png": "19d8b3cb2639216626f4208b936d7f0daa514342229d6f05bffcc01428fff00d",
+    "OrbInspectLatex/figures/fig08_rviz_overview/rviz_execution_overview.pdf": "277230c29a8b457901d01c887774175c70981a7be2ae83211f46d3ebc0e9f427",
+    "OrbInspectLatex/figures/fig08_rviz_overview/overview_manifest.json": "55c15e1a91b69d6cbdd58235c1e0d62e4170faf0268e8986701644d17b9b983a",
+    "OrbInspectLatex/figures/fig08_rviz_overview/rviz_execution_overview.png": "730b2f78ad0e40623de72f9ebf461166bb39188085e61f9dcfdd5c280c111e17",
+    "OrbInspectLatex/figures/fig08_rviz_overview/rviz_execution_overview.svg": "1215de74d45ba419ef417f1a54e6bcb3d199247cafd332caf31b0341458776c8"
+  },
+  "frozen_figures45_evidence_exact_match": true,
+  "figure3_all_statistics_match_reference": true,
+  "figure6_frozen_final_totals_match": true,
+  "source_preflight_findings": {
+    "generate_depth_figure.py": [
+      {
+        "check_id": "FONT-SIZE",
+        "level": "WARN",
+        "message": "No explicit text sizes found; verify readability at final physical size"
+      },
+      {
+        "check_id": "EXPORT-VECTOR",
+        "level": "FAIL",
+        "message": "Missing required vector export: SVG, PDF"
+      },
+      {
+        "check_id": "EXPORT-RASTER",
+        "level": "FAIL",
+        "message": "No TIFF or PNG raster export found"
+      },
+      {
+        "check_id": "FINAL-WIDTH",
+        "level": "WARN",
+        "message": "No static final width detected; verify the target journal's current specification"
+      },
+      {
+        "check_id": "LOG-GUARD",
+        "level": "WARN",
+        "message": "Logarithmic operation found without an obvious positivity/pseudocount guard"
+      }
+    ],
+    "generate_result_figures.py": [
+      {
+        "check_id": "FONT-SIZE",
+        "level": "WARN",
+        "message": "No explicit text sizes found; verify readability at final physical size"
+      },
+      {
+        "check_id": "FONT-GLYPH-FLOOR",
+        "level": "WARN",
+        "message": "Mathtext superscript/subscript detected without an auditable parent font size; inspect the exported PDF"
+      },
+      {
+        "check_id": "EXPORT-VECTOR",
+        "level": "FAIL",
+        "message": "Missing required vector export: SVG, PDF"
+      },
+      {
+        "check_id": "EXPORT-RASTER",
+        "level": "FAIL",
+        "message": "No TIFF or PNG raster export found"
+      },
+      {
+        "check_id": "RASTER-DPI",
+        "level": "WARN",
+        "message": "No explicit raster DPI/resolution found"
+      },
+      {
+        "check_id": "FINAL-WIDTH",
+        "level": "WARN",
+        "message": "No static final width detected; verify the target journal's current specification"
+      },
+      {
+        "check_id": "DEMO-DATA",
+        "level": "WARN",
+        "message": "Simulated data appears in the plotting source without an explicit demo boundary"
+      }
+    ],
+    "generate_trajectory_figure.py": [
+      {
+        "check_id": "FONT-SIZE",
+        "level": "WARN",
+        "message": "No explicit text sizes found; verify readability at final physical size"
+      },
+      {
+        "check_id": "EXPORT-VECTOR",
+        "level": "FAIL",
+        "message": "Missing required vector export: SVG, PDF"
+      },
+      {
+        "check_id": "EXPORT-RASTER",
+        "level": "FAIL",
+        "message": "No TIFF or PNG raster export found"
+      },
+      {
+        "check_id": "RASTER-DPI",
+        "level": "WARN",
+        "message": "No explicit raster DPI/resolution found"
+      },
+      {
+        "check_id": "FINAL-WIDTH",
+        "level": "WARN",
+        "message": "No static final width detected; verify the target journal's current specification"
+      },
+      {
+        "check_id": "ROTATION-ANCHOR",
+        "level": "WARN",
+        "message": "Some rotated text calls lack rotation_mode='anchor' and may cross their intended anchors after rotation"
+      }
+    ]
+  },
+  "source_preflight_resolution": "Heuristic cannot follow loop-generated PDF/SVG/PNG suffixes or imported TEXT_PT. All exports exist and the actual PDF glyph sizes and embedding pass. Input hashes, exact statistics and data-array checks pass. Existing palettes, layouts and publisher subcaptions are retained; no TIFF requested.",
+  "pdf_content_stream_font_floor_audit": {
+    "adp_depth_tradeoff_a.pdf": {
+      "pdf": "OrbInspectLatex/figures/fig03_depth_tradeoff/adp_depth_tradeoff_a.pdf",
+      "auditable": true,
+      "minimum_required_pt": 5.0,
+      "minimum_found_pt": 8.0,
+      "text_run_count": 15,
+      "below_minimum_count": 0,
+      "below_minimum": [],
+      "warnings": []
+    },
+    "adp_depth_tradeoff_c.pdf": {
+      "pdf": "OrbInspectLatex/figures/fig03_depth_tradeoff/adp_depth_tradeoff_c.pdf",
+      "auditable": true,
+      "minimum_required_pt": 5.0,
+      "minimum_found_pt": 5.6,
+      "text_run_count": 15,
+      "below_minimum_count": 0,
+      "below_minimum": [],
+      "warnings": []
+    },
+    "adp_depth_tradeoff_b.pdf": {
+      "pdf": "OrbInspectLatex/figures/fig03_depth_tradeoff/adp_depth_tradeoff_b.pdf",
+      "auditable": true,
+      "minimum_required_pt": 5.0,
+      "minimum_found_pt": 5.6,
+      "text_run_count": 17,
+      "below_minimum_count": 0,
+      "below_minimum": [],
+      "warnings": []
+    },
+    "adp_heldout_performance_c.pdf": {
+      "pdf": "OrbInspectLatex/figures/fig04_heldout_performance/adp_heldout_performance_c.pdf",
+      "auditable": true,
+      "minimum_required_pt": 5.0,
+      "minimum_found_pt": 8.0,
+      "text_run_count": 14,
+      "below_minimum_count": 0,
+      "below_minimum": [],
+      "warnings": []
+    },
+    "adp_heldout_performance_b.pdf": {
+      "pdf": "OrbInspectLatex/figures/fig04_heldout_performance/adp_heldout_performance_b.pdf",
+      "auditable": true,
+      "minimum_required_pt": 5.0,
+      "minimum_found_pt": 5.6,
+      "text_run_count": 12,
+      "below_minimum_count": 0,
+      "below_minimum": [],
+      "warnings": []
+    },
+    "adp_heldout_performance_d.pdf": {
+      "pdf": "OrbInspectLatex/figures/fig04_heldout_performance/adp_heldout_performance_d.pdf",
+      "auditable": true,
+      "minimum_required_pt": 5.0,
+      "minimum_found_pt": 5.6,
+      "text_run_count": 12,
+      "below_minimum_count": 0,
+      "below_minimum": [],
+      "warnings": []
+    },
+    "adp_heldout_performance_a.pdf": {
+      "pdf": "OrbInspectLatex/figures/fig04_heldout_performance/adp_heldout_performance_a.pdf",
+      "auditable": true,
+      "minimum_required_pt": 5.0,
+      "minimum_found_pt": 8.0,
+      "text_run_count": 14,
+      "below_minimum_count": 0,
+      "below_minimum": [],
+      "warnings": []
+    },
+    "adp_ablation_safety_a.pdf": {
+      "pdf": "OrbInspectLatex/figures/fig05_ablation_safety/adp_ablation_safety_a.pdf",
+      "auditable": true,
+      "minimum_required_pt": 5.0,
+      "minimum_found_pt": 8.0,
+      "text_run_count": 12,
+      "below_minimum_count": 0,
+      "below_minimum": [],
+      "warnings": []
+    },
+    "adp_ablation_safety_legend.pdf": {
+      "pdf": "OrbInspectLatex/figures/fig05_ablation_safety/adp_ablation_safety_legend.pdf",
+      "auditable": true,
+      "minimum_required_pt": 5.0,
+      "minimum_found_pt": 8.0,
+      "text_run_count": 2,
+      "below_minimum_count": 0,
+      "below_minimum": [],
+      "warnings": []
+    },
+    "adp_ablation_safety_d.pdf": {
+      "pdf": "OrbInspectLatex/figures/fig05_ablation_safety/adp_ablation_safety_d.pdf",
+      "auditable": true,
+      "minimum_required_pt": 5.0,
+      "minimum_found_pt": 5.6,
+      "text_run_count": 10,
+      "below_minimum_count": 0,
+      "below_minimum": [],
+      "warnings": []
+    },
+    "adp_ablation_safety_c.pdf": {
+      "pdf": "OrbInspectLatex/figures/fig05_ablation_safety/adp_ablation_safety_c.pdf",
+      "auditable": true,
+      "minimum_required_pt": 5.0,
+      "minimum_found_pt": 8.0,
+      "text_run_count": 8,
+      "below_minimum_count": 0,
+      "below_minimum": [],
+      "warnings": []
+    },
+    "adp_ablation_safety_b.pdf": {
+      "pdf": "OrbInspectLatex/figures/fig05_ablation_safety/adp_ablation_safety_b.pdf",
+      "auditable": true,
+      "minimum_required_pt": 5.0,
+      "minimum_found_pt": 8.0,
+      "text_run_count": 9,
+      "below_minimum_count": 0,
+      "below_minimum": [],
+      "warnings": []
+    },
+    "adp_representative_trajectory_b.pdf": {
+      "pdf": "OrbInspectLatex/figures/fig06_representative_trajectory/adp_representative_trajectory_b.pdf",
+      "auditable": true,
+      "minimum_required_pt": 5.0,
+      "minimum_found_pt": 8.0,
+      "text_run_count": 13,
+      "below_minimum_count": 0,
+      "below_minimum": [],
+      "warnings": []
+    },
+    "adp_representative_trajectory_a.pdf": {
+      "pdf": "OrbInspectLatex/figures/fig06_representative_trajectory/adp_representative_trajectory_a.pdf",
+      "auditable": true,
+      "minimum_required_pt": 5.0,
+      "minimum_found_pt": 8.0,
+      "text_run_count": 22,
+      "below_minimum_count": 0,
+      "below_minimum": [],
+      "warnings": []
+    },
+    "adp_representative_trajectory_c.pdf": {
+      "pdf": "OrbInspectLatex/figures/fig06_representative_trajectory/adp_representative_trajectory_c.pdf",
+      "auditable": true,
+      "minimum_required_pt": 5.0,
+      "minimum_found_pt": 8.0,
+      "text_run_count": 16,
+      "below_minimum_count": 0,
+      "below_minimum": [],
+      "warnings": []
+    }
+  },
+  "visual_review": {
+    "pages": [
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "all_panels_readable": true,
+    "no_label_clipping": true,
+    "figure6_horizontal_ticks": "alternate labels; original grid planes retained",
+    "figure6_method_legend": "shared above the 3D panel"
+  },
+  "manuscript_sha256": "eff74a9233ac8f90dfea0ef30513d194b29616d28146fceb52ad4d4a5dd59a5e"
+}

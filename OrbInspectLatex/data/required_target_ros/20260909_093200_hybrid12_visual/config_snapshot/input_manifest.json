@@ -1,0 +1,618 @@
+{
+  "base_experiment_snapshot_sha256": "fac496ad6874c03e8c35be6a91e7b63aed3c7fa099d2a8321ae9ba59a57e1cb4",
+  "exporter_sha256": "b3c12e00efc80e21eaedbab9c0e349daa9c60f26667d02450f158854c817f902",
+  "git_revision": "a835dbf35e4f9422958bb9f15a0354a7c73be3ae",
+  "integration_dt": 3.0,
+  "max_acceleration": 0.06,
+  "mean_motion": 0.0011313666536110225,
+  "mesh_sha256": "26dba905b4b7555edbcb0c5f5a61b5c18659f5166076ab27dbb0e64025759fca",
+  "mesh_transform": "full_gltf_scene_hierarchy_then_sdf_pitch_90_scale",
+  "methods": [
+    "adaptive_rollout_adp"
+  ],
+  "output_files_sha256": {
+    "attitude.csv": "23b3b27de579848e90a227109a8c65716de207e7cde17898b6498ae8c61633db",
+    "control.csv": "82d8a4591173d9dc002433005bed62b11c513a78da410b1f4015f16479a3ada1",
+    "coverage.csv": "5f1c4e59d25f85af13958e5d41a1454c826626f566efe64ada6326d0c371dbcb",
+    "mission_events.csv": "c2c1a08886c3ecdcef478525faede9c7653d1e07c8ac043e5431acfa24458b20",
+    "planner.csv": "94a9bbb51c726939fb5def0804734a4827e56af66de852c83b7920e91ca61357",
+    "safety.csv": "961b6c90d1067b3fca7096379dd88481f6fd8b522a241a3d3a52e61018631ebe",
+    "trajectory.csv": "a1adbdd44d5cfceae476c1f9eb623699509023ec53eb7285651aa50794460e3b",
+    "viewpoints.csv": "b84114d7c7d92c6b9a4310366872857e4fced7b471b2fa73b1c3e0287f9ec33c"
+  },
+  "route_count": 1,
+  "routes": [
+    {
+      "action_count": 12,
+      "duration_s": 1800.0,
+      "initial_state": [
+        0.0,
+        -35.0,
+        10.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "method": "adaptive_rollout_adp",
+      "metrics_archived": false,
+      "mission": {
+        "goal_coverage": 0.95,
+        "goal_mode": "hybrid",
+        "mission_sha256": "e22ca852242a8c4dcf72c27c360909b04d4dae844c6dc9316ff18e2a408628da",
+        "required_target_ids": [
+          "mesh_00001",
+          "mesh_00007",
+          "mesh_00015",
+          "mesh_00019",
+          "mesh_00033",
+          "mesh_00052",
+          "mesh_00055",
+          "mesh_00059",
+          "mesh_00079"
+        ],
+        "target_weights": {
+          "mesh_00001": 192.8608269558608,
+          "mesh_00005": 192.8608269558608,
+          "mesh_00006": 192.8608269558608,
+          "mesh_00007": 192.8608269558608,
+          "mesh_00008": 192.8608269558608,
+          "mesh_00009": 192.8608269558608,
+          "mesh_00010": 473.7640522671588,
+          "mesh_00011": 192.8608269558608,
+          "mesh_00012": 192.8608269558608,
+          "mesh_00015": 192.8608269558608,
+          "mesh_00016": 192.8608269558608,
+          "mesh_00019": 192.8608269558608,
+          "mesh_00020": 473.7640522671588,
+          "mesh_00024": 192.8608269558608,
+          "mesh_00025": 192.8608269558608,
+          "mesh_00028": 192.8608269558608,
+          "mesh_00029": 192.8608269558608,
+          "mesh_00031": 192.8608269558608,
+          "mesh_00033": 192.8608269558608,
+          "mesh_00034": 192.8608269558608,
+          "mesh_00036": 192.8608269558608,
+          "mesh_00039": 473.7640522671588,
+          "mesh_00041": 192.8608269558608,
+          "mesh_00045": 192.8608269558608,
+          "mesh_00048": 192.8608269558608,
+          "mesh_00049": 192.8608269558608,
+          "mesh_00052": 192.8608269558608,
+          "mesh_00053": 192.8608269558608,
+          "mesh_00055": 192.8608269558608,
+          "mesh_00059": 473.7640522671588,
+          "mesh_00060": 192.8608269558608,
+          "mesh_00064": 192.8608269558608,
+          "mesh_00065": 192.8608269558608,
+          "mesh_00068": 192.8608269558608,
+          "mesh_00070": 192.8608269558608,
+          "mesh_00071": 192.8608269558608,
+          "mesh_00072": 192.8608269558608,
+          "mesh_00073": 192.8608269558608,
+          "mesh_00079": 473.7640522671588,
+          "mesh_00087": 192.8608269558608,
+          "mesh_00088": 192.8608269558608
+        }
+      },
+      "planned_coverage": 0.9585771560419855,
+      "planned_delta_v": 18.027014267787823,
+      "planned_graph_cost": 147.75829574322825,
+      "planned_min_clearance": 2.38511730288576,
+      "planned_peak_input": 0.05858419313244917,
+      "route_node_ids": [
+        "cand_0016",
+        "cand_0021",
+        "cand_0068",
+        "cand_0045",
+        "cand_0063_safe",
+        "cand_0062",
+        "cand_0055",
+        "cand_0052",
+        "cand_0066",
+        "cand_0005",
+        "cand_0000",
+        "cand_0013_safe"
+      ],
+      "scenario_id": "required09_test_000_bg95",
+      "scenario_seed": 202609360000,
+      "split": "supplemental",
+      "success": true,
+      "frozen_transfer_metrics": {
+        "duration_s": 1080.0,
+        "planned_delta_v": 17.929212692979377,
+        "planned_graph_cost": 147.75829574322825,
+        "planned_min_clearance": 2.38511730288576,
+        "planned_peak_input": 0.05858419313244917
+      }
+    }
+  ],
+  "safety_margin": 2.0,
+  "scenario_count": 1,
+  "schema_version": "orbinspect-ros-verification-input/v3",
+  "source_files_sha256": {
+    "hcw_graph.json": "e90f40f0aaf87464ad5b5ef6b39979aa3c5f0b7049fe0ec17ad5e5b1a19b0af2",
+    "heldout_results.csv": "421feb49e6009105d49bfaffcac1893ba504b48b9acb5c98fd76d3c1de537f7d",
+    "scenarios.json": "1d5553cd1076ffd3a0c775f461babf5f253f76555a1df1609c8d9813a708100a"
+  },
+  "source_result_root": "/home/rugang/robotics/projects/OrbInspect/data/results/20260909_090745_hybrid12_plan",
+  "splits": [
+    "validation",
+    "test",
+    "ood"
+  ],
+  "transfer_duration": 90.0,
+  "vehicle_bounding_radius": 0.8,
+  "viewpoint_refinement": {
+    "selection": "Supplemental 12-view hybrid route; views 5 and 12 refined after synchronous tracking failure, with recomputed transfers and visibility; unchanged safety margins, camera gates, target IDs and weights.",
+    "source_bundle": "/home/rugang/robotics/projects/OrbInspect/data/results/20260909_090745_hybrid12_transfers",
+    "source_manifest_sha256": "b0fb8813d76b9df2b09cd97f6adaba1473297e7bd465199c2fc75b02536fa969",
+    "fixed_target_universe": "unchanged 41 parent target IDs and weights",
+    "original_route": {
+      "action_count": 12,
+      "duration_s": 1080.0,
+      "initial_state": [
+        0.0,
+        -35.0,
+        10.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "method": "adaptive_rollout_adp",
+      "metrics_archived": true,
+      "mission": {
+        "goal_coverage": 0.95,
+        "goal_mode": "hybrid",
+        "mission_sha256": "e22ca852242a8c4dcf72c27c360909b04d4dae844c6dc9316ff18e2a408628da",
+        "required_target_ids": [
+          "mesh_00001",
+          "mesh_00007",
+          "mesh_00015",
+          "mesh_00019",
+          "mesh_00033",
+          "mesh_00052",
+          "mesh_00055",
+          "mesh_00059",
+          "mesh_00079"
+        ],
+        "target_weights": {
+          "mesh_00001": 192.8608269558608,
+          "mesh_00005": 192.8608269558608,
+          "mesh_00006": 192.8608269558608,
+          "mesh_00007": 192.8608269558608,
+          "mesh_00008": 192.8608269558608,
+          "mesh_00009": 192.8608269558608,
+          "mesh_00010": 473.7640522671588,
+          "mesh_00011": 192.8608269558608,
+          "mesh_00012": 192.8608269558608,
+          "mesh_00015": 192.8608269558608,
+          "mesh_00016": 192.8608269558608,
+          "mesh_00019": 192.8608269558608,
+          "mesh_00020": 473.7640522671588,
+          "mesh_00024": 192.8608269558608,
+          "mesh_00025": 192.8608269558608,
+          "mesh_00028": 192.8608269558608,
+          "mesh_00029": 192.8608269558608,
+          "mesh_00031": 192.8608269558608,
+          "mesh_00033": 192.8608269558608,
+          "mesh_00034": 192.8608269558608,
+          "mesh_00036": 192.8608269558608,
+          "mesh_00039": 473.7640522671588,
+          "mesh_00041": 192.8608269558608,
+          "mesh_00045": 192.8608269558608,
+          "mesh_00048": 192.8608269558608,
+          "mesh_00049": 192.8608269558608,
+          "mesh_00052": 192.8608269558608,
+          "mesh_00053": 192.8608269558608,
+          "mesh_00055": 192.8608269558608,
+          "mesh_00059": 473.7640522671588,
+          "mesh_00060": 192.8608269558608,
+          "mesh_00064": 192.8608269558608,
+          "mesh_00065": 192.8608269558608,
+          "mesh_00068": 192.8608269558608,
+          "mesh_00070": 192.8608269558608,
+          "mesh_00071": 192.8608269558608,
+          "mesh_00072": 192.8608269558608,
+          "mesh_00073": 192.8608269558608,
+          "mesh_00079": 473.7640522671588,
+          "mesh_00087": 192.8608269558608,
+          "mesh_00088": 192.8608269558608
+        }
+      },
+      "planned_coverage": 0.9585771560419855,
+      "planned_delta_v": 18.026821872754084,
+      "planned_graph_cost": 148.55663452922946,
+      "planned_min_clearance": 1.1491575873556459,
+      "planned_peak_input": 0.05858419313244917,
+      "route_node_ids": [
+        "cand_0016",
+        "cand_0021",
+        "cand_0068",
+        "cand_0045",
+        "cand_0063",
+        "cand_0062",
+        "cand_0055",
+        "cand_0052",
+        "cand_0066",
+        "cand_0005",
+        "cand_0000",
+        "cand_0013"
+      ],
+      "scenario_id": "required09_test_000_bg95",
+      "scenario_seed": 202609360000,
+      "split": "supplemental",
+      "success": true
+    },
+    "observations": [
+      {
+        "action": 1,
+        "original_id": "cand_0016",
+        "candidate_id": "cand_0016",
+        "position": [
+          47.15438218014242,
+          1.9132428633870262,
+          39.75474212287527
+        ],
+        "aim_position": [
+          17.709518349511672,
+          -15.08675658584437,
+          39.75830887854099
+        ],
+        "visible_target_ids": [
+          "mesh_00015",
+          "mesh_00016",
+          "mesh_00024",
+          "mesh_00025",
+          "mesh_00034"
+        ],
+        "visible_outside_fixed_universe": [],
+        "original_visible_target_ids": [
+          "mesh_00015",
+          "mesh_00016",
+          "mesh_00024",
+          "mesh_00025",
+          "mesh_00034"
+        ],
+        "min_clearance": 2.451415363219672,
+        "peak_input": 0.048074778454512024
+      },
+      {
+        "action": 2,
+        "original_id": "cand_0021",
+        "candidate_id": "cand_0021",
+        "position": [
+          37.17635404906447,
+          32.28739450664882,
+          39.75388600862191
+        ],
+        "aim_position": [
+          0.8032869610975252,
+          11.287395193463254,
+          39.75829741001129
+        ],
+        "visible_target_ids": [
+          "mesh_00019",
+          "mesh_00020",
+          "mesh_00024",
+          "mesh_00028",
+          "mesh_00029",
+          "mesh_00033"
+        ],
+        "visible_outside_fixed_universe": [],
+        "original_visible_target_ids": [
+          "mesh_00019",
+          "mesh_00020",
+          "mesh_00024",
+          "mesh_00028",
+          "mesh_00029",
+          "mesh_00033"
+        ],
+        "min_clearance": 30.68302916702849,
+        "peak_input": 0.0229950397028658
+      },
+      {
+        "action": 3,
+        "original_id": "cand_0068",
+        "candidate_id": "cand_0068",
+        "position": [
+          29.057205196336707,
+          37.70409602829488,
+          1.486281695834873
+        ],
+        "aim_position": [
+          4.5836758059263225,
+          3.571320589184761,
+          1.486282346248627
+        ],
+        "visible_target_ids": [
+          "mesh_00006",
+          "mesh_00008",
+          "mesh_00039",
+          "mesh_00041"
+        ],
+        "visible_outside_fixed_universe": [],
+        "original_visible_target_ids": [
+          "mesh_00006",
+          "mesh_00008",
+          "mesh_00039",
+          "mesh_00041"
+        ],
+        "min_clearance": 18.816814235933883,
+        "peak_input": 0.02828577403054568
+      },
+      {
+        "action": 4,
+        "original_id": "cand_0045",
+        "candidate_id": "cand_0045",
+        "position": [
+          25.76697330621689,
+          54.95296338639528,
+          -50.223460083259454
+        ],
+        "aim_position": [
+          -10.60609378190536,
+          33.95296407461681,
+          -50.21904326736927
+        ],
+        "visible_target_ids": [
+          "mesh_00052",
+          "mesh_00053",
+          "mesh_00064",
+          "mesh_00065"
+        ],
+        "visible_outside_fixed_universe": [],
+        "original_visible_target_ids": [
+          "mesh_00052",
+          "mesh_00053",
+          "mesh_00064",
+          "mesh_00065"
+        ],
+        "min_clearance": 22.642455949416764,
+        "peak_input": 0.03914538418373136
+      },
+      {
+        "action": 5,
+        "original_id": "cand_0063",
+        "candidate_id": "cand_0063_safe",
+        "position": [
+          15.167266891513275,
+          11.571294664875204,
+          -61.59617538183524
+        ],
+        "aim_position": [
+          -13.372391116619111,
+          5.905034939646721,
+          -16.31811008118093
+        ],
+        "visible_target_ids": [
+          "mesh_00045",
+          "mesh_00068",
+          "mesh_00070"
+        ],
+        "visible_outside_fixed_universe": [],
+        "original_visible_target_ids": [
+          "mesh_00045",
+          "mesh_00070"
+        ],
+        "min_clearance": 8.493504307798746,
+        "peak_input": 0.033076461111137594
+      },
+      {
+        "action": 6,
+        "original_id": "cand_0062",
+        "candidate_id": "cand_0062",
+        "position": [
+          7.4038132011875835,
+          -0.22808597444695908,
+          -68.702571188211
+        ],
+        "aim_position": [
+          7.403813201189041,
+          -0.22809208571910855,
+          -26.70257118821144
+        ],
+        "visible_target_ids": [
+          "mesh_00068",
+          "mesh_00070",
+          "mesh_00079"
+        ],
+        "visible_outside_fixed_universe": [],
+        "original_visible_target_ids": [
+          "mesh_00068",
+          "mesh_00070",
+          "mesh_00079"
+        ],
+        "min_clearance": 4.463826826083071,
+        "peak_input": 0.01139979783328793
+      },
+      {
+        "action": 7,
+        "original_id": "cand_0055",
+        "candidate_id": "cand_0055",
+        "position": [
+          45.92088104692785,
+          17.141790760942456,
+          -41.4783779233683
+        ],
+        "aim_position": [
+          9.547813961707208,
+          -3.858208558136331,
+          -41.48278391122818
+        ],
+        "visible_target_ids": [
+          "mesh_00048",
+          "mesh_00049",
+          "mesh_00059",
+          "mesh_00060",
+          "mesh_00065",
+          "mesh_00071"
+        ],
+        "visible_outside_fixed_universe": [],
+        "original_visible_target_ids": [
+          "mesh_00048",
+          "mesh_00049",
+          "mesh_00059",
+          "mesh_00060",
+          "mesh_00065",
+          "mesh_00071"
+        ],
+        "min_clearance": 3.952468722936641,
+        "peak_input": 0.03622126596410656
+      },
+      {
+        "action": 8,
+        "original_id": "cand_0052",
+        "candidate_id": "cand_0052",
+        "position": [
+          45.477154697086974,
+          1.9083032715960648,
+          -39.7547140181887
+        ],
+        "aim_position": [
+          16.032290866991627,
+          -15.091696176721463,
+          -39.758289538621895
+        ],
+        "visible_target_ids": [
+          "mesh_00048",
+          "mesh_00049",
+          "mesh_00055",
+          "mesh_00059",
+          "mesh_00060"
+        ],
+        "visible_outside_fixed_universe": [],
+        "original_visible_target_ids": [
+          "mesh_00048",
+          "mesh_00049",
+          "mesh_00055",
+          "mesh_00059",
+          "mesh_00060"
+        ],
+        "min_clearance": 28.020696602167636,
+        "peak_input": 0.010987791892782718
+      },
+      {
+        "action": 9,
+        "original_id": "cand_0066",
+        "candidate_id": "cand_0066",
+        "position": [
+          47.10610591334751,
+          5.947555696210703,
+          -17.285705478945466
+        ],
+        "aim_position": [
+          5.106245408132672,
+          6.0555915070325135,
+          -17.292473497465252
+        ],
+        "visible_target_ids": [
+          "mesh_00072",
+          "mesh_00073",
+          "mesh_00087"
+        ],
+        "visible_outside_fixed_universe": [],
+        "original_visible_target_ids": [
+          "mesh_00072",
+          "mesh_00073",
+          "mesh_00087"
+        ],
+        "min_clearance": 22.160633993741133,
+        "peak_input": 0.016439965939907673
+      },
+      {
+        "action": 10,
+        "original_id": "cand_0005",
+        "candidate_id": "cand_0005",
+        "position": [
+          -14.216049847602841,
+          -36.53834050628878,
+          15.53200695987428
+        ],
+        "aim_position": [
+          -14.216049847602841,
+          2.264598515629768,
+          -0.5407004430890083
+        ],
+        "visible_target_ids": [
+          "mesh_00001",
+          "mesh_00005"
+        ],
+        "visible_outside_fixed_universe": [],
+        "original_visible_target_ids": [
+          "mesh_00001",
+          "mesh_00005"
+        ],
+        "min_clearance": 5.733682925600197,
+        "peak_input": 0.05858419313244917
+      },
+      {
+        "action": 11,
+        "original_id": "cand_0000",
+        "candidate_id": "cand_0000",
+        "position": [
+          -47.848664349308564,
+          4.91803559574651,
+          19.240079866583297
+        ],
+        "aim_position": [
+          -20.341997742652893,
+          4.9180366420745845,
+          -0.7444964909553528
+        ],
+        "visible_target_ids": [
+          "mesh_00007"
+        ],
+        "visible_outside_fixed_universe": [],
+        "original_visible_target_ids": [
+          "mesh_00007"
+        ],
+        "min_clearance": 9.50629574148618,
+        "peak_input": 0.038487968192774204
+      },
+      {
+        "action": 12,
+        "original_id": "cand_0013",
+        "candidate_id": "cand_0013_safe",
+        "position": [
+          -5.703573616712612,
+          1.619262353067862,
+          58.97143848153044
+        ],
+        "aim_position": [
+          0.12388174810011598,
+          6.274852870942527,
+          32.112260910102016
+        ],
+        "visible_target_ids": [
+          "mesh_00010",
+          "mesh_00011",
+          "mesh_00012",
+          "mesh_00031",
+          "mesh_00036"
+        ],
+        "visible_outside_fixed_universe": [],
+        "original_visible_target_ids": [
+          "mesh_00010",
+          "mesh_00011",
+          "mesh_00012",
+          "mesh_00031",
+          "mesh_00036"
+        ],
+        "min_clearance": 2.38511730288576,
+        "peak_input": 0.04175784094764469
+      }
+    ],
+    "metrics_basis": "all transfers and visibility recomputed; not archived graph metrics"
+  },
+  "execution_schedule": {
+    "kind": "frozen_transfers_with_uniform_terminal_dwell",
+    "terminal_dwell_s": 60.0,
+    "observation_timing": "after each fixed dwell",
+    "mean_motion": 0.0011313666536110225,
+    "source_manifest_sha256": "aeef1943ff2a6df846b66770d546bf7a0659535198474ddd4f48dcc61dc24414",
+    "source_bundle": "/home/rugang/robotics/projects/OrbInspect/data/results/20260909_092700_hybrid12_refined_inputs",
+    "stationary_hold_delta_v": 0.09780157480844631,
+    "graph_cost_basis": "unchanged source transfers only; excludes settling time and feedback",
+    "selection": "Supplemental 12-view hybrid route; views 5 and 12 refined after synchronous tracking failure, with recomputed transfers and visibility; unchanged safety margins, camera gates, target IDs and weights."
+  }
+}

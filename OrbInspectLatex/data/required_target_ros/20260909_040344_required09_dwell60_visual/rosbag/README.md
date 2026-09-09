@@ -1,0 +1,1 @@
+Original core and camera MCAPs remain in the timestamped workspace result directories. Their hashes and metadata are retained here. The compact manuscript snapshot includes original selected RGB images, camera/pose alignment records, all six executed CSV files and derived event/control audit data.

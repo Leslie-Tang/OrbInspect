@@ -23,9 +23,10 @@ from matplotlib.patches import Patch
 import numpy as np
 from figure_palette import (ALERT, BLACK, GREY, ONE_STEP_COLOR, ORANGE,
                             PURPLE, TEAL, TEAL_LIGHT)
+from figure_typography import COLUMN_WIDTH_PT, TEXT_PT, register_fonts
 
 ROOT = Path(__file__).resolve().parents[1]
-WIDTH_PT = 240 * 72 / 72.27
+WIDTH_PT = COLUMN_WIDTH_PT
 PERFORMANCE_PANEL_FRACTION = .49
 SAFETY_PANEL_FRACTIONS = (.46, .54)
 METHODS = ('incumbent', 'one_step_adp', 'seeded_local_search', 'adaptive_rollout_adp')
@@ -94,8 +95,8 @@ def load_evidence() -> dict:
 
 def style() -> None:
     plt.rcParams.update({'font.family': 'sans-serif', 'font.sans-serif': ['Arial', 'Helvetica', 'DejaVu Sans'],
-                        'font.size': 9, 'axes.labelsize': 9, 'axes.titlesize': 9,
-                        'xtick.labelsize': 9, 'ytick.labelsize': 9, 'legend.fontsize': 9,
+                        'font.size': TEXT_PT, 'axes.labelsize': TEXT_PT, 'axes.titlesize': TEXT_PT,
+                        'xtick.labelsize': TEXT_PT, 'ytick.labelsize': TEXT_PT, 'legend.fontsize': TEXT_PT,
                         'axes.spines.top': False, 'axes.spines.right': False,
                         'axes.linewidth': .65, 'axes.unicode_minus': False,
                         'xtick.major.size': 2, 'ytick.major.size': 2,
@@ -223,7 +224,7 @@ def separate_panel(evidence: dict, builder, index: int):
 
     Remove the other axes before export, rather than cropping a composite image.
     Unequal outer widths in Figure 5 accommodate the SI decimal tick labels;
-    the plotted axes remain equal in size and the font stays at nine points.
+    the plotted axes remain equal in size and the font stays at eight points.
     """
     assert index in range(4)
     fig = builder(evidence)
@@ -259,7 +260,7 @@ def export(fig, destination: Path, stem: str) -> dict:
     for suffix in ('svg', 'pdf', 'png'):
         fig.savefig(destination/f'{stem}.{suffix}', bbox_inches=None)
     report = {'width_pt': float(fig.get_figwidth()*72), 'height_pt': float(fig.get_figheight()*72),
-              'axes': len(fig.axes), 'text_size_pt': 9}
+              'axes': len(fig.axes), 'text_size_pt': TEXT_PT}
     plt.close(fig)
     return report
 
@@ -267,7 +268,9 @@ def export(fig, destination: Path, stem: str) -> dict:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output-root', type=Path, default=ROOT/'figures')
+    parser.add_argument('--font-dir', type=Path, help='Optional local Arial font directory')
     args = parser.parse_args()
+    register_fonts(args.font_dir)
     evidence = load_evidence()
     style()
     outputs = []
@@ -285,6 +288,7 @@ def main() -> None:
         manifest = {'number': number, 'layout': 'LaTeX subfloat; single-column 2x2',
                     'panel_labels': 'LaTeX-generated; absent from image exports', 'panels': reports,
                     'generator_sha256': sha(Path(__file__)),
+                    'typography_sha256': sha(Path(__file__).with_name('figure_typography.py')),
                     'palette_sha256': sha(Path(__file__).with_name('figure_palette.py')),
                     'evidence': evidence}
         (destination/'single_column_manifest.json').write_text(json.dumps(manifest, indent=2)+'\n')

@@ -1,0 +1,256 @@
+{
+  "scope": "Counterfactual filtering of archived planned samples; not executed measurements",
+  "actions": [
+    {
+      "action": 1,
+      "candidate": "cand_0005",
+      "planned_samples": 30,
+      "filtered_planned_samples": 0,
+      "minimum_planned_proxy_clearance": 23.005980261685345,
+      "interventions": []
+    },
+    {
+      "action": 2,
+      "candidate": "cand_0000",
+      "planned_samples": 30,
+      "filtered_planned_samples": 10,
+      "minimum_planned_proxy_clearance": 0.3575628916698861,
+      "interventions": [
+        {
+          "time": 147.0,
+          "reason": "closing_speed_braked;filtered_acceleration_limited",
+          "clearance": 4.778965173667582,
+          "primitive": "left_solar_array"
+        },
+        {
+          "time": 150.0,
+          "reason": "closing_speed_braked;filtered_acceleration_limited",
+          "clearance": 2.867283991205805,
+          "primitive": "left_solar_array"
+        },
+        {
+          "time": 153.0,
+          "reason": "closing_speed_braked;filtered_acceleration_limited",
+          "clearance": 1.1730991113491713,
+          "primitive": "left_solar_array"
+        },
+        {
+          "time": 156.0,
+          "reason": "closing_speed_braked",
+          "clearance": 0.3575628916698861,
+          "primitive": "left_solar_array"
+        },
+        {
+          "time": 159.0,
+          "reason": "inward_acceleration_projected",
+          "clearance": 0.7966228870942995,
+          "primitive": "left_solar_array"
+        },
+        {
+          "time": 162.0,
+          "reason": "inward_acceleration_projected",
+          "clearance": 1.8509090946102003,
+          "primitive": "left_solar_array"
+        },
+        {
+          "time": 165.0,
+          "reason": "inward_acceleration_projected",
+          "clearance": 2.940101187720402,
+          "primitive": "left_solar_array"
+        },
+        {
+          "time": 168.0,
+          "reason": "inward_acceleration_projected",
+          "clearance": 4.025005044704251,
+          "primitive": "left_solar_array"
+        },
+        {
+          "time": 171.0,
+          "reason": "inward_acceleration_projected",
+          "clearance": 4.963625543047924,
+          "primitive": "left_solar_array"
+        },
+        {
+          "time": 174.0,
+          "reason": "inward_acceleration_projected",
+          "clearance": 5.682470584273413,
+          "primitive": "left_solar_array"
+        }
+      ]
+    },
+    {
+      "action": 3,
+      "candidate": "cand_0070",
+      "planned_samples": 30,
+      "filtered_planned_samples": 2,
+      "minimum_planned_proxy_clearance": 5.8585890213103875,
+      "interventions": [
+        {
+          "time": 192.0,
+          "reason": "inward_acceleration_projected;closing_speed_braked",
+          "clearance": 5.930714510878922,
+          "primitive": "left_solar_array"
+        },
+        {
+          "time": 195.0,
+          "reason": "inward_acceleration_projected;closing_speed_braked",
+          "clearance": 5.8585890213103875,
+          "primitive": "left_solar_array"
+        }
+      ]
+    },
+    {
+      "action": 4,
+      "candidate": "cand_0068",
+      "planned_samples": 30,
+      "filtered_planned_samples": 3,
+      "minimum_planned_proxy_clearance": 3.572152678340762,
+      "interventions": [
+        {
+          "time": 285.0,
+          "reason": "inward_acceleration_projected;closing_speed_braked;filtered_acceleration_limited",
+          "clearance": 5.763174204498793,
+          "primitive": "s4_array_port"
+        },
+        {
+          "time": 288.0,
+          "reason": "inward_acceleration_projected;closing_speed_braked;filtered_acceleration_limited",
+          "clearance": 4.713091109110524,
+          "primitive": "s4_array_port"
+        },
+        {
+          "time": 291.0,
+          "reason": "inward_acceleration_projected;closing_speed_braked",
+          "clearance": 3.880667934058435,
+          "primitive": "s4_array_port"
+        }
+      ]
+    },
+    {
+      "action": 5,
+      "candidate": "cand_0021",
+      "planned_samples": 30,
+      "filtered_planned_samples": 0,
+      "minimum_planned_proxy_clearance": 31.558226252897875,
+      "interventions": []
+    },
+    {
+      "action": 6,
+      "candidate": "cand_0015",
+      "planned_samples": 30,
+      "filtered_planned_samples": 0,
+      "minimum_planned_proxy_clearance": 26.96623880937375,
+      "interventions": []
+    },
+    {
+      "action": 7,
+      "candidate": "cand_0052",
+      "planned_samples": 30,
+      "filtered_planned_samples": 0,
+      "minimum_planned_proxy_clearance": 6.723975309577041,
+      "interventions": []
+    },
+    {
+      "action": 8,
+      "candidate": "cand_0062",
+      "planned_samples": 30,
+      "filtered_planned_samples": 9,
+      "minimum_planned_proxy_clearance": 3.4826107047218295,
+      "interventions": [
+        {
+          "time": 690.0,
+          "reason": "closing_speed_braked;filtered_acceleration_limited",
+          "clearance": 5.200686593341213,
+          "primitive": "p6_array_starboard"
+        },
+        {
+          "time": 693.0,
+          "reason": "closing_speed_braked;filtered_acceleration_limited",
+          "clearance": 4.170421432285082,
+          "primitive": "p6_array_starboard"
+        },
+        {
+          "time": 696.0,
+          "reason": "closing_speed_braked",
+          "clearance": 3.591276723849089,
+          "primitive": "p6_array_starboard"
+        },
+        {
+          "time": 699.0,
+          "reason": "inward_acceleration_projected",
+          "clearance": 3.4826107047218295,
+          "primitive": "p6_array_starboard"
+        },
+        {
+          "time": 702.0,
+          "reason": "inward_acceleration_projected",
+          "clearance": 3.7559750528407196,
+          "primitive": "p6_array_starboard"
+        },
+        {
+          "time": 705.0,
+          "reason": "inward_acceleration_projected",
+          "clearance": 4.257803102380035,
+          "primitive": "p6_array_starboard"
+        },
+        {
+          "time": 708.0,
+          "reason": "inward_acceleration_projected",
+          "clearance": 4.840531340361075,
+          "primitive": "p6_array_starboard"
+        },
+        {
+          "time": 711.0,
+          "reason": "inward_acceleration_projected",
+          "clearance": 5.393679540002325,
+          "primitive": "p6_array_starboard"
+        },
+        {
+          "time": 714.0,
+          "reason": "inward_acceleration_projected",
+          "clearance": 5.833654718666321,
+          "primitive": "p6_array_starboard"
+        }
+      ]
+    },
+    {
+      "action": 9,
+      "candidate": "cand_0045",
+      "planned_samples": 30,
+      "filtered_planned_samples": 5,
+      "minimum_planned_proxy_clearance": 4.869107705033723,
+      "interventions": [
+        {
+          "time": 726.0,
+          "reason": "inward_acceleration_projected;closing_speed_braked",
+          "clearance": 5.966371104025936,
+          "primitive": "p6_array_starboard"
+        },
+        {
+          "time": 729.0,
+          "reason": "inward_acceleration_projected;closing_speed_braked",
+          "clearance": 5.692489623044305,
+          "primitive": "p6_array_starboard"
+        },
+        {
+          "time": 732.0,
+          "reason": "inward_acceleration_projected;closing_speed_braked",
+          "clearance": 5.395009075786233,
+          "primitive": "p6_array_starboard"
+        },
+        {
+          "time": 735.0,
+          "reason": "inward_acceleration_projected;closing_speed_braked",
+          "clearance": 5.165574265298007,
+          "primitive": "p6_array_starboard"
+        },
+        {
+          "time": 741.0,
+          "reason": "inward_acceleration_projected;closing_speed_braked",
+          "clearance": 4.869107705033723,
+          "primitive": "p6_array_port"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+scenario_id,method,action,candidate_id,time,record_basis,feasible,min_clearance,peak_input,max_speed,terminal_error
+required09_test_000_bg95,adaptive_rollout_adp,1,cand_0016,150.0,recomputed_transfer_not_execution,True,2.451415363219672,0.048074778454512024,1.1160630078274327,3.6255199397114215e-14
+required09_test_000_bg95,adaptive_rollout_adp,2,cand_0021,300.0,recomputed_transfer_not_execution,True,30.68302916702849,0.0229950397028658,0.5337063761663716,4.0194366942304644e-14
+required09_test_000_bg95,adaptive_rollout_adp,3,cand_0068,450.0,recomputed_transfer_not_execution,True,18.816814235933883,0.02828577403054568,0.6590095796130205,1.4541802722008283e-14
+required09_test_000_bg95,adaptive_rollout_adp,4,cand_0045,600.0,recomputed_transfer_not_execution,True,22.642455949416764,0.03914538418373136,0.9112955179701563,3.117493601007525e-14
+required09_test_000_bg95,adaptive_rollout_adp,5,cand_0063_safe,750.0,recomputed_transfer_not_execution,True,8.493504307798746,0.033076461111137594,0.7692741338890009,3.28025345777039e-14
+required09_test_000_bg95,adaptive_rollout_adp,6,cand_0062,900.0,recomputed_transfer_not_execution,True,4.463826826083071,0.01139979783328793,0.2639119263242823,1.918761631962013e-14
+required09_test_000_bg95,adaptive_rollout_adp,7,cand_0055,1050.0,recomputed_transfer_not_execution,True,3.952468722936641,0.03622126596410656,0.8388606061100137,4.0351070721557915e-14
+required09_test_000_bg95,adaptive_rollout_adp,8,cand_0052,1200.0,recomputed_transfer_not_execution,True,28.020696602167636,0.010987791892782718,0.256033476117548,1.0341177711654675e-14
+required09_test_000_bg95,adaptive_rollout_adp,9,cand_0066,1350.0,recomputed_transfer_not_execution,True,22.160633993741133,0.016439965939907673,0.38191613642747035,1.9214237003936263e-14
+required09_test_000_bg95,adaptive_rollout_adp,10,cand_0005,1500.0,recomputed_transfer_not_execution,True,5.733682925600197,0.05858419313244917,1.360276565054799,5.129951247153617e-14
+required09_test_000_bg95,adaptive_rollout_adp,11,cand_0000,1650.0,recomputed_transfer_not_execution,True,9.50629574148618,0.038487968192774204,0.8932278504491379,3.036739037525883e-14
+required09_test_000_bg95,adaptive_rollout_adp,12,cand_0013_safe,1800.0,recomputed_transfer_not_execution,True,2.38511730288576,0.04175784094764469,0.9681560640093891,2.252302967772513e-14

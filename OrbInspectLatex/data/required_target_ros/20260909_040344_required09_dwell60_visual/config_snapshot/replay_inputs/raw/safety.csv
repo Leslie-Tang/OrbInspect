@@ -1,0 +1,10 @@
+scenario_id,method,action,candidate_id,time,record_basis,feasible,min_clearance,peak_input,max_speed,terminal_error
+required09_test_000,adaptive_rollout_adp,1,cand_0005,150.0,planned_graph_and_transfer_not_execution,True,24.41543000628948,0.011044769914094579,0.25587674133890953,1.5987211554602254e-14
+required09_test_000,adaptive_rollout_adp,2,cand_0000,300.0,planned_graph_and_transfer_not_execution,True,9.506295741486179,0.0384879681927742,0.8932278504491378,5.312019821099653e-14
+required09_test_000,adaptive_rollout_adp,3,cand_0070,450.0,planned_graph_and_transfer_not_execution,True,9.780632274991182,0.024868898992754324,0.5752922308851766,1.6280579355608324e-14
+required09_test_000,adaptive_rollout_adp,4,cand_0068,600.0,planned_graph_and_transfer_not_execution,True,2.807539873330642,0.04253615042051258,0.987270761132043,1.854570987253821e-14
+required09_test_000,adaptive_rollout_adp,5,cand_0021,750.0,planned_graph_and_transfer_not_execution,True,19.02362299384877,0.028283174189474024,0.6590095590019939,2.929642751054232e-14
+required09_test_000,adaptive_rollout_adp,6,cand_0015,900.0,planned_graph_and_transfer_not_execution,True,32.41839763810407,0.013330481646881338,0.3081643110429251,2.6586074758753436e-14
+required09_test_000,adaptive_rollout_adp,7,cand_0052,1050.0,planned_graph_and_transfer_not_execution,True,20.31613444698578,0.05920129140888114,1.3796209043031817,4.109265228033051e-14
+required09_test_000,adaptive_rollout_adp,8,cand_0062,1200.0,planned_graph_and_transfer_not_execution,True,3.1132871756951648,0.03450996621743417,0.7989804415851002,2.3981845294153116e-14
+required09_test_000,adaptive_rollout_adp,9,cand_0045,1350.0,planned_graph_and_transfer_not_execution,True,4.388644165750648,0.04381115314063969,1.0186193454830164,3.8263897345803626e-14

@@ -1,0 +1,46 @@
+{
+  "passed": true,
+  "camera_and_execution_event_streams_identical": true,
+  "selection": "Nearest MCAP wall receipt within 0.2 s; no endpoint clamping",
+  "image_message_count": 23722,
+  "clock_message_count": 78382,
+  "camera_receipt_max_gap_s": 0.19346189498901367,
+  "camera_receipt_median_gap_s": 0.06180882453918457,
+  "camera_sim_stamp_max_gap_s": 0.08000000000015461,
+  "camera_stamp_nonincreasing_count": 0,
+  "receipt_gap_over_0_2_s_count": 0,
+  "missing_nominal_sensor_slots_estimate": 0,
+  "pose_gates": {
+    "scene_stamp_tolerance_s": 0.041,
+    "position_tolerance_m": 0.1,
+    "angle_tolerance_deg": 0.5
+  },
+  "stream_timing_diagnostics": {
+    "nonincreasing_receipt_indices": [],
+    "nonincreasing_sensor_stamp_indices": [],
+    "backward_sensor_stamp_indices": []
+  },
+  "scene_pose_stream_diagnostics": {
+    "total_records": 74962,
+    "valid_chaser_records": 74959,
+    "records_without_chaser": [
+      {
+        "record_index": 0,
+        "simulator_stamp_s": 0.04,
+        "reason": "No named chaser in recorded scene"
+      },
+      {
+        "record_index": 1,
+        "simulator_stamp_s": 0.060000000000000005,
+        "reason": "No named chaser in recorded scene"
+      },
+      {
+        "record_index": 2,
+        "simulator_stamp_s": 0.08,
+        "reason": "No named chaser in recorded scene"
+      }
+    ],
+    "handling": "Raw records retained; no pose synthesized. Each selected frame must still pass the unchanged bracketing and pose gates."
+  },
+  "limitations": "Receipt matching includes transport delay. Named scene poses verify alignment, not image-derived target identification or fresh visibility tests."
+}

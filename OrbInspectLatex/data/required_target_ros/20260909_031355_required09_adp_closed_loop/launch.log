@@ -1,0 +1,51 @@
+[INFO] [launch]: All log files can be found below /home/rugang/.ros/log/2026-09-09-11-13-55-679572-rugang-ThinkBook-14-G5-APO-109002
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [planned_trajectory_replay_node-1]: process started with pid [109014]
+[INFO] [verification_evaluator_node-2]: process started with pid [109015]
+[INFO] [dynamics_node-3]: process started with pid [109016]
+[INFO] [controller_node-4]: process started with pid [109017]
+[INFO] [safety_filter_node-5]: process started with pid [109018]
+[INFO] [logger_node-6]: process started with pid [109019]
+[INFO] [ros2-7]: process started with pid [109020]
+[ros2-7] stdin is not a terminal device. Keyboard handling disabled.[INFO] [1788923636.163605361] [rosbag2_recorder]: Press SPACE for pausing/resuming
+[ros2-7] [INFO] [1788923636.163608628] [rosbag2_recorder]: Event publisher thread: Started
+[ros2-7] [INFO] [1788923636.168445187] [rosbag2_recorder]: Starting recording to '/home/rugang/robotics/projects/OrbInspect/data/results/20260909_031355_required09_adp_closed_loop/rosbag/orbinspect_run'
+[ros2-7] [INFO] [1788923636.170833549] [rosbag2_recorder]: Listening for topics...
+[ros2-7] [INFO] [1788923636.170862264] [rosbag2_recorder]: Recording...
+[ros2-7] [INFO] [1788923636.170877774] [rosbag2_recorder]: Topics discovery started.
+[ros2-7] [INFO] [1788923636.214611518] [rosbag2_recorder]: Subscribed to topic '/chaser/odom'
+[ros2-7] [INFO] [1788923636.238919293] [rosbag2_recorder]: Subscribed to topic '/chaser/reference_state'
+[ros2-7] [INFO] [1788923636.240678150] [rosbag2_recorder]: Subscribed to topic '/chaser/attitude_reference'
+[ros2-7] [INFO] [1788923636.241449557] [rosbag2_recorder]: Subscribed to topic '/inspection/executed_path'
+[ros2-7] [INFO] [1788923636.241879991] [rosbag2_recorder]: Subscribed to topic '/inspection/planned_path'
+[ros2-7] [INFO] [1788923636.242950871] [rosbag2_recorder]: Subscribed to topic '/verification/reference_status'
+[ros2-7] [INFO] [1788923636.247994656] [rosbag2_recorder]: Subscribed to topic '/chaser/control_command'
+[ros2-7] [INFO] [1788923636.261446198] [rosbag2_recorder]: Subscribed to topic '/chaser/safe_control_command'
+[ros2-7] [INFO] [1788923636.262517629] [rosbag2_recorder]: Subscribed to topic '/chaser/safety_status'
+[ros2-7] [INFO] [1788923636.264451061] [rosbag2_recorder]: Subscribed to topic '/inspection/coverage_map'
+[ros2-7] [INFO] [1788923636.264994231] [rosbag2_recorder]: Subscribed to topic '/mission/event'
+[ros2-7] [INFO] [1788923636.265370080] [rosbag2_recorder]: Subscribed to topic '/verification/status'
+[planned_trajectory_replay_node-1] [INFO] [1788923636.267951192] [planned_trajectory_replay_node]: closed_loop validation using 270 trajectory samples and 9 viewpoints from /home/rugang/robotics/projects/OrbInspect/data/results/20260909_031013_required09_replay
+[logger_node-6] [INFO] [1788923636.361941627] [csv_logger_node]: logging results to /home/rugang/robotics/projects/OrbInspect/data/results/20260909_031355_required09_adp_closed_loop
+[INFO] [ros2-7]: sending signal 'SIGINT' to process[ros2-7]
+[INFO] [logger_node-6]: sending signal 'SIGINT' to process[logger_node-6]
+[INFO] [safety_filter_node-5]: sending signal 'SIGINT' to process[safety_filter_node-5]
+[INFO] [controller_node-4]: sending signal 'SIGINT' to process[controller_node-4]
+[INFO] [dynamics_node-3]: sending signal 'SIGINT' to process[dynamics_node-3]
+[INFO] [verification_evaluator_node-2]: sending signal 'SIGINT' to process[verification_evaluator_node-2]
+[INFO] [planned_trajectory_replay_node-1]: sending signal 'SIGINT' to process[planned_trajectory_replay_node-1]
+[ros2-7] [INFO] [1788924455.906156338] [rosbag2_recorder]: Topics discovery stopped.
+[ros2-7] [INFO] [1788924455.906400031] [rosbag2_recorder]: Pausing recording.
+[ros2-7] [INFO] [1788924455.906428515] [rosbag2_cpp]: Writing remaining messages from cache to the bag. It may take a while
+[verification_evaluator_node-2] /home/rugang/robotics/projects/OrbInspect/build/orbinspect_guidance/orbinspect_guidance/verification_evaluator_node.py:287: RuntimeWarning: coroutine 'Executor._make_handler.<locals>.handler' was never awaited
+[verification_evaluator_node-2]   pass
+[verification_evaluator_node-2] RuntimeWarning: Enable tracemalloc to get the object allocation traceback
+[ros2-7] [INFO] [1788924455.915844216] [rosbag2_recorder]: Recording stopped
+[ros2-7] [INFO] [1788924455.916731569] [rosbag2_recorder]: Event publisher thread: Exited
+[INFO] [ros2-7]: process has finished cleanly [pid 109020]
+[INFO] [verification_evaluator_node-2]: process has finished cleanly [pid 109015]
+[INFO] [safety_filter_node-5]: process has finished cleanly [pid 109018]
+[INFO] [dynamics_node-3]: process has finished cleanly [pid 109016]
+[INFO] [controller_node-4]: process has finished cleanly [pid 109017]
+[INFO] [planned_trajectory_replay_node-1]: process has finished cleanly [pid 109014]
+[INFO] [logger_node-6]: process has finished cleanly [pid 109019]

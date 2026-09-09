@@ -1,0 +1,12 @@
+{
+  "description": "Approved 170 by 44 mm nine-view Figure 7 before supplemental twelve-view execution update.",
+  "sha256": {
+    "sections/ros_verification_results.tex": "0694f1b27c4fbc9a3cc9782fc8a56e159b9cef05e595cd44b2fbd860fd24dc1a",
+    "figures/manifest.json": "33116beb9559cb2af1fef9c9a07b9a6c6f9dcf59b635ca9e927b9fa592ef0d4e",
+    "scripts/generate_ros_camera_figure.py": "b19004b9ec6b9d6660a80d87be029823df929b6caebe8b5bf0261be1525f2356",
+    "figures/fig07_ros_camera_views/ros_key_camera_views_trajectory.svg": "92a3eada71a87d10ddb72e9fae6a99d7209cb75ce509d026daf087c6a5998166",
+    "figures/fig07_ros_camera_views/ros_key_camera_views_trajectory.pdf": "35dc859fc28a46c7c588b149bfdac44162985b39f5408a754e4e6592e2c07c13",
+    "figures/fig07_ros_camera_views/compact_layout_manifest.json": "055b80b5f176e52c7b7bf78a97fef0f48c548298b7c9c8a4af5123e7eecc6271",
+    "figures/fig07_ros_camera_views/ros_key_camera_views_trajectory.png": "3401821ea461a56a4fe7c7fa7ce2d07585e60df9644642701b36514b9f187fce"
+  }
+}

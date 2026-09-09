@@ -1,0 +1,46 @@
+{
+  "status": "complete",
+  "input_bundle": "../20260909_092700_hybrid12_refined_inputs_dwell60",
+  "execution_bundle": "../20260909_113140_hybrid12_rviz_video_execution",
+  "scenario_id": "required09_test_000_bg95",
+  "method": "adaptive_rollout_adp",
+  "time_scale": 1.0,
+  "mission_duration_s": 1800.036726796,
+  "accepted_observations": 12,
+  "required_targets_covered": 9,
+  "required_target_count": 9,
+  "weighted_coverage": 0.9585771560419855,
+  "credited_targets": 39,
+  "target_universe": 41,
+  "executed_delta_v_until_terminal_mps": 20.47500735451556,
+  "minimum_body_clearance_m": 3.3798850637302156,
+  "execution_audit_passed": true,
+  "mesh_audit_passed": true,
+  "reference_stream": {
+    "complete": true,
+    "event": "reference_stream_status",
+    "maximum_allowed_reference_gap_s": 0.075,
+    "maximum_reference_gap_s": 0.053039609999999016,
+    "method": "adaptive_rollout_adp",
+    "minimum_expected_publish_count": 35640,
+    "nominal_gap_passed": true,
+    "passed": true,
+    "reference_publish_count": 36192,
+    "scenario_id": "required09_test_000_bg95"
+  },
+  "video_quality_audit": "raw/video_quality_audit.json",
+  "videos": [
+    {
+      "path": "videos/OrbInspect_12_observations_RViz_10x_preview.mp4",
+      "bytes": 29135855,
+      "sha256": "8b9a4df9adf6802b9391832e91194fdd2b347826b14d526861a31dcfb8da4d1c"
+    },
+    {
+      "path": "videos/OrbInspect_12_observations_RViz_realtime.mp4",
+      "bytes": 111017886,
+      "sha256": "129ffa710cf4dd53edccb1e3b066a8804a3d760571c769873b6c35aa5aac2622"
+    }
+  ],
+  "manuscript_figures_changed": false,
+  "camera_note": "One live spacecraft camera shown sequentially through all twelve observations, beside the global RViz scene. Original event PNGs retained; no full raw image bag for this video run."
+}

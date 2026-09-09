@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "pdf": "output/pdf/OrbInspect_IEEE_TAES_ROS_12_observations_20260909.pdf",
+  "pdf_sha256": "556d3a2550cd4a6ad361255f1de59c2410ae7e175dbf73059b594d10285454b8",
+  "pages": 13,
+  "fig7_page": 12,
+  "first_ten_pages_pixel_identical_to_approved_nine_view_manuscript": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "root_build_artifacts_frozen_offline_and_bibliography_unchanged": true,
+  "latex_overfull_undefined_or_float_size_errors": [],
+  "figure_minimum_font_pt": 7,
+  "figure_mm": [
+    170,
+    47
+  ],
+  "observations_accepted": 12,
+  "required_targets_accepted": 9,
+  "weighted_background_coverage": 0.9585771560419855,
+  "body_margin_above_required_m": 3.379874827639833,
+  "target_mesh_and_camera_audit_gates_passed": true,
+  "nominal_reference_gap_diagnostic_passed": false,
+  "nominal_reference_gap_diagnostic_disclosed": true,
+  "publisher_maximum_reference_gap_s": 0.248723052,
+  "recorded_reference_header_maximum_gap_s": 0.05131387710571289,
+  "tool_tests": "7 passed",
+  "figure_pixels_and_coordinates_preserved_in_source_arrays": true,
+  "camera_layout": "two chronological rows of six; odd/even markers split across projections",
+  "visual_review": "All 12 source camera panels and complete Figure 7 inspected; revised pages 11\u201313 inspected; conclusion kept together on page 12 and references start on page 13.",
+  "earlier_full_colcon_test_note": "The initial baseline full colcon test retained two pre-existing guidance lint failures; the ROS build passed all 12 packages. No runtime source was modified by this follow-up.",
+  "unchanged_protected_figure_files": 67
+}

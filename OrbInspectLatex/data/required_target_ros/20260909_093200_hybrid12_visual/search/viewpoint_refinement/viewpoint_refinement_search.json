@@ -1,0 +1,2873 @@
+{
+  "scope": "26 cube directions, radii 5.5/8/11 m, original visible targets as possible aim anchors; body clearance >= caution margin +0.3 m; original geometry and camera criteria unchanged",
+  "inventory": [
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0000",
+      "position": [
+        10.342693372056218,
+        14.746721145418146,
+        -64.77160186237818
+      ],
+      "source_target_id": "mesh_00045",
+      "displacement_m": 5.5,
+      "body_clearance": 8.494046115820394,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00068",
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0001",
+      "position": [
+        10.342693372056218,
+        14.746721145418146,
+        -64.77160186237818
+      ],
+      "source_target_id": "mesh_00070",
+      "displacement_m": 5.5,
+      "body_clearance": 8.494046115820394,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00068",
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0002",
+      "position": [
+        7.1672668915132745,
+        11.571294664875204,
+        -69.59617538183524
+      ],
+      "source_target_id": "mesh_00045",
+      "displacement_m": 8.0,
+      "body_clearance": 9.67908668697406,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0003",
+      "position": [
+        7.1672668915132745,
+        11.571294664875204,
+        -69.59617538183524
+      ],
+      "source_target_id": "mesh_00070",
+      "displacement_m": 8.0,
+      "body_clearance": 9.67908668697406,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0004",
+      "position": [
+        7.1672668915132745,
+        17.228148914367583,
+        -67.25302963132762
+      ],
+      "source_target_id": "mesh_00045",
+      "displacement_m": 8.0,
+      "body_clearance": 9.021466152619752,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00068",
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0005",
+      "position": [
+        7.1672668915132745,
+        17.228148914367583,
+        -67.25302963132762
+      ],
+      "source_target_id": "mesh_00070",
+      "displacement_m": 8.0,
+      "body_clearance": 9.021466152619752,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00068",
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0006",
+      "position": [
+        11.786069045030281,
+        6.952492511358197,
+        -66.21497753535225
+      ],
+      "source_target_id": "mesh_00045",
+      "displacement_m": 8.0,
+      "body_clearance": 8.324212209778002,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00068",
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0007",
+      "position": [
+        11.786069045030281,
+        6.952492511358197,
+        -66.21497753535225
+      ],
+      "source_target_id": "mesh_00070",
+      "displacement_m": 8.0,
+      "body_clearance": 8.324212209778002,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00068",
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0008",
+      "position": [
+        12.824121141005655,
+        11.571294664875204,
+        -67.25302963132762
+      ],
+      "source_target_id": "mesh_00045",
+      "displacement_m": 8.0,
+      "body_clearance": 10.462911124516463,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00068",
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0009",
+      "position": [
+        12.824121141005655,
+        11.571294664875204,
+        -67.25302963132762
+      ],
+      "source_target_id": "mesh_00070",
+      "displacement_m": 8.0,
+      "body_clearance": 10.462911124516463,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00068",
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0010",
+      "position": [
+        15.167266891513275,
+        11.571294664875204,
+        -61.59617538183524
+      ],
+      "source_target_id": "mesh_00045",
+      "displacement_m": 8.0,
+      "body_clearance": 9.855297196542368,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00045",
+        "mesh_00068",
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": true
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0011",
+      "position": [
+        15.167266891513275,
+        11.571294664875204,
+        -61.59617538183524
+      ],
+      "source_target_id": "mesh_00070",
+      "displacement_m": 8.0,
+      "body_clearance": 9.855297196542368,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00045",
+        "mesh_00068",
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": true
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0012",
+      "position": [
+        11.786069045030281,
+        16.19009681839221,
+        -66.21497753535225
+      ],
+      "source_target_id": "mesh_00045",
+      "displacement_m": 8.0,
+      "body_clearance": 10.934663914723338,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00068",
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0013",
+      "position": [
+        11.786069045030281,
+        16.19009681839221,
+        -66.21497753535225
+      ],
+      "source_target_id": "mesh_00070",
+      "displacement_m": 8.0,
+      "body_clearance": 10.934663914723338,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00068",
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0014",
+      "position": [
+        12.824121141005655,
+        17.228148914367583,
+        -61.59617538183524
+      ],
+      "source_target_id": "mesh_00045",
+      "displacement_m": 8.0,
+      "body_clearance": 10.538640054021934,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00068",
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0015",
+      "position": [
+        12.824121141005655,
+        17.228148914367583,
+        -61.59617538183524
+      ],
+      "source_target_id": "mesh_00070",
+      "displacement_m": 8.0,
+      "body_clearance": 10.538640054021934,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00068",
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0016",
+      "position": [
+        11.786069045030281,
+        16.19009681839221,
+        -56.97737322831823
+      ],
+      "source_target_id": "mesh_00045",
+      "displacement_m": 8.0,
+      "body_clearance": 8.961290718403864,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00065",
+        "mesh_00068",
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0017",
+      "position": [
+        11.786069045030281,
+        16.19009681839221,
+        -56.97737322831823
+      ],
+      "source_target_id": "mesh_00070",
+      "displacement_m": 8.0,
+      "body_clearance": 8.961290718403864,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00065",
+        "mesh_00068",
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0018",
+      "position": [
+        -0.6109077015387472,
+        11.571294664875204,
+        -69.37434997488725
+      ],
+      "source_target_id": "mesh_00045",
+      "displacement_m": 11.0,
+      "body_clearance": 9.035585177135617,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0019",
+      "position": [
+        -0.6109077015387472,
+        11.571294664875204,
+        -69.37434997488725
+      ],
+      "source_target_id": "mesh_00070",
+      "displacement_m": 11.0,
+      "body_clearance": 9.035585177135617,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0020",
+      "position": [
+        7.1672668915132745,
+        3.793120071823182,
+        -69.37434997488725
+      ],
+      "source_target_id": "mesh_00045",
+      "displacement_m": 11.0,
+      "body_clearance": 8.92573220461861,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0021",
+      "position": [
+        7.1672668915132745,
+        3.793120071823182,
+        -69.37434997488725
+      ],
+      "source_target_id": "mesh_00070",
+      "displacement_m": 11.0,
+      "body_clearance": 8.92573220461861,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00070",
+        "mesh_00079"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0022",
+      "position": [
+        7.1672668915132745,
+        11.571294664875204,
+        -72.59617538183524
+      ],
+      "source_target_id": "mesh_00045",
+      "displacement_m": 11.0,
+      "body_clearance": 12.548281390655816,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00068",
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0023",
+      "position": [
+        7.1672668915132745,
+        11.571294664875204,
+        -72.59617538183524
+      ],
+      "source_target_id": "mesh_00070",
+      "displacement_m": 11.0,
+      "body_clearance": 12.548281390655816,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00068",
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0024",
+      "position": [
+        7.1672668915132745,
+        19.349469257927225,
+        -69.37434997488725
+      ],
+      "source_target_id": "mesh_00045",
+      "displacement_m": 11.0,
+      "body_clearance": 11.342704930360187,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0025",
+      "position": [
+        7.1672668915132745,
+        19.349469257927225,
+        -69.37434997488725
+      ],
+      "source_target_id": "mesh_00070",
+      "displacement_m": 11.0,
+      "body_clearance": 11.342704930360187,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0026",
+      "position": [
+        7.1672668915132745,
+        22.571294664875204,
+        -61.59617538183524
+      ],
+      "source_target_id": "mesh_00045",
+      "displacement_m": 11.0,
+      "body_clearance": 8.350105012614577,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00045",
+        "mesh_00068",
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": true
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0027",
+      "position": [
+        7.1672668915132745,
+        22.571294664875204,
+        -61.59617538183524
+      ],
+      "source_target_id": "mesh_00070",
+      "displacement_m": 11.0,
+      "body_clearance": 8.350105012614577,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00045",
+        "mesh_00068",
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": true
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0028",
+      "position": [
+        13.51811985259916,
+        5.220441703789319,
+        -67.94702834292113
+      ],
+      "source_target_id": "mesh_00045",
+      "displacement_m": 11.0,
+      "body_clearance": 10.166467914481123,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00068",
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0029",
+      "position": [
+        13.51811985259916,
+        5.220441703789319,
+        -67.94702834292113
+      ],
+      "source_target_id": "mesh_00070",
+      "displacement_m": 11.0,
+      "body_clearance": 10.166467914481123,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00068",
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0030",
+      "position": [
+        14.945441484565297,
+        11.571294664875204,
+        -69.37434997488725
+      ],
+      "source_target_id": "mesh_00045",
+      "displacement_m": 11.0,
+      "body_clearance": 13.315047158095622,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00068",
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0031",
+      "position": [
+        14.945441484565297,
+        11.571294664875204,
+        -69.37434997488725
+      ],
+      "source_target_id": "mesh_00070",
+      "displacement_m": 11.0,
+      "body_clearance": 13.315047158095622,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00068",
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0032",
+      "position": [
+        18.167266891513275,
+        11.571294664875204,
+        -61.59617538183524
+      ],
+      "source_target_id": "mesh_00045",
+      "displacement_m": 11.0,
+      "body_clearance": 12.65074605286248,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00060",
+        "mesh_00065",
+        "mesh_00068",
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0033",
+      "position": [
+        18.167266891513275,
+        11.571294664875204,
+        -61.59617538183524
+      ],
+      "source_target_id": "mesh_00070",
+      "displacement_m": 11.0,
+      "body_clearance": 12.65074605286248,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00065",
+        "mesh_00068",
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0034",
+      "position": [
+        14.945441484565297,
+        11.571294664875204,
+        -53.818000788783216
+      ],
+      "source_target_id": "mesh_00045",
+      "displacement_m": 11.0,
+      "body_clearance": 9.480039671920698,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00045",
+        "mesh_00065",
+        "mesh_00068",
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": true
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0035",
+      "position": [
+        14.945441484565297,
+        11.571294664875204,
+        -53.818000788783216
+      ],
+      "source_target_id": "mesh_00070",
+      "displacement_m": 11.0,
+      "body_clearance": 9.480039671920698,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00045",
+        "mesh_00065",
+        "mesh_00068",
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": true
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0036",
+      "position": [
+        13.51811985259916,
+        17.922147625961088,
+        -67.94702834292113
+      ],
+      "source_target_id": "mesh_00045",
+      "displacement_m": 11.0,
+      "body_clearance": 13.864689894386947,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00068",
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0037",
+      "position": [
+        13.51811985259916,
+        17.922147625961088,
+        -67.94702834292113
+      ],
+      "source_target_id": "mesh_00070",
+      "displacement_m": 11.0,
+      "body_clearance": 13.864689894386947,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00068",
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0038",
+      "position": [
+        14.945441484565297,
+        19.349469257927225,
+        -61.59617538183524
+      ],
+      "source_target_id": "mesh_00045",
+      "displacement_m": 11.0,
+      "body_clearance": 13.403946578633985,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00065",
+        "mesh_00068",
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0039",
+      "position": [
+        14.945441484565297,
+        19.349469257927225,
+        -61.59617538183524
+      ],
+      "source_target_id": "mesh_00070",
+      "displacement_m": 11.0,
+      "body_clearance": 13.403946578633985,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00065",
+        "mesh_00068",
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0040",
+      "position": [
+        13.51811985259916,
+        17.922147625961088,
+        -55.24532242074935
+      ],
+      "source_target_id": "mesh_00045",
+      "displacement_m": 11.0,
+      "body_clearance": 11.327316122187543,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00065",
+        "mesh_00068",
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0063",
+      "candidate_id": "cand_0063_near_0041",
+      "position": [
+        13.51811985259916,
+        17.922147625961088,
+        -55.24532242074935
+      ],
+      "source_target_id": "mesh_00070",
+      "displacement_m": 11.0,
+      "body_clearance": 11.327316122187543,
+      "original_visible": [
+        "mesh_00045",
+        "mesh_00070"
+      ],
+      "visible_target_ids": [
+        "mesh_00065",
+        "mesh_00068",
+        "mesh_00070"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0042",
+      "position": [
+        -5.452556467145303,
+        1.994427766623458,
+        58.14943848153044
+      ],
+      "source_target_id": "mesh_00010",
+      "displacement_m": 5.5,
+      "body_clearance": 8.511479646285022,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0043",
+      "position": [
+        -5.452556467145303,
+        1.994427766623458,
+        58.14943848153044
+      ],
+      "source_target_id": "mesh_00011",
+      "displacement_m": 5.5,
+      "body_clearance": 8.511479646285022,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00036"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0044",
+      "position": [
+        -5.452556467145303,
+        1.994427766623458,
+        58.14943848153044
+      ],
+      "source_target_id": "mesh_00012",
+      "displacement_m": 5.5,
+      "body_clearance": 8.511479646285022,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00036"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0045",
+      "position": [
+        -5.452556467145303,
+        1.994427766623458,
+        58.14943848153044
+      ],
+      "source_target_id": "mesh_00031",
+      "displacement_m": 5.5,
+      "body_clearance": 8.511479646285022,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0046",
+      "position": [
+        -5.452556467145303,
+        1.994427766623458,
+        58.14943848153044
+      ],
+      "source_target_id": "mesh_00036",
+      "displacement_m": 5.5,
+      "body_clearance": 8.511479646285022,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0047",
+      "position": [
+        -6.1822713241363,
+        1.264712909632462,
+        53.53063632801343
+      ],
+      "source_target_id": "mesh_00010",
+      "displacement_m": 8.0,
+      "body_clearance": 9.508288678453333,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00010"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0048",
+      "position": [
+        -6.1822713241363,
+        1.264712909632462,
+        53.53063632801343
+      ],
+      "source_target_id": "mesh_00011",
+      "displacement_m": 8.0,
+      "body_clearance": 9.508288678453333,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00036"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0049",
+      "position": [
+        -6.1822713241363,
+        1.264712909632462,
+        53.53063632801343
+      ],
+      "source_target_id": "mesh_00012",
+      "displacement_m": 8.0,
+      "body_clearance": 9.508288678453333,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00036"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0050",
+      "position": [
+        -6.1822713241363,
+        1.264712909632462,
+        53.53063632801343
+      ],
+      "source_target_id": "mesh_00031",
+      "displacement_m": 8.0,
+      "body_clearance": 9.508288678453333,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00031"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0051",
+      "position": [
+        -6.1822713241363,
+        1.264712909632462,
+        53.53063632801343
+      ],
+      "source_target_id": "mesh_00036",
+      "displacement_m": 8.0,
+      "body_clearance": 9.508288678453333,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00012",
+        "mesh_00036"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0052",
+      "position": [
+        -7.220323420111672,
+        0.22666081365708912,
+        58.14943848153044
+      ],
+      "source_target_id": "mesh_00010",
+      "displacement_m": 8.0,
+      "body_clearance": 10.926294212006917,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0053",
+      "position": [
+        -7.220323420111672,
+        0.22666081365708912,
+        58.14943848153044
+      ],
+      "source_target_id": "mesh_00011",
+      "displacement_m": 8.0,
+      "body_clearance": 10.926294212006917,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0054",
+      "position": [
+        -7.220323420111672,
+        0.22666081365708912,
+        58.14943848153044
+      ],
+      "source_target_id": "mesh_00012",
+      "displacement_m": 8.0,
+      "body_clearance": 10.926294212006917,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0055",
+      "position": [
+        -7.220323420111672,
+        0.22666081365708912,
+        58.14943848153044
+      ],
+      "source_target_id": "mesh_00031",
+      "displacement_m": 8.0,
+      "body_clearance": 10.926294212006917,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00031"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0056",
+      "position": [
+        -7.220323420111672,
+        0.22666081365708912,
+        58.14943848153044
+      ],
+      "source_target_id": "mesh_00036",
+      "displacement_m": 8.0,
+      "body_clearance": 10.926294212006917,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00012",
+        "mesh_00031"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0057",
+      "position": [
+        -6.1822713241363,
+        1.264712909632462,
+        62.76824063504745
+      ],
+      "source_target_id": "mesh_00010",
+      "displacement_m": 8.0,
+      "body_clearance": 9.954675243504223,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0058",
+      "position": [
+        -6.1822713241363,
+        1.264712909632462,
+        62.76824063504745
+      ],
+      "source_target_id": "mesh_00011",
+      "displacement_m": 8.0,
+      "body_clearance": 9.954675243504223,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00036"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0059",
+      "position": [
+        -6.1822713241363,
+        1.264712909632462,
+        62.76824063504745
+      ],
+      "source_target_id": "mesh_00012",
+      "displacement_m": 8.0,
+      "body_clearance": 9.954675243504223,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00036"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0060",
+      "position": [
+        -6.1822713241363,
+        1.264712909632462,
+        62.76824063504745
+      ],
+      "source_target_id": "mesh_00031",
+      "displacement_m": 8.0,
+      "body_clearance": 9.954675243504223,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00036"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0061",
+      "position": [
+        -6.1822713241363,
+        1.264712909632462,
+        62.76824063504745
+      ],
+      "source_target_id": "mesh_00036",
+      "displacement_m": 8.0,
+      "body_clearance": 9.954675243504223,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00036"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0062",
+      "position": [
+        -9.563469170619292,
+        5.883515063149469,
+        58.14943848153044
+      ],
+      "source_target_id": "mesh_00010",
+      "displacement_m": 8.0,
+      "body_clearance": 10.127090831968854,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0063",
+      "position": [
+        -9.563469170619292,
+        5.883515063149469,
+        58.14943848153044
+      ],
+      "source_target_id": "mesh_00011",
+      "displacement_m": 8.0,
+      "body_clearance": 10.127090831968854,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00036"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0064",
+      "position": [
+        -9.563469170619292,
+        5.883515063149469,
+        58.14943848153044
+      ],
+      "source_target_id": "mesh_00012",
+      "displacement_m": 8.0,
+      "body_clearance": 10.127090831968854,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00036"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0065",
+      "position": [
+        -9.563469170619292,
+        5.883515063149469,
+        58.14943848153044
+      ],
+      "source_target_id": "mesh_00031",
+      "displacement_m": 8.0,
+      "body_clearance": 10.127090831968854,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00031"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0066",
+      "position": [
+        -9.563469170619292,
+        5.883515063149469,
+        58.14943848153044
+      ],
+      "source_target_id": "mesh_00036",
+      "displacement_m": 8.0,
+      "body_clearance": 10.127090831968854,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00036"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0067",
+      "position": [
+        -7.220323420111672,
+        5.883515063149469,
+        63.80629273102282
+      ],
+      "source_target_id": "mesh_00010",
+      "displacement_m": 8.0,
+      "body_clearance": 8.99886640780708,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0068",
+      "position": [
+        -7.220323420111672,
+        5.883515063149469,
+        63.80629273102282
+      ],
+      "source_target_id": "mesh_00011",
+      "displacement_m": 8.0,
+      "body_clearance": 8.99886640780708,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0069",
+      "position": [
+        -7.220323420111672,
+        5.883515063149469,
+        63.80629273102282
+      ],
+      "source_target_id": "mesh_00012",
+      "displacement_m": 8.0,
+      "body_clearance": 8.99886640780708,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0070",
+      "position": [
+        -7.220323420111672,
+        5.883515063149469,
+        63.80629273102282
+      ],
+      "source_target_id": "mesh_00031",
+      "displacement_m": 8.0,
+      "body_clearance": 8.99886640780708,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00031"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0071",
+      "position": [
+        -7.220323420111672,
+        5.883515063149469,
+        63.80629273102282
+      ],
+      "source_target_id": "mesh_00036",
+      "displacement_m": 8.0,
+      "body_clearance": 8.99886640780708,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0072",
+      "position": [
+        -7.914322131705177,
+        -0.46733789793641556,
+        51.798585520444554
+      ],
+      "source_target_id": "mesh_00010",
+      "displacement_m": 11.0,
+      "body_clearance": 11.874314082237012,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00010"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0073",
+      "position": [
+        -7.914322131705177,
+        -0.46733789793641556,
+        51.798585520444554
+      ],
+      "source_target_id": "mesh_00011",
+      "displacement_m": 11.0,
+      "body_clearance": 11.874314082237012,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00036"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0074",
+      "position": [
+        -7.914322131705177,
+        -0.46733789793641556,
+        51.798585520444554
+      ],
+      "source_target_id": "mesh_00012",
+      "displacement_m": 11.0,
+      "body_clearance": 11.874314082237012,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00036"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0075",
+      "position": [
+        -7.914322131705177,
+        -0.46733789793641556,
+        51.798585520444554
+      ],
+      "source_target_id": "mesh_00031",
+      "displacement_m": 11.0,
+      "body_clearance": 11.874314082237012,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00031"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0076",
+      "position": [
+        -7.914322131705177,
+        -0.46733789793641556,
+        51.798585520444554
+      ],
+      "source_target_id": "mesh_00036",
+      "displacement_m": 11.0,
+      "body_clearance": 11.874314082237012,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00012",
+        "mesh_00036"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0077",
+      "position": [
+        -9.341643763671314,
+        -1.8946595299025528,
+        58.14943848153044
+      ],
+      "source_target_id": "mesh_00010",
+      "displacement_m": 11.0,
+      "body_clearance": 13.824125544391642,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0078",
+      "position": [
+        -9.341643763671314,
+        -1.8946595299025528,
+        58.14943848153044
+      ],
+      "source_target_id": "mesh_00011",
+      "displacement_m": 11.0,
+      "body_clearance": 13.824125544391642,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0079",
+      "position": [
+        -9.341643763671314,
+        -1.8946595299025528,
+        58.14943848153044
+      ],
+      "source_target_id": "mesh_00012",
+      "displacement_m": 11.0,
+      "body_clearance": 13.824125544391642,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0080",
+      "position": [
+        -9.341643763671314,
+        -1.8946595299025528,
+        58.14943848153044
+      ],
+      "source_target_id": "mesh_00031",
+      "displacement_m": 11.0,
+      "body_clearance": 13.824125544391642,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0081",
+      "position": [
+        -9.341643763671314,
+        -1.8946595299025528,
+        58.14943848153044
+      ],
+      "source_target_id": "mesh_00036",
+      "displacement_m": 11.0,
+      "body_clearance": 13.824125544391642,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00012"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0082",
+      "position": [
+        -7.914322131705177,
+        -0.46733789793641556,
+        64.50029144261632
+      ],
+      "source_target_id": "mesh_00010",
+      "displacement_m": 11.0,
+      "body_clearance": 12.752212085444834,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00036"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0083",
+      "position": [
+        -7.914322131705177,
+        -0.46733789793641556,
+        64.50029144261632
+      ],
+      "source_target_id": "mesh_00011",
+      "displacement_m": 11.0,
+      "body_clearance": 12.752212085444834,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00036"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0084",
+      "position": [
+        -7.914322131705177,
+        -0.46733789793641556,
+        64.50029144261632
+      ],
+      "source_target_id": "mesh_00012",
+      "displacement_m": 11.0,
+      "body_clearance": 12.752212085444834,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00036"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0085",
+      "position": [
+        -7.914322131705177,
+        -0.46733789793641556,
+        64.50029144261632
+      ],
+      "source_target_id": "mesh_00031",
+      "displacement_m": 11.0,
+      "body_clearance": 12.752212085444834,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00036"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0086",
+      "position": [
+        -7.914322131705177,
+        -0.46733789793641556,
+        64.50029144261632
+      ],
+      "source_target_id": "mesh_00036",
+      "displacement_m": 11.0,
+      "body_clearance": 12.752212085444834,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00036"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0087",
+      "position": [
+        -9.341643763671314,
+        5.883515063149469,
+        50.37126388847842
+      ],
+      "source_target_id": "mesh_00010",
+      "displacement_m": 11.0,
+      "body_clearance": 9.934984394347183,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0088",
+      "position": [
+        -9.341643763671314,
+        5.883515063149469,
+        50.37126388847842
+      ],
+      "source_target_id": "mesh_00011",
+      "displacement_m": 11.0,
+      "body_clearance": 9.934984394347183,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0089",
+      "position": [
+        -9.341643763671314,
+        5.883515063149469,
+        50.37126388847842
+      ],
+      "source_target_id": "mesh_00012",
+      "displacement_m": 11.0,
+      "body_clearance": 9.934984394347183,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00011",
+        "mesh_00012"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0090",
+      "position": [
+        -9.341643763671314,
+        5.883515063149469,
+        50.37126388847842
+      ],
+      "source_target_id": "mesh_00031",
+      "displacement_m": 11.0,
+      "body_clearance": 9.934984394347183,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00031"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0091",
+      "position": [
+        -9.341643763671314,
+        5.883515063149469,
+        50.37126388847842
+      ],
+      "source_target_id": "mesh_00036",
+      "displacement_m": 11.0,
+      "body_clearance": 9.934984394347183,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00012"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0092",
+      "position": [
+        -12.563469170619292,
+        5.883515063149469,
+        58.14943848153044
+      ],
+      "source_target_id": "mesh_00010",
+      "displacement_m": 11.0,
+      "body_clearance": 12.725167043320855,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0093",
+      "position": [
+        -12.563469170619292,
+        5.883515063149469,
+        58.14943848153044
+      ],
+      "source_target_id": "mesh_00011",
+      "displacement_m": 11.0,
+      "body_clearance": 12.725167043320855,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00036"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0094",
+      "position": [
+        -12.563469170619292,
+        5.883515063149469,
+        58.14943848153044
+      ],
+      "source_target_id": "mesh_00012",
+      "displacement_m": 11.0,
+      "body_clearance": 12.725167043320855,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00036"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0095",
+      "position": [
+        -12.563469170619292,
+        5.883515063149469,
+        58.14943848153044
+      ],
+      "source_target_id": "mesh_00031",
+      "displacement_m": 11.0,
+      "body_clearance": 12.725167043320855,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00031"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0096",
+      "position": [
+        -12.563469170619292,
+        5.883515063149469,
+        58.14943848153044
+      ],
+      "source_target_id": "mesh_00036",
+      "displacement_m": 11.0,
+      "body_clearance": 12.725167043320855,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00036"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0097",
+      "position": [
+        -9.341643763671314,
+        5.883515063149469,
+        65.92761307458247
+      ],
+      "source_target_id": "mesh_00010",
+      "displacement_m": 11.0,
+      "body_clearance": 11.60963113810637,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0098",
+      "position": [
+        -9.341643763671314,
+        5.883515063149469,
+        65.92761307458247
+      ],
+      "source_target_id": "mesh_00011",
+      "displacement_m": 11.0,
+      "body_clearance": 11.60963113810637,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0099",
+      "position": [
+        -9.341643763671314,
+        5.883515063149469,
+        65.92761307458247
+      ],
+      "source_target_id": "mesh_00012",
+      "displacement_m": 11.0,
+      "body_clearance": 11.60963113810637,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0100",
+      "position": [
+        -9.341643763671314,
+        5.883515063149469,
+        65.92761307458247
+      ],
+      "source_target_id": "mesh_00031",
+      "displacement_m": 11.0,
+      "body_clearance": 11.60963113810637,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00031"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0101",
+      "position": [
+        -9.341643763671314,
+        5.883515063149469,
+        65.92761307458247
+      ],
+      "source_target_id": "mesh_00036",
+      "displacement_m": 11.0,
+      "body_clearance": 11.60963113810637,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0102",
+      "position": [
+        -1.563469170619293,
+        -5.116484936850531,
+        58.14943848153044
+      ],
+      "source_target_id": "mesh_00010",
+      "displacement_m": 11.0,
+      "body_clearance": 10.153038838627225,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00036"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0103",
+      "position": [
+        -1.563469170619293,
+        -5.116484936850531,
+        58.14943848153044
+      ],
+      "source_target_id": "mesh_00011",
+      "displacement_m": 11.0,
+      "body_clearance": 10.153038838627225,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00036"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0104",
+      "position": [
+        -1.563469170619293,
+        -5.116484936850531,
+        58.14943848153044
+      ],
+      "source_target_id": "mesh_00012",
+      "displacement_m": 11.0,
+      "body_clearance": 10.153038838627225,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00036"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0105",
+      "position": [
+        -1.563469170619293,
+        -5.116484936850531,
+        58.14943848153044
+      ],
+      "source_target_id": "mesh_00031",
+      "displacement_m": 11.0,
+      "body_clearance": 10.153038838627225,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0106",
+      "position": [
+        -1.563469170619293,
+        -5.116484936850531,
+        58.14943848153044
+      ],
+      "source_target_id": "mesh_00036",
+      "displacement_m": 11.0,
+      "body_clearance": 10.153038838627225,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0107",
+      "position": [
+        -1.563469170619293,
+        -1.8946595299025528,
+        65.92761307458247
+      ],
+      "source_target_id": "mesh_00010",
+      "displacement_m": 11.0,
+      "body_clearance": 9.989554044550399,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00012",
+        "mesh_00036"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0108",
+      "position": [
+        -1.563469170619293,
+        -1.8946595299025528,
+        65.92761307458247
+      ],
+      "source_target_id": "mesh_00011",
+      "displacement_m": 11.0,
+      "body_clearance": 9.989554044550399,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00012",
+        "mesh_00036"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0109",
+      "position": [
+        -1.563469170619293,
+        -1.8946595299025528,
+        65.92761307458247
+      ],
+      "source_target_id": "mesh_00012",
+      "displacement_m": 11.0,
+      "body_clearance": 9.989554044550399,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00012",
+        "mesh_00036"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0110",
+      "position": [
+        -1.563469170619293,
+        -1.8946595299025528,
+        65.92761307458247
+      ],
+      "source_target_id": "mesh_00031",
+      "displacement_m": 11.0,
+      "body_clearance": 9.989554044550399,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00012",
+        "mesh_00036"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0111",
+      "position": [
+        -1.563469170619293,
+        -1.8946595299025528,
+        65.92761307458247
+      ],
+      "source_target_id": "mesh_00036",
+      "displacement_m": 11.0,
+      "body_clearance": 9.989554044550399,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00012",
+        "mesh_00036"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0112",
+      "position": [
+        -1.563469170619293,
+        5.883515063149469,
+        69.14943848153044
+      ],
+      "source_target_id": "mesh_00010",
+      "displacement_m": 11.0,
+      "body_clearance": 9.458967062503346,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00011",
+        "mesh_00012"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0113",
+      "position": [
+        -1.563469170619293,
+        5.883515063149469,
+        69.14943848153044
+      ],
+      "source_target_id": "mesh_00011",
+      "displacement_m": 11.0,
+      "body_clearance": 9.458967062503346,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00011",
+        "mesh_00012"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0114",
+      "position": [
+        -1.563469170619293,
+        5.883515063149469,
+        69.14943848153044
+      ],
+      "source_target_id": "mesh_00012",
+      "displacement_m": 11.0,
+      "body_clearance": 9.458967062503346,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00011",
+        "mesh_00012"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0115",
+      "position": [
+        -1.563469170619293,
+        5.883515063149469,
+        69.14943848153044
+      ],
+      "source_target_id": "mesh_00031",
+      "displacement_m": 11.0,
+      "body_clearance": 9.458967062503346,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00011",
+        "mesh_00012"
+      ],
+      "preserves_original_visibility": false
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_near_0116",
+      "position": [
+        -1.563469170619293,
+        5.883515063149469,
+        69.14943848153044
+      ],
+      "source_target_id": "mesh_00036",
+      "displacement_m": 11.0,
+      "body_clearance": 9.458967062503346,
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "visible_target_ids": [
+        "mesh_00011",
+        "mesh_00012"
+      ],
+      "preserves_original_visibility": false
+    }
+  ],
+  "eligible": {
+    "cand_0063": [
+      {
+        "original_id": "cand_0063",
+        "candidate_id": "cand_0063_near_0010",
+        "position": [
+          15.167266891513275,
+          11.571294664875204,
+          -61.59617538183524
+        ],
+        "source_target_id": "mesh_00045",
+        "displacement_m": 8.0,
+        "body_clearance": 9.855297196542368,
+        "original_visible": [
+          "mesh_00045",
+          "mesh_00070"
+        ],
+        "visible_target_ids": [
+          "mesh_00045",
+          "mesh_00068",
+          "mesh_00070"
+        ],
+        "preserves_original_visibility": true
+      },
+      {
+        "original_id": "cand_0063",
+        "candidate_id": "cand_0063_near_0011",
+        "position": [
+          15.167266891513275,
+          11.571294664875204,
+          -61.59617538183524
+        ],
+        "source_target_id": "mesh_00070",
+        "displacement_m": 8.0,
+        "body_clearance": 9.855297196542368,
+        "original_visible": [
+          "mesh_00045",
+          "mesh_00070"
+        ],
+        "visible_target_ids": [
+          "mesh_00045",
+          "mesh_00068",
+          "mesh_00070"
+        ],
+        "preserves_original_visibility": true
+      },
+      {
+        "original_id": "cand_0063",
+        "candidate_id": "cand_0063_near_0026",
+        "position": [
+          7.1672668915132745,
+          22.571294664875204,
+          -61.59617538183524
+        ],
+        "source_target_id": "mesh_00045",
+        "displacement_m": 11.0,
+        "body_clearance": 8.350105012614577,
+        "original_visible": [
+          "mesh_00045",
+          "mesh_00070"
+        ],
+        "visible_target_ids": [
+          "mesh_00045",
+          "mesh_00068",
+          "mesh_00070"
+        ],
+        "preserves_original_visibility": true
+      },
+      {
+        "original_id": "cand_0063",
+        "candidate_id": "cand_0063_near_0027",
+        "position": [
+          7.1672668915132745,
+          22.571294664875204,
+          -61.59617538183524
+        ],
+        "source_target_id": "mesh_00070",
+        "displacement_m": 11.0,
+        "body_clearance": 8.350105012614577,
+        "original_visible": [
+          "mesh_00045",
+          "mesh_00070"
+        ],
+        "visible_target_ids": [
+          "mesh_00045",
+          "mesh_00068",
+          "mesh_00070"
+        ],
+        "preserves_original_visibility": true
+      },
+      {
+        "original_id": "cand_0063",
+        "candidate_id": "cand_0063_near_0034",
+        "position": [
+          14.945441484565297,
+          11.571294664875204,
+          -53.818000788783216
+        ],
+        "source_target_id": "mesh_00045",
+        "displacement_m": 11.0,
+        "body_clearance": 9.480039671920698,
+        "original_visible": [
+          "mesh_00045",
+          "mesh_00070"
+        ],
+        "visible_target_ids": [
+          "mesh_00045",
+          "mesh_00065",
+          "mesh_00068",
+          "mesh_00070"
+        ],
+        "preserves_original_visibility": true
+      },
+      {
+        "original_id": "cand_0063",
+        "candidate_id": "cand_0063_near_0035",
+        "position": [
+          14.945441484565297,
+          11.571294664875204,
+          -53.818000788783216
+        ],
+        "source_target_id": "mesh_00070",
+        "displacement_m": 11.0,
+        "body_clearance": 9.480039671920698,
+        "original_visible": [
+          "mesh_00045",
+          "mesh_00070"
+        ],
+        "visible_target_ids": [
+          "mesh_00045",
+          "mesh_00065",
+          "mesh_00068",
+          "mesh_00070"
+        ],
+        "preserves_original_visibility": true
+      }
+    ],
+    "cand_0013": []
+  }
+}

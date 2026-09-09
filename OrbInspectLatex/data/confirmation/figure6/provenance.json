@@ -1,0 +1,19 @@
+{
+  "purpose": "Display-only geometry: exact existing Figure 6 face selection, never used for planning or safety.",
+  "source": "src/orbinspect_description/models/iss_real/meshes/ISS_stationary.glb",
+  "source_sha256": "26dba905b4b7555edbcb0c5f5a61b5c18659f5166076ab27dbb0e64025759fca",
+  "scale": 1.065,
+  "source_triangle_count": 247525,
+  "display_triangle_count": 1800,
+  "selection": "numpy.linspace(0, triangle_count - 1, 1800, dtype=int)",
+  "original_generator": "tools/paper/generate_required_target_details.py",
+  "display_mesh_sha256": "005bbacd906be5c429545c177ad2eed72fa256cad38e9b64d45489887d819cfc",
+  "frozen_inputs_sha256": {
+    "raw/representative_case_manifest.json": "a10583ba2e32b731dfad868ef1302a448a19790c3863973207cbd36e1267640e",
+    "raw/representative_case_trajectory.csv": "78d2b5df766b39dcffef019e36b149e2e46e1afc62dec12e426bacb35cacf78e",
+    "raw/representative_case_progress.csv": "3d5341ee0e0a0cc63bf79d7eb1b405129ba58285adf8cb08637e6e8754bcc3dc",
+    "raw/target_positions.csv": "73810927ffd53d7eff5a0f3fd46ac4cb6776a9482d47c1d1c05c833e3e4c006a",
+    "raw/hcw_graph.json": "e90f40f0aaf87464ad5b5ef6b39979aa3c5f0b7049fe0ec17ad5e5b1a19b0af2",
+    "config_snapshot/base_experiment_config.json": "fac496ad6874c03e8c35be6a91e7b63aed3c7fa099d2a8321ae9ba59a57e1cb4"
+  }
+}

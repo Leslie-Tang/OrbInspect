@@ -1,0 +1,29 @@
+{
+  "workspace_build": {
+    "packages_finished": 12,
+    "passed": true
+  },
+  "rosdep": "all system dependencies satisfied",
+  "frozen_input_checksums": "all four matched handover",
+  "colcon_test_result": {
+    "tests": 184,
+    "errors": 0,
+    "failures": 2,
+    "skipped": 10,
+    "failed_checks": [
+      "orbinspect_guidance/test_flake8",
+      "orbinspect_guidance/test_pep257"
+    ]
+  },
+  "focused_checks": {
+    "passed": 66,
+    "failed": 0
+  },
+  "new_audit_tests": {
+    "passed": 2,
+    "failed": 0
+  },
+  "runtime_source_changed": false,
+  "preexisting_dirty_files": "root-level LaTeX build products and OrbInspectLatex.zip",
+  "pdf_dependency": "PyMuPDF 1.28.2 installed under build/manuscript_python for system Python 3.12; initial missing-dependency failure preserved"
+}

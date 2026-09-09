@@ -1,0 +1,9 @@
+# Selected by the user after the recorded background-goal search.
+source_scenario: required09_test_000
+derived_scenario: required09_test_000_bg95
+goal_mode: hybrid
+background_goal: 0.95
+observation_count: 12
+terminal_dwell_s: 60.0
+mean_motion: 0.00113137
+selection_reason: User-selected 12-view hybrid ADP plan; retain the earlier 60-s settling protocol and unchanged offline study.

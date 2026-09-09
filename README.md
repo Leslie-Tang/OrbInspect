@@ -312,6 +312,19 @@ Important executable entry points include:
 - Basilisk is optional and must not be required for the main demo.
 - Paper experiment data belongs under `data/results/<timestamp>/`.
 
+## ROS Manuscript Execution Check
+
+The [twelve-observation report](OrbInspectLatex/docs/ROS_TWELVE_OBSERVATIONS_20260909.md)
+documents a normal-speed graphical execution with 12/12 accepted observations,
+all nine required targets and 95.86% weighted background coverage. The supplemental
+hybrid case keeps the prior target IDs, weights and safety settings; two viewpoints
+were refined after a failed diagnostic. Each 90-s transfer includes 60 s of
+terminal settling, for a nominal 1,800 s. The prior 7/9 failure and nine-view
+77.22% execution remain retained. Figure 7 has two camera rows of six in the
+approved style. The publisher's nominal reference-gap diagnostic is disclosed;
+execution, full-mesh and selected camera-alignment gates passed. Figures 1–6
+and the offline study remain unchanged.
+
 ## Git Hygiene
 
 Do not commit generated ROS build artifacts:

@@ -1,0 +1,2 @@
+scenario_id,method,time,event,state,execution_performed,planned_success,coverage_ratio,required_coverage_ratio,mission_sha256
+required09_test_000_bg95,adaptive_rollout_adp,1800.0,planned_mission_complete,planned,False,True,0.9585771560419855,1.0,e22ca852242a8c4dcf72c27c360909b04d4dae844c6dc9316ff18e2a408628da

@@ -123,14 +123,12 @@ Fig.~\ref{fig:representative-trajectory} shows the selected routes, target compl
   \label{fig:representative-trajectory}
 \end{figure}
 
-\subsection{Execution Interface and Historical ROS Evidence}
+\subsection{Required-Target ROS Execution}
 \label{sec:ros-verification-protocol}
 
-The execution interface records per-observation target IDs and unions accepted observations. Tests verify required completion, duplicate exclusion, rejection handling, and export consistency. The schema preserves existing message interfaces while distinguishing planned and accepted metrics.
+ROS-native HCW dynamics and LQR control track an ADP-derived reference fixed before execution, without online replanning. Each observation contributes its fixed geometric visibility mask only when position error is at most \unit{0.5}{m} and speed is at most \unit{0.05}{m/s}. Rejected views add no credit; repeated IDs count once. Execution success requires every observation to pass and every required target to be accepted; the supplemental hybrid case also requires 95\% weighted background coverage. Both recorded event topics independently verify accepted-target unions.
 
-An offline replay export preserves the illustrative route's nine actions, nine required IDs, and 77.22\% planned background coverage. Target unions and resource metrics match the archive. Six CSV streams record trajectory, control, coverage, safety, planning, and mission events.
-
-The available Ubuntu~24.04.4/ROS~2 Jazzy execution uses the earlier 80\% survey objective and is reported separately below. Required-target results in this study remain offline planning and interface tests; a new required-target ROS campaign has not been executed.
+The parent nine-target task imposes no background-coverage threshold; the supplemental case adds this threshold while retaining its target IDs and weights. Execution used 20-Hz control and state publication, \unit{0.05}{s} integration steps, and a $0.060~\mathrm{m/s^2}$ acceleration limit. The filter retained a \unit{1.50}{m/s} speed limit, \unit{0.80}{m} vehicle radius, \unit{2}{m} safety margin, and \unit{8}{m} caution distance.
 
 \ifincludeROSVerificationResults
   \input{sections/ros_verification_results}
@@ -162,4 +160,4 @@ ADP completed \RTTestSuccess/\RTTestN{} test and \RTOodSuccess/\RTOodN{} shifted
 
 % \section*{Data and Code Availability}
 
-% The accompanying reproducibility package contains the corrected graph, fixed target profiles and their geometric provenance, configuration and freeze manifests, fresh scenario inventories, method--scenario rows, target-level credit records, statistical outputs, source tables, and figure scripts. Required-target evidence is versioned separately from the historical 80\% benchmark, post-selection depth/coverage diagnostics, and accepted historical ROS task. A new required-target ROS bag is not included because that campaign was not run. The public NASA mesh source and checksum are documented; the mesh is not redistributed. A persistent repository identifier will replace the submission-package reference in the accepted version.
+% The accompanying reproducibility package contains the corrected graph, fixed target profiles and their geometric provenance, configuration and freeze manifests, fresh scenario inventories, method--scenario rows, target-level credit records, statistical outputs, source tables, and figure scripts. The original unsuccessful check and the subsequent required-target execution with explicit terminal settling have separate snapshots and hash-identified local ROS bags; the latter includes synchronized camera evidence. It is distinct from the historical 80% benchmark, post-selection depth/coverage diagnostics, and accepted historical ROS task. The public NASA mesh source and checksum are documented; the mesh is not redistributed. A persistent repository identifier will replace the submission-package reference in the accepted version.

@@ -1,0 +1,187 @@
+{
+  "eligible": [
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_safe",
+      "position": [
+        -5.422048687247562,
+        2.061360681932412,
+        60.699438481530436
+      ],
+      "aim_position": [
+        -0.23949391463075642,
+        6.06510143847397,
+        33.226302538130724
+      ],
+      "displacement_m": 6,
+      "body_clearance": 8.50521242355374,
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ]
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_safe",
+      "position": [
+        -5.399256993504448,
+        1.6746397053126554,
+        60.03943848153044
+      ],
+      "aim_position": [
+        -0.09053692476200936,
+        6.145421751707223,
+        32.778921949626195
+      ],
+      "displacement_m": 6,
+      "body_clearance": 8.631255765849245,
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ]
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_safe",
+      "position": [
+        -5.821209397080768,
+        1.9243075459849814,
+        59.63143848153044
+      ],
+      "aim_position": [
+        -0.05774036030476548,
+        6.17313232180138,
+        32.5618473120884
+      ],
+      "displacement_m": 6,
+      "body_clearance": 8.865802559107777,
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ]
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_safe",
+      "position": [
+        -5.29236919655505,
+        1.3467315553571586,
+        59.379438481530435
+      ],
+      "aim_position": [
+        0.07860059181072465,
+        6.250176905059242,
+        32.32573251909584
+      ],
+      "displacement_m": 6,
+      "body_clearance": 8.69660150622419,
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ]
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_safe",
+      "position": [
+        -5.703573616712612,
+        1.619262353067862,
+        58.97143848153044
+      ],
+      "aim_position": [
+        0.12388174810011598,
+        6.274852870942527,
+        32.112260910102016
+      ],
+      "displacement_m": 6,
+      "body_clearance": 8.91644958137356,
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ]
+    },
+    {
+      "original_id": "cand_0013",
+      "candidate_id": "cand_0013_safe",
+      "position": [
+        -5.516265454507624,
+        1.372511013264499,
+        58.31143848153044
+      ],
+      "aim_position": [
+        0.32384293100007344,
+        6.398957473601056,
+        31.658677960491268
+      ],
+      "displacement_m": 6,
+      "body_clearance": 8.877611624469626,
+      "visible_target_ids": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ],
+      "original_visible": [
+        "mesh_00010",
+        "mesh_00011",
+        "mesh_00012",
+        "mesh_00031",
+        "mesh_00036"
+      ]
+    }
+  ],
+  "examined": 89,
+  "individually_visible": 32,
+  "search": "1000 Fibonacci directions, radii 5.2/6/8/12/16/24/32, original range/incidence/LOS/FOV, body clearance >=8.3"
+}

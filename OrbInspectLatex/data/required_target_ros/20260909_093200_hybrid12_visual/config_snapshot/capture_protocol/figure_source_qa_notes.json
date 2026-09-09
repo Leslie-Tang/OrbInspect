@@ -1,0 +1,10 @@
+{
+  "source_validation": "17 passes, 3 warnings, 0 failures",
+  "warning_resolution": {
+    "mathtext_subscript": "Legacy historical-only c2/c3 text is not used by the required/hybrid snapshots; final PDF glyph sizes are audited separately.",
+    "raster_format": "Retain the approved PDF/SVG/600-dpi PNG exports and manuscript contract; no unsolicited TIFF is needed.",
+    "width_detector": "20.8 mm is the nine-view camera-panel constant. The actual figure canvas is 170 mm wide; the 12-view branch uses 18.1-mm cameras."
+  },
+  "style_function_unchanged": true,
+  "prior_nine_view_png_pixels_identical": true
+}

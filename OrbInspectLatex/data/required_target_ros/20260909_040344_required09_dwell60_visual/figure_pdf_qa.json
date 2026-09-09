@@ -1,0 +1,10 @@
+{
+  "pdf": "/home/rugang/robotics/projects/OrbInspect/data/results/20260909_040344_required09_dwell60_visual/figures/figure7_artwork/ros_key_camera_views_trajectory.pdf",
+  "auditable": true,
+  "minimum_required_pt": 5.0,
+  "minimum_found_pt": 7.0,
+  "text_run_count": 88,
+  "below_minimum_count": 0,
+  "below_minimum": [],
+  "warnings": []
+}

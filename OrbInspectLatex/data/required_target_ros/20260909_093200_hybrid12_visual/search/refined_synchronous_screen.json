@@ -1,0 +1,112 @@
+{
+  "kind": "synchronous screening; not ROS execution",
+  "input_manifest_sha256": "d6cae3671b4ce4809d5b10614dd15b67f140b28c639f548ed90d3d9e4146c14e",
+  "runtime_config_sha256": "dacd4e02f942c97f1d46285100e0a74bf58c77cd72751e729537d36f3a3d917d",
+  "results": [
+    {
+      "scenario_id": "required09_test_000_bg95",
+      "events": [
+        {
+          "action": 1,
+          "candidate_id": "cand_0016",
+          "time": 150.0,
+          "position_error": 0.0019801585178075226,
+          "speed": 0.0001508317066706925,
+          "accepted": true
+        },
+        {
+          "action": 2,
+          "candidate_id": "cand_0021",
+          "time": 300.0,
+          "position_error": 0.00024474253661397493,
+          "speed": 1.863807449195231e-05,
+          "accepted": true
+        },
+        {
+          "action": 3,
+          "candidate_id": "cand_0068",
+          "time": 450.0,
+          "position_error": 0.0003020673543871136,
+          "speed": 2.3007007064375593e-05,
+          "accepted": true
+        },
+        {
+          "action": 4,
+          "candidate_id": "cand_0045",
+          "time": 600.0,
+          "position_error": 0.00041772770818567515,
+          "speed": 3.181530346844868e-05,
+          "accepted": true
+        },
+        {
+          "action": 5,
+          "candidate_id": "cand_0063_safe",
+          "time": 750.0,
+          "position_error": 0.00035273804975023915,
+          "speed": 2.6862948163392525e-05,
+          "accepted": true
+        },
+        {
+          "action": 6,
+          "candidate_id": "cand_0062",
+          "time": 900.0,
+          "position_error": 0.0021502242858770174,
+          "speed": 0.00016377659623554227,
+          "accepted": true
+        },
+        {
+          "action": 7,
+          "candidate_id": "cand_0055",
+          "time": 1050.0,
+          "position_error": 0.0005021980220636093,
+          "speed": 3.825240204072716e-05,
+          "accepted": true
+        },
+        {
+          "action": 8,
+          "candidate_id": "cand_0052",
+          "time": 1200.0,
+          "position_error": 0.00011740129534649601,
+          "speed": 8.940828422022037e-06,
+          "accepted": true
+        },
+        {
+          "action": 9,
+          "candidate_id": "cand_0066",
+          "time": 1350.0,
+          "position_error": 0.0001750385748251961,
+          "speed": 1.3333110480378805e-05,
+          "accepted": true
+        },
+        {
+          "action": 10,
+          "candidate_id": "cand_0005",
+          "time": 1500.0,
+          "position_error": 0.0007691525506921589,
+          "speed": 5.858052807876471e-05,
+          "accepted": true
+        },
+        {
+          "action": 11,
+          "candidate_id": "cand_0000",
+          "time": 1650.0,
+          "position_error": 0.05009800498390031,
+          "speed": 0.003815353916848934,
+          "accepted": true
+        },
+        {
+          "action": 12,
+          "candidate_id": "cand_0013_safe",
+          "time": 1800.0,
+          "position_error": 0.0005090164903054421,
+          "speed": 3.87638137204162e-05,
+          "accepted": true
+        }
+      ],
+      "all_observations_accepted": true,
+      "accepted_count": 12,
+      "filter_interventions": 1848,
+      "delta_v": 20.498332819866345
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+Metadata only. The 1.7 GiB source MCAP remains under data/results/20260909_031355_required09_adp_closed_loop/rosbag/orbinspect_run. Its SHA-256 appears in required_target_execution_audit.json. The portable snapshot does not contain or claim a complete bag.

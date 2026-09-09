@@ -1,0 +1,61 @@
+{
+  "figure_number": 8,
+  "width_mm": 85.0,
+  "height_mm": 46.0,
+  "source_manifest": "data/rviz_overview/20260909_113140_hybrid12_rviz_video/source_manifest.json",
+  "source_manifest_sha256": "9b07510fef56c7c7cbeabd2e79ebba3bc0ed3f6bcff4582e604156a4bb3de929",
+  "conclusion": "The recorded repeat execution presents the global trajectory and a distinct central-module camera view together during transfer from observation 9 to 10.",
+  "archetype": "image plate + progress counts",
+  "reuse": "Style-only inheritance from Figure 7; screenshot pixels unchanged.",
+  "independent_execution": "20260909_113140_hybrid12_rviz_video_execution",
+  "selected_video_frame_time_s": 1375.0,
+  "frame_state": {
+    "phase": "transfer",
+    "from_observation": 9,
+    "to_observation": 10,
+    "accepted_observations": 9,
+    "accepted_required_count": 7,
+    "weighted_coverage": 0.7627194404377868,
+    "video_time_s": 1375.0,
+    "estimated_mission_time_s": 1374.0095262022307,
+    "video_mission_offset_s": 0.9904737977691433,
+    "timing_note": "Mission time estimated from recorded video/event alignment; 24 s after the previous accepted observation and within the 90 s transfer. Counts use the last credited event before this frame.",
+    "source_event_time_s": 1350.037210678
+  },
+  "panel_a": {
+    "question": "Where did the spacecraft travel relative to the station?",
+    "crop_xyxy": [
+      260,
+      200,
+      960,
+      1020
+    ],
+    "native_pixels": [
+      700,
+      820
+    ],
+    "effective_source_dpi": 505.11363636363626
+  },
+  "panel_b": {
+    "question": "What did the onboard camera show during the transfer between observation stops?",
+    "crop_xyxy": [
+      1198,
+      311,
+      1920,
+      827
+    ],
+    "native_pixels": [
+      722,
+      516
+    ],
+    "effective_source_dpi": 441.89879518072286
+  },
+  "image_adjustments": "Exact rectangular crops only; original brightness, contrast, colors, geometry and camera field retained.",
+  "replicate_unit": "One illustrative repeat execution; no uncertainty estimate or aggregate inference.",
+  "minimum_label_font_pt": 7.2,
+  "files": {
+    "rviz_execution_overview.pdf": "277230c29a8b457901d01c887774175c70981a7be2ae83211f46d3ebc0e9f427",
+    "rviz_execution_overview.svg": "1215de74d45ba419ef417f1a54e6bcb3d199247cafd332caf31b0341458776c8",
+    "rviz_execution_overview.png": "730b2f78ad0e40623de72f9ebf461166bb39188085e61f9dcfdd5c280c111e17"
+  }
+}

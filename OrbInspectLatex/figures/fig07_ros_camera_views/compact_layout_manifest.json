@@ -2,22 +2,64 @@
   "status": "passed",
   "figure_mm": [
     170.0,
-    74.0
+    47.0
   ],
-  "camera_views": 10,
-  "trajectory_rows": 18918,
+  "layout_canvas_mm": [
+    170.0,
+    47.0
+  ],
+  "blank_bottom_trim_mm": 0.0,
+  "camera_views": 12,
+  "trajectory_rows": 36181,
   "image_pixels_unchanged": true,
   "trajectory_coordinates_unchanged": true,
   "equal_spatial_scaling": true,
   "text_within_canvas": true,
-  "layout": "Two columns plus a centered fifth view on each side; two central projections",
-  "correspondence": "Matching observation numbers; active 1-5 left and 6-10 right; inactive hollow markers retained",
-  "minimum_annotation_font_pt": 7.0,
-  "snapshot_sha256": "9ba40f90442904b1a7035df9d345511fc7af49ade728fbbc74c2a3749f0e3bb7",
-  "script_sha256": "88fb6e710b356b5a9093b83f5fd9434167ca83df7460ea53a20c1e154a061b4a",
+  "markers_within_axes": true,
+  "layout": "Two shared-axis projections on the left; 6 camera columns in two rows on the right; legend in the spare tenth cell when nine views are present",
+  "camera_width_mm": 18.1,
+  "camera_column_gap_mm": 0.8,
+  "camera_row_pitch_mm": 21.5,
+  "projection_spatial_scale_relative_to_original_74mm_layout": 0.6,
+  "projection_rectangles_mm": {
+    "xz": [
+      10.2,
+      13.5,
+      20.52,
+      28.08
+    ],
+    "yz": [
+      34.0,
+      13.5,
+      20.04,
+      28.08
+    ]
+  },
+  "right_marker_padding_mm": 0.6,
+  "projection_view_limits_m": {
+    "x": [
+      -58.46153846153846,
+      58.46153846153846
+    ],
+    "y": [
+      -50.38461538461539,
+      63.80341880341881
+    ],
+    "z": [
+      -80,
+      80
+    ]
+  },
+  "correspondence": "Odd-numbered views highlighted in projection (a), even-numbered views in (b); camera rows remain chronological 1-6 and 7-12; inactive hollow markers retained",
+  "minimum_annotation_font_pt": 5.2,
+  "waypoint_marker_area_pt2": 57.0,
+  "waypoint_marker_diameter_pt": 7.54983443527075,
+  "waypoint_label_font_pt": 5.2,
+  "snapshot_sha256": "53cafdc30358dc61806a6e96c62a912dcb286a2bd38fc01b799135b72bf0d309",
+  "script_sha256": "f85e9f64bd1515ee3efd655094bb7eb70081bed20c857ea41f5c590d75ea9e1d",
   "output_sha256": {
-    "ros_key_camera_views_trajectory.svg": "6754bb0fc9d80283f67abcc7e7ba481a436a8e075391c9114656dfbb62cce89c",
-    "ros_key_camera_views_trajectory.pdf": "cb4b294cfd7ee74bd884d7b07504edb22983a7298c0ae8b35908266db659859b",
-    "ros_key_camera_views_trajectory.png": "d854757ae416a4dbfc28326bd8f43a1c21837b5956887c39f309591a2e90a5b2"
+    "ros_key_camera_views_trajectory.svg": "338b45a7f49051a226c28928056ecd332154ceea1c8d50fb91c86caea89ac19e",
+    "ros_key_camera_views_trajectory.pdf": "19741ac5991f40cd640df9c4f8d9c97e88389b24ef7bc1b70648d693ea077924",
+    "ros_key_camera_views_trajectory.png": "19d8b3cb2639216626f4208b936d7f0daa514342229d6f05bffcc01428fff00d"
   }
 }

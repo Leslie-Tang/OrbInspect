@@ -19,11 +19,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from figure_palette import BLACK, GREY, SLATE, TEAL
+from figure_typography import COLUMN_WIDTH_PT, TEXT_PT, register_fonts
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'data/depth_diagnostic/raw/validation_depth_results.csv'
 REFERENCE = ROOT / 'figures/fig03_depth_tradeoff/required_target_depth_figure_manifest.json'
-WIDTH_MM, HEIGHT_MM = 26.6, 40.0
+WIDTH_MM, HEIGHT_MM = .315 * COLUMN_WIDTH_PT / 72 * 25.4, 40.0
 
 
 def sha(path: Path) -> str:
@@ -55,11 +56,13 @@ def verified_series() -> tuple[list[dict], dict]:
     return series, reference
 
 
-def generate(output: Path) -> None:
+def generate(output: Path, font_dir: Path | None = None) -> None:
+    register_fonts(font_dir)
     series, reference = verified_series()
     mpl.rcParams.update({
         'font.family': 'sans-serif', 'font.sans-serif': ['Arial', 'Helvetica', 'DejaVu Sans'],
-        'font.size': 7.0, 'axes.labelsize': 7.2, 'xtick.labelsize': 7.0, 'ytick.labelsize': 7.0,
+        'font.size': TEXT_PT, 'axes.labelsize': TEXT_PT,
+        'xtick.labelsize': TEXT_PT, 'ytick.labelsize': TEXT_PT,
         'axes.spines.top': False, 'axes.spines.right': False, 'axes.linewidth': 0.5,
         'pdf.fonttype': 42, 'svg.fonttype': 'none', 'svg.hashsalt': 'orbinspect-depth-readable',
         'figure.facecolor': 'white', 'savefig.facecolor': 'white', 'axes.unicode_minus': False,
@@ -74,8 +77,8 @@ def generate(output: Path) -> None:
         x = np.asarray([r['depth'] for r in series])
         y = np.asarray([r[field] for r in series])
         figure = plt.figure(figsize=(WIDTH_MM / 25.4, HEIGHT_MM / 25.4))
-        axis = figure.add_axes((9.7 / WIDTH_MM, 9.0 / HEIGHT_MM,
-                                15.8 / WIDTH_MM, 23.4 / HEIGHT_MM))
+        axis = figure.add_axes((10.6 / WIDTH_MM, 9.0 / HEIGHT_MM,
+                                14.9 / WIDTH_MM, 23.4 / HEIGHT_MM))
         line, = axis.plot(x, y, color=TEAL, linewidth=0.7, marker='o', markersize=2.5,
                           markerfacecolor='white', markeredgewidth=0.65, zorder=2)
         axis.scatter([3], [y[2]], color=SLATE, marker='s', s=12,
@@ -89,8 +92,8 @@ def generate(output: Path) -> None:
         axis.tick_params(axis='y', which='minor', length=1.0, width=0.3)
         axis.grid(axis='y', which='both', color='#ECECEC', linewidth=0.4)
         note = 'common complete\n$n=9$' if suffix == 'a' else 'post-selection\ndiagnostic'
-        figure.text(0.62, 0.96, note, ha='center', va='top', color=GREY,
-                    fontsize=6.5, linespacing=1.05)
+        figure.text(0.55, 0.96, note, ha='center', va='top', color=GREY,
+                    fontsize=TEXT_PT, linespacing=1.05)
         figure.canvas.draw()
         renderer = figure.canvas.get_renderer()
         off_axis = set()
@@ -120,16 +123,19 @@ def generate(output: Path) -> None:
     report = {
         'status': 'passed', 'source_sha256': sha(SOURCE), 'reference_sha256': sha(REFERENCE),
         'script_sha256': sha(Path(__file__)), 'palette_sha256': sha(Path(__file__).with_name('figure_palette.py')),
-        'panel_mm': [WIDTH_MM, HEIGHT_MM], 'axis_label_font_pt': 7.2, 'tick_font_pt': 7.0,
-        'note_font_pt': 6.5, 'depths': list(range(1, 7)), 'common_complete_n': 9,
+        'typography_sha256': sha(Path(__file__).with_name('figure_typography.py')),
+        'panel_mm': [WIDTH_MM, HEIGHT_MM], 'axis_label_font_pt': TEXT_PT, 'tick_font_pt': TEXT_PT,
+        'note_font_pt': TEXT_PT, 'depths': list(range(1, 7)), 'common_complete_n': 9,
         'runtime_and_screen_n': 12, 'all_statistics_match_reference': True, 'plotted_series': series,
         'outputs_sha256': {p.name: sha(p) for p in exported},
     }
     (output / 'readable_typography_manifest.json').write_text(json.dumps(report, indent=2) + '\n')
-    print(json.dumps({'status': 'passed', 'panels': 3, 'font_pt': [7.0, 7.2], 'output': str(output)}))
+    print(json.dumps({'status': 'passed', 'panels': 3, 'font_pt': TEXT_PT, 'output': str(output)}))
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output-dir', type=Path, default=ROOT / 'build/figure3_readable_preview')
-    generate(parser.parse_args().output_dir)
+    parser.add_argument('--font-dir', type=Path, help='Optional local Arial font directory')
+    args = parser.parse_args()
+    generate(args.output_dir, args.font_dir)

@@ -2,15 +2,16 @@
   "status": "passed",
   "source_sha256": "d20ed34285caeae175cff4132ed992f2caf3e8865ee6e9dd4fb5d721f06d8252",
   "reference_sha256": "389be102d0cdc3a22a85481978d57fa1e0dc0e778a78f4ab5cf842be8f428f06",
-  "script_sha256": "075c836d8974a2d939eda66b164c2b2e177adb776da947e13692de08e23d2a38",
+  "script_sha256": "d68715287ec8816c92e194c04f11dc2b1cb95b175a7fc0172d435288ef209c01",
   "palette_sha256": "226d5485bfa0dc376c62680576166351dae5aa96580b0331b60562f264192938",
+  "typography_sha256": "ff259417d5f7af3bdf4223d7ee852942fe499a8e91d75ed43125468628fd8dc7",
   "panel_mm": [
-    26.6,
+    26.570361145703608,
     40.0
   ],
-  "axis_label_font_pt": 7.2,
-  "tick_font_pt": 7.0,
-  "note_font_pt": 6.5,
+  "axis_label_font_pt": 8.0,
+  "tick_font_pt": 8.0,
+  "note_font_pt": 8.0,
   "depths": [
     1,
     2,
@@ -61,14 +62,14 @@
     }
   ],
   "outputs_sha256": {
-    "adp_depth_tradeoff_a.svg": "b6fc7d9c098b7eb5c1f7e525d56f3afed24b499b1c4f59fce97d38e93e6cda2d",
-    "adp_depth_tradeoff_a.pdf": "105da3e6851127a1069bbd1b75c2a2559d0f34f820ae13515df96db2654dee72",
-    "adp_depth_tradeoff_a.png": "757b7e60cef3917f48642eca741683135bc6f32f996996698a54420f92c71c95",
-    "adp_depth_tradeoff_b.svg": "81f67e267cefdfce318147257cd67ff745427670ace3d93c53b39c17d3156ba8",
-    "adp_depth_tradeoff_b.pdf": "97fcbb9dd61ef9290a5cba0c3bce4e913a41966b598c65e032e423bd0471b01b",
-    "adp_depth_tradeoff_b.png": "79e957b8909ad0c0bab3c4486e1002625e538c64becf72e53707567972b03be1",
-    "adp_depth_tradeoff_c.svg": "9101df204b5c4b785f55c8ab249ae1a1c09235eb8dd0a06b3694d7002b008ea8",
-    "adp_depth_tradeoff_c.pdf": "50834f66e5fc6a1b4e3cc63fba97cb6f1b3918968a4824810132cf958029ab16",
-    "adp_depth_tradeoff_c.png": "ab046737d88fc559435f0a325a20302336f30f81106bb232c433b978af67b317"
+    "adp_depth_tradeoff_a.svg": "6156ac5cca48ae3a5d9f9ad3e3dc8dccec88e174d4026cf39eeecbcf61224120",
+    "adp_depth_tradeoff_a.pdf": "046d6f965c8ba23ac3eaad72292c5e6c78a02653ccb8994558275bde7b3a0d51",
+    "adp_depth_tradeoff_a.png": "9243a4771209dc9ec48f7355e53eddf1c25ad9778dca884a759c956eb2a85e92",
+    "adp_depth_tradeoff_b.svg": "7a2f7a97ed76b0eb3adefbef5a7d89baf7eff317aa5572c9a8e4d100f6e24b92",
+    "adp_depth_tradeoff_b.pdf": "781d6c6583639ce047d7b90177a57503bfa5751c7193aa6eaaf0229aebb88e5f",
+    "adp_depth_tradeoff_b.png": "ae33635407a0d17e23b4635a72662aa7dd00a197e205c7ace0194e0ed8eb132a",
+    "adp_depth_tradeoff_c.svg": "248785e9c9ca91ca963a9b21404e33f0b8221b87b3496ef1fca59d43ce0a4d9a",
+    "adp_depth_tradeoff_c.pdf": "a4ff0fac281387c76612d9836869b8f608b8605edec32e186d8b5ad136e6bc11",
+    "adp_depth_tradeoff_c.png": "46fb48d03febb47949229c6af4194d81cc280c5900ce06d2f93b770bea7146a8"
   }
 }

@@ -1,0 +1,46 @@
+{
+  "intended_conclusion": "A recorded execution of the original nine-target route, with an explicitly added uniform settling interval, can link every accepted observation to its trajectory position and actual simulator camera view. Publish only after the graphical execution and camera audits pass.",
+  "archetype": "Two trajectory projections with numbered camera panels",
+  "evidence_chain": [
+    "Unchanged frozen required-target set and route",
+    "Declared derived execution timing",
+    "Actual ROS HCW/LQR/safety-filter execution",
+    "Accepted-ID union reconstructed from both event topics",
+    "Full transformed-mesh and command audits",
+    "Camera-frame receipt matching and named Gazebo-pose alignment"
+  ],
+  "figure_size_mm": [
+    170,
+    74
+  ],
+  "backend": "Python matplotlib",
+  "preserved_style": [
+    "Arial regular and bold, 7–8 pt",
+    "Original observation-index colors and numbered badges",
+    "Gray dashed planned reference and blue solid executed path",
+    "Neutral ISS display mesh",
+    "Five left-side and four right-side camera panels",
+    "Two central equal-scale projections",
+    "Uncropped camera images with metadata below"
+  ],
+  "data_sensitive_layout_change": "Expand axis ranges to contain the actual route, maintaining identical physical scale between projections; no coordinate warping.",
+  "statistical_unit": "One selected graphical execution; no aggregate, confidence interval, or ROS saving claim.",
+  "exports": [
+    "editable SVG",
+    "vector PDF with embedded camera rasters",
+    "600 dpi PNG"
+  ],
+  "source_checks": [
+    "manifest hashes",
+    "CSV odometry correspondence",
+    "source RGB pixel hashes",
+    "camera and core event streams identical",
+    "frame timestamps bracketed",
+    "Gazebo/ROS scene pose agreement"
+  ],
+  "automated_source_warnings_review": {
+    "FONT-GLYPH-FLOOR": "Warning comes from retained historical c2/c3 branch; new figure uses plain text for overall margin. Audit the delivered PDF glyph sizes.",
+    "EXPORT-RASTER": "Requested PNG preview accompanies the manuscript vector PDF and editable SVG; no TIFF is requested.",
+    "FINAL-WIDTH": "170-by-74-mm approved IEEE layout is explicitly retained; generic Nature widths do not apply."
+  }
+}

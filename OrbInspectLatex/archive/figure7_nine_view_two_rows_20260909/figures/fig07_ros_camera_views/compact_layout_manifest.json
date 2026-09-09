@@ -1,0 +1,62 @@
+{
+  "status": "passed",
+  "figure_mm": [
+    170.0,
+    44.0
+  ],
+  "layout_canvas_mm": [
+    170.0,
+    47.0
+  ],
+  "blank_bottom_trim_mm": 3.0,
+  "camera_views": 9,
+  "trajectory_rows": 27188,
+  "image_pixels_unchanged": true,
+  "trajectory_coordinates_unchanged": true,
+  "equal_spatial_scaling": true,
+  "text_within_canvas": true,
+  "markers_within_axes": true,
+  "layout": "Two shared-axis projections on the left; five camera columns in two rows on the right; legend in the spare tenth cell when nine views are present",
+  "camera_width_mm": 20.8,
+  "camera_column_gap_mm": 0.8,
+  "camera_row_pitch_mm": 21.5,
+  "projection_spatial_scale_relative_to_original_74mm_layout": 0.66,
+  "projection_rectangles_mm": {
+    "xz": [
+      10.6,
+      11.0,
+      22.572,
+      30.887999999999998
+    ],
+    "yz": [
+      37.0,
+      11.0,
+      21.984,
+      30.887999999999998
+    ]
+  },
+  "right_marker_padding_mm": 0.6,
+  "projection_view_limits_m": {
+    "x": [
+      -58.46153846153846,
+      58.46153846153846
+    ],
+    "y": [
+      -50.38461538461539,
+      63.4926184926185
+    ],
+    "z": [
+      -80,
+      80
+    ]
+  },
+  "correspondence": "Camera top row 1-5 matches projection (a); camera bottom row 6-9 matches projection (b); inactive hollow markers retained",
+  "minimum_annotation_font_pt": 7.0,
+  "snapshot_sha256": "c5866b5366c45298d67fa2b5e94feaec284deb6a4a8cfc6ed693fee22b39349a",
+  "script_sha256": "b19004b9ec6b9d6660a80d87be029823df929b6caebe8b5bf0261be1525f2356",
+  "output_sha256": {
+    "ros_key_camera_views_trajectory.svg": "92a3eada71a87d10ddb72e9fae6a99d7209cb75ce509d026daf087c6a5998166",
+    "ros_key_camera_views_trajectory.pdf": "35dc859fc28a46c7c588b149bfdac44162985b39f5408a754e4e6592e2c07c13",
+    "ros_key_camera_views_trajectory.png": "3401821ea461a56a4fe7c7fa7ce2d07585e60df9644642701b36514b9f187fce"
+  }
+}

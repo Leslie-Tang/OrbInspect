@@ -1,0 +1,22 @@
+{
+  "total_records": 74962,
+  "valid_chaser_records": 74959,
+  "records_without_chaser": [
+    {
+      "record_index": 0,
+      "simulator_stamp_s": 0.04,
+      "reason": "No named chaser in recorded scene"
+    },
+    {
+      "record_index": 1,
+      "simulator_stamp_s": 0.060000000000000005,
+      "reason": "No named chaser in recorded scene"
+    },
+    {
+      "record_index": 2,
+      "simulator_stamp_s": 0.08,
+      "reason": "No named chaser in recorded scene"
+    }
+  ],
+  "handling": "Raw records retained; no pose synthesized. Each selected frame must still pass the unchanged bracketing and pose gates."
+}

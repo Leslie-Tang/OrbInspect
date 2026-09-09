@@ -1,0 +1,59 @@
+{
+  "case_kind": "supplemental selected 12-observation hybrid ROS case; not a held-out result",
+  "parent_scenario": "required09_test_000",
+  "derived_scenario": "required09_test_000_bg95",
+  "required_targets": 9,
+  "fixed_weighted_universe": 41,
+  "background_goal": 0.95,
+  "original_predicted_coverage": 0.9585771560419855,
+  "original_route_synchronous_screen": {
+    "accepted": 10,
+    "total": 12,
+    "failed_views": [
+      5,
+      12
+    ],
+    "position_errors_m": [
+      2.8687402181,
+      2.6180193326
+    ]
+  },
+  "diagnosed_cause": "The two planned viewpoints lie within the unchanged proxy caution zone; the projection filter prevents arrival under the existing reference.",
+  "refinement_selection": {
+    "view5_displacement_m": 8.0,
+    "view12_displacement_m": 6.0,
+    "methods": [
+      "26 cube directions at 5.5, 8 and 11 m with original visible targets as aim anchors",
+      "centered-boresight combinations at safe cube positions",
+      "1000 Fibonacci directions per radius; tested 5.2 and 6 m before stopping at the first radius with feasible full-visibility candidates"
+    ],
+    "gates": "Body clearance >=8.3 m in search; original 2-m hard margin, 8-m caution margin and camera range/FOV/incidence/full-mesh LOS fixed",
+    "choice": "First complete-preservation 8-m candidate for view5; maximum proxy body clearance among complete-preservation 6-m candidates for view12",
+    "route_order_preserved": true,
+    "all_transfers_and_visibility_recomputed": true
+  },
+  "refined_prediction": {
+    "observations": 12,
+    "required_targets": 9,
+    "weighted_coverage": 0.9585771560419855,
+    "covered_samples": 39,
+    "schedule_s": 1800,
+    "terminal_dwell_s": 60
+  },
+  "refined_synchronous_screen": {
+    "accepted": 12,
+    "total": 12,
+    "maximum_terminal_position_error_m": 0.05009800498390031,
+    "maximum_terminal_speed_mps": 0.003815353916848934
+  },
+  "execution_protocol": "One normal-speed graphical ROS run after the synchronous diagnostic; no accelerated-probe metrics substitute for this execution.",
+  "promotion_gates": [
+    "all12 observations pass existing .5 m/.05 m/s gates",
+    "all9 fixed required targets accepted",
+    "weighted accepted-ID union >=.95",
+    "independent event topics agree",
+    "full247525-triangle continuous swept-body mesh audit passes",
+    "camera/event receipt, scene-time and scene-pose gates all pass"
+  ],
+  "retained_prior_evidence": "Original 810-s failure, previous1350-s9-view graphical success, original12-view synchronous failure and all refinement search inventories retained."
+}

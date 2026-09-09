@@ -66,8 +66,8 @@ def check() -> dict:
                     for attr, value in element.attrib.items():
                         if attr.split('}')[-1] == 'href':
                             assert value.startswith(('data:', '#')), f'External SVG resource: {path.name}'
-    assert len(manifest['figures']) == 7
-    return {'local_compilation_inputs': len(inputs), 'figure_groups': 7,
+    assert [f['number'] for f in manifest['figures']] == list(range(1, 9))
+    return {'local_compilation_inputs': len(inputs), 'figure_groups': len(manifest['figures']),
             'verified_figure_files': checked, 'external_project_inputs': 0,
             'native_diagram_images': 'embedded', 'status': 'passed'}
 

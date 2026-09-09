@@ -1,0 +1,47 @@
+{
+  "figure_number": 8,
+  "width_mm": 85.0,
+  "height_mm": 46.0,
+  "source_manifest": "data/rviz_overview/20260909_113140_hybrid12_rviz_video/source_manifest.json",
+  "source_manifest_sha256": "6d6403125a9e8c3bedcf9ca19426994df5406554e4d783f284106e530bc8e51e",
+  "conclusion": "The recorded repeat execution presents the global trajectory and onboard camera together in RViz at mission completion.",
+  "archetype": "image plate + completion counts",
+  "reuse": "Style-only inheritance from Figure 7; screenshot pixels unchanged.",
+  "independent_execution": "20260909_113140_hybrid12_rviz_video_execution",
+  "panel_a": {
+    "question": "Where did the spacecraft travel relative to the station?",
+    "crop_xyxy": [
+      260,
+      200,
+      960,
+      1020
+    ],
+    "native_pixels": [
+      700,
+      820
+    ],
+    "effective_source_dpi": 505.11363636363626
+  },
+  "panel_b": {
+    "question": "What did the onboard camera show at completion?",
+    "crop_xyxy": [
+      1198,
+      311,
+      1920,
+      827
+    ],
+    "native_pixels": [
+      722,
+      516
+    ],
+    "effective_source_dpi": 441.89879518072286
+  },
+  "image_adjustments": "Exact rectangular crops only; original brightness, contrast, colors, geometry and camera field retained.",
+  "replicate_unit": "One illustrative repeat execution; no uncertainty estimate or aggregate inference.",
+  "minimum_label_font_pt": 7.2,
+  "files": {
+    "rviz_execution_overview.pdf": "1b9867fdb0bf3a9f9241018596f302640f84ab69295455ff33a9333ad1beb288",
+    "rviz_execution_overview.svg": "7af7816a88ced372baacd7b626ed12f9fb0e00f217c523be661e4e7bf5370878",
+    "rviz_execution_overview.png": "fbdedfab84dc022dd006c86b88b6984353d2756fb7ebf85ee2277aa75d281ba6"
+  }
+}
