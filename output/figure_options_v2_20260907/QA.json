@@ -1,0 +1,110 @@
+{
+  "status": "review drafts; manuscript unchanged",
+  "pages": [
+    {
+      "name": "A - Integrated revision",
+      "stem": "A_integrated",
+      "native_cells": 370,
+      "photo_objects": 1,
+      "vector_mesh_facets": 31897,
+      "label_count": 67,
+      "word_count": 152,
+      "width_mm": 182,
+      "height_mm": 125.66666666666667,
+      "min_font_pt": 6.755905511811024,
+      "text_width_warnings": []
+    },
+    {
+      "name": "B1 - Sensing and planning overview",
+      "stem": "B1_overview",
+      "native_cells": 328,
+      "photo_objects": 1,
+      "vector_mesh_facets": 30298,
+      "label_count": 49,
+      "word_count": 105,
+      "width_mm": 182,
+      "height_mm": 91.86666666666666,
+      "min_font_pt": 6.755905511811024,
+      "text_width_warnings": []
+    },
+    {
+      "name": "B2 - Reference-inspired ADP mechanism",
+      "stem": "B2_adp_mechanism",
+      "native_cells": 85,
+      "photo_objects": 0,
+      "vector_mesh_facets": 0,
+      "label_count": 32,
+      "word_count": 121,
+      "width_mm": 182,
+      "height_mm": 101.83333333333333,
+      "min_font_pt": 7.062992125984253,
+      "text_width_warnings": []
+    }
+  ],
+  "evidence_scenario": "required09_test_000",
+  "source_hashes": {
+    "data/results/20260905_101500_required_target_confirmation/raw/hcw_graph.json": "e90f40f0aaf87464ad5b5ef6b39979aa3c5f0b7049fe0ec17ad5e5b1a19b0af2",
+    "data/results/20260905_101500_required_target_confirmation/raw/representative_case_manifest.json": "a10583ba2e32b731dfad868ef1302a448a19790c3863973207cbd36e1267640e",
+    "data/results/20260905_101500_required_target_confirmation/raw/representative_case_trajectory.csv": "78d2b5df766b39dcffef019e36b149e2e46e1afc62dec12e426bacb35cacf78e",
+    "data/results/20260905_101500_required_target_confirmation/raw/target_positions.csv": "73810927ffd53d7eff5a0f3fd46ac4cb6776a9482d47c1d1c05c833e3e4c006a",
+    "data/results/20260905_101500_required_target_confirmation/config_snapshot/base_experiment_config.json": "fac496ad6874c03e8c35be6a91e7b63aed3c7fa099d2a8321ae9ba59a57e1cb4",
+    "src/orbinspect_description/models/iss_real/meshes/ISS_stationary.glb": "26dba905b4b7555edbcb0c5f5a61b5c18659f5166076ab27dbb0e64025759fca",
+    "src/orbinspect_description/models/iss_real/model.sdf": "2c54fb53e81a6423c2d3b4e396a6c2ea1f3b41e6cb8db1137ebade5d8ab50e47"
+  },
+  "preserved_sha256": {
+    "OrbInspectLatex/main.tex": "b9f55331f459eba887a0f2f18c4710e299e146f0783c84ccae2b75ccb7b0147d",
+    "OrbInspectLatex/main.pdf": "2ddbe42ab1a3b822972042d12e0c001d92e5b2bda67493174b06e711b305b281",
+    "OrbInspectLatex/figures/required_target/orbinspect_framework.drawio": "835a81472933fd08b44ecdc631b03b5504b0e067246f029d4ab9e9c301262c04",
+    "OrbInspectLatex/figures/required_target/orbinspect_framework.pdf": "bbb00d620f0ebe19c2b6ff814fd05af09fa044bda3868354ce551a03bd7a0e31",
+    "output/pdf/OrbInspect_figure_options_20260907.pdf": "c4555c341cad0e4efdd30081353d879b314a21d5d0c73ddec68fb8fb0273d56c",
+    "output/figure_options_20260907/A_integrated.drawio": "700b6bdc618c6b45b6a3e9d429a2f38efd042f02facea5b804ffddc91c700a4d",
+    "output/figure_options_20260907/B1_overview.drawio": "87e55d197920e42b7cddf78c13d862589102eecdd6af147c55cf149b30dab296",
+    "output/figure_options_20260907/B2_adp_mechanism.drawio": "2f062c7f47c37a4092b60ebcfd7694dee9d2eca025d20bf47e8177ce53c210b2",
+    "output/figure_options_20260907/OrbInspect_figure_options.drawio": "2bc458e26a83c8f5c2b4a0b836d324a58b7aa0416078dffc1cb4dced608d2cb6"
+  },
+  "manuscript_and_current_figure_unchanged": true,
+  "manuscript_and_previous_options_unchanged": true,
+  "new_checks": {
+    "los": "Schematic FOV/range/incidence/occlusion geometry",
+    "hcw": {
+      "delta_v": 1.9803895513381728,
+      "feasible": true,
+      "input_limit": 0.06,
+      "min_clearance": 2.80753987333066,
+      "passive_margin": null,
+      "peak_input": 0.04253615042051259,
+      "source_id": "cand_0070",
+      "stage_cost": 16.245231493772835,
+      "target_id": "cand_0068",
+      "tracking_error": 35.24046520601095
+    },
+    "adp": "Reference-inspired native prefix, complete tails, finite/infinite costs and Bellman backup."
+  },
+  "validation": {
+    "native_pages": 3,
+    "separate_files_match_master": true,
+    "native_stencils_validated": [
+      {
+        "ISS_facets": 31897,
+        "LOS_geometry": 3
+      },
+      {
+        "ISS_facets": 30298,
+        "LOS_geometry": 3
+      },
+      {
+        "ISS_facets": 0,
+        "LOS_geometry": 0
+      }
+    ],
+    "original_camera_bytes_preserved": true,
+    "archived_sources_manuscript_and_v1_hashes_match": true,
+    "all_graph_arcs_are_archived_passed_audits": true,
+    "hcw_positions_and_controls_match_30_archived_intervals": true,
+    "hcw_peak_control_m_s2": 0.04253615042051258,
+    "review_pdf_pages_and_text_bounds_checked": true,
+    "native_drawio_import_visually_checked": true,
+    "poppler_review_pdf_visually_checked": true,
+    "equation_export": "Vector outlines; corresponding draw.io equations are editable HTML text."
+  }
+}

@@ -1,0 +1,17 @@
+\begin{table*}[t]
+  \centering
+  \caption{Required-target validation depth diagnostic. Graph-cost means use the same scenarios completed at all depths. Penalized cost, timing, and safety-screen counts include every validation scenario; depth three was fixed before this diagnostic}
+  \label{tab:depth-sensitivity}
+  \renewcommand{\arraystretch}{1.08}
+  \setlength{\tabcolsep}{5pt}
+  \footnotesize
+  \begin{tabular}{@{}crrrrrr@{}}
+    \toprule
+    Depth & Complete & Common pairs & Mean $J$ & Penalized $J$ & Median time (s) & Mean evaluations \\
+    \midrule
+    1 & 9/12 & 9 & 135.714 & 351.786 & 0.0252 & 7,132 \\
+    2 & 9/12 & 9 & 133.450 & 350.087 & 0.2244 & 65,928 \\
+    3 & 9/12 & 9 & 118.520 & 338.890 & 1.0117 & 322,349 \\
+    \bottomrule
+  \end{tabular}
+\end{table*}

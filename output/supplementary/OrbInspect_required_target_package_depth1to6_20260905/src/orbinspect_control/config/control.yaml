@@ -1,0 +1,15 @@
+controller_node:
+  ros__parameters:
+    position_gain: 0.0008
+    velocity_gain: 0.08
+    max_acceleration: 0.01
+    control_rate: 10.0
+    default_reference: [8.0, -20.0, 6.0]
+    frame_id: lvlh
+    publish_safe_command_passthrough: true
+
+reference_publisher_node:
+  ros__parameters:
+    reference_position: [8.0, -20.0, 6.0]
+    publish_rate: 2.0
+    frame_id: lvlh

@@ -1,0 +1,31 @@
+{
+  "artifact_id": "fig-adp-depth-sensitivity",
+  "caption_claim": "On the corrected validation graph, mean cost decreases with deeper lookahead while platform-specific time and safety-screen evaluations increase; depth three is the frozen policy setting, not a choice made from this post-selection sweep.",
+  "generated_files": [
+    "OrbInspectLatex/figures/adp_future/adp_depth_tradeoff_a.pdf",
+    "OrbInspectLatex/figures/adp_future/adp_depth_tradeoff_a.png",
+    "OrbInspectLatex/figures/adp_future/adp_depth_tradeoff_a.svg",
+    "OrbInspectLatex/figures/adp_future/adp_depth_tradeoff_b.pdf",
+    "OrbInspectLatex/figures/adp_future/adp_depth_tradeoff_b.png",
+    "OrbInspectLatex/figures/adp_future/adp_depth_tradeoff_b.svg",
+    "OrbInspectLatex/figures/adp_future/adp_depth_tradeoff_c.pdf",
+    "OrbInspectLatex/figures/adp_future/adp_depth_tradeoff_c.png",
+    "OrbInspectLatex/figures/adp_future/adp_depth_tradeoff_c.svg"
+  ],
+  "limitations": [
+    "All depths are post-selection, validation-only diagnostic evidence.",
+    "The sweep did not select depth three or alter the frozen primary comparison.",
+    "Wall-clock time is environment-sensitive and is not a real-time benchmark."
+  ],
+  "script": "OrbInspectLatex/scripts/generate_depth_tradeoff_figure.py",
+  "script_sha256": "381dbce08c1d5a4691e146ab2928e4582906cb251326854f2b5dd72eb66a000c",
+  "source_files": [
+    "data/results/adp_depth_corrected_postselection_d1_20260905/raw/heldout_summary.csv",
+    "data/results/adp_depth_corrected_postselection_d2_20260905/raw/heldout_summary.csv",
+    "data/results/adp_depth_corrected_postselection_d3_20260905/raw/heldout_summary.csv",
+    "data/results/adp_depth_corrected_postselection_d4_20260905/raw/heldout_summary.csv",
+    "data/results/adp_depth_corrected_postselection_d5_20260905/raw/heldout_summary.csv",
+    "data/results/adp_depth_corrected_postselection_d6_20260905/raw/heldout_summary.csv"
+  ],
+  "source_table": "OrbInspectLatex/data/adp_depth_sensitivity_corrected_20260905.csv"
+}

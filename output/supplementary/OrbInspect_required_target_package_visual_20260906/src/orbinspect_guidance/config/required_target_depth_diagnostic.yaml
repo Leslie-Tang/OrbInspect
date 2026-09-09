@@ -1,0 +1,24 @@
+schema_version: 1
+study_name: required_target_depth_one_to_six_diagnostic
+source_study: data/results/20260905_101500_required_target_confirmation
+primary_profile: required09
+scenario_split: validation
+expected_scenario_count: 12
+diagnostic_depths: [1, 2, 3, 4, 5, 6]
+reference_depth: 3
+method: adaptive_rollout_adp
+execution_order: depth_ascending_then_original_scenario_order
+parallel_plans: 1
+checkpoint_after_every_plan: true
+classification: post_selection_user_requested_validation_diagnostic
+primary_test_policy_changed: false
+notes: >-
+  Reuse the exact twelve confirmation validation scenarios, fixed nine target
+  IDs, graph, costs, budget, and original implementation. Recompute all six
+  depths in one sequential timing job on the same host, preserving every
+  failure including absent required observations. No target, seed, graph,
+  algorithm, or primary test outcome is changed. This descriptive diagnostic
+  can explain the practical cost-workload tradeoff but cannot retrospectively
+  select depth three or demonstrate its universal optimality. Resource-cost
+  means use scenarios completed at every depth; success, penalties, timing,
+  and safety-screen counts retain all twelve scenarios at every depth.

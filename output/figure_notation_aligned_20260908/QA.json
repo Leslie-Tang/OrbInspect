@@ -1,0 +1,1966 @@
+{
+  "revision": "Notation and native/export consistency in A, B1, B2",
+  "math_source": "One canonical LaTeX token sequence per label",
+  "live_mathjax_rendering": {
+    "verified": false,
+    "reason": "Private headless browser could not initialize even on a blank page; no live renderer pass is claimed."
+  },
+  "figures": {
+    "A_integrated": {
+      "updated_labels": [
+        {
+          "cell": "97",
+          "before": "Required targets K",
+          "canonical": [
+            [
+              {
+                "kind": "text",
+                "value": "Required targets "
+              },
+              {
+                "kind": "math",
+                "value": "\\displaystyle \\mathcal{K}"
+              }
+            ]
+          ],
+          "geometry_before": [
+            65.0,
+            480.0,
+            357.0,
+            42.0
+          ],
+          "geometry_after": [
+            65.0,
+            480.0,
+            357.0,
+            42.0
+          ],
+          "font_size": 28.0,
+          "original_font_size": 28.0,
+          "width": 252.27199935913086,
+          "box_width": 357.0,
+          "line_heights": [
+            33.6
+          ]
+        },
+        {
+          "cell": "104",
+          "before": "Camera rⱼ",
+          "canonical": [
+            [
+              {
+                "kind": "text",
+                "value": "Camera "
+              },
+              {
+                "kind": "math",
+                "value": "\\displaystyle \\bar{\\mathbf{r}}_j"
+              }
+            ]
+          ],
+          "geometry_before": [
+            33.0,
+            848.6,
+            105.56,
+            30.0
+          ],
+          "geometry_after": [
+            33.0,
+            848.6,
+            105.56,
+            30.0
+          ],
+          "font_size": 22.258919710203546,
+          "original_font_size": 23.0,
+          "width": 104.34069797787056,
+          "box_width": 105.56,
+          "line_heights": [
+            26.710703652244256
+          ]
+        },
+        {
+          "cell": "109",
+          "before": "pᵢ",
+          "canonical": [
+            [
+              {
+                "kind": "math",
+                "value": "\\displaystyle p_i"
+              }
+            ]
+          ],
+          "geometry_before": [
+            373.97999999999996,
+            665.7,
+            64.0,
+            31.0
+          ],
+          "geometry_after": [
+            373.97999999999996,
+            665.7,
+            64.0,
+            31.0
+          ],
+          "font_size": 25.0,
+          "original_font_size": 25.0,
+          "width": 21.0,
+          "box_width": 64.0,
+          "line_heights": [
+            30.0
+          ]
+        },
+        {
+          "cell": "110",
+          "before": "nᵢ",
+          "canonical": [
+            [
+              {
+                "kind": "math",
+                "value": "\\displaystyle n_i"
+              }
+            ]
+          ],
+          "geometry_before": [
+            293.97999999999996,
+            696.7,
+            47.0,
+            28.0
+          ],
+          "geometry_after": [
+            293.97999999999996,
+            696.7,
+            47.0,
+            28.0
+          ],
+          "font_size": 23.263333333333335,
+          "original_font_size": 24.0,
+          "width": 22.0,
+          "box_width": 47.0,
+          "line_heights": [
+            27.916
+          ]
+        },
+        {
+          "cell": "113",
+          "before": "θ",
+          "canonical": [
+            [
+              {
+                "kind": "math",
+                "value": "\\displaystyle \\theta"
+              }
+            ]
+          ],
+          "geometry_before": [
+            307.97999999999996,
+            742.7,
+            35.0,
+            28.0
+          ],
+          "geometry_after": [
+            307.97999999999996,
+            742.7,
+            35.0,
+            28.0
+          ],
+          "font_size": 23.263333333333335,
+          "original_font_size": 24.0,
+          "width": 11.0,
+          "box_width": 35.0,
+          "line_heights": [
+            27.916
+          ]
+        },
+        {
+          "cell": "115",
+          "before": "ρ",
+          "canonical": [
+            [
+              {
+                "kind": "text",
+                "value": "Range"
+              }
+            ]
+          ],
+          "geometry_before": [
+            220.82,
+            764.8,
+            46.0,
+            29.0
+          ],
+          "geometry_after": [
+            205.82,
+            764.8,
+            76.0,
+            29.0
+          ],
+          "font_size": 24.094166666666666,
+          "original_font_size": 25.0,
+          "width": 70.98141451746226,
+          "box_width": 76.0,
+          "line_heights": [
+            28.912999999999997
+          ]
+        },
+        {
+          "cell": "117",
+          "before": "αₘₐₓ",
+          "canonical": [
+            [
+              {
+                "kind": "math",
+                "value": "\\displaystyle \\alpha_{\\max}"
+              }
+            ]
+          ],
+          "geometry_before": [
+            56.39,
+            705.4,
+            92.0,
+            31.0
+          ],
+          "geometry_after": [
+            56.39,
+            705.4,
+            92.0,
+            31.0
+          ],
+          "font_size": 24.0,
+          "original_font_size": 24.0,
+          "width": 49.0,
+          "box_width": 92.0,
+          "line_heights": [
+            28.799999999999997
+          ]
+        },
+        {
+          "cell": "119",
+          "before": "b(qⱼ)",
+          "canonical": [
+            [
+              {
+                "kind": "math",
+                "value": "\\displaystyle b(\\bar{q}_j)"
+              }
+            ]
+          ],
+          "geometry_before": [
+            366.97999999999996,
+            810.6,
+            60.9,
+            28.0
+          ],
+          "geometry_after": [
+            366.97999999999996,
+            810.6,
+            60.9,
+            28.0
+          ],
+          "font_size": 23.0,
+          "original_font_size": 23.0,
+          "width": 48.0,
+          "box_width": 60.9,
+          "line_heights": [
+            27.599999999999998
+          ]
+        },
+        {
+          "cell": "131",
+          "before": "Valid targets → Gⱼ",
+          "canonical": [
+            [
+              {
+                "kind": "text",
+                "value": "Valid targets → "
+              },
+              {
+                "kind": "math",
+                "value": "\\displaystyle G_j"
+              }
+            ]
+          ],
+          "geometry_before": [
+            123.38000000000001,
+            992.0,
+            219.24,
+            29.0
+          ],
+          "geometry_after": [
+            123.38000000000001,
+            992.0,
+            219.24,
+            29.0
+          ],
+          "font_size": 24.0,
+          "original_font_size": 24.0,
+          "width": 209.39199924468994,
+          "box_width": 219.24,
+          "line_heights": [
+            28.799999999999997
+          ]
+        },
+        {
+          "cell": "133",
+          "before": "s = (j, m, b, h)",
+          "canonical": [
+            [
+              {
+                "kind": "math",
+                "value": "\\displaystyle s=(j,m,b,h)"
+              }
+            ]
+          ],
+          "geometry_before": [
+            45.0,
+            1055.0,
+            375.0,
+            34.0
+          ],
+          "geometry_after": [
+            45.0,
+            1055.0,
+            375.0,
+            34.0
+          ],
+          "font_size": 28.0,
+          "original_font_size": 28.0,
+          "width": 169.0,
+          "box_width": 375.0,
+          "line_heights": [
+            33.6
+          ]
+        },
+        {
+          "cell": "adp-d-6",
+          "before": "Safe actions · depth d",
+          "canonical": [
+            [
+              {
+                "kind": "text",
+                "value": "Safe actions · depth "
+              },
+              {
+                "kind": "math",
+                "value": "\\displaystyle d"
+              }
+            ]
+          ],
+          "geometry_before": [
+            500.0,
+            629.0,
+            329.0,
+            31.0
+          ],
+          "geometry_after": [
+            500.0,
+            629.0,
+            329.0,
+            31.0
+          ],
+          "font_size": 25.0,
+          "original_font_size": 25.0,
+          "width": 241.9249981045723,
+          "box_width": 329.0,
+          "line_heights": [
+            30.0
+          ]
+        },
+        {
+          "cell": "adp-d-7",
+          "before": "Deterministic greedy μ",
+          "canonical": [
+            [
+              {
+                "kind": "text",
+                "value": "Deterministic greedy "
+              },
+              {
+                "kind": "math",
+                "value": "\\displaystyle \\mu"
+              }
+            ]
+          ],
+          "geometry_before": [
+            857.0,
+            629.0,
+            430.0,
+            31.0
+          ],
+          "geometry_after": [
+            857.0,
+            629.0,
+            430.0,
+            31.0
+          ],
+          "font_size": 25.0,
+          "original_font_size": 25.0,
+          "width": 250.77499932050705,
+          "box_width": 430.0,
+          "line_heights": [
+            30.0
+          ]
+        },
+        {
+          "cell": "adp-d-21",
+          "before": "s",
+          "canonical": [
+            [
+              {
+                "kind": "math",
+                "value": "\\displaystyle s"
+              }
+            ]
+          ],
+          "geometry_before": [
+            507.0,
+            769.0,
+            50.0,
+            31.0
+          ],
+          "geometry_after": [
+            507.0,
+            769.0,
+            50.0,
+            31.0
+          ],
+          "font_size": 25.75583333333333,
+          "original_font_size": 28.0,
+          "width": 13.0,
+          "box_width": 50.0,
+          "line_heights": [
+            30.906999999999996
+          ]
+        },
+        {
+          "cell": "adp-d-22",
+          "before": "a₁",
+          "removed": true
+        },
+        {
+          "cell": "adp-d-23",
+          "before": "a₂",
+          "removed": true
+        },
+        {
+          "cell": "237",
+          "before": "First action a*",
+          "canonical": [
+            [
+              {
+                "kind": "text",
+                "value": "First action "
+              },
+              {
+                "kind": "math",
+                "value": "\\displaystyle a^\\star"
+              }
+            ]
+          ],
+          "geometry_before": [
+            1366.0,
+            196.0,
+            270.0,
+            38.0
+          ],
+          "geometry_after": [
+            1366.0,
+            196.0,
+            270.0,
+            38.0
+          ],
+          "font_size": 28.0,
+          "original_font_size": 28.0,
+          "width": 197.70399951934814,
+          "box_width": 270.0,
+          "line_heights": [
+            33.6
+          ]
+        },
+        {
+          "cell": "243",
+          "before": "s′ = f(s, a*)",
+          "canonical": [
+            [
+              {
+                "kind": "math",
+                "value": "\\displaystyle s^{\\prime}=f(s,a^\\star)"
+              }
+            ]
+          ],
+          "geometry_before": [
+            1366.0,
+            375.0,
+            270.0,
+            37.0
+          ],
+          "geometry_after": [
+            1366.0,
+            375.0,
+            270.0,
+            37.0
+          ],
+          "font_size": 27.0,
+          "original_font_size": 27.0,
+          "width": 149.0,
+          "box_width": 270.0,
+          "line_heights": [
+            32.4
+          ]
+        },
+        {
+          "cell": "hcw-c-20",
+          "before": "xᵢⱼ(t), uᵢⱼ(t)",
+          "canonical": [
+            [
+              {
+                "kind": "math",
+                "value": "\\displaystyle \\mathbf{x}_{ij}(t),\\;\\mathbf{u}_{ij}(t)"
+              }
+            ]
+          ],
+          "geometry_before": [
+            505.0,
+            381.0,
+            238.0,
+            28.0
+          ],
+          "geometry_after": [
+            505.0,
+            381.0,
+            238.0,
+            28.0
+          ],
+          "font_size": 23.263333333333332,
+          "original_font_size": 25.0,
+          "width": 124.0,
+          "box_width": 238.0,
+          "line_heights": [
+            27.915999999999997
+          ]
+        },
+        {
+          "cell": "hcw-c-29",
+          "before": "All pass: χᵢⱼ = 1",
+          "canonical": [
+            [
+              {
+                "kind": "text",
+                "value": "All pass: "
+              },
+              {
+                "kind": "math",
+                "value": "\\displaystyle \\chi_{ij}=1"
+              }
+            ]
+          ],
+          "geometry_before": [
+            777.0,
+            343.0,
+            232.0,
+            31.0
+          ],
+          "geometry_after": [
+            777.0,
+            343.0,
+            232.0,
+            31.0
+          ],
+          "font_size": 23.0,
+          "original_font_size": 23.0,
+          "width": 168.2579995393753,
+          "box_width": 232.0,
+          "line_heights": [
+            27.599999999999998
+          ]
+        },
+        {
+          "cell": "hcw-c-33",
+          "before": "SOOA aᵢⱼ",
+          "canonical": [
+            [
+              {
+                "kind": "text",
+                "value": "SOOA "
+              },
+              {
+                "kind": "math",
+                "value": "\\displaystyle a_{ij}"
+              }
+            ]
+          ],
+          "geometry_before": [
+            1060.0,
+            198.0,
+            226.0,
+            28.0
+          ],
+          "geometry_after": [
+            1060.0,
+            198.0,
+            226.0,
+            28.0
+          ],
+          "font_size": 23.263333333333332,
+          "original_font_size": 25.0,
+          "width": 101.97772310038407,
+          "box_width": 226.0,
+          "line_heights": [
+            27.915999999999997
+          ]
+        },
+        {
+          "cell": "hcw-c-39",
+          "before": "ℓᵢⱼ",
+          "canonical": [
+            [
+              {
+                "kind": "math",
+                "value": "\\displaystyle \\ell_{ij}"
+              }
+            ]
+          ],
+          "geometry_before": [
+            1135.0,
+            228.0,
+            67.0,
+            28.0
+          ],
+          "geometry_after": [
+            1135.0,
+            228.0,
+            67.0,
+            28.0
+          ],
+          "font_size": 23.263333333333332,
+          "original_font_size": 25.0,
+          "width": 24.0,
+          "box_width": 67.0,
+          "line_heights": [
+            27.915999999999997
+          ]
+        },
+        {
+          "cell": "hcw-c-40",
+          "before": "Source i",
+          "canonical": [
+            [
+              {
+                "kind": "text",
+                "value": "Source "
+              },
+              {
+                "kind": "math",
+                "value": "\\displaystyle i"
+              }
+            ]
+          ],
+          "geometry_before": [
+            1048.0,
+            301.0,
+            93.0,
+            27.0
+          ],
+          "geometry_after": [
+            1048.0,
+            301.0,
+            93.0,
+            27.0
+          ],
+          "font_size": 22.432500000000005,
+          "original_font_size": 23.0,
+          "width": 85.30239455074073,
+          "box_width": 93.0,
+          "line_heights": [
+            26.919000000000004
+          ]
+        },
+        {
+          "cell": "hcw-c-41",
+          "before": "View j",
+          "canonical": [
+            [
+              {
+                "kind": "text",
+                "value": "View "
+              },
+              {
+                "kind": "math",
+                "value": "\\displaystyle j"
+              }
+            ]
+          ],
+          "geometry_before": [
+            1195.0,
+            301.0,
+            95.0,
+            27.0
+          ],
+          "geometry_after": [
+            1195.0,
+            301.0,
+            95.0,
+            27.0
+          ],
+          "font_size": 22.432500000000005,
+          "original_font_size": 23.0,
+          "width": 64.84746233955028,
+          "box_width": 95.0,
+          "line_heights": [
+            26.919000000000004
+          ]
+        },
+        {
+          "cell": "hcw-c-44",
+          "before": "Node: view + mask Gⱼ",
+          "canonical": [
+            [
+              {
+                "kind": "text",
+                "value": "Node: view + mask "
+              },
+              {
+                "kind": "math",
+                "value": "\\displaystyle G_j"
+              }
+            ]
+          ],
+          "geometry_before": [
+            1060.0,
+            382.0,
+            230.0,
+            29.0
+          ],
+          "geometry_after": [
+            1060.0,
+            382.0,
+            230.0,
+            29.0
+          ],
+          "font_size": 23.0,
+          "original_font_size": 23.0,
+          "width": 228.31899911165237,
+          "box_width": 230.0,
+          "line_heights": [
+            27.599999999999998
+          ]
+        },
+        {
+          "cell": "adp-d-35",
+          "before": "V̂0 = ∑ ℓ",
+          "canonical": [
+            [
+              {
+                "kind": "math",
+                "value": "\\displaystyle \\widehat{V}_0(s)=\\sum\\ell"
+              }
+            ]
+          ],
+          "geometry_before": [
+            1074.0,
+            763.0,
+            193.0,
+            41.0
+          ],
+          "geometry_after": [
+            1074.0,
+            763.0,
+            193.0,
+            41.0
+          ],
+          "font_size": 29.0,
+          "original_font_size": 29.0,
+          "width": 153.0,
+          "box_width": 193.0,
+          "line_heights": [
+            41.0
+          ]
+        },
+        {
+          "cell": "adp-d-38",
+          "before": "V̂0 = +∞",
+          "canonical": [
+            [
+              {
+                "kind": "math",
+                "value": "\\displaystyle \\widehat{V}_0(s)=+\\infty"
+              }
+            ]
+          ],
+          "geometry_before": [
+            1074.0,
+            890.0,
+            193.0,
+            31.0
+          ],
+          "geometry_after": [
+            1074.0,
+            890.0,
+            193.0,
+            31.0
+          ],
+          "font_size": 25.75583333333333,
+          "original_font_size": 27.0,
+          "width": 134.0,
+          "box_width": 193.0,
+          "line_heights": [
+            31.0
+          ]
+        },
+        {
+          "cell": "adp-d-39",
+          "before": "a ∈ Us(s)",
+          "canonical": [
+            [
+              {
+                "kind": "math",
+                "value": "\\displaystyle a\\in\\mathcal{U}_s(s)"
+              }
+            ]
+          ],
+          "geometry_before": [
+            546.0,
+            933.0,
+            269.0,
+            34.0
+          ],
+          "geometry_after": [
+            546.0,
+            933.0,
+            269.0,
+            34.0
+          ],
+          "font_size": 26.0,
+          "original_font_size": 26.0,
+          "width": 101.0,
+          "box_width": 269.0,
+          "line_heights": [
+            31.2
+          ]
+        },
+        {
+          "cell": "adp-d-44",
+          "before": "3  Bellman backup · discard +∞ actions",
+          "canonical": [
+            [
+              {
+                "kind": "text",
+                "value": "3  Bellman backup · discard "
+              },
+              {
+                "kind": "math",
+                "value": "\\displaystyle +\\infty"
+              },
+              {
+                "kind": "text",
+                "value": " actions"
+              }
+            ]
+          ],
+          "geometry_before": [
+            550.0,
+            986.0,
+            690.0,
+            29.0
+          ],
+          "geometry_after": [
+            550.0,
+            986.0,
+            690.0,
+            29.0
+          ],
+          "font_size": 24.094166666666666,
+          "original_font_size": 26.0,
+          "width": 458.1183953975141,
+          "box_width": 690.0,
+          "line_heights": [
+            28.912999999999997
+          ]
+        },
+        {
+          "cell": "adp-d-46",
+          "before": "Q̂d(s, a) = ℓja + V̂d−1(f(s, a))",
+          "canonical": [
+            [
+              {
+                "kind": "math",
+                "value": "\\displaystyle \\widehat{Q}_d(s,a)=\\ell_{ja}+\\widehat{V}_{d-1}(f(s,a))"
+              }
+            ]
+          ],
+          "geometry_before": [
+            555.0,
+            1034.0,
+            680.0,
+            42.0
+          ],
+          "geometry_after": [
+            555.0,
+            1034.0,
+            680.0,
+            42.0
+          ],
+          "font_size": 31.0,
+          "original_font_size": 31.0,
+          "width": 390.0,
+          "box_width": 680.0,
+          "line_heights": [
+            41.0
+          ]
+        },
+        {
+          "cell": "238",
+          "before": "Minimum finite Q",
+          "canonical": [
+            [
+              {
+                "kind": "text",
+                "value": "Minimum finite "
+              },
+              {
+                "kind": "math",
+                "value": "\\displaystyle \\widehat{Q}_d(s,a)"
+              }
+            ]
+          ],
+          "geometry_before": [
+            1366.0,
+            239.0,
+            270.0,
+            30.0
+          ],
+          "geometry_after": [
+            1366.0,
+            239.0,
+            270.0,
+            30.0
+          ],
+          "font_size": 24.0,
+          "original_font_size": 24.0,
+          "width": 245.35199975967407,
+          "box_width": 270.0,
+          "line_heights": [
+            30.0
+          ]
+        }
+      ],
+      "shared_math_tokens": 27,
+      "native_export_math_source_equal": true,
+      "unchanged_nonlabel_svg_elements": 32533,
+      "unchanged_geometry_data_palette": true
+    },
+    "B1_overview": {
+      "updated_labels": [
+        {
+          "cell": "97",
+          "before": "Required targets K",
+          "canonical": [
+            [
+              {
+                "kind": "text",
+                "value": "Required targets "
+              },
+              {
+                "kind": "math",
+                "value": "\\displaystyle \\mathcal{K}"
+              }
+            ]
+          ],
+          "geometry_before": [
+            65.0,
+            612.0,
+            252.0,
+            41.0
+          ],
+          "geometry_after": [
+            65.0,
+            612.0,
+            252.0,
+            41.0
+          ],
+          "font_size": 25.0,
+          "original_font_size": 25.0,
+          "width": 225.5999994277954,
+          "box_width": 252.0,
+          "line_heights": [
+            30.0
+          ]
+        },
+        {
+          "cell": "98",
+          "before": "Initial state; budget H",
+          "canonical": [
+            [
+              {
+                "kind": "text",
+                "value": "Initial state; budget "
+              },
+              {
+                "kind": "math",
+                "value": "\\displaystyle H"
+              }
+            ]
+          ],
+          "geometry_before": [
+            34.0,
+            687.0,
+            286.0,
+            38.0
+          ],
+          "geometry_after": [
+            34.0,
+            687.0,
+            286.0,
+            38.0
+          ],
+          "font_size": 25.0,
+          "original_font_size": 25.0,
+          "width": 237.79999828338623,
+          "box_width": 286.0,
+          "line_heights": [
+            30.0
+          ]
+        },
+        {
+          "cell": "105",
+          "before": "Camera rⱼ",
+          "canonical": [
+            [
+              {
+                "kind": "text",
+                "value": "Camera "
+              },
+              {
+                "kind": "math",
+                "value": "\\displaystyle \\bar{\\mathbf{r}}_j"
+              }
+            ]
+          ],
+          "geometry_before": [
+            390.0,
+            304.28,
+            152.36,
+            30.0
+          ],
+          "geometry_after": [
+            390.0,
+            304.28,
+            152.36,
+            30.0
+          ],
+          "font_size": 23.0,
+          "original_font_size": 23.0,
+          "width": 107.18199980258942,
+          "box_width": 152.36,
+          "line_heights": [
+            27.599999999999998
+          ]
+        },
+        {
+          "cell": "110",
+          "before": "pᵢ",
+          "canonical": [
+            [
+              {
+                "kind": "math",
+                "value": "\\displaystyle p_i"
+              }
+            ]
+          ],
+          "geometry_before": [
+            880.38,
+            130.56,
+            64.0,
+            31.0
+          ],
+          "geometry_after": [
+            880.38,
+            130.56,
+            64.0,
+            31.0
+          ],
+          "font_size": 25.0,
+          "original_font_size": 25.0,
+          "width": 21.0,
+          "box_width": 64.0,
+          "line_heights": [
+            30.0
+          ]
+        },
+        {
+          "cell": "111",
+          "before": "nᵢ",
+          "canonical": [
+            [
+              {
+                "kind": "math",
+                "value": "\\displaystyle n_i"
+              }
+            ]
+          ],
+          "geometry_before": [
+            800.38,
+            161.56,
+            47.0,
+            28.0
+          ],
+          "geometry_after": [
+            800.38,
+            161.56,
+            47.0,
+            28.0
+          ],
+          "font_size": 23.263333333333335,
+          "original_font_size": 24.0,
+          "width": 22.0,
+          "box_width": 47.0,
+          "line_heights": [
+            27.916
+          ]
+        },
+        {
+          "cell": "114",
+          "before": "θ",
+          "canonical": [
+            [
+              {
+                "kind": "math",
+                "value": "\\displaystyle \\theta"
+              }
+            ]
+          ],
+          "geometry_before": [
+            814.38,
+            207.56,
+            35.0,
+            28.0
+          ],
+          "geometry_after": [
+            814.38,
+            207.56,
+            35.0,
+            28.0
+          ],
+          "font_size": 23.263333333333335,
+          "original_font_size": 24.0,
+          "width": 11.0,
+          "box_width": 35.0,
+          "line_heights": [
+            27.916
+          ]
+        },
+        {
+          "cell": "116",
+          "before": "ρ",
+          "canonical": [
+            [
+              {
+                "kind": "text",
+                "value": "Range"
+              }
+            ]
+          ],
+          "geometry_before": [
+            662.42,
+            225.24,
+            46.0,
+            29.0
+          ],
+          "geometry_after": [
+            647.42,
+            225.24,
+            76.0,
+            29.0
+          ],
+          "font_size": 24.094166666666666,
+          "original_font_size": 25.0,
+          "width": 70.98141451746226,
+          "box_width": 76.0,
+          "line_heights": [
+            28.912999999999997
+          ]
+        },
+        {
+          "cell": "118",
+          "before": "αₘₐₓ",
+          "canonical": [
+            [
+              {
+                "kind": "math",
+                "value": "\\displaystyle \\alpha_{\\max}"
+              }
+            ]
+          ],
+          "geometry_before": [
+            425.09000000000003,
+            173.32,
+            92.0,
+            31.0
+          ],
+          "geometry_after": [
+            425.09000000000003,
+            173.32,
+            92.0,
+            31.0
+          ],
+          "font_size": 24.0,
+          "original_font_size": 24.0,
+          "width": 49.0,
+          "box_width": 92.0,
+          "line_heights": [
+            28.799999999999997
+          ]
+        },
+        {
+          "cell": "120",
+          "before": "b(qⱼ)",
+          "canonical": [
+            [
+              {
+                "kind": "math",
+                "value": "\\displaystyle b(\\bar{q}_j)"
+              }
+            ]
+          ],
+          "geometry_before": [
+            873.38,
+            266.28,
+            87.89999999999999,
+            28.0
+          ],
+          "geometry_after": [
+            873.38,
+            266.28,
+            87.89999999999999,
+            28.0
+          ],
+          "font_size": 23.0,
+          "original_font_size": 23.0,
+          "width": 48.0,
+          "box_width": 87.89999999999999,
+          "line_heights": [
+            27.599999999999998
+          ]
+        },
+        {
+          "cell": "132",
+          "before": "Valid targets → Gⱼ",
+          "canonical": [
+            [
+              {
+                "kind": "text",
+                "value": "Valid targets → "
+              },
+              {
+                "kind": "math",
+                "value": "\\displaystyle G_j"
+              }
+            ]
+          ],
+          "geometry_before": [
+            521.78,
+            430.0,
+            316.44,
+            29.0
+          ],
+          "geometry_after": [
+            521.78,
+            430.0,
+            316.44,
+            29.0
+          ],
+          "font_size": 24.0,
+          "original_font_size": 24.0,
+          "width": 209.39199924468994,
+          "box_width": 316.44,
+          "line_heights": [
+            28.799999999999997
+          ]
+        },
+        {
+          "cell": "196",
+          "before": "Lookahead d",
+          "canonical": [
+            [
+              {
+                "kind": "text",
+                "value": "Lookahead "
+              },
+              {
+                "kind": "math",
+                "value": "\\displaystyle d"
+              }
+            ]
+          ],
+          "geometry_before": [
+            714.0,
+            591.0,
+            227.04,
+            48.0
+          ],
+          "geometry_after": [
+            714.0,
+            591.0,
+            227.04,
+            48.0
+          ],
+          "font_size": 25.0,
+          "original_font_size": 25.0,
+          "width": 152.92499953508377,
+          "box_width": 227.04,
+          "line_heights": [
+            30.0
+          ]
+        },
+        {
+          "cell": "210",
+          "before": "+∞",
+          "canonical": [
+            [
+              {
+                "kind": "math",
+                "value": "\\displaystyle +\\infty"
+              }
+            ]
+          ],
+          "geometry_before": [
+            1121.64,
+            724.0,
+            103.2,
+            36.0
+          ],
+          "geometry_after": [
+            1121.64,
+            724.0,
+            103.2,
+            36.0
+          ],
+          "font_size": 29.0,
+          "original_font_size": 29.0,
+          "width": 52.0,
+          "box_width": 103.2,
+          "line_heights": [
+            34.8
+          ]
+        },
+        {
+          "cell": "212",
+          "before": "s",
+          "canonical": [
+            [
+              {
+                "kind": "math",
+                "value": "\\displaystyle s"
+              }
+            ]
+          ],
+          "geometry_before": [
+            716.0,
+            655.0,
+            40.0,
+            28.0
+          ],
+          "geometry_after": [
+            716.0,
+            655.0,
+            40.0,
+            28.0
+          ],
+          "font_size": 23.263333333333332,
+          "original_font_size": 25.0,
+          "width": 11.0,
+          "box_width": 40.0,
+          "line_heights": [
+            27.915999999999997
+          ]
+        },
+        {
+          "cell": "135",
+          "before": "‖u‖ (m/s²)",
+          "canonical": [
+            [
+              {
+                "kind": "math",
+                "value": "\\displaystyle \\|\\mathbf{u}\\|_2"
+              },
+              {
+                "kind": "text",
+                "value": " (m/s²)"
+              }
+            ]
+          ],
+          "geometry_before": [
+            1057.0,
+            152.0,
+            204.39999999999998,
+            32.0
+          ],
+          "geometry_after": [
+            1057.0,
+            152.0,
+            204.39999999999998,
+            32.0
+          ],
+          "font_size": 25.0,
+          "original_font_size": 25.0,
+          "width": 126.0,
+          "box_width": 204.39999999999998,
+          "line_heights": [
+            30.0
+          ]
+        },
+        {
+          "cell": "153",
+          "before": "HCW motion x(t)",
+          "canonical": [
+            [
+              {
+                "kind": "text",
+                "value": "HCW motion "
+              },
+              {
+                "kind": "math",
+                "value": "\\displaystyle \\mathbf{x}_{ij}(t)"
+              }
+            ]
+          ],
+          "geometry_before": [
+            1377.04,
+            154.0,
+            233.60000000000002,
+            32.0
+          ],
+          "geometry_after": [
+            1377.04,
+            154.0,
+            233.60000000000002,
+            32.0
+          ],
+          "font_size": 25.0,
+          "original_font_size": 25.0,
+          "width": 214.9250002503395,
+          "box_width": 233.60000000000002,
+          "line_heights": [
+            30.0
+          ]
+        }
+      ],
+      "shared_math_tokens": 14,
+      "native_export_math_source_equal": true,
+      "unchanged_nonlabel_svg_elements": 30732,
+      "unchanged_geometry_data_palette": true
+    },
+    "B2_adp_mechanism": {
+      "updated_labels": [
+        {
+          "cell": "6",
+          "before": "s = (j, m, b, h)",
+          "canonical": [
+            [
+              {
+                "kind": "math",
+                "value": "\\displaystyle s=(j,m,b,h)"
+              }
+            ]
+          ],
+          "geometry_before": [
+            41.0,
+            207.0,
+            244.0,
+            48.0
+          ],
+          "geometry_after": [
+            41.0,
+            207.0,
+            244.0,
+            48.0
+          ],
+          "font_size": 29.0,
+          "original_font_size": 29.0,
+          "width": 175.0,
+          "box_width": 244.0,
+          "line_heights": [
+            34.8
+          ]
+        },
+        {
+          "cell": "12",
+          "before": "Fixed required set K",
+          "canonical": [
+            [
+              {
+                "kind": "text",
+                "value": "Fixed required set "
+              },
+              {
+                "kind": "math",
+                "value": "\\displaystyle \\mathcal{K}"
+              }
+            ]
+          ],
+          "geometry_before": [
+            34.0,
+            749.0,
+            256.0,
+            32.0
+          ],
+          "geometry_after": [
+            34.0,
+            749.0,
+            256.0,
+            32.0
+          ],
+          "font_size": 24.0,
+          "original_font_size": 24.0,
+          "width": 232.4079990386963,
+          "box_width": 256.0,
+          "line_heights": [
+            28.799999999999997
+          ]
+        },
+        {
+          "cell": "16",
+          "before": "Lookahead depth d",
+          "canonical": [
+            [
+              {
+                "kind": "text",
+                "value": "Lookahead depth "
+              },
+              {
+                "kind": "math",
+                "value": "\\displaystyle d"
+              }
+            ]
+          ],
+          "geometry_before": [
+            373.0,
+            202.0,
+            422.1,
+            31.0
+          ],
+          "geometry_after": [
+            373.0,
+            202.0,
+            422.1,
+            31.0
+          ],
+          "font_size": 25.0,
+          "original_font_size": 25.0,
+          "width": 214.1499980688095,
+          "box_width": 422.1,
+          "line_heights": [
+            30.0
+          ]
+        },
+        {
+          "cell": "18",
+          "before": "Deterministic greedy μ",
+          "canonical": [
+            [
+              {
+                "kind": "text",
+                "value": "Deterministic greedy "
+              },
+              {
+                "kind": "math",
+                "value": "\\displaystyle \\mu"
+              }
+            ]
+          ],
+          "geometry_before": [
+            832.62,
+            202.0,
+            453.0,
+            31.0
+          ],
+          "geometry_after": [
+            832.62,
+            202.0,
+            453.0,
+            31.0
+          ],
+          "font_size": 25.0,
+          "original_font_size": 25.0,
+          "width": 250.77499932050705,
+          "box_width": 453.0,
+          "line_heights": [
+            30.0
+          ]
+        },
+        {
+          "cell": "33",
+          "before": "s",
+          "canonical": [
+            [
+              {
+                "kind": "math",
+                "value": "\\displaystyle s"
+              }
+            ]
+          ],
+          "geometry_before": [
+            372.0,
+            405.5,
+            50.0,
+            32.0
+          ],
+          "geometry_after": [
+            372.0,
+            405.5,
+            50.0,
+            32.0
+          ],
+          "font_size": 26.586666666666666,
+          "original_font_size": 28.0,
+          "width": 13.0,
+          "box_width": 50.0,
+          "line_heights": [
+            31.903999999999996
+          ]
+        },
+        {
+          "cell": "34",
+          "before": "a₁",
+          "removed": true
+        },
+        {
+          "cell": "35",
+          "before": "a₂",
+          "removed": true
+        },
+        {
+          "cell": "36",
+          "before": "a ∈ Uₛ(s)",
+          "canonical": [
+            [
+              {
+                "kind": "math",
+                "value": "\\displaystyle a\\in\\mathcal{U}_s(s)"
+              }
+            ]
+          ],
+          "geometry_before": [
+            371.0,
+            664.0,
+            403.34,
+            35.0
+          ],
+          "geometry_after": [
+            371.0,
+            664.0,
+            403.34,
+            35.0
+          ],
+          "font_size": 25.0,
+          "original_font_size": 25.0,
+          "width": 97.0,
+          "box_width": 403.34,
+          "line_heights": [
+            30.0
+          ]
+        },
+        {
+          "cell": "56",
+          "before": "Noncompletion\n+∞",
+          "canonical": [
+            [
+              {
+                "kind": "text",
+                "value": "Noncompletion"
+              }
+            ],
+            [
+              {
+                "kind": "math",
+                "value": "\\displaystyle +\\infty"
+              }
+            ]
+          ],
+          "geometry_before": [
+            1075.5,
+            510.84000000000003,
+            215.81,
+            148.15999999999997
+          ],
+          "geometry_after": [
+            1075.5,
+            510.84000000000003,
+            215.81,
+            148.15999999999997
+          ],
+          "font_size": 24.0,
+          "original_font_size": 24.0,
+          "width": 174.67199993133545,
+          "box_width": 215.81,
+          "line_heights": [
+            28.799999999999997,
+            28.799999999999997
+          ]
+        },
+        {
+          "cell": "72",
+          "before": "s′ = f(s, a*)",
+          "canonical": [
+            [
+              {
+                "kind": "math",
+                "value": "\\displaystyle s^{\\prime}=f(s,a^\\star)"
+              }
+            ]
+          ],
+          "geometry_before": [
+            1383.0,
+            443.0,
+            254.0,
+            40.0
+          ],
+          "geometry_after": [
+            1383.0,
+            443.0,
+            254.0,
+            40.0
+          ],
+          "font_size": 28.0,
+          "original_font_size": 28.0,
+          "width": 154.0,
+          "box_width": 254.0,
+          "line_heights": [
+            33.6
+          ]
+        },
+        {
+          "cell": "7",
+          "before": "j   current viewpoint\nm  covered targets\nb  selected views\nh  remaining budget",
+          "canonical": [
+            [
+              {
+                "kind": "math",
+                "value": "\\displaystyle j"
+              },
+              {
+                "kind": "text",
+                "value": "  current node"
+              }
+            ],
+            [
+              {
+                "kind": "math",
+                "value": "\\displaystyle m"
+              },
+              {
+                "kind": "text",
+                "value": "  covered-target mask"
+              }
+            ],
+            [
+              {
+                "kind": "math",
+                "value": "\\displaystyle b"
+              },
+              {
+                "kind": "text",
+                "value": "  selected-view mask"
+              }
+            ],
+            [
+              {
+                "kind": "math",
+                "value": "\\displaystyle h"
+              },
+              {
+                "kind": "text",
+                "value": "  remaining budget"
+              }
+            ]
+          ],
+          "geometry_before": [
+            39.0,
+            307.0,
+            255.0,
+            162.0
+          ],
+          "geometry_after": [
+            39.0,
+            307.0,
+            255.0,
+            162.0
+          ],
+          "font_size": 24.0,
+          "original_font_size": 24.0,
+          "width": 254.07999897003174,
+          "box_width": 255.0,
+          "line_heights": [
+            28.799999999999997,
+            28.799999999999997,
+            28.799999999999997,
+            28.799999999999997
+          ]
+        },
+        {
+          "cell": "10",
+          "before": "Us(s): ba = 0, χja = 1",
+          "canonical": [
+            [
+              {
+                "kind": "math",
+                "value": "\\displaystyle \\mathcal{U}_s(s):\\;b_a=0,\\;\\chi_{ja}=1"
+              }
+            ]
+          ],
+          "geometry_before": [
+            43.0,
+            569.0,
+            240.0,
+            37.0
+          ],
+          "geometry_after": [
+            43.0,
+            569.0,
+            240.0,
+            37.0
+          ],
+          "font_size": 24.0,
+          "original_font_size": 24.0,
+          "width": 225.0,
+          "box_width": 240.0,
+          "line_heights": [
+            28.799999999999997
+          ]
+        },
+        {
+          "cell": "61",
+          "before": "Q̂d(s, a) = ℓja + V̂d−1(f(s, a))",
+          "canonical": [
+            [
+              {
+                "kind": "math",
+                "value": "\\displaystyle \\widehat{Q}_d(s,a)=\\ell_{ja}+\\widehat{V}_{d-1}(f(s,a))"
+              }
+            ]
+          ],
+          "geometry_before": [
+            420.0,
+            727.0,
+            830.0,
+            42.0
+          ],
+          "geometry_after": [
+            420.0,
+            727.0,
+            830.0,
+            42.0
+          ],
+          "font_size": 29.0,
+          "original_font_size": 29.0,
+          "width": 365.0,
+          "box_width": 830.0,
+          "line_heights": [
+            39.0
+          ]
+        },
+        {
+          "cell": "67",
+          "before": "a* = arg mina Q̂d(s, a)",
+          "canonical": [
+            [
+              {
+                "kind": "math",
+                "value": "\\displaystyle a^\\star=\\arg\\min_a\\,\\widehat{Q}_d(s,a)"
+              }
+            ]
+          ],
+          "geometry_before": [
+            1383.0,
+            260.0,
+            254.0,
+            43.0
+          ],
+          "geometry_after": [
+            1383.0,
+            260.0,
+            254.0,
+            43.0
+          ],
+          "font_size": 25.0,
+          "original_font_size": 25.0,
+          "width": 238.0,
+          "box_width": 254.0,
+          "line_heights": [
+            38.0
+          ]
+        },
+        {
+          "cell": "81",
+          "before": "All Q = +∞ → no certified completion",
+          "canonical": [
+            [
+              {
+                "kind": "text",
+                "value": "All "
+              },
+              {
+                "kind": "math",
+                "value": "\\displaystyle \\widehat{Q}_d(s,a)=+\\infty"
+              }
+            ],
+            [
+              {
+                "kind": "text",
+                "value": "No certified completion"
+              }
+            ]
+          ],
+          "geometry_before": [
+            514.0,
+            848.0,
+            499.0,
+            48.0
+          ],
+          "geometry_after": [
+            514.0,
+            838.0,
+            499.0,
+            56.0
+          ],
+          "font_size": 22.51290322580645,
+          "original_font_size": 25.0,
+          "width": 228.9562248403026,
+          "box_width": 499.0,
+          "line_heights": [
+            29.0,
+            27.01548387096774
+          ]
+        }
+      ],
+      "shared_math_tokens": 16,
+      "native_export_math_source_equal": true,
+      "unchanged_nonlabel_svg_elements": 397,
+      "unchanged_geometry_data_palette": true
+    }
+  },
+  "preserved_sha256": {
+    "output/figure_adp_compact_20260907/A_integrated.svg": "c8cc3df81ae2678f2347cbcbf1dfc8875869d8f337ff69bdd4c520b7ab01a63a",
+    "output/figure_adp_compact_20260907/QA.json": "ccdfd601da0fdc87cf864227dc79a1f16ab646dd35472a91c1a864202217ee98",
+    "output/figure_adp_compact_20260907/B2_adp_mechanism.drawio": "f6b946339763d191918ba494aa3ab90123c18d57d4dd5ea8c881f3b956376900",
+    "output/figure_adp_compact_20260907/A_integrated.png": "1f03571476a72c720a92729d7e32e44cf8a1b1f663b4c978a226714dd02d0b46",
+    "output/figure_adp_compact_20260907/A_integrated.drawio": "5a086e133132fbbe23b6f40d9fc27d27f24f253bcde511f22dedab2bf1a303d9",
+    "output/figure_adp_compact_20260907/README.md": "da0a5e6e11e969db5278dbe6725bf164927d9a0828f0afd914d6a7a255a1f61b",
+    "output/figure_adp_compact_20260907/palette.json": "7133d5a88927b6e340996474f7a2f38529db9e2c1cc295fcd2b7664842897064",
+    "output/figure_adp_compact_20260907/B1_overview.svg": "79d181f9d9bea02bf993f1cc4ad8b1138e3499542fc8374fd0c025cb66e93dd8",
+    "output/figure_adp_compact_20260907/B2_adp_mechanism.png": "8ad507aa3118097456eb976b47b6ea445508fef6fc41f2e8e53bb8c76a3dbff2",
+    "output/figure_adp_compact_20260907/OrbInspect_figure_options.drawio": "ed0c33c6a39b43765e43d2611bc75c562568c6d4635372cbcd32d03997570234",
+    "output/figure_adp_compact_20260907/B2_adp_mechanism.svg": "3c2fdc6cf1f7b3e721b37dc5892371fb4547b7275cca23d4f14175e4e2e9d855",
+    "output/figure_adp_compact_20260907/B1_overview.png": "3e3ea4a52c6e0fe87e81852ff00b8d11171a98b5867553f1f014bc8793fa9e99",
+    "output/figure_adp_compact_20260907/B1_overview.drawio": "05ecdfdb72f2c742539ab27dd63a6e525e12352d24ef60f24c55ef4da989c873",
+    "output/figure_adp_compact_20260907/source/revise_compact_adp_panel.py": "c912a763053e1515ba0b1923583d06bcfd8499375fd1b4e844c31e240b5e177b",
+    "output/figure_adp_compact_20260907/source/generate_editable_framework.py": "0a9549de3f54b5af822467457bd55bf18c74a8d0dc3e3ba220fd7f6007ece152",
+    "output/figure_adp_compact_20260907/source/generate_figure_options.py": "06429ec7bd14b1babb43867a0ba1cc4c31f442ec083d02d7cbe08e2f638ad1df",
+    "output/figure_adp_compact_20260907/assets/evidence.json": "88ea2c46409777a0849e51d3e76baf176af822800d31161c47b0c1084f269459",
+    "output/figure_adp_compact_20260907/assets/camera_alexander_lucke.jpg": "6882fba51eaa084d38f21e3edc622811ba07d3107942e12f85dd97a83486832d",
+    "output/figure_adp_compact_20260907/assets/IMAGE_CREDITS.md": "73fde8ad222992ee86cdcc40ce336b235c2138c648aa3b5e520b142cdfd16a73",
+    "OrbInspectLatex/main.tex": "b9f55331f459eba887a0f2f18c4710e299e146f0783c84ccae2b75ccb7b0147d",
+    "OrbInspectLatex/main.pdf": "2ddbe42ab1a3b822972042d12e0c001d92e5b2bda67493174b06e711b305b281",
+    "output/pdf/OrbInspect_figure_adp_compact_20260907.pdf": "cd6fbace5e2c57a172d5170aeb7ac1c000b547a1eed105c7ff571f2aaab75ca9"
+  },
+  "sources_and_manuscript_unchanged": true
+}

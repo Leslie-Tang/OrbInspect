@@ -1,0 +1,395 @@
+{
+  "camera_views": [
+    {
+      "body_clearance_above_required_margin_m": 30.66917838219345,
+      "camera_frame_fraction": 0.19316628421016477,
+      "camera_frame_index": 509,
+      "cumulative_coverage": 0.08463827631242919,
+      "executed_position_lvlh_m": [
+        -14.211493254762928,
+        -36.538075115602496,
+        15.530237489799719
+      ],
+      "individual_outputs": {
+        "export_dpi": 600,
+        "pdf": "OrbInspectLatex/figures/ros_key_camera_views/view_01_cand_0005_t0090s.pdf",
+        "pdf_sha256": "68f1272d4d81a0c7d101caee8182d9b518d5f4db608729e3d2c7505b32b0ae25",
+        "png": "OrbInspectLatex/figures/ros_key_camera_views/view_01_cand_0005_t0090s.png",
+        "png_sha256": "689d9480db86753728cde24a6ab3c2c1ae0872e048b4deb8c9658c0b24f6a5a3",
+        "source_height_px": 686,
+        "source_width_px": 960
+      },
+      "mesh_center_distance_m": 33.46917838219345,
+      "mission_time_s": 90.00694755,
+      "planned_position_lvlh_m": [
+        -14.215387816523867,
+        -36.53831190085295,
+        15.53175095839516
+      ],
+      "sequence": 1,
+      "trajectory_row_index": 1751,
+      "trajectory_time_s": 90.00694755,
+      "waypoint_id": "cand_0005"
+    },
+    {
+      "body_clearance_above_required_margin_m": 11.360004349508795,
+      "camera_frame_fraction": 0.276807990863418,
+      "camera_frame_index": 729,
+      "cumulative_coverage": 0.18624794373263165,
+      "executed_position_lvlh_m": [
+        -16.572591341073924,
+        9.211678531174236,
+        50.10339505176954
+      ],
+      "individual_outputs": {
+        "export_dpi": 600,
+        "pdf": "OrbInspectLatex/figures/ros_key_camera_views/view_02_cand_0010_t0180s.pdf",
+        "pdf_sha256": "58d43e927d11d051d9d0e67ed7b4d9ff8e26b5eb0cda0157a32a27ece022e2ff",
+        "png": "OrbInspectLatex/figures/ros_key_camera_views/view_02_cand_0010_t0180s.png",
+        "png_sha256": "942833ab1f36aa36e52f0d5db077eaf636f543299ccd3aae98ba97a5fea6e3a5",
+        "source_height_px": 686,
+        "source_width_px": 960
+      },
+      "mesh_center_distance_m": 14.160004349508796,
+      "mission_time_s": 180.006724585,
+      "planned_position_lvlh_m": [
+        -16.572494314263974,
+        9.223040922565342,
+        50.111971267112885
+      ],
+      "sequence": 2,
+      "trajectory_row_index": 3551,
+      "trajectory_time_s": 180.006724585,
+      "waypoint_id": "cand_0010"
+    },
+    {
+      "body_clearance_above_required_margin_m": 9.837200618974398,
+      "camera_frame_fraction": 0.3604498526194532,
+      "camera_frame_index": 949,
+      "cumulative_coverage": 0.2032193348404049,
+      "executed_position_lvlh_m": [
+        -21.266789671763952,
+        24.28885401102643,
+        29.546432255515434
+      ],
+      "individual_outputs": {
+        "export_dpi": 600,
+        "pdf": "OrbInspectLatex/figures/ros_key_camera_views/view_03_cand_0070_t0270s.pdf",
+        "pdf_sha256": "c6a153d46fe3c28674af347cbc97f0e95afe17d2bf0d2f34d162542039dcc9ea",
+        "png": "OrbInspectLatex/figures/ros_key_camera_views/view_03_cand_0070_t0270s.png",
+        "png_sha256": "e416956be5ee9211ca24eef2272d071708b8b05f335ae0369c03da8669c0757a",
+        "source_height_px": 686,
+        "source_width_px": 960
+      },
+      "mesh_center_distance_m": 12.637200618974399,
+      "mission_time_s": 270.00666861,
+      "planned_position_lvlh_m": [
+        -21.267723051622028,
+        24.29269597280825,
+        29.54135474720531
+      ],
+      "sequence": 3,
+      "trajectory_row_index": 5351,
+      "trajectory_time_s": 270.00666861,
+      "waypoint_id": "cand_0070"
+    },
+    {
+      "body_clearance_above_required_margin_m": 22.7400324822295,
+      "camera_frame_fraction": 0.44409160469566406,
+      "camera_frame_index": 1170,
+      "cumulative_coverage": 0.271104899271498,
+      "executed_position_lvlh_m": [
+        28.98775518684292,
+        37.6725002437392,
+        1.4633262018090092
+      ],
+      "individual_outputs": {
+        "export_dpi": 600,
+        "pdf": "OrbInspectLatex/figures/ros_key_camera_views/view_04_cand_0068_t0360s.pdf",
+        "pdf_sha256": "28690df0afac532abd569454168fc1febbe7331b10c539138f7289f1469c16f4",
+        "png": "OrbInspectLatex/figures/ros_key_camera_views/view_04_cand_0068_t0360s.png",
+        "png_sha256": "85a0005e304f0a992d454f4da539e9260a8540387b39f84d2c209ecec7b40364",
+        "source_height_px": 686,
+        "source_width_px": 960
+      },
+      "mesh_center_distance_m": 25.5400324822295,
+      "mission_time_s": 360.006494495,
+      "planned_position_lvlh_m": [
+        29.054819679282204,
+        37.703623139960506,
+        1.4875898899054723
+      ],
+      "sequence": 4,
+      "trajectory_row_index": 7151,
+      "trajectory_time_s": 360.006494495,
+      "waypoint_id": "cand_0068"
+    },
+    {
+      "body_clearance_above_required_margin_m": 32.50807421665471,
+      "camera_frame_fraction": 0.5277337445288297,
+      "camera_frame_index": 1390,
+      "cumulative_coverage": 0.5250197282087856,
+      "executed_position_lvlh_m": [
+        37.1739631521465,
+        32.28909919970644,
+        39.74256653912067
+      ],
+      "individual_outputs": {
+        "export_dpi": 600,
+        "pdf": "OrbInspectLatex/figures/ros_key_camera_views/view_05_cand_0021_t0450s.pdf",
+        "pdf_sha256": "f7a641320a6e87b9f2ba160120736e39c5a5bd7ff7d1f9ad88b028f50f026067",
+        "png": "OrbInspectLatex/figures/ros_key_camera_views/view_05_cand_0021_t0450s.png",
+        "png_sha256": "6fa26d6d9cb7488976e9a04dbd3041eaf40ae1d94721db379259d5cb8b75b688",
+        "source_height_px": 686,
+        "source_width_px": 960
+      },
+      "mesh_center_distance_m": 35.30807421665471,
+      "mission_time_s": 450.006737595,
+      "planned_position_lvlh_m": [
+        37.17644045367278,
+        32.28717951916092,
+        39.75388601442142
+      ],
+      "sequence": 5,
+      "trajectory_row_index": 8951,
+      "trajectory_time_s": 450.006737595,
+      "waypoint_id": "cand_0021"
+    },
+    {
+      "body_clearance_above_required_margin_m": 30.884022527192997,
+      "camera_frame_fraction": 0.6113757314749674,
+      "camera_frame_index": 1610,
+      "cumulative_coverage": 0.5929052926398786,
+      "executed_position_lvlh_m": [
+        47.15199957213697,
+        1.922348640423075,
+        39.754710960284456
+      ],
+      "individual_outputs": {
+        "export_dpi": 600,
+        "pdf": "OrbInspectLatex/figures/ros_key_camera_views/view_06_cand_0016_t0540s.pdf",
+        "pdf_sha256": "7d5e9ebcf0b4c90e45ebed1b25cb1bef939e6c98f931cc0a764ac6b0b362d022",
+        "png": "OrbInspectLatex/figures/ros_key_camera_views/view_06_cand_0016_t0540s.png",
+        "png_sha256": "6cefea08ad228e06502632db3c36d03040c8d161470c8c0f67db34de0f223cb6",
+        "source_height_px": 686,
+        "source_width_px": 960
+      },
+      "mesh_center_distance_m": 33.684022527192994,
+      "mission_time_s": 540.0068162800001,
+      "planned_position_lvlh_m": [
+        47.15401174384147,
+        1.9146746871681253,
+        39.75474208073782
+      ],
+      "sequence": 6,
+      "trajectory_row_index": 10751,
+      "trajectory_time_s": 540.0068162800001,
+      "waypoint_id": "cand_0016"
+    },
+    {
+      "body_clearance_above_required_margin_m": 31.902902279823408,
+      "camera_frame_fraction": 0.6950179023286894,
+      "camera_frame_index": 1831,
+      "cumulative_coverage": 0.6098766837476519,
+      "executed_position_lvlh_m": [
+        47.41841400277255,
+        25.238272780932263,
+        3.91834337725059
+      ],
+      "individual_outputs": {
+        "export_dpi": 600,
+        "pdf": "OrbInspectLatex/figures/ros_key_camera_views/view_07_cand_0009_t0630s.pdf",
+        "pdf_sha256": "975cdbbb15a883da4fcf0bada8e94339fc31fa135237a019b9bbb35fd801b984",
+        "png": "OrbInspectLatex/figures/ros_key_camera_views/view_07_cand_0009_t0630s.png",
+        "png_sha256": "7a45a2f8aa681439661a100bbf384bdeba4084b55e570e611d2335fd31d61cd2",
+        "source_height_px": 686,
+        "source_width_px": 960
+      },
+      "mesh_center_distance_m": 34.702902279823405,
+      "mission_time_s": 630.00709349,
+      "planned_position_lvlh_m": [
+        47.41884017642445,
+        25.244055169396592,
+        3.909402831342199
+      ],
+      "sequence": 7,
+      "trajectory_row_index": 12551,
+      "trajectory_time_s": 630.00709349,
+      "waypoint_id": "cand_0009"
+    },
+    {
+      "body_clearance_above_required_margin_m": 28.085875371312795,
+      "camera_frame_fraction": 0.7786593441993365,
+      "camera_frame_index": 2051,
+      "cumulative_coverage": 0.7454291333834009,
+      "executed_position_lvlh_m": [
+        45.47814268437682,
+        1.915094514635337,
+        -39.74186049280286
+      ],
+      "individual_outputs": {
+        "export_dpi": 600,
+        "pdf": "OrbInspectLatex/figures/ros_key_camera_views/view_08_cand_0052_t0720s.pdf",
+        "pdf_sha256": "772a941c5a31e502ff2e0a39f5e1bf2a4d11969255b3148be7c4257d9c0a93a0",
+        "png": "OrbInspectLatex/figures/ros_key_camera_views/view_08_cand_0052_t0720s.png",
+        "png_sha256": "dc177f8069cba07b6ce55cb9eb2d063014b86816e4c86444dd689fcc2ddd36b9",
+        "source_height_px": 686,
+        "source_width_px": 960
+      },
+      "mesh_center_distance_m": 30.885875371312796,
+      "mission_time_s": 720.0065846050001,
+      "planned_position_lvlh_m": [
+        45.47731591651405,
+        1.909387837584102,
+        -39.75267073911061
+      ],
+      "sequence": 8,
+      "trajectory_row_index": 14351,
+      "trajectory_time_s": 720.0065846050001,
+      "waypoint_id": "cand_0052"
+    },
+    {
+      "body_clearance_above_required_margin_m": 32.630451266590484,
+      "camera_frame_fraction": 0.862301482924625,
+      "camera_frame_index": 2271,
+      "cumulative_coverage": 0.7793719155989475,
+      "executed_position_lvlh_m": [
+        45.92048253734326,
+        17.137396130813656,
+        -41.47784182317414
+      ],
+      "individual_outputs": {
+        "export_dpi": 600,
+        "pdf": "OrbInspectLatex/figures/ros_key_camera_views/view_09_cand_0055_t0810s.pdf",
+        "pdf_sha256": "f0b52460f18dcbf2389212927bb7173b0ad81b2e33c7ebe55cc06e9a2ddf7048",
+        "png": "OrbInspectLatex/figures/ros_key_camera_views/view_09_cand_0055_t0810s.png",
+        "png_sha256": "765db9161e22b57b9c6ed9be0cee46a71d7a540ffe2cdbe45e77fe32d313a9f1",
+        "source_height_px": 686,
+        "source_width_px": 960
+      },
+      "mesh_center_distance_m": 35.43045126659048,
+      "mission_time_s": 810.0068274800001,
+      "planned_position_lvlh_m": [
+        45.92081541751833,
+        17.141092307280058,
+        -41.478298620845464
+      ],
+      "sequence": 9,
+      "trajectory_row_index": 16151,
+      "trajectory_time_s": 810.0068274800001,
+      "waypoint_id": "cand_0055"
+    },
+    {
+      "body_clearance_above_required_margin_m": 34.497439505045016,
+      "camera_frame_fraction": 0.9459431585573219,
+      "camera_frame_index": 2492,
+      "cumulative_coverage": 0.8133146978144941,
+      "executed_position_lvlh_m": [
+        39.808035019525754,
+        26.098745976755815,
+        -47.15966711036678
+      ],
+      "individual_outputs": {
+        "export_dpi": 600,
+        "pdf": "OrbInspectLatex/figures/ros_key_camera_views/view_10_cand_0051_t0900s.pdf",
+        "pdf_sha256": "a55ec87ff4f4880d9d822d4b3c53ad9a30dd53e3f855be5efa71166bd8438a4b",
+        "png": "OrbInspectLatex/figures/ros_key_camera_views/view_10_cand_0051_t0900s.png",
+        "png_sha256": "0b141646965cdf617233ef71d2dcc3cd8eac10785cd16c0f3767b639010f52a6",
+        "source_height_px": 686,
+        "source_width_px": 960
+      },
+      "mesh_center_distance_m": 37.29743950504501,
+      "mission_time_s": 900.006570665,
+      "planned_position_lvlh_m": [
+        39.80665960957709,
+        26.101071338494723,
+        -47.16107911243782
+      ],
+      "sequence": 10,
+      "trajectory_row_index": 17951,
+      "trajectory_time_s": 900.006570665,
+      "waypoint_id": "cand_0051"
+    }
+  ],
+  "composite_layout": {
+    "leader_policy": "one local leader per camera view; all other projection markers remain as hollow gray context",
+    "left_camera_views": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "left_projection": "radial-cross-track (x-z)",
+    "right_camera_views": [
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "right_projection": "along-track-cross-track (y-z)"
+  },
+  "gazebo_role": "visualization and chaser camera only",
+  "interpretation": "Camera frames document the rendered field of view at each credited terminal event. Coverage credit comes from the frozen geometric visibility masks, not image-pixel processing.",
+  "mesh_audit_passed": true,
+  "mesh_display": {
+    "display_triangle_count": 14000,
+    "interpretation": "Display decimation affects rendering only; the accepted version-2 safety audit evaluated all source triangles.",
+    "selection": "deterministic uniformly spaced triangle indices",
+    "source_triangle_count": 247525
+  },
+  "mesh_transform": "full_gltf_scene_hierarchy_then_sdf_pitch_90_scale",
+  "method": "adaptive_rollout_adp",
+  "outputs_sha256": {
+    "OrbInspectLatex/figures/ros_key_camera_views/view_01_cand_0005_t0090s.pdf": "68f1272d4d81a0c7d101caee8182d9b518d5f4db608729e3d2c7505b32b0ae25",
+    "OrbInspectLatex/figures/ros_key_camera_views/view_01_cand_0005_t0090s.png": "689d9480db86753728cde24a6ab3c2c1ae0872e048b4deb8c9658c0b24f6a5a3",
+    "OrbInspectLatex/figures/ros_key_camera_views/view_02_cand_0010_t0180s.pdf": "58d43e927d11d051d9d0e67ed7b4d9ff8e26b5eb0cda0157a32a27ece022e2ff",
+    "OrbInspectLatex/figures/ros_key_camera_views/view_02_cand_0010_t0180s.png": "942833ab1f36aa36e52f0d5db077eaf636f543299ccd3aae98ba97a5fea6e3a5",
+    "OrbInspectLatex/figures/ros_key_camera_views/view_03_cand_0070_t0270s.pdf": "c6a153d46fe3c28674af347cbc97f0e95afe17d2bf0d2f34d162542039dcc9ea",
+    "OrbInspectLatex/figures/ros_key_camera_views/view_03_cand_0070_t0270s.png": "e416956be5ee9211ca24eef2272d071708b8b05f335ae0369c03da8669c0757a",
+    "OrbInspectLatex/figures/ros_key_camera_views/view_04_cand_0068_t0360s.pdf": "28690df0afac532abd569454168fc1febbe7331b10c539138f7289f1469c16f4",
+    "OrbInspectLatex/figures/ros_key_camera_views/view_04_cand_0068_t0360s.png": "85a0005e304f0a992d454f4da539e9260a8540387b39f84d2c209ecec7b40364",
+    "OrbInspectLatex/figures/ros_key_camera_views/view_05_cand_0021_t0450s.pdf": "f7a641320a6e87b9f2ba160120736e39c5a5bd7ff7d1f9ad88b028f50f026067",
+    "OrbInspectLatex/figures/ros_key_camera_views/view_05_cand_0021_t0450s.png": "6fa26d6d9cb7488976e9a04dbd3041eaf40ae1d94721db379259d5cb8b75b688",
+    "OrbInspectLatex/figures/ros_key_camera_views/view_06_cand_0016_t0540s.pdf": "7d5e9ebcf0b4c90e45ebed1b25cb1bef939e6c98f931cc0a764ac6b0b362d022",
+    "OrbInspectLatex/figures/ros_key_camera_views/view_06_cand_0016_t0540s.png": "6cefea08ad228e06502632db3c36d03040c8d161470c8c0f67db34de0f223cb6",
+    "OrbInspectLatex/figures/ros_key_camera_views/view_07_cand_0009_t0630s.pdf": "975cdbbb15a883da4fcf0bada8e94339fc31fa135237a019b9bbb35fd801b984",
+    "OrbInspectLatex/figures/ros_key_camera_views/view_07_cand_0009_t0630s.png": "7a45a2f8aa681439661a100bbf384bdeba4084b55e570e611d2335fd31d61cd2",
+    "OrbInspectLatex/figures/ros_key_camera_views/view_08_cand_0052_t0720s.pdf": "772a941c5a31e502ff2e0a39f5e1bf2a4d11969255b3148be7c4257d9c0a93a0",
+    "OrbInspectLatex/figures/ros_key_camera_views/view_08_cand_0052_t0720s.png": "dc177f8069cba07b6ce55cb9eb2d063014b86816e4c86444dd689fcc2ddd36b9",
+    "OrbInspectLatex/figures/ros_key_camera_views/view_09_cand_0055_t0810s.pdf": "f0b52460f18dcbf2389212927bb7173b0ad81b2e33c7ebe55cc06e9a2ddf7048",
+    "OrbInspectLatex/figures/ros_key_camera_views/view_09_cand_0055_t0810s.png": "765db9161e22b57b9c6ed9be0cee46a71d7a540ffe2cdbe45e77fe32d313a9f1",
+    "OrbInspectLatex/figures/ros_key_camera_views/view_10_cand_0051_t0900s.pdf": "a55ec87ff4f4880d9d822d4b3c53ad9a30dd53e3f855be5efa71166bd8438a4b",
+    "OrbInspectLatex/figures/ros_key_camera_views/view_10_cand_0051_t0900s.png": "0b141646965cdf617233ef71d2dcc3cd8eac10785cd16c0f3767b639010f52a6",
+    "OrbInspectLatex/figures/ros_key_camera_views_trajectory.pdf": "d461d7f13701b2224f3ecfe54d413d9e328eaefee3fb0bf3216642e7366462aa",
+    "OrbInspectLatex/figures/ros_key_camera_views_trajectory.png": "9a88411438f56011107e9f0bab940f3e8b078ed87eca0ce92aa2ba6a15555fa6"
+  },
+  "scenario_id": "validation_002",
+  "schema_version": "orbinspect-ros-key-camera-views-figure/v3",
+  "script_sha256": "9d5237bcd3dd4b7901758cdd163511b80e4f89168a01c608786e4afa53f1d611",
+  "source_run": "data/results/ros_rviz_full_planning_demo_corrected_validation002_radius080_20260812",
+  "sources_sha256": {
+    "data/results/ros_rviz_full_planning_demo_corrected_validation002_radius080_20260812/config_snapshot/video_timing.json": "7c71c744f0ce77b02751503b21996b55ec17c1a06e929d42dd161333924f49ec",
+    "data/results/ros_rviz_full_planning_demo_corrected_validation002_radius080_20260812/mesh_execution_audit.json": "9ac1b2365d0c61a512059877c8770bce3c1110460e7c3e91182619787a8544e3",
+    "data/results/ros_rviz_full_planning_demo_corrected_validation002_radius080_20260812/raw/camera_sensor_raw.mp4": "7a40f54932604510ecd72acb4e46e9801e80a7eebb4c5e6e47aa2c68a05bd4c1",
+    "data/results/ros_rviz_full_planning_demo_corrected_validation002_radius080_20260812/raw/mission_events.csv": "6fd31587fbadc68d2f2e42695a6d1800f46d9e912f66cfc9bc153b808b4a0659",
+    "data/results/ros_rviz_full_planning_demo_corrected_validation002_radius080_20260812/raw/trajectory.csv": "036ff9af747415bd9b25b6e689692ef2a4a9fd85456bca69fc890fa8a3343f0f",
+    "data/results/ros_rviz_full_planning_demo_corrected_validation002_radius080_20260812/summary.json": "602d690828877c21a05e64592af54866ae648443e0a809c6e796d28356f5b4bf",
+    "src/orbinspect_description/models/iss_real/meshes/ISS_stationary.glb": "26dba905b4b7555edbcb0c5f5a61b5c18659f5166076ab27dbb0e64025759fca"
+  },
+  "state_source_of_truth": "ROS-native HCW dynamics node",
+  "synchronization": "event mission time -> mission wall time -> normalized retained camera stream frame, matching the accepted video compositor",
+  "verification": {
+    "coverage_ratio": 0.8133146978144941,
+    "credited_actions": 10,
+    "current_waypoint_id": "",
+    "current_waypoint_index": 10,
+    "event": "mission_complete",
+    "failed_actions": 0,
+    "reason": "all_execution_gates_passed",
+    "state": "complete",
+    "success": true,
+    "time": 900.006570665
+  }
+}

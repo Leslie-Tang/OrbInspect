@@ -1,0 +1,77 @@
+{
+  "final_video": {
+    "duration_s": 198.32,
+    "fps": 15.001008471157725,
+    "frames": 2975,
+    "height": 1080,
+    "path": "data/results/ros_rviz_full_planning_demo_corrected_validation002_radius080_20260812/videos/orbinspect_rviz_full_planning_demo_validation_002.mp4",
+    "sha256": "0b954553816c2a4bb1a398c111958e75bf8ed944d7550b39e82897766182b1a7",
+    "width": 1600
+  },
+  "gazebo_role": "visualization and chaser camera only",
+  "interpretation": "The video documents one complete accelerated ROS closed-loop task. It is a demonstration artifact, not an additional campaign row.",
+  "mesh_execution_audit_passed": true,
+  "method": "adaptive_rollout_adp",
+  "minimum_body_clearance_m": 5.692127720480195,
+  "mission_duration_s": 900.0,
+  "mission_time_scale": 5.0,
+  "planned_action_count": 10,
+  "preview": {
+    "path": "data/results/ros_rviz_full_planning_demo_corrected_validation002_radius080_20260812/figures/rviz_full_planning_demo_preview.png",
+    "sha256": "fff89897701849022dca91dd5c659579eb5840bd9f794f922ee70e3a95113e78"
+  },
+  "publish_mode": "closed_loop",
+  "raw_camera": {
+    "frames": 2635,
+    "source_height": 686,
+    "source_topic": "/chaser/camera/image",
+    "source_width": 960
+  },
+  "raw_rviz": {
+    "fps": 15.001411423117766,
+    "frames": 2975,
+    "height": 980,
+    "width": 1600
+  },
+  "reference_stream": {
+    "complete": true,
+    "event": "reference_stream_status",
+    "maximum_allowed_reference_gap_s": 0.075,
+    "maximum_reference_gap_s": 0.17500412000003962,
+    "method": "adaptive_rollout_adp",
+    "minimum_expected_publish_count": 17820,
+    "nominal_gap_passed": false,
+    "passed": true,
+    "reference_publish_count": 18893,
+    "scenario_id": "validation_002"
+  },
+  "scenario_id": "validation_002",
+  "schema_version": "orbinspect-rviz-planning-demo-video/v1",
+  "script_sha256": "e432568e5e0181df372f579c364704d7844e30e27cf7c060139cc1a4f8e3ec33",
+  "sources_sha256": {
+    "data/results/ros_rviz_full_planning_demo_corrected_validation002_radius080_20260812/config_snapshot/run_manifest.json": "6fd7d672b08953e9723c00bc30f3084b128893ea4d68daddc8c9c16801e735ec",
+    "data/results/ros_rviz_full_planning_demo_corrected_validation002_radius080_20260812/config_snapshot/video_timing.json": "7c71c744f0ce77b02751503b21996b55ec17c1a06e929d42dd161333924f49ec",
+    "data/results/ros_rviz_full_planning_demo_corrected_validation002_radius080_20260812/mesh_execution_audit.json": "9ac1b2365d0c61a512059877c8770bce3c1110460e7c3e91182619787a8544e3",
+    "data/results/ros_rviz_full_planning_demo_corrected_validation002_radius080_20260812/raw/camera_sensor_raw.mp4": "7a40f54932604510ecd72acb4e46e9801e80a7eebb4c5e6e47aa2c68a05bd4c1",
+    "data/results/ros_rviz_full_planning_demo_corrected_validation002_radius080_20260812/raw/control.csv": "6dedfc5e1f4c3445107ca8a8600f598e80cdc2f7ce2ed00d2d90bf752b880658",
+    "data/results/ros_rviz_full_planning_demo_corrected_validation002_radius080_20260812/raw/launch.log": "97e21a8c44133ebe032b07d8de86c185b3829360f9dc24b5bbcae48930559f66",
+    "data/results/ros_rviz_full_planning_demo_corrected_validation002_radius080_20260812/raw/mission_events.csv": "6fd31587fbadc68d2f2e42695a6d1800f46d9e912f66cfc9bc153b808b4a0659",
+    "data/results/ros_rviz_full_planning_demo_corrected_validation002_radius080_20260812/raw/rviz_window_raw.mp4": "8930bc2d82a491ef5a39a6a63de06ae8daa6e891fd684078334454df35b551fc",
+    "data/results/ros_rviz_full_planning_demo_corrected_validation002_radius080_20260812/raw/trajectory.csv": "036ff9af747415bd9b25b6e689692ef2a4a9fd85456bca69fc890fa8a3343f0f",
+    "data/results/ros_rviz_full_planning_demo_corrected_validation002_radius080_20260812/summary.json": "602d690828877c21a05e64592af54866ae648443e0a809c6e796d28356f5b4bf"
+  },
+  "state_source_of_truth": "ROS-native HCW dynamics node",
+  "vehicle_bounding_radius_m": 0.8,
+  "verification": {
+    "coverage_ratio": 0.8133146978144941,
+    "credited_actions": 10,
+    "current_waypoint_id": "",
+    "current_waypoint_index": 10,
+    "event": "mission_complete",
+    "failed_actions": 0,
+    "reason": "all_execution_gates_passed",
+    "state": "complete",
+    "success": true,
+    "time": 900.006570665
+  }
+}

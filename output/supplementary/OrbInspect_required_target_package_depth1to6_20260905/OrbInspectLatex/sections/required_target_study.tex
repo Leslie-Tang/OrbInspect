@@ -1,0 +1,160 @@
+% Numerical macros and tables are generated from the frozen required-target study.
+
+\section{Experimental Protocol}
+\label{sec:simulation}
+
+\subsection{Fixed Geometry and Required-Target Profiles}
+
+The study uses the corrected public ISS mesh distributed by the National Aeronautics and Space Administration (NASA) \cite{nasa_iss_gltf_model}. Its complete transformed geometry contains $247\,525$ triangles. Ninety equal-represented-area samples define the original surface denominator; 41 are observable from at least one of the 24 retained candidate observations. The directed archive contains 24 initial-to-observation and $24\times23$ inter-observation records, of which 264 pass every enabled gate. Every method receives the same graph and scenario-specific available-node set.
+
+Required-target profiles are selected deterministically from target geometry before evaluating the new scenarios. Their IDs, coordinates, selection rule, visibility masks, and checksums are stored in the mission manifest. These are synthetic, spatially distributed inspection requirements within the fixed observable library. The mesh sampler does not retain verified component-criticality annotations, so the profiles are not represented as an operational ISS maintenance checklist. Full completion means acceptance of all prescribed samples under \eqref{eq:visibility}; it does not establish full-region imagery, physical defect detection, or complete ISS surface inspection.
+
+\input{data/required_target_profiles}
+
+The required set is unchanged when a scenario removes observation nodes. If a required item disappears from the union of all available visibility masks, the task is ruled out by visibility. Passing this necessary condition does not prove the existence of a directed safe route within the budget. Feasibility is known when a method constructs a valid route, or when an exhausted exact search provides a certificate; otherwise the outcome remains unresolved rather than being declared structurally feasible.
+
+\subsection{Dynamics, Costs, and Observation Accounting}
+
+Each rest-to-rest SOOA lasts \unit{90}{s} and uses fixed-step fourth-order Runge--Kutta (RK4) propagation with $\dt=\unit{3}{s}$. The HCW mean motion is $1.13137\times10^{-3}~\mathrm{rad/s}$, the acceleration limit is $u_{\max}=0.060~\mathrm{m/s^2}$, and the speed limit is $v_{\max}=\unit{2.0}{m/s}$. The vehicle radius is \unit{0.80}{m}, the full-mesh safety margin is \unit{2}{m}, and terminal position and velocity tolerances are \unit{0.5}{m} and \unit{0.05}{m/s}. Equation~\eqref{eq:edge-cost} retains $(\lambda_v,\lambda_e,\lambda_s,\lambda_a)=(5,0.18,120,0.05)$. The action budget is 14. Required-only completion has no additional global area threshold.
+
+Coverage is computed from unions of target identities, with duplicate credit excluded. We report required-target completion $C^{\mathcal K}$, priority-weighted inspectable score $C^{\mathrm{insp}}$, and the unweighted fractions over 41 observable and 90 original samples. Because the original sample areas are equal, the last fraction is the archived sampled-area estimate; scenario priority multipliers do not change that area denominator. Prescribed terminal exposures are assumed complete in the offline model, and no extra dwell, image-resolution gate, or illumination process is simulated.
+
+\subsection{Development History and Fresh Confirmation}
+
+The earlier 80\% survey and its post-selection diagnostics are development history; their cost improvements are not transferred to this mission. A first required-target campaign froze the three geometry-defined profiles and evaluated 36 validation, 150 test, and 90 shifted scenarios without feasibility rejection. The nine-item profile was designated primary before evaluation. On that profile, depth-three ADP completed 37/50 test and 10/30 shifted tasks, whereas greedy construction and its fixed-suffix and local-search descendants completed none. Those failed initializations cannot support a matched-completion cost comparison. Table~\ref{tab:required-profile-results} retains the first-campaign outcomes rather than replacing them.
+
+A subsequent fresh confirmation therefore compares depth-three ADP against one-step ADP and local search initialized by a completed one-step ADP route. Its methods, penalty, scenario inventory, and implementation hashes are frozen before evaluating any of its new outcomes. The nine prescribed targets, depth-three policy, dynamics, and cost remain unchanged. The confirmation contains \RTValidationN{} validation, \RTTestN{} test, and \RTOodN{} shifted scenarios, with seed identities disjoint from the first campaign and archived development runs. No target is removed or replaced after seeing outcomes. The first campaign is explicitly development evidence for the comparator choice, not an untouched confirmation set.
+
+Each scenario samples a node-removal probability uniformly from $[0,0.10]$ and independently retains or removes each candidate using that probability. It multiplies the priorities of approximately 6\%--14\% of targets by a factor in $[2,4]$. The shifted distribution uses removal probabilities in $[0.15,0.25]$, priority fractions of 12\%--20\%, and factors in $[5,8]$. Every sampled scenario is retained, including loss of all views of a required target. Priorities affect background scores and the coverage-only ablation, but not the unweighted required-target goal or stage cost. These are perturbations of one frozen graph, not independent geometries; distinct seeds can yield identical routes.
+
+The frozen depth-three setting uses the same deterministic task-aware base policy as the incumbent. After the confirmation analysis, the validation diagnostic was extended to depths one through six to assess the cost--workload trade-off beyond the chosen depth. All six depths were rerun sequentially on the same 12 validation scenarios, fixed nine-target requirement, graph, action budget, and implementation. Each depth retains every scenario, including missing required visibility. This extension evaluated no additional test or shifted scenarios; depths four through six remain validation-only, and the frozen primary comparison is unchanged. Every depth uses the same unvisited, shield-admissible action set, including zero-gain connecting observations.
+
+Timing measures complete-route generation, including the preliminary base-policy call, in Python~3.14 on an Apple M4 host running macOS; it excludes graph loading and result serialization. There is one timing observation per scenario--depth pair in an ascending-depth sequential pass. These measurements characterize the present implementation and include uncontrolled scheduling and thermal effects; they are neither repeated-timing uncertainty estimates nor onboard deadlines. Safety-screen counts exclude the separate preliminary base-policy call.
+
+\input{data/required_target_depth_rationale}
+
+\input{data/required_target_depth_table}
+
+\begin{figure}[t]
+  \centering
+  \subfloat[Mean validation cost.]{\includegraphics[width=0.315\linewidth]{figures/required_target/adp_depth_tradeoff_a.pdf}}\hfill
+  \subfloat[Median planning time.]{\includegraphics[width=0.315\linewidth]{figures/required_target/adp_depth_tradeoff_b.pdf}}\hfill
+  \subfloat[Safety-screen evaluations.]{\includegraphics[width=0.315\linewidth]{figures/required_target/adp_depth_tradeoff_c.pdf}}
+  \caption{Post-selection required-target validation diagnostic for depths one through six. The square marks the unchanged depth-three primary setting. Cost uses the same completed-task cohort at all depths; runtime and safety-screen workload retain all 12 cases. Panels (b) and (c) use logarithmic scales. The accompanying table reports completion counts and changes relative to depth three. This diagnostic quantifies a practical cost--workload trade-off, not a universally optimal depth or real-time capability.}
+  \label{fig:adp-depth-sensitivity}
+\end{figure}
+
+\subsection{Matched Baselines and Statistical Reporting}
+
+The confirmation includes the task-aware greedy incumbent, one-step ADP, ADP-seeded local search, and depth-three ADP. All use the identical required-target predicate, dynamics, safety gates, and budget. One-step ADP uses \eqref{eq:rollout-value} with $d=1$. The local comparator applies three audited best-improvement reversal passes to that completed route and retains its feasible seed if improvement fails. It is an ADP-initialized sequence baseline, not an independent non-ADP planner or an exhaustive solver. The proposed $d=3$ policy uses the original greedy base value and receives no fallback from the one-step route. This comparison separates repeated Bellman improvement from improving a feasible ordering.
+
+An additional coverage-only policy retains the earlier 80\% priority-weighted stopping rule but is evaluated against the same fixed required-target identities. It is an objective ablation, not a matched complete-task cost baseline. This comparison tests whether satisfying an aggregate score also satisfies the explicit task. The earlier fitted-critic results belong to the earlier objective and are not reported as a trained DRL comparison for this campaign.
+
+Primary reporting distinguishes all-required mission success from cost conditional on completion. Success and missing-target counts use every generated scenario. Graph cost and physical $\Delta v$ are compared within jointly successful depth-three ADP/seeded-local pairs. The all-scenario diagnostic is $J_{\mathrm{pen}}=J+500(1-C^{\mathcal K})+500(1-\Gamma_{\mathcal K})$; its fixed penalties are evaluation choices, not physical maneuver costs. Percentile intervals for paired mean differences use $10\,000$ resamples; exact two-sided sign tests exclude numerical ties. Intervals characterize this scenario generator, not flight or external-mesh generalization. Online time includes route initialization, including the one-step seed for local search. Safety-screen counts describe the selected planner call and exclude the separately timed initializer.
+
+\section{Results}
+\label{sec:results}
+
+\subsection{Complete Required-Target Inspection}
+
+In the fresh nine-target confirmation, depth-three ADP completed every prescribed target in \RTTestSuccess/\RTTestN{} test scenarios and \RTOodSuccess/\RTOodN{} shifted scenarios. Every successful route achieved $C^{\mathcal K}=100\%$, irrespective of optional background coverage. These are counts of complete missions, not a claim that all generated tasks were successful. The corresponding seeded-local counts were \RTLocalTestSuccess/\RTTestN{} and \RTLocalOodSuccess/\RTOodN{}. The separate first-campaign profile rates use different scenario seeds and are descriptive, not paired estimates of increasing requirement difficulty.
+
+\input{data/required_target_profile_results}
+\input{data/required_target_aggregate}
+
+In the confirmation, all 43 test and nine shifted scenarios retaining visibility of every required item have an actual depth-three ADP completion witness. Every remaining scenario loses all available views of at least one mandatory item and is therefore impossible in the fixed library. This agreement is an observed result, not a general sufficiency theorem for the union-of-views test. In the first campaign, one six-target shifted case retains the required visibility but yields no ADP certificate; its directed feasibility remains unresolved. Proposition~\ref{prop:rollout-viability} applies to finite completion certificates and does not guarantee finding one for every physically feasible task.
+
+\subsection{ADP Policy Improvement at Matched Completion}
+
+The predeclared all-scenario endpoint is the ADP-minus-seeded-local penalized score. Its mean differences are $-12.256$ on the 50 test scenarios and $-31.999$ on the 30 shifted scenarios, with 95\% intervals $[-14.155,-10.212]$ and $[-91.494,-1.241]$, respectively. These results use the stated failure penalties and do not imply physical-resource savings on failed routes. The following complete-task comparisons provide the separate resource interpretation.
+
+There were \RTJointTestN{} jointly successful test pairs and \RTJointOodN{} jointly successful shifted pairs. The mean ADP-minus-local graph-cost differences were \RTTestCostDiff{} and \RTOodCostDiff{}, respectively. The corresponding physical $\Delta v$ differences were \unit{\RTTestDvDiff}{m/s} and \unit{\RTOodDvDiff}{m/s}. Table~\ref{tab:required-paired} reports the paired uncertainty and wins/ties/losses. The cost comparison is conditional on both methods completing the task and must be read with the full-population success counts.
+
+On the 43 complete test pairs, mean $\Delta v$ decreases from \unit{15.777}{m/s} to \unit{14.033}{m/s}, an 11.05\% reduction in the ratio of means. The paired reduction is \unit{1.744}{m/s}, with a 95\% interval of \unit{1.525--1.923}{m/s}. ADP wins 40 pairs and loses three; the guarantee does not require winning against local search. The eight shifted pairs are a smaller descriptive sample: their mean reduction interval excludes zero, but the exact two-sided sign test gives $p=0.0703$. These endpoints and tests are not interchangeable claims of significance.
+
+\input{data/required_target_paired}
+
+\begin{figure*}[!t]
+  \centering
+  \subfloat[Test physical $\Delta v$.]{\includegraphics[width=0.23\linewidth]{figures/required_target/adp_heldout_performance_a.pdf}}\hfill
+  \subfloat[Test graph-cost differences.]{\includegraphics[width=0.23\linewidth]{figures/required_target/adp_heldout_performance_b.pdf}}\hfill
+  \subfloat[Shifted physical $\Delta v$.]{\includegraphics[width=0.23\linewidth]{figures/required_target/adp_heldout_performance_c.pdf}}\hfill
+  \subfloat[Shifted graph-cost differences.]{\includegraphics[width=0.22\linewidth]{figures/required_target/adp_heldout_performance_d.pdf}}
+  \caption{Required-target ADP/local comparison on jointly successful pairs: \RTJointTestN{} test and \RTJointOodN{} shifted scenarios. Dashed lines denote parity. Bands and solid horizontal lines in (b) and (d) denote 95\% paired-bootstrap intervals and mean graph-cost differences. Failed missions are excluded from these physical-cost panels and retained in the success tables and all-scenario penalty analysis.}
+  \label{fig:paired-performance}
+\end{figure*}
+
+The theoretical comparator is the deterministic adaptive base policy. Proposition~\ref{prop:base-bound} bounds graph cost relative to that policy when it completes; it does not imply superiority over every local-search route or a lower physical $\Delta v$ in every scenario. The greedy base completes no confirmation task, so an empirical base-cost-bound check on this campaign would be vacuous. Finite-graph unit tests separately exercise the bound, useful connecting actions, and exact recursion; no new mesh-based exact-oracle campaign is claimed. The present comparison instead measures empirical improvement over completion-capable one-step and seeded-local policies.
+
+\subsection{Objective Ablation and Safety}
+
+\input{data/required_target_objective_ablation}
+
+The coverage-only ablation is evaluated using the new required-target denominator even though its stopping rule remains a global score. A route that reaches 80\% background score while omitting a required item fails the prescribed inspection task. Conversely, a required-only route can finish with a lower background score when every required item has been accepted. The ablation quantifies this distinction without redefining targets from the resulting routes.
+
+The coverage-only policy completes the nine-item requirement in only 1/50 test and 0/30 shifted scenarios. In contrast, 41 of the 43 completed ADP test missions finish below 80\% weighted background coverage while accepting all nine prescribed items; their mean background score over all 43 successes is 72.32\%. Thus the lower background score is consistent with complete execution of the declared sample-level task, not evidence that the remaining mesh has been inspected.
+
+\begin{figure*}[!t]
+  \centering
+  \subfloat[Matched complete-task effort.]{\includegraphics[width=0.23\linewidth]{figures/required_target/adp_ablation_safety_a.pdf}}\hfill
+  \subfloat[All-required mission success.]{\includegraphics[width=0.23\linewidth]{figures/required_target/adp_ablation_safety_b.pdf}}\hfill
+  \subfloat[Clearance above margin.]{\includegraphics[width=0.23\linewidth]{figures/required_target/adp_ablation_safety_c.pdf}}\hfill
+  \subfloat[Peak commanded input.]{\includegraphics[width=0.23\linewidth]{figures/required_target/adp_ablation_safety_d.pdf}}
+  \caption{Fresh nine-target component and safety audit. Panel (a) uses the \RTFourMethodN{} test scenarios completed by one-step ADP, seeded local search, and depth-three ADP, with mean and 95\% bootstrap interval. The greedy incumbent is reported in the all-scenario success panel (b). Panels (c) and (d) use jointly complete depth-three ADP/seeded-local pairs. No passive-drift or uncertainty-robustness claim is made.}
+  \label{fig:paired-safety}
+\end{figure*}
+
+The observed safety quantities are properties of the accepted deterministic edge records. Full-mesh occlusion and collision checks still include structure outside the required target set. Restricting the inspection task therefore does not reduce the safety geometry. Timing and evaluation counts remain descriptive measurements of the present implementation, not onboard real-time benchmarks.
+
+\subsection{Representative Required-Target Route}
+
+\input{data/required_target_case}
+
+\begin{figure}[!t]
+  \centering
+  \subfloat[Generated LVLH routes.]{\includegraphics[width=0.475\linewidth]{figures/required_target/adp_representative_trajectory_a.pdf}}
+  \\
+  \subfloat[Required-target completion.]{\includegraphics[width=0.435\linewidth]{figures/required_target/adp_representative_trajectory_b.pdf}}\hfill
+  \subfloat[Cumulative physical $\Delta v$.]{\includegraphics[width=0.435\linewidth]{figures/required_target/adp_representative_trajectory_c.pdf}}
+  \caption{Illustrative required-target case selected by a stated median-effect rule from jointly successful test pairs. Both methods complete the same fixed required set; background coverage is a separate descriptor. Markers identify terminal observations and required samples, and the star is the common initial state. The case illustrates the policy mechanism and does not replace the all-scenario comparison.}
+  \label{fig:representative-trajectory}
+\end{figure}
+
+\subsection{Execution Interface and Historical ROS Evidence}
+\label{sec:ros-verification-protocol}
+
+The target-credit implementation retains per-observation target IDs and forms the union of accepted observations. Planned cumulative coverage is not imported when a later observation passes. Required completion, duplicate credit, rejected observations, and export consistency are tested independently of ROS. The new schema carries the fixed requirement manifest and separate planned and accepted metrics while preserving existing message interfaces.
+
+An offline replay export of the illustrative confirmation ADP route preserves its nine actions, all nine required IDs, and 77.22\% planned weighted background coverage. Target unions and resource metrics match the archived route. The six core CSV streams distinguish planned trajectories, controls, coverage, safety, planning decisions, and mission events from executed measurements. This materialization checks the new mission interface but is not evidence that those observations were executed by ROS.
+
+The available Ubuntu~24.04.4/ROS~2 Jazzy demonstration predates the required-target campaign and uses the earlier 80\% survey objective. It is retained solely as an execution/interface example for the corrected mesh. No new required-target ROS campaign was executed in the present revision, so the new primary results are offline ADP results. A subsequent required-target execution must use the new manifest, credit each prescribed item, and repeat the finite-body audit before supporting an execution-level completion claim.
+
+\ifincludeROSVerificationResults
+  \input{sections/ros_verification_results}
+\fi
+
+\section{Discussion}
+\label{sec:discussion}
+
+The central contribution is the ADP policy-improvement mechanism under an explicit inspection-completion constraint. The approximate terminal value is the complete cost of a tractable base policy. A finite Bellman prefix searches beyond that policy's immediate choice while retaining a checkable goal-reaching completion. This construction gives the viability and base-cost statements their meaning; labeling an arbitrary scalar coverage score as complete inspection would not provide the same task guarantee.
+
+The required-target formulation changes the application criterion without requiring a new coverage state for every fixed mission. Covered identities and the frozen required set determine the residual task. The same theoretical construction applies to a hybrid goal that additionally imposes a background threshold, provided the base policy, rollout boundary, and comparisons all use that identical predicate. A higher target-priority weight alone cannot replace a mandatory requirement because a sufficiently high aggregate score can still omit that target.
+
+The relation to DRL concerns value approximation and certification. A learned critic or actor could guide candidate ordering or propose actions, but a predicted value is not a completion certificate. Retaining the present guarantees would require checking the proposed action against a valid continuation and the relevant cost bound. This paper evaluates the model-based rollout instantiation and does not claim a trained deep policy, sample-efficiency result, or new DRL convergence theorem.
+
+The experimental scope is deliberately explicit. The prescribed profiles are synthetic geometry-based tasks on one retained observation library. Their selection is independent of the new test outcomes but conditional on nominal observability in that library. They establish complete acceptance of specified samples under a deterministic camera model, not a validated set of mission-critical ISS components. Denser region sampling, verified component annotations, resolution and dwell acceptance, illumination, and independent geometry are needed for operational inspection claims. A fixed mandatory denominator must be retained when such requirements become difficult or unavailable.
+
+Allowing safe zero-gain connections makes the declared graph action space consistent with directed reachability, at additional search cost. The finite-completion safeguard can still fail to find a route when its base policy is unsuccessful, even if a different route exists. Exact reduced-graph analysis and explicit unresolved-failure labels prevent that algorithmic limitation from being confused with physical infeasibility. The statistical comparisons also separate task completion from cost on the selected jointly successful subset.
+
+Finally, HCW propagation, prescribed camera attitude, and the full-mesh numerical audits do not establish navigation robustness, actuator fidelity, continuous-space optimality, passive safety, image-based diagnosis, or flight performance. The historical ROS example verifies one corrected survey execution. The new target-credit checks prepare the execution interface for the revised task but do not substitute for a fresh ROS campaign.
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+This paper formulated complete prescribed-target inspection as viability-preserving rollout approximate dynamic programming over audited orbital arcs. A fixed required set defines mission success, while a finite Bellman prefix and complete adaptive base-policy value provide a checkable policy-improvement mechanism. Under the deterministic finite-graph assumptions, rollout preserves a finite completion certificate and, when the base policy completes, does not exceed that policy's graph cost.
+
+Across \RTTestN{} new test and \RTOodN{} shifted scenarios, ADP completed the required task in \RTTestSuccess{} and \RTOodSuccess{} cases, respectively. Matched-completion cost comparisons and the coverage-only ablation quantify the effects of sequence improvement and explicit task requirements separately. Every successful required-target route accepted all prescribed samples, while optional area coverage remained a distinct outcome. These results support the stated ADP formulation within the frozen synthetic task library; they do not establish full ISS inspection, trained DRL performance, or execution of the new task on flight hardware.
+
+\section*{Data and Code Availability}
+
+The accompanying reproducibility package contains the corrected graph, fixed target profiles and their geometric provenance, configuration and freeze manifests, fresh scenario inventories, method--scenario rows, target-level credit records, statistical outputs, source tables, and figure scripts. Required-target evidence is versioned separately from the historical 80\% benchmark, post-selection depth/coverage diagnostics, and accepted historical ROS task. A new required-target ROS bag is not included because that campaign was not run. The public NASA mesh source and checksum are documented; the mesh is not redistributed. A persistent repository identifier will replace the submission-package reference in the accepted version.

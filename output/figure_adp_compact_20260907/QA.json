@@ -1,0 +1,62 @@
+{
+  "revision": "Integrated panel d only",
+  "backend": "Python with native draw.io vector objects",
+  "old_panel_native_cells": 49,
+  "new_panel_native_cells": 47,
+  "text_width_warnings": [],
+  "all_other_native_cells_identical": true,
+  "all_other_svg_elements_identical": true,
+  "rendered_surroundings_check": {
+    "identical_path_and_text_content": true,
+    "maximum_coordinate_drift": 0.0025482177734375,
+    "path_count": 32398,
+    "text_span_count": 76,
+    "antialiasing_changed_pixel_count": 6925
+  },
+  "prefix_tail_vertical_span_reduction_percent": 38.8,
+  "fixed_anchors": {
+    "root": [
+      532,
+      822
+    ],
+    "output": [
+      1245,
+      1056
+    ]
+  },
+  "B1_and_B2_copied_unchanged": true,
+  "other_PDF_pages_pixel_identical": true,
+  "preserved_sha256": {
+    "output/figure_hcw_clarity_20260907/A_integrated.svg": "3703fbfd039d1065fa9479ea3516f9ed3698072dd6347b805e275ed844b1df33",
+    "output/figure_hcw_clarity_20260907/QA.json": "9018781adf5a2c0dd9f3315d92faef7ce48f606df281f293db14f7018d9d1c28",
+    "output/figure_hcw_clarity_20260907/B2_adp_mechanism.drawio": "f6b946339763d191918ba494aa3ab90123c18d57d4dd5ea8c881f3b956376900",
+    "output/figure_hcw_clarity_20260907/A_integrated.png": "d88f09bdea0367eae1c1389b01a7922af603ac1f4aaed1e812e18c5906b7d5ce",
+    "output/figure_hcw_clarity_20260907/A_integrated.drawio": "29f7f25710399e37fc2e343a0a73d0bda063fcedac1cffb8218010ecf5d40636",
+    "output/figure_hcw_clarity_20260907/README.md": "ebb9023671c4350bc7dc3a9d3841f23089d48d25e5d20be1c6217bb029309b53",
+    "output/figure_hcw_clarity_20260907/palette.json": "7133d5a88927b6e340996474f7a2f38529db9e2c1cc295fcd2b7664842897064",
+    "output/figure_hcw_clarity_20260907/B1_overview.svg": "79d181f9d9bea02bf993f1cc4ad8b1138e3499542fc8374fd0c025cb66e93dd8",
+    "output/figure_hcw_clarity_20260907/B2_adp_mechanism.png": "8ad507aa3118097456eb976b47b6ea445508fef6fc41f2e8e53bb8c76a3dbff2",
+    "output/figure_hcw_clarity_20260907/OrbInspect_figure_options.drawio": "bc01dfe356f90612b5342d1171e3cb9629689694893b2b4e62fe90ee7418f59a",
+    "output/figure_hcw_clarity_20260907/B2_adp_mechanism.svg": "3c2fdc6cf1f7b3e721b37dc5892371fb4547b7275cca23d4f14175e4e2e9d855",
+    "output/figure_hcw_clarity_20260907/B1_overview.png": "3e3ea4a52c6e0fe87e81852ff00b8d11171a98b5867553f1f014bc8793fa9e99",
+    "output/figure_hcw_clarity_20260907/B1_overview.drawio": "05ecdfdb72f2c742539ab27dd63a6e525e12352d24ef60f24c55ef4da989c873",
+    "output/figure_hcw_clarity_20260907/source/generate_editable_framework.py": "0a9549de3f54b5af822467457bd55bf18c74a8d0dc3e3ba220fd7f6007ece152",
+    "output/figure_hcw_clarity_20260907/source/revise_hcw_graph_panel.py": "f75291711b65d0770cfda3cd335cf54114722fff9ab964c5fbabb90366138b9d",
+    "output/figure_hcw_clarity_20260907/source/generate_figure_options.py": "06429ec7bd14b1babb43867a0ba1cc4c31f442ec083d02d7cbe08e2f638ad1df",
+    "output/figure_hcw_clarity_20260907/assets/evidence.json": "88ea2c46409777a0849e51d3e76baf176af822800d31161c47b0c1084f269459",
+    "output/figure_hcw_clarity_20260907/assets/camera_alexander_lucke.jpg": "6882fba51eaa084d38f21e3edc622811ba07d3107942e12f85dd97a83486832d",
+    "output/figure_hcw_clarity_20260907/assets/IMAGE_CREDITS.md": "73fde8ad222992ee86cdcc40ce336b235c2138c648aa3b5e520b142cdfd16a73",
+    "OrbInspectLatex/main.tex": "b9f55331f459eba887a0f2f18c4710e299e146f0783c84ccae2b75ccb7b0147d",
+    "OrbInspectLatex/main.pdf": "2ddbe42ab1a3b822972042d12e0c001d92e5b2bda67493174b06e711b305b281",
+    "output/pdf/OrbInspect_figure_hcw_clarity_20260907.pdf": "6bbb5acb06da749579ba5f8635fa70c9cf08c5423b8a5dd1cb9c79144a753589"
+  },
+  "sources_and_manuscript_unchanged": true,
+  "scientific_checks": {
+    "full_greedy_completion_at_every_leaf": true,
+    "exact_prefix_not_fixed_depth_two": true,
+    "finite_tail_value_is_sum_of_all_tail_costs": true,
+    "infinite_backed_up_actions_discarded": true,
+    "all_infinite_is_no_certified_completion_not_infeasibility": true,
+    "no_neural_critic_or_new_experiment_claim": true
+  }
+}

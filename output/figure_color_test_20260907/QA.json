@@ -1,0 +1,49 @@
+{
+  "operation": "color-only discussion test",
+  "source_reference_sha256": "77d9fc9f1b5446d518b4c6f5e47a9ada8af7844615f99fc4fb31c42941ef854d",
+  "pages": [
+    {
+      "page": "A - Integrated revision",
+      "color_changed_cells": 286
+    },
+    {
+      "page": "B1 - Sensing and planning overview",
+      "color_changed_cells": 245
+    },
+    {
+      "page": "B2 - Reference-inspired ADP mechanism",
+      "color_changed_cells": 84
+    }
+  ],
+  "palette_exactly_present_in_reference": true,
+  "native_non_color_structure_unchanged": true,
+  "svg_non_color_structure_unchanged": true,
+  "text_and_equation_values_unchanged": true,
+  "fonts_sizes_and_geometry_unchanged": true,
+  "export_word_positions_unchanged": true,
+  "camera_and_ISS_unchanged": true,
+  "preserved_sha256": {
+    "output/figure_options_v2_20260907/A_integrated.svg": "4febf33cd6304ae8488d4482675c0c65c4a79349a9d92fab1303cf0c581bd7d2",
+    "output/figure_options_v2_20260907/QA.json": "594574f5ed9b2a9485e2979d8d1a56f4730cc88d8639ee15cafcd262b432e8ec",
+    "output/figure_options_v2_20260907/B2_adp_mechanism.drawio": "be893474a16d8eae30701305bb97cc41237e63783aa473d54762a48d1a271c63",
+    "output/figure_options_v2_20260907/A_integrated.png": "4a39c2d79ec36f9a66f395bda22d8b698f94d1ea3d91b6609e70530b777f5497",
+    "output/figure_options_v2_20260907/A_integrated.drawio": "9b28774d6570dac2b96f688f6d2798a6a7d927f2f37d41828159a943e895dac8",
+    "output/figure_options_v2_20260907/README.md": "d7483e3a2a4eaaccf0020cb695afe339d6c1af613060642aba27dbc485e7836c",
+    "output/figure_options_v2_20260907/B1_overview.svg": "2735998b6f4bac95762de2ea50ade2d4f37b40670bf3c0be103cd4f98b00289b",
+    "output/figure_options_v2_20260907/B2_adp_mechanism.png": "325e58bf50ccf504e08bc347bc1e80b4a93c8c383198c4429c216eae18c25abd",
+    "output/figure_options_v2_20260907/OrbInspect_figure_options.drawio": "30c312f028b6bfd580f56d0911149711d6ef6a5159a8e1a83c7d46c5bad8b72e",
+    "output/figure_options_v2_20260907/B2_adp_mechanism.svg": "afb3f7b31a7294fc9cd56d04b68d1adf89b9a69a242e4237b4d96bab4556a16e",
+    "output/figure_options_v2_20260907/B1_overview.png": "30ad6b43fafb17447ce53fe05cf5d762cbdfcd01fcdaa8f2ed49e814ee1f56ea",
+    "output/figure_options_v2_20260907/B1_overview.drawio": "775e6e8b637abcdbb09c2909e671807d18400e6226f26d0966c50edc8062d2b2",
+    "output/figure_options_v2_20260907/source/generate_editable_framework.py": "0a9549de3f54b5af822467457bd55bf18c74a8d0dc3e3ba220fd7f6007ece152",
+    "output/figure_options_v2_20260907/source/generate_figure_options.py": "06429ec7bd14b1babb43867a0ba1cc4c31f442ec083d02d7cbe08e2f638ad1df",
+    "output/figure_options_v2_20260907/source/generate_figure_options_v2.py": "ed5c19b9401aa2a68cf427d3c04c18b65bb10ae9f8ec541cea5a00034c28fd2c",
+    "output/figure_options_v2_20260907/assets/evidence.json": "88ea2c46409777a0849e51d3e76baf176af822800d31161c47b0c1084f269459",
+    "output/figure_options_v2_20260907/assets/camera_alexander_lucke.jpg": "6882fba51eaa084d38f21e3edc622811ba07d3107942e12f85dd97a83486832d",
+    "output/figure_options_v2_20260907/assets/IMAGE_CREDITS.md": "73fde8ad222992ee86cdcc40ce336b235c2138c648aa3b5e520b142cdfd16a73",
+    "OrbInspectLatex/main.tex": "b9f55331f459eba887a0f2f18c4710e299e146f0783c84ccae2b75ccb7b0147d",
+    "OrbInspectLatex/main.pdf": "2ddbe42ab1a3b822972042d12e0c001d92e5b2bda67493174b06e711b305b281",
+    "output/pdf/OrbInspect_figure_options_v2_20260907.pdf": "782679e450b2333607656da054e9827fe2234cff6f050179f54cd51e6c7025ba"
+  },
+  "source_figures_and_manuscript_unchanged": true
+}

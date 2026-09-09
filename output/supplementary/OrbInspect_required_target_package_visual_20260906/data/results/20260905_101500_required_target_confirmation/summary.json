@@ -1,0 +1,589 @@
+{
+  "aggregates": [
+    {
+      "mean_penalized_cost": 851.0590761020912,
+      "mean_required_coverage": 0.45925925925925926,
+      "mean_successful_background_coverage": NaN,
+      "mean_successful_cost": NaN,
+      "mean_successful_delta_v": NaN,
+      "mean_successful_whole_sample_coverage": NaN,
+      "median_online_time_s": 0.00032795852166600525,
+      "method": "incumbent",
+      "profile_id": "required09",
+      "required_visibility_available_count": 9,
+      "scenario_count": 30,
+      "split": "ood",
+      "success_count": 0,
+      "success_rate": 0.0,
+      "successful_base_bound_violations": 0,
+      "unsafe_selected_edges": 0
+    },
+    {
+      "mean_penalized_cost": 770.6937366732368,
+      "mean_required_coverage": 0.26666666666666666,
+      "mean_successful_background_coverage": 0.743966704446007,
+      "mean_successful_cost": 140.10151252463814,
+      "mean_successful_delta_v": 17.012396266490008,
+      "mean_successful_whole_sample_coverage": 0.325,
+      "median_online_time_s": 0.003661312541225925,
+      "method": "one_step_adp",
+      "profile_id": "required09",
+      "required_visibility_available_count": 9,
+      "scenario_count": 30,
+      "split": "ood",
+      "success_count": 8,
+      "success_rate": 0.26666666666666666,
+      "successful_base_bound_violations": 0,
+      "unsafe_selected_edges": 0
+    },
+    {
+      "mean_penalized_cost": 768.2243812186454,
+      "mean_required_coverage": 0.26666666666666666,
+      "mean_successful_background_coverage": 0.7419602415856392,
+      "mean_successful_cost": 130.8414295699201,
+      "mean_successful_delta_v": 15.888288968910357,
+      "mean_successful_whole_sample_coverage": 0.32361111111111107,
+      "median_online_time_s": 0.0037133750156499445,
+      "method": "seeded_local_search",
+      "profile_id": "required09",
+      "required_visibility_available_count": 9,
+      "scenario_count": 30,
+      "split": "ood",
+      "success_count": 8,
+      "success_rate": 0.26666666666666666,
+      "successful_base_bound_violations": 0,
+      "unsafe_selected_edges": 0
+    },
+    {
+      "mean_penalized_cost": 736.2253211084869,
+      "mean_required_coverage": 0.3,
+      "mean_successful_background_coverage": 0.7396191752606562,
+      "mean_successful_cost": 120.75107036162315,
+      "mean_successful_delta_v": 14.655696798078518,
+      "mean_successful_whole_sample_coverage": 0.33209876543209876,
+      "median_online_time_s": 0.17471479196683504,
+      "method": "adaptive_rollout_adp",
+      "profile_id": "required09",
+      "required_visibility_available_count": 9,
+      "scenario_count": 30,
+      "split": "ood",
+      "success_count": 9,
+      "success_rate": 0.3,
+      "successful_base_bound_violations": 0,
+      "unsafe_selected_edges": 0
+    },
+    {
+      "mean_penalized_cost": 826.3646596207514,
+      "mean_required_coverage": 0.5,
+      "mean_successful_background_coverage": NaN,
+      "mean_successful_cost": NaN,
+      "mean_successful_delta_v": NaN,
+      "mean_successful_whole_sample_coverage": NaN,
+      "median_online_time_s": 0.17697172999032773,
+      "method": "coverage_only80",
+      "profile_id": "required09",
+      "required_visibility_available_count": 9,
+      "scenario_count": 30,
+      "split": "ood",
+      "success_count": 0,
+      "success_rate": 0.0,
+      "successful_base_bound_violations": 0,
+      "unsafe_selected_edges": 0
+    },
+    {
+      "mean_penalized_cost": 911.2424267236495,
+      "mean_required_coverage": 0.2733333333333333,
+      "mean_successful_background_coverage": NaN,
+      "mean_successful_cost": NaN,
+      "mean_successful_delta_v": NaN,
+      "mean_successful_whole_sample_coverage": NaN,
+      "median_online_time_s": 0.000359437515726313,
+      "method": "incumbent",
+      "profile_id": "required09",
+      "required_visibility_available_count": 43,
+      "scenario_count": 50,
+      "split": "test",
+      "success_count": 0,
+      "success_rate": 0.0,
+      "successful_base_bound_violations": 0,
+      "unsafe_selected_edges": 0
+    },
+    {
+      "mean_penalized_cost": 256.91286815367096,
+      "mean_required_coverage": 0.86,
+      "mean_successful_background_coverage": 0.6626060109887828,
+      "mean_successful_cost": 135.94519552752436,
+      "mean_successful_delta_v": 16.51171352067165,
+      "mean_successful_whole_sample_coverage": 0.30439276485788114,
+      "median_online_time_s": 0.024033854017034173,
+      "method": "one_step_adp",
+      "profile_id": "required09",
+      "required_visibility_available_count": 43,
+      "scenario_count": 50,
+      "split": "test",
+      "success_count": 43,
+      "success_rate": 0.86,
+      "successful_base_bound_violations": 0,
+      "unsafe_selected_edges": 0
+    },
+    {
+      "mean_penalized_cost": 251.7068637172948,
+      "mean_required_coverage": 0.86,
+      "mean_successful_background_coverage": 0.6626060109887828,
+      "mean_successful_cost": 129.8917019968544,
+      "mean_successful_delta_v": 15.777135745330057,
+      "mean_successful_whole_sample_coverage": 0.30439276485788114,
+      "median_online_time_s": 0.02471535454969853,
+      "method": "seeded_local_search",
+      "profile_id": "required09",
+      "required_visibility_available_count": 43,
+      "scenario_count": 50,
+      "split": "test",
+      "success_count": 43,
+      "success_rate": 0.86,
+      "successful_base_bound_violations": 0,
+      "unsafe_selected_edges": 0
+    },
+    {
+      "mean_penalized_cost": 239.45112112942743,
+      "mean_required_coverage": 0.86,
+      "mean_successful_background_coverage": 0.7232208781244271,
+      "mean_successful_cost": 115.64083852259003,
+      "mean_successful_delta_v": 14.033367225846476,
+      "mean_successful_whole_sample_coverage": 0.33204134366925064,
+      "median_online_time_s": 1.026889457978541,
+      "method": "adaptive_rollout_adp",
+      "profile_id": "required09",
+      "required_visibility_available_count": 43,
+      "scenario_count": 50,
+      "split": "test",
+      "success_count": 43,
+      "success_rate": 0.86,
+      "successful_base_bound_violations": 0,
+      "unsafe_selected_edges": 0
+    },
+    {
+      "mean_penalized_cost": 754.0515026809985,
+      "mean_required_coverage": 0.6688888888888889,
+      "mean_successful_background_coverage": 0.818277721182517,
+      "mean_successful_cost": 136.61358873877077,
+      "mean_successful_delta_v": 16.572732195729923,
+      "mean_successful_whole_sample_coverage": 0.3888888888888889,
+      "median_online_time_s": 0.5158625209878664,
+      "method": "coverage_only80",
+      "profile_id": "required09",
+      "required_visibility_available_count": 43,
+      "scenario_count": 50,
+      "split": "test",
+      "success_count": 1,
+      "success_rate": 0.02,
+      "successful_base_bound_violations": 0,
+      "unsafe_selected_edges": 0
+    }
+  ],
+  "base_experiment_config": {
+    "adp_action_cost": 0.05,
+    "adp_branch_width": 8,
+    "adp_candidate_limit": 24,
+    "adp_candidate_pool_width": 18,
+    "adp_cost_scale": 50.0,
+    "adp_exploration_rate": 0.3,
+    "adp_learning_rate": 0.025,
+    "adp_lookahead_depth": 2,
+    "adp_oracle_node_limit": 14,
+    "adp_reference_improvement_passes": 4,
+    "adp_terminal_penalty": 500.0,
+    "adp_training_episodes": 0,
+    "candidate_radius": 34.0,
+    "candidate_stride": 2,
+    "certified_candidate_limit": 18,
+    "certified_max_expansions": 150000,
+    "certified_time_limit_s": 8.0,
+    "coverage_stop_ratio": 0.8,
+    "coverage_threshold": 0.7,
+    "cw_energy_weight": 5.0,
+    "cw_safety_weight": 120.0,
+    "cw_tracking_weight": 0.18,
+    "geometry_backend": "mesh",
+    "initial_state": [
+      0.0,
+      -35.0,
+      10.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "integration_dt": 3.0,
+    "max_acceleration": 0.06,
+    "max_viewpoints": 14,
+    "mesh_occlusion_max_triangles": 0,
+    "mesh_target_count": 90,
+    "methods": [],
+    "min_new_targets": 1,
+    "output_root": "data/results",
+    "passive_safety_distance": 0.0,
+    "passive_safety_horizon": 0.0,
+    "proposed_beam_width": 6,
+    "proposed_lookahead_depth": 2,
+    "random_seed": 7,
+    "run_id": "",
+    "safety_margin": 2.0,
+    "transfer_duration": 90.0,
+    "vehicle_radius": 0.8
+  },
+  "completed_at_utc": "2026-09-05T09:45:42.810915+00:00",
+  "evaluation_rows": 400,
+  "frozen_at_utc": "2026-09-05T09:43:18.172764+00:00",
+  "limitations": [
+    "Comparator includes depth-one ADP; effects are empirical and not guaranteed against local search.",
+    "Same corrected graph and unchanged synthetic nine-item requirement; fresh perturbations are not independent geometries.",
+    "All greedy-base failures are retained; base-cost bound is conditional on successful greedy completion.",
+    "No new ROS execution or DRL-trained policy is represented by this campaign."
+  ],
+  "paired_comparisons": [
+    {
+      "all_scenario_count": 30,
+      "allscenario_penalized_cost_difference_ci95": [
+        -283.87022469729345,
+        44.2789093046195
+      ],
+      "baseline": "incumbent",
+      "joint_success_count": 0,
+      "joint_success_losses": 0,
+      "joint_success_ties": 0,
+      "joint_success_wins": 0,
+      "mean_allscenario_penalized_cost_difference": -114.83375499360426,
+      "mean_paired_cost_difference": NaN,
+      "mean_paired_cost_reduction_pct": NaN,
+      "mean_paired_delta_v_difference": NaN,
+      "paired_cost_difference_ci95": [
+        NaN,
+        NaN
+      ],
+      "paired_delta_v_difference_ci95": [
+        NaN,
+        NaN
+      ],
+      "profile_id": "required09",
+      "scope": "Matched required-target task.",
+      "sign_test_two_sided_p": 1.0,
+      "split": "ood"
+    },
+    {
+      "all_scenario_count": 30,
+      "allscenario_penalized_cost_difference_ci95": [
+        -94.60273564731015,
+        -2.6415298736759545
+      ],
+      "baseline": "one_step_adp",
+      "joint_success_count": 8,
+      "joint_success_losses": 0,
+      "joint_success_ties": 0,
+      "joint_success_wins": 8,
+      "mean_allscenario_penalized_cost_difference": -34.46841556474989,
+      "mean_paired_cost_difference": -19.150424570140597,
+      "mean_paired_cost_reduction_pct": 13.444686473317313,
+      "mean_paired_delta_v_difference": -2.331606063256209,
+      "paired_cost_difference_ci95": [
+        -26.06135316279867,
+        -11.868014212157933
+      ],
+      "paired_delta_v_difference_ci95": [
+        -3.170610078853142,
+        -1.4474182837585692
+      ],
+      "profile_id": "required09",
+      "scope": "Matched required-target task.",
+      "sign_test_two_sided_p": 0.0078125,
+      "split": "ood"
+    },
+    {
+      "all_scenario_count": 30,
+      "allscenario_penalized_cost_difference_ci95": [
+        -91.4942025155297,
+        -1.2405984195971784
+      ],
+      "baseline": "seeded_local_search",
+      "joint_success_count": 8,
+      "joint_success_losses": 1,
+      "joint_success_ties": 0,
+      "joint_success_wins": 7,
+      "mean_allscenario_penalized_cost_difference": -31.999060110158418,
+      "mean_paired_cost_difference": -9.890341615422582,
+      "mean_paired_cost_reduction_pct": 7.531577787840842,
+      "mean_paired_delta_v_difference": -1.2074987656765561,
+      "paired_cost_difference_ci95": [
+        -14.110724327935092,
+        -4.6878163301625975
+      ],
+      "paired_delta_v_difference_ci95": [
+        -1.7129288483217695,
+        -0.5749972416813978
+      ],
+      "profile_id": "required09",
+      "scope": "Matched required-target task.",
+      "sign_test_two_sided_p": 0.0703125,
+      "split": "ood"
+    },
+    {
+      "all_scenario_count": 30,
+      "allscenario_penalized_cost_difference_ci95": [
+        -230.12795736256882,
+        43.08082620953128
+      ],
+      "baseline": "coverage_only80",
+      "joint_success_count": 0,
+      "joint_success_losses": 0,
+      "joint_success_ties": 0,
+      "joint_success_wins": 0,
+      "mean_allscenario_penalized_cost_difference": -90.13933851226442,
+      "mean_paired_cost_difference": NaN,
+      "mean_paired_cost_reduction_pct": NaN,
+      "mean_paired_delta_v_difference": NaN,
+      "paired_cost_difference_ci95": [
+        NaN,
+        NaN
+      ],
+      "paired_delta_v_difference_ci95": [
+        NaN,
+        NaN
+      ],
+      "profile_id": "required09",
+      "scope": "Coverage-only80 uses a different native task; diagnostic comparison only.",
+      "sign_test_two_sided_p": 1.0,
+      "split": "ood"
+    },
+    {
+      "all_scenario_count": 50,
+      "allscenario_penalized_cost_difference_ci95": [
+        -756.9267759668975,
+        -565.780311151223
+      ],
+      "baseline": "incumbent",
+      "joint_success_count": 0,
+      "joint_success_losses": 0,
+      "joint_success_ties": 0,
+      "joint_success_wins": 0,
+      "mean_allscenario_penalized_cost_difference": -671.7913055942221,
+      "mean_paired_cost_difference": NaN,
+      "mean_paired_cost_reduction_pct": NaN,
+      "mean_paired_delta_v_difference": NaN,
+      "paired_cost_difference_ci95": [
+        NaN,
+        NaN
+      ],
+      "paired_delta_v_difference_ci95": [
+        NaN,
+        NaN
+      ],
+      "profile_id": "required09",
+      "scope": "Matched required-target task.",
+      "sign_test_two_sided_p": 1.0,
+      "split": "test"
+    },
+    {
+      "all_scenario_count": 50,
+      "allscenario_penalized_cost_difference_ci95": [
+        -19.866217553042095,
+        -14.851209182466587
+      ],
+      "baseline": "one_step_adp",
+      "joint_success_count": 43,
+      "joint_success_losses": 0,
+      "joint_success_ties": 0,
+      "joint_success_wins": 43,
+      "mean_allscenario_penalized_cost_difference": -17.461747024243518,
+      "mean_paired_cost_difference": -20.30435700493432,
+      "mean_paired_cost_reduction_pct": 14.899839296890459,
+      "mean_paired_delta_v_difference": -2.4783462948251724,
+      "paired_cost_difference_ci95": [
+        -22.093573787959777,
+        -18.28071014910113
+      ],
+      "paired_delta_v_difference_ci95": [
+        -2.695194837719928,
+        -2.231538210357749
+      ],
+      "profile_id": "required09",
+      "scope": "Matched required-target task.",
+      "sign_test_two_sided_p": 2.2737367544323206e-13,
+      "split": "test"
+    },
+    {
+      "all_scenario_count": 50,
+      "allscenario_penalized_cost_difference_ci95": [
+        -14.154832689177335,
+        -10.21220568013374
+      ],
+      "baseline": "seeded_local_search",
+      "joint_success_count": 43,
+      "joint_success_losses": 3,
+      "joint_success_ties": 0,
+      "joint_success_wins": 40,
+      "mean_allscenario_penalized_cost_difference": -12.255742587867353,
+      "mean_paired_cost_difference": -14.250863474264364,
+      "mean_paired_cost_reduction_pct": 10.971513041855287,
+      "mean_paired_delta_v_difference": -1.743768519483582,
+      "paired_cost_difference_ci95": [
+        -15.715417519961724,
+        -12.461035388934702
+      ],
+      "paired_delta_v_difference_ci95": [
+        -1.9229347958012653,
+        -1.5251434631134668
+      ],
+      "profile_id": "required09",
+      "scope": "Matched required-target task.",
+      "sign_test_two_sided_p": 3.0213413992896676e-09,
+      "split": "test"
+    },
+    {
+      "all_scenario_count": 50,
+      "allscenario_penalized_cost_difference_ci95": [
+        -588.6786398108181,
+        -428.8713303398154
+      ],
+      "baseline": "coverage_only80",
+      "joint_success_count": 1,
+      "joint_success_losses": 0,
+      "joint_success_ties": 0,
+      "joint_success_wins": 1,
+      "mean_allscenario_penalized_cost_difference": -514.6003815515711,
+      "mean_paired_cost_difference": -1.8826488458233257,
+      "mean_paired_cost_reduction_pct": 1.3780831491245586,
+      "mean_paired_delta_v_difference": -0.2117809492710947,
+      "paired_cost_difference_ci95": [
+        -1.8826488458233257,
+        -1.8826488458233257
+      ],
+      "paired_delta_v_difference_ci95": [
+        -0.2117809492710947,
+        -0.2117809492710947
+      ],
+      "profile_id": "required09",
+      "scope": "Coverage-only80 uses a different native task; diagnostic comparison only.",
+      "sign_test_two_sided_p": 1.0,
+      "split": "test"
+    }
+  ],
+  "predecessor_study": "data/results/20260905_093000_required_target_adp",
+  "primary_comparator": "seeded_local_search",
+  "primary_endpoint": "paired_all_scenario_penalized_graph_cost_difference",
+  "primary_profile": "required09",
+  "required_target_manifest": {
+    "candidate_observable_target_count": 41,
+    "confirmation_requirement_source": "data/results/20260905_093000_required_target_adp",
+    "geometric_regions": [
+      {
+        "axis": "z",
+        "candidate_observable_item_count": 12,
+        "lower_bound_m": -57.9093481272459,
+        "ordered_target_ids": [
+          "mesh_00055",
+          "mesh_00052",
+          "mesh_00059",
+          "mesh_00064"
+        ],
+        "region_id": "axis_z_slab_1",
+        "upper_bound_m": -19.303121783733367
+      },
+      {
+        "axis": "z",
+        "candidate_observable_item_count": 17,
+        "lower_bound_m": -19.303121783733367,
+        "ordered_target_ids": [
+          "mesh_00007",
+          "mesh_00001",
+          "mesh_00079",
+          "mesh_00045"
+        ],
+        "region_id": "axis_z_slab_2",
+        "upper_bound_m": 19.303104559779165
+      },
+      {
+        "axis": "z",
+        "candidate_observable_item_count": 12,
+        "lower_bound_m": 19.303104559779165,
+        "ordered_target_ids": [
+          "mesh_00033",
+          "mesh_00015",
+          "mesh_00019",
+          "mesh_00024"
+        ],
+        "region_id": "axis_z_slab_3",
+        "upper_bound_m": 57.90933090329168
+      }
+    ],
+    "mesh_target_count": 90,
+    "profiles": [
+      {
+        "profile_id": "required09",
+        "region_target_ids": {
+          "axis_z_slab_1": [
+            "mesh_00055",
+            "mesh_00052",
+            "mesh_00059"
+          ],
+          "axis_z_slab_2": [
+            "mesh_00007",
+            "mesh_00001",
+            "mesh_00079"
+          ],
+          "axis_z_slab_3": [
+            "mesh_00033",
+            "mesh_00015",
+            "mesh_00019"
+          ]
+        },
+        "required_target_count": 9,
+        "required_target_ids": [
+          "mesh_00055",
+          "mesh_00052",
+          "mesh_00059",
+          "mesh_00007",
+          "mesh_00001",
+          "mesh_00079",
+          "mesh_00033",
+          "mesh_00015",
+          "mesh_00019"
+        ],
+        "required_target_mask": 275750586889
+      }
+    ],
+    "requirements_reselected": false,
+    "scientific_scope": "Synthetic geometric benchmark requirements; no component-criticality claim.",
+    "selection_inputs": "mesh coordinates and archived candidate-observable target IDs only",
+    "selection_uses_route_outcomes": false,
+    "selection_uses_scenario_inventory": false
+  },
+  "source_graph_sha256": "e90f40f0aaf87464ad5b5ef6b39979aa3c5f0b7049fe0ec17ad5e5b1a19b0af2",
+  "study": "required_target_adp_fresh_comparator_confirmation",
+  "superiority_config": {
+    "action_cost": 0.05,
+    "adaptive_rollout_depth": 3,
+    "base_seed": 731,
+    "branch_width": 8,
+    "candidate_limit": 36,
+    "candidate_pool_width": 18,
+    "cost_scale": 50.0,
+    "critic_backend": "mlp",
+    "episodes_per_training_scenario": 12,
+    "exploration_rate": 0.3,
+    "goal_coverage": 0.0,
+    "learning_rate": 0.025,
+    "local_improvement_passes": 3,
+    "lookahead_depth": 2,
+    "max_steps": 14,
+    "mlp_hidden_units": 48,
+    "mlp_regularization": 0.001,
+    "ood_node_increment": 2,
+    "ood_scenarios": 20,
+    "ridge_regularization": 0.1,
+    "scenario_node_count": 0,
+    "terminal_penalty": 500.0,
+    "test_scenarios": 30,
+    "training_scenarios": 24,
+    "training_target": "rollout",
+    "validation_scenarios": 8
+  }
+}

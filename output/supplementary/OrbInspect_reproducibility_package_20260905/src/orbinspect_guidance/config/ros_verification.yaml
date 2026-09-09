@@ -1,0 +1,62 @@
+hcw_dynamics_node:
+  ros__parameters:
+    mean_motion: 0.00113137
+    integration_dt: 0.05
+    publish_rate: 20.0
+    frame_id: lvlh
+    child_frame_id: chaser_body
+
+trajectory_tracking_controller:
+  ros__parameters:
+    controller_type: lqr
+    position_gain: 0.0015
+    velocity_gain: 0.10
+    max_acceleration: 0.060
+    control_rate: 20.0
+    mean_motion: 0.00113137
+    lqr_state_weights: [1.0, 1.0, 1.0, 120.0, 120.0, 120.0]
+    lqr_control_weights: [1800.0, 1800.0, 1800.0]
+    riccati_iterations: 300
+    mpc_horizon: 8
+    mpc_max_iterations: 35
+    frame_id: lvlh
+    publish_safe_command_passthrough: false
+
+safety_filter_node:
+  ros__parameters:
+    safety_margin: 2.0
+    caution_margin: 8.0
+    vehicle_radius: 0.80
+    max_acceleration: 0.060
+    max_speed: 1.50
+    repulsion_gain: 0.004
+    braking_time: 4.0
+    frame_id: lvlh
+
+planned_trajectory_replay_node:
+  ros__parameters:
+    trajectory_source: csv
+    publish_mode: closed_loop
+    publish_rate: 20.0
+    time_scale: 1.0
+    loop: false
+    stop_before_time: 0.0
+    frame_id: lvlh
+    child_frame_id: chaser_body
+    camera_frame_id: chaser_camera
+
+verification_evaluator_node:
+  ros__parameters:
+    position_tolerance: 0.5
+    velocity_tolerance: 0.05
+    goal_coverage: 0.80
+    max_sooas: 14
+    publish_rate: 20.0
+    frame_id: lvlh
+
+csv_logger_node:
+  ros__parameters:
+    result_root: data/results
+    reuse_run_id: true
+    save_figures: true
+    max_acceleration: 0.060
