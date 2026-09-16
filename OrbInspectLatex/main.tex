@@ -13,6 +13,7 @@
 \usepackage[caption=false,font=footnotesize]{subfig}
 \usepackage{tabularx}
 \usepackage{textcomp}
+\usepackage{ragged2e}
 \usepackage[urlcolor=blue,linkcolor=blue,citecolor=blue]{hyperref}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
@@ -25,6 +26,25 @@
 \setlength{\@dblfpsep}{12pt}
 \makeatother
 
+% Keep figure captions centered beneath their figures while fully justifying
+% the caption text within the same 0.9\linewidth width used by the artwork.
+\makeatletter
+\long\def\@makecaption#1#2{%
+  \ifx\@captype\@IEEEtablestring
+    {\centering{\tablecapnumfont#1}\par{\tablecapfont #2}\par}%
+    \@IEEEtablecaptionsepspace
+  \else
+    \@IEEEfigurecaptionsepspace
+    \vspace*{2pt}%
+    \makebox[\linewidth][c]{%
+      \parbox[t]{0.9\linewidth}{%
+        \figcapnumfont#1.\hspace*{9.5pt}{\figcapfont\justifying#2\par}%
+      }%
+    }%
+  \fi
+}
+\makeatother
+
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\dt}{\Delta t}
 \newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
@@ -32,7 +52,24 @@
 \newcommand{\fov}{\mathrm{FOV}}
 \newcommand{\dv}{\Delta v}
 \newcommand{\unit}[2]{#1~#2}
-\input{tables/required_target_numbers}
+% Begin included source: tables/required_target_numbers.tex
+\newcommand{\RTTestN}{50}
+\newcommand{\RTTestSuccess}{43}
+\newcommand{\RTLocalTestSuccess}{43}
+\newcommand{\RTJointTestN}{43}
+\newcommand{\RTTestPenaltyDiff}{-12.256}
+\newcommand{\RTTestCostDiff}{-14.251}
+\newcommand{\RTTestDvDiff}{-1.744}
+\newcommand{\RTOodN}{30}
+\newcommand{\RTOodSuccess}{9}
+\newcommand{\RTLocalOodSuccess}{8}
+\newcommand{\RTJointOodN}{8}
+\newcommand{\RTOodPenaltyDiff}{-31.999}
+\newcommand{\RTOodCostDiff}{-9.890}
+\newcommand{\RTOodDvDiff}{-1.207}
+\newcommand{\RTValidationN}{12}
+\newcommand{\RTFourMethodN}{43}
+% End included source: tables/required_target_numbers.tex
 
 % Include required-target execution checks and the historical survey evidence.
 \newif\ifincludeROSVerificationResults
@@ -40,6 +77,7 @@
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{proposition}{Proposition}
+\newtheorem{problem}{Problem}
 \theoremstyle{remark}
 \newtheorem{remark}{Remark}
 \theoremstyle{plain}
@@ -70,7 +108,7 @@
 \maketitle
 
 \begin{abstract}
-Autonomous orbital inspection must limit maneuver effort while completing prescribed observations under relative-motion and safety constraints. This paper develops a viability-preserving rollout approximate dynamic programming (ADP) formulation on a directed graph of audited orbital arcs. A finite Bellman prefix uses the completion cost of a deterministic task-aware base policy as its approximate terminal value. Uncertified completions receive infinite value, while safe connecting actions remain available even without immediate inspection gain. Under deterministic finite-graph assumptions, exhaustive rollout preserves a completion certificate and does not exceed the graph cost of a completing base policy. Offline experiments on an International Space Station mesh evaluate nine prescribed targets across \RTTestN{} test and \RTOodN{} shifted scenarios, including loss of required visibility. Depth-three ADP completes \RTTestSuccess{} and \RTOodSuccess{} missions, respectively. On 43 jointly completed test missions, mean maneuver velocity increment, $\Delta v$, decreases by 11.05\% relative to one-step-ADP-seeded local search. The paired reduction is \unit{1.744}{m/s}, with a 95\% interval of \unit{1.525--1.923}{m/s}. A depth-one-to-six diagnostic quantifies the additional computation required for further cost improvement. These results demonstrate maneuver-efficient inspection through completion-certified ADP sequencing on the tested finite graph.
+Autonomous orbital inspection must limit maneuver effort while completing prescribed observations under relative-motion and safety constraints. This paper develops a viability-preserving rollout approximate dynamic programming (ADP) formulation on a directed graph of audited orbital arcs. A finite Bellman prefix uses a deterministic task-aware base policy's completion cost as its approximate terminal value. Uncertified completions receive infinite value, while safe connecting actions remain available without immediate inspection gain. Under deterministic finite-graph assumptions, exhaustive rollout preserves completion and does not exceed the graph cost of a completing base policy. To separate planner failure from unavailable viewpoints, we independently certify route feasibility before evaluating the planners. In a development pilot, this defines a primary, feasibility-conditioned all-solvable benchmark of 59 cases from three 33-view graphs: depth-three ADP completes 59/59 missions, compared with 57/59 for one-step ADP and 33/59 for the task-aware greedy policy. Its mean graph-cost gap is 0.96\% over 27 cases with a proven finite-graph optimum. Four additional shifted cases failing the visibility certificate are retained as a separate stress test. The original fixed-library confirmation is reported separately: depth-three ADP completes \RTTestSuccess/\RTTestN{} test and \RTOodSuccess/\RTOodN{} shifted missions, and reduces mean maneuver velocity increment, $\Delta v$, by 11.05\% on 43 jointly completed test missions relative to one-step-ADP-seeded local search. These results support completion-certified sequencing while identifying viewpoint availability as a separate mission-level constraint.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -88,20 +126,21 @@ The planning challenge is to reduce cumulative maneuver effort while preserving 
 
 \begin{figure*}[t]
   \centering
-  \includegraphics[width=\linewidth]{figures/fig01_framework/viability_preserving_rollout_adp.pdf}
-  \caption{Viability-preserving rollout ADP for orbital inspection. I. ISS mesh and required targets $\mathcal K$ (orange rings). II. Camera-valid targets $G_j$ from range, FOV, incidence $\theta\leq\theta_{\max}$, and LOS checks. III. HCW transfer, motion audits, and directed SOOA construction; C70 and C68 are archived candidate IDs. IV. Depth-$d$ Bellman lookahead with complete greedy base-policy tails. At each leaf, $\sum\ell$ denotes the full tail cost; $+\infty$ denotes no certified completion within the remaining budget. V. First-action selection and planning-state updates toward the required goal $\Gamma_{\mathcal K}(m)=1$. The tree is schematic; the 9/9 route is an archived offline plan. ISS geometry: \href{https://science.nasa.gov/resource/international-space-station-3d-model/}{NASA}. Camera photograph: \href{https://commons.wikimedia.org/wiki/File:SVCam-ECO_Series_black_with_Tubus.JPG}{A.~Lucke}, \href{https://creativecommons.org/licenses/by-sa/3.0/}{CC BY-SA 3.0} (illustrative hardware).}
+  \includegraphics[width=0.85\linewidth]{figures/fig01_framework/viability_preserving_rollout_adp.pdf}
+  \caption{Viability-preserving rollout ADP for orbital inspection. I. International Space Station (ISS) mesh and required targets $\mathcal K$. II. Camera-valid targets $G_j$ from range, field of view (FOV), incidence $\theta\leq\theta_{\max}$, and line of sight (LOS) checks. III. HCW transfer, motion audits, and directed SOOA construction; C70 and C68 are archived candidate IDs. IV. Depth-$d$ Bellman lookahead with complete greedy base-policy tails. At each leaf, $\sum\ell$ denotes the full tail cost; $+\infty$ denotes no certified completion within the remaining budget. V. First-action selection and planning-state updates toward completion of all required targets. The tree is schematic; the 9/9 route is an archived offline plan. ISS geometry: National Aeronautics and Space Administration (NASA), \href{https://science.nasa.gov/resource/international-space-station-3d-model/}{NASA}.}
   \label{fig:sooa-framework}
 \end{figure*}
 
 The main contribution is a viability-preserving rollout approximate dynamic programming (ADP) formulation for maneuver-efficient required-target inspection. It specializes established rollout policy improvement \cite{bertsekas1997combinatorial,bertsekas2020rollout} using complete task-aware base-policy evaluations and finite-depth Bellman expansion. Actions are evaluated by approximate total graph cost, with infinite values rejecting uncertified completions. The analysis establishes completion preservation and base-policy no-degradation for SOOA sequencing, with exact dynamic programming providing a reference on tractable graphs.
 
 The contributions are:
+\begin{samepage}
 \begin{enumerate}
-  \item a rollout ADP formulation for maneuver-efficient required-target inspection, combining a required-target terminal predicate, finite-depth Bellman improvement, and complete task-aware base-policy evaluation;
-  \item a finite-graph analysis establishing Markov sufficiency, specializing rollout completion and cost-improvement guarantees to SOOA sequencing, and proving exact optimality on exhausted reduced graphs;
-  \item a directed SOOA representation with full-mesh visibility and motion audits, including complete GL Transmission Format (glTF) scene-node transforms, that admits safe connecting actions without requiring immediate inspection gain; and
-  \item a reproducible comparison showing an 11.05\% reduction in mean $\Delta v$ relative to one-step-ADP-seeded local search on 43 jointly completed test missions. Robot Operating System 2 (ROS~2) execution checks are reported separately.
+  \item a viability-preserving rollout ADP over directed SOOA graphs for maneuver-efficient required-target inspection, combining required-target terminal predicates, finite-depth Bellman improvement, complete task-aware base-policy evaluation, audited visibility and motion transitions, and safe zero-gain connectors;
+  \item a finite-graph analysis establishing Markov sufficiency, specializing rollout completion and cost-improvement guarantees to SOOA sequencing, and proving exact optimality on exhausted reduced graphs; and
+  \item a reproducible evaluation of the method: an independently certified 59-case all-solvable benchmark (59/59 depth-three ADP versus 57/59 one-step ADP), a separate four-case visibility stress test, an 11.05\% mean $\Delta v$ reduction relative to one-step-ADP-seeded local search on 43 jointly completed test missions, and separate Robot Operating System 2 (ROS~2) execution checks.
 \end{enumerate}
+\end{samepage}
 
 
 \section{Related Work}
@@ -115,14 +154,16 @@ Robotic view planning couples sensor range, incidence, occlusion, and reconstruc
 
 \emph{ADP and learning-based spacecraft control:} ADP replaces expensive exact cost-to-go calculations with tractable approximations \cite{bertsekas1996neuro,bertsekas2020rollout}. Combinatorial rollout uses heuristic completions to improve sequential decisions \cite{bertsekas1997combinatorial}; its policy-iteration interpretation also connects rollout with model predictive control \cite{bertsekas2005survey}. Value and policy iteration provide a broader theoretical basis for terminal-set optimal control \cite{bertsekas2017iterations}. OrbInspect uses a complete base-policy simulation as its value approximation, rather than a learned critic.
 
-Reinforcement learning offers a complementary route to approximate optimal feedback control from trajectory data \cite{kiumarsi2018survey}. Spacecraft applications include constrained six-degree-of-freedom proximity control \cite{hu2021learning} and actor--critic ADP with motion constraints, input saturation, and disturbance compensation \cite{tian2024proximity}. For inspection specifically, van Wijk et al. combine deep reinforcement learning (DRL) with discrete control barrier functions and run-time assurance \cite{vanwijk2024inspection}. These studies concern learned control policies; the present model-based ADP contribution concerns completion-certified observation sequencing.
+Reinforcement learning offers a complementary route to approximate optimal feedback control from trajectory data \cite{kiumarsi2018survey}. Spacecraft applications include constrained six-degree-of-freedom proximity control \cite{hu2021learning}, online attitude stabilization under dynamic uncertainty \cite{luo2025attitude}, and actor--critic ADP with motion constraints, input saturation, and disturbance compensation \cite{tian2024proximity}. Reach-avoid differential graphical games provide a related ADP setting for nonlinear multi-agent dynamics with communication constraints and input saturation \cite{tang2025reachavoid}; their adversarial objectives differ from the deterministic required-observation sequencing studied here. For inspection specifically, van Wijk et al. combine deep reinforcement learning (DRL) with discrete control barrier functions and run-time assurance \cite{vanwijk2024inspection}. These studies concern learned control policies; the present model-based ADP contribution concerns completion-certified observation sequencing.
 
 \emph{Safety and completion guarantees:} Constrained policy optimization regulates expected constraint costs \cite{achiam2017cpo}, whereas shielding restricts action selection using a specified safety model \cite{alshiekh2018shielding}. Control barrier functions impose conditions for forward invariance \cite{ames2017barrier}, and predictive barrier functions provide a recovery mechanism toward the feasible set of a predictive safety filter \cite{wabersich2023predictive}. OrbInspect separates these control-level concerns from finite-task viability: motion audits admit SOOA edges, while finite rollout values certify a continuation to every required target. The resulting completion and cost bounds specialize established rollout principles to a directed inspection graph; they do not replace continuous-state safety certificates.
 
 \section{System and Observation Model}
 \label{sec:system}
 
-The planner operates offline. It receives a known station mesh, a fixed nonempty required-target set, an initial relative state, camera parameters, a keep-out model, and actuation limits. It returns a time-indexed translational reference, a camera-boresight stream, selected SOOA records, accepted target identities, and summary metrics. Table~\ref{tab:assumptions} states the modeling assumptions and their implications for interpreting both evidence layers.
+This section defines the deterministic system, observation, and feasibility model from which the candidate graph is constructed. The inspected structure is represented by a known station mesh and surface samples; the chaser state, camera parameters, nonempty required-target set, keep-out model, and actuation limits define each scenario. These ingredients determine visibility masks, admissible transfers, and SOOA edge costs.
+
+The modeling assumptions and the resulting limits on interpretation are summarized in Table~\ref{tab:assumptions} before the system equations are introduced.
 
 \begin{table*}[t]
   \centering
@@ -135,12 +176,10 @@ The planner operates offline. It receives a known station mesh, a fixed nonempty
     \toprule
     Assumption & Role in the baseline & Consequence for interpretation \\
     \midrule
-    Circular chief orbit & Supports linear HCW relative translation in the LVLH frame. & Quantitative results compare planners under the same local linear model, not a perturbed flight ephemeris. \\
-    Station fixed in LVLH & Keeps mesh targets and the mesh safety geometry stationary during one planning run. & Rotating appendages or station attitude motion require a body-frame extension. \\
+    HCW and fixed local-vertical/local-horizontal (LVLH) geometry & A circular chief orbit supports linear HCW relative translation, while a station fixed in LVLH keeps the mesh and safety geometry stationary during one planning run. & Quantitative results use a local linear, stationary-mesh model; perturbed ephemerides or station attitude motion require an extension. \\
     Known mesh and state & Makes visibility, occlusion, and transfer evaluation deterministic. & Navigation, map, and shape uncertainty are not represented by the present safety margin. \\
     Prescribed camera attitude & Points the boresight toward each candidate observation target and exports the corresponding quaternion stream. & Camera slew time, reaction-wheel limits, and closed-loop attitude error are outside the optimization. \\
     Mesh-based sampled safety & Computes distance to the full International Space Station (ISS) triangle mesh at every rollout sample and rejects sampled motion segments that intersect the mesh. & Positive sampled clearance and surface nonintersection are planning audits rather than a robust continuous-time collision certificate. \\
-    No illumination or plume model & Isolates view geometry and translational feasibility. & Sun angle, shadow, contamination, and plume-impingement restrictions must be added for flight design. \\
     \bottomrule
   \end{tabularx}
 \end{table*}
@@ -158,6 +197,7 @@ The inspected structure is fixed in a local-vertical/local-horizontal (LVLH) fra
   \end{aligned}
   \label{eq:hcw-continuous}
 \end{equation}
+where $I$ is the $3\times3$ identity matrix and the zero blocks have compatible dimensions.
 For the continuous HCW model, piecewise-constant acceleration over $\dt$ has the exact zero-order-hold map
 \begin{equation}
   \begin{aligned}
@@ -167,23 +207,25 @@ For the continuous HCW model, piecewise-constant acceleration over $\dt$ has the
   \end{aligned}
   \label{eq:hcw-discrete}
 \end{equation}
-The implementation constructs and propagates each boundary map with fixed-step fourth-order Runge--Kutta integration under the same piecewise-constant input model. The numerical map is $\mathbf x_{k+1}=\widetilde A_d\mathbf x_k+\widetilde B_d\mathbf u_k$, with \eqref{eq:hcw-discrete} providing the exact continuous-model reference. Each rest-to-rest segment uses finite-duration thrust and is accepted when its terminal position and velocity errors satisfy the prescribed tolerances.
+% The implementation constructs and propagates each boundary map with fixed-step fourth-order Runge--Kutta integration under the same piecewise-constant input model. The numerical map is $\mathbf x_{k+1}=\widetilde A_d\mathbf x_k+\widetilde B_d\mathbf u_k$, with \eqref{eq:hcw-discrete} providing the exact continuous-model reference.
 
 \subsection{Visibility, Prescribed Observation, and Coverage}
 
-The structure is represented by surface samples $\mathcal T=\{(p_i,n_i,a_i)\}_{i=1}^{N}$ with represented areas $a_i>0$. Mission priority weights are separately defined as $w_i=a_i\eta_i$, where $\eta_i>0$ is a priority multiplier; they are not geometric areas. A fixed nonempty set $\mathcal K\subseteq\mathcal T$ specifies the required inspection items before scenario evaluation. The camera attitude $q_k$ defines unit boresight $b(q_k)$, and $\mathcal O$ denotes the occluding mesh. Target $i$ is visible when
+The structure is represented by indexed surface samples $\{(\mathbf p_i,\mathbf n_i,a_i)\}_{i=1}^{N}$, where $\mathbf p_i\in\mathbb R^3$ is the sample position in the LVLH frame, $\mathbf n_i\in\mathbb R^3$ is its outward unit normal, and $a_i>0$ is its represented surface area. Let $\mathcal T=\{1,\ldots,N\}$ denote the sample-index set. Mission priority weights are separately defined as $w_i=a_i\eta_i$, where $\eta_i>0$ is a priority multiplier; they are not geometric areas. A fixed nonempty set $\mathcal K\subseteq\mathcal T$ specifies the required inspection items before scenario evaluation. The camera attitude quaternion $q_k$ defines unit boresight $\mathbf b(q_k)$, and $\mathcal O$ denotes the occluding mesh. Target index $i$ is visible when
 \begin{align}
-  r_{\min}^{\mathrm{cam}}&\le\norm{p_i-\mathbf r_k}\le r_{\max}^{\mathrm{cam}},\nonumber\\
-  \arccos\!\frac{(p_i-\mathbf r_k)^{\mathsf T}b(q_k)}
-  {\norm{p_i-\mathbf r_k}}&\le\alpha_{\max},\nonumber\\
-  \arccos\!\frac{(\mathbf r_k-p_i)^{\mathsf T}n_i}
-  {\norm{\mathbf r_k-p_i}\norm{n_i}}&\le\theta_{\max},\nonumber\\
-  \los(\mathbf r_k,p_i,\mathcal O)&=1.
+  r_{\min}^{\mathrm{cam}}&\le\norm{\mathbf p_i-\mathbf r_k}\le r_{\max}^{\mathrm{cam}},\nonumber\\
+  \arccos\!\frac{(\mathbf p_i-\mathbf r_k)^{\mathsf T}\mathbf b(q_k)}
+  {\norm{\mathbf p_i-\mathbf r_k}}&\le\alpha_{\max},\nonumber\\
+  \arccos\!\frac{(\mathbf r_k-\mathbf p_i)^{\mathsf T}\mathbf n_i}
+  {\norm{\mathbf r_k-\mathbf p_i}\norm{\mathbf n_i}}&\le\theta_{\max},\nonumber\\
+  \los(\mathbf r_k,\mathbf p_i,\mathcal O)&=1.
   \label{eq:visibility}
 \end{align}
-Fig.~\ref{fig:sooa-framework}, panel~II, illustrates the range, field-of-view, incidence-angle, and line-of-sight tests in \eqref{eq:visibility}. Line of sight is queried against a deterministic bounding-volume hierarchy containing every ISS mesh triangle; intersections at the target endpoint are excluded, while interior segment intersections block the view. In a closed-loop execution model, dwell could be accumulated as $\tau_{i,k+1}=\tau_{i,k}+\dt$ while target $i$ remains visible and accepted when $\tau_i\ge\tau_{\min}$. The offline study instead treats every candidate as a stabilized terminal observation with its prescribed exposure completed a priori. Applying \eqref{eq:visibility} at the candidate pose $(\mathbf r_k,q_k)=(\bar{\mathbf r}_j,\bar q_j)$ yields its fixed visibility mask $G_j$. Selecting node $j$ credits this mask, so $m_{k+1}=m_k\lor G_j$. The sampled-area coverage represented by mask $m_k$ is
+Here $r_{\min}^{\mathrm{cam}}$ and $r_{\max}^{\mathrm{cam}}$ are the camera range limits, $\alpha_{\max}$ is the FOV half-angle, $\theta_{\max}$ is the incidence-angle limit, and $\los(\mathbf r_k,\mathbf p_i,\mathcal O)=1$ denotes an unobstructed LOS. Let $\mathbf m_k\in\{0,1\}^{N}$ denote the cumulative covered-target mask after the first $k$ selected observations, initialized at $\mathbf m_0=\mathbf 0$. Let $M$ denote the number of candidate observation nodes, indexed by $j=1,\ldots,M$. For a target-index set $G_j$, let $\mathbf 1_{G_j}\in\{0,1\}^{N}$ denote its indicator vector; let $\mathbf e_a\in\{0,1\}^{M}$ denote the standard basis vector that marks selected destination $a$. Fig.~\ref{fig:sooa-framework}, panel~II, illustrates the range, FOV, incidence-angle, and LOS tests in \eqref{eq:visibility}. LOS is queried against a deterministic bounding-volume hierarchy containing every ISS mesh triangle; intersections at the target endpoint are excluded, while interior segment intersections block the view. In a closed-loop execution model, dwell could be accumulated as $\tau_{i,k+1}=\tau_{i,k}+\dt$ while target $i$ remains visible and accepted when $\tau_{i,k+1}\ge\tau_{\min}$, where $\tau_{i,k}$ is accumulated dwell time and $\tau_{\min}$ is the required dwell time. The offline study instead treats every candidate as a stabilized terminal observation with its prescribed exposure completed a priori. Applying \eqref{eq:visibility} at the candidate pose $(\mathbf r_k,q_k)=(\bar{\mathbf r}_j,\bar q_j)$ yields its fixed visibility mask $G_j$. Selecting node $j$ credits this mask, so $\mathbf m_{k+1}=\mathbf m_k\lor\mathbf 1_{G_j}$. Here $\mathbf m_k=[m_{1,k},\ldots,m_{N,k}]^{\mathsf T}$, where $m_{i,k}=1$ exactly when target/sample $i$ has been credited after the first $k$ observations.
+Thus $\mathbf m_0=\mathbf 0$ is the initial all-uncovered mask, while $\mathbf m_k$ denotes
+the generic mask at decision step $k$. The sampled-area coverage represented by mask $\mathbf m_k$ is
 \begin{equation}
-  C^{\mathrm{area}}(m_k)=\frac{\sum_i a_i m_{i,k}}{\sum_i a_i}.
+  C^{\mathrm{area}}(\mathbf m_k)=\frac{\sum_i a_i m_{i,k}}{\sum_i a_i}.
   \label{eq:coverage}
 \end{equation}
 
@@ -194,58 +236,82 @@ Candidate generation can make a subset of the sampled surface invisible from eve
   {\sum_{i\in\mathcal T_{\mathrm{insp}}}w_i}.
   \label{eq:inspectable-coverage}
 \end{equation}
-Equation~\eqref{eq:coverage} estimates credited area over the original surface samples, whereas \eqref{eq:inspectable-coverage} is a priority-weighted score conditional on the candidate library. Their denominators remain fixed after scenario-specific observation loss. Neither is the primary required-target completion metric, which is
+Equation~\eqref{eq:coverage} estimates credited area over the original surface samples, whereas \eqref{eq:inspectable-coverage} is a priority-weighted score conditional on the candidate library. Their denominators remain fixed after scenario-specific observation loss. Neither is the primary required-target completion metric. Here, $\operatorname{supp}(\mathbf m)=\{i\in\mathcal T:m_i=1\}$ denotes the set of sample indices covered by binary mask $m$.
 \begin{equation}
   \begin{aligned}
-  C^{\mathcal K}(m)&=\frac{|\mathcal K\cap\operatorname{supp}(m)|}{|\mathcal K|},\\
-  \Gamma_{\mathcal K}(m)&=\mathbf1\{\mathcal K\subseteq\operatorname{supp}(m)\}.
+  C^{\mathcal K}(\mathbf m)&=\frac{|\mathcal K\cap\operatorname{supp}(\mathbf m)|}{|\mathcal K|},\\
+  \Gamma_{\mathcal K}(\mathbf m)&=\mathbf1\{\mathcal K\subseteq\operatorname{supp}(\mathbf m)\}.
   \end{aligned}
   \label{eq:required-goal}
 \end{equation}
-Mission success requires $\Gamma_{\mathcal K}=1$, independently of optional area coverage. One observation can credit several required items, and different viewpoints can satisfy the same item. Completion denotes acceptance of the prescribed samples under \eqref{eq:visibility}. Reported mission duration is transfer-only; observation exposure is assumed complete at each stabilized candidate.
+Mission success requires $\Gamma_{\mathcal K}(\mathbf m)=1$, independently of optional area coverage. One observation can credit several required items, and different viewpoints can satisfy the same item. Completion denotes acceptance of the prescribed samples under \eqref{eq:visibility}. Reported mission duration is transfer-only; observation exposure is assumed complete at each stabilized candidate.
 
 \subsection{Dynamic Feasibility and SOOAs}
 
-Every sampled state must satisfy
+The finite-body radius is $r_{\mathrm{veh}}=\unit{0.80}{m}$, which conservatively bounds the chaser visual model, and the prescribed mesh-clearance margin is $d_{\mathrm{safe}}=\unit{2.0}{m}$. For an edge rollout with $K$ post-step samples, let $\varepsilon_r$ and $\varepsilon_v$ denote the terminal position and velocity tolerances. Every sampled state must satisfy
 \begin{equation}
   \norm{\mathbf u_k}_2\le u_{\max},\qquad
   \norm{\mathbf v_k}_2\le v_{\max},\qquad
   d_{\mathcal S}(\mathbf r_k)\ge 0,
   \label{eq:limits}
 \end{equation}
-where $d_{\mathcal S}(\mathbf r)=d_{\mathrm{mesh}}(\mathbf r)-r_{\mathrm{veh}}-d_{\mathrm{safe}}$ is finite-body clearance above the required margin, $d_{\mathrm{mesh}}$ is unsigned center distance to the closest triangle in the complete ISS mesh, and $r_{\mathrm{veh}}=\unit{0.80}{m}$ conservatively bounds the chaser visual model; thus $d_{\mathcal S}=0$ is the sampled admissibility boundary. The mesh coordinates are obtained from the complete glTF scene hierarchy (a matrix or translation--rotation--scale at every ancestor), followed by the Simulation Description Format (SDF) pose and scale. In addition, each consecutive pair of rollout samples is tested for a triangle-surface intersection, and its continuous center-distance lower bound subtracts half the segment length from the smaller endpoint distance by the 1-Lipschitz property of distance to a closed set. This swept test catches a direct mesh crossing even if both endpoints have positive unsigned distance. For a directed rollout from source node $i$ to destination node $j$, define $\Delta v_{ij}=\sum_k\norm{\mathbf u_{ij,k}}_2\dt$, root-mean-square distance $e_{ij}^{\mathrm{rms}}$ from the transfer samples to the destination position, and $d_{ij}^{\min}=\min_k d_{\mathcal S}(\mathbf r_{ij,k})$. The graph stage cost used in the reported study is
+where $d_{\mathcal S}(\mathbf r)=d_{\mathrm{mesh}}(\mathbf r)-r_{\mathrm{veh}}-d_{\mathrm{safe}}$ is finite-body clearance above the required margin, $d_{\mathrm{mesh}}$ is unsigned center distance to the closest triangle in the complete ISS mesh, and $d_{\mathcal S}=0$ is the sampled admissibility boundary. The mesh coordinates are obtained from the complete GL Transmission Format (glTF) scene hierarchy, followed by the Simulation Description Format (SDF) pose and scale. In addition, each consecutive pair of rollout samples is tested for a triangle-surface intersection, and its continuous center-distance lower bound subtracts half the segment length from the smaller endpoint distance by the 1-Lipschitz property of distance to a closed set. This swept test catches a direct mesh crossing even if both endpoints have positive unsigned distance. For a directed rollout from source node $i$ to destination node $j$, define $\Delta v_{ij}=\sum_k\norm{\mathbf u_{ij,k}}_2\dt$, root-mean-square distance $e_{ij}^{\mathrm{rms}}$ from the transfer samples to the destination position, and $d_{ij}^{\min}=\min_k d_{\mathcal S}(\mathbf r_{ij,k})$. The coefficients $\lambda_v$, $\lambda_e$, $\lambda_s$, and $\lambda_a$ are fixed nonnegative weights for maneuver increment, terminal tracking error, clearance violation, and per-edge action cost, respectively. The graph stage cost is
 \begin{equation}
   \ell_{ij}=\lambda_v\Delta v_{ij}+\lambda_e e_{ij}^{\mathrm{rms}}+\lambda_s\max(0,-d_{ij}^{\min})+\lambda_a.
   \label{eq:edge-cost}
 \end{equation}
+For any route, $J$ denotes the sum of its edge stage costs; $J_{\mathrm{rollout}}$ in the illustrative figure is the corresponding realized rollout cost.
 For every shield-admissible edge, the clearance-violation term is zero. It remains in the shared cost implementation so deliberately unshielded comparison methods can be evaluated with the same expression.
 
 A candidate observation node and a directed SOOA edge are, respectively,
 \begin{equation}
   \begin{aligned}
-  v_j&=(\bar{\mathbf r}_j,\bar q_j,G_j),\\
-  a_{ij}&=\bigl(\mathbf x_{ij}[1{:}K],\mathbf u_{ij}[0{:}K-1],q_{ij}[1{:}K],\\
+  c_j&=(\bar{\mathbf r}_j,\bar q_j,G_j),\\
+  \mathsf a_{ij}&=\bigl(\mathbf x_{ij}[1{:}K],\mathbf u_{ij}[0{:}K-1],q_{ij}[1{:}K],\\
   &\qquad \Delta v_{ij},d_{ij}^{\min},u_{ij}^{\max},v_{ij}^{\max},e_{ij}^{r},e_{ij}^{v},\rho_{ij}\bigr).
   \end{aligned}
   \label{eq:sooa}
 \end{equation}
-Here $\bar{\mathbf r}_j$ and $\bar q_j$ are the terminal observation pose and prescribed attitude, $G_j\subseteq\mathcal T$ is its camera-valid target set, and $e_{ij}^{r}$ and $e_{ij}^{v}$ are terminal position and velocity errors. The stored state and attitude arrays contain the $K$ post-step samples; the source state is held by node $v_i$. The initial condition is a distinguished source node $v_0$ with no visibility reward. For passive horizon $T_p=L_p\dt$, an optional audit can propagate zero-input HCW drift from every stored edge state and record $\rho_{ij}=\min_{1\le k\le K,\,0\le l\le L_p}d_{\mathcal S}(\mathbf r_{ij,k}^{\mathrm{drift}}(l))$. The reported study disables this optional audit and therefore makes no passive-safety claim; it retains input, speed, full-mesh sampled clearance, swept surface-intersection, and terminal checks. Throughout this paper, ``safe'' means admissible under the audits explicitly enabled for the reported experiment. These deterministic checks do not certify robustness between samples or under model and state uncertainty.
+Here $\bar{\mathbf r}_j$ and $\bar q_j$ are the terminal observation pose and prescribed attitude, $G_j\subseteq\mathcal T$ is its camera-valid target set, and $e_{ij}^{r}$ and $e_{ij}^{v}$ are terminal position and velocity errors. The stored state and attitude arrays contain the $K$ post-step samples, while $u_{ij}^{\max}$ and $v_{ij}^{\max}$ record the maximum sampled input and speed norms; the source state is held by candidate node $c_i$. In the edge notation below, $i$ and $j$ index candidate nodes and are distinct from the surface-sample index used above. The initial condition is a distinguished source node $c_0$ with no visibility reward. For a passive audit with horizon $T_p=L_p\dt$, where $L_p$ is the number of passive steps, zero-input HCW drift can be propagated from every stored edge state and recorded as $\rho_{ij}=\min_{1\le k\le K,\,0\le l\le L_p}d_{\mathcal S}(\mathbf r_{ij,k}^{\mathrm{drift}}(l))$. The reported study disables this optional audit and therefore makes no passive-safety claim; it retains input, speed, full-mesh sampled clearance, swept surface-intersection, and terminal checks. Throughout this paper, ``safe'' means admissible under the audits explicitly enabled for the reported experiment.
+
+The preceding model induces the required-target sequencing problem. The graph
+state and shield notation used to solve it are introduced in Section~\ref{sec:algorithm}.
+\begin{samepage}
+\begin{problem}[Required-target SOOA planning]
+\label{prob:required-target-sooa}
+Given the candidate nodes and stored directed SOOA records above, an initial
+action budget $H$, and the required set $\mathcal K$, find a finite sequence
+$\pi=(a_1,\ldots,a_L)$, with $0\le L\le H$, that minimizes
+\begin{equation}
+  J(\pi)=\sum_{k=1}^{L}\ell_{j_{k-1}a_k},
+  \qquad j_0=0,\quad j_k=a_k,
+  \label{eq:problem-objective}
+\end{equation}
+subject to the following conditions: each traversed record
+$\mathsf a_{j_{k-1}a_k}$ passes all enabled motion, terminal, clearance, and
+passive audits; no destination is selected more than once; and the masks
+updated by $\mathbf m_k=\mathbf m_{k-1}\lor\mathbf 1_{G_{a_k}}$, $\mathbf m_0=\mathbf0$, satisfy
+$\Gamma_{\mathcal K}(m_L)=1$. A zero-gain action is allowed when it is needed
+to reach a later required observation. If no such sequence exists within $H$,
+the instance is declared infeasible in the available candidate graph.
+\end{problem}
+\end{samepage}
 
 \section{Viability-Preserving Rollout ADP}
 \label{sec:algorithm}
 
 \subsection{Candidate Graph and Markov State}
 
-Let $\mathcal V=\{v_0,v_1,\ldots,v_M\}$ contain the initial node and the $M$ candidate observation nodes in \eqref{eq:sooa}. A directed edge from $v_i$ to $v_j$ is the source-dependent SOOA $a_{ij}$, and it is absent when an enabled audit fails. Thus visibility $G_j$ is node dependent, whereas trajectory, cost, clearance, input, terminal error, and passive margin are edge dependent. This separation is necessary because reaching the same observation from two different source nodes generally produces different HCW motion and audit values.
+Let $\mathcal V=\{c_0,c_1,\ldots,c_M\}$ contain the initial node and the $M$ candidate observation nodes in \eqref{eq:sooa}. A directed edge from $c_i$ to $c_j$ is the source-dependent SOOA $\mathsf a_{ij}$, and it is absent when an enabled audit fails. Thus visibility $G_j$ is node dependent, whereas trajectory, cost, clearance, input, terminal error, and passive margin are edge dependent. This separation is necessary because reaching the same observation from two different source nodes generally produces different HCW motion and audit values.
 
 A node identifier is not a sufficient decision state because the value of a view changes after its targets have been covered. The finite-horizon Markov state is
 \begin{equation}
-  s_k=(j_k,m_k,b_k,h_k),
+  s_k=(j_k,\mathbf m_k,b_k,h_k),
   \label{eq:mdp-state}
 \end{equation}
-where $j_k\in\{0,\ldots,M\}$ is the current node, $m_k\in\{0,1\}^{N}$ is the covered-target mask, $b_k\in\{0,1\}^{M}$ is the selected-observation mask, and $h_k$ is the remaining action budget. Selecting destination $a\in\{1,\ldots,M\}$ traverses edge $a_{j_ka}$ and gives the deterministic transition
+where $j_k\in\{0,\ldots,M\}$ is the current node, $\mathbf m_k\in\{0,1\}^{N}$ is the covered-target mask, $b_k\in\{0,1\}^{M}$ is the selected-observation mask, and $h_k$ is the remaining action budget. The scalar destination index $a$ is distinct from the surface-area scalar $a_i$ defined above. Selecting destination index $a\in\{1,\ldots,M\}$ traverses edge $\mathsf a_{j_ka}$ and gives the deterministic transition
 \begin{equation}
-  f(s_k,a)=\left(a,\;m_k\lor G_a,\;b_k\lor\mathbf e_a,\;h_k-1\right).
+  f(s_k,a)=\left(a,\;\mathbf m_k\lor\mathbf 1_{G_a},\;b_k\lor\mathbf e_a,\;h_k-1\right).
   \label{eq:mdp-transition}
 \end{equation}
 The required set $\mathcal K$ is fixed problem data. The shield-admissible action set $\mathcal U_s(s)$ is defined below. The constrained graph problem minimizes total stage cost subject to \eqref{eq:required-goal}, with zero terminal cost for a completed task and value $+\infty$ when no admissible completion exists within the remaining budget. Its Bellman recursion is
@@ -253,7 +319,7 @@ The required set $\mathcal K$ is fixed problem data. The shield-admissible actio
   \begin{aligned}
   V^\star(s)&=
     \begin{cases}
-    0, & \Gamma_{\mathcal K}(m)=1,\\
+    0, & \Gamma_{\mathcal K}(\mathbf m)=1,\\
     +\infty, & h=0\ \text{or}\ \mathcal U_s(s)=\varnothing,\\
     \min\limits_{a\in\mathcal U_s(s)}
       Q^\star(s,a), & \text{otherwise},
@@ -262,11 +328,11 @@ The required set $\mathcal K$ is fixed problem data. The shield-admissible actio
   \end{aligned}
   \label{eq:bellman}
 \end{equation}
-Here $j$ and $h$ are the current-node and remaining-budget components of $s$. Exact evaluation is exponential in the coverage and selected-node masks. The proposed method approximates this recursion with a short exact prefix and a computationally inexpensive, goal-aware terminal policy.
+Here $j$ and $h$ are the current-node and remaining-budget components of $s$, and $f$ is the deterministic state-transition map. Exact evaluation is exponential in the coverage and selected-node masks. The proposed method approximates this recursion with a short exact prefix and a computationally inexpensive, goal-aware terminal policy.
 
 \subsection{SOOA Construction and Safety Shield}
 
-Area-weighted targets are sampled from the mesh, and camera seeds are generated on offset shells around their outward normals. The binary visibility matrix $V_{ij}=\mathbf 1\{i\in G_j\}$ is computed once from the terminal observation geometry. For a transition to $\bar{\mathbf x}_j=[\bar{\mathbf r}_j^{\mathsf T},\mathbf0^{\mathsf T}]^{\mathsf T}$, the planner solves the minimum-energy piecewise-constant HCW boundary-value problem under the numerical fourth-order Runge--Kutta (RK4) map
+Area-weighted targets are sampled from the mesh, and camera seeds are generated on offset shells around their outward normals. The binary visibility matrix $\mathsf V_{ij}=\mathbf 1\{i\in G_j\}$ is computed once from the terminal observation geometry. For a transition to $\bar{\mathbf x}_j=[\bar{\mathbf r}_j^{\mathsf T},\mathbf0^{\mathsf T}]^{\mathsf T}$, the planner solves the minimum-energy piecewise-constant HCW boundary-value problem under the numerical fourth-order Runge--Kutta (RK4) map
 \begin{equation}
   \begin{aligned}
   \min_{\mathbf u_0,\ldots,\mathbf u_{K-1}}\quad&
@@ -277,16 +343,18 @@ Area-weighted targets are sampled from the mesh, and camera seeds are generated 
   \end{aligned}
   \label{eq:terminal-transfer}
 \end{equation}
-If the terminal influence matrix $\mathcal B_K=[\widetilde A_d^{K-1}\widetilde B_d\ \cdots\ \widetilde B_d]$ has full row rank, the stacked minimum-norm command from source state $\mathbf x_i^{\mathrm{src}}$ is $\mathbf U_{ij}^\star=\mathcal B_K^{\mathsf T}(\mathcal B_K\mathcal B_K^{\mathsf T})^{-1}(\bar{\mathbf x}_j-\widetilde A_d^K\mathbf x_i^{\mathrm{src}})$. The implementation computes this expression through the $6\times6$ Gram system and then propagates the requested input without clipping. Let $\chi_{ij}=1$ exactly when every stored edge sample satisfies \eqref{eq:limits}, $e_{ij}^{r}\le\varepsilon_r$, $e_{ij}^{v}\le\varepsilon_v$, and $\rho_{ij}\ge0$ when the passive audit is enabled. The shield then admits
+If the terminal influence matrix $\mathcal B_K=[\widetilde A_d^{K-1}\widetilde B_d\ \cdots\ \widetilde B_d]\in\mathbb R^{6\times3K}$ has full row rank, stack the commands as $\mathbf U_{ij}=[\mathbf u_{ij,0}^{\mathsf T},\ldots,\mathbf u_{ij,K-1}^{\mathsf T}]^{\mathsf T}$. The minimum-norm command from source state $\mathbf x_i^{\mathrm{src}}$ is then $\mathbf U_{ij}^\star=\mathcal B_K^{\mathsf T}(\mathcal B_K\mathcal B_K^{\mathsf T})^{-1}(\bar{\mathbf x}_j-\widetilde A_d^K\mathbf x_i^{\mathrm{src}})$. The implementation computes this expression through the $6\times6$ Gram system and then propagates the requested input without clipping. Let $\chi_{ij}=1$ exactly when every stored edge sample satisfies \eqref{eq:limits}, the enabled swept-segment audit reports no triangle intersection, $e_{ij}^{r}\le\varepsilon_r$, $e_{ij}^{v}\le\varepsilon_v$, and $\rho_{ij}\ge0$ when the passive audit is enabled. The shield then admits
 \begin{equation}
-  \mathcal U_s(s)=\{a\in\{1,\ldots,M\}:b_a=0,\;\chi_{ja}=1\},
+  \mathcal U_s(s)=\{a\in\{1,\ldots,M\}:h>0,\;b_a=0,\;\chi_{ja}=1\},
   \label{eq:safe-action-set}
 \end{equation}
 where $j$ is the current-node component of $s$. Safe unvisited nodes remain admissible when they provide no immediate inspection gain, because a connecting action may be needed to reach a required target on the directed graph. The finite budget and no-revisit mask bound such connections. The shield makes an inadmissible edge unavailable to incumbent construction, local search, and exact recursion \cite{alshiekh2018shielding}. Its guarantee remains conditional on the sampled numerical rollout and deterministic model used to compute $\chi_{ij}$.
 
+An edge is audit-admissible when $\chi_{ij}=1$; an action is shield-admissible when it belongs to $\mathcal U_s(s)$. A scenario is feasible for the candidate graph when at least one shield-admissible sequence reaches $\Gamma_{\mathcal K}(\mathbf m)=1$ within the available budget, and is infeasible when no such sequence exists.
+
 \subsection{Adaptive Base Policy and Rollout Value}
 
-Let $g_{\mathcal K}(s,a)=|\mathcal K\cap(G_a\setminus\operatorname{supp}(m))|$ count newly accepted required targets, and let $\epsilon=0.05$ prevent division by a near-zero stage cost. For the required-target task, the deterministic adaptive base policy is
+Let $g_{\mathcal K}(s,a)=|\mathcal K\cap(G_a\setminus\operatorname{supp}(\mathbf m))|$ count newly accepted required targets, and let $\epsilon=0.05$ prevent division by a near-zero stage cost. For the required-target task, the deterministic adaptive base policy is
 \begin{equation}
   \mu(s)\in\arg\max_{a\in\mathcal U_s(s)}
   \left(\frac{g_{\mathcal K}(s,a)}{\max\{\epsilon,\ell_{ja}\}},
@@ -297,18 +365,18 @@ where the tuple is compared lexicographically, followed by deterministic node-id
 \begin{equation}
   \widehat V_0(s)=
   \begin{cases}
-  \sum_{k=0}^{L-1}\ell_{j_k\mu(s_k)}, & \mu\text{ reaches }\Gamma_{\mathcal K}=1\text{ within }h,\\
+  \sum_{k=0}^{L-1}\ell_{j_k\mu(s_k)}, & \mu\text{ reaches }\Gamma_{\mathcal K}(\mathbf m)=1\text{ within }h,\\
   +\infty, & \text{otherwise}.
   \end{cases}
   \label{eq:base-value}
 \end{equation}
-Thus $\widehat V_0$ approximates the cost-to-go through a complete, shielded base-policy simulation.
+where $L$ is the number of actions taken by the base policy before completion or budget exhaustion. Thus $\widehat V_0$ approximates the cost-to-go through a complete, shielded base-policy simulation.
 
 For rollout depth $d\ge1$, define the truncated Bellman value
 \begin{equation}
   \widehat V_d(s)=
   \begin{cases}
-    0, & \Gamma_{\mathcal K}(m)=1,\\
+    0, & \Gamma_{\mathcal K}(\mathbf m)=1,\\
     +\infty, & h=0,\\
     \min\limits_{a\in\mathcal U_s(s)}\widehat Q_d(s,a), & \text{otherwise},
   \end{cases}
@@ -320,8 +388,8 @@ Fig.~\ref{fig:adp-architecture} gives a worked decision on an illustrative graph
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=\columnwidth]{figures/fig02_rollout_example/adp_rollout_mechanism.pdf}
-  \caption{Illustrative completion-certified rollout ADP, with initial state $s=(0,\mathbf0,\mathbf0,3)$. I. Solid edges are admissible, edge labels are stage costs, and $G_j$ lists visible targets. The dashed transfer is excluded. II. At $d=2$, rollout selects zero-gain connector $v_2$ for total cost 4, versus base-policy cost 8; action 3 has no certified completion. III. The successor $s'=(2,\mathbf0,\mathbf e_2,2)$ retains a cost-3 completion. Counts indicate covered required targets; $J_{\mathrm{rollout}}$ is realized graph cost. The example illustrates Propositions~\ref{prop:rollout-viability} and~\ref{prop:base-bound}. Assigned costs and audit flags are illustrative, not experimental HCW data; the primary study uses $d=3$.}
+  \includegraphics[width=0.9\columnwidth]{figures/fig02_rollout_example/adp_rollout_mechanism.pdf}
+  \caption{Illustrative completion-certified rollout ADP, with initial state $s=(0,\mathbf0,\mathbf0,3)$. I. Solid edges are admissible, edge labels are stage costs, and $G_j$ lists visible targets. The dashed transfer is excluded. II. At $d=2$, rollout selects zero-gain connector $c_2$ for total cost 4, versus base-policy cost 8; action 3 has no certified completion. III. The successor $s'=(2,\mathbf0,\mathbf e_2,2)$ retains a cost-3 completion. Counts indicate covered required targets; $J_{\mathrm{rollout}}$ is realized graph cost. The example illustrates Propositions~\ref{prop:rollout-viability} and~\ref{prop:base-bound}. Assigned costs and audit flags are illustrative, not experimental HCW data; the primary study uses $d=3$.}
   \label{fig:adp-architecture}
 \end{figure}
 
@@ -330,8 +398,8 @@ Fig.~\ref{fig:adp-architecture} gives a worked decision on an illustrative graph
 \label{alg:safe-graph-api}
 \begin{algorithmic}[1]
 \Require Candidate graph, shield $\mathcal U_s$, required set $\mathcal K$, budget $H$, depth $d$
-\State $s\gets(0,\mathbf0,\mathbf0,H)$; $\pi\gets()$
-\While{$\Gamma_{\mathcal K}(m)=0$ and $h>0$}
+\State $s\gets(0,\mathbf0,\mathbf0,H)$; $\pi\gets()$ \Comment{$\pi$ stores the selected action sequence}
+\While{$\Gamma_{\mathcal K}(\mathbf m)=0$ and $h>0$}
   \State Enumerate every $a\in\mathcal U_s(s)$
   \For{each admissible $a$}
     \State $\widehat Q_d(s,a)\gets\ell_{ja}+\widehat V_{d-1}(f(s,a))$
@@ -342,7 +410,7 @@ Fig.~\ref{fig:adp-architecture} gives a worked decision on an illustrative graph
   \State Append $a^\star$ and its audit record to $\pi$
   \State $s\gets f(s,a^\star)$
 \EndWhile
-\State \Return $\pi$ if $\Gamma_{\mathcal K}(m)=1$; otherwise return no certified completion
+\State \Return $\pi$ if $\Gamma_{\mathcal K}(\mathbf m)=1$; otherwise return no certified completion
 \end{algorithmic}
 \end{algorithm}
 
@@ -370,12 +438,12 @@ For a fixed deterministic candidate graph with fixed node masks, required set $\
 \end{proposition}
 
 \begin{IEEEproof}
-The current node $j_k$ identifies the source of every possible next edge; $m_k$ and fixed $\mathcal K$ determine the remaining inspection requirements; $b_k$ determines which observations remain selectable under the no-revisit rule; and $h_k$ determines the remaining budget. By assumption, visibility masks and edge costs and audits are deterministic records indexed only by the current and destination nodes. Equations~\eqref{eq:mdp-transition}, \eqref{eq:bellman}, and \eqref{eq:safe-action-set} therefore depend on no earlier history once $(j_k,m_k,b_k,h_k)$ is given. The proposition concerns binary prescribed-observation acceptance; partial dwell, multiple independent look directions, or time-dependent illumination would require additional state.
+The current node $j_k$ identifies the source of every possible next edge; $\mathbf m_k$ and fixed $\mathcal K$ determine the remaining inspection requirements; $b_k$ determines which observations remain selectable under the no-revisit rule; and $h_k$ determines the remaining budget. By assumption, visibility masks and edge costs and audits are deterministic records indexed only by the current and destination nodes. Equations~\eqref{eq:mdp-transition}, \eqref{eq:bellman}, and \eqref{eq:safe-action-set} therefore depend on no earlier history once $(j_k,\mathbf m_k,b_k,h_k)$ is given. The proposition concerns binary prescribed-observation acceptance; partial dwell, multiple independent look directions, or time-dependent illumination would require additional state.
 \end{IEEEproof}
 
 \begin{proposition}[Compositional preservation of stored audits]
 \label{prop:audit-composition}
-Consider a sequence $(a_{j_{k-1}j_k})_{k=1}^{L}$ whose first source is $v_0$, whose idealized rest-to-rest endpoints match exactly, and whose every edge has $\chi_{j_{k-1}j_k}=1$. Then every stored sample of the concatenated sequence satisfies the input, speed, and clearance inequalities, every edge endpoint satisfies its terminal conditions, and every stored passive-drift rollout has nonnegative margin when that audit is enabled.
+Consider a sequence $(\mathsf a_{j_{k-1}j_k})_{k=1}^{L}$ whose first source is $c_0$, whose idealized rest-to-rest endpoints match exactly, and whose every edge has $\chi_{j_{k-1}j_k}=1$. Then every stored sample of the concatenated sequence satisfies the input, speed, and clearance inequalities, every edge endpoint satisfies its terminal conditions, and every stored passive-drift rollout has nonnegative margin when that audit is enabled.
 \end{proposition}
 
 \begin{IEEEproof}
@@ -415,15 +483,394 @@ For fixed finite nodes, deterministic visibility masks, deterministic audited ed
 Proceed by induction on the remaining budget $h$. At $h=0$, \eqref{eq:bellman} returns zero exactly for a goal state and $+\infty$ otherwise, which is correct. Assume the recursion is correct for all states with at most $h-1$ remaining actions. At a state with $h$ actions, every feasible sequence begins with exactly one $a\in\mathcal U_s(s)$ and then a feasible continuation from $f(s,a)$; by the induction hypothesis, the recursion assigns that continuation its minimum cost or $+\infty$ if none exists. Minimizing over every admissible first action therefore returns the minimum total cost, or $+\infty$ when all continuations are infeasible. The claim is limited to the exhausted sampled graph and does not extend to omitted camera poses or continuous-space trajectories.
 \end{IEEEproof}
 
-With maximum branching factor $B$, depth $d$, and at most $H$ base-policy actions, direct decision evaluation costs $O(HB^{d+1})$ in the worst case. Memoization reduces repeated evaluation when prefixes reach the same mask state. Fig.~\ref{fig:adp-depth-sensitivity} and Table~\ref{tab:depth-sensitivity} quantify the offline cost--computation trade-off for $d=1,\ldots,6$.
+With maximum branching factor $B_{\max}$, depth $d$, and at most $H$ base-policy actions, direct decision evaluation costs $O(HB_{\max}^{d+1})$ in the worst case. Memoization reduces repeated evaluation when prefixes reach the same mask state. Fig.~\ref{fig:adp-depth-sensitivity} and Table~\ref{tab:depth-sensitivity} quantify the offline cost--computation trade-off for $d=1,\ldots,6$.
 
-\input{sections/required_target_study}
+% Begin included source: sections/required_target_study.tex
+% Numerical macros and tables are generated from the frozen required-target study.
+
+\section{Experimental Protocol}
+\label{sec:simulation}
+
+\subsection{Fixed Geometry and Required-Target Profiles}
+
+The primary study uses the corrected public ISS mesh distributed by the National Aeronautics and Space Administration (NASA) \cite{nasa_iss_gltf_model}. Its complete transformed geometry contains $247\,525$ triangles. Ninety equal-represented-area samples define the original surface denominator; 41 are observable from at least one of the 24 retained candidate observations. The directed archive contains 24 initial-to-observation and $24\times23$ inter-observation records, of which 264 pass every enabled gate. Every method receives the same graph and scenario-specific available-node set. A subsequent development pilot samples additional viewpoint graphs on the same geometry, as described in Section~\ref{sec:redundant-view-protocol}.
+
+Required-target profiles are selected deterministically from geometry before scenario evaluation. The mission manifest records their IDs, coordinates, selection rule, visibility masks, and checksums. These synthetic profiles distribute prescribed samples across the observable library; they are not an operational ISS maintenance checklist.
+
+% Begin included source: tables/required_target_profiles.tex
+\begin{table}[t]
+  \centering
+  \caption{Frozen synthetic required-target profiles. Three equal-width slabs span the mesh longest axis; each slab uses centroid-first, normalized farthest-point selection. IDs omit the common mesh prefix. The nine-item profile is primary}
+  \label{tab:required-profiles}
+  \renewcommand{\arraystretch}{1.08}
+  \setlength{\tabcolsep}{4pt}
+  \footnotesize
+  \begin{tabularx}{\linewidth}{@{}lr>{\centering\arraybackslash}p{2.6em}>{\raggedright\arraybackslash}X@{}}
+    \toprule
+    Profile & Items & \shortstack{Slab\\counts} & Required sample IDs \\
+    \midrule
+    6-target & 6 & 2/2/2 & 00055, 00052, 00007, 00001, 00033, 00015 \\
+    9-target & 9 & 3/3/3 & 00055, 00052, 00059, 00007, 00001, 00079, 00033, 00015, 00019 \\
+    12-target & 12 & 4/4/4 & 00055, 00052, 00059, 00064, 00007, 00001, 00079, 00045, 00033, 00015, 00019, 00024 \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+% End included source: tables/required_target_profiles.tex
+
+The required set remains fixed when a scenario removes observation nodes. Losing every available view of a required item makes the task impossible in the library. Otherwise, a valid route or exhausted exact search establishes feasibility status; cases without either certificate remain unresolved.
+
+\subsection{Dynamics, Costs, and Observation Accounting}
+
+Each rest-to-rest SOOA lasts \unit{90}{s} and uses fixed-step fourth-order Runge--Kutta (RK4) propagation with $\dt=\unit{3}{s}$. The HCW mean motion is $1.13137\times10^{-3}~\mathrm{rad/s}$, the acceleration limit is $u_{\max}=0.060~\mathrm{m/s^2}$, and the speed limit is $v_{\max}=\unit{2.0}{m/s}$. The vehicle radius is \unit{0.80}{m}, the full-mesh safety margin is \unit{2}{m}, and terminal position and velocity tolerances are \unit{0.5}{m} and \unit{0.05}{m/s}. For the reported simulations, we set $\lambda_{v}=5$, $\lambda_{e}=0.18$, $\lambda_{s}=120$, and $\lambda_{a}=0.05$, weighting maneuver increment, terminal tracking error, clearance violation, and per-edge action cost, respectively, in \eqref{eq:edge-cost}. The action budget is 14. Required-only completion has no additional global area threshold.
+
+Target-identity unions exclude duplicate credit. Reporting includes required-target completion $C^{\mathcal K}$, priority-weighted inspectable score $C^{\mathrm{insp}}$, and unweighted fractions over the 41 observable and 90 original samples. Equal represented sample areas make the last fraction the sampled-area estimate; priority multipliers affect only the weighted score.
+
+\subsection{Development History and Fresh Confirmation}
+
+The first required-target campaign evaluated three fixed profiles on 36 validation, 150 test, and 90 shifted scenarios without feasibility rejection. The nine-item profile was designated primary. Depth-three ADP completed 37/50 test and 10/30 shifted tasks on that profile, whereas greedy construction and its sequence-improvement descendants completed none. Table~\ref{tab:required-profile-results} retains these development results, which motivated a completion-capable comparator.
+
+A fresh confirmation compares depth-three ADP with one-step ADP and local search initialized by a completed one-step ADP route. Methods, penalties, scenario identities, and implementation hashes were frozen before evaluating the new outcomes. The confirmation retains the nine prescribed targets and depth-three policy, with \RTValidationN{} validation, \RTTestN{} test, and \RTOodN{} shifted scenarios. Its seeds are disjoint from all development runs, and every generated case is retained.
+
+Each scenario samples a node-removal probability uniformly from $[0,0.10]$, then removes candidates independently using that probability. It multiplies priorities for approximately 6\%--14\% of targets by a factor in $[2,4]$. Shifted scenarios use removal probabilities in $[0.15,0.25]$, priority fractions of 12\%--20\%, and factors in $[5,8]$. Priorities affect background scores and the coverage-only ablation, but not the required-target goal or stage cost. All scenarios perturb one frozen graph, and distinct seeds may yield identical routes.
+
+After confirmation, the depth diagnostic was extended to $d=1,\ldots,6$ on the same 12 validation scenarios. Every depth used the fixed nine-target requirement, graph, budget, and implementation, including zero-gain connecting actions. The extension retains all cases and leaves the primary test and shifted comparisons unchanged. Fig.~\ref{fig:adp-depth-sensitivity} shows the resulting cost, runtime, and safety-screen workload.
+
+Complete-route timing includes preliminary base-policy construction and excludes graph loading and serialization. Each scenario--depth pair was measured once in ascending-depth order using Python~3.14 on an Apple M4/macOS host. Scheduling and thermal effects were uncontrolled. Safety-screen counts exclude the separate preliminary base-policy call.
+
+% Begin included source: tables/required_target_depth_rationale.tex
+% Audited against 20260905_100500_required_target_depth_diagnostic.
+% This interpretation must be reviewed if the diagnostic data are regenerated.
+All six depths completed the same nine validation tasks; the other three lacked required visibility. Depth three reduced mean graph cost by 11.19\% relative to depth two. It captured 84.11\% of the observed reduction from depth one to the lowest mean cost among the six depths. Depth four improved cost by a further 2.74\%, at 4.63 times the median planning time and 4.74 times the mean safety-screen count. Depths five and six produced no further cost or completion improvement, while median runtime reached 17.50 and 52.52 times the depth-three value.
+
+The fixed depth-three setting therefore offers a computation--cost compromise; depth four provides lower cost when additional computation is acceptable.
+% End included source: tables/required_target_depth_rationale.tex
+
+% Begin included source: tables/required_target_depth_table.tex
+\begin{table*}[t]
+  \centering
+  \caption{Post-selection required-target depth diagnostic on the same 12 validation scenarios. Graph-cost means use the 9 scenarios completed at all six depths. Time and screen counts include all 12 cases; ratios use depth three. Negative $\Delta J$ denotes lower mean cost. All depths were rerun sequentially; the primary depth-three test results are unchanged}
+  \label{tab:depth-sensitivity}
+  \renewcommand{\arraystretch}{1.08}
+  \setlength{\tabcolsep}{5pt}
+  \footnotesize
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}crrrrrrr@{}}
+    \toprule
+    Depth & Complete & Mean $J$ & $\Delta J$ (\%) & Median time (s) & Time ($\times$) & Mean screens & Screens ($\times$) \\
+    \midrule
+    1 & 9/12 & 135.714 & +14.51 & 0.0272 & 0.03 & 7,132 & 0.02 \\
+    2 & 9/12 & 133.450 & +12.60 & 0.2207 & 0.22 & 65,928 & 0.20 \\
+    \textbf{3} & \textbf{9/12} & \textbf{118.520} & \textbf{+0.00} & \textbf{1.0094} & \textbf{1.00} & \textbf{322,349} & \textbf{1.00} \\
+    4 & 9/12 & 115.272 & -2.74 & 4.6760 & 4.63 & 1,527,408 & 4.74 \\
+    5 & 9/12 & 115.272 & -2.74 & 17.6601 & 17.50 & 5,757,081 & 17.86 \\
+    6 & 9/12 & 115.272 & -2.74 & 53.0133 & 52.52 & 17,454,611 & 54.15 \\
+    \bottomrule
+  \end{tabular*}
+\end{table*}
+% End included source: tables/required_target_depth_table.tex
+
+\begin{figure}[t]
+  \centering
+  \subfloat[Mean validation cost.]{\includegraphics[width=0.315\linewidth]{figures/fig03_depth_tradeoff/adp_depth_tradeoff_a.pdf}}\hfill
+  \subfloat[Median planning time.]{\includegraphics[width=0.315\linewidth]{figures/fig03_depth_tradeoff/adp_depth_tradeoff_b.pdf}}\hfill
+  \subfloat[Safety-screen evaluations.]{\includegraphics[width=0.315\linewidth]{figures/fig03_depth_tradeoff/adp_depth_tradeoff_c.pdf}}
+  \caption{Post-selection depth diagnostic. The square marks the primary depth-three setting. Cost uses the nine tasks completed at all depths; runtime and safety-screen counts include all 12 validation cases. Panels (b) and (c) use logarithmic scales. Table~\ref{tab:depth-sensitivity} reports completion counts and changes relative to depth three.}
+  \label{fig:adp-depth-sensitivity}
+\end{figure}
+
+\subsection{Matched Baselines and Statistical Reporting}
+
+The confirmation includes the task-aware greedy incumbent, one-step ADP, ADP-seeded local search, and depth-three ADP under identical tasks, dynamics, safety gates, and action budgets. One-step ADP uses \eqref{eq:rollout-value} with $d=1$. Local search applies three audited best-improvement reversal passes to its completed route and retains the feasible seed if improvement fails. This comparator improves an ADP-initialized ordering; it does not introduce new viewpoints. Depth-three ADP uses the original greedy base value without a one-step fallback.
+
+A coverage-only ablation retains the earlier 80\% priority-weighted stopping rule and is evaluated against the same required-target identities. It tests the mission objective separately from the matched complete-task cost comparison.
+
+Success and missing-target counts use every scenario; graph cost and physical $\Delta v$ use jointly completed ADP/seeded-local pairs. For a route with final covered-target mask $\mathbf m$, the all-scenario score is $J_{\mathrm{pen}}=J+500(1-C^{\mathcal K}(\mathbf m))+500(1-\Gamma_{\mathcal K}(\mathbf m))$, with fixed evaluation penalties distinct from physical maneuver cost. Paired-mean percentile intervals use $10\,000$ resamples, and exact two-sided sign tests exclude numerical ties. Timing includes initialization, including the one-step seed for local search; safety-screen counts cover the selected planner call.
+
+\subsection{All-Solvable Redundant-Viewpoint Benchmark}
+\label{sec:redundant-view-protocol}
+
+A subsequent pilot tested whether redundant viewpoints reduce the visibility bottleneck while permitting independent route certification. Three frozen seeds generated 33-view graphs on the same mesh, with the same nine required targets, initial state, camera model, dynamics, costs, and safety limits. Each graph contained three separated views per required target and six connecting views anchored to other observable samples. Candidate positions were sampled \unit{26--42}{m} from their source target within a $35^{\circ}$ cone around its surface normal, with the camera aimed at that target. From 64 attempts per source, deterministic first-valid and farthest-point selection retained geometry-valid views separated by at least \unit{4}{m}. All rejected attempts were archived. Each graph's $33+33\times32=1\,089$ directed transfers were regenerated and audited against the full mesh.
+
+Each graph supplied one reference case, ten nominal cases and ten shifted cases, using the confirmation's node-removal probability ranges. All 63 cases were retained. The 59 cases with an independent feasible certificate define the primary all-solvable benchmark (three reference, 30 nominal and 26 shifted cases). The four remaining shifted cases are retained as a visibility-loss stress test and are excluded only from the primary solvable-case denominator. Background weights were fixed because they do not affect required-only completion or graph cost. The generation rules, seeds and source hashes were frozen before graph construction. This pilot followed inspection of the confirmation failures and is development evidence; it does not replace the frozen confirmation.
+
+An independent mixed-integer linear program (MILP) selected a source-to-sink path over admissible edges. Binary arc and node variables enforced flow, required-target coverage, no revisits and the 14-observation budget; increasing node ranks excluded disconnected cycles. Its objective was the same additive graph cost, including the 0.05 action charge. A reconstructed valid route certified feasibility. Missing required visibility or a solver infeasibility result certified impossibility in the available graph; a limit without a valid route remained unresolved. Optimality was claimed only after solver proof and route-cost reconstruction. Certification preceded ADP evaluation and supplied no route to either ADP depth.
+
+Greedy construction, one-step ADP, depth-three ADP and the independent MILP each received a nominal \unit{15}{s} budget, including initialization or model construction and excluding shared graph generation. The pilot used Python~3.12.3 and SciPy~1.11.4/HiGHS on Ubuntu. Each method--case pair was timed once; greedy/ADP order was shuffled, while MILP timing came from the preceding certification phase. Native solver termination could slightly exceed its requested limit. The primary success-rate denominator is the independently certified all-solvable benchmark; all 63 generated cases and the four stress cases remain available for transparent audit. Cost gaps used only cases with proven optima.
+
+\section{Results}
+\label{sec:results}
+
+\subsection{Complete Required-Target Inspection}
+
+Depth-three ADP completed all nine targets in \RTTestSuccess/\RTTestN{} test scenarios and \RTOodSuccess/\RTOodN{} shifted scenarios. Seeded local search completed \RTLocalTestSuccess/\RTTestN{} and \RTLocalOodSuccess/\RTOodN{}, respectively. Every completed mission achieved $C^{\mathcal K}=100\%$, with optional background coverage reported separately.
+
+% Begin included source: tables/required_target_profile_results.tex
+\begin{table}[t]
+  \centering
+  \caption{First-campaign development results by fixed profile. Local search in this campaign was initialized by the greedy incumbent, unlike the fresh confirmation comparator. Profiles use different seeds, so cross-profile rates are descriptive}
+  \label{tab:required-profile-results}
+  \renewcommand{\arraystretch}{1.08}
+  \setlength{\tabcolsep}{5pt}
+  \footnotesize
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrlrr@{}}
+    \toprule
+    Profile & \shortstack[r]{Required\\items} & Split & \shortstack[r]{ADP\\complete} & \shortstack[r]{Local\\complete} \\
+    \midrule
+    6-target & 6 & Test & 40/50 & 0/50 \\
+    9-target & 9 & Test & 37/50 & 0/50 \\
+    12-target & 12 & Test & 38/50 & 0/50 \\
+    6-target & 6 & Shifted & 10/30 & 0/30 \\
+    9-target & 9 & Shifted & 10/30 & 0/30 \\
+    12-target & 12 & Shifted & 10/30 & 1/30 \\
+    \bottomrule
+  \end{tabular*}
+\end{table}
+% End included source: tables/required_target_profile_results.tex
+
+% Begin included source: tables/required_target_aggregate.tex
+\begin{table*}[t]
+  \centering
+  \caption{Required-target results. Resource means use successful routes of each method; the final column includes every scenario with the fixed failure penalty}
+  \label{tab:paired-aggregate}
+  \renewcommand{\arraystretch}{1.08}
+  \setlength{\tabcolsep}{5pt}
+  \footnotesize
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}llrrrrr@{}}
+    \toprule
+    Split & Method & Complete & Mean SOOAs & Mean $\Delta v$ (m/s) & Mean $J$ & Penalized $J$ \\
+    \midrule
+    Test & Task-aware incumbent & 0/50 & -- & -- & -- & 911.242 \\
+    Test & One-step ADP & 43/50 & 8.21 & 16.512 & 135.945 & 256.913 \\
+    Test & ADP-seeded local search & 43/50 & 8.21 & 15.777 & 129.892 & 251.707 \\
+    Test & Depth-three ADP & 43/50 & 9.00 & 14.033 & 115.641 & 239.451 \\
+    Shifted & Task-aware incumbent & 0/30 & -- & -- & -- & 851.059 \\
+    Shifted & One-step ADP & 8/30 & 9.25 & 17.012 & 140.102 & 770.694 \\
+    Shifted & ADP-seeded local search & 8/30 & 8.88 & 15.888 & 130.841 & 768.224 \\
+    Shifted & Depth-three ADP & 9/30 & 9.11 & 14.656 & 120.751 & 736.225 \\
+    \bottomrule
+  \end{tabular*}
+\end{table*}
+% End included source: tables/required_target_aggregate.tex
+
+ADP completed every confirmation scenario retaining visibility of all required items. The seven incomplete test cases and 21 incomplete shifted cases each lost all available views of at least one mandatory target. Thus, ADP completed 43/43 and 9/9 feasible cases, respectively; their returned routes supplied feasibility witnesses. Five of the nine required targets originally had only one candidate view, making completion sensitive to node removal. These failures establish impossibility within the available library, not in continuous space. In the first development campaign, one six-target shifted case retained required visibility but produced no ADP certificate; its directed feasibility remains unresolved.
+
+\subsection{ADP Policy Improvement at Matched Completion}
+
+The predeclared ADP-minus-seeded-local penalized endpoint had mean differences of $-12.256$ on the 50 test scenarios and $-31.999$ on the 30 shifted scenarios. Their 95\% intervals were $[-14.155,-10.212]$ and $[-91.494,-1.241]$, respectively. Physical-resource comparisons below use the jointly completed missions.
+
+Fig.~\ref{fig:paired-performance} compares the \RTJointTestN{} jointly completed test pairs and \RTJointOodN{} shifted pairs. Mean ADP-minus-local graph-cost differences were \RTTestCostDiff{} and \RTOodCostDiff{}, respectively. Table~\ref{tab:required-paired} reports the paired uncertainty and win/tie/loss counts.
+
+On the 43 completed test pairs, mean $\Delta v$ decreased from \unit{15.777}{m/s} to \unit{14.033}{m/s}, an 11.05\% reduction. The paired reduction was \unit{1.744}{m/s}, with a 95\% interval of \unit{1.525--1.923}{m/s}; ADP won 40 pairs and lost three. The eight shifted pairs had a mean reduction of \unit{1.207}{m/s}. Its bootstrap interval excluded zero, while the exact sign test gave $p=0.0703$.
+
+% Begin included source: tables/required_target_paired.tex
+\begin{table*}[t]
+  \centering
+  \caption{ADP-minus-seeded-local effects. The predeclared penalized endpoint includes all scenarios; physical resources and graph cost use jointly complete pairs. Intervals are percentile 95\% paired-bootstrap intervals; sign tests exclude ties}
+  \label{tab:required-paired}
+  \renewcommand{\arraystretch}{1.08}
+  \setlength{\tabcolsep}{5pt}
+  \footnotesize
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}llrrlrr@{}}
+    \toprule
+    Split & Endpoint & Pairs & Mean difference & 95\% interval & Win/tie/loss & Sign-test $p$ \\
+    \midrule
+    Test & $J_{\mathrm{pen}}$ (all) & 50 & -12.256 & $[-14.155,-10.212]$ & 40/7/3 & $3.02\times10^{-9}$ \\
+    Test & $J$ & 43 & -14.251 & $[-15.715,-12.461]$ & 40/0/3 & $3.02\times10^{-9}$ \\
+    Test & $\Delta v$ (m/s) & 43 & -1.744 & $[-1.923,-1.525]$ & 40/0/3 & $3.02\times10^{-9}$ \\
+    Shifted & $J_{\mathrm{pen}}$ (all) & 30 & -31.999 & $[-91.494,-1.241]$ & 8/21/1 & 0.0391 \\
+    Shifted & $J$ & 8 & -9.890 & $[-14.111,-4.688]$ & 7/0/1 & 0.0703 \\
+    Shifted & $\Delta v$ (m/s) & 8 & -1.207 & $[-1.713,-0.575]$ & 7/0/1 & 0.0703 \\
+    \bottomrule
+  \end{tabular*}
+\end{table*}
+% End included source: tables/required_target_paired.tex
+
+\begin{figure}[!t]
+  \centering
+  \subfloat[Test: effort.]{\includegraphics[width=0.49\linewidth]{figures/fig04_heldout_performance/adp_heldout_performance_a.pdf}\label{fig:paired-performance-a}}\hfill
+  \subfloat[Test: cost.]{\includegraphics[width=0.49\linewidth]{figures/fig04_heldout_performance/adp_heldout_performance_b.pdf}\label{fig:paired-performance-b}}\\[2pt]
+  \subfloat[Shifted: effort.]{\includegraphics[width=0.49\linewidth]{figures/fig04_heldout_performance/adp_heldout_performance_c.pdf}\label{fig:paired-performance-c}}\hfill
+  \subfloat[Shifted: cost.]{\includegraphics[width=0.49\linewidth]{figures/fig04_heldout_performance/adp_heldout_performance_d.pdf}\label{fig:paired-performance-d}}
+  \caption{ADP/seeded-local comparison on jointly completed missions: (a), (b) \RTJointTestN{} test pairs; (c), (d) \RTJointOodN{} shifted pairs. Panels (a), (c) compare physical $\Delta v$; (b), (d) show ordered graph-cost differences in cost units. Dashed lines denote parity. Solid lines and bands give the means and 95\% paired-bootstrap intervals: (b) $-14.25$ [$-15.72$, $-12.46$]; (d) $-9.89$ [$-14.11$, $-4.69$].}
+  \label{fig:paired-performance}
+\end{figure}
+
+The greedy base completed no confirmation mission, so this campaign measures improvement over one-step ADP and seeded local search rather than a completing greedy comparator. Finite-graph unit tests separately exercise the base-cost bound, connecting actions, and exact recursion.
+
+\subsection{Objective Ablation and Safety}
+
+% Begin included source: tables/required_target_objective_ablation.tex
+\begin{table}[t]
+  \centering
+  \caption{Required-target completion under the coverage-only objective. The required set is identical to that of the main comparison}
+  \label{tab:required-objective}
+  \renewcommand{\arraystretch}{1.08}
+  \setlength{\tabcolsep}{5pt}
+  \footnotesize
+  \begin{tabular}{@{}llr@{}}
+    \toprule
+    Split & Objective ablation & All required complete \\
+    \midrule
+    Test & Coverage-only (80\%) & 1/50 \\
+    Shifted & Coverage-only (80\%) & 0/30 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+% End included source: tables/required_target_objective_ablation.tex
+
+Fig.~\ref{fig:paired-safety} summarizes component performance and the accepted-edge safety metrics. The coverage-only ablation in Table~\ref{tab:required-objective} applies the fixed required-target denominator to routes using the 80\% background stopping rule.
+
+The coverage-only policy completed the nine-item requirement in 1/50 test and 0/30 shifted scenarios. In contrast, 41 of 43 completed ADP test missions finished below 80\% weighted background coverage while accepting all nine prescribed items. Mean background coverage over those 43 successes was 72.32\%.
+
+\begin{figure}[!t]
+  \centering
+  \subfloat[Matched effort.]{\includegraphics[width=0.46\linewidth]{figures/fig05_ablation_safety/adp_ablation_safety_a.pdf}\label{fig:paired-safety-a}}%
+  \subfloat[Task success.]{\includegraphics[width=0.54\linewidth]{figures/fig05_ablation_safety/adp_ablation_safety_b.pdf}\label{fig:paired-safety-b}}\\[1pt]
+  \includegraphics[width=\linewidth]{figures/fig05_ablation_safety/adp_ablation_safety_legend.pdf}\\[1pt]
+  \subfloat[Clearance.]{\includegraphics[width=0.46\linewidth]{figures/fig05_ablation_safety/adp_ablation_safety_c.pdf}\label{fig:paired-safety-c}}%
+  \subfloat[Peak input.]{\includegraphics[width=0.54\linewidth]{figures/fig05_ablation_safety/adp_ablation_safety_d.pdf}\label{fig:paired-safety-d}}
+  \caption{Nine-target component and safety comparison. Base denotes the task-aware incumbent; $d=1,3$ denote ADP depths; Local denotes ADP-seeded local search. (a) Physical $\Delta v$: means and 95\% bootstrap intervals over the \RTFourMethodN{} test cases completed by all three methods. (b) All-required success over all 50 test and 30 shifted cases. (c) Minimum clearance above the safety margin. (d) Peak commanded input; the orange line marks the $0.060\,\mathrm{m/s^2}$ limit. Panels (c), (d) use jointly completed ADP/local pairs; dashed lines denote parity.}
+  \label{fig:paired-safety}
+\end{figure}
+
+Full-mesh occlusion and collision checks include structure outside the required target set. The reported clearance and input metrics describe the accepted deterministic edge records.
+
+\subsection{Representative Required-Target Route}
+
+Fig.~\ref{fig:representative-trajectory} shows the selected routes, target completion, and accumulated $\Delta v$ for the representative test pair.
+
+% Begin included source: tables/required_target_case.tex
+The representative test case is the jointly completed scenario nearest the median ADP-minus-local graph-cost difference. Ties are resolved deterministically using the scenario identifier. Both routes complete all 9 prescribed targets. Rollout ADP uses 9 SOOAs, $J=113.472$, and $\Delta v=13.769~\mathrm{m/s}$; local search uses 8 SOOAs, $J=129.605$, and $\Delta v=15.744~\mathrm{m/s}$. The respective background inspectable scores are 77.22\% and 64.97\%. Repropagation reproduces both archived costs and velocity increments to numerical tolerance.
+% End included source: tables/required_target_case.tex
+
+\begin{figure}[!t]
+  \centering
+  \subfloat[Generated LVLH routes.]{\includegraphics[width=0.675\linewidth]{figures/fig06_representative_trajectory/adp_representative_trajectory_a.pdf}}
+  \\
+  \subfloat[Required-target completion.]{\includegraphics[width=0.435\linewidth]{figures/fig06_representative_trajectory/adp_representative_trajectory_b.pdf}}\hfill
+  \subfloat[Cumulative physical $\Delta v$.]{\includegraphics[width=0.435\linewidth]{figures/fig06_representative_trajectory/adp_representative_trajectory_c.pdf}}
+  \caption{Representative required-target test pair selected by the median-effect rule. Both methods complete the same required set. Markers identify terminal observations and prescribed samples; the star denotes the common initial state.}
+  \label{fig:representative-trajectory}
+\end{figure}
+
+\subsection{All-Solvable Benchmark Results}
+\label{sec:redundant-view-results}
+
+The three new graphs supplied at least three valid views of every required target, with 413, 439 and 386 admissible directed edges. Graph construction took \unit{28.7--30.2}{s} per graph. Independent certification found all three reference cases, all 30 nominal cases and 26 of 30 shifted cases feasible. The other four shifted cases lacked any available view of a required target; none remained unresolved. We therefore use the 59 certified-solvable cases as the primary benchmark for planner success rates and retain the four cases in a separate visibility-loss stress test.
+
+Table~\ref{tab:redundant-view-pilot} reports completion and timing. Depth-three ADP completed all 59 feasible cases, whereas one-step ADP missed two feasible shifted cases. Greedy construction completed 13 nominal and 19 shifted cases, allowing direct checks of the conditional base-cost bound. Both ADP depths stayed within the cost of every completing greedy route, including the single completed reference, giving 66 method--case checks.
+
+\begin{table}[t]
+  \centering
+  \caption{Primary all-solvable benchmark from the development pilot. Each denominator is independently certified feasible: three reference, 30 nominal, 26 shifted and 59 cases overall. The four shifted cases failing the visibility certificate are retained in a separate stress test. Median planning times (nominal/shifted) are 0.001/0.001~s for the incumbent, 0.046/0.037~s for one-step ADP, 4.173/2.085~s for depth-three ADP and 15.007/5.373~s for the MILP. The MILP row is the inclusion certificate, not an independent planner baseline.}
+  \label{tab:redundant-view-pilot}
+  \renewcommand{\arraystretch}{1.08}
+  \setlength{\tabcolsep}{3pt}
+  \footnotesize
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrr@{}}
+    \toprule
+    Method & \shortstack[r]{Reference\\(3)} & \shortstack[r]{Nominal\\(30)} & \shortstack[r]{Shifted\\(26)} & \shortstack[r]{All-solvable\\(59)} \\
+    \midrule
+    Task-aware incumbent & 1/3 & 13/30 & 19/26 & 33/59 \\
+    One-step ADP & 3/3 & 30/30 & 24/26 & 57/59 \\
+    Depth-three ADP & 3/3 & 30/30 & 26/26 & 59/59 \\
+    Independent MILP & 3/3 & 30/30 & 26/26 & 59/59 \\
+    \bottomrule
+  \end{tabular*}
+\end{table}
+
+The MILP proved minimum graph costs for nine nominal and 18 shifted cases. Depth-three ADP's mean relative gaps were 0.86\% and 1.01\%, respectively, or 0.96\% across these 27 cases. The other 32 feasible MILP runs in the all-solvable benchmark reached the time limit with checked routes whose optimality remained unproven. No ADP run timed out. The MILP returned slightly lower mean costs than depth-three ADP on the jointly completed nominal and shifted sets, by 0.150 and 1.388 cost units, respectively. Depth-three ADP reduced mean cost relative to one-step ADP by 5.493 units across 30 nominal pairs and 7.012 units across 24 shifted pairs, with longer computation times. These comparisons use explicit paired completion sets and do not establish uniform superiority over either comparator.
+
+All 252 method--case records and $3\,267$ numeric edge records passed post-run reconstruction of coverage, route cost and enabled edge predicates. All graphs share one structure and initial state, and the nominal splits contain only seven, nine and ten distinct availability masks per ten cases. The all-solvable benchmark is therefore a feasibility-conditioned planner comparison, not a random unconditional sample. These dependent development observations warrant a larger confirmation with fresh seeds; they are not additional held-out evidence for the original 11.05\% saving.
+
+\subsection{Required-Target ROS Execution}
+\label{sec:ros-verification-protocol}
+
+ROS-native HCW dynamics and linear-quadratic regulator (LQR) control track an ADP-derived reference fixed before execution, without online replanning. Each observation contributes its fixed geometric visibility mask only when position error is at most \unit{0.5}{m} and speed is at most \unit{0.05}{m/s}. Rejected views add no credit; repeated IDs count once. Execution success requires every observation to pass and every required target to be accepted; the supplemental hybrid case also requires 95\% weighted background coverage. Both recorded event topics independently verify accepted-target unions.
+
+The parent nine-target task imposes no background-coverage threshold; the supplemental case adds this threshold while retaining its target IDs and weights. Execution used 20-Hz control and state publication, \unit{0.05}{s} integration steps, and a $0.060~\mathrm{m/s^2}$ acceleration limit. The filter retained a \unit{1.50}{m/s} speed limit, \unit{0.80}{m} vehicle radius, \unit{2}{m} safety margin, and \unit{8}{m} caution distance.
+
+\ifincludeROSVerificationResults
+% Begin included source: sections/ros_verification_results.tex
+\label{sec:ros-verification-results}
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=\textwidth]{figures/fig07_ros_camera_views/ros_key_camera_views_trajectory.pdf}
+  \caption{Supplemental ROS~2 execution with twelve \unit{90}{s} transfers and
+  \unit{60}{s} settling intervals. All observations pass, accepting 9/9 required
+  targets and 95.86\% weighted background coverage. Panels (a) and (b) highlight
+  odd- and even-numbered views; hollow markers show the others. Both projections
+  have equal spatial scale. Camera rows 1--6 and 7--12 show mission time,
+  accepted required targets (Req), and weighted coverage (Bg). Uncropped frames
+  and trajectories come from the same execution. Target credit uses fixed
+  visibility masks and terminal tracking; the swept-body margin is audited
+  against the full 3-D mesh.}
+  \label{fig:ros-key-camera-views}
+\end{figure*}
+
+To increase the earlier nine-view result from 77.22\% background coverage, we added a 95\% goal using the same nine required IDs and 41-sample weights, and selected a twelve-view hybrid ADP plan. Synchronous screening rejected views 5 and 12 because their endpoints lay inside the unchanged caution zone. We shifted them by \unit{8}{m} and \unit{6}{m}, adjusted their camera aims, and recomputed all transfers and visibility masks. The observation order, camera criteria, safety settings and acceptance tolerances were retained, with \unit{60}{s} settling after each \unit{90}{s} transfer. This post-hoc case, its failed diagnostic and refinement search are archived separately from the unchanged held-out study.
+
+The subsequent normal-speed graphical run used Ubuntu~24.04.4, ROS~2 Jazzy, Gazebo Harmonic, RViz2, and Python~3.12.3. All twelve observations passed at \unit{1800.035}{s}, accepting 9/9 required targets and 95.86\% weighted background coverage (39/41 inspectable samples). Maximum terminal position error and speed were \unit{0.050}{m} and \unit{0.0038}{m/s}.
+
+Integrating $36\,172$ timestamped safe-control messages through the final event gave \unit{20.477}{m/s} executed $\Delta v$, versus \unit{18.027}{m/s} for the transfer-and-hold reference. The safety stream reported $1\,847$ interventions. Auditing $36\,181$ trajectory samples and their connecting segments against $247\,525$ transformed triangles found no surface crossing. Minimum swept-body clearance was \unit{3.380}{m} above the required \unit{2}{m} margin; peak acceleration was $0.0600~\mathrm{m/s^2}$. All execution and full-mesh audit gates passed. Reference-count completion passed, although the publisher reported a maximum \unit{0.249}{s} gap, exceeding the \unit{0.075}{s} nominal timing diagnostic.
+
+Fig.~\ref{fig:ros-key-camera-views} matches camera frames within \unit{0.074}{s} of accepted event receipts. Both bags contain identical verification events, and named Gazebo poses confirm image--trajectory alignment. Images do not supply fresh visibility credit or defect detection. This selected, adjusted execution provides no paired ROS saving; the 11.05\% result remains the unchanged offline aggregate.
+
+Figure~\ref{fig:rviz-execution-overview} shows a separate repeat execution of the
+same reference (Supplementary Video~1).
+
+\begingroup
+\setlength{\intextsep}{3pt}
+\setlength{\abovecaptionskip}{0pt}
+\begin{figure}[H]
+  \centering
+  \subfloat[Global trajectory.]{\includegraphics[width=0.426\linewidth]{figures/fig08_rviz_overview/rviz_execution_overview_a.pdf}\label{fig:rviz-execution-overview-a}}\hfill
+  \subfloat[Onboard camera.]{\includegraphics[width=0.5\linewidth]{figures/fig08_rviz_overview/rviz_execution_overview_b.pdf}\label{fig:rviz-execution-overview-b}}
+  \caption{RViz display: (a) planned (blue) and executed (orange) trajectories
+  with camera FOV (yellow); (b) onboard Gazebo camera.
+  Crops from one frame during transfer 9--10.}
+  \label{fig:rviz-execution-overview}
+\end{figure}
+\endgroup
+% End included source: sections/ros_verification_results.tex
+
+\fi
+
+\section{Discussion}
+\label{sec:discussion}
+
+The results support model-based rollout ADP for prescribed-target inspection. A base-policy completion supplies a checkable continuation, while Bellman lookahead improves the next action. The required-target constraint determines mission completion independently of optional background coverage. This sequencing layer complements learning-based proximity controllers \cite{hu2021learning,tian2024proximity} and run-time-assured DRL inspection \cite{vanwijk2024inspection}; the reported baseline comparisons evaluate sequencing performance, not superiority over those controllers.
+
+The task formulation also accommodates a hybrid goal with an additional background threshold, provided the base policy and rollout boundary use the same predicate. Target priorities alone cannot impose mandatory observations. The coverage-only ablation illustrates this difference directly.
+
+The primary comparison measures maneuver savings against one-step ADP and its seeded reversal-search baseline. The viewpoint pilot additionally supplies independent feasibility certificates and proven cost optima for a subset of cases. Its common time budget exposes a trade-off: depth-three ADP improves completion and mean cost relative to one-step ADP, while MILP returns slightly lower mean costs with longer median runtimes. Repeated timing, broader search neighborhoods and a larger frozen confirmation are needed to assess this trade-off beyond the pilot.
+
+Viewpoint availability is a separate requirement from successful sequencing. The original low shifted completion rate arose from missing mandatory visibility, so additional lookahead could not recover those cases. The redundant-viewpoint pilot addresses this observed limitation without changing required target identities. Its higher feasible fraction supports further evaluation of viewpoint redundancy, although the new library and protocol prevent interpreting the two campaigns as a paired algorithm improvement.
+
+\subsection{Scope and Limitations}
+
+The primary evidence covers synthetic prescribed samples on one deterministic observation graph; the development pilot adds three sampled graphs on the same mesh. Completion certifies those samples under the camera model, rather than full-region imagery or defect detection. Independent MILP certification checks route optimization, while visibility and clearance retain the existing geometry implementation. Operational inspection requires verified component requirements, denser sampling, resolution and dwell acceptance, illumination, and independent geometry.
+
+The finite-completion safeguard may fail to find a route when its base policy is unsuccessful, even if another feasible route exists. The base-cost theorem applies when the base policy completes. Exact recursion and proven MILP optima concern only the specified finite graph; a time-limited feasible MILP route is not an optimum. Timing and confidence intervals characterize the stated desktop implementation and scenario generator, with no cross-host timing comparison. The observed depth-four-to-six plateau does not establish global optimality, and the pilot's 0.96\% gap applies only to its 27 cases with proven optima.
+
+The model assumptions in Table~\ref{tab:assumptions} exclude navigation uncertainty, actuator and attitude dynamics, and illumination effects. Safety remains conditional on the enabled deterministic audits, with passive-drift auditing disabled. The study evaluates model-based ADP; extending it to a learned critic or actor would require preserving a valid continuation and the relevant cost bound.
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+This paper developed viability-preserving rollout ADP for prescribed-target inspection over audited orbital arcs. A finite Bellman prefix and task-aware base-policy value preserve completion and provide a conditional graph-cost bound.
+
+ADP completed \RTTestSuccess/\RTTestN{} test and \RTOodSuccess/\RTOodN{} shifted missions, covering every feasible case in that confirmation; the remaining cases lacked required visibility. On jointly completed test missions, it reduced mean $\Delta v$ by 11.05\% relative to seeded local search. A subsequent redundant-viewpoint development pilot achieved 30/30 nominal and 26/30 shifted completions, plus all three reference cases, matching independently certified feasibility. Its mean graph-cost gap was 0.96\% across 27 proven optima. These findings support completion-certified sequencing and motivate a larger, separately frozen evaluation of viewpoint redundancy on the prescribed inspection model.
+
+% \section*{Data and Code Availability}
+
+% The accompanying reproducibility package contains the corrected graph, fixed target profiles and their geometric provenance, configuration and freeze manifests, fresh scenario inventories, method--scenario rows, target-level credit records, statistical outputs, source tables, and figure scripts. The original unsuccessful check and the subsequent required-target execution with explicit terminal settling have separate snapshots and hash-identified local ROS bags; the latter includes synchronized camera evidence. It is distinct from the historical 80% benchmark, post-selection depth/coverage diagnostics, and accepted historical ROS task. The public NASA mesh source and checksum are documented; the mesh is not redistributed. A persistent repository identifier will replace the submission-package reference in the accepted version.
+% End included source: sections/required_target_study.tex
 
 % \section*{Acknowledgment}
 % OpenAI Codex was used to assist with drafting and revision in the Abstract, Introduction, System and Observation Model, Viability-Preserving Rollout ADP, Experimental Protocol, Results, Discussion, Conclusion, and Data and Code Availability sections; with LaTeX formatting and source checking; and with implementation, testing, offline experiment orchestration, statistical tabulation, and figure-generation scripts. The authors retain responsibility for reviewing and validating all AI-assisted text, mathematical statements, references, source code, figures, and reported results, and for the scientific content of the article.
 
-% Balance the final reference page; retune if the bibliography or text changes.
-\IEEEtriggeratref{0}
+% The bibliography is allowed to flow naturally; a fixed trigger at reference
+% 29 would force the remaining references onto a new, sparsely filled page.
 \bibliographystyle{IEEEtran}
 \bibliography{references}
 

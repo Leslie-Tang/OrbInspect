@@ -1,0 +1,5 @@
+scenario_id,graph_id,split,seed,independent_status,independent_reason,independent_optimal
+g02_shifted_000,g02,shifted,20260914120000,infeasible,missing_required_visibility,False
+g02_shifted_004,g02,shifted,20260914120004,infeasible,missing_required_visibility,False
+g03_shifted_006,g03,shifted,20260914220006,infeasible,missing_required_visibility,False
+g03_shifted_007,g03,shifted,20260914220007,infeasible,missing_required_visibility,False

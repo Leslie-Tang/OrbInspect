@@ -1,0 +1,305 @@
+{
+  "comparisons": [
+    {
+      "certified_feasible": 3,
+      "complete": 1,
+      "complete_on_certified_feasible": 1,
+      "mean_delta_v_success": 12.828480602729385,
+      "mean_optimality_gap_percent": null,
+      "median_seconds": 0.0010321440004190663,
+      "method": "incumbent",
+      "optimum_comparison_count": 0,
+      "split": "reference",
+      "time_limit_with_feasible_witness": 0,
+      "time_limit_without_feasible_witness": 0,
+      "time_limits": 0,
+      "total": 3
+    },
+    {
+      "certified_feasible": 3,
+      "complete": 3,
+      "complete_on_certified_feasible": 3,
+      "mean_delta_v_success": 12.606391770170207,
+      "mean_optimality_gap_percent": null,
+      "median_seconds": 0.04770817700045882,
+      "method": "one_step_adp",
+      "optimum_comparison_count": 0,
+      "split": "reference",
+      "time_limit_with_feasible_witness": 0,
+      "time_limit_without_feasible_witness": 0,
+      "time_limits": 0,
+      "total": 3
+    },
+    {
+      "certified_feasible": 3,
+      "complete": 3,
+      "complete_on_certified_feasible": 3,
+      "mean_delta_v_success": 12.102169638915834,
+      "mean_optimality_gap_percent": null,
+      "median_seconds": 4.83560876500087,
+      "method": "adaptive_rollout_adp",
+      "optimum_comparison_count": 0,
+      "split": "reference",
+      "time_limit_with_feasible_witness": 0,
+      "time_limit_without_feasible_witness": 0,
+      "time_limits": 0,
+      "total": 3
+    },
+    {
+      "certified_feasible": 3,
+      "complete": 3,
+      "complete_on_certified_feasible": 3,
+      "mean_delta_v_success": 12.326541944886124,
+      "mean_optimality_gap_percent": null,
+      "median_seconds": 15.00666178999927,
+      "method": "independent_milp",
+      "optimum_comparison_count": 0,
+      "split": "reference",
+      "time_limit_with_feasible_witness": 3,
+      "time_limit_without_feasible_witness": 0,
+      "time_limits": 3,
+      "total": 3
+    },
+    {
+      "certified_feasible": 30,
+      "complete": 13,
+      "complete_on_certified_feasible": 13,
+      "mean_delta_v_success": 14.032960377358698,
+      "mean_optimality_gap_percent": 28.979037290871805,
+      "median_seconds": 0.0009577425007591955,
+      "method": "incumbent",
+      "optimum_comparison_count": 4,
+      "split": "nominal",
+      "time_limit_with_feasible_witness": 0,
+      "time_limit_without_feasible_witness": 0,
+      "time_limits": 0,
+      "total": 30
+    },
+    {
+      "certified_feasible": 30,
+      "complete": 30,
+      "complete_on_certified_feasible": 30,
+      "mean_delta_v_success": 12.86494946281574,
+      "mean_optimality_gap_percent": 4.397446848910584,
+      "median_seconds": 0.046121273499011295,
+      "method": "one_step_adp",
+      "optimum_comparison_count": 9,
+      "split": "nominal",
+      "time_limit_with_feasible_witness": 0,
+      "time_limit_without_feasible_witness": 0,
+      "time_limits": 0,
+      "total": 30
+    },
+    {
+      "certified_feasible": 30,
+      "complete": 30,
+      "complete_on_certified_feasible": 30,
+      "mean_delta_v_success": 12.197339530358079,
+      "mean_optimality_gap_percent": 0.859322398040099,
+      "median_seconds": 4.172537554999508,
+      "method": "adaptive_rollout_adp",
+      "optimum_comparison_count": 9,
+      "split": "nominal",
+      "time_limit_with_feasible_witness": 0,
+      "time_limit_without_feasible_witness": 0,
+      "time_limits": 0,
+      "total": 30
+    },
+    {
+      "certified_feasible": 30,
+      "complete": 30,
+      "complete_on_certified_feasible": 30,
+      "mean_delta_v_success": 12.179518642023007,
+      "mean_optimality_gap_percent": 0.0,
+      "median_seconds": 15.006507056000373,
+      "method": "independent_milp",
+      "optimum_comparison_count": 9,
+      "split": "nominal",
+      "time_limit_with_feasible_witness": 21,
+      "time_limit_without_feasible_witness": 0,
+      "time_limits": 21,
+      "total": 30
+    },
+    {
+      "certified_feasible": 26,
+      "complete": 19,
+      "complete_on_certified_feasible": 19,
+      "mean_delta_v_success": 15.203589733227094,
+      "mean_optimality_gap_percent": 19.66635202620503,
+      "median_seconds": 0.0009164495013465057,
+      "method": "incumbent",
+      "optimum_comparison_count": 13,
+      "split": "shifted",
+      "time_limit_with_feasible_witness": 0,
+      "time_limit_without_feasible_witness": 0,
+      "time_limits": 0,
+      "total": 30
+    },
+    {
+      "certified_feasible": 26,
+      "complete": 24,
+      "complete_on_certified_feasible": 24,
+      "mean_delta_v_success": 13.412141754832668,
+      "mean_optimality_gap_percent": 7.795065416955147,
+      "median_seconds": 0.03526958200018271,
+      "method": "one_step_adp",
+      "optimum_comparison_count": 17,
+      "split": "shifted",
+      "time_limit_with_feasible_witness": 0,
+      "time_limit_without_feasible_witness": 0,
+      "time_limits": 0,
+      "total": 30
+    },
+    {
+      "certified_feasible": 26,
+      "complete": 26,
+      "complete_on_certified_feasible": 26,
+      "mean_delta_v_success": 12.710464763576425,
+      "mean_optimality_gap_percent": 1.010437651999913,
+      "median_seconds": 2.0053402134990392,
+      "method": "adaptive_rollout_adp",
+      "optimum_comparison_count": 18,
+      "split": "shifted",
+      "time_limit_with_feasible_witness": 0,
+      "time_limit_without_feasible_witness": 0,
+      "time_limits": 0,
+      "total": 30
+    },
+    {
+      "certified_feasible": 26,
+      "complete": 26,
+      "complete_on_certified_feasible": 26,
+      "mean_delta_v_success": 12.542569850673726,
+      "mean_optimality_gap_percent": 0.0,
+      "median_seconds": 5.1795809524992364,
+      "method": "independent_milp",
+      "optimum_comparison_count": 18,
+      "split": "shifted",
+      "time_limit_with_feasible_witness": 8,
+      "time_limit_without_feasible_witness": 0,
+      "time_limits": 8,
+      "total": 30
+    }
+  ],
+  "feasibility": {
+    "nominal": {
+      "feasible": 30,
+      "proven_optimal": 9,
+      "total": 30
+    },
+    "reference": {
+      "feasible": 3,
+      "proven_optimal": 0,
+      "total": 3
+    },
+    "shifted": {
+      "feasible": 26,
+      "infeasible": 4,
+      "proven_optimal": 18,
+      "total": 30
+    }
+  },
+  "geometry_feasibility_scale_gate_passed": true,
+  "graphs": [
+    {
+      "build_seconds": 28.682090062000498,
+      "feasible_edge_count": 413,
+      "graph_id": "g01",
+      "node_count": 33,
+      "required_view_counts": {
+        "mesh_00001": 3,
+        "mesh_00007": 4,
+        "mesh_00015": 4,
+        "mesh_00019": 4,
+        "mesh_00033": 3,
+        "mesh_00052": 3,
+        "mesh_00055": 4,
+        "mesh_00059": 3,
+        "mesh_00079": 3
+      },
+      "seed": 20260914001
+    },
+    {
+      "build_seconds": 29.52440446000037,
+      "feasible_edge_count": 439,
+      "graph_id": "g02",
+      "node_count": 33,
+      "required_view_counts": {
+        "mesh_00001": 3,
+        "mesh_00007": 3,
+        "mesh_00015": 3,
+        "mesh_00019": 3,
+        "mesh_00033": 3,
+        "mesh_00052": 3,
+        "mesh_00055": 3,
+        "mesh_00059": 4,
+        "mesh_00079": 3
+      },
+      "seed": 20260914002
+    },
+    {
+      "build_seconds": 30.234267998999712,
+      "feasible_edge_count": 386,
+      "graph_id": "g03",
+      "node_count": 33,
+      "required_view_counts": {
+        "mesh_00001": 3,
+        "mesh_00007": 3,
+        "mesh_00015": 4,
+        "mesh_00019": 3,
+        "mesh_00033": 3,
+        "mesh_00052": 3,
+        "mesh_00055": 3,
+        "mesh_00059": 3,
+        "mesh_00079": 3
+      },
+      "seed": 20260914003
+    }
+  ],
+  "main_manuscript_changed": false,
+  "original_confirmation_changed": false,
+  "post_run_audit": {
+    "auditor_sha256": "4d025d10d8d2df65f1fae33fec547b8fe36cc8358b26a7670e3c23c402d85f09",
+    "completed_base_cost_bounds_checked": 66,
+    "independent_lower_bounds_checked": 208,
+    "method_rows_verified": 252,
+    "numeric_edge_records_verified": 3267,
+    "scenarios_verified": 63,
+    "selected_edges_verified": 2232,
+    "status": "passed"
+  },
+  "post_run_review": "review.md",
+  "primary_benchmark": {
+    "cases": 59,
+    "completion": {
+      "adaptive_rollout_adp": 59,
+      "incumbent": 33,
+      "independent_milp": 59,
+      "one_step_adp": 57
+    },
+    "denominator": 59,
+    "name": "independently_certified_all_solvable_pilot",
+    "selection_precedes_planner_evaluation": true,
+    "selection_rule": "independent_feasibility_status == feasible",
+    "split_counts": {
+      "nominal": 30,
+      "reference": 3,
+      "shifted": 26
+    },
+    "stress_cases": 4
+  },
+  "scaling_conditions": {
+    "build_practicality": true,
+    "classification_resolved": true,
+    "nominal_feasibility": true,
+    "redundancy": true,
+    "shifted_feasibility": true
+  },
+  "scope_limitations": [
+    "Same ISS geometry, nine targets and start state across graphs.",
+    "One timing measurement per method-case pair.",
+    "The pilot is development evidence, not an independent confirmation.",
+    "Physical closed-loop execution and ROS recording were not performed."
+  ],
+  "study_type": "development pilot"
+}

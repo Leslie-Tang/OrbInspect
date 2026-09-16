@@ -553,6 +553,11 @@
   "all_non_geometric_cell_attributes_identical": true,
   "all_information_fonts_colors_and_topology_unchanged": true,
   "illustrative_graph_report_unchanged": true,
+  "notation_alignment": {
+    "candidate_nodes": "c_0, c_1, c_2, c_3, c_4, c_5",
+    "retained_tail": "c_2 \\to c_5 \\to c_4",
+    "geometry_and_palette_unchanged": true
+  },
   "body_font_pt": 7.4719800747198,
   "previous_alternatives_preserved": true
 }

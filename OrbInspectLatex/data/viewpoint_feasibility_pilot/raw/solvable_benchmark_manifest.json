@@ -1,0 +1,22 @@
+{
+  "all_generated_cases": 63,
+  "all_solvable_cases": 59,
+  "benchmark_name": "independently_certified_all_solvable_pilot",
+  "derived_hashes": {
+    "raw/solvable_benchmark_cases.csv": "8c0b9d0819397a88f68fbc4c160e9baf7891651d05edf66bedae89119b574c17",
+    "raw/solvable_benchmark_cases.json": "d759ec307d708116b2e2d5c8edb26bf76c6516ffb37dfd1eef3a4ea855f97e74",
+    "raw/solvable_benchmark_results.csv": "804ba94412e6a7c2ca9145c67576b477670afce40f6be71a3c6ae20ade12182e",
+    "raw/solvable_benchmark_results.json": "3a4eb375709a6bf3ea158a65cff837a8eb50de3eb618772b6952c24b31c44aca",
+    "raw/solvable_benchmark_summary.json": "6c1d635c7db005a5fbc93fbddaa8518c65f4591962e822938e76be46ddbaae7a",
+    "raw/visibility_stress_cases.csv": "a94151ea15cdb5c3bccb79fbfbb1dc2d8f67aefc5e98d8e39d5324dbab59ca39",
+    "raw/visibility_stress_cases.json": "e5af85b2c1b98c1af172d82d649693759d46fb46d017fe85e30a76ce43d6760f",
+    "raw/visibility_stress_results.csv": "3c7979a50b8ba46605ec245c52cc2f350a92a23e711e5e646623af817e46ee77",
+    "raw/visibility_stress_results.json": "e1fbf392b3250f9fe6f1e7049640c8562f89b60f0cf93a6529dbf8658a1b50fe"
+  },
+  "source_hashes": {
+    "raw/benchmark_results.json": "2f5f80ce981b4a88fecaf5272824daf3397bcb11a9a91218438fdd5025328cc8",
+    "raw/feasibility.json": "57a7a4d00996dd6375716ca773f91b3645b797066a6d3ab577a49982695de1d8",
+    "raw/scenarios.json": "37acf0285da6dcb9d49af87fc3c2a83cec9e1214cbf10051b455420a4fb7dece"
+  },
+  "visibility_stress_cases": 4
+}

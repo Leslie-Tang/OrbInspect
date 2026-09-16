@@ -1,0 +1,86 @@
+{
+  "candidate_observable_target_count": 41,
+  "confirmation_requirement_source": "data/results/20260905_093000_required_target_adp",
+  "geometric_regions": [
+    {
+      "axis": "z",
+      "candidate_observable_item_count": 12,
+      "lower_bound_m": -57.9093481272459,
+      "ordered_target_ids": [
+        "mesh_00055",
+        "mesh_00052",
+        "mesh_00059",
+        "mesh_00064"
+      ],
+      "region_id": "axis_z_slab_1",
+      "upper_bound_m": -19.303121783733367
+    },
+    {
+      "axis": "z",
+      "candidate_observable_item_count": 17,
+      "lower_bound_m": -19.303121783733367,
+      "ordered_target_ids": [
+        "mesh_00007",
+        "mesh_00001",
+        "mesh_00079",
+        "mesh_00045"
+      ],
+      "region_id": "axis_z_slab_2",
+      "upper_bound_m": 19.303104559779165
+    },
+    {
+      "axis": "z",
+      "candidate_observable_item_count": 12,
+      "lower_bound_m": 19.303104559779165,
+      "ordered_target_ids": [
+        "mesh_00033",
+        "mesh_00015",
+        "mesh_00019",
+        "mesh_00024"
+      ],
+      "region_id": "axis_z_slab_3",
+      "upper_bound_m": 57.90933090329168
+    }
+  ],
+  "mesh_target_count": 90,
+  "profiles": [
+    {
+      "profile_id": "required09",
+      "region_target_ids": {
+        "axis_z_slab_1": [
+          "mesh_00055",
+          "mesh_00052",
+          "mesh_00059"
+        ],
+        "axis_z_slab_2": [
+          "mesh_00007",
+          "mesh_00001",
+          "mesh_00079"
+        ],
+        "axis_z_slab_3": [
+          "mesh_00033",
+          "mesh_00015",
+          "mesh_00019"
+        ]
+      },
+      "required_target_count": 9,
+      "required_target_ids": [
+        "mesh_00055",
+        "mesh_00052",
+        "mesh_00059",
+        "mesh_00007",
+        "mesh_00001",
+        "mesh_00079",
+        "mesh_00033",
+        "mesh_00015",
+        "mesh_00019"
+      ],
+      "required_target_mask": 275750586889
+    }
+  ],
+  "requirements_reselected": false,
+  "scientific_scope": "Synthetic geometric benchmark requirements; no component-criticality claim.",
+  "selection_inputs": "mesh coordinates and archived candidate-observable target IDs only",
+  "selection_uses_route_outcomes": false,
+  "selection_uses_scenario_inventory": false
+}

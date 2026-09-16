@@ -1,0 +1,25 @@
+{
+  "frozen_at_utc": "2026-09-14T07:36:52.248883+00:00",
+  "graph_count": 3,
+  "input_hashes": {
+    "raw/g01/candidate_attempts.json": "f4a9527ed4eb66b8498c55cd00a422eea5fcc1a2ef632b1b1b58f7fc6a5e71dd",
+    "raw/g01/candidates.json": "83d5b70dbcc70d1d29232768923007a1ab10890125ee3bc12605bfa2c84ff705",
+    "raw/g01/edge_audits.csv": "c9b200c559ca7541eb47164d088c1416f19673fd487884ac5d27e11473c598af",
+    "raw/g01/edge_samples.npz": "dd5c137ed5e42c4a885099d98ec6c92ddb765a3bea4053aa2b92e17194a55b45",
+    "raw/g01/hcw_graph.json": "ae98e9d81dd1f3a5bc0ae9a4fa24e50f22ca859e6ab6e93a17f605d98453ac49",
+    "raw/g02/candidate_attempts.json": "b0ba9e3436211dcf2015e03dd71111590d7ef827eb9db27341246f740c574a0a",
+    "raw/g02/candidates.json": "bbea76ad62f7201ce648acefd118520d8afc09353d478315072ee2a7adda2d14",
+    "raw/g02/edge_audits.csv": "41a48e151a3068ba85deb24a09eb4d5779765bbc32cdfd3332c7c03917f8fc7d",
+    "raw/g02/edge_samples.npz": "5d24cdc02b8de62fce5f405d6caf9f603d21fce2b79cfbb037a3fc1961514ff3",
+    "raw/g02/hcw_graph.json": "f6cd07b8c9d6dd9cd62148741d8db8b685625de848ec36fe43a879f7bc5b7583",
+    "raw/g03/candidate_attempts.json": "c833cb0dfa5cce7ea603e54f386df9c082da8762fb0f51997ade5d13606dfe81",
+    "raw/g03/candidates.json": "3cab9e81728bce28fea20146696ae55476f66df9b3a2c1d3fc20812c821e8925",
+    "raw/g03/edge_audits.csv": "b68eabf5dd31e0aa19237eb26af44b7691ab9a5670f757b2b87377d6892c67ca",
+    "raw/g03/edge_samples.npz": "6ff97c3cbc5a24fbe9cb48ea71cab884699ae517a516f269e07b869daf659d5a",
+    "raw/g03/hcw_graph.json": "248c5c6e2da52fd286baeab35dca547345aed4f67ec0704ba24f40bbfd7cc2a7",
+    "raw/geometry.json": "30ccba1bda16b2cbcc57bc6c716ace03ddae85b61c990f0497c0ed0060e2a5c4",
+    "raw/graph_summary.json": "b651aca15d5b32df6972b659c07899f57c8e6249fe5384c675fd4e712d770cf0",
+    "raw/scenarios.json": "37acf0285da6dcb9d49af87fc3c2a83cec9e1214cbf10051b455420a4fb7dece"
+  },
+  "scenario_count": 63
+}

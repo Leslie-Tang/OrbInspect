@@ -1,0 +1,22 @@
+{
+  "main_tex": "main.tex",
+  "manuscript_tex_files": 1,
+  "inlined_source_files": 11,
+  "archived_source_files_verified": 12,
+  "pages_before": 13,
+  "pages_after": 13,
+  "render_dpi": 100,
+  "pages_with_pixel_differences": [],
+  "figure_files": "68 original files verified by make check",
+  "latex_errors_or_undefined_references": [],
+  "source_zip_manuscript_tex_files": [
+    "main.tex"
+  ],
+  "source_zip_historical_evidence_tex_files": [
+    "data/depth_diagnostic/raw/manuscript_depth_table.tex",
+    "data/historical_ros/figure7/artwork/caption.tex",
+    "data/required_target_ros/20260909_093200_hybrid12_visual/config_snapshot/capture_protocol/ros_results_template.tex"
+  ],
+  "overleaf_modified": false,
+  "status": "passed"
+}

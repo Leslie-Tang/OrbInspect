@@ -12,7 +12,7 @@ def main() -> None:
     destination.parent.mkdir(exist_ok=True)
     roots = [ROOT/p for p in ('main.tex','references.bib','IEEEtaes.cls','IEEEtran.bst',
                               'Makefile','.latexmkrc','.gitignore','README.md',
-                              'sections','tables','figures','data','scripts','docs')]
+                              'figures','data','scripts','docs')]
     members = []
     for root in roots:
         members.extend(root.rglob('*') if root.is_dir() else [root])

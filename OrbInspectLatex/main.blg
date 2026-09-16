@@ -14,44 +14,44 @@ Database file #1: references.bib
 ** IEEEtran BST control entry "IEEEfullAuthorNames" detected.
 
 Done.
-You've used 34 entries,
+You've used 36 entries,
             4087 wiz_defined-function locations,
-            1021 strings with 13551 characters,
-and the built_in function-call counts, 28876 in all, are:
-= -- 2445
-> -- 666
-< -- 309
-+ -- 380
-- -- 102
-* -- 1409
-:= -- 4237
-add.period$ -- 66
-call.type$ -- 34
-change.case$ -- 33
-chr.to.int$ -- 690
-cite$ -- 34
-duplicate$ -- 1983
-empty$ -- 2089
-format.name$ -- 129
-if$ -- 6743
+            1032 strings with 14007 characters,
+and the built_in function-call counts, 31251 in all, are:
+= -- 2641
+> -- 724
+< -- 338
++ -- 424
+- -- 122
+* -- 1535
+:= -- 4554
+add.period$ -- 70
+call.type$ -- 36
+change.case$ -- 35
+chr.to.int$ -- 762
+cite$ -- 36
+duplicate$ -- 2132
+empty$ -- 2248
+format.name$ -- 139
+if$ -- 7291
 int.to.chr$ -- 0
-int.to.str$ -- 33
-missing$ -- 325
-newline$ -- 122
-num.names$ -- 33
-pop$ -- 647
+int.to.str$ -- 35
+missing$ -- 346
+newline$ -- 128
+num.names$ -- 35
+pop$ -- 690
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 4
-skip$ -- 2264
+skip$ -- 2434
 stack$ -- 0
-substring$ -- 1648
-swap$ -- 1790
-text.length$ -- 79
+substring$ -- 1850
+swap$ -- 1941
+text.length$ -- 84
 text.prefix$ -- 0
 top$ -- 6
-type$ -- 34
+type$ -- 36
 warning$ -- 0
-while$ -- 142
-width$ -- 35
-write$ -- 364
+while$ -- 152
+width$ -- 37
+write$ -- 385

@@ -29,6 +29,7 @@ setup(
         'paper': [
             'matplotlib',
             'numpy',
+            'scipy>=1.9',
             'scikit-learn',
         ],
         'test': [

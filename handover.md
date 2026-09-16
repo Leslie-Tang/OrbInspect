@@ -1,5 +1,90 @@
 # Ubuntu handover: required-target ROS validation and manuscript update
 
+**Figure 1 refreshed (2026-09-14):** the updated native draw.io source was
+checked and exported to matching PDF/SVG/PNG assets. The revised workflow-arrow
+routing is included in the local manuscript; the five-panel content, labels,
+caption semantics and aspect ratio are unchanged. Figures 2--8 were not altered.
+
+**Related-work references added (2026-09-14):** the manuscript now cites Luo,
+Ning and Tang (2025) on online reinforcement-learning attitude stabilization
+under spacecraft dynamic uncertainty, and Tang et al. (2025) on nonlinear
+reach-avoid differential graphical games. Both entries were verified against
+DOI metadata and are included in the local bibliography and compiled PDF.
+
+**Contributions condensed (2026-09-14):** the introduction now groups the
+contributions into three focused points covering the method, finite-graph
+analysis, and reproducible evaluation evidence.
+
+**System-model emphasis clarified (2026-09-14):** Section 3 now foregrounds
+the deterministic system, observation, and feasibility model from which the
+candidate graph is constructed. Planner operation and the offline-before-ROS
+evaluation protocol remain described in the algorithm, experimental, and ROS
+sections, where the lightweight depth-three timing is reported.
+
+**Observation notation clarified (2026-09-14):** Section 3 explicitly defines
+$p_i$ as the LVLH surface-sample position, $n_i$ as its outward unit normal,
+and $a_i$ as represented area; required and visible target sets now use sample
+indices consistently with the coverage masks.
+
+**Pilot incorporated into the local manuscript (2026-09-14):**
+`OrbInspectLatex/main.tex` now explains the original visibility-infeasible cases
+and includes the three-graph pilot protocol, an independent MILP comparison,
+Table VIII, and revised abstract/discussion/conclusion. The abstract and Table
+VIII now lead with an independently certified all-solvable benchmark of 59 cases
+(3 reference, 30 nominal and 26 shifted); depth-three ADP completes 59/59,
+one-step ADP 57/59, and the greedy incumbent 33/59. The four shifted cases
+failing the visibility certificate remain in a separate stress-test inventory.
+The pilot is explicitly development evidence; the original confirmation counts,
+data tables and all eight approved figure blocks/assets are retained. The compiled manuscript is
+15 pages. Current dated PDF:
+`output/pdf/OrbInspect_IEEE_TAES_viewpoint_pilot_20260914.pdf`.
+The portable source ZIP and `OrbInspectLatex/main.pdf` are synchronized.
+See `OrbInspectLatex/docs/VIEWPOINT_PILOT_MANUSCRIPT_20260914.md` and its QA record.
+The reproducible subset generator is `tools/paper/materialize_solvable_benchmark.py`;
+its derived files are under `data/results/20260914_073800_viewpoint_feasibility_pilot/raw/`.
+No Overleaf edits or Git push were performed. The notes below describe earlier
+stages, including the pilot's completion before manuscript integration.
+
+**Viewpoint/feasibility pilot completed (2026-09-14):** new local experiment
+`data/results/20260914_073800_viewpoint_feasibility_pilot/` contains three frozen
+33-view graphs and 63 retained scenarios on the same ISS mesh and nine required
+targets. Every target has at least three valid candidate views per graph.
+Independent SciPy/HiGHS certification preceded ADP evaluation: 30/30 nominal and
+26/30 shifted cases are feasible; four shifted cases lack any available view of
+a required target. None is unresolved. Depth-three ADP completes every feasible
+case (59/59 including three references), compared with 24/26 feasible shifted
+cases for one-step ADP. ADP's mean gap is 0.9601% across the 27 independently
+proven optima; MILP has a lower mean cost in both perturbed splits. Its 32
+time-limited feasible routes are not claimed optimal. The predeclared feasibility
+gate passed, supporting a larger confirmation with fresh seeds and a separately
+frozen protocol. These are development results, not a replacement confirmation.
+
+All 252 method-case rows and 3,267 numeric edge records passed post-run audit;
+57 relevant Python tests passed and all 12 ROS packages built successfully.
+Build with `colcon build --symlink-install --base-paths src` because archived
+supplementary source trees otherwise produce duplicate package discovery.
+Existing manuscript figures and the old 80-case confirmation remain intact.
+Read the [completed pilot review](data/results/20260914_073800_viewpoint_feasibility_pilot/review.md)
+and `docs/viewpoint_feasibility_pilot_protocol_20260914.md`.
+The runner is `tools/paper/run_viewpoint_feasibility_pilot.py`; preserve its
+frozen sources for reproducing this run. The independent post-run audit is
+`tools/paper/audit_viewpoint_feasibility_pilot.py`.
+
+**Single local TeX manuscript (2026-09-14):** `OrbInspectLatex/main.tex` now
+contains all manuscript sections, tables and numerical macros. The twelve
+earlier modular source files and their compiled PDF are preserved under
+`OrbInspectLatex/archive/modular_tex_20260914/`. Figures and bibliography remain
+supporting assets, including Figure 8's separate PDF panels with LaTeX labels.
+This is a local change; no edits were made on Overleaf. See
+`OrbInspectLatex/docs/SINGLE_TEX_20260914.md` for validation.
+
+**Figure 8 LaTeX subfigures (2026-09-10):** the global and camera views now
+use separate PDF/SVG/PNG exports. LaTeX generates their (a)/(b) labels and
+subcaptions, consistent with the other native subfigures. Screenshot pixels,
+printed image sizes, borders and progress annotations are preserved. The
+manuscript remains 13 pages; Figures 1--7 are unchanged. See
+`OrbInspectLatex/docs/FIGURE_8_LATEX_SUBFIGURES_20260910.md`.
+
 **Figures 3--6 font consistency (2026-09-10):** axes, ticks, legends and notes
 now use 8 pt Arial at the final manuscript size (math scripts: 5.6 pt).
 The Figure 6 generators now read frozen CSVs and a portable snapshot of its
@@ -489,3 +574,111 @@ Further context: `docs/required_target_execution_validation_20260905.md`,
 `OrbInspectLatex/docs/FIGURE_7_COMPACT_TWO_COLUMN_20260908.md`, and
 `tools/paper/README.md`. Some older notes name `OrbInspectLatex/scripts/` for
 experiment tools; their current repository-dependent location is `tools/paper/`.
+
+**Coverage-mask notation ordered (2026-09-14):** Section 3 now defines
+$m_k\in\{0,1\}^N$ immediately after the visibility equation as the cumulative
+covered-target mask, initialized by $m_0=\mathbf 0$. The Figure 1 caption uses
+plain-language completion wording so it does not introduce the mask notation
+before the system-model definition. The manuscript was rebuilt and project
+checks passed.
+
+**Table I introduced before presentation (2026-09-14):** The System and
+Observation Model now explicitly refers to Table~I before the assumptions table
+is typeset, establishing its purpose and scope before the reader encounters it.
+
+**Coverage-mask support defined (2026-09-14):** Section 3 now defines
+$\operatorname{supp}(m)=\{i\in\mathcal T:m_i=1\}$ before the required-target
+coverage and completion equations, making explicit that it is the set of sample
+indices covered by the binary mask.
+
+**Table I streamlined (2026-09-14):** The assumptions table now has four focused
+rows. Circular-chief-orbit and fixed-LVLH assumptions are combined; deterministic
+mesh/state, prescribed camera attitude, and sampled-mesh safety remain explicit.
+The illumination/plume row was removed because the same limitation is already
+stated in the scope and limitations discussion.
+
+**Safety-clearance symbols defined (2026-09-14):** Section 3 now defines the
+finite-body radius $r_{\mathrm{veh}}=0.80$ m and prescribed mesh-clearance margin
+$d_{\mathrm{safe}}=2.0$ m before the sampled-state feasibility equation.
+
+**Stage-cost weights ordered (2026-09-14):** Section 3 now defines the four
+weight symbols and their maneuver, tracking, clearance, and per-edge action-cost
+roles before presenting $\ell_{ij}$. The numerical values are stated in detail
+in the simulation protocol.
+
+**Graph-node notation separated from velocity (2026-09-14):** Individual graph
+vertices are now denoted by $c_i,c_j$ (candidate nodes), while $\mathbf v$ and
+$v_x,v_y,v_z$ remain reserved for translational velocity. The vertex set
+$\mathcal V$ is unchanged.
+
+**Terminology paragraph added (2026-09-14):** Section 3 now defines SOOA,
+audit and shield admissibility, scenario feasibility/infeasibility, required
+completion, optional coverage, and the limited sampled-audit meaning of ``safe''
+before the dynamics and observation equations.
+
+**Edge/action notation separated (2026-09-14):** The destination action index
+$a$ is retained in the Markov and Bellman recursions, while the stored directed
+edge is written $\mathsf a_{ij}$. This removes the ambiguity in expressions such
+as $a_{j_ka}$ without changing the underlying graph or costs.
+
+**Mask transition clarified (2026-09-14):** The Markov transition now uses
+$m_k\lor\mathbf 1_{G_a}$, and the visibility subsection uses
+$m_{k+1}=m_k\lor\mathbf 1_{G_j}$, because $G_j$ is a target-index set while
+$m_k$ is a binary vector. The indicator-vector convention and the one-hot
+destination vector $\mathbf e_a$ are defined before use.
+
+**Candidate-count symbol ordered (2026-09-14):** Section 3 now defines $M$ as
+the number of candidate observation nodes before using it in the inspectable-set
+union, one-hot action vector, and graph-state dimensions.
+
+**Shield predicate clarified (2026-09-14):** The edge certificate $\chi_{ij}$
+now includes the enabled swept-segment no-intersection audit alongside the
+stored-sample limits, terminal tolerances, and optional passive margin. The
+shield action set also requires $h>0$ explicitly, so it is empty when the
+finite mission budget is exhausted.
+
+**Notation audit completed (2026-09-14):** The manuscript now defines camera
+range and angle limits, dwell symbols, terminal tolerances, rollout dimensions,
+route cost $J$, and the stacked command vector before use. Vector-valued surface
+positions, normals, and boresights use bold notation; the visibility matrix is
+distinct from the value function; the branching factor is $B_{\max}$; and the
+illustrative figure caption explicitly distinguishes its schematic $v_i$ labels
+from the formal candidate-node notation $c_i$. Acronym first uses and
+the feasibility/admissibility terminology were clarified. The source rebuild
+is 15 pages and all project/package checks pass.
+
+**Bibliography flow corrected (2026-09-14):** Removed the stale
+`\IEEEtriggeratref{29}` page-break trigger. References 1--35 now flow naturally
+on the final reference page, reducing the manuscript from 16 to 15 pages.
+
+**Figure notation synchronized (2026-09-14):** Figure 1 now uses bold
+`\mathbf p_i`, `\mathbf n_i`, and `\mathbf b(\bar q_j)`, the stored-edge
+notation `\mathsf a_{ij}`, and candidate nodes `c_i`. Figure 2 uses `c_i`
+consistently, including the retained rollout tail. Native draw.io exports and
+the PDF/PNG/SVG assets were regenerated and visually checked; the manuscript
+was rebuilt to 15 pages.
+
+**Figure caption layout refined (2026-09-14):** Figure captions are now set in
+centered blocks with the same 0.9-linewidth measure as the artwork and fully
+justified text. Figures 1, 2, and 7 were visually checked after rebuilding;
+figure artwork and panel layouts are unchanged.
+
+**Problem statement added (2026-09-15):** Added explicit Problem 1 at the end
+of the system and observation model. It defines the finite SOOA sequence,
+stage-cost objective, enabled audits, no-revisit rule, required-target terminal
+condition, and graph-level infeasibility criterion. The problem is kept intact
+within one column; the rebuilt manuscript is 16 pages.
+
+**FOV terminology standardized (2026-09-15):** After the initial definition
+“field of view (FOV)” in Figure 1, subsequent manuscript references use FOV and
+LOS consistently, including the visibility-model explanation and the RViz
+caption. The FOV half-angle remains represented by $\alpha_{\max}$.
+
+**Coverage-mask notation clarified (2026-09-15):** The system model now defines
+$m_k=[m_{1,k},\ldots,m_{N,k}]^{\mathsf T}$ and states that $m_{i,k}=1$ means
+target/sample $i$ has been credited after $k$ observations. It distinguishes
+the initial mask $m_0=\mathbf0$ from the generic decision-step mask $m_k$.
+
+**Coverage-mask vector styling standardized (2026-09-15):** Coverage masks are
+now written as bold vectors, $\mathbf m_k$ and $\mathbf m$, throughout the
+manuscript; their scalar components remain $m_{i,k}$ and $m_i$.

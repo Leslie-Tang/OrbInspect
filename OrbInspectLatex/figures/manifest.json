@@ -6,19 +6,19 @@
       "files": [
         {
           "file": "figures/fig01_framework/viability_preserving_rollout_adp.drawio",
-          "sha256": "0b6979f6b33cfdff48aef4107311eb31deab0df24d27a7e3053f9365abe3a194"
+          "sha256": "215da32c2554dc64152a6e2b1d47941ea0df203b25d170092b43db47f82b102c"
         },
         {
           "file": "figures/fig01_framework/viability_preserving_rollout_adp.pdf",
-          "sha256": "c5f4547d8f5e8ebe903deba0c1632b4f4616bda58433d16658ca526879a31e29"
+          "sha256": "cf06f6b8db443058067717d35e92287f96fd5d860c457de9cf61b9bb8ea01452"
         },
         {
           "file": "figures/fig01_framework/viability_preserving_rollout_adp.png",
-          "sha256": "24bded88c465c0dfab1a82f1075e2f352a83eebe014a5bddfe5fb91a5764d5f9"
+          "sha256": "7df0b333b665e4cc54780de2222eccd9274abf3f0a4e99ee0ca1ee84d99abfb2"
         },
         {
           "file": "figures/fig01_framework/viability_preserving_rollout_adp.svg",
-          "sha256": "171839d9442c7a8151160893480e4cb856faea7b95b840d594af306cdb11f7b2"
+          "sha256": "cb9f180258af87309206f4a14cb15840b4a8688e9c186a962333e1cf83551a9c"
         }
       ]
     },
@@ -28,19 +28,19 @@
       "files": [
         {
           "file": "figures/fig02_rollout_example/adp_rollout_mechanism.drawio",
-          "sha256": "d602f51a43057918c293526170ce4d3a8acd9fdf556f69d514c0f845129b552c"
+          "sha256": "ad61e4e508631e8d5fa41926606e5b7bbb9523bd1ef7c705369f75a26383fbe6"
         },
         {
           "file": "figures/fig02_rollout_example/adp_rollout_mechanism.pdf",
-          "sha256": "cdc16dc2c0dba6c2967162bb152021a31ae32fb0c5c1644aee443cb09842ea0d"
+          "sha256": "3b7289af1f86264b685da2598f6e50ec49954b297db0b72055a857a6c81e1ff6"
         },
         {
           "file": "figures/fig02_rollout_example/adp_rollout_mechanism.png",
-          "sha256": "4c3828030b224f217890ea6d765b4c70eb93d617cb8bf8d221c5b4d74d909cb0"
+          "sha256": "027d8e2568ad753783ae7db7a66fda3d45cb8f50db5c69646bb9e738bcaebcb8"
         },
         {
           "file": "figures/fig02_rollout_example/adp_rollout_mechanism.svg",
-          "sha256": "cf3feaed080a1f30f88699ab46d80d502349c990d267632e9edc70e9de264cdf"
+          "sha256": "a5777acf292ada3189b3e2d7cd4beea46cb795db6f28186c557d98a977ecdd80"
         }
       ]
     },
@@ -292,19 +292,31 @@
       "files": [
         {
           "file": "figures/fig08_rviz_overview/overview_manifest.json",
-          "sha256": "55c15e1a91b69d6cbdd58235c1e0d62e4170faf0268e8986701644d17b9b983a"
+          "sha256": "c3bd5ee6528f3851354ca58045f3a11a9af7797509419150fb7448ee1a8f8352"
         },
         {
-          "file": "figures/fig08_rviz_overview/rviz_execution_overview.pdf",
-          "sha256": "277230c29a8b457901d01c887774175c70981a7be2ae83211f46d3ebc0e9f427"
+          "file": "figures/fig08_rviz_overview/rviz_execution_overview_a.pdf",
+          "sha256": "12c47374a73be2f5608f1a214547e40e4bde566186abe1e4c050f72beeb22efb"
         },
         {
-          "file": "figures/fig08_rviz_overview/rviz_execution_overview.png",
-          "sha256": "730b2f78ad0e40623de72f9ebf461166bb39188085e61f9dcfdd5c280c111e17"
+          "file": "figures/fig08_rviz_overview/rviz_execution_overview_a.png",
+          "sha256": "745d543122e566b16c64b06fe90e04929c6cc7efad316acbd5de1029429ee0a4"
         },
         {
-          "file": "figures/fig08_rviz_overview/rviz_execution_overview.svg",
-          "sha256": "1215de74d45ba419ef417f1a54e6bcb3d199247cafd332caf31b0341458776c8"
+          "file": "figures/fig08_rviz_overview/rviz_execution_overview_a.svg",
+          "sha256": "970f4594cf8968404cf919f9159e5b8bba7fbf3f4e0b85977bc4b0de62ca75b4"
+        },
+        {
+          "file": "figures/fig08_rviz_overview/rviz_execution_overview_b.pdf",
+          "sha256": "fc502de955176c23fc05c5829656ef081364582f750381aa064b0a5e7dfbb62c"
+        },
+        {
+          "file": "figures/fig08_rviz_overview/rviz_execution_overview_b.png",
+          "sha256": "d3d1f7928cf1ec39bb3af808e3e6a4f16d899afc18502070d6682a51fc3d6286"
+        },
+        {
+          "file": "figures/fig08_rviz_overview/rviz_execution_overview_b.svg",
+          "sha256": "6a0c3c4100daecc85581c198b7d987af82d4a2147be996530149813915b4905e"
         }
       ]
     }

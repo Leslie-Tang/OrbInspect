@@ -1,0 +1,33 @@
+{
+  "source_root": "/home/rugang/robotics/projects/OrbInspect/OrbInspectLatex",
+  "main_tex": "/home/rugang/robotics/projects/OrbInspect/output/overleaf/OrbInspect_single_tex_20260914/main.tex",
+  "archive": "/home/rugang/robotics/projects/OrbInspect/output/overleaf/OrbInspect_single_tex_20260914.zip",
+  "tex_files": 1,
+  "included_tex_files": 11,
+  "files": {
+    "IEEEtaes.cls": "18a8aae3298eb402ff0252ca8d611fee2ca4dd4385ead039dae7954a8fbfcea2",
+    "IEEEtran.bst": "314f0ece704568faf827011bac498650691b2b5ee06320720830e782416d5a5f",
+    "figures/fig01_framework/viability_preserving_rollout_adp.pdf": "c5f4547d8f5e8ebe903deba0c1632b4f4616bda58433d16658ca526879a31e29",
+    "figures/fig02_rollout_example/adp_rollout_mechanism.pdf": "cdc16dc2c0dba6c2967162bb152021a31ae32fb0c5c1644aee443cb09842ea0d",
+    "figures/fig03_depth_tradeoff/adp_depth_tradeoff_a.pdf": "046d6f965c8ba23ac3eaad72292c5e6c78a02653ccb8994558275bde7b3a0d51",
+    "figures/fig03_depth_tradeoff/adp_depth_tradeoff_b.pdf": "781d6c6583639ce047d7b90177a57503bfa5751c7193aa6eaaf0229aebb88e5f",
+    "figures/fig03_depth_tradeoff/adp_depth_tradeoff_c.pdf": "a4ff0fac281387c76612d9836869b8f608b8605edec32e186d8b5ad136e6bc11",
+    "figures/fig04_heldout_performance/adp_heldout_performance_a.pdf": "6594f132718c1275434744bf7a642a913743b5a3a329640f7387ff2d0e94737f",
+    "figures/fig04_heldout_performance/adp_heldout_performance_b.pdf": "646f6a90b1932b088e103852fc4d3202c077621f128ab7ee0e4c8fff2595071d",
+    "figures/fig04_heldout_performance/adp_heldout_performance_c.pdf": "d1888cf2bedfdcc07e23c92027c4c39ca17c2c82d8366522f137ad7d8af27c95",
+    "figures/fig04_heldout_performance/adp_heldout_performance_d.pdf": "646b8c377b6b5652e7eb2f67c168a182a084407cedce8754ac3f9546d23d4032",
+    "figures/fig05_ablation_safety/adp_ablation_safety_a.pdf": "6be090a4a88fc2f61bc5015b1761878df030ab557c61a0617c500c0f26968588",
+    "figures/fig05_ablation_safety/adp_ablation_safety_b.pdf": "4e2318f4b1248702e34141a7e95ee1afa83634e3b782dd8a0b4e53bb24ce504b",
+    "figures/fig05_ablation_safety/adp_ablation_safety_c.pdf": "581e05223426b6cd5d115825f909d0b6c4372e8163bdb58c3bf1409aa063bd85",
+    "figures/fig05_ablation_safety/adp_ablation_safety_d.pdf": "6c87377815c8165cd3853b9a199c4ca237a5410cbe2aa778865fd26bd808953d",
+    "figures/fig05_ablation_safety/adp_ablation_safety_legend.pdf": "12e7692c5f397f3dfa725b2525b2725209095755440825ec2eacdd32cb656c1e",
+    "figures/fig06_representative_trajectory/adp_representative_trajectory_a.pdf": "8f1966a2038ae48a3733bed0d89c76b4193346061c410eeadffe3164543e5c2d",
+    "figures/fig06_representative_trajectory/adp_representative_trajectory_b.pdf": "10856ea3d40859ba711a632ffb9c7d66b23ac1f3de5c08c97127bbc2fe6c91c3",
+    "figures/fig06_representative_trajectory/adp_representative_trajectory_c.pdf": "92173cc4c85ae20155ab12997f5bb9c2f51179236f6d967cbd310fa26281eeb2",
+    "figures/fig07_ros_camera_views/ros_key_camera_views_trajectory.pdf": "19741ac5991f40cd640df9c4f8d9c97e88389b24ef7bc1b70648d693ea077924",
+    "figures/fig08_rviz_overview/rviz_execution_overview_a.pdf": "12c47374a73be2f5608f1a214547e40e4bde566186abe1e4c050f72beeb22efb",
+    "figures/fig08_rviz_overview/rviz_execution_overview_b.pdf": "fc502de955176c23fc05c5829656ef081364582f750381aa064b0a5e7dfbb62c",
+    "main.tex": "cba28afeb1feb1d4bb0c7ee625a4efd75a480b073881e1cabc8aff6160ad0457",
+    "references.bib": "04f03086cb54acfee9615abcda98cd61674146ddf0e66ba8ecb95f66204e0bfb"
+  }
+}

@@ -1,0 +1,62 @@
+[
+  {
+    "graph_id": "g01",
+    "split": "nominal",
+    "scenario_count": 10,
+    "distinct_available_node_sets": 7,
+    "available_node_count_range": [
+      30,
+      33
+    ]
+  },
+  {
+    "graph_id": "g01",
+    "split": "shifted",
+    "scenario_count": 10,
+    "distinct_available_node_sets": 10,
+    "available_node_count_range": [
+      25,
+      30
+    ]
+  },
+  {
+    "graph_id": "g02",
+    "split": "nominal",
+    "scenario_count": 10,
+    "distinct_available_node_sets": 9,
+    "available_node_count_range": [
+      26,
+      33
+    ]
+  },
+  {
+    "graph_id": "g02",
+    "split": "shifted",
+    "scenario_count": 10,
+    "distinct_available_node_sets": 10,
+    "available_node_count_range": [
+      22,
+      30
+    ]
+  },
+  {
+    "graph_id": "g03",
+    "split": "nominal",
+    "scenario_count": 10,
+    "distinct_available_node_sets": 10,
+    "available_node_count_range": [
+      29,
+      33
+    ]
+  },
+  {
+    "graph_id": "g03",
+    "split": "shifted",
+    "scenario_count": 10,
+    "distinct_available_node_sets": 10,
+    "available_node_count_range": [
+      19,
+      29
+    ]
+  }
+]

@@ -1,0 +1,56 @@
+[
+  {
+    "build_seconds": 28.682090062000498,
+    "feasible_edge_count": 413,
+    "graph_id": "g01",
+    "node_count": 33,
+    "required_view_counts": {
+      "mesh_00001": 3,
+      "mesh_00007": 4,
+      "mesh_00015": 4,
+      "mesh_00019": 4,
+      "mesh_00033": 3,
+      "mesh_00052": 3,
+      "mesh_00055": 4,
+      "mesh_00059": 3,
+      "mesh_00079": 3
+    },
+    "seed": 20260914001
+  },
+  {
+    "build_seconds": 29.52440446000037,
+    "feasible_edge_count": 439,
+    "graph_id": "g02",
+    "node_count": 33,
+    "required_view_counts": {
+      "mesh_00001": 3,
+      "mesh_00007": 3,
+      "mesh_00015": 3,
+      "mesh_00019": 3,
+      "mesh_00033": 3,
+      "mesh_00052": 3,
+      "mesh_00055": 3,
+      "mesh_00059": 4,
+      "mesh_00079": 3
+    },
+    "seed": 20260914002
+  },
+  {
+    "build_seconds": 30.234267998999712,
+    "feasible_edge_count": 386,
+    "graph_id": "g03",
+    "node_count": 33,
+    "required_view_counts": {
+      "mesh_00001": 3,
+      "mesh_00007": 3,
+      "mesh_00015": 4,
+      "mesh_00019": 3,
+      "mesh_00033": 3,
+      "mesh_00052": 3,
+      "mesh_00055": 3,
+      "mesh_00059": 3,
+      "mesh_00079": 3
+    },
+    "seed": 20260914003
+  }
+]

@@ -29,6 +29,24 @@ The 26-dimensional critic interface is retained. For required goals its gap
 features describe unmet required items, so checkpoints should be trained and
 evaluated under the intended task specification.
 
+## Independent required-route certificates
+
+`required_route_milp.solve_required_route` is an optional offline SciPy/HiGHS
+solver independent of ADP and its exact recursion. It supports required-only
+inspection with the same directed edge audits, fixed target masks, action budget,
+no revisits and additive graph cost. A checked route certifies feasibility;
+missing or unreachable required visibility, or an explicit MILP infeasibility
+result, can certify infeasibility. A time limit without a checked route stays unresolved.
+Reported optimality requires a solver optimum and independent reconstruction of
+the route and objective. The MILP uses one source-to-sink path and increasing
+node ranks to exclude disconnected cycles. SciPy >= 1.9 is included in the
+optional `paper` dependencies; it is not required by the ROS baseline demo.
+
+The new viewpoint pilot is configured in `config/viewpoint_feasibility_pilot.yaml`
+and run by `tools/paper/run_viewpoint_feasibility_pilot.py` from the repository
+root. See `docs/viewpoint_feasibility_pilot_protocol_20260914.md` for its commands,
+frozen design and interpretation limits.
+
 ## Offline result and figure workflow
 
 Run either offline simulator first:

@@ -1,0 +1,27 @@
+{
+  "status": "passed",
+  "checks": "independent state/control-array reconstruction of costs, delta-v, speed, input, endpoints and feasible-edge audit predicates",
+  "graphs": [
+    {
+      "graph": "g01",
+      "edges_checked": 1089,
+      "feasible_edges": 413,
+      "max_terminal_position_error_m": 1.5026760978682746e-13,
+      "max_delta_v_reconstruction_error": 2.6645352591003757e-15
+    },
+    {
+      "graph": "g02",
+      "edges_checked": 1089,
+      "feasible_edges": 439,
+      "max_terminal_position_error_m": 1.4444304490450665e-13,
+      "max_delta_v_reconstruction_error": 1.7763568394002505e-15
+    },
+    {
+      "graph": "g03",
+      "edges_checked": 1089,
+      "feasible_edges": 386,
+      "max_terminal_position_error_m": 1.2985642344529727e-13,
+      "max_delta_v_reconstruction_error": 2.6645352591003757e-15
+    }
+  ]
+}

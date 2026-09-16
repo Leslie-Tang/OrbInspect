@@ -1,0 +1,14 @@
+{
+  "main.tex": "ba2a778788c0ecc33ab1523f01a3ec24c826bf388bdab66da767e5e58879621b",
+  "sections/required_target_study.tex": "ae643c76f8edab9ef731e812a581a9055c1b1bdad1025c020b9617677727432e",
+  "sections/ros_verification_results.tex": "2d6be92af1fdadd714a743e1343002b9c095fc696e91b5b6819ca51a29fa4034",
+  "tables/required_target_aggregate.tex": "e6a86381ee00cc7ab47df7553beca7374483773b2b0d73929980d69da06c61e5",
+  "tables/required_target_case.tex": "a153133d90caf0ad9d0836495bdf2e6b6261795d4f26b2717f45f4d7930001f8",
+  "tables/required_target_depth_rationale.tex": "f05700fcf319daa4e158f06e212b2a0dc11f1868bb0e5b8b5b9a9322f238f2f9",
+  "tables/required_target_depth_table.tex": "1b0b5f87f11365d5e260675f1e4a4d2a3583cea39d19f52f17687ebd98145d1e",
+  "tables/required_target_numbers.tex": "4cd3e17500cc296efa0c48956b5d9f60be509f60f00e62bf865353aa2b8e0ead",
+  "tables/required_target_objective_ablation.tex": "56ac1a2208c3a6afb5181f0e5c15755025ee6a7d3d7b8223bf4ecf5098ccddd5",
+  "tables/required_target_paired.tex": "69ad71c0bd00afa58d09100fdc81f06dfa66d1bd59261941043470fecd252488",
+  "tables/required_target_profile_results.tex": "6376e5312c0f86fc5b9191a65d8239deadf6b38fc6ffb99561b75dcf62988997",
+  "tables/required_target_profiles.tex": "afdde1585a02b708d9c494533c0f7f443ec4a6e9a465d2f8505c3fcd96c3118d"
+}

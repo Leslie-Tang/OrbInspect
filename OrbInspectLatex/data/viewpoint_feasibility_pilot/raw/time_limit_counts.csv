@@ -1,0 +1,13 @@
+split,method,time_limit_reached,feasible_witness_at_limit
+reference,incumbent,0,0
+reference,one_step_adp,0,0
+reference,adaptive_rollout_adp,0,0
+reference,independent_milp,3,3
+nominal,incumbent,0,0
+nominal,one_step_adp,0,0
+nominal,adaptive_rollout_adp,0,0
+nominal,independent_milp,21,21
+shifted,incumbent,0,0
+shifted,one_step_adp,0,0
+shifted,adaptive_rollout_adp,0,0
+shifted,independent_milp,8,8

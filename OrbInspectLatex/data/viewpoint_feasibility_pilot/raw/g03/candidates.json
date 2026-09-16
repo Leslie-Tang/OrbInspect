@@ -1,0 +1,586 @@
+[
+  {
+    "all_visible_ids": [
+      "mesh_00055",
+      "mesh_00060"
+    ],
+    "candidate": {
+      "candidate_id": "g03_t00_000",
+      "position": [
+        29.894770922054857,
+        -6.657522782362557,
+        -44.728142890090496
+      ],
+      "safety_margin": 13.492287428405902,
+      "source_target_id": "mesh_00055"
+    },
+    "coverage_mask": "0x50000000"
+  },
+  {
+    "all_visible_ids": [
+      "mesh_00055"
+    ],
+    "candidate": {
+      "candidate_id": "g03_t00_006",
+      "position": [
+        6.080304119229621,
+        -35.60440084253866,
+        -51.846627769073095
+      ],
+      "safety_margin": 15.67962035856361,
+      "source_target_id": "mesh_00055"
+    },
+    "coverage_mask": "0x10000000"
+  },
+  {
+    "all_visible_ids": [
+      "mesh_00055",
+      "mesh_00068"
+    ],
+    "candidate": {
+      "candidate_id": "g03_t00_035",
+      "position": [
+        27.734216542518656,
+        -26.22137308526376,
+        -62.33068658209926
+      ],
+      "safety_margin": 2.482597418570646,
+      "source_target_id": "mesh_00055"
+    },
+    "coverage_mask": "0x210000000"
+  },
+  {
+    "all_visible_ids": [
+      "mesh_00052",
+      "mesh_00053"
+    ],
+    "candidate": {
+      "candidate_id": "g03_t01_000",
+      "position": [
+        10.157746732273031,
+        48.49484318851632,
+        -48.52978588872357
+      ],
+      "safety_margin": 22.39789567901127,
+      "source_target_id": "mesh_00052"
+    },
+    "coverage_mask": "0xc000000"
+  },
+  {
+    "all_visible_ids": [
+      "mesh_00052",
+      "mesh_00053"
+    ],
+    "candidate": {
+      "candidate_id": "g03_t01_046",
+      "position": [
+        3.086959657253237,
+        69.56297619741594,
+        -70.74004140355454
+      ],
+      "safety_margin": 31.72032809377935,
+      "source_target_id": "mesh_00052"
+    },
+    "coverage_mask": "0xc000000"
+  },
+  {
+    "all_visible_ids": [
+      "mesh_00052",
+      "mesh_00053"
+    ],
+    "candidate": {
+      "candidate_id": "g03_t01_031",
+      "position": [
+        19.855794288432364,
+        44.2121408712753,
+        -72.73483374610666
+      ],
+      "safety_margin": 31.324230259481197,
+      "source_target_id": "mesh_00052"
+    },
+    "coverage_mask": "0xc000000"
+  },
+  {
+    "all_visible_ids": [
+      "mesh_00048",
+      "mesh_00059"
+    ],
+    "candidate": {
+      "candidate_id": "g03_t02_000",
+      "position": [
+        47.75809655111651,
+        -11.348781784370477,
+        -38.86265338481929
+      ],
+      "safety_margin": 26.1780908334861,
+      "source_target_id": "mesh_00059"
+    },
+    "coverage_mask": "0x21000000"
+  },
+  {
+    "all_visible_ids": [
+      "mesh_00048",
+      "mesh_00059"
+    ],
+    "candidate": {
+      "candidate_id": "g03_t02_037",
+      "position": [
+        62.30811869516967,
+        -27.187750789351913,
+        -29.83289451602146
+      ],
+      "safety_margin": 34.23810160275872,
+      "source_target_id": "mesh_00059"
+    },
+    "coverage_mask": "0x21000000"
+  },
+  {
+    "all_visible_ids": [
+      "mesh_00048",
+      "mesh_00049",
+      "mesh_00059",
+      "mesh_00060"
+    ],
+    "candidate": {
+      "candidate_id": "g03_t02_002",
+      "position": [
+        54.679317240172665,
+        -11.676008619175294,
+        -60.534815547742824
+      ],
+      "safety_margin": 31.84363229078395,
+      "source_target_id": "mesh_00059"
+    },
+    "coverage_mask": "0x63000000"
+  },
+  {
+    "all_visible_ids": [
+      "mesh_00007",
+      "mesh_00076"
+    ],
+    "candidate": {
+      "candidate_id": "g03_t03_000",
+      "position": [
+        -29.66679319625561,
+        4.515871040066269,
+        6.288758291301851
+      ],
+      "safety_margin": 1.4814326847812538,
+      "source_target_id": "mesh_00007"
+    },
+    "coverage_mask": "0x8"
+  },
+  {
+    "all_visible_ids": [
+      "mesh_00007"
+    ],
+    "candidate": {
+      "candidate_id": "g03_t03_035",
+      "position": [
+        -31.249892569272376,
+        5.297462420584207,
+        -19.87935698250836
+      ],
+      "safety_margin": 3.6312713901588145,
+      "source_target_id": "mesh_00007"
+    },
+    "coverage_mask": "0x8"
+  },
+  {
+    "all_visible_ids": [
+      "mesh_00007",
+      "mesh_00076"
+    ],
+    "candidate": {
+      "candidate_id": "g03_t03_056",
+      "position": [
+        -37.44014187494989,
+        23.36115626837897,
+        3.4522711143231013
+      ],
+      "safety_margin": 15.030631292739955,
+      "source_target_id": "mesh_00007"
+    },
+    "coverage_mask": "0x8"
+  },
+  {
+    "all_visible_ids": [
+      "mesh_00001"
+    ],
+    "candidate": {
+      "candidate_id": "g03_t04_000",
+      "position": [
+        -7.853600977596763,
+        -26.168126734533455,
+        14.378234783214431
+      ],
+      "safety_margin": 19.558493563579777,
+      "source_target_id": "mesh_00001"
+    },
+    "coverage_mask": "0x1"
+  },
+  {
+    "all_visible_ids": [
+      "mesh_00001",
+      "mesh_00005"
+    ],
+    "candidate": {
+      "candidate_id": "g03_t04_030",
+      "position": [
+        -46.19481499103868,
+        -33.626130981388926,
+        9.653702937991017
+      ],
+      "safety_margin": 32.73102624105107,
+      "source_target_id": "mesh_00001"
+    },
+    "coverage_mask": "0x3"
+  },
+  {
+    "all_visible_ids": [
+      "mesh_00001",
+      "mesh_00005"
+    ],
+    "candidate": {
+      "candidate_id": "g03_t04_054",
+      "position": [
+        -33.39304370224876,
+        -31.502722171249246,
+        33.00140276320788
+      ],
+      "safety_margin": 33.62201354577021,
+      "source_target_id": "mesh_00001"
+    },
+    "coverage_mask": "0x3"
+  },
+  {
+    "all_visible_ids": [
+      "mesh_00068",
+      "mesh_00073",
+      "mesh_00079"
+    ],
+    "candidate": {
+      "candidate_id": "g03_t05_003",
+      "position": [
+        30.660118813442487,
+        -16.19169100619644,
+        -45.89915003226874
+      ],
+      "safety_margin": 9.349466380636873,
+      "source_target_id": "mesh_00079"
+    },
+    "coverage_mask": "0x6200000000"
+  },
+  {
+    "all_visible_ids": [
+      "mesh_00079"
+    ],
+    "candidate": {
+      "candidate_id": "g03_t05_047",
+      "position": [
+        0.5023511510274083,
+        -24.58768422487807,
+        -40.90372043162237
+      ],
+      "safety_margin": 15.362585298075178,
+      "source_target_id": "mesh_00079"
+    },
+    "coverage_mask": "0x4000000000"
+  },
+  {
+    "all_visible_ids": [
+      "mesh_00073",
+      "mesh_00079"
+    ],
+    "candidate": {
+      "candidate_id": "g03_t05_029",
+      "position": [
+        32.497950223425995,
+        -29.227890527821856,
+        -28.271555978634648
+      ],
+      "safety_margin": 4.659646852751452,
+      "source_target_id": "mesh_00079"
+    },
+    "coverage_mask": "0x6000000000"
+  },
+  {
+    "all_visible_ids": [
+      "mesh_00020",
+      "mesh_00033"
+    ],
+    "candidate": {
+      "candidate_id": "g03_t06_000",
+      "position": [
+        18.06197741046918,
+        31.064966576149423,
+        20.93642111461142
+      ],
+      "safety_margin": 9.543345765525807,
+      "source_target_id": "mesh_00033"
+    },
+    "coverage_mask": "0x41000"
+  },
+  {
+    "all_visible_ids": [
+      "mesh_00011",
+      "mesh_00012",
+      "mesh_00020",
+      "mesh_00029",
+      "mesh_00033",
+      "mesh_00036",
+      "mesh_00041"
+    ],
+    "candidate": {
+      "candidate_id": "g03_t06_021",
+      "position": [
+        2.482385352416344,
+        44.840302235797694,
+        47.803282995585874
+      ],
+      "safety_margin": 15.431683130104858,
+      "source_target_id": "mesh_00033"
+    },
+    "coverage_mask": "0x551180"
+  },
+  {
+    "all_visible_ids": [
+      "mesh_00009",
+      "mesh_00012",
+      "mesh_00016",
+      "mesh_00020",
+      "mesh_00024",
+      "mesh_00029",
+      "mesh_00033",
+      "mesh_00036",
+      "mesh_00039"
+    ],
+    "candidate": {
+      "candidate_id": "g03_t06_014",
+      "position": [
+        33.56764521832238,
+        31.998127883367633,
+        49.51054262379304
+      ],
+      "safety_margin": 33.10097792709249,
+      "source_target_id": "mesh_00033"
+    },
+    "coverage_mask": "0x353520"
+  },
+  {
+    "all_visible_ids": [
+      "mesh_00015",
+      "mesh_00016",
+      "mesh_00024",
+      "mesh_00025"
+    ],
+    "candidate": {
+      "candidate_id": "g03_t07_000",
+      "position": [
+        54.15865818714252,
+        -14.632680886846742,
+        47.95624876587579
+      ],
+      "safety_margin": 28.42528006754263,
+      "source_target_id": "mesh_00015"
+    },
+    "coverage_mask": "0x6600"
+  },
+  {
+    "all_visible_ids": [
+      "mesh_00015",
+      "mesh_00016",
+      "mesh_00024",
+      "mesh_00025"
+    ],
+    "candidate": {
+      "candidate_id": "g03_t07_045",
+      "position": [
+        52.31649752415906,
+        -0.30296865640359627,
+        24.098363442138925
+      ],
+      "safety_margin": 33.05529628276043,
+      "source_target_id": "mesh_00015"
+    },
+    "coverage_mask": "0x6600"
+  },
+  {
+    "all_visible_ids": [
+      "mesh_00015",
+      "mesh_00016",
+      "mesh_00024",
+      "mesh_00025"
+    ],
+    "candidate": {
+      "candidate_id": "g03_t07_010",
+      "position": [
+        43.90383290410926,
+        6.653131147286057,
+        52.4891047728703
+      ],
+      "safety_margin": 30.341506875240135,
+      "source_target_id": "mesh_00015"
+    },
+    "coverage_mask": "0x6600"
+  },
+  {
+    "all_visible_ids": [
+      "mesh_00019"
+    ],
+    "candidate": {
+      "candidate_id": "g03_t08_000",
+      "position": [
+        11.986876397661016,
+        43.16346948742894,
+        51.95191532514939
+      ],
+      "safety_margin": 22.422362154145635,
+      "source_target_id": "mesh_00019"
+    },
+    "coverage_mask": "0x800"
+  },
+  {
+    "all_visible_ids": [
+      "mesh_00019",
+      "mesh_00028"
+    ],
+    "candidate": {
+      "candidate_id": "g03_t08_003",
+      "position": [
+        6.831702859778387,
+        70.21197306108732,
+        32.430655840848104
+      ],
+      "safety_margin": 34.2396092653611,
+      "source_target_id": "mesh_00019"
+    },
+    "coverage_mask": "0x8800"
+  },
+  {
+    "all_visible_ids": [
+      "mesh_00019",
+      "mesh_00028",
+      "mesh_00029"
+    ],
+    "candidate": {
+      "candidate_id": "g03_t08_025",
+      "position": [
+        15.93589011601802,
+        41.70355565534627,
+        23.572930082190915
+      ],
+      "safety_margin": 19.678613088533673,
+      "source_target_id": "mesh_00019"
+    },
+    "coverage_mask": "0x18800"
+  },
+  {
+    "all_visible_ids": [
+      "mesh_00060",
+      "mesh_00064",
+      "mesh_00065"
+    ],
+    "candidate": {
+      "candidate_id": "g03_t09_000",
+      "position": [
+        13.862837638915085,
+        44.729410543235375,
+        -23.35972011330059
+      ],
+      "safety_margin": 24.67868952460909,
+      "source_target_id": "mesh_00064"
+    },
+    "coverage_mask": "0x1c0000000"
+  },
+  {
+    "all_visible_ids": [
+      "mesh_00015",
+      "mesh_00016",
+      "mesh_00024",
+      "mesh_00025"
+    ],
+    "candidate": {
+      "candidate_id": "g03_t10_000",
+      "position": [
+        32.98812095676727,
+        19.2637923786845,
+        39.065660498251475
+      ],
+      "safety_margin": 25.593810048341833,
+      "source_target_id": "mesh_00024"
+    },
+    "coverage_mask": "0x6600"
+  },
+  {
+    "all_visible_ids": [
+      "mesh_00020",
+      "mesh_00028",
+      "mesh_00029"
+    ],
+    "candidate": {
+      "candidate_id": "g03_t11_000",
+      "position": [
+        7.034320450232052,
+        49.719360192068244,
+        64.87027058614541
+      ],
+      "safety_margin": 22.031737648844526,
+      "source_target_id": "mesh_00028"
+    },
+    "coverage_mask": "0x19000"
+  },
+  {
+    "all_visible_ids": [
+      "mesh_00045"
+    ],
+    "candidate": {
+      "candidate_id": "g03_t12_000",
+      "position": [
+        -5.385266083303161,
+        7.038447753923582,
+        -48.39275232307722
+      ],
+      "safety_margin": 3.5599365527034905,
+      "source_target_id": "mesh_00045"
+    },
+    "coverage_mask": "0x800000"
+  },
+  {
+    "all_visible_ids": [
+      "mesh_00008",
+      "mesh_00009",
+      "mesh_00039"
+    ],
+    "candidate": {
+      "candidate_id": "g03_t13_000",
+      "position": [
+        41.893019456007636,
+        6.102255077852817,
+        12.070143982921731
+      ],
+      "safety_margin": 20.038860605645095,
+      "source_target_id": "mesh_00009"
+    },
+    "coverage_mask": "0x200030"
+  },
+  {
+    "all_visible_ids": [
+      "mesh_00048",
+      "mesh_00049",
+      "mesh_00060",
+      "mesh_00065"
+    ],
+    "candidate": {
+      "candidate_id": "g03_t14_000",
+      "position": [
+        35.68334113040553,
+        16.264030748575422,
+        -69.83298880376779
+      ],
+      "safety_margin": 30.98256498446417,
+      "source_target_id": "mesh_00049"
+    },
+    "coverage_mask": "0x143000000"
+  }
+]

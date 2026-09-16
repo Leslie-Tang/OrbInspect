@@ -8,6 +8,16 @@ A standard TeX installation is still required.
 
 ## Build or share
 
+The 2026-09-14 revision adds a redundant-viewpoint development pilot and an
+independent feasibility/cost comparison. New Section V-E describes the protocol,
+Section VI-E and Table VIII use the independently certified all-solvable benchmark
+as the primary planner-success denominator: 59 cases, with the four visibility-loss
+cases retained separately as a stress test. Depth-three ADP completes 59/59
+solvable cases, with a 0.96% mean graph-cost gap on 27 proven optima. The manuscript is 15 pages and
+all eight approved figure assets and inclusion sizes are preserved. See
+[the revision record](docs/VIEWPOINT_PILOT_MANUSCRIPT_20260914.md) and
+[the complete local evidence](data/viewpoint_feasibility_pilot/README.md).
+
 The 2026-09-09 ROS revision reports a supplemental twelve-observation execution
 with all nine required targets accepted and 95.86% weighted background coverage
 (39/41 inspectable samples). Two viewpoints were refined after a failed tracking
@@ -20,7 +30,7 @@ See [the twelve-observation report](docs/ROS_TWELVE_OBSERVATIONS_20260909.md) an
 Figure 8 adds a compact RViz overview from a separate recorded repeat of the
 same twelve-observation reference. It pairs the global trajectory with the
 onboard camera from one frame during transfer 9 to 10. Figure 7 and its results remain
-unchanged. The reviewed manuscript is 13 pages, with both figures on page 12.
+unchanged. That revision was 13 pages, with both figures on page 12.
 See [the Figure 8 record](docs/FIGURE_8_RVIZ_OVERVIEW_20260909.md).
 
 Run from this folder:
@@ -36,6 +46,13 @@ graphics and publisher packages (TeX Live or MacTeX). The journal class
 `IEEEtaes.cls` and bibliography style `IEEEtran.bst` are included locally.
 `make check` and packaging use only Python 3's standard library. On Ubuntu,
 review `scripts/install_tex_ubuntu.sh` before using it to install TeX packages.
+
+All manuscript text, sections, tables and numerical macros are now edited in
+the single `main.tex`. The bibliography, journal class, bibliography style and
+original figure PDFs remain supporting files. The earlier modular TeX sources
+are preserved under `archive/modular_tex_20260914/`; they are not compilation
+inputs. If study tables are regenerated, update their corresponding blocks in
+`main.tex` explicitly. See [the consolidation record](docs/SINGLE_TEX_20260914.md).
 
 For Overleaf, upload the source ZIP and select `main.tex` with pdfLaTeX.
 The ZIP excludes historical archives, repository-dependent tools and build
@@ -53,12 +70,10 @@ publisher's bibliography style. It does not appear as a numbered reference.
 
 ```text
 OrbInspectLatex/
-├── main.tex                 Main article and entry point
+├── main.tex                 Complete article, all sections, tables and numerical macros
 ├── references.bib           Bibliography
 ├── IEEEtaes.cls             Local journal class
 ├── IEEEtran.bst             Local bibliography style
-├── sections/               Included manuscript sections
-├── tables/                 Nine included TeX tables/numerical files
 ├── figures/                Eight numbered figure folders and an index
 ├── data/                   Local copies of current evidence for inspection
 ├── scripts/                Standalone checks, packaging and TeX installer
@@ -78,7 +93,7 @@ OrbInspectLatex/
 | 5 | `figures/fig05_ablation_safety/` | Four separate PDF/SVG/PNG panels and shared legend; LaTeX subfigures; data manifest |
 | 6 | `figures/fig06_representative_trajectory/` | Three PDF/SVG/PNG panels |
 | 7 | `figures/fig07_ros_camera_views/` | Compact two-column SVG/PDF/PNG; local snapshot and Python generator |
-| 8 | `figures/fig08_rviz_overview/` | Single-column RViz screenshot pair; PDF/SVG/PNG, local frame and generator |
+| 8 | `figures/fig08_rviz_overview/` | Two independent PDF/SVG/PNG panels with LaTeX subcaptions; local frame and generator |
 
 The manuscript uses the PDFs. For Figures 1 and 2, edit the native `.drawio`
 file and export a matching PDF at its original aspect ratio, retaining its
@@ -107,7 +122,7 @@ and their hashes. The previous small-type exports are preserved in
 
 Figures 4 and 5 retain their original panel dimensions with the shared typography.
 Each uses four independent vector PDFs assembled into a 2-by-2 grid with
-`\subfloat` in `sections/required_target_study.tex`. LaTeX generates the letters
+`\subfloat` in `main.tex`. LaTeX generates the letters
 and subcaptions; individual labels end in `-a`, `-b`, `-c`, and `-d`. Figure 5
 also includes an unnumbered shared-legend strip. Do not add panel letters to
 the image files or replace the subfigures with a composite export.
@@ -162,9 +177,12 @@ Trajectory waypoint numbers now use 5.2 pt Arial Bold so IDs 10--12 fit inside
 the original colored circles. Camera labels, marker sizes and all other figure
 styling remain unchanged. See `docs/FIGURE_7_MARKER_LABELS_20260909.md`.
 
-Figure 8 uses an 85 by 46 mm canvas with the global view on the left and the
-complete displayed camera image on the right. Screenshot colors are unchanged;
-the added typography and camera border follow Figure 7. Both panels are exact
+Figure 8 uses two independent exports, `rviz_execution_overview_a.pdf` and
+`rviz_execution_overview_b.pdf`, assembled by LaTeX `\subfloat` at one-column
+width. LaTeX generates (a) Global trajectory and (b) Onboard camera beneath
+the panels, with separate reference labels ending in `-a` and `-b`.
+The panel files contain no embedded letters or subcaptions. Screenshot colors,
+original image widths, borders and progress annotations are unchanged. Both panels are exact
 rectangular crops of the same video frame. Its optional generator reads only
 the included screenshot and audit snapshots:
 
@@ -172,6 +190,8 @@ the included screenshot and audit snapshots:
 python3 scripts/generate_rviz_overview_figure.py
 ```
 
+The generator also accepts `--output-dir` to stage exports for review.
+See `docs/FIGURE_8_LATEX_SUBFIGURES_20260910.md` for the layout and checks.
 This requires matplotlib, NumPy and Pillow. The selected transfer frame shows
 central-module detail from a different perspective than Figure 7's observation
 stops; its labels report progress at that frame (9/12 observations, 7/9 required

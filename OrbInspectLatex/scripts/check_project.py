@@ -45,6 +45,8 @@ def dependencies() -> set[Path]:
 
 def check() -> dict:
     inputs = dependencies()
+    tex_inputs = {p for p in inputs if p.suffix == '.tex'}
+    assert tex_inputs == {ROOT/'main.tex'}, 'Keep all manuscript sections and tables in main.tex.'
     manifest = json.loads((ROOT/'figures/manifest.json').read_text())
     checked = 0
     for figure in manifest['figures']:
@@ -67,7 +69,8 @@ def check() -> dict:
                         if attr.split('}')[-1] == 'href':
                             assert value.startswith(('data:', '#')), f'External SVG resource: {path.name}'
     assert [f['number'] for f in manifest['figures']] == list(range(1, 9))
-    return {'local_compilation_inputs': len(inputs), 'figure_groups': len(manifest['figures']),
+    return {'local_compilation_inputs': len(inputs), 'manuscript_tex_files': len(tex_inputs),
+            'figure_groups': len(manifest['figures']),
             'verified_figure_files': checked, 'external_project_inputs': 0,
             'native_diagram_images': 'embedded', 'status': 'passed'}
 

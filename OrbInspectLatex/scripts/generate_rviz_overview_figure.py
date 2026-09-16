@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""Build Figure 8 from two exact crops of one recorded RViz video frame."""
+"""Export separate Figure 8 panels; LaTeX owns their labels and subcaptions."""
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 from pathlib import Path
@@ -16,8 +17,10 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'data/rviz_overview/20260909_113140_hybrid12_rviz_video'
 OUTPUT = ROOT / 'figures/fig08_rviz_overview'
 STEM = 'rviz_execution_overview'
-WIDTH_MM, HEIGHT_MM = 85.0, 46.0
-TRIM_BOTTOM_MM = 9.0
+# Match the existing screenshot widths and gap within the 85 mm layout.
+# Removing the embedded headings leaves room for LaTeX subcaptions below.
+WIDTH_MM, HEIGHT_MM = 85.0, 42.3
+PANEL_FRACTIONS = {'a': .426, 'b': .5}
 
 
 def sha(path: Path) -> str:
@@ -25,15 +28,17 @@ def sha(path: Path) -> str:
 
 
 def text_at(fig, x: float, y: float, value: str, *, bold: bool = False):
-    return fig.text(x / WIDTH_MM, (y-TRIM_BOTTOM_MM) / HEIGHT_MM, value, va='top', ha='left',
+    width_mm = fig.get_figwidth() * 25.4
+    return fig.text(x / width_mm, y / HEIGHT_MM, value, va='top', ha='left',
                     fontsize=7.5 if bold else 7.2,
                     fontweight='bold' if bold else 'normal', color='#111820')
 
 
 def image_panel(fig, pixels, *, x, top, width, edge):
+    width_mm = fig.get_figwidth() * 25.4
     height = width * pixels.shape[0] / pixels.shape[1]
-    axis = fig.add_axes((x / WIDTH_MM, (top-height-TRIM_BOTTOM_MM) / HEIGHT_MM,
-                         width / WIDTH_MM, height / HEIGHT_MM))
+    axis = fig.add_axes((x / width_mm, (top-height) / HEIGHT_MM,
+                         width / width_mm, height / HEIGHT_MM))
     # Native pixels are embedded in PDF/SVG. No local or global image adjustment.
     axis.imshow(pixels, interpolation='none', aspect='equal')
     axis.set_xticks([])
@@ -44,7 +49,7 @@ def image_panel(fig, pixels, *, x, top, width, edge):
     return axis
 
 
-def main() -> None:
+def generate(output: Path = OUTPUT) -> None:
     source = json.loads((DATA / 'source_manifest.json').read_text())
     for name, digest in source['files'].items():
         assert sha(DATA/name) == digest, f'Source changed: {name}'
@@ -73,40 +78,50 @@ def main() -> None:
         x0, y0, x1, y1 = source[f'{key}_crop_xyxy']
         panels[key] = frame[y0:y1, x0:x1].copy()
 
-    # Inherit the approved Figure 7 typography and white outer canvas. Retain
-    # the original RViz colors inside the screenshot and the approved border.
+    # Keep the actual DejaVu Sans annotations embedded in the approved export,
+    # the original screenshot colors, and the existing border treatment.
     mpl.rcParams.update({
         'font.family': 'sans-serif',
-        'font.sans-serif': ['Arial', 'Helvetica', 'DejaVu Sans'],
+        'font.sans-serif': ['DejaVu Sans'],
         'font.size': 7.2, 'svg.fonttype': 'none', 'pdf.fonttype': 42,
         'ps.fonttype': 42, 'figure.facecolor': 'white',
         'savefig.facecolor': 'white', 'svg.hashsalt': 'orbinspect-fig8-rviz',
     })
-    fig = plt.figure(figsize=(WIDTH_MM/25.4, HEIGHT_MM/25.4))
-    text_at(fig, 0.5, 54.7, '(a) Global trajectory', bold=True)
-    text_at(fig, 43.0, 54.7, '(b) Onboard camera', bold=True)
-    image_panel(fig, panels['global'], x=0.5, top=50.8, width=35.2, edge='#8A939C')
-    image_panel(fig, panels['camera'], x=43.0, top=50.8, width=41.5, edge='#7E4A9E')
-    text_at(fig, 43.0, 19.8, f"Transfer {state['from_observation']} to {state['to_observation']}", bold=True)
-    text_at(fig, 43.0, 16.2, f"{state['accepted_observations']}/12 observations; {state['accepted_required_count']}/9 required")
-    text_at(fig, 43.0, 12.6, f"Weighted coverage: {100*state['weighted_coverage']:.2f}%")
-    fig.canvas.draw()
-    for label in fig.texts:
-        box = label.get_window_extent(fig.canvas.get_renderer())
-        assert box.x0 >= 0 and box.x1 <= fig.bbox.width, label.get_text()
-        assert box.y0 >= 0 and box.y1 <= fig.bbox.height, label.get_text()
-    OUTPUT.mkdir(parents=True, exist_ok=True)
-    fig.savefig(OUTPUT / f'{STEM}.pdf', dpi=600, facecolor='white')
-    fig.savefig(OUTPUT / f'{STEM}.svg', dpi=600, facecolor='white')
-    fig.savefig(OUTPUT / f'{STEM}.png', dpi=600, facecolor='white')
-    plt.close(fig)
+    output.mkdir(parents=True, exist_ok=True)
+    files = {}
+    for suffix, key, width, edge in (('a', 'global', 35.2, '#8A939C'),
+                                     ('b', 'camera', 41.5, '#7E4A9E')):
+        fig = plt.figure(figsize=(WIDTH_MM*PANEL_FRACTIONS[suffix]/25.4, HEIGHT_MM/25.4))
+        axis = image_panel(fig, panels[key], x=0.5, top=41.8, width=width, edge=edge)
+        np.testing.assert_array_equal(np.asarray(axis.images[0].get_array()), panels[key])
+        if suffix == 'b':
+            text_at(fig, 0.5, 10.8, f"Transfer {state['from_observation']} to {state['to_observation']}", bold=True)
+            text_at(fig, 0.5, 7.2, f"{state['accepted_observations']}/12 observations; {state['accepted_required_count']}/9 required")
+            text_at(fig, 0.5, 3.6, f"Weighted coverage: {100*state['weighted_coverage']:.2f}%")
+        fig.canvas.draw()
+        for label in fig.texts:
+            box = label.get_window_extent(fig.canvas.get_renderer())
+            assert box.x0 >= 0 and box.x1 <= fig.bbox.width, label.get_text()
+            assert box.y0 >= 0 and box.y1 <= fig.bbox.height, label.get_text()
+        fig.savefig(output / f'{STEM}_{suffix}.pdf', dpi=600, facecolor='white')
+        fig.savefig(output / f'{STEM}_{suffix}.svg', dpi=600, facecolor='white')
+        fig.savefig(output / f'{STEM}_{suffix}.png', dpi=600, facecolor='white')
+        plt.close(fig)
+        for ext in ('pdf', 'svg', 'png'):
+            name = f'{STEM}_{suffix}.{ext}'
+            files[name] = sha(output/name)
     manifest = {
         'figure_number': 8, 'width_mm': WIDTH_MM, 'height_mm': HEIGHT_MM,
+        'layout': 'Two independent panels assembled with LaTeX subfloat',
+        'panel_labels': 'LaTeX-generated; no panel labels or subcaptions in image exports',
+        'panel_width_mm': {key: WIDTH_MM*value for key, value in PANEL_FRACTIONS.items()},
+        'latex_column_fractions': PANEL_FRACTIONS,
+        'generator_sha256': sha(Path(__file__)),
         'source_manifest': str((DATA/'source_manifest.json').relative_to(ROOT)),
         'source_manifest_sha256': sha(DATA/'source_manifest.json'),
         'conclusion': 'The recorded repeat execution presents the global trajectory and a distinct central-module camera view together during transfer from observation 9 to 10.',
         'archetype': 'image plate + progress counts',
-        'reuse': 'Style-only inheritance from Figure 7; screenshot pixels unchanged.',
+        'reuse': 'Exact reuse of approved Figure 8 crops, borders and progress annotations; screenshot pixels unchanged.',
         'independent_execution': source['repeat_execution_id'],
         'selected_video_frame_time_s': source['video_frame_time_s'],
         'frame_state': state,
@@ -119,11 +134,13 @@ def main() -> None:
         'image_adjustments': 'Exact rectangular crops only; original brightness, contrast, colors, geometry and camera field retained.',
         'replicate_unit': 'One illustrative repeat execution; no uncertainty estimate or aggregate inference.',
         'minimum_label_font_pt': 7.2,
-        'files': {f'{STEM}.{ext}': sha(OUTPUT/f'{STEM}.{ext}') for ext in ('pdf', 'svg', 'png')},
+        'files': files,
     }
-    (OUTPUT/'overview_manifest.json').write_text(json.dumps(manifest, indent=2)+'\n')
-    print(json.dumps({'figure': 8, 'dimensions_mm': [WIDTH_MM, HEIGHT_MM], 'output': str(OUTPUT)}, indent=2))
+    (output/'overview_manifest.json').write_text(json.dumps(manifest, indent=2)+'\n')
+    print(json.dumps({'figure': 8, 'separate_panels': 2, 'output': str(output)}, indent=2))
 
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output-dir', type=Path, default=OUTPUT)
+    generate(parser.parse_args().output_dir)

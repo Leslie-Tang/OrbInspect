@@ -1,0 +1,50 @@
+schema_version: 1
+study_name: redundant_viewpoint_feasibility_pilot
+source_bundle: OrbInspectLatex/data/confirmation
+graph_seeds: [20260914001, 20260914002, 20260914003]
+scenario_seed_base: 20260914000000
+views_per_required_target: 3
+connector_count: 6
+candidate_attempts_per_target: 64
+standoff_range_m: [26.0, 42.0]
+normal_cone_angle_deg: 35.0
+minimum_view_separation_m: 4.0
+nominal_scenarios_per_graph: 10
+shifted_scenarios_per_graph: 10
+nominal_dropout_range: [0.0, 0.10]
+shifted_dropout_range: [0.15, 0.25]
+max_steps: 14
+action_cost: 0.05
+solver_time_limit_s: 15.0
+planner_time_limit_s: 15.0
+methods: [incumbent, one_step_adp, adaptive_rollout_adp, independent_milp]
+adaptive_rollout_depth: 3
+branch_width: 8
+candidate_pool_width: 18
+lookahead_depth: 2
+local_improvement_passes: 3
+cost_scale: 50.0
+terminal_penalty: 500.0
+evaluation_failure_penalty: 500.0
+evaluation_missing_fraction_penalty: 500.0
+transfer_duration_s: 90.0
+bootstrap_seed: 20260914009999
+bootstrap_replicates: 10000
+scale_gate:
+  minimum_views_per_required_target: 3
+  minimum_feasible_fraction_nominal: 0.8
+  minimum_feasible_fraction_shifted: 0.6
+  maximum_unresolved_fraction: 0.1
+  maximum_graph_build_seconds: 1200.0
+notes: >-
+  This is a development pilot, not a replacement for the frozen 80-case study.
+  Same NASA geometry, nine prescribed IDs, initial state, dynamics and safety gates.
+  New candidate positions and graph-specific HCW transfers are generated before
+  scenario evaluation. Every generated dropout case is retained. A missing-view
+  or unreachable-target proof establishes infeasibility; a checked independent
+  MILP route establishes feasibility. Solver limits without a witness remain
+  unresolved. A common 15-second per-method budget includes model construction
+  or ADP initialization but excludes shared geometry and graph construction.
+  Each method is evaluated from scratch; ADP is not initialized with MILP routes.
+  Scaling depends on library redundancy, independently certified feasibility and
+  computational practicality, never on whether ADP outperforms a comparator.

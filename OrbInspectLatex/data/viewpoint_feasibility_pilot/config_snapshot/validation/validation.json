@@ -1,0 +1,28 @@
+{
+  "recorded_at_utc": "2026-09-14T07:57:27.635069+00:00",
+  "python_tests": {
+    "command": "PYTHONPATH=src/orbinspect_guidance:src/orbinspect_dynamics:src/orbinspect_perception:src/orbinspect_safety python3 -m pytest -q src/orbinspect_guidance/test/test_required_route_milp.py src/orbinspect_guidance/test/test_advanced_safe_planner.py src/orbinspect_guidance/test/test_required_target_study.py src/orbinspect_guidance/test/test_mesh_spatial_index.py",
+    "exit_code": 0,
+    "passed": 57,
+    "seconds": 0.2,
+    "output_origin": "Saved from the observed completed tool result; not a repeated test run."
+  },
+  "ros_build": {
+    "command": "source /opt/ros/jazzy/setup.bash && colcon build --symlink-install --base-paths src",
+    "exit_code": 0,
+    "packages_finished": 12,
+    "reason_for_base_paths": "Archived supplementary source bundles are duplicate packages under unrestricted discovery."
+  },
+  "manuscript_asset_check": {
+    "command": "make -C OrbInspectLatex check",
+    "exit_code": 0,
+    "local_compilation_inputs": 24,
+    "manuscript_tex_files": 1,
+    "figure_groups": 8,
+    "verified_figure_files": 68
+  },
+  "diff_check_note": "Whole-workspace diff check flags only whitespace in the pre-existing generated OrbInspectLatex/main.log; the pilot leaves that file untouched.",
+  "installed_solver_import": "passed",
+  "package_discovery_count": 12,
+  "pilot_source_diff_check": "passed"
+}

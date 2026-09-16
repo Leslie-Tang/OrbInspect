@@ -10,6 +10,20 @@ None of these tools is needed to compile or share the LaTeX paper. Use
 
 ## Current workflows
 
+- Independent viewpoint/feasibility pilot: `run_viewpoint_feasibility_pilot.py`
+  generates three separately sampled 33-view graphs around the same nine required
+  targets, records full-mesh HCW edge audits, freezes every dropout case, and
+  obtains independent MILP feasibility/optimality certificates before benchmarking
+  ADP. Run its `prepare`, `certify`, `benchmark`, and `summarize` stages in order,
+  always against a new timestamped result directory, then run
+  `audit_viewpoint_feasibility_pilot.py <result-directory>` to reconstruct saved
+  routes and produce the final review with paired comparisons and limit counts.
+  Run `materialize_solvable_benchmark.py <result-directory>` after the audit to
+  create the independently certified all-solvable success-rate denominator and
+  the separate visibility-loss stress-test inventory.
+  It exports the six standard
+  CSVs for completed offline routes and does not edit manuscript figures.
+  See `docs/viewpoint_feasibility_pilot_protocol_20260914.md`.
 - Required-target ROS evidence: after the existing full-mesh audit, run
   `python3 tools/paper/audit_required_target_ros.py <execution-directory>` in
   the sourced Jazzy environment. It checks both event topics against the frozen

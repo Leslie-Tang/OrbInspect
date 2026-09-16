@@ -1,0 +1,31 @@
+{
+  "classification": "Independent MILP checked witness, impossibility certificate, or unresolved.",
+  "environment": {
+    "numpy": "1.26.4",
+    "platform": "Linux-7.0.0-31-generic-x86_64-with-glibc2.39",
+    "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "scipy": "1.11.4"
+  },
+  "frozen_at_utc": "2026-09-14T07:35:11.627305+00:00",
+  "input_hashes": {
+    "config_snapshot/base_experiment_config.json": "fac496ad6874c03e8c35be6a91e7b63aed3c7fa099d2a8321ae9ba59a57e1cb4",
+    "config_snapshot/pilot.yaml": "fe9c35d2e6bbbf33e90944cc26118aee1e4d0d36aa48c664ccb2ee49df1cf629",
+    "config_snapshot/required_targets.json": "6388780d64571b7f970f9ba69c07a03db1427236db11122daf65bfaf6f49dcd2",
+    "config_snapshot/target_positions.csv": "73810927ffd53d7eff5a0f3fd46ac4cb6776a9482d47c1d1c05c833e3e4c006a"
+  },
+  "scope": "Development pilot. Shared ISS geometry; independently sampled viewpoint graphs.",
+  "selection": "Geometry and frozen seeds only; no ADP outcomes used to select graphs or scenarios.",
+  "source_hashes": {
+    "src/orbinspect_dynamics/orbinspect_dynamics/hcw_dynamics.py": "d68f8164e7a5ce5991298a063fb7e96fd3119397e461660fbf43160f0ef4bcc5",
+    "src/orbinspect_guidance/orbinspect_guidance/advanced_safe_planner.py": "15e9d3cbb78ddcef69105c34badbb05e73a559ad7683e544de72ca598dc806f2",
+    "src/orbinspect_guidance/orbinspect_guidance/mesh_spatial_index.py": "4a858e3c2723a339a2cf707dab2821be4e5fece3a6a48eb60a5bdd65aedc3d50",
+    "src/orbinspect_guidance/orbinspect_guidance/offline_adp_superiority_study.py": "1db2aba801c3f57153367d3bf98f9ea7c2f3db06bfc46a118ea8f445ef111601",
+    "src/orbinspect_guidance/orbinspect_guidance/offline_coverage_planner.py": "d83dcfc501c82c2967f037a2dd0e6c9ed96e61b48df56e2dab469463df295330",
+    "src/orbinspect_guidance/orbinspect_guidance/offline_planning_experiment.py": "f273ecebd41ee81d01215bae18f49ac64187a092c354a759dddd72b5fd698ef9",
+    "src/orbinspect_guidance/orbinspect_guidance/required_route_milp.py": "193f5e37ba6063d0149c0448c998d9c112e3ebc3bd66a511440ded0fc7b3f64c",
+    "src/orbinspect_perception/orbinspect_perception/visibility_checker.py": "d66e979895042b5d22b5a02257862218b915cbd8753964cef03a64eeda0e9f6c",
+    "tools/paper/run_required_target_confirmation.py": "54433d050bb01b23e89e9ee5e38e72f69a02f745d39d1a7f734b80a5c9fec792",
+    "tools/paper/run_required_target_study.py": "9f4152764dd781417b9721f74620c9fdd643a17c7fc59dd949993907ab42f9c0",
+    "tools/paper/run_viewpoint_feasibility_pilot.py": "ee74c6839e997ffb60781826c2068ab74b686ebd84cc654e833ba7b8c0767717"
+  }
+}

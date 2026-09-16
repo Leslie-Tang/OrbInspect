@@ -22,7 +22,13 @@
     }
   ],
   "all_other_native_svg_objects_identical": true,
-  "geometry_fonts_colors_and_equations_unchanged": true,
+  "geometry_fonts_colors_and_non_notation_equations_unchanged": true,
+  "notation_alignment": {
+    "camera_target_vectors": "\\mathbf{p}_i, \\mathbf{n}_i",
+    "camera_boresight": "\\mathbf{b}(\\bar{q}_j)",
+    "stored_edge": "\\mathsf{a}_{ij}",
+    "candidate_nodes": "c_i"
+  },
   "native_export_heading_text_equal": true,
   "visual_review": "passed: page 3 Roman headings and matching caption are legible without overlap or clipping",
   "manuscript_changed_pages": [3],

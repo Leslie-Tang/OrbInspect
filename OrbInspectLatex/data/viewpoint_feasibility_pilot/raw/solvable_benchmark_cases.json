@@ -1,0 +1,533 @@
+[
+  {
+    "graph_id": "g01",
+    "independent_optimal": false,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g01_reference_000",
+    "seed": 20260914000000,
+    "split": "reference"
+  },
+  {
+    "graph_id": "g01",
+    "independent_optimal": false,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g01_nominal_000",
+    "seed": 20260914010000,
+    "split": "nominal"
+  },
+  {
+    "graph_id": "g01",
+    "independent_optimal": false,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g01_nominal_001",
+    "seed": 20260914010001,
+    "split": "nominal"
+  },
+  {
+    "graph_id": "g01",
+    "independent_optimal": false,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g01_nominal_002",
+    "seed": 20260914010002,
+    "split": "nominal"
+  },
+  {
+    "graph_id": "g01",
+    "independent_optimal": false,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g01_nominal_003",
+    "seed": 20260914010003,
+    "split": "nominal"
+  },
+  {
+    "graph_id": "g01",
+    "independent_optimal": false,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g01_nominal_004",
+    "seed": 20260914010004,
+    "split": "nominal"
+  },
+  {
+    "graph_id": "g01",
+    "independent_optimal": false,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g01_nominal_005",
+    "seed": 20260914010005,
+    "split": "nominal"
+  },
+  {
+    "graph_id": "g01",
+    "independent_optimal": false,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g01_nominal_006",
+    "seed": 20260914010006,
+    "split": "nominal"
+  },
+  {
+    "graph_id": "g01",
+    "independent_optimal": false,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g01_nominal_007",
+    "seed": 20260914010007,
+    "split": "nominal"
+  },
+  {
+    "graph_id": "g01",
+    "independent_optimal": false,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g01_nominal_008",
+    "seed": 20260914010008,
+    "split": "nominal"
+  },
+  {
+    "graph_id": "g01",
+    "independent_optimal": false,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g01_nominal_009",
+    "seed": 20260914010009,
+    "split": "nominal"
+  },
+  {
+    "graph_id": "g01",
+    "independent_optimal": false,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g01_shifted_000",
+    "seed": 20260914020000,
+    "split": "shifted"
+  },
+  {
+    "graph_id": "g01",
+    "independent_optimal": true,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g01_shifted_001",
+    "seed": 20260914020001,
+    "split": "shifted"
+  },
+  {
+    "graph_id": "g01",
+    "independent_optimal": false,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g01_shifted_002",
+    "seed": 20260914020002,
+    "split": "shifted"
+  },
+  {
+    "graph_id": "g01",
+    "independent_optimal": true,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g01_shifted_003",
+    "seed": 20260914020003,
+    "split": "shifted"
+  },
+  {
+    "graph_id": "g01",
+    "independent_optimal": true,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g01_shifted_004",
+    "seed": 20260914020004,
+    "split": "shifted"
+  },
+  {
+    "graph_id": "g01",
+    "independent_optimal": true,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g01_shifted_005",
+    "seed": 20260914020005,
+    "split": "shifted"
+  },
+  {
+    "graph_id": "g01",
+    "independent_optimal": false,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g01_shifted_006",
+    "seed": 20260914020006,
+    "split": "shifted"
+  },
+  {
+    "graph_id": "g01",
+    "independent_optimal": true,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g01_shifted_007",
+    "seed": 20260914020007,
+    "split": "shifted"
+  },
+  {
+    "graph_id": "g01",
+    "independent_optimal": true,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g01_shifted_008",
+    "seed": 20260914020008,
+    "split": "shifted"
+  },
+  {
+    "graph_id": "g01",
+    "independent_optimal": true,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g01_shifted_009",
+    "seed": 20260914020009,
+    "split": "shifted"
+  },
+  {
+    "graph_id": "g02",
+    "independent_optimal": false,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g02_reference_000",
+    "seed": 20260914100000,
+    "split": "reference"
+  },
+  {
+    "graph_id": "g02",
+    "independent_optimal": false,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g02_nominal_000",
+    "seed": 20260914110000,
+    "split": "nominal"
+  },
+  {
+    "graph_id": "g02",
+    "independent_optimal": false,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g02_nominal_001",
+    "seed": 20260914110001,
+    "split": "nominal"
+  },
+  {
+    "graph_id": "g02",
+    "independent_optimal": true,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g02_nominal_002",
+    "seed": 20260914110002,
+    "split": "nominal"
+  },
+  {
+    "graph_id": "g02",
+    "independent_optimal": false,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g02_nominal_003",
+    "seed": 20260914110003,
+    "split": "nominal"
+  },
+  {
+    "graph_id": "g02",
+    "independent_optimal": false,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g02_nominal_004",
+    "seed": 20260914110004,
+    "split": "nominal"
+  },
+  {
+    "graph_id": "g02",
+    "independent_optimal": false,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g02_nominal_005",
+    "seed": 20260914110005,
+    "split": "nominal"
+  },
+  {
+    "graph_id": "g02",
+    "independent_optimal": true,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g02_nominal_006",
+    "seed": 20260914110006,
+    "split": "nominal"
+  },
+  {
+    "graph_id": "g02",
+    "independent_optimal": false,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g02_nominal_007",
+    "seed": 20260914110007,
+    "split": "nominal"
+  },
+  {
+    "graph_id": "g02",
+    "independent_optimal": false,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g02_nominal_008",
+    "seed": 20260914110008,
+    "split": "nominal"
+  },
+  {
+    "graph_id": "g02",
+    "independent_optimal": false,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g02_nominal_009",
+    "seed": 20260914110009,
+    "split": "nominal"
+  },
+  {
+    "graph_id": "g02",
+    "independent_optimal": false,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g02_shifted_001",
+    "seed": 20260914120001,
+    "split": "shifted"
+  },
+  {
+    "graph_id": "g02",
+    "independent_optimal": true,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g02_shifted_002",
+    "seed": 20260914120002,
+    "split": "shifted"
+  },
+  {
+    "graph_id": "g02",
+    "independent_optimal": true,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g02_shifted_003",
+    "seed": 20260914120003,
+    "split": "shifted"
+  },
+  {
+    "graph_id": "g02",
+    "independent_optimal": false,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g02_shifted_005",
+    "seed": 20260914120005,
+    "split": "shifted"
+  },
+  {
+    "graph_id": "g02",
+    "independent_optimal": true,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g02_shifted_006",
+    "seed": 20260914120006,
+    "split": "shifted"
+  },
+  {
+    "graph_id": "g02",
+    "independent_optimal": false,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g02_shifted_007",
+    "seed": 20260914120007,
+    "split": "shifted"
+  },
+  {
+    "graph_id": "g02",
+    "independent_optimal": true,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g02_shifted_008",
+    "seed": 20260914120008,
+    "split": "shifted"
+  },
+  {
+    "graph_id": "g02",
+    "independent_optimal": false,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g02_shifted_009",
+    "seed": 20260914120009,
+    "split": "shifted"
+  },
+  {
+    "graph_id": "g03",
+    "independent_optimal": false,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g03_reference_000",
+    "seed": 20260914200000,
+    "split": "reference"
+  },
+  {
+    "graph_id": "g03",
+    "independent_optimal": true,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g03_nominal_000",
+    "seed": 20260914210000,
+    "split": "nominal"
+  },
+  {
+    "graph_id": "g03",
+    "independent_optimal": true,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g03_nominal_001",
+    "seed": 20260914210001,
+    "split": "nominal"
+  },
+  {
+    "graph_id": "g03",
+    "independent_optimal": true,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g03_nominal_002",
+    "seed": 20260914210002,
+    "split": "nominal"
+  },
+  {
+    "graph_id": "g03",
+    "independent_optimal": true,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g03_nominal_003",
+    "seed": 20260914210003,
+    "split": "nominal"
+  },
+  {
+    "graph_id": "g03",
+    "independent_optimal": false,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g03_nominal_004",
+    "seed": 20260914210004,
+    "split": "nominal"
+  },
+  {
+    "graph_id": "g03",
+    "independent_optimal": true,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g03_nominal_005",
+    "seed": 20260914210005,
+    "split": "nominal"
+  },
+  {
+    "graph_id": "g03",
+    "independent_optimal": true,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g03_nominal_006",
+    "seed": 20260914210006,
+    "split": "nominal"
+  },
+  {
+    "graph_id": "g03",
+    "independent_optimal": false,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g03_nominal_007",
+    "seed": 20260914210007,
+    "split": "nominal"
+  },
+  {
+    "graph_id": "g03",
+    "independent_optimal": true,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g03_nominal_008",
+    "seed": 20260914210008,
+    "split": "nominal"
+  },
+  {
+    "graph_id": "g03",
+    "independent_optimal": false,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g03_nominal_009",
+    "seed": 20260914210009,
+    "split": "nominal"
+  },
+  {
+    "graph_id": "g03",
+    "independent_optimal": true,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g03_shifted_000",
+    "seed": 20260914220000,
+    "split": "shifted"
+  },
+  {
+    "graph_id": "g03",
+    "independent_optimal": true,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g03_shifted_001",
+    "seed": 20260914220001,
+    "split": "shifted"
+  },
+  {
+    "graph_id": "g03",
+    "independent_optimal": true,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g03_shifted_002",
+    "seed": 20260914220002,
+    "split": "shifted"
+  },
+  {
+    "graph_id": "g03",
+    "independent_optimal": true,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g03_shifted_003",
+    "seed": 20260914220003,
+    "split": "shifted"
+  },
+  {
+    "graph_id": "g03",
+    "independent_optimal": true,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g03_shifted_004",
+    "seed": 20260914220004,
+    "split": "shifted"
+  },
+  {
+    "graph_id": "g03",
+    "independent_optimal": true,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g03_shifted_005",
+    "seed": 20260914220005,
+    "split": "shifted"
+  },
+  {
+    "graph_id": "g03",
+    "independent_optimal": false,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g03_shifted_008",
+    "seed": 20260914220008,
+    "split": "shifted"
+  },
+  {
+    "graph_id": "g03",
+    "independent_optimal": true,
+    "independent_reason": "checked_route_witness",
+    "independent_status": "feasible",
+    "scenario_id": "g03_shifted_009",
+    "seed": 20260914220009,
+    "split": "shifted"
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "graph_id": "g02",
+    "independent_optimal": false,
+    "independent_reason": "missing_required_visibility",
+    "independent_status": "infeasible",
+    "scenario_id": "g02_shifted_000",
+    "seed": 20260914120000,
+    "split": "shifted"
+  },
+  {
+    "graph_id": "g02",
+    "independent_optimal": false,
+    "independent_reason": "missing_required_visibility",
+    "independent_status": "infeasible",
+    "scenario_id": "g02_shifted_004",
+    "seed": 20260914120004,
+    "split": "shifted"
+  },
+  {
+    "graph_id": "g03",
+    "independent_optimal": false,
+    "independent_reason": "missing_required_visibility",
+    "independent_status": "infeasible",
+    "scenario_id": "g03_shifted_006",
+    "seed": 20260914220006,
+    "split": "shifted"
+  },
+  {
+    "graph_id": "g03",
+    "independent_optimal": false,
+    "independent_reason": "missing_required_visibility",
+    "independent_status": "infeasible",
+    "scenario_id": "g03_shifted_007",
+    "seed": 20260914220007,
+    "split": "shifted"
+  }
+]

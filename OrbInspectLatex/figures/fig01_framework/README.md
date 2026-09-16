@@ -2,10 +2,13 @@
 
 `viability_preserving_rollout_adp.drawio` is the current native editable source.
 The PDF, SVG and PNG are the approved matching exports; the manuscript uses
-the PDF. All four files are unchanged by the folder organization.
+the PDF. The 2026-09-14 export updates the workflow-arrow routing while
+preserving the five-panel content, labels and aspect ratio.
 
-The five panels use Roman labels I--V. The station illustration derives from
-the NASA ISS mesh, and the independent camera image is Alexander Lucke's
+The five panels use Roman labels I--V. The notation follows the manuscript:
+$\mathbf p_i$, $\mathbf n_i$, $\mathbf b(\bar q_j)$, stored edge
+$\mathsf a_{ij}$, and candidate nodes $c_i$. The station illustration derives
+from the NASA ISS mesh, and the independent camera image is Alexander Lucke's
 photograph under CC BY-SA 3.0, as credited in the manuscript caption.
 `assets/camera_alexander_lucke.jpg` is included, while images required to
 display the diagram are embedded in the draw.io and SVG files.

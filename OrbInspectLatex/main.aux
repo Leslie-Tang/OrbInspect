@@ -26,141 +26,159 @@
 \citation{deka2023astrodynamics}
 \citation{apodaca2025trajectory}
 \citation{zhou2026tomographic}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Viability-preserving rollout ADP for orbital inspection. I. ISS mesh and required targets $\mathcal  K$ (orange rings). II. Camera-valid targets $G_j$ from range, FOV, incidence $\theta \leq \theta _{\max }$, and LOS checks. III. HCW transfer, motion audits, and directed SOOA construction; C70 and C68 are archived candidate IDs. IV. Depth-$d$ Bellman lookahead with complete greedy base-policy tails. At each leaf, $\DOTSB \sum@ \slimits@ \ell $ denotes the full tail cost; $+\infty $ denotes no certified completion within the remaining budget. V. First-action selection and planning-state updates toward the required goal $\Gamma _{\mathcal  K}(m)=1$. The tree is schematic; the 9/9 route is an archived offline plan. ISS geometry: \href  {https://science.nasa.gov/resource/international-space-station-3d-model/}{NASA}. Camera photograph: \href  {https://commons.wikimedia.org/wiki/File:SVCam-ECO_Series_black_with_Tubus.JPG}{A.~Lucke}, \href  {https://creativecommons.org/licenses/by-sa/3.0/}{CC BY-SA 3.0} (illustrative hardware).}}{2}{figure.3}\protected@file@percent }
-\newlabel{fig:sooa-framework}{{1}{2}{Viability-preserving rollout ADP for orbital inspection. I. ISS mesh and required targets $\mathcal K$ (orange rings). II. Camera-valid targets $G_j$ from range, FOV, incidence $\theta \leq \theta _{\max }$, and LOS checks. III. HCW transfer, motion audits, and directed SOOA construction; C70 and C68 are archived candidate IDs. IV. Depth-$d$ Bellman lookahead with complete greedy base-policy tails. At each leaf, $\sum \ell $ denotes the full tail cost; $+\infty $ denotes no certified completion within the remaining budget. V. First-action selection and planning-state updates toward the required goal $\Gamma _{\mathcal K}(m)=1$. The tree is schematic; the 9/9 route is an archived offline plan. ISS geometry: \href {https://science.nasa.gov/resource/international-space-station-3d-model/}{NASA}. Camera photograph: \href {https://commons.wikimedia.org/wiki/File:SVCam-ECO_Series_black_with_Tubus.JPG}{A.~Lucke}, \href {https://creativecommons.org/licenses/by-sa/3.0/}{CC BY-SA 3.0} (illustrative hardware)}{figure.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {II}Related Work}{2}{section.8}\protected@file@percent }
-\newlabel{sec:related}{{II}{2}{}{section.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Viability-preserving rollout ADP for orbital inspection. I. International Space Station (ISS) mesh and required targets $\mathcal  K$. II. Camera-valid targets $G_j$ from range, field of view (FOV), incidence $\theta \leq \theta _{\max }$, and line of sight (LOS) checks. III. HCW transfer, motion audits, and directed SOOA construction; C70 and C68 are archived candidate IDs. IV. Depth-$d$ Bellman lookahead with complete greedy base-policy tails. At each leaf, $\DOTSB \sum@ \slimits@ \ell $ denotes the full tail cost; $+\infty $ denotes no certified completion within the remaining budget. V. First-action selection and planning-state updates toward completion of all required targets. The tree is schematic; the 9/9 route is an archived offline plan. ISS geometry: National Aeronautics and Space Administration (NASA), \href  {https://science.nasa.gov/resource/international-space-station-3d-model/}{NASA}.}}{2}{figure.3}\protected@file@percent }
+\newlabel{fig:sooa-framework}{{1}{2}{Viability-preserving rollout ADP for orbital inspection. I. International Space Station (ISS) mesh and required targets $\mathcal K$. II. Camera-valid targets $G_j$ from range, field of view (FOV), incidence $\theta \leq \theta _{\max }$, and line of sight (LOS) checks. III. HCW transfer, motion audits, and directed SOOA construction; C70 and C68 are archived candidate IDs. IV. Depth-$d$ Bellman lookahead with complete greedy base-policy tails. At each leaf, $\sum \ell $ denotes the full tail cost; $+\infty $ denotes no certified completion within the remaining budget. V. First-action selection and planning-state updates toward completion of all required targets. The tree is schematic; the 9/9 route is an archived offline plan. ISS geometry: National Aeronautics and Space Administration (NASA), \href {https://science.nasa.gov/resource/international-space-station-3d-model/}{NASA}}{figure.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {II}Related Work}{2}{section.7}\protected@file@percent }
+\newlabel{sec:related}{{II}{2}{}{section.7}{}}
 \citation{bertsekas1996neuro,bertsekas2020rollout}
 \citation{bertsekas1997combinatorial}
 \citation{bertsekas2005survey}
 \citation{bertsekas2017iterations}
 \citation{kiumarsi2018survey}
 \citation{hu2021learning}
+\citation{luo2025attitude}
 \citation{tian2024proximity}
+\citation{tang2025reachavoid}
 \citation{vanwijk2024inspection}
 \citation{achiam2017cpo}
 \citation{alshiekh2018shielding}
 \citation{ames2017barrier}
 \citation{wabersich2023predictive}
-\@writefile{toc}{\contentsline {section}{\numberline {III}System and Observation Model}{3}{section.9}\protected@file@percent }
-\newlabel{sec:system}{{III}{3}{}{section.9}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {A}Relative Dynamics}{3}{subsection.12}\protected@file@percent }
-\newlabel{eq:hcw-continuous}{{1}{3}{}{equation.13}{}}
-\newlabel{eq:hcw-discrete}{{2}{3}{}{equation.14}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {B}Visibility, Prescribed Observation, and Coverage}{3}{subsection.15}\protected@file@percent }
-\newlabel{eq:visibility}{{3}{3}{}{equation.16}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Modeling assumptions and the boundary of the reported evidence}}{4}{table.11}\protected@file@percent }
-\newlabel{tab:assumptions}{{I}{4}{Modeling assumptions and the boundary of the reported evidence}{table.11}{}}
-\newlabel{eq:coverage}{{4}{4}{}{equation.17}{}}
-\newlabel{eq:inspectable-coverage}{{5}{4}{}{equation.18}{}}
-\newlabel{eq:required-goal}{{6}{4}{}{equation.19}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {C}Dynamic Feasibility and SOOAs}{4}{subsection.20}\protected@file@percent }
-\newlabel{eq:limits}{{7}{4}{}{equation.21}{}}
-\newlabel{eq:edge-cost}{{8}{4}{}{equation.22}{}}
-\newlabel{eq:sooa}{{9}{4}{}{equation.23}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {III}System and Observation Model}{3}{section.8}\protected@file@percent }
+\newlabel{sec:system}{{III}{3}{}{section.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A}Relative Dynamics}{3}{subsection.11}\protected@file@percent }
+\newlabel{eq:hcw-continuous}{{1}{3}{}{equation.12}{}}
+\newlabel{eq:hcw-discrete}{{2}{3}{}{equation.13}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B}Visibility, Prescribed Observation, and Coverage}{3}{subsection.14}\protected@file@percent }
+\newlabel{eq:visibility}{{3}{3}{}{equation.15}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Modeling assumptions and the boundary of the reported evidence}}{4}{table.10}\protected@file@percent }
+\newlabel{tab:assumptions}{{I}{4}{Modeling assumptions and the boundary of the reported evidence}{table.10}{}}
+\newlabel{eq:coverage}{{4}{4}{}{equation.16}{}}
+\newlabel{eq:inspectable-coverage}{{5}{4}{}{equation.17}{}}
+\newlabel{eq:required-goal}{{6}{4}{}{equation.18}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C}Dynamic Feasibility and SOOAs}{4}{subsection.19}\protected@file@percent }
+\newlabel{eq:limits}{{7}{4}{}{equation.20}{}}
+\newlabel{eq:edge-cost}{{8}{4}{}{equation.21}{}}
+\newlabel{eq:sooa}{{9}{5}{}{equation.22}{}}
+\newlabel{prob:required-target-sooa}{{1}{5}{Required-target SOOA planning}{problem.23}{}}
+\newlabel{eq:problem-objective}{{10}{5}{Required-target SOOA planning}{equation.24}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Viability-Preserving Rollout ADP}{5}{section.25}\protected@file@percent }
+\newlabel{sec:algorithm}{{IV}{5}{}{section.25}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A}Candidate Graph and Markov State}{5}{subsection.26}\protected@file@percent }
+\newlabel{eq:mdp-state}{{11}{5}{}{equation.27}{}}
+\newlabel{eq:mdp-transition}{{12}{5}{}{equation.28}{}}
+\newlabel{eq:bellman}{{13}{5}{}{equation.29}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B}SOOA Construction and Safety Shield}{5}{subsection.30}\protected@file@percent }
+\newlabel{eq:terminal-transfer}{{14}{5}{}{equation.31}{}}
 \citation{alshiekh2018shielding}
-\@writefile{toc}{\contentsline {section}{\numberline {IV}Viability-Preserving Rollout ADP}{5}{section.24}\protected@file@percent }
-\newlabel{sec:algorithm}{{IV}{5}{}{section.24}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {A}Candidate Graph and Markov State}{5}{subsection.25}\protected@file@percent }
-\newlabel{eq:mdp-state}{{10}{5}{}{equation.26}{}}
-\newlabel{eq:mdp-transition}{{11}{5}{}{equation.27}{}}
-\newlabel{eq:bellman}{{12}{5}{}{equation.28}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {B}SOOA Construction and Safety Shield}{5}{subsection.29}\protected@file@percent }
-\newlabel{eq:terminal-transfer}{{13}{5}{}{equation.30}{}}
-\newlabel{eq:safe-action-set}{{14}{5}{}{equation.31}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {C}Adaptive Base Policy and Rollout Value}{5}{subsection.32}\protected@file@percent }
-\newlabel{eq:base-policy}{{15}{5}{}{equation.33}{}}
-\newlabel{eq:base-value}{{16}{5}{}{equation.34}{}}
-\newlabel{eq:rollout-value}{{17}{5}{}{equation.35}{}}
 \citation{nemhauser1978submodular}
 \citation{bertsekas1997combinatorial,bertsekas2020rollout}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Illustrative completion-certified rollout ADP, with initial state $s=(0,\mathbf  0,\mathbf  0,3)$. I. Solid edges are admissible, edge labels are stage costs, and $G_j$ lists visible targets. The dashed transfer is excluded. II. At $d=2$, rollout selects zero-gain connector $v_2$ for total cost 4, versus base-policy cost 8; action 3 has no certified completion. III. The successor $s'=(2,\mathbf  0,\mathbf  e_2,2)$ retains a cost-3 completion. Counts indicate covered required targets; $J_{\mathrm  {rollout}}$ is realized graph cost. The example illustrates Propositions~\ref {prop:rollout-viability} and~\ref {prop:base-bound}. Assigned costs and audit flags are illustrative, not experimental HCW data; the primary study uses $d=3$.}}{6}{figure.37}\protected@file@percent }
-\newlabel{fig:adp-architecture}{{2}{6}{Illustrative completion-certified rollout ADP, with initial state $s=(0,\mathbf 0,\mathbf 0,3)$. I. Solid edges are admissible, edge labels are stage costs, and $G_j$ lists visible targets. The dashed transfer is excluded. II. At $d=2$, rollout selects zero-gain connector $v_2$ for total cost 4, versus base-policy cost 8; action 3 has no certified completion. III. The successor $s'=(2,\mathbf 0,\mathbf e_2,2)$ retains a cost-3 completion. Counts indicate covered required targets; $J_{\mathrm {rollout}}$ is realized graph cost. The example illustrates Propositions~\ref {prop:rollout-viability} and~\ref {prop:base-bound}. Assigned costs and audit flags are illustrative, not experimental HCW data; the primary study uses $d=3$}{figure.37}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {D}Properties and Exact Oracle}{6}{subsection.39}\protected@file@percent }
-\newlabel{sec:theory}{{D}{6}{}{subsection.39}{}}
-\newlabel{prop:submodular-coverage}{{1}{6}{Monotone submodularity of fixed-mask coverage}{proposition.40}{}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Viability-preserving rollout ADP}}{6}{algorithm.38}\protected@file@percent }
-\newlabel{alg:safe-graph-api}{{1}{6}{}{algorithm.38}{}}
-\newlabel{prop:markov-sufficiency}{{2}{6}{Markov sufficiency}{proposition.42}{}}
-\newlabel{prop:audit-composition}{{3}{6}{Compositional preservation of stored audits}{proposition.43}{}}
+\newlabel{eq:safe-action-set}{{15}{6}{}{equation.32}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C}Adaptive Base Policy and Rollout Value}{6}{subsection.33}\protected@file@percent }
+\newlabel{eq:base-policy}{{16}{6}{}{equation.34}{}}
+\newlabel{eq:base-value}{{17}{6}{}{equation.35}{}}
+\newlabel{eq:rollout-value}{{18}{6}{}{equation.36}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Illustrative completion-certified rollout ADP, with initial state $s=(0,\mathbf  0,\mathbf  0,3)$. I. Solid edges are admissible, edge labels are stage costs, and $G_j$ lists visible targets. The dashed transfer is excluded. II. At $d=2$, rollout selects zero-gain connector $c_2$ for total cost 4, versus base-policy cost 8; action 3 has no certified completion. III. The successor $s'=(2,\mathbf  0,\mathbf  e_2,2)$ retains a cost-3 completion. Counts indicate covered required targets; $J_{\mathrm  {rollout}}$ is realized graph cost. The example illustrates Propositions~\ref {prop:rollout-viability} and~\ref {prop:base-bound}. Assigned costs and audit flags are illustrative, not experimental HCW data; the primary study uses $d=3$.}}{6}{figure.38}\protected@file@percent }
+\newlabel{fig:adp-architecture}{{2}{6}{Illustrative completion-certified rollout ADP, with initial state $s=(0,\mathbf 0,\mathbf 0,3)$. I. Solid edges are admissible, edge labels are stage costs, and $G_j$ lists visible targets. The dashed transfer is excluded. II. At $d=2$, rollout selects zero-gain connector $c_2$ for total cost 4, versus base-policy cost 8; action 3 has no certified completion. III. The successor $s'=(2,\mathbf 0,\mathbf e_2,2)$ retains a cost-3 completion. Counts indicate covered required targets; $J_{\mathrm {rollout}}$ is realized graph cost. The example illustrates Propositions~\ref {prop:rollout-viability} and~\ref {prop:base-bound}. Assigned costs and audit flags are illustrative, not experimental HCW data; the primary study uses $d=3$}{figure.38}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {D}Properties and Exact Oracle}{6}{subsection.40}\protected@file@percent }
+\newlabel{sec:theory}{{D}{6}{}{subsection.40}{}}
+\newlabel{prop:submodular-coverage}{{1}{6}{Monotone submodularity of fixed-mask coverage}{proposition.41}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Viability-preserving rollout ADP}}{7}{algorithm.39}\protected@file@percent }
+\newlabel{alg:safe-graph-api}{{1}{7}{}{algorithm.39}{}}
+\newlabel{prop:markov-sufficiency}{{2}{7}{Markov sufficiency}{proposition.43}{}}
+\newlabel{prop:audit-composition}{{3}{7}{Compositional preservation of stored audits}{proposition.44}{}}
+\newlabel{prop:rollout-viability}{{4}{7}{Rollout viability}{proposition.46}{}}
+\newlabel{prop:base-bound}{{5}{7}{Base-policy no-degradation}{proposition.47}{}}
 \citation{nasa_iss_gltf_model}
-\newlabel{prop:rollout-viability}{{4}{7}{Rollout viability}{proposition.45}{}}
-\newlabel{prop:base-bound}{{5}{7}{Base-policy no-degradation}{proposition.46}{}}
-\newlabel{thm:reduced-optimality}{{1}{7}{Optimality on an exhausted reduced SOOA graph}{theorem.47}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {V}Experimental Protocol}{7}{section.48}\protected@file@percent }
-\newlabel{sec:simulation}{{V}{7}{}{section.48}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {A}Fixed Geometry and Required-Target Profiles}{7}{subsection.49}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Frozen synthetic required-target profiles. Three equal-width slabs span the mesh longest axis; each slab uses centroid-first, normalized farthest-point selection. IDs omit the common mesh prefix. The nine-item profile is primary}}{8}{table.51}\protected@file@percent }
-\newlabel{tab:required-profiles}{{II}{8}{Frozen synthetic required-target profiles. Three equal-width slabs span the mesh longest axis; each slab uses centroid-first, normalized farthest-point selection. IDs omit the common mesh prefix. The nine-item profile is primary}{table.51}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {B}Dynamics, Costs, and Observation Accounting}{8}{subsection.52}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {C}Development History and Fresh Confirmation}{8}{subsection.53}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {D}Matched Baselines and Statistical Reporting}{8}{subsection.61}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Post-selection required-target depth diagnostic on the same 12 validation scenarios. Graph-cost means use the 9 scenarios completed at all six depths. Time and screen counts include all 12 cases; ratios use depth three. Negative $\Delta J$ denotes lower mean cost. All depths were rerun sequentially; the primary depth-three test results are unchanged}}{9}{table.55}\protected@file@percent }
-\newlabel{tab:depth-sensitivity}{{III}{9}{Post-selection required-target depth diagnostic on the same 12 validation scenarios. Graph-cost means use the 9 scenarios completed at all six depths. Time and screen counts include all 12 cases; ratios use depth three. Negative $\Delta J$ denotes lower mean cost. All depths were rerun sequentially; the primary depth-three test results are unchanged}{table.55}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Post-selection depth diagnostic. The square marks the primary depth-three setting. Cost uses the nine tasks completed at all depths; runtime and safety-screen counts include all 12 validation cases. Panels (b) and (c) use logarithmic scales. Table~\ref {tab:depth-sensitivity} reports completion counts and changes relative to depth three.}}{9}{figure.60}\protected@file@percent }
+\newlabel{thm:reduced-optimality}{{1}{8}{Optimality on an exhausted reduced SOOA graph}{theorem.48}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Experimental Protocol}{8}{section.49}\protected@file@percent }
+\newlabel{sec:simulation}{{V}{8}{}{section.49}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A}Fixed Geometry and Required-Target Profiles}{8}{subsection.50}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Frozen synthetic required-target profiles. Three equal-width slabs span the mesh longest axis; each slab uses centroid-first, normalized farthest-point selection. IDs omit the common mesh prefix. The nine-item profile is primary}}{8}{table.52}\protected@file@percent }
+\newlabel{tab:required-profiles}{{II}{8}{Frozen synthetic required-target profiles. Three equal-width slabs span the mesh longest axis; each slab uses centroid-first, normalized farthest-point selection. IDs omit the common mesh prefix. The nine-item profile is primary}{table.52}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B}Dynamics, Costs, and Observation Accounting}{8}{subsection.53}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {C}Development History and Fresh Confirmation}{8}{subsection.54}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {D}Matched Baselines and Statistical Reporting}{9}{subsection.62}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Post-selection depth diagnostic. The square marks the primary depth-three setting. Cost uses the nine tasks completed at all depths; runtime and safety-screen counts include all 12 validation cases. Panels (b) and (c) use logarithmic scales. Table~\ref {tab:depth-sensitivity} reports completion counts and changes relative to depth three.}}{9}{figure.61}\protected@file@percent }
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Mean validation cost.}}}{9}{subfigure.3.1}\protected@file@percent }
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Median planning time.}}}{9}{subfigure.3.2}\protected@file@percent }
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {Safety-screen evaluations.}}}{9}{subfigure.3.3}\protected@file@percent }
-\newlabel{fig:adp-depth-sensitivity}{{3}{9}{Post-selection depth diagnostic. The square marks the primary depth-three setting. Cost uses the nine tasks completed at all depths; runtime and safety-screen counts include all 12 validation cases. Panels (b) and (c) use logarithmic scales. Table~\ref {tab:depth-sensitivity} reports completion counts and changes relative to depth three}{figure.60}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {VI}Results}{9}{section.62}\protected@file@percent }
-\newlabel{sec:results}{{VI}{9}{}{section.62}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {A}Complete Required-Target Inspection}{9}{subsection.63}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {IV}{\ignorespaces First-campaign development results by fixed profile. Local search in this campaign was initialized by the greedy incumbent, unlike the fresh confirmation comparator. Profiles use different seeds, so cross-profile rates are descriptive}}{9}{table.65}\protected@file@percent }
-\newlabel{tab:required-profile-results}{{IV}{9}{First-campaign development results by fixed profile. Local search in this campaign was initialized by the greedy incumbent, unlike the fresh confirmation comparator. Profiles use different seeds, so cross-profile rates are descriptive}{table.65}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {B}ADP Policy Improvement at Matched Completion}{9}{subsection.68}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {V}{\ignorespaces Required-target results. Resource means use successful routes of each method; the final column includes every scenario with the fixed failure penalty}}{10}{table.67}\protected@file@percent }
-\newlabel{tab:paired-aggregate}{{V}{10}{Required-target results. Resource means use successful routes of each method; the final column includes every scenario with the fixed failure penalty}{table.67}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {VI}{\ignorespaces ADP-minus-seeded-local effects. The predeclared penalized endpoint includes all scenarios; physical resources and graph cost use jointly complete pairs. Intervals are percentile 95\% paired-bootstrap intervals; sign tests exclude ties}}{10}{table.70}\protected@file@percent }
-\newlabel{tab:required-paired}{{VI}{10}{ADP-minus-seeded-local effects. The predeclared penalized endpoint includes all scenarios; physical resources and graph cost use jointly complete pairs. Intervals are percentile 95\% paired-bootstrap intervals; sign tests exclude ties}{table.70}{}}
-\newlabel{fig:paired-performance-a}{{4a}{10}{Subfigure 4a}{subfigure.71}{}}
-\newlabel{sub@fig:paired-performance-a}{{(a)}{a}{Subfigure 4a\relax }{subfigure.71}{}}
-\newlabel{fig:paired-performance-b}{{4b}{10}{Subfigure 4b}{subfigure.72}{}}
-\newlabel{sub@fig:paired-performance-b}{{(b)}{b}{Subfigure 4b\relax }{subfigure.72}{}}
-\newlabel{fig:paired-performance-c}{{4c}{10}{Subfigure 4c}{subfigure.73}{}}
-\newlabel{sub@fig:paired-performance-c}{{(c)}{c}{Subfigure 4c\relax }{subfigure.73}{}}
-\newlabel{fig:paired-performance-d}{{4d}{10}{Subfigure 4d}{subfigure.74}{}}
-\newlabel{sub@fig:paired-performance-d}{{(d)}{d}{Subfigure 4d\relax }{subfigure.74}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces ADP/seeded-local comparison on jointly completed missions: (a), (b) 43{} test pairs; (c), (d) 8{} shifted pairs. Panels (a), (c) compare physical $\Delta v$; (b), (d) show ordered graph-cost differences in cost units. Dashed lines denote parity. Solid lines and bands give the means and 95\% paired-bootstrap intervals: (b) $-14.25$ [$-15.72$, $-12.46$]; (d) $-9.89$ [$-14.11$, $-4.69$].}}{10}{figure.76}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Test: effort.}}}{10}{subfigure.4.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Test: cost.}}}{10}{subfigure.4.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {Shifted: effort.}}}{10}{subfigure.4.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {Shifted: cost.}}}{10}{subfigure.4.4}\protected@file@percent }
-\newlabel{fig:paired-performance}{{4}{10}{ADP/seeded-local comparison on jointly completed missions: (a), (b) \RTJointTestN {} test pairs; (c), (d) \RTJointOodN {} shifted pairs. Panels (a), (c) compare physical $\Delta v$; (b), (d) show ordered graph-cost differences in cost units. Dashed lines denote parity. Solid lines and bands give the means and 95\% paired-bootstrap intervals: (b) $-14.25$ [$-15.72$, $-12.46$]; (d) $-9.89$ [$-14.11$, $-4.69$]}{figure.76}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {VII}{\ignorespaces Required-target completion under the coverage-only objective. The required set is identical to that of the main comparison}}{10}{table.79}\protected@file@percent }
-\newlabel{tab:required-objective}{{VII}{10}{Required-target completion under the coverage-only objective. The required set is identical to that of the main comparison}{table.79}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {C}Objective Ablation and Safety}{10}{subsection.77}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {D}Representative Required-Target Route}{10}{subsection.86}\protected@file@percent }
-\newlabel{fig:paired-safety-a}{{5a}{11}{Subfigure 5a}{subfigure.80}{}}
-\newlabel{sub@fig:paired-safety-a}{{(a)}{a}{Subfigure 5a\relax }{subfigure.80}{}}
-\newlabel{fig:paired-safety-b}{{5b}{11}{Subfigure 5b}{subfigure.81}{}}
-\newlabel{sub@fig:paired-safety-b}{{(b)}{b}{Subfigure 5b\relax }{subfigure.81}{}}
-\newlabel{fig:paired-safety-c}{{5c}{11}{Subfigure 5c}{subfigure.82}{}}
-\newlabel{sub@fig:paired-safety-c}{{(c)}{c}{Subfigure 5c\relax }{subfigure.82}{}}
-\newlabel{fig:paired-safety-d}{{5d}{11}{Subfigure 5d}{subfigure.83}{}}
-\newlabel{sub@fig:paired-safety-d}{{(d)}{d}{Subfigure 5d\relax }{subfigure.83}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Nine-target component and safety comparison. Base denotes the task-aware incumbent; $d=1,3$ denote ADP depths; Local denotes ADP-seeded local search. (a) Physical $\Delta v$: means and 95\% bootstrap intervals over the 43{} test cases completed by all three methods. (b) All-required success over all 50 test and 30 shifted cases. (c) Minimum clearance above the safety margin. (d) Peak commanded input; the orange line marks the $0.060\,\mathrm  {m/s^2}$ limit. Panels (c), (d) use jointly completed ADP/local pairs; dashed lines denote parity.}}{11}{figure.85}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Matched effort.}}}{11}{subfigure.5.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Task success.}}}{11}{subfigure.5.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {Clearance.}}}{11}{subfigure.5.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {Peak input.}}}{11}{subfigure.5.4}\protected@file@percent }
-\newlabel{fig:paired-safety}{{5}{11}{Nine-target component and safety comparison. Base denotes the task-aware incumbent; $d=1,3$ denote ADP depths; Local denotes ADP-seeded local search. (a) Physical $\Delta v$: means and 95\% bootstrap intervals over the \RTFourMethodN {} test cases completed by all three methods. (b) All-required success over all 50 test and 30 shifted cases. (c) Minimum clearance above the safety margin. (d) Peak commanded input; the orange line marks the $0.060\,\mathrm {m/s^2}$ limit. Panels (c), (d) use jointly completed ADP/local pairs; dashed lines denote parity}{figure.85}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {E}Required-Target ROS Execution}{11}{subsection.92}\protected@file@percent }
-\newlabel{sec:ros-verification-protocol}{{E}{11}{}{subsection.92}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Representative required-target test pair selected by the median-effect rule. Both methods complete the same required set. Markers identify terminal observations and prescribed samples; the star denotes the common initial state.}}{11}{figure.91}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Generated LVLH routes.}}}{11}{subfigure.6.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Required-target completion.}}}{11}{subfigure.6.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {Cumulative physical $\Delta v$.}}}{11}{subfigure.6.3}\protected@file@percent }
-\newlabel{fig:representative-trajectory}{{6}{11}{Representative required-target test pair selected by the median-effect rule. Both methods complete the same required set. Markers identify terminal observations and prescribed samples; the star denotes the common initial state}{figure.91}{}}
-\newlabel{sec:ros-verification-results}{{E}{11}{}{subsection.92}{}}
+\newlabel{fig:adp-depth-sensitivity}{{3}{9}{Post-selection depth diagnostic. The square marks the primary depth-three setting. Cost uses the nine tasks completed at all depths; runtime and safety-screen counts include all 12 validation cases. Panels (b) and (c) use logarithmic scales. Table~\ref {tab:depth-sensitivity} reports completion counts and changes relative to depth three}{figure.61}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {E}All-Solvable Redundant-Viewpoint Benchmark}{9}{subsection.63}\protected@file@percent }
+\newlabel{sec:redundant-view-protocol}{{E}{9}{}{subsection.63}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Post-selection required-target depth diagnostic on the same 12 validation scenarios. Graph-cost means use the 9 scenarios completed at all six depths. Time and screen counts include all 12 cases; ratios use depth three. Negative $\Delta J$ denotes lower mean cost. All depths were rerun sequentially; the primary depth-three test results are unchanged}}{10}{table.56}\protected@file@percent }
+\newlabel{tab:depth-sensitivity}{{III}{10}{Post-selection required-target depth diagnostic on the same 12 validation scenarios. Graph-cost means use the 9 scenarios completed at all six depths. Time and screen counts include all 12 cases; ratios use depth three. Negative $\Delta J$ denotes lower mean cost. All depths were rerun sequentially; the primary depth-three test results are unchanged}{table.56}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Results}{10}{section.64}\protected@file@percent }
+\newlabel{sec:results}{{VI}{10}{}{section.64}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A}Complete Required-Target Inspection}{10}{subsection.65}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {IV}{\ignorespaces First-campaign development results by fixed profile. Local search in this campaign was initialized by the greedy incumbent, unlike the fresh confirmation comparator. Profiles use different seeds, so cross-profile rates are descriptive}}{10}{table.67}\protected@file@percent }
+\newlabel{tab:required-profile-results}{{IV}{10}{First-campaign development results by fixed profile. Local search in this campaign was initialized by the greedy incumbent, unlike the fresh confirmation comparator. Profiles use different seeds, so cross-profile rates are descriptive}{table.67}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B}ADP Policy Improvement at Matched Completion}{10}{subsection.70}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {V}{\ignorespaces Required-target results. Resource means use successful routes of each method; the final column includes every scenario with the fixed failure penalty}}{11}{table.69}\protected@file@percent }
+\newlabel{tab:paired-aggregate}{{V}{11}{Required-target results. Resource means use successful routes of each method; the final column includes every scenario with the fixed failure penalty}{table.69}{}}
+\newlabel{fig:paired-performance-a}{{4a}{11}{Subfigure 4a}{subfigure.73}{}}
+\newlabel{sub@fig:paired-performance-a}{{(a)}{a}{Subfigure 4a\relax }{subfigure.73}{}}
+\newlabel{fig:paired-performance-b}{{4b}{11}{Subfigure 4b}{subfigure.74}{}}
+\newlabel{sub@fig:paired-performance-b}{{(b)}{b}{Subfigure 4b\relax }{subfigure.74}{}}
+\newlabel{fig:paired-performance-c}{{4c}{11}{Subfigure 4c}{subfigure.75}{}}
+\newlabel{sub@fig:paired-performance-c}{{(c)}{c}{Subfigure 4c\relax }{subfigure.75}{}}
+\newlabel{fig:paired-performance-d}{{4d}{11}{Subfigure 4d}{subfigure.76}{}}
+\newlabel{sub@fig:paired-performance-d}{{(d)}{d}{Subfigure 4d\relax }{subfigure.76}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces ADP/seeded-local comparison on jointly completed missions: (a), (b) 43{} test pairs; (c), (d) 8{} shifted pairs. Panels (a), (c) compare physical $\Delta v$; (b), (d) show ordered graph-cost differences in cost units. Dashed lines denote parity. Solid lines and bands give the means and 95\% paired-bootstrap intervals: (b) $-14.25$ [$-15.72$, $-12.46$]; (d) $-9.89$ [$-14.11$, $-4.69$].}}{11}{figure.78}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Test: effort.}}}{11}{subfigure.4.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Test: cost.}}}{11}{subfigure.4.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {Shifted: effort.}}}{11}{subfigure.4.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {Shifted: cost.}}}{11}{subfigure.4.4}\protected@file@percent }
+\newlabel{fig:paired-performance}{{4}{11}{ADP/seeded-local comparison on jointly completed missions: (a), (b) \RTJointTestN {} test pairs; (c), (d) \RTJointOodN {} shifted pairs. Panels (a), (c) compare physical $\Delta v$; (b), (d) show ordered graph-cost differences in cost units. Dashed lines denote parity. Solid lines and bands give the means and 95\% paired-bootstrap intervals: (b) $-14.25$ [$-15.72$, $-12.46$]; (d) $-9.89$ [$-14.11$, $-4.69$]}{figure.78}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C}Objective Ablation and Safety}{11}{subsection.79}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {D}Representative Required-Target Route}{11}{subsection.88}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {E}All-Solvable Benchmark Results}{11}{subsection.94}\protected@file@percent }
+\newlabel{sec:redundant-view-results}{{E}{11}{}{subsection.94}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {VI}{\ignorespaces ADP-minus-seeded-local effects. The predeclared penalized endpoint includes all scenarios; physical resources and graph cost use jointly complete pairs. Intervals are percentile 95\% paired-bootstrap intervals; sign tests exclude ties}}{12}{table.72}\protected@file@percent }
+\newlabel{tab:required-paired}{{VI}{12}{ADP-minus-seeded-local effects. The predeclared penalized endpoint includes all scenarios; physical resources and graph cost use jointly complete pairs. Intervals are percentile 95\% paired-bootstrap intervals; sign tests exclude ties}{table.72}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {VII}{\ignorespaces Required-target completion under the coverage-only objective. The required set is identical to that of the main comparison}}{12}{table.81}\protected@file@percent }
+\newlabel{tab:required-objective}{{VII}{12}{Required-target completion under the coverage-only objective. The required set is identical to that of the main comparison}{table.81}{}}
+\newlabel{fig:paired-safety-a}{{5a}{12}{Subfigure 5a}{subfigure.82}{}}
+\newlabel{sub@fig:paired-safety-a}{{(a)}{a}{Subfigure 5a\relax }{subfigure.82}{}}
+\newlabel{fig:paired-safety-b}{{5b}{12}{Subfigure 5b}{subfigure.83}{}}
+\newlabel{sub@fig:paired-safety-b}{{(b)}{b}{Subfigure 5b\relax }{subfigure.83}{}}
+\newlabel{fig:paired-safety-c}{{5c}{12}{Subfigure 5c}{subfigure.84}{}}
+\newlabel{sub@fig:paired-safety-c}{{(c)}{c}{Subfigure 5c\relax }{subfigure.84}{}}
+\newlabel{fig:paired-safety-d}{{5d}{12}{Subfigure 5d}{subfigure.85}{}}
+\newlabel{sub@fig:paired-safety-d}{{(d)}{d}{Subfigure 5d\relax }{subfigure.85}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Nine-target component and safety comparison. Base denotes the task-aware incumbent; $d=1,3$ denote ADP depths; Local denotes ADP-seeded local search. (a) Physical $\Delta v$: means and 95\% bootstrap intervals over the 43{} test cases completed by all three methods. (b) All-required success over all 50 test and 30 shifted cases. (c) Minimum clearance above the safety margin. (d) Peak commanded input; the orange line marks the $0.060\,\mathrm  {m/s^2}$ limit. Panels (c), (d) use jointly completed ADP/local pairs; dashed lines denote parity.}}{12}{figure.87}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Matched effort.}}}{12}{subfigure.5.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Task success.}}}{12}{subfigure.5.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {Clearance.}}}{12}{subfigure.5.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {Peak input.}}}{12}{subfigure.5.4}\protected@file@percent }
+\newlabel{fig:paired-safety}{{5}{12}{Nine-target component and safety comparison. Base denotes the task-aware incumbent; $d=1,3$ denote ADP depths; Local denotes ADP-seeded local search. (a) Physical $\Delta v$: means and 95\% bootstrap intervals over the \RTFourMethodN {} test cases completed by all three methods. (b) All-required success over all 50 test and 30 shifted cases. (c) Minimum clearance above the safety margin. (d) Peak commanded input; the orange line marks the $0.060\,\mathrm {m/s^2}$ limit. Panels (c), (d) use jointly completed ADP/local pairs; dashed lines denote parity}{figure.87}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Representative required-target test pair selected by the median-effect rule. Both methods complete the same required set. Markers identify terminal observations and prescribed samples; the star denotes the common initial state.}}{12}{figure.93}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Generated LVLH routes.}}}{12}{subfigure.6.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Required-target completion.}}}{12}{subfigure.6.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {Cumulative physical $\Delta v$.}}}{12}{subfigure.6.3}\protected@file@percent }
+\newlabel{fig:representative-trajectory}{{6}{12}{Representative required-target test pair selected by the median-effect rule. Both methods complete the same required set. Markers identify terminal observations and prescribed samples; the star denotes the common initial state}{figure.93}{}}
 \citation{hu2021learning,tian2024proximity}
 \citation{vanwijk2024inspection}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Supplemental ROS~2 execution with twelve 90~s transfers and 60~s settling intervals. All observations pass, accepting 9/9 required targets and 95.86\% weighted background coverage. Panels (a) and (b) highlight odd- and even-numbered views; hollow markers show the others. Both projections have equal spatial scale. Camera rows 1--6 and 7--12 show mission time, accepted required targets (Req), and weighted coverage (Bg). Uncropped frames and trajectories come from the same execution. Target credit uses fixed visibility masks and terminal tracking; the swept-body margin is audited against the full 3-D mesh.}}{12}{figure.94}\protected@file@percent }
-\newlabel{fig:ros-key-camera-views}{{7}{12}{Supplemental ROS~2 execution with twelve \unit {90}{s} transfers and \unit {60}{s} settling intervals. All observations pass, accepting 9/9 required targets and 95.86\% weighted background coverage. Panels (a) and (b) highlight odd- and even-numbered views; hollow markers show the others. Both projections have equal spatial scale. Camera rows 1--6 and 7--12 show mission time, accepted required targets (Req), and weighted coverage (Bg). Uncropped frames and trajectories come from the same execution. Target credit uses fixed visibility masks and terminal tracking; the swept-body margin is audited against the full 3-D mesh}{figure.94}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces RViz display: (a) planned (blue) and executed (orange) trajectories with camera field of view (yellow); (b) onboard Gazebo camera. Crops from one frame during transfer 9--10.}}{12}{figure.96}\protected@file@percent }
-\newlabel{fig:rviz-execution-overview}{{8}{12}{RViz display: (a) planned (blue) and executed (orange) trajectories with camera field of view (yellow); (b) onboard Gazebo camera. Crops from one frame during transfer 9--10}{figure.96}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {VII}Discussion}{12}{section.97}\protected@file@percent }
-\newlabel{sec:discussion}{{VII}{12}{}{section.97}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {A}Scope and Limitations}{12}{subsection.98}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {VIII}{\ignorespaces Primary all-solvable benchmark from the development pilot. Each denominator is independently certified feasible: three reference, 30 nominal, 26 shifted and 59 cases overall. The four shifted cases failing the visibility certificate are retained in a separate stress test. Median planning times (nominal/shifted) are 0.001/0.001~s for the incumbent, 0.046/0.037~s for one-step ADP, 4.173/2.085~s for depth-three ADP and 15.007/5.373~s for the MILP. The MILP row is the inclusion certificate, not an independent planner baseline.}}{13}{table.96}\protected@file@percent }
+\newlabel{tab:redundant-view-pilot}{{VIII}{13}{Primary all-solvable benchmark from the development pilot. Each denominator is independently certified feasible: three reference, 30 nominal, 26 shifted and 59 cases overall. The four shifted cases failing the visibility certificate are retained in a separate stress test. Median planning times (nominal/shifted) are 0.001/0.001~s for the incumbent, 0.046/0.037~s for one-step ADP, 4.173/2.085~s for depth-three ADP and 15.007/5.373~s for the MILP. The MILP row is the inclusion certificate, not an independent planner baseline}{table.96}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {F}Required-Target ROS Execution}{13}{subsection.97}\protected@file@percent }
+\newlabel{sec:ros-verification-protocol}{{F}{13}{}{subsection.97}{}}
+\newlabel{sec:ros-verification-results}{{F}{13}{}{subsection.97}{}}
+\newlabel{fig:rviz-execution-overview-a}{{8a}{13}{Subfigure 8a}{subfigure.100}{}}
+\newlabel{sub@fig:rviz-execution-overview-a}{{(a)}{a}{Subfigure 8a\relax }{subfigure.100}{}}
+\newlabel{fig:rviz-execution-overview-b}{{8b}{13}{Subfigure 8b}{subfigure.101}{}}
+\newlabel{sub@fig:rviz-execution-overview-b}{{(b)}{b}{Subfigure 8b\relax }{subfigure.101}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces RViz display: (a) planned (blue) and executed (orange) trajectories with camera FOV (yellow); (b) onboard Gazebo camera. Crops from one frame during transfer 9--10.}}{13}{figure.103}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Global trajectory.}}}{13}{subfigure.8.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Onboard camera.}}}{13}{subfigure.8.2}\protected@file@percent }
+\newlabel{fig:rviz-execution-overview}{{8}{13}{RViz display: (a) planned (blue) and executed (orange) trajectories with camera FOV (yellow); (b) onboard Gazebo camera. Crops from one frame during transfer 9--10}{figure.103}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VII}Discussion}{13}{section.104}\protected@file@percent }
+\newlabel{sec:discussion}{{VII}{13}{}{section.104}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Supplemental ROS~2 execution with twelve 90~s transfers and 60~s settling intervals. All observations pass, accepting 9/9 required targets and 95.86\% weighted background coverage. Panels (a) and (b) highlight odd- and even-numbered views; hollow markers show the others. Both projections have equal spatial scale. Camera rows 1--6 and 7--12 show mission time, accepted required targets (Req), and weighted coverage (Bg). Uncropped frames and trajectories come from the same execution. Target credit uses fixed visibility masks and terminal tracking; the swept-body margin is audited against the full 3-D mesh.}}{14}{figure.99}\protected@file@percent }
+\newlabel{fig:ros-key-camera-views}{{7}{14}{Supplemental ROS~2 execution with twelve \unit {90}{s} transfers and \unit {60}{s} settling intervals. All observations pass, accepting 9/9 required targets and 95.86\% weighted background coverage. Panels (a) and (b) highlight odd- and even-numbered views; hollow markers show the others. Both projections have equal spatial scale. Camera rows 1--6 and 7--12 show mission time, accepted required targets (Req), and weighted coverage (Bg). Uncropped frames and trajectories come from the same execution. Target credit uses fixed visibility masks and terminal tracking; the swept-body margin is audited against the full 3-D mesh}{figure.99}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A}Scope and Limitations}{14}{subsection.105}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {VIII}Conclusion}{14}{section.106}\protected@file@percent }
+\newlabel{sec:conclusion}{{VIII}{14}{}{section.106}{}}
 \bibstyle{IEEEtran}
 \bibdata{references}
 \bibcite{flores2014review}{1}
@@ -188,15 +206,15 @@
 \bibcite{bertsekas2017iterations}{23}
 \bibcite{kiumarsi2018survey}{24}
 \bibcite{hu2021learning}{25}
-\bibcite{tian2024proximity}{26}
-\bibcite{vanwijk2024inspection}{27}
-\bibcite{achiam2017cpo}{28}
-\bibcite{alshiekh2018shielding}{29}
-\bibcite{ames2017barrier}{30}
-\bibcite{wabersich2023predictive}{31}
-\bibcite{nemhauser1978submodular}{32}
-\bibcite{nasa_iss_gltf_model}{33}
-\@writefile{toc}{\contentsline {section}{\numberline {VIII}Conclusion}{13}{section.99}\protected@file@percent }
-\newlabel{sec:conclusion}{{VIII}{13}{}{section.99}{}}
-\@writefile{toc}{\contentsline {section}{REFERENCES}{13}{section.99}\protected@file@percent }
-\gdef \@abspage@last{13}
+\bibcite{luo2025attitude}{26}
+\bibcite{tian2024proximity}{27}
+\bibcite{tang2025reachavoid}{28}
+\bibcite{vanwijk2024inspection}{29}
+\bibcite{achiam2017cpo}{30}
+\bibcite{alshiekh2018shielding}{31}
+\bibcite{ames2017barrier}{32}
+\bibcite{wabersich2023predictive}{33}
+\bibcite{nemhauser1978submodular}{34}
+\bibcite{nasa_iss_gltf_model}{35}
+\@writefile{toc}{\contentsline {section}{REFERENCES}{15}{section.106}\protected@file@percent }
+\gdef \@abspage@last{15}
