@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.6.22)  15 SEP 2026 12:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.6.22)  18 SEP 2026 17:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -460,46 +460,44 @@ LaTeX Info: Redefining \nocite on input line 332.
 Package: cite 2015/02/27  v 5.5
 )
 \c@theorem=\count315
-\c@proposition=\count316
-\c@problem=\count317
-\c@remark=\count318
+\c@problem=\count316
  (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count319
+\l__color_backend_stack_int=\count317
 \l__pdf_internal_box=\box66
 ) (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
  (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count320
+\scratchcounter=\count318
 \scratchdimen=\dimen262
 \scratchbox=\box67
-\nofMPsegments=\count321
-\nofMParguments=\count322
+\nofMPsegments=\count319
+\nofMParguments=\count320
 \everyMPshowfont=\toks36
-\MPscratchCnt=\count323
+\MPscratchCnt=\count321
 \MPscratchDim=\dimen263
-\MPnumerator=\count324
-\makeMPintoPDFobject=\count325
+\MPnumerator=\count322
+\makeMPintoPDFobject=\count323
 \everyMPtoPDFconversion=\toks37
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -507,7 +505,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring ON on input line 85.
+Package hyperref Info: Link coloring ON on input line 91.
  (./main.out) (./main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
@@ -515,39 +513,33 @@ Package hyperref Info: Link coloring ON on input line 85.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Trying to load font information for OT1+phv on input line 109.
+LaTeX Font Info:    Trying to load font information for OT1+phv on input line 124.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
 )
-LaTeX Font Info:    Calculating math sizes for size <8.25> on input line 109.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 109.
+LaTeX Font Info:    Calculating math sizes for size <8.25> on input line 124.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 124.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 109.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 124.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 109.
+LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 124.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
-<figures/fig01_framework/viability_preserving_rollout_adp.pdf, id=127, 1215.58131pt x 716.6775pt>
+<figures/fig01_framework/viability_preserving_rollout_adp.pdf, id=127, 1242.56212pt x 740.7675pt>
 File: figures/fig01_framework/viability_preserving_rollout_adp.pdf Graphic file (type pdf)
 <use figures/fig01_framework/viability_preserving_rollout_adp.pdf>
-Package pdftex.def Info: figures/fig01_framework/viability_preserving_rollout_adp.pdf  used on input line 129.
-(pdftex.def)             Requested size: 418.203pt x 246.56506pt.
-LaTeX Font Info:    Calculating math sizes for size <10.28844> on input line 141.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
+Package pdftex.def Info: figures/fig01_framework/viability_preserving_rollout_adp.pdf  used on input line 144.
+(pdftex.def)             Requested size: 418.203pt x 249.31439pt.
+LaTeX Font Info:    Calculating math sizes for size <10.28844> on input line 155.
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}]
-Underfull \vbox (badness 2245) has occurred while \output is active []
-
-
-Underfull \hbox (badness 6445) in paragraph at lines 151--152
+Underfull \hbox (badness 6445) in paragraph at lines 164--165
 []\OT1/ptm/m/it/10.28844 Relative mo-tion and in-spec-tion plan-ning: \OT1/ptm/m/n/10.28844 The
  []
 
@@ -555,227 +547,210 @@ Underfull \hbox (badness 6445) in paragraph at lines 151--152
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [2 <./figures/fig01_framework/viability_preserving_rollout_adp.pdf>]
-Underfull \hbox (badness 4886) in paragraph at lines 184--184
+Underfull \hbox (badness 4886) in paragraph at lines 195--195
 []|\OT1/ptm/m/n/8.25 HCW and fixed local-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 184--184
+Underfull \hbox (badness 10000) in paragraph at lines 195--195
 \OT1/ptm/m/n/8.25 vertical/local-horizontal
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 184--184
+Underfull \hbox (badness 10000) in paragraph at lines 195--195
 []|\OT1/ptm/m/n/8.25 Mesh-based sam-pled
  []
 
 
-Underfull \hbox (badness 7540) in paragraph at lines 189--190
+Underfull \hbox (badness 7540) in paragraph at lines 200--201
 []\OT1/ptm/m/n/10.28844 The in-spected struc-ture is fixed in a local-
  []
 
+[3]
+Underfull \vbox (badness 6876) has occurred while \output is active []
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [3] [4]
-Underfull \hbox (badness 10000) in paragraph at lines 345--347
+ [4]
+Underfull \hbox (badness 10000) in paragraph at lines 342--344
 \OT1/ptm/m/n/10.28844 If the ter-mi-nal in-flu-ence ma-trix $\OMS/cmsy/m/n/10 B[] \OT1/cmr/m/n/10 =
  []
 
 
-Underfull \hbox (badness 2229) in paragraph at lines 345--347
+Underfull \hbox (badness 2229) in paragraph at lines 342--344
 \OT1/cmr/m/n/10 [[][]  []  []] \OMS/cmsy/m/n/10 2 \U/msb/m/n/10.28844 R[]$ \OT1/ptm/m/n/10.28844 has full row rank,
  []
 
-[5]
-Overfull \hbox (12.8892pt too wide) detected at line 372
-[][][][]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 s\OT1/cmr/m/n/10 ) = []
+
+Underfull \hbox (badness 1546) in paragraph at lines 342--344
+\OT1/ptm/m/n/10.28844 ev-ery stored edge sam-ple sat-is-fies [], the en-abled
  []
 
-<figures/fig02_rollout_example/adp_rollout_mechanism.pdf, id=330, 240.9pt x 276.07141pt>
+
+Underfull \hbox (badness 1484) in paragraph at lines 342--344
+\OT1/ptm/m/n/10.28844 swept-segment au-dit re-ports no tri-an-gle in-ter-sec-tion,
+ []
+
+[5]
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 392.
+<figures/fig02_rollout_example/adp_rollout_mechanism.pdf, id=329, 240.9pt x 276.07141pt>
 File: figures/fig02_rollout_example/adp_rollout_mechanism.pdf Graphic file (type pdf)
 <use figures/fig02_rollout_example/adp_rollout_mechanism.pdf>
-Package pdftex.def Info: figures/fig02_rollout_example/adp_rollout_mechanism.pdf  used on input line 391.
+Package pdftex.def Info: figures/fig02_rollout_example/adp_rollout_mechanism.pdf  used on input line 414.
 (pdftex.def)             Requested size: 215.99854pt x 247.53941pt.
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 397.
 
-Underfull \hbox (badness 1990) in paragraph at lines 420--421
-[]\OT1/ptm/m/n/10.28844 The cov-er-age re-sult be-low records the stan-dard
- []
+Underfull \vbox (badness 6078) has occurred while \output is active []
 
-[6 <./figures/fig02_rollout_example/adp_rollout_mechanism.pdf>]
-Underfull \hbox (badness 3579) in paragraph at lines 454--455
-\OT1/ptm/m/n/10.28844 si-tion is a finite-record com-po-si-tion re-sult, not a
- []
+ [6 <./figures/fig02_rollout_example/adp_rollout_mechanism.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-
-Underfull \hbox (badness 2253) in paragraph at lines 468--469
-[][]\OT1/ptm/m/sc/10.28844 Proposition \OT1/ptm/m/n/10.28844 5 (Base-pol-icy no-degra-da-tion) []\OT1/ptm/m/it/10.28844 If the
- []
-
-[7] [8]
-Underfull \hbox (badness 1472) in paragraph at lines 538--539
-[]\OT1/ptm/m/n/10.28844 Complete-route tim-ing in-cludes pre-lim-i-nary base-
- []
-
-
-Underfull \hbox (badness 2538) in paragraph at lines 545--547
-[]\OT1/ptm/m/n/10.28844 The fixed depth-three set-ting there-fore of-fers a
- []
-
-<figures/fig03_depth_tradeoff/adp_depth_tradeoff_a.pdf, id=417, 75.6pt x 113.81102pt>
+ [7]
+<figures/fig03_depth_tradeoff/adp_depth_tradeoff_a.pdf, id=383, 75.6pt x 113.81102pt>
 File: figures/fig03_depth_tradeoff/adp_depth_tradeoff_a.pdf Graphic file (type pdf)
 <use figures/fig03_depth_tradeoff/adp_depth_tradeoff_a.pdf>
-Package pdftex.def Info: figures/fig03_depth_tradeoff/adp_depth_tradeoff_a.pdf  used on input line 573.
+Package pdftex.def Info: figures/fig03_depth_tradeoff/adp_depth_tradeoff_a.pdf  used on input line 471.
 (pdftex.def)             Requested size: 75.60059pt x 113.81941pt.
 
-Underfull \hbox (badness 4940) in paragraph at lines 573--573
+Underfull \hbox (badness 4940) in paragraph at lines 471--471
 []\OT1/ptm/m/n/8.25 (a) |Mean val-i-da-tion
  []
 
-<figures/fig03_depth_tradeoff/adp_depth_tradeoff_b.pdf, id=418, 75.6pt x 113.81102pt>
+<figures/fig03_depth_tradeoff/adp_depth_tradeoff_b.pdf, id=384, 75.6pt x 113.81102pt>
 File: figures/fig03_depth_tradeoff/adp_depth_tradeoff_b.pdf Graphic file (type pdf)
 <use figures/fig03_depth_tradeoff/adp_depth_tradeoff_b.pdf>
-Package pdftex.def Info: figures/fig03_depth_tradeoff/adp_depth_tradeoff_b.pdf  used on input line 574.
+Package pdftex.def Info: figures/fig03_depth_tradeoff/adp_depth_tradeoff_b.pdf  used on input line 472.
 (pdftex.def)             Requested size: 75.60059pt x 113.81941pt.
 
-Underfull \hbox (badness 1515) in paragraph at lines 574--574
+Underfull \hbox (badness 1515) in paragraph at lines 472--472
 []\OT1/ptm/m/n/8.25 (b) |Me-dian plan-ning
  []
 
-<figures/fig03_depth_tradeoff/adp_depth_tradeoff_c.pdf, id=419, 75.6pt x 113.81102pt>
+<figures/fig03_depth_tradeoff/adp_depth_tradeoff_c.pdf, id=385, 75.6pt x 113.81102pt>
 File: figures/fig03_depth_tradeoff/adp_depth_tradeoff_c.pdf Graphic file (type pdf)
 <use figures/fig03_depth_tradeoff/adp_depth_tradeoff_c.pdf>
-Package pdftex.def Info: figures/fig03_depth_tradeoff/adp_depth_tradeoff_c.pdf  used on input line 575.
+Package pdftex.def Info: figures/fig03_depth_tradeoff/adp_depth_tradeoff_c.pdf  used on input line 473.
 (pdftex.def)             Requested size: 75.60059pt x 113.81941pt.
-[9 <./figures/fig03_depth_tradeoff/adp_depth_tradeoff_a.pdf> <./figures/fig03_depth_tradeoff/adp_depth_tradeoff_b.pdf> <./figures/fig03_depth_tradeoff/adp_depth_tradeoff_c.pdf>]
-Underfull \vbox (badness 2478) has occurred while \output is active []
 
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Underfull \vbox (badness 2035) has occurred while \output is active []
-
- [10]
-<figures/fig04_heldout_performance/adp_heldout_performance_a.pdf, id=496, 117.59999pt x 112.42pt>
+ [8 <./figures/fig03_depth_tradeoff/adp_depth_tradeoff_a.pdf> <./figures/fig03_depth_tradeoff/adp_depth_tradeoff_b.pdf> <./figures/fig03_depth_tradeoff/adp_depth_tradeoff_c.pdf>]
+<figures/fig04_heldout_performance/adp_heldout_performance_a.pdf, id=452, 117.59999pt x 112.42pt>
 File: figures/fig04_heldout_performance/adp_heldout_performance_a.pdf Graphic file (type pdf)
 <use figures/fig04_heldout_performance/adp_heldout_performance_a.pdf>
-Package pdftex.def Info: figures/fig04_heldout_performance/adp_heldout_performance_a.pdf  used on input line 689.
-(pdftex.def)             Requested size: 117.60132pt x 112.42657pt.
-<figures/fig04_heldout_performance/adp_heldout_performance_b.pdf, id=497, 117.59999pt x 112.42pt>
+Package pdftex.def Info: figures/fig04_heldout_performance/adp_heldout_performance_a.pdf  used on input line 564.
+(pdftex.def)             Requested size: 107.99927pt x 103.24582pt.
+<figures/fig04_heldout_performance/adp_heldout_performance_b.pdf, id=453, 117.59999pt x 112.42pt>
 File: figures/fig04_heldout_performance/adp_heldout_performance_b.pdf Graphic file (type pdf)
 <use figures/fig04_heldout_performance/adp_heldout_performance_b.pdf>
-Package pdftex.def Info: figures/fig04_heldout_performance/adp_heldout_performance_b.pdf  used on input line 690.
-(pdftex.def)             Requested size: 117.60132pt x 112.42657pt.
-<figures/fig04_heldout_performance/adp_heldout_performance_c.pdf, id=498, 117.59999pt x 112.42pt>
+Package pdftex.def Info: figures/fig04_heldout_performance/adp_heldout_performance_b.pdf  used on input line 565.
+(pdftex.def)             Requested size: 107.99927pt x 103.24582pt.
+<figures/fig04_heldout_performance/adp_heldout_performance_c.pdf, id=454, 117.59999pt x 112.42pt>
 File: figures/fig04_heldout_performance/adp_heldout_performance_c.pdf Graphic file (type pdf)
 <use figures/fig04_heldout_performance/adp_heldout_performance_c.pdf>
-Package pdftex.def Info: figures/fig04_heldout_performance/adp_heldout_performance_c.pdf  used on input line 691.
-(pdftex.def)             Requested size: 117.60132pt x 112.42657pt.
-<figures/fig04_heldout_performance/adp_heldout_performance_d.pdf, id=499, 117.59999pt x 112.42pt>
+Package pdftex.def Info: figures/fig04_heldout_performance/adp_heldout_performance_c.pdf  used on input line 566.
+(pdftex.def)             Requested size: 107.99927pt x 103.24582pt.
+<figures/fig04_heldout_performance/adp_heldout_performance_d.pdf, id=455, 117.59999pt x 112.42pt>
 File: figures/fig04_heldout_performance/adp_heldout_performance_d.pdf Graphic file (type pdf)
 <use figures/fig04_heldout_performance/adp_heldout_performance_d.pdf>
-Package pdftex.def Info: figures/fig04_heldout_performance/adp_heldout_performance_d.pdf  used on input line 692.
-(pdftex.def)             Requested size: 117.60132pt x 112.42657pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-<figures/fig05_ablation_safety/adp_ablation_safety_a.pdf, id=502, 110.40001pt x 101.37875pt>
+Package pdftex.def Info: figures/fig04_heldout_performance/adp_heldout_performance_d.pdf  used on input line 567.
+(pdftex.def)             Requested size: 107.99927pt x 103.24582pt.
+<figures/fig05_ablation_safety/adp_ablation_safety_a.pdf, id=458, 110.40001pt x 101.37875pt>
 File: figures/fig05_ablation_safety/adp_ablation_safety_a.pdf Graphic file (type pdf)
 <use figures/fig05_ablation_safety/adp_ablation_safety_a.pdf>
-Package pdftex.def Info: figures/fig05_ablation_safety/adp_ablation_safety_a.pdf  used on input line 726.
-(pdftex.def)             Requested size: 110.40161pt x 101.38004pt.
-<figures/fig05_ablation_safety/adp_ablation_safety_b.pdf, id=503, 129.6pt x 101.37875pt>
+Package pdftex.def Info: figures/fig05_ablation_safety/adp_ablation_safety_a.pdf  used on input line 601.
+(pdftex.def)             Requested size: 95.99854pt x 88.15393pt.
+<figures/fig05_ablation_safety/adp_ablation_safety_b.pdf, id=459, 129.6pt x 101.37875pt>
 File: figures/fig05_ablation_safety/adp_ablation_safety_b.pdf Graphic file (type pdf)
 <use figures/fig05_ablation_safety/adp_ablation_safety_b.pdf>
-Package pdftex.def Info: figures/fig05_ablation_safety/adp_ablation_safety_b.pdf  used on input line 727.
-(pdftex.def)             Requested size: 129.59839pt x 101.38158pt.
-<figures/fig05_ablation_safety/adp_ablation_safety_legend.pdf, id=504, 240.0pt x 18.0675pt>
+Package pdftex.def Info: figures/fig05_ablation_safety/adp_ablation_safety_b.pdf  used on input line 602.
+(pdftex.def)             Requested size: 120.0pt x 93.87286pt.
+<figures/fig05_ablation_safety/adp_ablation_safety_legend.pdf, id=460, 240.0pt x 18.0675pt>
 File: figures/fig05_ablation_safety/adp_ablation_safety_legend.pdf Graphic file (type pdf)
 <use figures/fig05_ablation_safety/adp_ablation_safety_legend.pdf>
-Package pdftex.def Info: figures/fig05_ablation_safety/adp_ablation_safety_legend.pdf  used on input line 728.
+Package pdftex.def Info: figures/fig05_ablation_safety/adp_ablation_safety_legend.pdf  used on input line 603.
 (pdftex.def)             Requested size: 240.0pt x 18.06854pt.
-<figures/fig05_ablation_safety/adp_ablation_safety_c.pdf, id=505, 110.40001pt x 116.435pt>
+<figures/fig05_ablation_safety/adp_ablation_safety_c.pdf, id=461, 110.40001pt x 116.435pt>
 File: figures/fig05_ablation_safety/adp_ablation_safety_c.pdf Graphic file (type pdf)
 <use figures/fig05_ablation_safety/adp_ablation_safety_c.pdf>
-Package pdftex.def Info: figures/fig05_ablation_safety/adp_ablation_safety_c.pdf  used on input line 729.
-(pdftex.def)             Requested size: 110.40161pt x 116.43648pt.
-<figures/fig05_ablation_safety/adp_ablation_safety_d.pdf, id=506, 129.6pt x 116.435pt>
+Package pdftex.def Info: figures/fig05_ablation_safety/adp_ablation_safety_c.pdf  used on input line 604.
+(pdftex.def)             Requested size: 100.79956pt x 106.30956pt.
+<figures/fig05_ablation_safety/adp_ablation_safety_d.pdf, id=462, 129.6pt x 116.435pt>
 File: figures/fig05_ablation_safety/adp_ablation_safety_d.pdf Graphic file (type pdf)
 <use figures/fig05_ablation_safety/adp_ablation_safety_d.pdf>
-Package pdftex.def Info: figures/fig05_ablation_safety/adp_ablation_safety_d.pdf  used on input line 730.
-(pdftex.def)             Requested size: 129.59839pt x 116.43825pt.
-<figures/fig06_representative_trajectory/adp_representative_trajectory_a.pdf, id=508, 162.0pt x 142.63287pt>
-File: figures/fig06_representative_trajectory/adp_representative_trajectory_a.pdf Graphic file (type pdf)
-<use figures/fig06_representative_trajectory/adp_representative_trajectory_a.pdf>
-Package pdftex.def Info: figures/fig06_representative_trajectory/adp_representative_trajectory_a.pdf  used on input line 747.
-(pdftex.def)             Requested size: 162.00073pt x 142.64555pt.
-<figures/fig06_representative_trajectory/adp_representative_trajectory_b.pdf, id=509, 104.4pt x 113.32338pt>
-File: figures/fig06_representative_trajectory/adp_representative_trajectory_b.pdf Graphic file (type pdf)
-<use figures/fig06_representative_trajectory/adp_representative_trajectory_b.pdf>
-Package pdftex.def Info: figures/fig06_representative_trajectory/adp_representative_trajectory_b.pdf  used on input line 749.
-(pdftex.def)             Requested size: 104.39941pt x 113.32309pt.
-<figures/fig06_representative_trajectory/adp_representative_trajectory_c.pdf, id=510, 104.4pt x 113.32338pt>
-File: figures/fig06_representative_trajectory/adp_representative_trajectory_c.pdf Graphic file (type pdf)
-<use figures/fig06_representative_trajectory/adp_representative_trajectory_c.pdf>
-Package pdftex.def Info: figures/fig06_representative_trajectory/adp_representative_trajectory_c.pdf  used on input line 750.
-(pdftex.def)             Requested size: 104.39941pt x 113.32309pt.
+Package pdftex.def Info: figures/fig05_ablation_safety/adp_ablation_safety_d.pdf  used on input line 605.
+(pdftex.def)             Requested size: 120.0pt x 107.81438pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [11 <./figures/fig04_heldout_performance/adp_heldout_performance_a.pdf> <./figures/fig04_heldout_performance/adp_heldout_performance_b.pdf> <./figures/fig04_heldout_performance/adp_heldout_performance_c.pdf> <./figures/fig04_heldout_performance/adp_heldout_performance_d.pdf>]
-Underfull \vbox (badness 1107) has occurred while \output is active []
+ [9 <./figures/fig04_heldout_performance/adp_heldout_performance_a.pdf> <./figures/fig04_heldout_performance/adp_heldout_performance_b.pdf> <./figures/fig04_heldout_performance/adp_heldout_performance_c.pdf> <./figures/fig04_heldout_performance/adp_heldout_performance_d.pdf> <./figures/fig05_ablation_safety/adp_ablation_safety_a.pdf> <./figures/fig05_ablation_safety/adp_ablation_safety_b.pdf> <./figures/fig05_ablation_safety/adp_ablation_safety_legend.pdf> <./figures/fig05_ablation_safety/adp_ablation_safety_c.pdf> <./figures/fig05_ablation_safety/adp_ablation_safety_d.pdf>]
+<figures/fig06_representative_trajectory/adp_representative_trajectory_a.pdf, id=663, 162.0pt x 142.63287pt>
+File: figures/fig06_representative_trajectory/adp_representative_trajectory_a.pdf Graphic file (type pdf)
+<use figures/fig06_representative_trajectory/adp_representative_trajectory_a.pdf>
+Package pdftex.def Info: figures/fig06_representative_trajectory/adp_representative_trajectory_a.pdf  used on input line 622.
+(pdftex.def)             Requested size: 150.0pt x 132.07913pt.
+<figures/fig06_representative_trajectory/adp_representative_trajectory_b.pdf, id=664, 104.4pt x 113.32338pt>
+File: figures/fig06_representative_trajectory/adp_representative_trajectory_b.pdf Graphic file (type pdf)
+<use figures/fig06_representative_trajectory/adp_representative_trajectory_b.pdf>
+Package pdftex.def Info: figures/fig06_representative_trajectory/adp_representative_trajectory_b.pdf  used on input line 624.
+(pdftex.def)             Requested size: 95.99854pt x 104.20343pt.
+<figures/fig06_representative_trajectory/adp_representative_trajectory_c.pdf, id=665, 104.4pt x 113.32338pt>
+File: figures/fig06_representative_trajectory/adp_representative_trajectory_c.pdf Graphic file (type pdf)
+<use figures/fig06_representative_trajectory/adp_representative_trajectory_c.pdf>
+Package pdftex.def Info: figures/fig06_representative_trajectory/adp_representative_trajectory_c.pdf  used on input line 625.
+(pdftex.def)             Requested size: 95.99854pt x 104.20343pt.
 
- [12 <./figures/fig05_ablation_safety/adp_ablation_safety_a.pdf> <./figures/fig05_ablation_safety/adp_ablation_safety_b.pdf> <./figures/fig05_ablation_safety/adp_ablation_safety_legend.pdf> <./figures/fig05_ablation_safety/adp_ablation_safety_c.pdf> <./figures/fig05_ablation_safety/adp_ablation_safety_d.pdf> <./figures/fig06_representative_trajectory/adp_representative_trajectory_a.pdf> <./figures/fig06_representative_trajectory/adp_representative_trajectory_b.pdf> <./figures/fig06_representative_trajectory/adp_representative_trajectory_c.pdf>]
-<figures/fig07_ros_camera_views/ros_key_camera_views_trajectory.pdf, id=774, 483.69685pt x 133.72795pt>
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [10 <./figures/fig06_representative_trajectory/adp_representative_trajectory_a.pdf> <./figures/fig06_representative_trajectory/adp_representative_trajectory_b.pdf> <./figures/fig06_representative_trajectory/adp_representative_trajectory_c.pdf>]
+<figures/fig07_ros_camera_views/ros_key_camera_views_trajectory.pdf, id=733, 483.69685pt x 133.72795pt>
 File: figures/fig07_ros_camera_views/ros_key_camera_views_trajectory.pdf Graphic file (type pdf)
 <use figures/fig07_ros_camera_views/ros_key_camera_views_trajectory.pdf>
-Package pdftex.def Info: figures/fig07_ros_camera_views/ros_key_camera_views_trajectory.pdf  used on input line 797.
+Package pdftex.def Info: figures/fig07_ros_camera_views/ros_key_camera_views_trajectory.pdf  used on input line 670.
 (pdftex.def)             Requested size: 492.0pt x 136.02524pt.
-
-Underfull \hbox (badness 1360) in paragraph at lines 812--813
-[]\OT1/ptm/m/n/10.28844 The sub-se-quent normal-speed graph-i-cal run used
- []
-
-<figures/fig08_rviz_overview/rviz_execution_overview_a.pdf, id=777, 103.02742pt x 120.35515pt>
+<figures/fig08_rviz_overview/rviz_execution_overview_a.pdf, id=736, 103.02742pt x 120.35515pt>
 File: figures/fig08_rviz_overview/rviz_execution_overview_a.pdf Graphic file (type pdf)
 <use figures/fig08_rviz_overview/rviz_execution_overview_a.pdf>
-Package pdftex.def Info: figures/fig08_rviz_overview/rviz_execution_overview_a.pdf  used on input line 826.
-(pdftex.def)             Requested size: 102.23877pt x 119.43658pt.
-<figures/fig08_rviz_overview/rviz_execution_overview_b.pdf, id=778, 120.92421pt x 120.35515pt>
+Package pdftex.def Info: figures/fig08_rviz_overview/rviz_execution_overview_a.pdf  used on input line 687.
+(pdftex.def)             Requested size: 95.99854pt x 112.14764pt.
+<figures/fig08_rviz_overview/rviz_execution_overview_b.pdf, id=737, 120.92421pt x 120.35515pt>
 File: figures/fig08_rviz_overview/rviz_execution_overview_b.pdf Graphic file (type pdf)
 <use figures/fig08_rviz_overview/rviz_execution_overview_b.pdf>
-Package pdftex.def Info: figures/fig08_rviz_overview/rviz_execution_overview_b.pdf  used on input line 827.
-(pdftex.def)             Requested size: 120.0pt x 119.43658pt.
-[13 <./figures/fig08_rviz_overview/rviz_execution_overview_a.pdf> <./figures/fig08_rviz_overview/rviz_execution_overview_b.pdf>] [14 <./figures/fig07_ros_camera_views/ros_key_camera_views_trajectory.pdf>] (./main.bbl
-Underfull \hbox (badness 1796) in paragraph at lines 126--127
+Package pdftex.def Info: figures/fig08_rviz_overview/rviz_execution_overview_b.pdf  used on input line 688.
+(pdftex.def)             Requested size: 107.99927pt x 107.49219pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [11] (./main.bbl [12 <./figures/fig07_ros_camera_views/ros_key_camera_views_trajectory.pdf> <./figures/fig08_rviz_overview/rviz_execution_overview_a.pdf> <./figures/fig08_rviz_overview/rviz_execution_overview_b.pdf>]
+Underfull \hbox (badness 1796) in paragraph at lines 123--124
 \OT1/ptm/m/n/8.25 Space Sta-tion glTF Model,'' [][]$https : / / science . nasa . gov / resource /
  []
 
 
-Underfull \hbox (badness 2689) in paragraph at lines 126--127
+Underfull \hbox (badness 2689) in paragraph at lines 123--124
 \OT1/ptm/m/n/8.25 international-[]space-[]station-[]3d-[]model/$[][], 2019, up-dated Nov. 2,
  []
 
-) [15] (./main.aux)
+) [13
+
+] (./main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: E65E262C841F4250A8765B545292FC2F;5723.
+(rerunfilecheck)             Checksum: B013E153F440C2F0B6363D94E2C4D09A;5761.
  ) 
 Here is how much of TeX's memory you used:
- 13383 strings out of 476106
- 219949 string characters out of 5793933
- 1955975 words of memory out of 5000000
- 35038 multiletter control sequences out of 15000+600000
- 602676 words of font info for 127 fonts, out of 8000000 for 9000
+ 13351 strings out of 476106
+ 219416 string characters out of 5793933
+ 1954975 words of memory out of 5000000
+ 35017 multiletter control sequences out of 15000+600000
+ 604506 words of font info for 133 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
- 90i,15n,93p,1860b,468s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (15 pages, 5872535 bytes).
+ 90i,15n,93p,1516b,599s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on main.pdf (13 pages, 5855373 bytes).
 PDF statistics:
- 1025 PDF objects out of 1200 (max. 8388607)
- 752 compressed objects within 8 object streams
- 157 named destinations out of 1000 (max. 500000)
+ 981 PDF objects out of 1000 (max. 8388607)
+ 711 compressed objects within 8 object streams
+ 140 named destinations out of 1000 (max. 500000)
  325 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -89,17 +89,14 @@ D.~P. Bertsekas, ``Dynamic programming and suboptimal control: A survey from {AD
 \bibitem{bertsekas2017iterations}
 D.~P. Bertsekas, ``Value and policy iterations in optimal control and adaptive dynamic programming,'' \emph{IEEE Transactions on Neural Networks and Learning Systems}, vol.~28, no.~3, pp. 500--509, 2017.
 
-\bibitem{kiumarsi2018survey}
-B.~Kiumarsi, K.~G. Vamvoudakis, H.~Modares, and F.~L. Lewis, ``Optimal and autonomous control using reinforcement learning: A survey,'' \emph{IEEE Transactions on Neural Networks and Learning Systems}, vol.~29, no.~6, pp. 2042--2062, 2018.
-
 \bibitem{hu2021learning}
 Q.~Hu, H.~Yang, H.~Dong, and X.~Zhao, ``Learning-based {6-DOF} control for autonomous proximity operations under motion constraints,'' \emph{IEEE Transactions on Aerospace and Electronic Systems}, vol.~57, no.~6, pp. 4097--4109, 2021.
 
-\bibitem{luo2025attitude}
-C.~Luo, X.~Ning, and R.~Tang, ``Online optimal attitude stabilization via reinforcement learning for rigid spacecraft with dynamic uncertainty,'' \emph{IEEE Transactions on Aerospace and Electronic Systems}, vol.~61, no.~4, pp. 10\,471--10\,482, 2025.
-
 \bibitem{tian2024proximity}
 Y.~Tian, Y.~Shi, X.~Shao, Q.~Hu, H.~Yang, and Z.~H. Zhu, ``Spacecraft proximity operations under motion and input constraints: A learning-based robust optimal control approach,'' \emph{IEEE Transactions on Aerospace and Electronic Systems}, vol.~60, no.~6, pp. 7838--7852, 2024.
+
+\bibitem{luo2025attitude}
+C.~Luo, X.~Ning, and R.~Tang, ``Online optimal attitude stabilization via reinforcement learning for rigid spacecraft with dynamic uncertainty,'' \emph{IEEE Transactions on Aerospace and Electronic Systems}, vol.~61, no.~4, pp. 10\,471--10\,482, 2025.
 
 \bibitem{tang2025reachavoid}
 R.~Tang, C.~Luo, T.~Wang, X.~Ning, and C.-Y. Wen, ``Reach-avoid differential graphical games for single evader and multiple pursuers with nonlinear dynamics,'' \emph{IEEE Transactions on Automation Science and Engineering}, vol.~22, pp. 24\,545--24\,558, 2025.

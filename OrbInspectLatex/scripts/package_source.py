@@ -10,7 +10,7 @@ def main() -> None:
     check()
     destination = ROOT/'build/OrbInspectLatex_source.zip'
     destination.parent.mkdir(exist_ok=True)
-    roots = [ROOT/p for p in ('main.tex','references.bib','IEEEtaes.cls','IEEEtran.bst',
+    roots = [ROOT/p for p in ('main.tex','supplement.tex','references.bib','IEEEtaes.cls','IEEEtran.bst',
                               'Makefile','.latexmkrc','.gitignore','README.md',
                               'figures','data','scripts','docs')]
     members = []

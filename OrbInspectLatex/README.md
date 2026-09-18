@@ -9,12 +9,13 @@ A standard TeX installation is still required.
 ## Build or share
 
 The 2026-09-14 revision adds a redundant-viewpoint development pilot and an
-independent feasibility/cost comparison. New Section V-E describes the protocol,
-Section VI-E and Table VIII use the independently certified all-solvable benchmark
+independent feasibility/cost comparison. Section V-E describes the protocol;
+Section VI-E and Table V use the independently certified all-solvable benchmark
 as the primary planner-success denominator: 59 cases, with the four visibility-loss
 cases retained separately as a stress test. Depth-three ADP completes 59/59
-solvable cases, with a 0.96% mean graph-cost gap on 27 proven optima. The manuscript is 15 pages and
-all eight approved figure assets and inclusion sizes are preserved. See
+solvable cases, with a 0.96% mean graph-cost gap on 27 proven optima. The main
+manuscript is 14 pages, its separate supplement is 2 pages, and all eight approved
+figure assets and inclusion sizes are preserved. See
 [the revision record](docs/VIEWPOINT_PILOT_MANUSCRIPT_20260914.md) and
 [the complete local evidence](data/viewpoint_feasibility_pilot/README.md).
 
@@ -36,7 +37,7 @@ See [the Figure 8 record](docs/FIGURE_8_RVIZ_OVERVIEW_20260909.md).
 Run from this folder:
 
 ```sh
-make          # PDF: build/main.pdf
+make          # PDFs: build/main.pdf and build/supplement.pdf
 make check    # Check local dependencies, figure hashes and embedded images
 make package  # Portable source ZIP: build/OrbInspectLatex_source.zip
 ```
@@ -47,18 +48,23 @@ graphics and publisher packages (TeX Live or MacTeX). The journal class
 `make check` and packaging use only Python 3's standard library. On Ubuntu,
 review `scripts/install_tex_ubuntu.sh` before using it to install TeX packages.
 
-All manuscript text, sections, tables and numerical macros are now edited in
-the single `main.tex`. The bibliography, journal class, bibliography style and
+All main-article text, sections, tables and numerical macros are edited in the
+single `main.tex`. Supporting tables and detailed ROS provenance moved during
+page reduction are in the standalone `supplement.tex`; it is not included by
+the main article. The bibliography, journal class, bibliography style and
 original figure PDFs remain supporting files. The earlier modular TeX sources
 are preserved under `archive/modular_tex_20260914/`; they are not compilation
-inputs. If study tables are regenerated, update their corresponding blocks in
-`main.tex` explicitly. See [the consolidation record](docs/SINGLE_TEX_20260914.md).
+inputs. If study tables are regenerated, update the corresponding block in
+`main.tex` or `supplement.tex` explicitly. See
+[the consolidation record](docs/SINGLE_TEX_20260914.md).
 
-For Overleaf, upload the source ZIP and select `main.tex` with pdfLaTeX.
+For Overleaf, upload the source ZIP and select `main.tex` with pdfLaTeX for the
+article, or select `supplement.tex` to compile the separate supplement.
 The ZIP excludes historical archives, repository-dependent tools and build
 debris. It retains the editable figures, local evidence snapshots and docs.
 For manual builds without latexmk, use `pdflatex main.tex`, `bibtex main`,
-then `pdflatex main.tex` twice; that fallback writes temporary files in the root.
+then `pdflatex main.tex` twice. Apply the same sequence with the basename
+`supplement` for the supplement; that fallback writes temporary files in the root.
 
 The bibliography prints author names in every reference, including consecutive
 entries with identical authors. The `IEEEfullAuthorNames` control entry in
@@ -71,6 +77,7 @@ publisher's bibliography style. It does not appear as a numbered reference.
 ```text
 OrbInspectLatex/
 ├── main.tex                 Complete article, all sections, tables and numerical macros
+├── supplement.tex           Standalone supporting tables and ROS execution provenance
 ├── references.bib           Bibliography
 ├── IEEEtaes.cls             Local journal class
 ├── IEEEtran.bst             Local bibliography style
@@ -223,9 +230,9 @@ The organization changed file paths only, not scientific content. Existing
 concurrent figure-width edits were preserved. See `docs/ORGANIZATION.md` and
 `docs/organization_manifest.json` for the inventory and verification record.
 
-The subsequent table-layout revision uses single-column floats for Tables II
-and IV and full-width alignment for Tables III, V and VI. Data, captions and
-font sizes are unchanged. See `docs/TABLE_LAYOUT_20260908.md` for verification.
+The main article now contains Tables I--V; the separate supplement contains
+Tables S1--S3. The approved caption measure, data and font sizes are preserved.
+See `docs/TABLE_LAYOUT_20260908.md` for the earlier layout verification.
 
 The later terminology cleanup replaces internal run/profile keys with academic
 display labels, preserving exact identifiers in `docs/MANUSCRIPT_IDENTIFIER_MAP.md`

@@ -8,20 +8,22 @@ complementary overview and ADP-mechanism pair.
 
 - $\mathcal K$ is the fixed required-target set; $K$ in the manuscript's HCW
   edge record is a different quantity, the number of transfer steps.
-- $s=(j,m,b,h)$ is the generic decision state. Here $j$ is the current node,
-  $m$ the covered-target mask, $b$ the selected-view mask, and $h$ the remaining
+- $s=(j,\mathbf m,\boldsymbol\beta,h)$ is the generic decision state. Here $j$
+  is the current node, $\mathbf m$ the covered-target mask, $\boldsymbol\beta$
+  the selected-view mask, and $h$ the remaining
   action budget. $H$ is the initial budget. Omitting the time subscript $k$ is
   consistent with the manuscript's Bellman equations.
-- $a\in\mathcal U_s(s)$ is an audited, unvisited destination choice. A stored
+- $a\in\mathcal U_s(s)$ is an audited, unvisited destination action. A stored
   edge $\mathsf a_{ij}$ joins source candidate node $c_i$ to destination
   candidate node $c_j$; $\ell_{ij}$ and $\chi_{ij}$ are
   its stage cost and audit indicator. At decision state $s$, the corresponding
-  indices are $\ell_{ja}$ and $\chi_{ja}$.
+  indices are $\ell_{ja}$ and $\chi_{ja}$. The represented area of surface
+  sample $i$ is denoted by $\Delta A_i$.
 
 ## Camera and example identifiers (A and B1)
 
 The camera center and boresight at observation node $j$ are
-$\bar{\mathbf r}_j$ and $\mathbf b(\bar q_j)$. Target position $\mathbf p_i$ and
+$\bar{\mathbf r}_j$ and $\mathbf b(\bar{\mathbf q}_j)$. Target position $\mathbf p_i$ and
 surface normal $\mathbf n_i$ use the manuscript's notation. The displayed range is
 $\|\mathbf p_i-\bar{\mathbf r}_j\|$. The illustrated incidence angle is
 

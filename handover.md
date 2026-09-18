@@ -1,5 +1,16 @@
 # Ubuntu handover: required-target ROS validation and manuscript update
 
+**Submission-length revision completed (2026-09-17):** recommendations 1, 2,
+4 and 5 were applied to the local manuscript. Repeated exposition was condensed,
+the target inventories and full depth diagnostic moved to a standalone supplement,
+and detailed ROS bookkeeping moved there with them. The former historical Table IV
+was removed from the main results and retained as Supplementary Table S3 with its
+development-only limitation stated explicitly. The main article is now 14 pages
+(down from 16), with Tables I--V; `supplement.tex` compiles separately to 2 pages
+with Tables S1--S3. All eight figure assets and their inclusion sizes are unchanged.
+Figures 7 and 8 appear in order on page 13, and references 19--34 occupy page 14.
+No Overleaf edit or Git push was performed.
+
 **Figure 1 refreshed (2026-09-14):** the updated native draw.io source was
 checked and exported to matching PDF/SVG/PNG assets. The revised workflow-arrow
 routing is included in the local manuscript; the five-panel content, labels,
@@ -682,3 +693,16 @@ the initial mask $m_0=\mathbf0$ from the generic decision-step mask $m_k$.
 **Coverage-mask vector styling standardized (2026-09-15):** Coverage masks are
 now written as bold vectors, $\mathbf m_k$ and $\mathbf m$, throughout the
 manuscript; their scalar components remain $m_{i,k}$ and $m_i$.
+
+**Equation 17 layout corrected (2026-09-17):** Wrapped the first-case condition
+in the base-policy completion value onto two lines so the display fits its
+column. Mathematical content, numbering, and font size are unchanged. Page 6
+was visually checked; the rebuilt manuscript remains 16 pages and has no
+overfull-box warnings.
+
+**Table caption alignment corrected (2026-09-17):** Table captions now use
+centered blocks of `0.9\linewidth`, matching the figure-caption measure.
+Multiline caption text is fully justified without first-line indentation;
+table numbers and single-line captions remain centered. All eight captions
+were visually checked. Table data, font sizes, and figure styling are unchanged;
+the rebuilt manuscript remains 16 pages.

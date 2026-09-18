@@ -6,19 +6,19 @@
       "files": [
         {
           "file": "figures/fig01_framework/viability_preserving_rollout_adp.drawio",
-          "sha256": "215da32c2554dc64152a6e2b1d47941ea0df203b25d170092b43db47f82b102c"
+          "sha256": "bf5e38204f2e4e3a02a803c452bda1f56d84a9447b4b7d0a036f8a2d3df7e225"
         },
         {
           "file": "figures/fig01_framework/viability_preserving_rollout_adp.pdf",
-          "sha256": "cf06f6b8db443058067717d35e92287f96fd5d860c457de9cf61b9bb8ea01452"
+          "sha256": "b143c44edf176f66f1d05ce2826ba6a2eda7031f0f7057d85fdf7dfb4a29ff04"
         },
         {
           "file": "figures/fig01_framework/viability_preserving_rollout_adp.png",
-          "sha256": "7df0b333b665e4cc54780de2222eccd9274abf3f0a4e99ee0ca1ee84d99abfb2"
+          "sha256": "b4b69537270162fb87c8e35a49c6695c102d19ca5ec7f9ed4a00cd3f6724cfa5"
         },
         {
           "file": "figures/fig01_framework/viability_preserving_rollout_adp.svg",
-          "sha256": "cb9f180258af87309206f4a14cb15840b4a8688e9c186a962333e1cf83551a9c"
+          "sha256": "c9bb85d866de4834e81f27095a4dbf2c2208ead66567e5270e0345e477f09ca2"
         }
       ]
     },

@@ -1,0 +1,150 @@
+%% Supplementary material for the OrbInspect IEEE TAES manuscript.
+\PassOptionsToPackage{hypertexnames=false}{hyperref}
+\documentclass{IEEEtaes}
+
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{ragged2e}
+\usepackage[urlcolor=blue,linkcolor=blue]{hyperref}
+
+\makeatletter
+\long\def\@makecaption#1#2{%
+  \ifx\@captype\@IEEEtablestring
+    \makebox[\linewidth][c]{%
+      \parbox[t]{\linewidth}{%
+        {\tablecapnumfont\centering#1\par}%
+        \sbox\@tempboxa{\tablecapfont#2}%
+        \ifdim\wd\@tempboxa>\linewidth
+          {\tablecapfont\justifying\noindent#2\par}%
+        \else
+          {\tablecapfont\centering#2\par}%
+        \fi
+      }%
+    }%
+    \@IEEEtablecaptionsepspace
+  \else
+    \@IEEEfigurecaptionsepspace
+    \makebox[\linewidth][c]{%
+      \parbox[t]{\linewidth}{%
+        \figcapnumfont#1.\hspace*{9.5pt}{\figcapfont\justifying#2\par}%
+      }%
+    }%
+  \fi
+}
+\makeatother
+
+\renewcommand{\thesection}{S\arabic{section}}
+\renewcommand{\thetable}{S\arabic{table}}
+
+\begin{document}
+
+\title{Supplementary Material for ``Viability-Preserving Rollout Approximate Dynamic Programming for Required-Target Orbital Inspection''}
+
+\author{Rugang Tang}
+\affil{The Hong Kong Polytechnic University, Hung Hom, Kowloon, Hong Kong SAR}
+
+\author{Xin Ning}
+\affil{School of Astronautics, Northwestern Polytechnical University, Xi'an, Shaanxi 710072, China}
+
+\author{Chih-Yung Wen}
+\affil{Department of Aeronautical and Aviation Engineering, The Hong Kong Polytechnic University, Hung Hom, Kowloon, Hong Kong SAR}
+
+\receiveddate{}
+\corresp{{\itshape Corresponding author: Rugang Tang} (e-mail: \href{mailto:rugtang@polyu.edu.hk}{rugtang@polyu.edu.hk}).}
+\markboth{OrbInspect Supplementary Material}{Rollout ADP for Orbital Inspection}
+\maketitle
+
+\section{Required-Target Profile Inventory}
+
+Table~S1 records the frozen synthetic target identities used in the first required-target campaign. Three equal-width slabs span the longest axis of the transformed mesh. Within each slab, selection begins with the sample nearest the slab centroid and then applies normalized farthest-point sampling. The profiles therefore distribute prescribed samples across the observable library; they do not represent an operational International Space Station maintenance checklist.
+
+\begin{table*}[t]
+  \centering
+  \caption{Frozen synthetic required-target profiles. IDs omit the common mesh prefix; the nine-target profile is primary}
+  \label{tab:supp-required-profiles}
+  \renewcommand{\arraystretch}{1.08}
+  \setlength{\tabcolsep}{5pt}
+  \footnotesize
+  \begin{tabularx}{\linewidth}{@{}lr>{\centering\arraybackslash}p{3.2em}>{\raggedright\arraybackslash}X@{}}
+    \toprule
+    Profile & Items & \shortstack{Slab\\counts} & Required sample IDs \\
+    \midrule
+    6-target & 6 & 2/2/2 & 00055, 00052, 00007, 00001, 00033, 00015 \\
+    9-target & 9 & 3/3/3 & 00055, 00052, 00059, 00007, 00001, 00079, 00033, 00015, 00019 \\
+    12-target & 12 & 4/4/4 & 00055, 00052, 00059, 00064, 00007, 00001, 00079, 00045, 00033, 00015, 00019, 00024 \\
+    \bottomrule
+  \end{tabularx}
+\end{table*}
+
+\section{Depth Diagnostic and Timing Protocol}
+
+After the primary depth-three policy was fixed, all six depths were evaluated on the same 12 validation scenarios with the nine-target requirement, graph, action budget, implementation, and zero-gain connecting actions unchanged. The nine scenarios with required visibility were completed at every depth; the other three lacked an available view of at least one required target. Mean graph cost in Table~S2 therefore uses the nine commonly completed scenarios, whereas timing and safety-screen counts include all 12 cases.
+
+Each scenario--depth pair was measured once in ascending-depth order using Python~3.14 on an Apple M4 host running macOS. Complete-route timing includes preliminary base-policy construction but excludes graph loading and serialization. Scheduling and thermal effects were uncontrolled. Safety-screen counts exclude the separate preliminary base-policy call. The measurements are therefore implementation diagnostics rather than controlled hardware benchmarks.
+
+\begin{table*}[t]
+  \centering
+  \caption{Post-selection depth diagnostic on the 12 validation scenarios. Ratios use depth three; negative $\Delta J$ denotes lower mean graph cost}
+  \label{tab:supp-depth-sensitivity}
+  \renewcommand{\arraystretch}{1.08}
+  \setlength{\tabcolsep}{5pt}
+  \footnotesize
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}crrrrrrr@{}}
+    \toprule
+    Depth & Complete & Mean $J$ & $\Delta J$ (\%) & Median time (s) & Time ($\times$) & Mean screens & Screens ($\times$) \\
+    \midrule
+    1 & 9/12 & 135.714 & +14.51 & 0.0272 & 0.03 & 7,132 & 0.02 \\
+    2 & 9/12 & 133.450 & +12.60 & 0.2207 & 0.22 & 65,928 & 0.20 \\
+    \textbf{3} & \textbf{9/12} & \textbf{118.520} & \textbf{+0.00} & \textbf{1.0094} & \textbf{1.00} & \textbf{322,349} & \textbf{1.00} \\
+    4 & 9/12 & 115.272 & $-2.74$ & 4.6760 & 4.63 & 1,527,408 & 4.74 \\
+    5 & 9/12 & 115.272 & $-2.74$ & 17.6601 & 17.50 & 5,757,081 & 17.86 \\
+    6 & 9/12 & 115.272 & $-2.74$ & 53.0133 & 52.52 & 17,454,611 & 54.15 \\
+    \bottomrule
+  \end{tabular*}
+\end{table*}
+
+Depth three reduced mean graph cost by 11.19\% relative to depth two. Depth four reduced it by a further 2.74\%, at 4.63 times the median planning time and 4.74 times the mean safety-screen count. Depths five and six produced no further cost or completion improvement. These results support depth three as the fixed computation--cost compromise used in the main comparisons.
+
+\section{Historical Required-Target Campaign}
+
+Table~S3 preserves the first campaign that motivated a completion-capable comparator. Each profile used different scenario seeds, so cross-profile comparisons are descriptive. The historical local search was initialized with the greedy route; a failed greedy construction therefore left it without a complete incumbent. This differs from the main manuscript's fresh comparator, which initializes local search from a completed one-step approximate dynamic programming route.
+
+\begin{table}[t]
+  \centering
+  \caption{Historical completion counts from the first required-target campaign}
+  \label{tab:supp-historical-results}
+  \renewcommand{\arraystretch}{1.08}
+  \setlength{\tabcolsep}{5pt}
+  \footnotesize
+  \begin{tabular}{@{}llrr@{}}
+    \toprule
+    Profile & Split & Depth-3 ADP & Greedy-seeded local \\
+    \midrule
+    6-target & Test & 40/50 & 0/50 \\
+    9-target & Test & 37/50 & 0/50 \\
+    12-target & Test & 38/50 & 0/50 \\
+    6-target & Shifted & 10/30 & 0/30 \\
+    9-target & Shifted & 10/30 & 0/30 \\
+    12-target & Shifted & 10/30 & 1/30 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The campaign retained all generated cases without feasibility rejection. One shifted case in the six-target profile preserved an available view for every required target but lacked a finite depth-three completion certificate; thus target-wise visibility alone did not establish route feasibility. Because seeds differ among profiles and the comparator depended on greedy initialization, these outcomes are development history rather than the manuscript's primary method comparison.
+
+\section{Exact Reduced-Graph Bellman Result}
+
+For fixed finite nodes, deterministic visibility masks and audited edge costs, a required set $\mathcal K$, the no-revisit rule, and horizon $H$, exhaustive evaluation of the Bellman recursion in the main manuscript returns a minimum-cost task-completing shield-feasible sequence when one exists. It returns $+\infty$ when no such sequence exists in the sampled graph.
+
+To prove the statement, use induction on the remaining budget $h$. At $h=0$, the recursion returns zero exactly for a completed state and $+\infty$ otherwise. Assume it is correct for all states with at most $h-1$ remaining actions. Every feasible sequence from a state with budget $h$ begins with one shield-admissible action and a continuation with budget $h-1$. By the induction hypothesis, the recursion assigns that continuation its minimum cost or $+\infty$ if none exists. Minimizing over every admissible first action therefore returns the minimum total cost, or $+\infty$ when every continuation is infeasible. The conclusion is limited to the exhausted sampled graph and does not extend to omitted camera poses or continuous-space trajectories.
+
+\section{ROS 2 Execution Provenance}
+
+The selected Robot Operating System 2 (ROS~2) execution in the main manuscript followed an earlier nine-view run that achieved 77.22\% weighted background coverage. Development then introduced a 95\% coverage goal while retaining the same nine required target IDs and 41-sample weighting. Candidate views 5 and 12 entered the caution zone and were shifted by 8~m and 6~m, respectively. Camera aims were adjusted, and the affected transfers and visibility masks were recomputed before the reported execution. Each 90~s transfer was followed by 60~s of settling.
+
+The run used Ubuntu~24.04.4, ROS~2 Jazzy, Gazebo Harmonic, RViz2, and Python~3.12.3. Its logs contain 36,172 safe-control messages, including 1,847 safety-filter interventions, and 36,181 trajectory samples. A $247\,525$-triangle full-mesh audit was applied to the swept trajectory. The maximum publisher gap was 0.249~s, compared with the nominal 0.075~s diagnostic interval. Recorded camera frames matched their observation-event receipts within 0.074~s. Both recorded bags contain identical verification events, and Gazebo poses confirm visual alignment with the ROS state.
+
+These adjustments and diagnostics document one selected, post-hoc development execution. They do not alter the frozen held-out comparison or its reported 11.05\% mean maneuver-velocity-increment reduction.
+
+\end{document}

@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
 <mxfile host="app.diagrams.net">
   <diagram name="Viability-preserving rollout ADP for orbital inspection" id="A_integrated">
     <mxGraphModel dx="2054" dy="1185" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1680" pageHeight="990" math="1" shadow="0">
@@ -416,7 +417,7 @@
             <mxPoint x="175.13137793757394" y="650.8620736497844" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="119" notationSource="[[{&quot;kind&quot;: &quot;math&quot;, &quot;value&quot;: &quot;\\displaystyle \\mathbf{b}(\\bar{q}_j)&quot;}]]" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontFamily=Arial;fontColor=#3F91A6;spacing=0;fontStyle=0;fontSize=26.00000;whiteSpace=nowrap;overflow=fill;" value="&lt;div style=&quot;line-height:1.2&quot;&gt;\(\displaystyle \mathbf{b}(\bar{q}_j)\)&lt;/div&gt;" vertex="1">
+        <mxCell id="119" notationSource="[[{&quot;kind&quot;: &quot;math&quot;, &quot;value&quot;: &quot;\\displaystyle \\mathbf{b}(\\bar{\\mathbf{q}}_j)&quot;}]]" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontFamily=Arial;fontColor=#3F91A6;spacing=0;fontStyle=0;fontSize=26.00000;whiteSpace=nowrap;overflow=fill;" value="&lt;div style=&quot;line-height:1.2&quot;&gt;\(\displaystyle \mathbf{b}(\bar{\mathbf{q}}_j)\)&lt;/div&gt;" vertex="1">
           <mxGeometry height="34" width="82" x="357" y="667.6" as="geometry" />
         </mxCell>
         <mxCell id="120" edge="1" parent="1" style="edgeStyle=none;rounded=0;html=1;strokeColor=#C30000;strokeWidth=2;endArrow=none;endFill=1;endSize=9;dashed=1;" value="">
@@ -477,7 +478,7 @@
         <mxCell id="132" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.1;absoluteArcSize=1;arcSize=16.0;" value="" vertex="1">
           <mxGeometry height="44" width="394" x="36" y="895" as="geometry" />
         </mxCell>
-        <mxCell id="133" notationSource="[[{&quot;kind&quot;: &quot;math&quot;, &quot;value&quot;: &quot;\\displaystyle s=(j,m,b,h)&quot;}]]" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontFamily=Arial;fontColor=#000000;spacing=0;fontStyle=0;fontSize=28.00000;whiteSpace=nowrap;overflow=fill;" value="&lt;div style=&quot;line-height:1.2&quot;&gt;\(\displaystyle s=(j,m,b,h)\)&lt;/div&gt;" vertex="1">
+        <mxCell id="133" notationSource="[[{&quot;kind&quot;: &quot;math&quot;, &quot;value&quot;: &quot;\\displaystyle s=(j,\\mathbf{m},\\boldsymbol{\\beta},h)&quot;}]]" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontFamily=Arial;fontColor=#000000;spacing=0;fontStyle=0;fontSize=28.00000;whiteSpace=nowrap;overflow=fill;" value="&lt;div style=&quot;line-height:1.2&quot;&gt;\(\displaystyle s=(j,\mathbf{m},\boldsymbol{\beta},h)\)&lt;/div&gt;" vertex="1">
           <mxGeometry height="34" width="375" x="45" y="901" as="geometry" />
         </mxCell>
         <mxCell id="hcw-c-0" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.4;absoluteArcSize=1;arcSize=32.0;" value="" vertex="1">

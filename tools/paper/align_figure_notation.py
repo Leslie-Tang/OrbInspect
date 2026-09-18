@@ -89,12 +89,12 @@ def specifications(stem, cells):
         'Required targets K': line(T('Required targets '), M(r'\mathcal{K}')),
         'Fixed required set K': line(T('Fixed required set '), M(r'\mathcal{K}')),
         'Camera rⱼ': line(T('Camera '), M(r'\bar{\mathbf{r}}_j')),
-        'pᵢ': line(M(r'p_i')), 'nᵢ': line(M(r'n_i')),
+        'pᵢ': line(M(r'\mathbf p_i')), 'nᵢ': line(M(r'\mathbf n_i')),
         'θ': line(M(r'\theta')), 'ρ': line(T('Range')),
         'αₘₐₓ': line(M(r'\alpha_{\max}')),
-        'b(qⱼ)': line(M(r'b(\bar q_j)')),
+        'b(qⱼ)': line(M(r'\mathbf b(\bar{\mathbf q}_j)')),
         'Valid targets → Gⱼ': line(T('Valid targets → '), M(r'G_j')),
-        's = (j, m, b, h)': line(M(r's=(j,m,b,h)')),
+        's = (j, m, b, h)': line(M(r's=(j,\mathbf m,\boldsymbol\beta,h)')),
         's': line(M('s')),
         'Deterministic greedy μ': line(T('Deterministic greedy '), M(r'\mu')),
         'Lookahead depth d': line(T('Lookahead depth '), M('d')),
@@ -134,9 +134,9 @@ def specifications(stem, cells):
         })
     else:
         spec.update({
-            '7': [[M('j'), T('  current node')], [M('m'), T('  covered-target mask')],
-                  [M('b'), T('  selected-view mask')], [M('h'), T('  remaining budget')]],
-            '10': line(M(r'\mathcal U_s(s):\;b_a=0,\;\chi_{ja}=1')),
+            '7': [[M('j'), T('  current node')], [M(r'\mathbf m'), T('  covered-target mask')],
+                  [M(r'\boldsymbol\beta'), T('  selected-view mask')], [M('h'), T('  remaining budget')]],
+            '10': line(M(r'\mathcal U_s(s):\;\beta_a=0,\;\chi_{ja}=1')),
             '61': line(M(q)),
             '67': line(M(r'a^\star=\arg\min_a\,\widehat Q_d(s,a)')),
             '81': [[T('All '), M(r'\widehat Q_d(s,a)=+\infty')],
@@ -439,8 +439,9 @@ complementary overview and ADP-mechanism pair.
 
 - $\mathcal K$ is the fixed required-target set; $K$ in the manuscript's HCW
   edge record is a different quantity, the number of transfer steps.
-- $s=(j,m,b,h)$ is the generic decision state. Here $j$ is the current node,
-  $m$ the covered-target mask, $b$ the selected-view mask, and $h$ the remaining
+- $s=(j,\mathbf m,\boldsymbol\beta,h)$ is the generic decision state. Here $j$
+  is the current node, $\mathbf m$ the covered-target mask, $\boldsymbol\beta$
+  the selected-view mask, and $h$ the remaining
   action budget. $H$ is the initial budget. Omitting the time subscript $k$ is
   consistent with the manuscript's Bellman equations.
 - $a\in\mathcal U_s(s)$ is an audited, unvisited destination choice. An edge
@@ -451,12 +452,12 @@ complementary overview and ADP-mechanism pair.
 ## Camera and example identifiers (A and B1)
 
 The camera center and boresight at observation node $j$ are
-$\bar{\mathbf r}_j$ and $b(\bar q_j)$. Target position $p_i$ and surface normal
-$n_i$ use the manuscript's notation. The displayed range is
-$\|p_i-\bar{\mathbf r}_j\|$. The illustrated incidence angle is
+$\bar{\mathbf r}_j$ and $\mathbf b(\bar{\mathbf q}_j)$. Target position $\mathbf p_i$ and surface normal
+$\mathbf n_i$ use the manuscript's notation. The displayed range is
+$\|\mathbf p_i-\bar{\mathbf r}_j\|$. The illustrated incidence angle is
 
-$$\theta=\arccos\frac{(\bar{\mathbf r}_j-p_i)^{\mathsf T}n_i}
-{\|\bar{\mathbf r}_j-p_i\|\|n_i\|},\qquad\theta\leq\theta_{\max}.$$
+$$\theta=\arccos\frac{(\bar{\mathbf r}_j-\mathbf p_i)^{\mathsf T}\mathbf n_i}
+{\|\bar{\mathbf r}_j-\mathbf p_i\|\|\mathbf n_i\|},\qquad\theta\leq\theta_{\max}.$$
 
 The FOV half-angle is $\alpha_{\max}$, and $G_j$ contains camera-valid targets.
 The letters $x,z$ on spatial axes name the LVLH directions, corresponding to

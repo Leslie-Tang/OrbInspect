@@ -19,20 +19,28 @@
     {
       "before": "e  Replanning",
       "after": "V. Replanning"
+    },
+    {
+      "before": "\\mathbf{b}(\\bar{q}_j)",
+      "after": "\\mathbf{b}(\\bar{\\mathbf{q}}_j)"
+    },
+    {
+      "before": "s=(j,m,b,h)",
+      "after": "s=(j,\\mathbf{m},\\boldsymbol{\\beta},h)"
     }
   ],
   "all_other_native_svg_objects_identical": true,
   "geometry_fonts_colors_and_non_notation_equations_unchanged": true,
   "notation_alignment": {
     "camera_target_vectors": "\\mathbf{p}_i, \\mathbf{n}_i",
-    "camera_boresight": "\\mathbf{b}(\\bar{q}_j)",
+    "camera_boresight": "\\mathbf{b}(\\bar{\\mathbf{q}}_j)",
+    "decision_state": "s=(j,\\mathbf{m},\\boldsymbol{\\beta},h)",
     "stored_edge": "\\mathsf{a}_{ij}",
     "candidate_nodes": "c_i"
   },
   "native_export_heading_text_equal": true,
-  "visual_review": "passed: page 3 Roman headings and matching caption are legible without overlap or clipping",
-  "manuscript_changed_pages": [3],
-  "all_other_manuscript_pages_pixel_identical": true,
-  "manuscript_source_only_five_caption_identifiers_changed": true,
-  "compiled_manuscript_pages": 13
+  "visual_review": "passed: Roman headings and the two updated notation labels are legible without overlap or clipping; figure geometry and styling are unchanged",
+  "manuscript_pages_visually_reviewed": [2, 3, 4, 5],
+  "current_revision_scope": "two notation labels plus synchronized native, SVG, PDF, and PNG exports",
+  "compiled_manuscript_pages": 14
 }

@@ -4,7 +4,7 @@ The local single-file manuscript now incorporates the completed pilot. Its
 principal claim remains completion-certified sequencing for prescribed-target
 inspection on audited finite graphs. The new evidence addresses the observed
 viewpoint-availability bottleneck and supplies an independent route-optimization
-comparison. The abstract and Table VIII now lead with a 59-case,
+comparison. The abstract and Table V now lead with a 59-case,
 independently certified all-solvable benchmark; the four visibility-loss cases
 remain a separate stress test, with the development boundary explicit.
 
@@ -20,7 +20,7 @@ remain a separate stress test, with the development boundary explicit.
 - The original completion discussion now identifies seven test and 21 shifted
   cases with missing required visibility, and five required targets with only
   one original candidate view. Feasibility is bounded to the available library.
-- A new results subsection and Table VIII make the independently certified
+- A new results subsection and Table V make the independently certified
   all-solvable benchmark the primary planner-success denominator: 59 cases,
   with 3 reference, 30 nominal and 26 shifted cases. The four visibility-loss
   cases remain in a separate stress-test inventory. Timing and paired cost
@@ -29,9 +29,11 @@ remain a separate stress test, with the development boundary explicit.
 - Discussion, limitations and conclusion distinguish the primary confirmation
   from the later development evidence, and finite-graph optimization from
   continuous-space or physical inspection.
+- The complete target inventories, depth diagnostic, historical campaign and
+  detailed ROS provenance are retained in a standalone two-page supplement.
 - The last bibliography page is balanced using the existing publisher mechanism.
-  All original figure blocks, asset files, inclusion sizes and original data
-  tables are preserved. No figures were regenerated.
+  All eight figure blocks, asset files and inclusion sizes are preserved. No
+  figures were regenerated.
 
 ## Terminology and paragraph logic
 
@@ -73,9 +75,11 @@ confirmation snapshot and figure data remain unchanged.
 ## Outputs and verification
 
 The previous single-file TeX and compiled PDF are preserved in
-`archive/before_viewpoint_pilot_20260914/`. The editable source remains `main.tex`.
-The compiled manuscript is `build/main.pdf`, mirrored as `main.pdf`; the dated
-PDF is `output/pdf/OrbInspect_IEEE_TAES_viewpoint_pilot_20260914.pdf` in the parent
+`archive/before_viewpoint_pilot_20260914/`. The 14-page article remains one
+editable `main.tex`; the moved supporting material is in standalone
+`supplement.tex`. The compiled files are `build/main.pdf` and
+`build/supplement.pdf`. The article is mirrored as `main.pdf`, and the dated
+article and supplement PDFs are stored under `output/pdf/` in the parent
 repository. `build/OrbInspectLatex_source.zip` contains the updated portable source.
 
 Numerical, source-integrity, compilation and visual checks are recorded in

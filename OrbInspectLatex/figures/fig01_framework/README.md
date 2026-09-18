@@ -6,8 +6,9 @@ the PDF. The 2026-09-14 export updates the workflow-arrow routing while
 preserving the five-panel content, labels and aspect ratio.
 
 The five panels use Roman labels I--V. The notation follows the manuscript:
-$\mathbf p_i$, $\mathbf n_i$, $\mathbf b(\bar q_j)$, stored edge
-$\mathsf a_{ij}$, and candidate nodes $c_i$. The station illustration derives
+$\mathbf p_i$, $\mathbf n_i$, $\mathbf b(\bar{\mathbf q}_j)$, state
+$s=(j,\mathbf m,\boldsymbol\beta,h)$, stored edge $\mathsf a_{ij}$, and
+candidate nodes $c_i$. The station illustration derives
 from the NASA ISS mesh, and the independent camera image is Alexander Lucke's
 photograph under CC BY-SA 3.0, as credited in the manuscript caption.
 `assets/camera_alexander_lucke.jpg` is included, while images required to
