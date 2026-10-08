@@ -16,7 +16,7 @@ and [the completed review](review.md).
 | nominal | 30 | 30 | 0 | 0 | 9 |
 | shifted | 30 | 26 | 4 | 0 | 18 |
 
-| Split | Method | Complete / all | Complete / independently feasible | Median time (s) | Mean gap to proven optimum (%) |
+| Split | Method | Complete / all | Complete / independently feasible | Median time over all generated cases (s) | Mean gap to proven optimum (%) |
 |---|---|---:|---:|---:|---:|
 | reference | incumbent | 1/3 | 1/3 | 0.001 | -- |
 | reference | one_step_adp | 3/3 | 3/3 | 0.048 | -- |

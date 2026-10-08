@@ -28,6 +28,8 @@ The derived machine-readable benchmark and result files are
 | Depth-three ADP | 30/30 | 26/30 | 4.173 | 2.005 |
 | Independent MILP | 30/30 | 26/30 | 15.007 | 5.180 |
 
+The timing columns above use all generated cases in each split, including the four shifted visibility-stress cases. On the 26-case independently certified shifted subset used by the manuscript's primary benchmark, the corresponding medians are 0.037 s (one-step ADP), 2.085 s (depth-three ADP), and 5.373 s (independent MILP); the machine-readable certified-subset summary is the source for those manuscript values.
+
 Independent certification found 30/30 nominal and 26/30 shifted cases feasible, with no unresolved cases. Depth-three ADP also completed all three reference cases; its completion on the independently feasible set was 59/59. One-step ADP missed two feasible shifted cases.
 
 ## Cost and timing evidence

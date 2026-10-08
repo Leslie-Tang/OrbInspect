@@ -13,26 +13,28 @@ independent feasibility/cost comparison. Section V-E describes the protocol;
 Section VI-E and Table V use the independently certified all-solvable benchmark
 as the primary planner-success denominator: 59 cases, with the four visibility-loss
 cases retained separately as a stress test. Depth-three ADP completes 59/59
-solvable cases, with a 0.96% mean graph-cost gap on 27 proven optima. The main
-manuscript is 14 pages, its separate supplement is 2 pages, and all eight approved
-figure assets and inclusion sizes are preserved. See
+solvable cases, with a 0.96% mean graph-cost gap on 27 proven optima. The current
+main manuscript is 13 pages and its separate supplement is 2 pages. The eight
+approved figure asset folders are preserved, although the former ablation panel
+set is retained as historical source material rather than included in the PDF. See
 [the revision record](docs/VIEWPOINT_PILOT_MANUSCRIPT_20260914.md) and
 [the complete local evidence](data/viewpoint_feasibility_pilot/README.md).
 
 The 2026-09-09 ROS revision reports a supplemental twelve-observation execution
 with all nine required targets accepted and 95.86% weighted background coverage
 (39/41 inspectable samples). Two viewpoints were refined after a failed tracking
-diagnostic, with the original safety settings and target weights retained.
-Figure 7 uses synchronized frames from this normal-speed run; Figures 1–6 and
-the offline results are unchanged. The reference-timing diagnostic is disclosed.
+diagnostic, with the original safety settings and target weights retained. Current
+PDF Figure 6 uses synchronized frames from this normal-speed run; the internal
+source folder remains `fig07_ros_camera_views`. The reference-timing diagnostic is
+disclosed.
 See [the twelve-observation report](docs/ROS_TWELVE_OBSERVATIONS_20260909.md) and
 [the evidence snapshots](data/required_target_ros/README.md).
 
-Figure 8 adds a compact RViz overview from a separate recorded repeat of the
+The later RViz revision adds current PDF Figure 7, a compact overview from a separate recorded repeat of the
 same twelve-observation reference. It pairs the global trajectory with the
-onboard camera from one frame during transfer 9 to 10. Figure 7 and its results remain
-unchanged. That revision was 13 pages, with both figures on page 12.
-See [the Figure 8 record](docs/FIGURE_8_RVIZ_OVERVIEW_20260909.md).
+onboard camera from one frame during transfer 9 to 10. The internal source folder
+remains `fig08_rviz_overview`; both active figures appear on page 12. See
+[the Figure 8 record](docs/FIGURE_8_RVIZ_OVERVIEW_20260909.md).
 
 Run from this folder:
 
@@ -81,7 +83,7 @@ OrbInspectLatex/
 ├── references.bib           Bibliography
 ├── IEEEtaes.cls             Local journal class
 ├── IEEEtran.bst             Local bibliography style
-├── figures/                Eight numbered figure folders and an index
+├── figures/                Eight figure asset folders and an index
 ├── data/                   Local copies of current evidence for inspection
 ├── scripts/                Standalone checks, packaging and TeX installer
 ├── docs/                   Provenance, integrity and organization notes
@@ -97,7 +99,7 @@ OrbInspectLatex/
 | 2 | `figures/fig02_rollout_example/` | draw.io, SVG, PDF, PNG; checked graph |
 | 3 | `figures/fig03_depth_tradeoff/` | Three PDF/SVG/PNG panels |
 | 4 | `figures/fig04_heldout_performance/` | Four separate PDF/SVG/PNG panels; LaTeX subfigures; data manifest |
-| 5 | `figures/fig05_ablation_safety/` | Four separate PDF/SVG/PNG panels and shared legend; LaTeX subfigures; data manifest |
+| 5 | `figures/fig05_ablation_safety/` | Retained historical ablation assets; not included in the current main PDF |
 | 6 | `figures/fig06_representative_trajectory/` | Three PDF/SVG/PNG panels |
 | 7 | `figures/fig07_ros_camera_views/` | Compact two-column SVG/PDF/PNG; local snapshot and Python generator |
 | 8 | `figures/fig08_rviz_overview/` | Two independent PDF/SVG/PNG panels with LaTeX subcaptions; local frame and generator |
@@ -127,19 +129,21 @@ and their hashes. The previous small-type exports are preserved in
 `archive/figure3_small_type_20260909/`. See
 `docs/FIGURE_3_READABLE_FONTS_20260909.md` for the typography revision.
 
-Figures 4 and 5 retain their original panel dimensions with the shared typography.
-Each uses four independent vector PDFs assembled into a 2-by-2 grid with
-`\subfloat` in `main.tex`. LaTeX generates the letters
-and subcaptions; individual labels end in `-a`, `-b`, `-c`, and `-d`. Figure 5
-also includes an unnumbered shared-legend strip. Do not add panel letters to
-the image files or replace the subfigures with a composite export.
-Their optional local generator is `scripts/generate_result_figures.py` (NumPy
-and matplotlib); it reads only the included frozen confirmation snapshot and
-verifies the original cohorts and statistics before exporting. The previous
-two-column panel exports are preserved in `archive/figure45_two_column_20260908/`.
-See `docs/FIGURES_4_5_SINGLE_COLUMN_20260908.md` for the layout and checks.
-The subsequent native-subfigure conversion is documented in
-`docs/FIGURES_4_5_LATEX_SUBFIGURES_20260908.md`; its previous composites are
+The current main PDF uses the held-out-performance panels from
+`figures/fig04_heldout_performance/` as Figure 3. The former ablation/safety
+panel set in `figures/fig05_ablation_safety/` was removed from the main article
+and is retained only as historical source material; it is not included by
+`main.tex`. The active panel set uses four independent vector PDFs assembled
+into a 2-by-2 grid with `\subfloat`; LaTeX generates the letters and
+subcaptions. Do not add panel letters to the image files or replace the
+subfigures with a composite export. The optional local generator is
+`scripts/generate_result_figures.py` (NumPy and matplotlib); it reads only the
+included frozen confirmation snapshot and verifies the original cohorts and
+statistics before exporting. The previous two-column panel exports are
+preserved in `archive/figure45_two_column_20260908/`. See
+`docs/FIGURES_4_5_SINGLE_COLUMN_20260908.md` for the layout and checks. The
+subfigure conversion is documented in
+`docs/FIGURES_4_5_LATEX_SUBFIGURES_20260908.md`; previous composites are
 preserved in `archive/figure45_composite_20260908/`.
 
 Figure 6 can be regenerated without ROS or a planner using

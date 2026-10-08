@@ -101,21 +101,27 @@
 \bstctlcite{IEEEfullAuthorNames}
 
 \title{Viability-Preserving Rollout Approximate Dynamic Programming for Required-Target Orbital Inspection}
+\hypersetup{%
+  pdftitle={Viability-Preserving Rollout Approximate Dynamic Programming for Required-Target Orbital Inspection},
+  pdfauthor={Rugang Tang; Xin Ning; Chih-Yung Wen},
+  pdfsubject={Required-target orbital inspection with viability-preserving rollout approximate dynamic programming},
+  pdfkeywords={spacecraft inspection, approximate dynamic programming, safe observable orbital arc, relative orbital dynamics, inspection requirements}%
+}
 
-\author{Rugang Tang}
-\affil{The Hong Kong Polytechnic University, Hung Hom, Kowloon, Hong Kong SAR}
+% \author{Rugang Tang}
+% \affil{The Hong Kong Polytechnic University, Hung Hom, Kowloon, Hong Kong SAR}
 
-\author{Xin Ning}
-\affil{School of Astronautics, Northwestern Polytechnical University, Xi'an, Shaanxi 710072, China}
+% \author{Xin Ning}
+% \affil{School of Astronautics, Northwestern Polytechnical University, Xi'an, Shaanxi 710072, China}
 
-\author{Chih-Yung Wen}
-\affil{Department of Aeronautical and Aviation Engineering, The Hong Kong Polytechnic University, Hung Hom, Kowloon, Hong Kong SAR}
+% \author{Chih-Yung Wen}
+% \affil{Department of Aeronautical and Aviation Engineering, The Hong Kong Polytechnic University, Hung Hom, Kowloon, Hong Kong SAR}
 
 \receiveddate{}
 
 \corresp{This work was supported in part by the Research Centre for Unmanned Autonomous Systems of The Hong Kong Polytechnic University under Grant P0046487. {\itshape (Corresponding author: Rugang Tang)}.}
 
-\authoraddress{Rugang Tang is with the Department of Aeronautical and Aviation Engineering, The Hong Kong Polytechnic University, Hung Hom, Kowloon, Hong Kong SAR (e-mail: \href{mailto:rugtang@polyu.edu.hk}{rugtang@polyu.edu.hk}). Xin Ning is with the School of Astronautics, Northwestern Polytechnical University, Xi'an, Shaanxi 710072, China. Chih-Yung Wen is with the Department of Aeronautical and Aviation Engineering, The Hong Kong Polytechnic University, Hung Hom, Kowloon, Hong Kong SAR.}
+% \authoraddress{Rugang Tang is with the Department of Aeronautical and Aviation Engineering, The Hong Kong Polytechnic University, Hung Hom, Kowloon, Hong Kong SAR (e-mail: \href{mailto:rugtang@polyu.edu.hk}{rugtang@polyu.edu.hk}). Xin Ning is with the School of Astronautics, Northwestern Polytechnical University, Xi'an, Shaanxi 710072, China. Chih-Yung Wen is with the Department of Aeronautical and Aviation Engineering, The Hong Kong Polytechnic University, Hung Hom, Kowloon, Hong Kong SAR.}
 
 \supplementary{Supplementary material containing supporting tables, ROS~2 execution details, data, and code is available with this article. Color versions of one or more figures are available online at \href{https://ieeexplore.ieee.org}{https://ieeexplore.ieee.org}.}
 \markboth{OrbInspect}{Rollout ADP for Orbital Inspection}
@@ -123,7 +129,7 @@
 \maketitle
 
 \begin{abstract}
-Autonomous orbital inspection must limit maneuver effort while completing prescribed observations under relative-motion and safety constraints. We formulate viability-preserving rollout approximate dynamic programming (ADP) on a directed graph of audited orbital arcs. A finite Bellman prefix evaluates deterministic task-aware base-policy completions; uncertified completions receive infinite value, while safe zero-gain connecting actions remain available. Under deterministic finite-graph assumptions, exhaustive rollout preserves base-policy completion and does not increase its graph cost. We independently certify route feasibility to separate planner failure from unavailable viewpoints. On a 59-case all-solvable development benchmark spanning three 33-view graphs, depth-three ADP completes 59/59 missions, versus 57/59 for one-step ADP and 33/59 for the task-aware greedy policy, with a 0.96\% mean gap over 27 proven optima. Four visibility-infeasible cases are retained as a separate stress test. In the fixed-library confirmation, depth-three ADP completes \RTTestSuccess/\RTTestN{} test and \RTOodSuccess/\RTOodN{} shifted missions and reduces mean maneuver velocity increment, $\Delta v$, by 11.05\% relative to one-step-ADP-seeded local search on 43 jointly completed test missions. The results support completion-certified sequencing while exposing viewpoint availability as a separate mission constraint.
+Autonomous orbital inspection must limit maneuver effort while completing prescribed observations under relative-motion and safety constraints. We formulate viability-preserving rollout approximate dynamic programming (ADP) on a directed graph of audited orbital arcs. A finite Bellman prefix evaluates deterministic task-aware base-policy completions; uncertified completions receive infinite value, while safe zero-gain connecting actions remain available. Under deterministic finite-graph assumptions, exhaustive rollout preserves base-policy completion and does not increase its graph cost. We independently certify route feasibility to separate planner failure from unavailable viewpoints. On a 59-case all-solvable development benchmark spanning three 33-view graphs, depth-three ADP completes 59/59 missions, versus 57/59 for one-step ADP and 33/59 for the task-aware greedy policy. An independent MILP certifies feasibility for all 59 cases and proves minimum graph costs for 27; depth-three ADP is within 0.96\% of those optima with shorter median runtimes. Four visibility-infeasible cases are retained as a separate stress test. In the fixed-library confirmation, depth-three ADP completes \RTTestSuccess/\RTTestN{} test and \RTOodSuccess/\RTOodN{} shifted missions and reduces mean maneuver velocity increment, $\Delta v$, by 11.05\% relative to one-step-ADP-seeded local search on 43 jointly completed test missions. The results support completion-certified sequencing while exposing viewpoint availability as a separate mission constraint.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -421,7 +427,7 @@ Fig.~\ref{fig:adp-architecture} gives a worked decision on an illustrative graph
 
 For fixed masks and nonnegative weights, $F(S)=\sum_{i=1}^{N}w_i\mathbf1\{i\in\cup_{j\in S}G_j\}$ is normalized, monotone, and submodular \cite{nemhauser1978submodular}. Unit weights on $\mathcal K$ give the same diminishing-returns property for required-target gain. This coverage fact neither justifies removing zero-gain connectors nor supplies a greedy approximation ratio, because SOOA cost and next-action admissibility depend on the current node.
 
-Under the fixed deterministic graph assumptions, the state in \eqref{eq:mdp-state} is Markov: $j_k$ identifies the source-dependent edges, $\mathbf m_k$ determines unmet requirements, $\boldsymbol\beta_k$ enforces no revisits, and $h_k$ gives the remaining budget. Partial dwell, independent look directions, or time-varying illumination would require additional state. If idealized rest-to-rest endpoints match exactly, concatenating edges with $\chi_{ij}=1$ also preserves their recorded input, speed, sampled-clearance, swept-intersection, terminal, and enabled passive-drift results. This is a finite-record statement, not a continuous-time or robust closed-loop certificate; it does not cover inter-sample finite-body clearance, endpoint perturbations, tracking error, or model uncertainty.
+Under the fixed deterministic graph assumptions, the state in \eqref{eq:mdp-state} is Markov: $j_k$ identifies the source-dependent edges, $\mathbf m_k$ determines unmet requirements, $\boldsymbol\beta_k$ enforces no revisits, and $h_k$ gives the remaining budget. Partial dwell, independent look directions, or time-varying illumination would require additional state. If idealized rest-to-rest endpoints match exactly, concatenating edges with $\chi_{ij}=1$ also preserves their recorded input, speed, sampled-clearance, swept-intersection, terminal, and enabled passive-drift results.
 
 \begin{theorem}[Completion and base-policy bound]
 \label{thm:rollout-guarantees}
@@ -429,12 +435,12 @@ Consider the deterministic finite graph, exhaustive depth-$d$ prefix evaluation,
 \end{theorem}
 
 \begin{IEEEproof}
-Finiteness of $\widehat V_d(s)$ provides a shield-admissible depth-$d$ prefix followed by a base-policy completion. After the first action, the retained tail, extended when necessary by the next base-policy action, remains a candidate in the rebuilt depth-$d$ tree. The rebuilt value at the successor is therefore finite, and induction over the decreasing budget proves completion. If $\widehat V_0(s)$ is finite, the first $d$ base-policy actions followed by the remaining base completion are feasible in \eqref{eq:rollout-value}, so $\widehat V_d(s)\le\widehat V_0(s)$. For a minimizing first action $a$ and successor $s'$, the retained certificate gives $\ell_{ja}+\widehat V_d(s')\le\widehat V_d(s)$. Summing over replans yields $J_{\mathrm{rollout}}\le\widehat V_d(s)$. These bounds concern graph stage cost, not physical $\Delta v$ alone.
+Finiteness of $\widehat V_d(s)$ provides a shield-admissible depth-$d$ prefix followed by a base-policy completion. After the first action, the retained tail, extended when necessary by the next base-policy action, remains a candidate in the rebuilt depth-$d$ tree. The rebuilt value at the successor is therefore finite, and induction over the decreasing budget proves completion. If $\widehat V_0(s)$ is finite, the first $d$ base-policy actions followed by the remaining base completion are feasible in \eqref{eq:rollout-value}, so $\widehat V_d(s)\le\widehat V_0(s)$. More generally, whenever $\widehat V_{d-1}(s')<+\infty$, the same certificate can be extended by the next base-policy action when needed (or terminates earlier at the goal), giving $\widehat V_d(s')\le\widehat V_{d-1}(s')$. Therefore, for a minimizing first action $a$ and successor $s'$, $\ell_{ja}+\widehat V_d(s')\le\ell_{ja}+\widehat V_{d-1}(s')=\widehat V_d(s)$. Summing over replans yields $J_{\mathrm{rollout}}\le\widehat V_d(s)$. These bounds concern graph stage cost, not physical $\Delta v$ alone.
 \end{IEEEproof}
 
 For reduced-graph certification, exact recursion caches \eqref{eq:bellman} for every reachable tuple $(j,\mathbf m,\boldsymbol\beta,h)$ and enumerates every action in $\mathcal U_s(s)$. Exhaustive evaluation returns a minimum-cost task-completing sequence or $+\infty$ if none exists in the fixed sampled graph; a finite-horizon induction proof is included in the supplementary material. This result does not cover omitted camera poses or continuous-space trajectories.
 
-With maximum branching factor $B_{\max}$ and at most $H$ base-policy actions, one depth-$d$ decision evaluation costs $O(HB_{\max}^{d+1})$ in the worst case; at most $H$ replans give a direct whole-route bound of $O(H^2B_{\max}^{d+1})$. Memoization reduces repeated evaluation when prefixes reach the same mask state. Fig.~\ref{fig:adp-depth-sensitivity} and Supplementary Table~S2 quantify the cost--computation trade-off for $d=1,\ldots,6$.
+With maximum branching factor $B_{\max}$ and at most $H$ base-policy actions, one depth-$d$ decision evaluation costs $O(HB_{\max}^{d+1})$ in the worst case; at most $H$ replans give a direct whole-route bound of $O(H^2B_{\max}^{d+1})$. Memoization reduces repeated evaluation when prefixes reach the same mask state. The Results section and Supplementary Table~S2 quantify the cost--computation trade-off for $d=1,\ldots,6$.
 
 % Begin included source: sections/required_target_study.tex
 % Numerical macros and tables are generated from the frozen required-target study.
@@ -444,7 +450,7 @@ With maximum branching factor $B_{\max}$ and at most $H$ base-policy actions, on
 
 \subsection{Fixed Geometry and Required-Target Profiles}
 
-The primary study uses the corrected public ISS mesh distributed by the National Aeronautics and Space Administration (NASA) \cite{nasa_iss_gltf_model}. Its complete transformed geometry contains $247\,525$ triangles. Ninety equal-represented-area samples define the original surface denominator; 41 are observable from at least one of the 24 retained candidate observations. The directed archive contains 24 initial-to-observation and $24\times23$ inter-observation records, of which 264 pass every enabled gate. Every method receives the same graph and scenario-specific available-node set. A subsequent development pilot samples additional viewpoint graphs on the same geometry, as described in Section~\ref{sec:redundant-view-protocol}.
+The primary study uses the public ISS mesh distributed by the National Aeronautics and Space Administration (NASA) \cite{nasa_iss_gltf_model}. Its complete transformed geometry contains $247\,525$ triangles. 90 equal-represented-area samples define the original surface denominator; 41 are observable from at least one of the 24 retained candidate observations. The directed archive contains 24 initial-to-observation and $24\times23$ inter-observation records, of which 264 pass every enabled gate. Every method receives the same graph and scenario-specific available-node set.
 
 Required-target profiles are selected deterministically before scenario evaluation by centroid-first, normalized farthest-point sampling within three equal-width mesh slabs. The primary nine-target profile assigns three samples to each slab; Supplementary Table~S1 gives the complete 6-, 9-, and 12-target inventories. These synthetic profiles are not an operational ISS maintenance checklist.
 
@@ -456,24 +462,15 @@ Each rest-to-rest SOOA lasts \unit{90}{s} and uses fixed-step RK4 propagation wi
 
 Target-identity unions exclude duplicate credit. Reporting includes required-target completion $C^{\mathcal K}$, priority-weighted inspectable score $C^{\mathrm{insp}}$, and unweighted fractions over the 41 observable and 90 original samples. Equal represented sample areas make the last fraction the sampled-area estimate; priority multipliers affect only the weighted score.
 
-\subsection{Development History and Fresh Confirmation}
+\subsection{Study Chronology and Fresh Confirmation}
 
-The first campaign evaluated three fixed profiles without feasibility rejection. On the primary nine-target profile, depth-three ADP completed 37/50 test and 10/30 shifted tasks, while the greedy-seeded comparators completed none. These development results, reported in Supplementary Table~S3, motivated the fresh comparator below and are not used as the main comparison.
+An exploratory campaign preceded the confirmation. It evaluated three fixed profiles without feasibility rejection; its outcomes are reported as development evidence in Results and Supplementary Table~S3. The campaign motivated the fresh comparator described below, but it is not part of the main comparison.
 
 A fresh confirmation compares depth-three ADP with one-step ADP and local search initialized by a completed one-step ADP route. Methods, penalties, scenario identities, and implementation hashes were frozen before evaluating the new outcomes. The confirmation retains the nine prescribed targets and depth-three policy, with \RTValidationN{} validation, \RTTestN{} test, and \RTOodN{} shifted scenarios. Its seeds are disjoint from all development runs, and every generated case is retained.
 
 Each scenario samples a node-removal probability uniformly from $[0,0.10]$, then removes candidates independently using that probability. It multiplies priorities for approximately 6\%--14\% of targets by a factor in $[2,4]$. Shifted scenarios use removal probabilities in $[0.15,0.25]$, priority fractions of 12\%--20\%, and factors in $[5,8]$. Priorities affect background scores and the coverage-only ablation, but not the required-target goal or stage cost. All scenarios perturb one frozen graph, and distinct seeds may yield identical routes.
 
-After confirmation, a post-selection diagnostic evaluated $d=1,\ldots,6$ on the same 12 validation scenarios. All depths completed the same nine tasks; the other three lacked required visibility. Depth three reduced mean graph cost by 11.19\% relative to depth two. Depth four improved cost by a further 2.74\% but required 4.63 times the median planning time, while depths five and six gave no further cost reduction. Fig.~\ref{fig:adp-depth-sensitivity} summarizes the trade-off; Supplementary Table~S2 gives the complete values and timing protocol.
-
-\begin{figure}[t]
-  \centering
-  \subfloat[Mean validation cost.]{\includegraphics[width=0.315\linewidth]{figures/fig03_depth_tradeoff/adp_depth_tradeoff_a.pdf}}\hfill
-  \subfloat[Median planning time.]{\includegraphics[width=0.315\linewidth]{figures/fig03_depth_tradeoff/adp_depth_tradeoff_b.pdf}}\hfill
-  \subfloat[Safety-screen evaluations.]{\includegraphics[width=0.315\linewidth]{figures/fig03_depth_tradeoff/adp_depth_tradeoff_c.pdf}}
-  \caption{Post-selection depth diagnostic on 12 validation cases. The square marks the primary depth-three setting; cost uses the nine cases completed at every depth, and panels (b), (c) use logarithmic scales.}
-  \label{fig:adp-depth-sensitivity}
-\end{figure}
+After confirmation, a post-selection depth diagnostic evaluated $d=1,\ldots,6$ on the same 12 validation scenarios. The diagnostic was post-selection and did not modify the primary comparison; its outcomes are reported in Results and Supplementary Table~S2.
 
 \subsection{Matched Baselines and Statistical Reporting}
 
@@ -490,9 +487,9 @@ A subsequent pilot tested whether redundant viewpoints reduce the visibility bot
 
 Each graph supplied one reference case, ten nominal cases and ten shifted cases, using the confirmation's node-removal probability ranges. All 63 cases were retained. The 59 cases with an independent feasible certificate define the primary all-solvable benchmark (three reference, 30 nominal and 26 shifted cases). The four remaining shifted cases are retained as a visibility-loss stress test and are excluded only from the primary solvable-case denominator. Background weights were fixed because they do not affect required-only completion or graph cost. The generation rules, seeds and source hashes were frozen before graph construction. This pilot followed inspection of the confirmation failures and is development evidence; it does not replace the frozen confirmation.
 
-An independent mixed-integer linear program (MILP) selected a source-to-sink path over admissible edges. Binary arc and node variables enforced flow, required-target coverage, no revisits and the 14-observation budget; increasing node ranks excluded disconnected cycles. Its objective was the same additive graph cost, including the 0.05 action charge. A reconstructed valid route certified feasibility. Missing required visibility or a solver infeasibility result certified impossibility in the available graph; a limit without a valid route remained unresolved. Optimality was claimed only after solver proof and route-cost reconstruction. Certification preceded ADP evaluation and supplied no route to either ADP depth.
+An independent mixed-integer linear program (MILP) served as an offline finite-graph reference and feasibility certificate. Binary arc and node variables enforced flow, required-target coverage, no revisits and the 14-observation budget; increasing node ranks excluded disconnected cycles. Its objective was the same additive graph cost, including the 0.05 action charge. A reconstructed valid route certified feasibility. Missing required visibility or a solver infeasibility result certified impossibility in the available graph; a time limit without a valid route remained unresolved. We labelled a case proven optimal only when HiGHS supplied an optimality proof and the reconstructed route cost matched its branch-and-bound lower bound within numerical tolerance. A time-limited feasible route was retained as a checked incumbent, not an optimum. Certification preceded ADP evaluation and supplied no route to either ADP depth.
 
-Greedy construction, one-step ADP, depth-three ADP and the independent MILP each received a nominal \unit{15}{s} budget, including initialization or model construction and excluding shared graph generation. The pilot used Python~3.12.3 and SciPy~1.11.4/HiGHS on Ubuntu. Each method--case pair was timed once; greedy/ADP order was shuffled, while MILP timing came from the preceding certification phase. Native solver termination could slightly exceed its requested limit. The primary success-rate denominator is the independently certified all-solvable benchmark; all 63 generated cases and the four stress cases remain available for transparent audit. Cost gaps used only cases with proven optima.
+Greedy construction, one-step ADP, depth-three ADP and the independent MILP each received a nominal \unit{15}{s} budget, including initialization or model construction and excluding shared graph generation. The pilot used Python~3.12.3 and SciPy~1.11.4/HiGHS on Ubuntu. Each method--case pair was timed once; greedy/ADP order was shuffled, while MILP timing came from the preceding certification phase. The MILP timing quantifies the computational cost of the finite-graph reference search; the solver was not used to initialize or constrain ADP. Native solver termination could slightly exceed its requested limit. The primary success-rate denominator is the independently certified all-solvable benchmark; all 63 generated cases and the four stress cases remain available for transparent audit. Cost gaps used only cases with proven optima.
 
 \section{Results}
 \label{sec:results}
@@ -573,41 +570,9 @@ The greedy base completed no confirmation mission, so this campaign measures imp
 
 \subsection{Objective Ablation and Safety}
 
-% Begin included source: tables/required_target_objective_ablation.tex
-\begin{table}[t]
-  \centering
-  \caption{Required-target completion under the coverage-only objective. The required set is identical to that of the main comparison}
-  \label{tab:required-objective}
-  \renewcommand{\arraystretch}{1.08}
-  \setlength{\tabcolsep}{5pt}
-  \footnotesize
-  \begin{tabular}{@{}llr@{}}
-    \toprule
-    Split & Objective ablation & All required complete \\
-    \midrule
-    Test & Coverage-only (80\%) & 1/50 \\
-    Shifted & Coverage-only (80\%) & 0/30 \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-% End included source: tables/required_target_objective_ablation.tex
+To test whether aggregate coverage can substitute for prescribed-target completion, we reran the same scenarios with the earlier coverage-only stopping rule, $C^{\mathrm{insp}}\ge0.80$, while retaining the same nine required targets for evaluation. The coverage-only policy completed all nine required targets in only 1/50 test and 0/30 shifted scenarios. By contrast, 41 of 43 completed depth-three ADP test missions finished below the 80\% priority-weighted coverage threshold while accepting all nine prescribed items; mean background coverage over those 43 successes was 72.32\%.
 
-Fig.~\ref{fig:paired-safety} summarizes component performance and the accepted-edge safety metrics. The coverage-only ablation in Table~\ref{tab:required-objective} applies the fixed required-target denominator to routes using the 80\% background stopping rule.
-
-The coverage-only policy completed the nine-item requirement in 1/50 test and 0/30 shifted scenarios. In contrast, 41 of 43 completed ADP test missions finished below 80\% weighted background coverage while accepting all nine prescribed items. Mean background coverage over those 43 successes was 72.32\%.
-
-\begin{figure}[!t]
-  \centering
-  \subfloat[Matched effort.]{\includegraphics[width=0.40\linewidth]{figures/fig05_ablation_safety/adp_ablation_safety_a.pdf}\label{fig:paired-safety-a}}%
-  \subfloat[Task success.]{\includegraphics[width=0.50\linewidth]{figures/fig05_ablation_safety/adp_ablation_safety_b.pdf}\label{fig:paired-safety-b}}\\[1pt]
-  \includegraphics[width=\linewidth]{figures/fig05_ablation_safety/adp_ablation_safety_legend.pdf}\\[1pt]
-  \subfloat[Clearance.]{\includegraphics[width=0.42\linewidth]{figures/fig05_ablation_safety/adp_ablation_safety_c.pdf}\label{fig:paired-safety-c}}%
-  \subfloat[Peak input.]{\includegraphics[width=0.50\linewidth]{figures/fig05_ablation_safety/adp_ablation_safety_d.pdf}\label{fig:paired-safety-d}}
-  \caption{Nine-target component and safety comparison. Base is the task-aware incumbent; $d=1,3$ are ADP depths; Local is ADP-seeded local search. (a) Physical $\Delta v$ over \RTFourMethodN{} jointly completed test cases. (b) All-required success. (c) Minimum clearance above the safety margin. (d) Peak input, with the $0.060\,\mathrm{m/s^2}$ limit in orange.}
-  \label{fig:paired-safety}
-\end{figure}
-
-Full-mesh occlusion and collision checks include structure outside the required target set. The reported clearance and input metrics describe the accepted deterministic edge records.
+Full-mesh occlusion and collision checks include structure outside the required target set; accepted edges satisfy the enabled clearance and input audits.
 
 \subsection{Representative Required-Target Route}
 
@@ -627,6 +592,21 @@ The representative test case is the jointly completed scenario nearest the media
   \label{fig:representative-trajectory}
 \end{figure}
 
+\subsection{Development and Depth Diagnostics}
+
+The initial development campaign evaluated three fixed profiles without feasibility rejection. On the primary nine-target profile, depth-three ADP completed 37/50 test and 10/30 shifted tasks, whereas the greedy-seeded comparators completed none. These development results motivated the fresh comparator and are reported separately from the main comparison in Supplementary Table~S3.
+
+The post-selection depth diagnostic evaluated $d=1,\ldots,6$ on the same 12 validation scenarios. All depths completed the same nine tasks; the other three cases lacked required visibility. Depth three reduced mean graph cost by 11.19\% relative to depth two. Depth four reduced it by a further 2.74\% but required 4.63 times the median planning time, whereas depths five and six produced no further cost reduction. Fig.~\ref{fig:adp-depth-sensitivity} summarizes this computation--cost trade-off; Supplementary Table~S2 gives the complete values and timing protocol.
+
+\begin{figure}[t]
+  \centering
+  \subfloat[Mean validation cost.]{\includegraphics[width=0.315\linewidth]{figures/fig03_depth_tradeoff/adp_depth_tradeoff_a.pdf}}\hfill
+  \subfloat[Median planning time.]{\includegraphics[width=0.315\linewidth]{figures/fig03_depth_tradeoff/adp_depth_tradeoff_b.pdf}}\hfill
+  \subfloat[Safety-screen evaluations.]{\includegraphics[width=0.315\linewidth]{figures/fig03_depth_tradeoff/adp_depth_tradeoff_c.pdf}}
+  \caption{Post-selection depth diagnostic on 12 validation cases. The square marks the primary depth-three setting; cost uses the nine cases completed at every depth, and panels (b), (c) use logarithmic scales.}
+  \label{fig:adp-depth-sensitivity}
+\end{figure}
+
 \subsection{All-Solvable Benchmark Results}
 \label{sec:redundant-view-results}
 
@@ -636,7 +616,7 @@ Table~\ref{tab:redundant-view-pilot} reports completion on the certified-solvabl
 
 \begin{table}[t]
   \centering
-  \caption{Primary all-solvable development benchmark. Each denominator is independently certified feasible; four additional shifted cases failing the visibility certificate are retained as a separate stress test. The MILP row is the inclusion certificate.}
+  \caption{Primary all-solvable development benchmark. Each denominator is independently certified feasible; four additional shifted cases failing the visibility certificate are retained as a separate stress test. The independent MILP row supplies the feasibility certificate, while its proven-optimal subset provides the finite-graph cost reference.}
   \label{tab:redundant-view-pilot}
   \renewcommand{\arraystretch}{1.08}
   \setlength{\tabcolsep}{3pt}
@@ -653,7 +633,7 @@ Table~\ref{tab:redundant-view-pilot} reports completion on the certified-solvabl
   \end{tabular*}
 \end{table}
 
-The MILP proved minimum graph costs for nine nominal and 18 shifted cases; depth-three ADP's mean relative gap was 0.96\% across these 27 cases. The other 32 feasible MILP runs reached the time limit with checked routes but unproven optimality. Median nominal/shifted times were 0.001/0.001~s for greedy construction, 0.046/0.037~s for one-step ADP, 4.173/2.085~s for depth-three ADP, and 15.007/5.373~s for the MILP. Depth-three ADP reduced mean cost relative to one-step ADP by 5.493 units across 30 nominal pairs and 7.012 units across 24 shifted pairs.
+The MILP proved minimum graph costs for nine nominal and 18 shifted cases, providing an exact reference on those finite graphs. Depth-three ADP had a mean relative gap of 0.96\% across these 27 cases, while matching the MILP completion rate on all 59 independently feasible cases. The other 32 feasible MILP runs reached the time limit with checked routes but unproven optimality, so those routes were not treated as optima. Median nominal/shifted times were 0.001/0.001~s for greedy construction, 0.046/0.037~s for one-step ADP, 4.173/2.085~s for depth-three ADP, and 15.007/5.373~s for the MILP. Thus, the proposed ADP traded a small gap to the proven finite-graph optima for shorter median computation, while reducing mean cost relative to one-step ADP by 5.493 units across 30 nominal pairs and 7.012 units across 24 shifted pairs.
 
 Post-run reconstruction verified all 252 method--case records and $3\,267$ numeric edge records. The three graphs share one structure and initial state, and their nominal splits contain seven, nine, and ten distinct availability masks. These dependent development observations require a larger frozen confirmation and do not extend the original 11.05\% held-out saving.
 
@@ -701,20 +681,20 @@ same reference (Supplementary Video~1).
 
 The results support model-based rollout ADP for prescribed-target inspection: a base-policy completion supplies a checkable continuation, and Bellman lookahead improves the next action. Required targets determine completion, while an optional background threshold can be added through the same terminal predicate. This sequencing layer complements learning-based proximity control \cite{hu2021learning,tian2024proximity,vanwijk2024inspection}.
 
-The fixed-library comparison measures maneuver savings against one-step ADP and seeded reversal search. Independent pilot certificates separate route feasibility from planner completion and show that depth-three ADP improves completion and mean cost relative to one-step ADP, while the MILP requires longer median runtimes. Because the pilot uses a new viewpoint library and dependent cases, it cannot be paired with the original campaign; repeated timing and a larger frozen confirmation are still needed.
+The fixed-library comparison measures maneuver savings against one-step ADP and seeded reversal search. The independent MILP is best interpreted as an exact finite-graph reference and feasibility certificate, rather than as the proposed deployment planner. It supplies a cost floor when solved to optimality, but its 15-s budget left 32 feasible cases without an optimality proof and its median runtimes exceeded those of depth-three ADP. The proposed method therefore targets the speed-quality trade-off: it matched MILP completion on the 59 certified-solvable cases and remained within 0.96\% of the 27 proven optima. Because the pilot uses a new viewpoint library and dependent cases, it cannot be paired with the original campaign; repeated timing and a larger frozen confirmation are still needed.
 
 \subsection{Scope and Limitations}
 
 The primary evidence covers synthetic prescribed samples on one deterministic graph; the development pilot adds three graphs on the same mesh. Completion certifies those samples under the camera model, rather than full-region imagery or defect detection. Operational use requires verified component requirements, denser sampling, image-resolution and dwell criteria, illumination, and independent geometry validation.
 
-The finite-completion safeguard may fail to find a route when its base policy is unsuccessful, even if another feasible route exists. The base-cost theorem applies when the base policy completes. Exact recursion and proven MILP optima concern only the specified finite graph; a time-limited feasible MILP route is not an optimum. Timing and confidence intervals characterize the stated desktop implementation and scenario generator, with no cross-host timing comparison. The observed depth-four-to-six plateau does not establish global optimality, and the pilot's 0.96\% gap applies only to its 27 cases with proven optima.
+The finite-completion safeguard may fail to find a route when its base policy is unsuccessful, even if another feasible route exists. The base-cost theorem applies when the base policy completes. Exact recursion and proven MILP optima concern only the specified finite graph, and do not establish optimality over omitted viewpoints or continuous-space trajectories. A time-limited feasible MILP route is not an optimum. Timing and confidence intervals characterize the stated desktop implementation and scenario generator, with no cross-host timing comparison. The observed depth-four-to-six plateau does not establish global optimality, and the pilot's 0.96\% gap applies only to its 27 cases with proven optima.
 
 Table~\ref{tab:assumptions} excludes navigation uncertainty, actuator and attitude dynamics, and illumination effects. Safety remains conditional on the enabled deterministic audits, with passive-drift auditing disabled.
 
 \section{Conclusion}
 \label{sec:conclusion}
 
-This paper developed viability-preserving rollout ADP for prescribed-target inspection over audited orbital arcs. It completed every feasible fixed-library confirmation case and reduced mean $\Delta v$ by 11.05\% relative to seeded local search on 43 jointly completed test missions. In the redundant-viewpoint development benchmark, it completed all 59 certified-solvable cases with a 0.96\% mean gap across 27 proven optima. The results support completion-certified sequencing and motivate a larger frozen evaluation of viewpoint redundancy.
+This paper developed viability-preserving rollout ADP for prescribed-target inspection over audited orbital arcs. It completed every feasible fixed-library confirmation case and reduced mean $\Delta v$ by 11.05\% relative to seeded local search on 43 jointly completed test missions. In the redundant-viewpoint development benchmark, the independent MILP supplied finite-graph feasibility and cost references, while depth-three ADP completed all 59 certified-solvable cases within 0.96\% of the 27 proven optima and with shorter median runtimes. These results support completion-certified sequencing as a computationally lighter alternative to exact finite-graph search, within the stated graph and audit assumptions, and motivate a larger frozen evaluation of viewpoint redundancy.
 
 % \section*{Data and Code Availability}
 
