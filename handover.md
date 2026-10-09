@@ -1,5 +1,105 @@
 # Ubuntu handover: required-target ROS validation and manuscript update
 
+**Figure 7 coverage precision aligned (2026-10-09):**
+The onboard-camera panel now displays weighted coverage as 76.3%, matching
+observation 9 in Figure 6. Both labels represent the same saved ratio,
+0.7627194404377868; coverage is held during transfer until the next accepted
+observation. Only the displayed precision changed. The generator, panel-b
+PDF/SVG/PNG exports, and integrity manifests are synchronized. Pixel comparison
+confirms that changes are confined to the last coverage label; embedded camera
+pixels, fonts, dimensions, layout, and panel a are unchanged. Figure preflight,
+PDF font audit, compilation, all 68 figure checks, and page-12 visual review
+passed. The main PDF remains 13 pages; root and build outputs are synchronized.
+
+**Abstract depth comparisons clarified (2026-10-09):**
+The abstract now identifies the separate comparison of rollout depths as the
+reason for retaining depth three, then introduces the main benchmark with
+"Using this depth". The 0.96% mean graph-cost gap remains explicitly tied to
+the 27 cases with MILP-proven optima. The four-case visibility stress-test
+sentence was removed from the abstract; its explanation and exclusion from
+the 59-case primary denominator remain in the benchmark protocol. Numerical
+results and figure assets are unchanged. Compilation, all 68 figure integrity
+checks, and first-page visual review passed; the main PDF remains 13 pages.
+
+**Figure 1 rectangular FOV illustrated (2026-10-09):**
+Panel II now shows a perspective rectangular viewing pyramid with separate
+horizontal and vertical half-angle labels, matching Eq. (3). Its far rectangle
+illustrates the angular limits; range, incidence, and LOS remain separate
+checks. The generic alpha_max label and principal-plane-only explanation have
+been replaced in the figure, caption, system-model reference, and notation
+notes. Native draw.io, SVG, PDF, and PNG exports are synchronized. The other
+four panels are pixel-identical to the prior preview; camera imagery, palette,
+typography, figure dimensions, and experimental data are preserved. The scoped
+Python updater is `tools/paper/rectangular_figure1_fov.py`. Compilation, all 68
+figure checks, whitespace checks, and manuscript-page visual review passed.
+The main manuscript remains 13 pages and the supplement 2 pages; the root and
+build manuscript PDFs are synchronized.
+
+**Abstract condensed (2026-10-09):**
+The abstract in `OrbInspectLatex/main.tex` was shortened from approximately 228
+to 171 words. It retains the method's completion safeguard, conditional rollout
+guarantee, depth-three rationale before the primary comparison, independently
+certified all-solvable benchmark, mean 0.96% gap over 27 proven optima, separate
+visibility stress cases, and the 11.05% confirmation maneuver saving. The
+fixed-library completion counts remain in the Results section. No numerical
+results or figures changed. Compilation, all 68 figure integrity checks,
+whitespace checks, and first-page visual review passed; the main PDF remains
+13 pages. Root and build manuscript PDFs are synchronized.
+
+**Depth rationale added to abstract (2026-10-09):**
+The abstract in `OrbInspectLatex/main.tex` now introduces the separate validation
+depth diagnostic immediately before the 59-case benchmark comparison. It says
+the diagnostic supports retaining depth three as a practical balance between
+graph cost and computation, preserving the chronology of the earlier frozen
+confirmation and subsequent all-solvable benchmark. No results or figures
+changed. Compilation, all 68 figure integrity checks, whitespace checks, and
+first-page visual review passed; the main PDF remains 13 pages. Root and build
+manuscript PDFs are synchronized.
+
+**Mean optimality-gap wording corrected (2026-10-09):**
+The abstract, discussion, and conclusion in `OrbInspectLatex/main.tex` now
+identify 0.96% as the mean relative graph-cost gap across the 27 cases with
+proven optima. The former "within 0.96%" wording implied a per-case bound
+that the reported mean does not establish. The runtime comparator is explicitly
+the independent MILP. Results and cover-letter wording already stated the mean
+correctly. No numerical results or figures changed. Compilation, all 68 figure
+integrity checks, whitespace checks, and rendered-page review passed; the main
+PDF remains 13 pages. Root and build manuscript PDFs are synchronized.
+
+**Rectangular FOV model aligned with implementation (2026-10-09):**
+Eq. (3) in `OrbInspectLatex/main.tex` now uses separate horizontal and vertical
+camera-frame bounds, together with positive forward displacement. The forward,
+horizontal, and vertical displacement components and both FOV half-angles are
+defined at first use. Section V-B records the implemented 70-by-50-degree full
+FOV and 35-/25-degree half-angles. Figure 1's existing alpha_max label is
+explicitly identified as the half-angle of its schematic principal-plane
+cross-section; its notation notes agree. All figure artwork is unchanged.
+The tangent bounds were checked against the implemented angular gate using
+10,000 random cases and 10 near-boundary/behind-camera cases. Compilation,
+figure-integrity checks, rendered-page review, and whitespace checks passed;
+the main PDF remains 13 pages. Root and build manuscript PDFs are synchronized.
+
+**Transfer-distance and terminal-error notation clarified (2026-10-09):**
+`OrbInspectLatex/main.tex` now defines the RMS distance to the fixed destination,
+terminal position error, and terminal velocity error together in Eq. (7).
+The RMS quantity uses all K post-step samples and enters the graph cost;
+terminal errors use only the final sample and enter admissibility checks,
+with zero desired terminal velocity. Both descriptions of the lambda_e weight
+now say RMS distance to the destination. The formulas match the existing planner;
+no implementation, results, or figure changes were needed. The rebuilt main PDF
+remains 13 pages; compilation, figure-integrity checks, and rendered-page review
+passed. The root main PDF and build output are synchronized.
+
+**Depth diagnostic reordered (2026-10-09):** Results now begins with
+“Rollout Depth and Computational Cost” (VI-A), followed by the method comparisons.
+The protocol and supplement distinguish depth three fixed for the earlier
+confirmation from its retention for the later all-solvable benchmark after the
+validation diagnostic. Repeated development outcomes remain in Supplementary
+Table S3. The main PDF is 13 pages and the supplement 2 pages; all 68 figure
+assets, numerical tables, and displayed equations are preserved. Both root PDFs
+and `build/` PDFs are current. See
+`OrbInspectLatex/docs/DEPTH_DIAGNOSTIC_ORDER_20261009.md`.
+
 **Submission-length revision completed (2026-09-17):** recommendations 1, 2,
 4 and 5 were applied to the local manuscript. Repeated exposition was condensed,
 the target inventories and full depth diagnostic moved to a standalone supplement,

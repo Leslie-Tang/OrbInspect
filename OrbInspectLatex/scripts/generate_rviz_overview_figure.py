@@ -97,7 +97,8 @@ def generate(output: Path = OUTPUT) -> None:
         if suffix == 'b':
             text_at(fig, 0.5, 10.8, f"Transfer {state['from_observation']} to {state['to_observation']}", bold=True)
             text_at(fig, 0.5, 7.2, f"{state['accepted_observations']}/12 observations; {state['accepted_required_count']}/9 required")
-            text_at(fig, 0.5, 3.6, f"Weighted coverage: {100*state['weighted_coverage']:.2f}%")
+            # Match the one-decimal coverage labels in the observation montage.
+            text_at(fig, 0.5, 3.6, f"Weighted coverage: {100*state['weighted_coverage']:.1f}%")
         fig.canvas.draw()
         for label in fig.texts:
             box = label.get_window_extent(fig.canvas.get_renderer())
@@ -121,7 +122,7 @@ def generate(output: Path = OUTPUT) -> None:
         'source_manifest_sha256': sha(DATA/'source_manifest.json'),
         'conclusion': 'The recorded repeat execution presents the global trajectory and a distinct central-module camera view together during transfer from observation 9 to 10.',
         'archetype': 'image plate + progress counts',
-        'reuse': 'Exact reuse of approved Figure 8 crops, borders and progress annotations; screenshot pixels unchanged.',
+        'reuse': 'Approved crops, borders and progress annotations retained; weighted coverage displayed to one decimal place to match the observation montage. Screenshot pixels unchanged.',
         'independent_execution': source['repeat_execution_id'],
         'selected_video_frame_time_s': source['video_frame_time_s'],
         'frame_state': state,

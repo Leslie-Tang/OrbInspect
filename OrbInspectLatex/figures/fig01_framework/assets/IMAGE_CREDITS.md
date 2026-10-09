@@ -1,10 +1,10 @@
 # Figure 1 photographic assets
 
-Both source files are embedded in the editable draw.io diagram and SVG, and
-included here unchanged. Only aspect-preserving display scaling is applied:
-no cropping, background removal, retouching, or generative modification.
-The photographs illustrate station identity and camera sensing, not experimental
-imagery or a tested/selected spacecraft camera.
+The current diagram embeds the camera photograph unchanged. The ISS photograph
+below is a historical source asset, not used in the current mesh-based panel I.
+Only aspect-preserving scaling is applied to the camera image: no cropping,
+background removal, retouching, or generative modification. It illustrates
+camera sensing, not experimental imagery or a tested/selected spacecraft camera.
 
 ## ISS
 
@@ -34,5 +34,5 @@ imagery or a tested/selected spacecraft camera.
   changes, and comply with the source license. The source license is not an
   assertion of a new license for the manuscript or software.
 
-Credits and the camera license link also appear in the manuscript's Figure 1
+The camera credit and license link also appear in the manuscript's Figure 1
 caption. Retrieved 2026-09-06.

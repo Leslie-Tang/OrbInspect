@@ -42,7 +42,7 @@
 \title{Supplementary Material for ``Viability-Preserving Rollout Approximate Dynamic Programming for Required-Target Orbital Inspection''}
 \hypersetup{%
   pdftitle={Supplementary Material for Viability-Preserving Rollout Approximate Dynamic Programming for Required-Target Orbital Inspection},
-  pdfauthor={Rugang Tang; Xin Ning; Chih-Yung Wen},
+  pdfauthor={Rugang Tang; Zheng Tan; Wenyu Yang; Xin Ning; Chih-Yung Wen},
   pdfsubject={Supplementary material for required-target orbital inspection with viability-preserving rollout approximate dynamic programming},
   pdfkeywords={spacecraft inspection, approximate dynamic programming, safe observable orbital arc, relative orbital dynamics, inspection requirements}%
 }
@@ -85,13 +85,13 @@ Table~S1 records the frozen synthetic target identities used in the first requir
 
 \section{Depth Diagnostic and Timing Protocol}
 
-After the primary depth-three policy was fixed, all six depths were evaluated on the same 12 validation scenarios with the nine-target requirement, graph, action budget, implementation, and zero-gain connecting actions unchanged. The nine scenarios with required visibility were completed at every depth; the other three lacked an available view of at least one required target. Mean graph cost in Table~S2 therefore uses the nine commonly completed scenarios, whereas timing and safety-screen counts include all 12 cases.
+The six-depth diagnostic followed the fixed-library confirmation, for which depth three was already fixed. It used the same 12 validation scenarios with the nine-target requirement, graph, action budget, implementation, and zero-gain connecting actions unchanged. The nine scenarios with required visibility were completed at every depth; the other three lacked an available view of at least one required target. Mean graph cost in Table~S2 therefore uses the nine commonly completed scenarios, whereas timing and safety-screen counts include all 12 cases.
 
 Each scenario--depth pair was measured once in ascending-depth order using Python~3.14 on an Apple M4 host running macOS. Complete-route timing includes preliminary base-policy construction but excludes graph loading and serialization. Scheduling and thermal effects were uncontrolled. Safety-screen counts exclude the separate preliminary base-policy call. The measurements are therefore implementation diagnostics rather than controlled hardware benchmarks.
 
 \begin{table*}[t]
   \centering
-  \caption{Post-selection depth diagnostic on the 12 validation scenarios. Ratios use depth three; negative $\Delta J$ denotes lower mean graph cost}
+  \caption{Post-confirmation depth diagnostic on the 12 validation scenarios. Ratios use depth three; negative $\Delta J$ denotes lower mean graph cost}
   \label{tab:supp-depth-sensitivity}
   \renewcommand{\arraystretch}{1.08}
   \setlength{\tabcolsep}{5pt}
@@ -110,7 +110,7 @@ Each scenario--depth pair was measured once in ascending-depth order using Pytho
   \end{tabular*}
 \end{table*}
 
-Depth three reduced mean graph cost by 11.19\% relative to depth two. Depth four reduced it by a further 2.74\%, at 4.63 times the median planning time and 4.74 times the mean safety-screen count. Depths five and six produced no further cost or completion improvement. These results support depth three as the fixed computation--cost compromise used in the main comparisons.
+Depth three reduced mean graph cost by 11.19\% relative to depth two. Depth four reduced it by a further 2.74\%, at 4.63 times the median planning time and 4.74 times the mean safety-screen count. Depths five and six produced no further cost or completion improvement. These results support depth three as a practical computation--cost compromise; this setting was retained for the subsequent all-solvable benchmark.
 
 \section{Historical Required-Target Campaign}
 
@@ -150,6 +150,8 @@ To prove the statement, use induction on the remaining budget $h$. At $h=0$, the
 The selected Robot Operating System 2 (ROS~2) execution in the main manuscript followed an earlier nine-view run that achieved 77.22\% weighted background coverage. Development then introduced a 95\% coverage goal while retaining the same nine required target IDs and 41-sample weighting. Candidate views 5 and 12 entered the caution zone and were shifted by 8~m and 6~m, respectively. Camera aims were adjusted, and the affected transfers and visibility masks were recomputed before the reported execution. Each 90~s transfer was followed by 60~s of settling.
 
 The run used Ubuntu~24.04.4, ROS~2 Jazzy, Gazebo Harmonic, RViz2, and Python~3.12.3. Its logs contain 36,172 safe-control messages, including 1,847 safety-filter interventions, and 36,181 trajectory samples. A $247\,525$-triangle full-mesh audit was applied to the swept trajectory. The maximum publisher gap was 0.249~s, compared with the nominal 0.075~s diagnostic interval. Recorded camera frames matched their observation-event receipts within 0.074~s. Both recorded bags contain identical verification events, and Gazebo poses confirm visual alignment with the ROS state.
+
+The Gazebo visualization uses an RGB perspective camera with a $70^{\circ}$ horizontal field of view (FOV), $960\times686$ pixels, and a 15-Hz update rate. Near and far clipping distances are 0.1 and 120~m. The image aspect ratio implies an approximately $53.2^{\circ}$ vertical FOV, whereas target-credit checks use the planner's $50^{\circ}$ vertical FOV. The camera is offset 0.45~m along the chaser body forward axis. Gazebo images are bridged to ROS~2 as \texttt{sensor\_msgs/msg/Image} on \texttt{/chaser/camera/image} for display and recording. Rendered images are illustrative and do not determine target credit.
 
 These adjustments and diagnostics document one selected, post-hoc development execution. They do not alter the frozen held-out comparison or its reported 11.05\% mean maneuver-velocity-increment reduction.
 

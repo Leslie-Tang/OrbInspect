@@ -1,0 +1,82 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% IEEE TAES initial-submission cover letter.
+% Adapted from the author-provided coverletter.tex template.
+% Original template credits: Chen Yang and Fanchao Chen;
+% original template source: LaTeXTemplates.com.
+% Scientific claims checked against ../main.tex on 9 October 2026.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[10pt]{article}
+\ifdefined\pdfminorversion\pdfminorversion=7\fi
+\usepackage{charter}
+\usepackage[a4paper,top=1in,bottom=1in,left=1in,right=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+  pdftitle={Cover Letter for IEEE Transactions on Aerospace and Electronic Systems},
+  pdfauthor={Zheng Tan},
+  pdfsubject={Regular Paper submission: required-target orbital inspection}
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.7em}
+
+\fancypagestyle{firstpage}{%
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{1pt}
+}
+\fancypagestyle{subsequentpages}{%
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{1pt}
+  \renewcommand{\footrulewidth}{1pt}
+}
+\AtBeginDocument{\thispagestyle{firstpage}}
+\pagestyle{subsequentpages}
+
+\newcommand{\SubmissionDate}{9 October 2026}
+\newcommand{\CorrespondingAuthor}{Zheng Tan}
+% Submission-contact email supplied by the author on 9 October 2026.
+\newcommand{\CorrespondingEmail}{\href{mailto:zheng-uav.tan@connect.polyu.hk}{zheng-uav.tan@connect.polyu.hk}}
+\newcommand{\ManuscriptTitle}{Viability-Preserving Rollout Approximate Dynamic Programming for Required-Target Orbital Inspection}
+
+\begin{document}
+
+\includegraphics[width=0.4\textwidth]{Polyu-cover.pdf}
+
+\vspace{-1em}
+\rule{\linewidth}{1pt}
+
+\vspace{0.6em}
+\hfill\begin{tabular}{r@{}}
+  \SubmissionDate\\[0.35em]
+  \CorrespondingAuthor\\
+  Email: \CorrespondingEmail\\
+  Department of Aeronautical and Aviation Engineering\\
+  The Hong Kong Polytechnic University\\
+  Hung Hom, Kowloon, Hong Kong SAR
+\end{tabular}
+
+\vspace{0.5em}
+Dear Editor,
+
+We submit our manuscript entitled ``\ManuscriptTitle'' for consideration as a Regular Paper in \textit{IEEE Transactions on Aerospace and Electronic Systems}.
+
+Autonomous orbital inspection must observe every prescribed target while limiting maneuver effort under relative-motion, visibility, and safety constraints. The manuscript develops viability-preserving rollout approximate dynamic programming (ADP) over a directed graph of audited orbital arcs. It couples Hill--Clohessy--Wiltshire transfers with camera-valid observations and task-completing base-policy continuations.
+
+The methodological contribution is to preserve a feasible continuation to all required observations during finite-depth rollout. Safe connecting actions remain available even when they provide no immediate observation gain. Under deterministic finite-graph assumptions and exhaustive prefix evaluation, we prove that repeated rollout preserves base-policy completion and does not increase its graph cost.
+
+Independent route certification distinguishes planner failure from unavailable viewpoints. On the resulting 59-case all-solvable development benchmark, depth-three ADP completes 59/59 missions, compared with 57/59 for one-step ADP and 33/59 for task-aware greedy planning. Its mean graph-cost gap is 0.96\% across 27 cases with proven optima, with shorter median runtimes than the independent mixed-integer reference. A separate fixed-library confirmation shows an 11.05\% reduction in mean maneuver velocity increment relative to one-step-ADP-seeded local search on 43 jointly completed test missions. ROS~2/Gazebo simulation execution further demonstrates completion of all nine required targets using twelve observations. These findings concern the specified candidate graphs and enabled deterministic audits.
+
+The work addresses aerospace guidance, autonomous mission planning, and on-orbit servicing, aligning with the journal's focus on aerospace systems. Supporting analyses and simulation execution details are provided in the accompanying supplementary material.
+
+Thank you for your consideration.
+
+Sincerely yours,
+
+\vspace{0.5em}
+\CorrespondingAuthor\\
+Corresponding author\\
+The Hong Kong Polytechnic University
+
+\end{document}

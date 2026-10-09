@@ -1,46 +1,83 @@
 {
-  "changes": [
+  "scope": "Panel II rectangular FOV geometry and its two half-angle labels",
+  "modified_native_ids": [
+    "100",
+    "101",
+    "114",
+    "116",
+    "117",
+    "118",
+    "119"
+  ],
+  "new_native_ids": [
+    "fov-h-arc",
+    "fov-h-label",
+    "fov-h-leader",
+    "fov-h-ray",
+    "fov-v-ray"
+  ],
+  "other_native_cells_and_svg_objects_identical": true,
+  "source_camera_photo_unchanged": true,
+  "preview_difference_bounds": [
+    53,
+    516,
+    412,
+    780
+  ],
+  "other_panels_pixel_identical": true,
+  "fov_shape": "Perspective rectangular pyramid; range gate remains independent",
+  "half_angles": [
+    "\\alpha_{\\max}^{\\mathrm h}",
+    "\\alpha_{\\max}^{\\mathrm v}"
+  ],
+  "label_metrics": [
     {
-      "before": "a  Mission inputs",
-      "after": "I. Mission inputs"
+      "id": "114",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 121.36799955368042,
+      "box_width": 154.0,
+      "line_heights": [
+        31.2
+      ]
     },
     {
-      "before": "b  Camera and LOS",
-      "after": "II. Camera and LOS"
+      "id": "117",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 53.0,
+      "box_width": 100.0,
+      "line_heights": [
+        31.2
+      ]
     },
     {
-      "before": "c  HCW transfer \u2192 SOOA graph",
-      "after": "III. HCW transfer \u2192 SOOA graph"
+      "id": "119",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 59.0,
+      "box_width": 82.0,
+      "line_heights": [
+        31.2
+      ]
     },
     {
-      "before": "d  Rollout ADP",
-      "after": "IV. Rollout ADP"
-    },
-    {
-      "before": "e  Replanning",
-      "after": "V. Replanning"
-    },
-    {
-      "before": "\\mathbf{b}(\\bar{q}_j)",
-      "after": "\\mathbf{b}(\\bar{\\mathbf{q}}_j)"
-    },
-    {
-      "before": "s=(j,m,b,h)",
-      "after": "s=(j,\\mathbf{m},\\boldsymbol{\\beta},h)"
+      "id": "fov-h-label",
+      "font_size": 26.0,
+      "original_font_size": 26.0,
+      "width": 53.0,
+      "box_width": 100.0,
+      "line_heights": [
+        31.2
+      ]
     }
   ],
-  "all_other_native_svg_objects_identical": true,
-  "geometry_fonts_colors_and_non_notation_equations_unchanged": true,
-  "notation_alignment": {
-    "camera_target_vectors": "\\mathbf{p}_i, \\mathbf{n}_i",
-    "camera_boresight": "\\mathbf{b}(\\bar{\\mathbf{q}}_j)",
-    "decision_state": "s=(j,\\mathbf{m},\\boldsymbol{\\beta},h)",
-    "stored_edge": "\\mathsf{a}_{ij}",
-    "candidate_nodes": "c_i"
-  },
-  "native_export_heading_text_equal": true,
-  "visual_review": "passed: Roman headings and the two updated notation labels are legible without overlap or clipping; figure geometry and styling are unchanged",
-  "manuscript_pages_visually_reviewed": [2, 3, 4, 5],
-  "current_revision_scope": "two notation labels plus synchronized native, SVG, PDF, and PNG exports",
-  "compiled_manuscript_pages": 14
+  "reuse_level": "Style-only inheritance; current five-panel native source",
+  "backend": "Python XML geometry and existing math renderer; Chromium SVG/PDF export via Python",
+  "typography_exemption": "Preserve existing paper styling and math-path export; final-size visual review required.",
+  "preflight_warnings": "Font sizes inherited from native cells; vector PDF is the manuscript asset; PNG is a preview, not a TIFF submission asset. Manuscript controls final width at 0.85 linewidth.",
+  "visual_review": "Passed: both principal-plane half-angle labels, the rectangular pyramid, range, incidence, and LOS examples are legible without label collisions. All five panels were inspected in the figure export and on manuscript page 2.",
+  "compiled_manuscript_pages": 13,
+  "project_check": "Passed: all 68 figure files verified; only Figure 1 checksums updated.",
+  "pdf_text_audit": "Passed for supported text streams; math outlines and page scaling were checked visually at manuscript size."
 }

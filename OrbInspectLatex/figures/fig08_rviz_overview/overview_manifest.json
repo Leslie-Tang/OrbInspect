@@ -12,12 +12,12 @@
     "a": 0.426,
     "b": 0.5
   },
-  "generator_sha256": "8aa461914dabebb6e5c99a2553d98701d21997db20526e78a54bdc759e434322",
+  "generator_sha256": "60b3c71a7b54a8bea23b474832bd35bb17230603035fe44600ff2d4c9549e02b",
   "source_manifest": "data/rviz_overview/20260909_113140_hybrid12_rviz_video/source_manifest.json",
   "source_manifest_sha256": "9b07510fef56c7c7cbeabd2e79ebba3bc0ed3f6bcff4582e604156a4bb3de929",
   "conclusion": "The recorded repeat execution presents the global trajectory and a distinct central-module camera view together during transfer from observation 9 to 10.",
   "archetype": "image plate + progress counts",
-  "reuse": "Exact reuse of approved Figure 8 crops, borders and progress annotations; screenshot pixels unchanged.",
+  "reuse": "Approved crops, borders and progress annotations retained; weighted coverage displayed to one decimal place to match the observation montage. Screenshot pixels unchanged.",
   "independent_execution": "20260909_113140_hybrid12_rviz_video_execution",
   "selected_video_frame_time_s": 1375.0,
   "frame_state": {
@@ -68,8 +68,8 @@
     "rviz_execution_overview_a.pdf": "12c47374a73be2f5608f1a214547e40e4bde566186abe1e4c050f72beeb22efb",
     "rviz_execution_overview_a.svg": "970f4594cf8968404cf919f9159e5b8bba7fbf3f4e0b85977bc4b0de62ca75b4",
     "rviz_execution_overview_a.png": "745d543122e566b16c64b06fe90e04929c6cc7efad316acbd5de1029429ee0a4",
-    "rviz_execution_overview_b.pdf": "fc502de955176c23fc05c5829656ef081364582f750381aa064b0a5e7dfbb62c",
-    "rviz_execution_overview_b.svg": "6a0c3c4100daecc85581c198b7d987af82d4a2147be996530149813915b4905e",
-    "rviz_execution_overview_b.png": "d3d1f7928cf1ec39bb3af808e3e6a4f16d899afc18502070d6682a51fc3d6286"
+    "rviz_execution_overview_b.pdf": "7b082a039c97776fccdeb1c3e6f4a12c0c764106c0de01084c1699ef0cbd9f6c",
+    "rviz_execution_overview_b.svg": "6bd9e4e05e610f27964441864f4f27a6c631e702d3501d14c80db87d32a3d165",
+    "rviz_execution_overview_b.png": "5340b45e976650a0fb9dad5d1cc79acdb1d7ea4e411cdd9b8026c15209e0482d"
   }
 }

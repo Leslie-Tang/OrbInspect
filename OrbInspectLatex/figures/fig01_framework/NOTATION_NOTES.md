@@ -30,7 +30,13 @@ $\|\mathbf p_i-\bar{\mathbf r}_j\|$. The illustrated incidence angle is
 $$\theta=\arccos\frac{(\bar{\mathbf r}_j-\mathbf p_i)^{\mathsf T}\mathbf n_i}
 {\|\bar{\mathbf r}_j-\mathbf p_i\|\|\mathbf n_i\|},\qquad\theta\leq\theta_{\max}.$$
 
-The FOV half-angle is $\alpha_{\max}$, and $G_j$ contains camera-valid targets.
+The current Figure 1 shows the rectangular angular FOV as a perspective
+pyramid. The half-angles $\alpha_{\max}^{\mathrm h}$ and
+$\alpha_{\max}^{\mathrm v}$ are measured from the boresight in the horizontal
+and vertical camera planes, respectively. The far rectangle illustrates the
+angular bounds, not the radial range limit; range is checked separately.
+The perspective drawing is schematic and is not an angle measurement plot.
+$G_j$ contains camera-valid targets.
 The letters $x,z$ on spatial axes name the LVLH directions, corresponding to
 position components $r_x,r_z$; bold $\mathbf x$ denotes the six-dimensional state.
 

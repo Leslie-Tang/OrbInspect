@@ -103,33 +103,39 @@
 \title{Viability-Preserving Rollout Approximate Dynamic Programming for Required-Target Orbital Inspection}
 \hypersetup{%
   pdftitle={Viability-Preserving Rollout Approximate Dynamic Programming for Required-Target Orbital Inspection},
-  pdfauthor={Rugang Tang; Xin Ning; Chih-Yung Wen},
+  pdfauthor={Rugang Tang; Zheng Tan; Wenyu Yang; Xin Ning; Chih-Yung Wen},
   pdfsubject={Required-target orbital inspection with viability-preserving rollout approximate dynamic programming},
   pdfkeywords={spacecraft inspection, approximate dynamic programming, safe observable orbital arc, relative orbital dynamics, inspection requirements}%
 }
 
-% \author{Rugang Tang}
-% \affil{The Hong Kong Polytechnic University, Hung Hom, Kowloon, Hong Kong SAR}
+\author{Rugang Tang}
+\affil{Department of Aeronautical and Aviation Engineering, The Hong Kong Polytechnic University, Hung Hom, Kowloon, Hong Kong SAR}
 
-% \author{Xin Ning}
-% \affil{School of Astronautics, Northwestern Polytechnical University, Xi'an, Shaanxi 710072, China}
+\author{Zheng Tan}
+\affil{Department of Aeronautical and Aviation Engineering, The Hong Kong Polytechnic University, Hung Hom, Kowloon, Hong Kong SAR}
 
-% \author{Chih-Yung Wen}
-% \affil{Department of Aeronautical and Aviation Engineering, The Hong Kong Polytechnic University, Hung Hom, Kowloon, Hong Kong SAR}
+\author{Wenyu Yang}
+\affil{Department of Aeronautical and Aviation Engineering, The Hong Kong Polytechnic University, Hung Hom, Kowloon, Hong Kong SAR}
+
+\author{Xin Ning}
+\affil{School of Astronautics, Northwestern Polytechnical University, Xi'an, Shaanxi 710072, China}
+
+\author{Chih-Yung Wen}
+\affil{Department of Aeronautical and Aviation Engineering, The Hong Kong Polytechnic University, Hung Hom, Kowloon, Hong Kong SAR}
 
 \receiveddate{}
 
-\corresp{This work was supported in part by the Research Centre for Unmanned Autonomous Systems of The Hong Kong Polytechnic University under Grant P0046487. {\itshape (Corresponding author: Rugang Tang)}.}
+\corresp{This work was supported in part by the Research Centre for Unmanned Autonomous Systems of The Hong Kong Polytechnic University under Grant P0046487. {\itshape (Corresponding author: Zheng Tan)} (e-mail: \href{mailto:zheng-uav.tan@connect.polyu.hk}{zheng-uav.tan@connect.polyu.hk}).}
 
 % \authoraddress{Rugang Tang is with the Department of Aeronautical and Aviation Engineering, The Hong Kong Polytechnic University, Hung Hom, Kowloon, Hong Kong SAR (e-mail: \href{mailto:rugtang@polyu.edu.hk}{rugtang@polyu.edu.hk}). Xin Ning is with the School of Astronautics, Northwestern Polytechnical University, Xi'an, Shaanxi 710072, China. Chih-Yung Wen is with the Department of Aeronautical and Aviation Engineering, The Hong Kong Polytechnic University, Hung Hom, Kowloon, Hong Kong SAR.}
 
-\supplementary{Supplementary material containing supporting tables, ROS~2 execution details, data, and code is available with this article. Color versions of one or more figures are available online at \href{https://ieeexplore.ieee.org}{https://ieeexplore.ieee.org}.}
+% \supplementary{Supplementary material containing supporting tables, ROS~2 execution details, data, and code is available with this article. Color versions of one or more figures are available online at \href{https://ieeexplore.ieee.org}{https://ieeexplore.ieee.org}.}
 \markboth{OrbInspect}{Rollout ADP for Orbital Inspection}
 
 \maketitle
 
 \begin{abstract}
-Autonomous orbital inspection must limit maneuver effort while completing prescribed observations under relative-motion and safety constraints. We formulate viability-preserving rollout approximate dynamic programming (ADP) on a directed graph of audited orbital arcs. A finite Bellman prefix evaluates deterministic task-aware base-policy completions; uncertified completions receive infinite value, while safe zero-gain connecting actions remain available. Under deterministic finite-graph assumptions, exhaustive rollout preserves base-policy completion and does not increase its graph cost. We independently certify route feasibility to separate planner failure from unavailable viewpoints. On a 59-case all-solvable development benchmark spanning three 33-view graphs, depth-three ADP completes 59/59 missions, versus 57/59 for one-step ADP and 33/59 for the task-aware greedy policy. An independent MILP certifies feasibility for all 59 cases and proves minimum graph costs for 27; depth-three ADP is within 0.96\% of those optima with shorter median runtimes. Four visibility-infeasible cases are retained as a separate stress test. In the fixed-library confirmation, depth-three ADP completes \RTTestSuccess/\RTTestN{} test and \RTOodSuccess/\RTOodN{} shifted missions and reduces mean maneuver velocity increment, $\Delta v$, by 11.05\% relative to one-step-ADP-seeded local search on 43 jointly completed test missions. The results support completion-certified sequencing while exposing viewpoint availability as a separate mission constraint.
+We propose viability-preserving rollout approximate dynamic programming (ADP) for maneuver-efficient prescribed-target orbital inspection under relative-motion and safety constraints, using a directed graph of audited orbital arcs. Finite-depth lookahead assigns infinite value to actions lacking certified task-completing base-policy continuations while retaining safe zero-gain connections. Under deterministic finite-graph assumptions, exhaustive rollout preserves base-policy completion without increasing graph cost. A separate comparison of rollout depths supports retaining depth three as a balance between graph cost and computation. Using this depth, ADP completes 59/59 missions on an independently certified all-solvable development benchmark spanning three 33-view graphs, versus 57/59 for one-step ADP and 33/59 for task-aware greedy planning. An independent mixed-integer linear program (MILP) proves optima for 27 cases. Depth-three ADP has a mean relative graph-cost gap of 0.96\% across these cases and shorter median runtimes than the MILP. In a separate fixed-library confirmation, mean maneuver velocity increment decreases by 11.05\% relative to one-step-ADP-seeded local search on 43 jointly completed test missions. These results support completion-certified sequencing while distinguishing planner performance from viewpoint availability. A ROS 2 simulation tracked a fixed ADP route through twelve accepted observations, covering all nine required targets while satisfying the enabled safety checks.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -141,18 +147,19 @@ spacecraft inspection, approximate dynamic programming, safe observable orbital 
 
 Orbital inspection provides visual evidence for spacecraft assessment and on-orbit servicing \cite{flores2014review}. Robot-aided inspection was demonstrated during STS-85 \cite{kimura2000inspection}, and later planning studies address large structures with one or several free-flying inspectors \cite{faghihi2022kinodynamic,faghihi2023multiple,apodaca2025trajectory}. An autonomous inspector must select observation locations and their order because relative dynamics couple transfer feasibility and maneuver effort.
 
-Next-best-view methods model observation quality \cite{scott2003view}, kinodynamic planners combine coverage and differential constraints \cite{faghihi2022kinodynamic,faghihi2023multiple}, and relative-orbit planners exploit natural motion \cite{hou2024relative,deka2023astrodynamics}. Prescribed missions require specific targets, which an aggregate coverage threshold can miss. We therefore optimize the viewpoints and sequence needed to observe every required item.
+Next-best-view methods model observation quality \cite{scott2003view}, kinodynamic planners combine coverage and differential constraints \cite{faghihi2022kinodynamic,faghihi2023multiple}, and relative-orbit planners exploit natural motion \cite{hou2024relative,deka2023astrodynamics}. Prescribed missions require specific targets, which an aggregate coverage threshold can miss. We therefore select candidate viewpoints and optimize their sequence to observe every required item.
 
 The planning challenge is to reduce cumulative maneuver effort while preserving a feasible continuation to all required observations. A low-cost immediate transfer can leave costly remaining observations or exhaust the budget before completing the task. Each safe observable orbital arc (SOOA) combines a source-dependent Hill--Clohessy--Wiltshire (HCW) transfer, a stabilized camera observation, and feasibility audits. Safe connecting arcs remain useful even when they reveal no new target immediately. Fig.~\ref{fig:sooa-framework} presents the resulting workflow, from mission inputs and arc construction to rollout ADP and inspection records.
 
 \begin{figure*}[t]
   \centering
   \includegraphics[width=0.85\linewidth]{figures/fig01_framework/viability_preserving_rollout_adp.pdf}
-  \caption{Viability-preserving rollout ADP for orbital inspection. I. International Space Station (ISS) mesh and required targets $\mathcal K$. II. Camera-valid targets $G_j$ from range, field of view (FOV), incidence $\theta\leq\theta_{\max}$, and line of sight (LOS) checks. III. HCW transfer, motion audits, and directed SOOA construction; C70 and C68 are archived candidate IDs. IV. Depth-$d$ Bellman lookahead with complete greedy base-policy tails. At each leaf, $\sum\ell$ denotes the full tail cost; $+\infty$ denotes no certified completion within the remaining budget. V. First-action selection and planning-state updates toward completion of all required targets. The tree is schematic; the 9/9 route is an archived offline plan. ISS geometry: National Aeronautics and Space Administration (NASA), \href{https://science.nasa.gov/resource/international-space-station-3d-model/}{NASA}.}
+  \caption{Viability-preserving rollout ADP for orbital inspection. I. International Space Station (ISS) mesh and required targets $\mathcal K$. II. Camera-valid targets $G_j$ from range, rectangular field of view (FOV), incidence $\theta\leq\theta_{\max}$, and line of sight (LOS) checks. III. HCW transfer, motion audits, and directed SOOA construction; C70 and C68 are archived candidate IDs. IV. Depth-$d$ Bellman lookahead with complete greedy base-policy tails. At each leaf, $\sum\ell$ denotes the full tail cost; $+\infty$ denotes no certified completion within the remaining budget. V. First-action selection and planning-state updates toward completion of all required targets. The tree is schematic; the 9/9 route is an archived offline plan. ISS geometry: National Aeronautics and Space Administration (NASA), \href{https://science.nasa.gov/resource/international-space-station-3d-model/}{NASA}.}
+  %  Camera photograph: \href{https://commons.wikimedia.org/wiki/File:SVCam-ECO_Series_black_with_Tubus.JPG}{Alexander Lucke}, \href{https://creativecommons.org/licenses/by-sa/3.0/}{CC BY-SA 3.0}, reproduced unmodified.
   \label{fig:sooa-framework}
 \end{figure*}
 
-The main contribution is a viability-preserving rollout approximate dynamic programming (ADP) formulation for maneuver-efficient required-target inspection. It specializes established rollout policy improvement \cite{bertsekas1997combinatorial,bertsekas2020rollout} using complete task-aware base-policy evaluations and finite-depth Bellman expansion. Actions are evaluated by approximate total graph cost, with infinite values rejecting uncertified completions. The analysis establishes completion preservation and base-policy no-degradation for SOOA sequencing, with exact dynamic programming providing a reference on tractable graphs.
+The main contribution is a viability-preserving rollout approximate dynamic programming (ADP) formulation for maneuver-efficient required-target inspection. It specializes established rollout policy improvement \cite{bertsekas1997combinatorial,bertsekas2020rollout} using complete task-aware base-policy evaluations and finite-depth Bellman expansion. Actions are evaluated by approximate total graph cost; those lacking a certified task-completing continuation receive infinite value. The analysis establishes completion preservation and base-policy no-degradation for SOOA sequencing, with exact dynamic programming providing a reference on tractable graphs.
 
 The contributions are:
 \begin{enumerate}
@@ -223,17 +230,19 @@ where $\widetilde A_d\in\mathbb R^{6\times6}$ and $\widetilde B_d\in\mathbb R^{6
 
 \subsection{Visibility, Prescribed Observation, and Coverage}
 
-The structure is represented by indexed surface samples $\{(\mathbf p_i,\mathbf n_i,\Delta A_i)\}_{i=1}^{N}$, where $\mathbf p_i\in\mathbb R^3$ is the sample position in the LVLH frame, $\mathbf n_i\in\mathbb R^3$ is its outward unit normal, and $\Delta A_i>0$ is its represented surface area. Let $\mathcal T=\{1,\ldots,N\}$ denote the sample-index set. Mission priority weights are separately defined as $w_i=\Delta A_i\eta_i$, where $\eta_i>0$ is a priority multiplier; they are not geometric areas. A fixed nonempty set $\mathcal K\subseteq\mathcal T$ specifies the required inspection items before scenario evaluation. The camera attitude quaternion $\mathbf q_k$ defines unit boresight $\mathbf b(\mathbf q_k)$, and $\mathcal O$ denotes the occluding mesh. Target index $i$ is visible when
+The structure is represented by indexed surface samples $\{(\mathbf p_i,\mathbf n_i,\Delta A_i)\}_{i=1}^{N}$, where $\mathbf p_i\in\mathbb R^3$ is the sample position in the LVLH frame, $\mathbf n_i\in\mathbb R^3$ is its outward unit normal, and $\Delta A_i>0$ is its represented surface area. Let $\mathcal T=\{1,\ldots,N\}$ denote the sample-index set. Mission priority weights are separately defined as $w_i=\Delta A_i\eta_i$, where $\eta_i>0$ is a priority multiplier; they are not geometric areas. A fixed nonempty set $\mathcal K\subseteq\mathcal T$ specifies the required inspection items before scenario evaluation.
+
+The camera attitude quaternion $\mathbf q_k$ specifies unit boresight $\mathbf b(\mathbf q_k)$ and the horizontal and vertical camera axes. Let $d_{i,k}^{\mathrm f}$, $d_{i,k}^{\mathrm h}$, and $d_{i,k}^{\mathrm v}$ denote the forward, horizontal, and vertical components of $\mathbf p_i-\mathbf r_k$ in this camera frame. With $\mathcal O$ denoting the occluding mesh, target $i$ is visible when $d_{i,k}^{\mathrm f}>0$ and
 \begin{align}
   r_{\min}^{\mathrm{cam}}&\le\norm{\mathbf p_i-\mathbf r_k}\le r_{\max}^{\mathrm{cam}},\nonumber\\
-  \arccos\!\frac{(\mathbf p_i-\mathbf r_k)^{\mathsf T}\mathbf b(\mathbf q_k)}
-  {\norm{\mathbf p_i-\mathbf r_k}}&\le\alpha_{\max},\nonumber\\
+  |d_{i,k}^{\mathrm h}|&\le d_{i,k}^{\mathrm f}\tan\alpha_{\max}^{\mathrm h},\nonumber\\
+  |d_{i,k}^{\mathrm v}|&\le d_{i,k}^{\mathrm f}\tan\alpha_{\max}^{\mathrm v},\nonumber\\
   \arccos\!\frac{(\mathbf r_k-\mathbf p_i)^{\mathsf T}\mathbf n_i}
   {\norm{\mathbf r_k-\mathbf p_i}\norm{\mathbf n_i}}&\le\theta_{\max},\nonumber\\
   \los(\mathbf r_k,\mathbf p_i,\mathcal O)&=1.
   \label{eq:visibility}
 \end{align}
-Here $r_{\min}^{\mathrm{cam}}$ and $r_{\max}^{\mathrm{cam}}$ are the camera range limits, $\alpha_{\max}$ is the FOV half-angle, $\theta_{\max}$ is the incidence-angle limit, and $\los(\mathbf r_k,\mathbf p_i,\mathcal O)=1$ denotes an unobstructed LOS. Let $\mathbf m_k\in\{0,1\}^{N}$ denote the cumulative covered-target mask after the first $k$ selected observations, initialized at $\mathbf m_0=\mathbf 0$. Let $M$ denote the number of candidate observation nodes, indexed by $j=1,\ldots,M$. For a target-index set $G_j$, let $\mathbf 1_{G_j}\in\{0,1\}^{N}$ denote its indicator vector; let $\mathbf e_a\in\{0,1\}^{M}$ denote the standard basis vector that marks selected destination $a$. Fig.~\ref{fig:sooa-framework}, panel~II, illustrates the range, FOV, incidence-angle, and LOS tests in \eqref{eq:visibility}. LOS is queried against a deterministic bounding-volume hierarchy containing every ISS mesh triangle; intersections at the target endpoint are excluded, while interior segment intersections block the view. Applying \eqref{eq:visibility} at the candidate pose $(\mathbf r_k,\mathbf q_k)=(\bar{\mathbf r}_j,\bar{\mathbf q}_j)$ yields its fixed visibility mask $G_j$. Selecting node $j$ credits this mask, so $\mathbf m_{k+1}=\mathbf m_k\lor\mathbf 1_{G_j}$. Here $\mathbf m_k=[m_{1,k},\ldots,m_{N,k}]^{\mathsf T}$, where $m_{i,k}=1$ exactly when target/sample $i$ has been credited after the first $k$ observations.
+Here $r_{\min}^{\mathrm{cam}}$ and $r_{\max}^{\mathrm{cam}}$ are the camera range limits, and $\alpha_{\max}^{\mathrm h},\alpha_{\max}^{\mathrm v}\in(0,\pi/2)$ are the horizontal and vertical FOV half-angles. The incidence-angle limit is $\theta_{\max}$, and $\los(\mathbf r_k,\mathbf p_i,\mathcal O)=1$ denotes an unobstructed LOS. Let $\mathbf m_k\in\{0,1\}^{N}$ denote the cumulative covered-target mask after the first $k$ selected observations, initialized at $\mathbf m_0=\mathbf 0$. Let $M$ denote the number of candidate observation nodes, indexed by $j=1,\ldots,M$. For a target-index set $G_j$, let $\mathbf 1_{G_j}\in\{0,1\}^{N}$ denote its indicator vector; let $\mathbf e_a\in\{0,1\}^{M}$ denote the standard basis vector that marks selected destination $a$. Fig.~\ref{fig:sooa-framework}, panel~II, illustrates the rectangular FOV and the range, incidence, and LOS tests. LOS is queried against a deterministic bounding-volume hierarchy containing every ISS mesh triangle; intersections at the target endpoint are excluded, while interior segment intersections block the view. Applying \eqref{eq:visibility} at the candidate pose $(\mathbf r_k,\mathbf q_k)=(\bar{\mathbf r}_j,\bar{\mathbf q}_j)$ yields its fixed visibility mask $G_j$. Selecting node $j$ credits this mask, so $\mathbf m_{k+1}=\mathbf m_k\lor\mathbf 1_{G_j}$. Here $\mathbf m_k=[m_{1,k},\ldots,m_{N,k}]^{\mathsf T}$, where $m_{i,k}=1$ exactly when target/sample $i$ has been credited after the first $k$ observations.
 Candidate generation can make a subset of the sampled surface invisible from every candidate observation. For the nonempty set $\mathcal T_{\mathrm{insp}}=\cup_{j=1}^{M}G_j$, the priority-weighted inspectable coverage is
 \begin{equation}
   C^{\mathrm{insp}}(\mathbf m_k)=
@@ -249,7 +258,7 @@ The required-target coverage fraction and the binary required-target completion 
   \end{aligned}
   \label{eq:required-goal}
 \end{equation}
-Completion denotes acceptance of the prescribed samples under \eqref{eq:visibility}. Reported mission duration is transfer-only; observation exposure is assumed complete at each stabilized candidate.
+Completion denotes acceptance of the prescribed samples under \eqref{eq:visibility}. Graph-planning durations count transfers only, with exposure assumed complete at each stabilized candidate. The ROS execution durations additionally include terminal settling.
 
 \subsection{Dynamic Feasibility and SOOAs}
 
@@ -260,7 +269,19 @@ Let $r_{\mathrm{veh}}$ denote the finite-body radius used to bound the chaser, a
   d_{\mathcal S}(\mathbf r_k)\ge 0,
   \label{eq:limits}
 \end{equation}
-where $d_{\mathcal S}(\mathbf r)=d_{\mathrm{mesh}}(\mathbf r)-r_{\mathrm{veh}}-d_{\mathrm{safe}}$ is finite-body clearance above the required margin, $d_{\mathrm{mesh}}$ is unsigned center distance to the closest triangle in the complete ISS mesh, and $d_{\mathcal S}=0$ is the sampled admissibility boundary. The mesh coordinates are obtained from the complete GL Transmission Format (glTF) scene hierarchy, followed by the Simulation Description Format (SDF) pose and scale. In addition, each consecutive pair of rollout samples is tested for a triangle-surface intersection, and its continuous center-distance lower bound subtracts half the segment length from the smaller endpoint distance by the 1-Lipschitz property of distance to a closed set. This swept test catches a direct mesh crossing even if both endpoints have positive unsigned distance. For a directed rollout from source node $i$ to destination node $j$, define $\Delta v_{ij}=\sum_k\norm{\mathbf u_{ij,k}}_2\dt$, root-mean-square distance $e_{ij}^{\mathrm{rms}}$ from the transfer samples to the destination position, and $d_{ij}^{\min}=\min_k d_{\mathcal S}(\mathbf r_{ij,k})$. The coefficients $\lambda_v$, $\lambda_e$, $\lambda_s$, and $\lambda_a$ are fixed nonnegative weights for maneuver increment, terminal tracking error, clearance violation, and per-edge action cost, respectively. The graph stage cost is
+where $d_{\mathcal S}(\mathbf r)=d_{\mathrm{mesh}}(\mathbf r)-r_{\mathrm{veh}}-d_{\mathrm{safe}}$ is finite-body clearance above the required margin, $d_{\mathrm{mesh}}$ is unsigned center distance to the closest triangle in the complete ISS mesh, and $d_{\mathcal S}=0$ is the sampled admissibility boundary. The mesh coordinates are obtained from the complete GL Transmission Format (glTF) scene hierarchy, followed by the Simulation Description Format (SDF) pose and scale. In addition, each consecutive pair of rollout samples is tested for a triangle-surface intersection, and its continuous center-distance lower bound subtracts half the segment length from the smaller endpoint distance by the 1-Lipschitz property of distance to a closed set. This swept test catches a direct mesh crossing even if both endpoints have positive unsigned distance.
+
+For a directed rollout from source node $i$ to destination node $j$, the desired terminal position is $\bar{\mathbf r}_j$ and velocity is zero. Define the root-mean-square (RMS) distance to this fixed destination and the terminal position and velocity errors, respectively, as
+\begin{equation}
+  \begin{aligned}
+  e_{ij}^{\mathrm{rms}}&=\left(\frac{1}{K}\sum_{k=1}^{K}\norm{\mathbf r_{ij,k}-\bar{\mathbf r}_j}_2^2\right)^{1/2},\\
+  e_{ij}^{r}&=\norm{\mathbf r_{ij,K}-\bar{\mathbf r}_j}_2,\qquad
+  e_{ij}^{v}=\norm{\mathbf v_{ij,K}}_2.
+  \end{aligned}
+  \label{eq:edge-errors}
+\end{equation}
+The RMS distance summarizes all $K$ post-step samples and contributes to the graph cost. Terminal errors use only the final sample and enter the admissibility checks.
+Also define $\Delta v_{ij}=\sum_k\norm{\mathbf u_{ij,k}}_2\dt$ and $d_{ij}^{\min}=\min_k d_{\mathcal S}(\mathbf r_{ij,k})$. The fixed nonnegative weights $\lambda_v$, $\lambda_e$, $\lambda_s$, and $\lambda_a$ correspond to maneuver increment, RMS distance to the destination, clearance violation, and per-edge action cost, respectively. The graph stage cost is
 \begin{equation}
   \ell_{ij}=\lambda_v\Delta v_{ij}+\lambda_e e_{ij}^{\mathrm{rms}}+\lambda_s\max(0,-d_{ij}^{\min})+\lambda_a.
   \label{eq:edge-cost}
@@ -277,7 +298,7 @@ A candidate observation node and a directed SOOA edge are, respectively,
   \end{aligned}
   \label{eq:sooa}
 \end{equation}
-Here $\bar{\mathbf r}_j$ and $\bar{\mathbf q}_j$ are the terminal observation position and prescribed attitude quaternion, $G_j\subseteq\mathcal T$ is its camera-valid target set, and $e_{ij}^{r}$ and $e_{ij}^{v}$ are terminal position and velocity errors. The stored state and boresight arrays contain the $K$ post-step samples, while $u_{ij}^{\max}$ and $v_{ij}^{\max}$ record the maximum sampled input and speed norms; the source state is held by candidate node $c_i$. In the edge notation below, $i$ and $j$ index candidate nodes and are distinct from the surface-sample index used above. The initial condition is a distinguished source node $c_0$ with no visibility reward. For an optional passive audit over $L_p$ steps, zero-input HCW drift can be propagated from every stored edge state and recorded as $\rho_{ij}=\min_{1\le k\le K,\,0\le l\le L_p}d_{\mathcal S}(\mathbf r_{ij,k}^{\mathrm{drift}}(l))$. The reported study disables this optional audit and therefore makes no passive-safety claim; it retains input, speed, full-mesh sampled clearance, swept surface-intersection, and terminal checks. Throughout this paper, ``safe'' means admissible under the audits explicitly enabled for the reported experiment.
+Here $\bar{\mathbf q}_j$ is the prescribed attitude quaternion, and $G_j\subseteq\mathcal T$ is the camera-valid target set. The terminal errors $e_{ij}^{r}$ and $e_{ij}^{v}$ are defined in \eqref{eq:edge-errors}. The stored state and boresight arrays contain the $K$ post-step samples, while $u_{ij}^{\max}$ and $v_{ij}^{\max}$ record the maximum sampled input and speed norms; the source state is held by candidate node $c_i$. In the edge notation below, $i$ and $j$ index candidate nodes and are distinct from the surface-sample index used above. The initial condition is a distinguished source node $c_0$ with no visibility reward. For an optional passive audit over $L_p$ steps, zero-input HCW drift can be propagated from every stored edge state and recorded as $\rho_{ij}=\min_{1\le k\le K,\,0\le l\le L_p}d_{\mathcal S}(\mathbf r_{ij,k}^{\mathrm{drift}}(l))$. The reported study disables this optional audit and therefore makes no passive-safety claim; it retains input, speed, full-mesh sampled clearance, swept surface-intersection, and terminal checks. Throughout this paper, ``safe'' means admissible under the audits explicitly enabled for the reported experiment.
 
 The preceding model induces the required-target sequencing problem.
 
@@ -357,7 +378,7 @@ An edge is audit-admissible when $\chi_{ij}=1$; an action is shield-admissible w
 
 \subsection{Adaptive Base Policy and Rollout Value}
 
-Let $g_{\mathcal K}(s,a)=|\mathcal K\cap(G_a\setminus\operatorname{supp}(\mathbf m))|$ count newly accepted required targets, and let $\epsilon=0.05$ prevent division by a near-zero stage cost. For the required-target task, the deterministic adaptive base policy is
+Let $g_{\mathcal K}(s,a)=|\mathcal K\cap(G_a\setminus\operatorname{supp}(\mathbf m))|$ count newly accepted required targets, and let $\epsilon>0$ prevent division by a near-zero stage cost. For the required-target task, the deterministic adaptive base policy is
 \begin{equation}
   \mu(s)\in\arg\max_{a\in\mathcal U_s(s)}
   \left(\frac{g_{\mathcal K}(s,a)}{\max\{\epsilon,\ell_{ja}\}},
@@ -458,19 +479,19 @@ The required set remains fixed when a scenario removes observation nodes. Losing
 
 \subsection{Dynamics, Costs, and Observation Accounting}
 
-Each rest-to-rest SOOA lasts \unit{90}{s} and uses fixed-step RK4 propagation with $\dt=\unit{3}{s}$. The HCW mean motion is $1.13137\times10^{-3}~\mathrm{rad/s}$, the acceleration limit is $u_{\max}=0.060~\mathrm{m/s^2}$, and the speed limit is $v_{\max}=\unit{2.0}{m/s}$. The finite-body radius is $r_{\mathrm{veh}}=\unit{0.80}{m}$, which conservatively bounds the chaser visual model, and the prescribed full-mesh clearance margin is $d_{\mathrm{safe}}=\unit{2.0}{m}$. Terminal position and velocity tolerances are \unit{0.5}{m} and \unit{0.05}{m/s}. For the reported simulations, we set $\lambda_{v}=5$, $\lambda_{e}=0.18$, $\lambda_{s}=120$, and $\lambda_{a}=0.05$, weighting maneuver increment, terminal tracking error, clearance violation, and per-edge action cost, respectively, in \eqref{eq:edge-cost}. The action budget is 14. Required-only completion has no additional global area threshold.
+Each rest-to-rest SOOA lasts \unit{90}{s} and uses fixed-step RK4 propagation with $\dt=\unit{3}{s}$. The HCW mean motion is $1.13137\times10^{-3}~\mathrm{rad/s}$, the acceleration limit is $u_{\max}=0.060~\mathrm{m/s^2}$, and the speed limit is $v_{\max}=\unit{2.0}{m/s}$. The finite-body radius is $r_{\mathrm{veh}}=\unit{0.80}{m}$, which conservatively bounds the chaser visual model, and the prescribed full-mesh clearance margin is $d_{\mathrm{safe}}=\unit{2.0}{m}$. Terminal position and velocity tolerances are \unit{0.5}{m} and \unit{0.05}{m/s}. For the reported simulations, we set $\lambda_{v}=5$, $\lambda_{e}=0.18$, $\lambda_{s}=120$, and $\lambda_{a}=0.05$, weighting maneuver increment, RMS distance to the destination, clearance violation, and per-edge action cost, respectively, in \eqref{eq:edge-cost}. The base-policy denominator floor is $\epsilon=0.05$, and the action budget is 14. Required-only completion has no additional global area threshold.
 
-Target-identity unions exclude duplicate credit. Reporting includes required-target completion $C^{\mathcal K}$, priority-weighted inspectable score $C^{\mathrm{insp}}$, and unweighted fractions over the 41 observable and 90 original samples. Equal represented sample areas make the last fraction the sampled-area estimate; priority multipliers affect only the weighted score.
+Candidate visibility uses a rectangular $70^{\circ}\times50^{\circ}$ FOV (horizontal $\times$ vertical), giving $\alpha_{\max}^{\mathrm h}=35^{\circ}$ and $\alpha_{\max}^{\mathrm v}=25^{\circ}$ in \eqref{eq:visibility}. The camera range is $2$--$54~\mathrm{m}$ and the maximum incidence angle is $60^{\circ}$; full-mesh LOS is checked separately. Target-identity unions exclude duplicate credit. Reporting includes required-target completion $C^{\mathcal K}$, priority-weighted inspectable score $C^{\mathrm{insp}}$, and unweighted fractions over the 41 observable and 90 original samples. Equal represented sample areas make the last fraction the sampled-area estimate; priority multipliers affect only the weighted score.
 
 \subsection{Study Chronology and Fresh Confirmation}
 
-An exploratory campaign preceded the confirmation. It evaluated three fixed profiles without feasibility rejection; its outcomes are reported as development evidence in Results and Supplementary Table~S3. The campaign motivated the fresh comparator described below, but it is not part of the main comparison.
+An exploratory campaign preceded the confirmation. It evaluated three fixed profiles without feasibility rejection; its outcomes are reported as development evidence in Supplementary Table~S3. The campaign motivated the fresh comparator described below, but it is not part of the main comparison.
 
 A fresh confirmation compares depth-three ADP with one-step ADP and local search initialized by a completed one-step ADP route. Methods, penalties, scenario identities, and implementation hashes were frozen before evaluating the new outcomes. The confirmation retains the nine prescribed targets and depth-three policy, with \RTValidationN{} validation, \RTTestN{} test, and \RTOodN{} shifted scenarios. Its seeds are disjoint from all development runs, and every generated case is retained.
 
 Each scenario samples a node-removal probability uniformly from $[0,0.10]$, then removes candidates independently using that probability. It multiplies priorities for approximately 6\%--14\% of targets by a factor in $[2,4]$. Shifted scenarios use removal probabilities in $[0.15,0.25]$, priority fractions of 12\%--20\%, and factors in $[5,8]$. Priorities affect background scores and the coverage-only ablation, but not the required-target goal or stage cost. All scenarios perturb one frozen graph, and distinct seeds may yield identical routes.
 
-After confirmation, a post-selection depth diagnostic evaluated $d=1,\ldots,6$ on the same 12 validation scenarios. The diagnostic was post-selection and did not modify the primary comparison; its outcomes are reported in Results and Supplementary Table~S2.
+After the fixed-library confirmation, a separate depth diagnostic evaluated $d=1,\ldots,6$ on its 12 validation scenarios, distinct from the test and shifted sets. Depth three was already fixed for that confirmation, whose results were unchanged. The diagnostic supported retaining this setting for the subsequent all-solvable benchmark. Its outcomes are presented first in Section~\ref{sec:depth-diagnostic} and Supplementary Table~S2.
 
 \subsection{Matched Baselines and Statistical Reporting}
 
@@ -483,7 +504,7 @@ Success and missing-target counts use every scenario; graph cost and physical $\
 \subsection{All-Solvable Redundant-Viewpoint Benchmark}
 \label{sec:redundant-view-protocol}
 
-A subsequent pilot tested whether redundant viewpoints reduce the visibility bottleneck while permitting independent route certification. Three frozen seeds generated 33-view graphs on the same mesh, with the same nine required targets, initial state, camera model, dynamics, costs, and safety limits. Each graph contained three separated views per required target and six connecting views anchored to other observable samples. Candidate positions were sampled \unit{26--42}{m} from their source target within a $35^{\circ}$ cone around its surface normal, with the camera aimed at that target. From 64 attempts per source, deterministic first-valid and farthest-point selection retained geometry-valid views separated by at least \unit{4}{m}. All rejected attempts were archived. Each graph's $33+33\times32=1\,089$ directed transfers were regenerated and audited against the full mesh.
+After the depth diagnostic, a redundant-viewpoint pilot tested whether additional viewpoints reduce the visibility bottleneck while permitting independent route certification. Three frozen seeds generated 33-view graphs on the same mesh, with the same nine required targets, initial state, camera model, dynamics, costs, and safety limits. Each graph contained three separated views per required target and six connecting views anchored to other observable samples. Candidate positions were sampled \unit{26--42}{m} from their source target within a $35^{\circ}$ cone around its surface normal, with the camera aimed at that target. From 64 attempts per source, deterministic first-valid and farthest-point selection retained geometry-valid views separated by at least \unit{4}{m}. All rejected attempts were archived. Each graph's $33+33\times32=1\,089$ directed transfers were regenerated and audited against the full mesh.
 
 Each graph supplied one reference case, ten nominal cases and ten shifted cases, using the confirmation's node-removal probability ranges. All 63 cases were retained. The 59 cases with an independent feasible certificate define the primary all-solvable benchmark (three reference, 30 nominal and 26 shifted cases). The four remaining shifted cases are retained as a visibility-loss stress test and are excluded only from the primary solvable-case denominator. Background weights were fixed because they do not affect required-only completion or graph cost. The generation rules, seeds and source hashes were frozen before graph construction. This pilot followed inspection of the confirmation failures and is development evidence; it does not replace the frozen confirmation.
 
@@ -494,9 +515,23 @@ Greedy construction, one-step ADP, depth-three ADP and the independent MILP each
 \section{Results}
 \label{sec:results}
 
+\subsection{Rollout Depth and Computational Cost}
+\label{sec:depth-diagnostic}
+
+The separate validation depth study evaluated $d=1,\ldots,6$ on 12 scenarios, distinct from the fixed-library test and shifted sets. All depths completed the same nine tasks; the other three cases lacked required visibility. Depth three reduced mean graph cost by 11.19\% relative to depth two. Depth four reduced it by a further 2.74\% but required 4.63 times the median planning time, whereas depths five and six produced no further cost reduction. These results support depth three as a practical balance between graph cost and computation; this setting was retained for the subsequent all-solvable benchmark. Fig.~\ref{fig:adp-depth-sensitivity} summarizes this trade-off; Supplementary Table~S2 gives the complete values and timing protocol.
+
+\begin{figure}[t]
+  \centering
+  \subfloat[Mean validation cost.]{\includegraphics[width=0.315\linewidth]{figures/fig03_depth_tradeoff/adp_depth_tradeoff_a.pdf}}\hfill
+  \subfloat[Median planning time.]{\includegraphics[width=0.315\linewidth]{figures/fig03_depth_tradeoff/adp_depth_tradeoff_b.pdf}}\hfill
+  \subfloat[Safety-screen evaluations.]{\includegraphics[width=0.315\linewidth]{figures/fig03_depth_tradeoff/adp_depth_tradeoff_c.pdf}}
+  \caption{Post-confirmation depth diagnostic on 12 validation cases. The square marks the retained depth-three setting; cost uses the nine cases completed at every depth, and panels (b), (c) use logarithmic scales.}
+  \label{fig:adp-depth-sensitivity}
+\end{figure}
+
 \subsection{Complete Required-Target Inspection}
 
-Depth-three ADP completed all nine targets in \RTTestSuccess/\RTTestN{} test scenarios and \RTOodSuccess/\RTOodN{} shifted scenarios. Seeded local search completed \RTLocalTestSuccess/\RTTestN{} and \RTLocalOodSuccess/\RTOodN{}, respectively. Every completed mission achieved $C^{\mathcal K}=100\%$, with optional background coverage reported separately.
+Depth-three ADP completed all nine targets in \RTTestSuccess/\RTTestN{} test scenarios and \RTOodSuccess/\RTOodN{} shifted scenarios. Seeded local search completed \RTLocalTestSuccess/\RTTestN{} and \RTLocalOodSuccess/\RTOodN{}, respectively. Table~\ref{tab:paired-aggregate} summarizes these confirmation results. Every completed mission achieved $C^{\mathcal K}=100\%$, with optional background coverage reported separately.
 
 % Begin included source: tables/required_target_aggregate.tex
 \begin{table*}[t]
@@ -523,7 +558,7 @@ Depth-three ADP completed all nine targets in \RTTestSuccess/\RTTestN{} test sce
 \end{table*}
 % End included source: tables/required_target_aggregate.tex
 
-Every incomplete confirmation case had lost all available views of at least one required target. Depth-three ADP therefore completed all 43 test and all 9 shifted cases that retained required visibility; each returned route supplied a feasibility witness. Five required targets had only one candidate view, making the fixed library sensitive to node removal.
+Every confirmation case not completed by depth-three ADP had lost all available views of at least one required target. Depth-three ADP therefore completed all 43 test and all 9 shifted cases that retained required visibility; each returned route supplied a feasibility witness. Five required targets had only one candidate view, making the fixed library sensitive to node removal.
 
 \subsection{ADP Policy Improvement at Matched Completion}
 
@@ -592,21 +627,6 @@ The representative test case is the jointly completed scenario nearest the media
   \label{fig:representative-trajectory}
 \end{figure}
 
-\subsection{Development and Depth Diagnostics}
-
-The initial development campaign evaluated three fixed profiles without feasibility rejection. On the primary nine-target profile, depth-three ADP completed 37/50 test and 10/30 shifted tasks, whereas the greedy-seeded comparators completed none. These development results motivated the fresh comparator and are reported separately from the main comparison in Supplementary Table~S3.
-
-The post-selection depth diagnostic evaluated $d=1,\ldots,6$ on the same 12 validation scenarios. All depths completed the same nine tasks; the other three cases lacked required visibility. Depth three reduced mean graph cost by 11.19\% relative to depth two. Depth four reduced it by a further 2.74\% but required 4.63 times the median planning time, whereas depths five and six produced no further cost reduction. Fig.~\ref{fig:adp-depth-sensitivity} summarizes this computation--cost trade-off; Supplementary Table~S2 gives the complete values and timing protocol.
-
-\begin{figure}[t]
-  \centering
-  \subfloat[Mean validation cost.]{\includegraphics[width=0.315\linewidth]{figures/fig03_depth_tradeoff/adp_depth_tradeoff_a.pdf}}\hfill
-  \subfloat[Median planning time.]{\includegraphics[width=0.315\linewidth]{figures/fig03_depth_tradeoff/adp_depth_tradeoff_b.pdf}}\hfill
-  \subfloat[Safety-screen evaluations.]{\includegraphics[width=0.315\linewidth]{figures/fig03_depth_tradeoff/adp_depth_tradeoff_c.pdf}}
-  \caption{Post-selection depth diagnostic on 12 validation cases. The square marks the primary depth-three setting; cost uses the nine cases completed at every depth, and panels (b), (c) use logarithmic scales.}
-  \label{fig:adp-depth-sensitivity}
-\end{figure}
-
 \subsection{All-Solvable Benchmark Results}
 \label{sec:redundant-view-results}
 
@@ -652,7 +672,7 @@ ROS-native HCW dynamics and linear-quadratic regulator control track a fixed ADP
   \label{fig:ros-key-camera-views}
 \end{figure*}
 
-The normal-speed ROS~2 Jazzy run accepted all twelve observations at \unit{1800.035}{s}, covering 9/9 required targets and 95.86\% of weighted background samples. Maximum terminal position error and speed were \unit{0.050}{m} and \unit{0.0038}{m/s}. Executed $\Delta v$ was \unit{20.477}{m/s}, versus \unit{18.027}{m/s} for the transfer-and-hold reference. The full-mesh audit found no surface crossing; minimum swept-body clearance was \unit{3.380}{m} above the \unit{2}{m} margin, and peak acceleration was $0.0600~\mathrm{m/s^2}$. Supplementary Section~S4 reports viewpoint refinement, message counts, synchronization, and timing diagnostics.
+The normal-speed ROS~2 Jazzy run accepted all twelve observations at \unit{1800.035}{s}, covering 9/9 required targets and 95.86\% of weighted background samples. Maximum terminal position error and speed were \unit{0.050}{m} and \unit{0.0038}{m/s}. Executed $\Delta v$ was \unit{20.477}{m/s}, versus \unit{18.027}{m/s} for the transfer-and-hold reference. The full-mesh audit found no surface crossing; minimum swept-body clearance was \unit{3.380}{m} above the \unit{2}{m} margin, and peak acceleration was $0.0600~\mathrm{m/s^2}$. Supplementary Section~S5 reports viewpoint refinement, message counts, synchronization, and timing diagnostics.
 
 Fig.~\ref{fig:ros-key-camera-views} provides synchronized visual evidence from this selected execution; the images provide no additional visibility credit or defect detection. The run supplies no paired ROS maneuver-saving estimate.
 
@@ -679,22 +699,22 @@ same reference (Supplementary Video~1).
 \section{Discussion}
 \label{sec:discussion}
 
-The results support model-based rollout ADP for prescribed-target inspection: a base-policy completion supplies a checkable continuation, and Bellman lookahead improves the next action. Required targets determine completion, while an optional background threshold can be added through the same terminal predicate. This sequencing layer complements learning-based proximity control \cite{hu2021learning,tian2024proximity,vanwijk2024inspection}.
+The results support model-based rollout ADP for prescribed-target inspection: a base-policy completion supplies a checkable continuation, and Bellman lookahead improves the next action. Required targets determine completion, while an optional background threshold can be added through the same terminal predicate. This sequencing layer complements learning-based proximity control \cite{hu2021learning,tian2024proximity,vanwijk2024inspection}. Failure to obtain a finite rollout value does not prove graph infeasibility, because the base policy may miss a feasible continuation.
 
-The fixed-library comparison measures maneuver savings against one-step ADP and seeded reversal search. The independent MILP is best interpreted as an exact finite-graph reference and feasibility certificate, rather than as the proposed deployment planner. It supplies a cost floor when solved to optimality, but its 15-s budget left 32 feasible cases without an optimality proof and its median runtimes exceeded those of depth-three ADP. The proposed method therefore targets the speed-quality trade-off: it matched MILP completion on the 59 certified-solvable cases and remained within 0.96\% of the 27 proven optima. Because the pilot uses a new viewpoint library and dependent cases, it cannot be paired with the original campaign; repeated timing and a larger frozen confirmation are still needed.
+The fixed-library comparison measures maneuver savings against one-step ADP and seeded reversal search. The independent MILP is best interpreted as an exact finite-graph reference and feasibility certificate, rather than as the proposed deployment planner. It supplies a cost floor when solved to optimality, but its 15-s budget left 32 feasible cases without an optimality proof and its median runtimes exceeded those of depth-three ADP. The proposed method therefore targets the speed-quality trade-off: it matched MILP completion on the 59 certified-solvable cases. Its mean relative graph-cost gap was 0.96\% across the 27 cases with proven optima. Because the pilot uses a new viewpoint library and dependent cases, it cannot be paired with the original campaign; repeated timing and a larger frozen confirmation are still needed.
 
-\subsection{Scope and Limitations}
+% \subsection{Scope and Limitations}
 
-The primary evidence covers synthetic prescribed samples on one deterministic graph; the development pilot adds three graphs on the same mesh. Completion certifies those samples under the camera model, rather than full-region imagery or defect detection. Operational use requires verified component requirements, denser sampling, image-resolution and dwell criteria, illumination, and independent geometry validation.
+% The primary evidence covers synthetic prescribed samples on one deterministic graph; the development pilot adds three graphs on the same mesh. Completion certifies those samples under the camera model, rather than full-region imagery or defect detection. Operational use requires verified component requirements, denser sampling, image-resolution and dwell criteria, illumination, and independent geometry validation.
 
-The finite-completion safeguard may fail to find a route when its base policy is unsuccessful, even if another feasible route exists. The base-cost theorem applies when the base policy completes. Exact recursion and proven MILP optima concern only the specified finite graph, and do not establish optimality over omitted viewpoints or continuous-space trajectories. A time-limited feasible MILP route is not an optimum. Timing and confidence intervals characterize the stated desktop implementation and scenario generator, with no cross-host timing comparison. The observed depth-four-to-six plateau does not establish global optimality, and the pilot's 0.96\% gap applies only to its 27 cases with proven optima.
+% The finite-completion safeguard may fail to find a route when its base policy is unsuccessful, even if another feasible route exists. The base-cost theorem applies when the base policy completes. Exact recursion and proven MILP optima concern only the specified finite graph, and do not establish optimality over omitted viewpoints or continuous-space trajectories. A time-limited feasible MILP route is not an optimum. Timing and confidence intervals characterize the stated desktop implementation and scenario generator, with no cross-host timing comparison. The observed depth-four-to-six plateau does not establish global optimality, and the pilot's 0.96\% gap applies only to its 27 cases with proven optima.
 
-Table~\ref{tab:assumptions} excludes navigation uncertainty, actuator and attitude dynamics, and illumination effects. Safety remains conditional on the enabled deterministic audits, with passive-drift auditing disabled.
+% Table~\ref{tab:assumptions} excludes navigation uncertainty, actuator and attitude dynamics, and illumination effects. Safety remains conditional on the enabled deterministic audits, with passive-drift auditing disabled.
 
 \section{Conclusion}
 \label{sec:conclusion}
 
-This paper developed viability-preserving rollout ADP for prescribed-target inspection over audited orbital arcs. It completed every feasible fixed-library confirmation case and reduced mean $\Delta v$ by 11.05\% relative to seeded local search on 43 jointly completed test missions. In the redundant-viewpoint development benchmark, the independent MILP supplied finite-graph feasibility and cost references, while depth-three ADP completed all 59 certified-solvable cases within 0.96\% of the 27 proven optima and with shorter median runtimes. These results support completion-certified sequencing as a computationally lighter alternative to exact finite-graph search, within the stated graph and audit assumptions, and motivate a larger frozen evaluation of viewpoint redundancy.
+This paper developed viability-preserving rollout ADP for prescribed-target inspection over audited orbital arcs. It completed every feasible fixed-library confirmation case and reduced mean $\Delta v$ by 11.05\% relative to seeded local search on 43 jointly completed test missions. In the redundant-viewpoint development benchmark, depth-three ADP completed all 59 cases independently certified as solvable by the MILP, with shorter median runtimes than the MILP. Its mean relative graph-cost gap was 0.96\% across the 27 cases with proven optima. These results support completion-certified sequencing as a computationally lighter alternative to exact finite-graph search, within the stated graph and audit assumptions, and motivate a larger frozen evaluation of viewpoint redundancy.
 
 % \section*{Data and Code Availability}
 
@@ -702,7 +722,7 @@ This paper developed viability-preserving rollout ADP for prescribed-target insp
 % End included source: sections/required_target_study.tex
 
 % \section*{Acknowledgment}
-% OpenAI Codex was used to assist with drafting and revision in the Abstract, Introduction, System and Observation Model, Viability-Preserving Rollout ADP, Experimental Protocol, Results, Discussion, Conclusion, and Data and Code Availability sections; with LaTeX formatting and source checking; and with implementation, testing, offline experiment orchestration, statistical tabulation, and figure-generation scripts. The authors retain responsibility for reviewing and validating all AI-assisted text, mathematical statements, references, source code, figures, and reported results, and for the scientific content of the article.
+% OpenAI Codex assisted with drafting and revision of the Abstract, Introduction, System and Observation Model, Viability-Preserving Rollout ADP, Experimental Protocol, Results, Discussion, and Conclusion; with LaTeX formatting and source checks; and with implementation, testing, experiment orchestration, statistical tabulation, and figure-generation scripts. The authors are responsible for the scientific content and for verifying all AI-assisted text, mathematics, references, code, figures, and results.
 
 % The bibliography is allowed to flow naturally; a fixed trigger at reference
 % 29 would force the remaining references onto a new, sparsely filled page.

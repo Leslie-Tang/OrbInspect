@@ -6,11 +6,28 @@ draw.io diagrams are included. No parent-repository files, ROS installation,
 Python plotting environment or network connection are required to compile.
 A standard TeX installation is still required.
 
+## Current figure numbering
+
+The published-number mapping is Figure 1 framework, Figure 2 rollout example,
+Figure 3 depth diagnostic, Figure 4 paired performance, Figure 5 representative
+route, Figure 6 twelve camera views, and Figure 7 RViz overview. Historical
+asset-folder names and dated revision notes retain their original numbers.
+Supplementary Section S4 gives the exact-recursion proof; S5 gives ROS provenance.
+
+The detailed 9 October 2026 pre-submission audit is in
+[docs/FINAL_SUBMISSION_AUDIT_20261009.md](docs/FINAL_SUBMISSION_AUDIT_20261009.md).
+
 ## Build or share
+
+The 2026-10-09 revision moves the validation depth diagnostic to the start of
+Results (Section VI-A). It clarifies that depth three was fixed for the earlier
+confirmation and retained for the later all-solvable benchmark after the
+diagnostic. The historical development outcomes remain in Supplementary
+Table S3; numerical results and figure artwork are unchanged.
 
 The 2026-09-14 revision adds a redundant-viewpoint development pilot and an
 independent feasibility/cost comparison. Section V-E describes the protocol;
-Section VI-E and Table V use the independently certified all-solvable benchmark
+Section VI-F and Table IV use the independently certified all-solvable benchmark
 as the primary planner-success denominator: 59 cases, with the four visibility-loss
 cases retained separately as a stress test. Depth-three ADP completes 59/59
 solvable cases, with a 0.96% mean graph-cost gap on 27 proven optima. The current
@@ -130,7 +147,7 @@ and their hashes. The previous small-type exports are preserved in
 `docs/FIGURE_3_READABLE_FONTS_20260909.md` for the typography revision.
 
 The current main PDF uses the held-out-performance panels from
-`figures/fig04_heldout_performance/` as Figure 3. The former ablation/safety
+`figures/fig04_heldout_performance/` as Figure 4. The former ablation/safety
 panel set in `figures/fig05_ablation_safety/` was removed from the main article
 and is retained only as historical source material; it is not included by
 `main.tex`. The active panel set uses four independent vector PDFs assembled
@@ -206,7 +223,7 @@ See `docs/FIGURE_8_LATEX_SUBFIGURES_20260910.md` for the layout and checks.
 This requires matplotlib, NumPy and Pillow. The selected transfer frame shows
 central-module detail from a different perspective than Figure 7's observation
 stops; its labels report progress at that frame (9/12 observations, 7/9 required
-targets and 76.27% weighted coverage). Figure 8 illustrates a separate
+targets and 76.3% displayed weighted coverage). Current Figure 7 illustrates a separate
 repeat execution; it does not replace Figure 7's twelve synchronized observation
 frames or its execution metrics. Supplementary Video 1 is supplied separately
 from the source ZIP; its provenance and checksum are in the Figure 8 record.
@@ -234,7 +251,7 @@ The organization changed file paths only, not scientific content. Existing
 concurrent figure-width edits were preserved. See `docs/ORGANIZATION.md` and
 `docs/organization_manifest.json` for the inventory and verification record.
 
-The main article now contains Tables I--V; the separate supplement contains
+The main article now contains Tables I--IV; the separate supplement contains
 Tables S1--S3. The approved caption measure, data and font sizes are preserved.
 See `docs/TABLE_LAYOUT_20260908.md` for the earlier layout verification.
 
