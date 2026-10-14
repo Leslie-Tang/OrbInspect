@@ -63,7 +63,7 @@
 
 \section{Required-Target Profile Inventory}
 
-Table~S1 records the frozen synthetic target identities used in the first required-target campaign. Three equal-width slabs span the longest axis of the transformed mesh. Within each slab, selection begins with the sample nearest the slab centroid and then applies normalized farthest-point sampling. The profiles therefore distribute prescribed samples across the observable library; they do not represent an operational International Space Station maintenance checklist.
+Table~S1 records the frozen synthetic target identities used in the first required-target campaign. Three equal-width slabs span the longest axis of the transformed mesh. Within each slab, selection begins with the sample nearest the slab centroid and then applies normalized farthest-point sampling. These synthetic profiles distribute prescribed samples across the observable station geometry.
 
 \begin{table*}[t]
   \centering
@@ -87,7 +87,7 @@ Table~S1 records the frozen synthetic target identities used in the first requir
 
 The six-depth diagnostic followed the fixed-library confirmation, for which depth three was already fixed. It used the same 12 validation scenarios with the nine-target requirement, graph, action budget, implementation, and zero-gain connecting actions unchanged. The nine scenarios with required visibility were completed at every depth; the other three lacked an available view of at least one required target. Mean graph cost in Table~S2 therefore uses the nine commonly completed scenarios, whereas timing and safety-screen counts include all 12 cases.
 
-Each scenario--depth pair was measured once in ascending-depth order using Python~3.14 on an Apple M4 host running macOS. Complete-route timing includes preliminary base-policy construction but excludes graph loading and serialization. Scheduling and thermal effects were uncontrolled. Safety-screen counts exclude the separate preliminary base-policy call. The measurements are therefore implementation diagnostics rather than controlled hardware benchmarks.
+Each scenario--depth pair was measured once in ascending-depth order using Python~3.14 on an Apple M4 host running macOS. Complete-route timing includes preliminary base-policy construction but excludes graph loading and serialization. Scheduling and thermal effects were uncontrolled. Safety-screen counts exclude the separate preliminary base-policy call. These timings characterize the computation--cost trade-off of the recorded implementation under these execution conditions.
 
 \begin{table*}[t]
   \centering
@@ -137,13 +137,13 @@ Table~S3 preserves the first campaign that motivated a completion-capable compar
   \end{tabular}
 \end{table}
 
-The campaign retained all generated cases without feasibility rejection. One shifted case in the six-target profile preserved an available view for every required target but lacked a finite depth-three completion certificate; thus target-wise visibility alone did not establish route feasibility. Because seeds differ among profiles and the comparator depended on greedy initialization, these outcomes are development history rather than the manuscript's primary method comparison.
+The campaign retained all generated cases without feasibility rejection. One shifted case in the six-target profile preserved an available view for every required target but lacked a finite depth-three completion certificate; thus target-wise visibility alone did not establish route feasibility.
 
 \section{Exact Reduced-Graph Bellman Result}
 
 For fixed finite nodes, deterministic visibility masks and audited edge costs, a required set $\mathcal K$, the no-revisit rule, and horizon $H$, exhaustive evaluation of the Bellman recursion in the main manuscript returns a minimum-cost task-completing shield-feasible sequence when one exists. It returns $+\infty$ when no such sequence exists in the sampled graph.
 
-To prove the statement, use induction on the remaining budget $h$. At $h=0$, the recursion returns zero exactly for a completed state and $+\infty$ otherwise. Assume it is correct for all states with at most $h-1$ remaining actions. Every feasible sequence from a state with budget $h$ begins with one shield-admissible action and a continuation with budget $h-1$. By the induction hypothesis, the recursion assigns that continuation its minimum cost or $+\infty$ if none exists. Minimizing over every admissible first action therefore returns the minimum total cost, or $+\infty$ when every continuation is infeasible. The conclusion is limited to the exhausted sampled graph and does not extend to omitted camera poses or continuous-space trajectories.
+To prove the statement, use induction on the remaining budget $h$. At $h=0$, the recursion returns zero exactly for a completed state and $+\infty$ otherwise. Assume it is correct for all states with at most $h-1$ remaining actions. Every feasible sequence from a state with budget $h$ begins with one shield-admissible action and a continuation with budget $h-1$. By the induction hypothesis, the recursion assigns that continuation its minimum cost or $+\infty$ if none exists. Minimizing over every admissible first action therefore returns the minimum total cost, or $+\infty$ when every continuation is infeasible. This establishes exact optimality over the specified finite candidate graph.
 
 \section{ROS 2 Execution Provenance}
 
@@ -151,8 +151,8 @@ The selected Robot Operating System 2 (ROS~2) execution in the main manuscript f
 
 The run used Ubuntu~24.04.4, ROS~2 Jazzy, Gazebo Harmonic, RViz2, and Python~3.12.3. Its logs contain 36,172 safe-control messages, including 1,847 safety-filter interventions, and 36,181 trajectory samples. A $247\,525$-triangle full-mesh audit was applied to the swept trajectory. The maximum publisher gap was 0.249~s, compared with the nominal 0.075~s diagnostic interval. Recorded camera frames matched their observation-event receipts within 0.074~s. Both recorded bags contain identical verification events, and Gazebo poses confirm visual alignment with the ROS state.
 
-The Gazebo visualization uses an RGB perspective camera with a $70^{\circ}$ horizontal field of view (FOV), $960\times686$ pixels, and a 15-Hz update rate. Near and far clipping distances are 0.1 and 120~m. The image aspect ratio implies an approximately $53.2^{\circ}$ vertical FOV, whereas target-credit checks use the planner's $50^{\circ}$ vertical FOV. The camera is offset 0.45~m along the chaser body forward axis. Gazebo images are bridged to ROS~2 as \texttt{sensor\_msgs/msg/Image} on \texttt{/chaser/camera/image} for display and recording. Rendered images are illustrative and do not determine target credit.
+The Gazebo visualization uses an RGB perspective camera with a $70^{\circ}$ horizontal field of view (FOV), $960\times686$ pixels, and a 15-Hz update rate. Near and far clipping distances are 0.1 and 120~m. The image aspect ratio implies an approximately $53.2^{\circ}$ vertical FOV, whereas target-credit checks use the planner's $50^{\circ}$ vertical FOV. The camera is offset 0.45~m along the chaser body forward axis. Gazebo images are bridged to ROS~2 as \texttt{sensor\_msgs/msg/Image} on \texttt{/chaser/camera/image} for display and recording. Target credit is computed from geometric visibility and observation-acceptance gates; rendered images support visualization and recording.
 
-These adjustments and diagnostics document one selected, post-hoc development execution. They do not alter the frozen held-out comparison or its reported 11.05\% mean maneuver-velocity-increment reduction.
+These records document the viewpoint refinements, safety-filter interventions, and synchronization of the reported development execution.
 
 \end{document}

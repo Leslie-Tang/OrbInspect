@@ -1,5 +1,46 @@
 # Ubuntu handover: required-target ROS validation and manuscript update
 
+**Defensive wording revised and scope consolidated (2026-10-13):**
+`OrbInspectLatex/main.tex` and `OrbInspectLatex/supplement.tex` now state the
+model, audit, finite-graph optimality, benchmark provenance, and ROS evidence
+directly. Repeated qualifications about the development benchmark were
+consolidated into one Discussion paragraph, retaining the shared geometry,
+dependent availability scenarios, and single runtime measurements. The
+confirmation/development chronology, 59-case solvable denominator, separate
+four-case visibility stress test, proven-optimal subset, disabled passive audit,
+and distinction between an absent rollout completion certificate and graph
+infeasibility remain explicit. Equations, Algorithm 1, Problem 1, the theorem
+statement, numerical table bodies, citations, and figure declarations are
+unchanged from the pre-edit snapshots. Compilation, all 68 figure-file checks,
+source comparisons, whitespace checks, and rendered-page review passed. The
+main manuscript remains 13 pages and the supplement 2 pages; both root PDFs
+are synchronized with `build/`. Snapshots and verification records are in
+`output/defensive_wording_revision_20261013/`.
+
+**Third contribution rewritten for fluency (2026-10-13):**
+The third contribution in `OrbInspectLatex/main.tex` now introduces a reproducible
+evaluation of completion, maneuver efficiency, and execution feasibility, then
+explains the independently certified all-solvable benchmark, separate visibility
+stress test, fixed-library comparisons, and ROS reference-tracking/completion
+checks in short sentences. The numerical result catalogue was removed from this
+item; detailed results remain in the manuscript. Compilation, all 68 figure
+checks, and page-2 visual review passed; the PDF remains 13 pages.
+
+**Abstract foregrounds algorithm design for TAES (2026-10-13):**
+The approximately 175-word abstract in `OrbInspectLatex/main.tex` now explains
+finite-depth Bellman lookahead with complete task-aware base-policy tails,
+infinite values for actions lacking certified task completion, admissible
+zero-gain connections, and first-action selection with repeated replanning.
+The deterministic finite-graph guarantee and depth-three rationale remain.
+Development-benchmark results are qualitative; the only numerical result is
+the 11.05% maneuver saving relative to one-step-ADP-seeded local search on
+jointly completed confirmation test missions. Detailed counts and the 0.96%
+mean proven-optimum gap remain in the main Results. ROS verification explicitly
+concerns fixed-route execution. The abstract fits entirely in the first-page
+left column. Compilation, all 68 figure-file checks, and first-page visual
+review passed; the manuscript remains 13 pages. Root and build PDFs are
+synchronized.
+
 **Figure 7 coverage precision aligned (2026-10-09):**
 The onboard-camera panel now displays weighted coverage as 76.3%, matching
 observation 9 in Figure 6. Both labels represent the same saved ratio,
